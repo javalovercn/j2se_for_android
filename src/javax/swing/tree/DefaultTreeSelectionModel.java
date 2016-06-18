@@ -106,7 +106,7 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable,
 
 	public void setSelectionMode(int mode) {
 		if (selectionMode != TreeSelectionModel.SINGLE_TREE_SELECTION) {
-			LogManager.warning("only SINGLE_TREE_SELECTION is supported in HomeCenter J2SE");
+			LogManager.warning("only SINGLE_TREE_SELECTION is supported in this lib.");
 		}
 
 		selectionMode = mode;

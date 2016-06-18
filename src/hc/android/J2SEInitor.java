@@ -18,6 +18,17 @@ import android.view.View;
  *
  */
 public class J2SEInitor {
+	private static String logoName = "LogoNameHere";
+	private static String contactEmail = "support@company.com";
+	
+	public static final String getLogoName(){
+		return logoName;
+	}
+	
+	public static final String getContactEmail(){
+		return contactEmail;
+	}
+	
 	private static Map<String, Object> actionMap;
 	
 	public static void doAction(Object mapKey){
@@ -47,6 +58,14 @@ public class J2SEInitor {
 		//------------para3-----------------
 		hc.android.ActivityManager.sysActivity = (Activity)para3;
 		init(ActivityManager.getActivity());
+		
+		try{
+			logoName = (String)paras[3];
+			
+			contactEmail = (String)paras[4];
+		}catch (Throwable e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -56,7 +75,7 @@ public class J2SEInitor {
 	public static void sendNotification(){
 		Activity context = ActivityManager.getActivity();
 
-		String title = "HomeCenter"; 
+		String title = J2SEInitor.getLogoName(); 
 		try{
 			title = context.getPackageManager().getPackageInfo(  
 					context.getPackageName(), 0).applicationInfo.loadLabel(context.getPackageManager()).toString(); 

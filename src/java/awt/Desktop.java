@@ -26,6 +26,8 @@ package java.awt;
 
 import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
+import hc.android.J2SEInitor;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -171,7 +173,7 @@ public class Desktop {
 
 	public void mail() throws IOException {
 		Intent intent = new Intent(Intent.ACTION_SEND);
-		String[] receiver=new String[]{"help@homecenter.mobi"};
+		String[] receiver=new String[]{J2SEInitor.getContactEmail()};
 		intent.putExtra(Intent.EXTRA_EMAIL, receiver);
 		ActivityManager.getActivity().startActivity(intent);//调用系统的mail客户端进行发送}
 	}

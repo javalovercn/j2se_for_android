@@ -47,7 +47,6 @@ import android.widget.EditText;
 import dalvik.system.DexClassLoader;
 
 public class AndroidPlatformService implements PlatformService {
-	private static final String TAG_HOMECENTER = "HomeCenter";
 	
 	final File optimizBaseDir;
 	final File dxCache;
@@ -796,11 +795,11 @@ public class AndroidPlatformService implements PlatformService {
 	@Override
 	public void extLog(final int level, final String msg) {
 		if(level == LOG_LEVEL_ERROR){
-			Log.e(TAG_HOMECENTER, msg);
+			Log.e(J2SEInitor.getLogoName(), msg);
 		}else if(level == LOG_LEVEL_WARN){
-			Log.w(TAG_HOMECENTER, msg);
+			Log.w(J2SEInitor.getLogoName(), msg);
 		}else{
-			Log.i(TAG_HOMECENTER, msg);
+			Log.i(J2SEInitor.getLogoName(), msg);
 		}
 	}
 }
