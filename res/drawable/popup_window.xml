@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+	<stroke android:width="@dimen/popup_border_stroke_width" android:color="@color/window_border_color" />
+	<solid android:color="@color/window_body_back_color"/>
+	<padding android:bottom="@dimen/popup_border_stroke_width" android:left="@dimen/popup_border_stroke_width" 
+	    android:right="@dimen/popup_border_stroke_width" android:top="@dimen/popup_border_stroke_width" />
+</shape>

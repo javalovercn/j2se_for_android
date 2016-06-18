@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<resources>
+    <color name="window_table_header_bg_from_color">#FAFCFD</color>
+    <color name="window_table_header_bg_to_color">#D4DCE8</color>
+    <color name="window_table_header_border_color">#A3B7CC</color>
+    <color name="window_table_body_cell_border_color">#D8D8D8</color>
+
+    <color name="window_trans_layer_color">#A0b5b0b0</color>
+
+    <color name="window_desktop_center_color">#364A59</color>
+    <color name="window_desktop_up_down_color">#364A59</color>
+    <color name="window_default_font_color">#66FF00</color>
+    <color name="window_font_color_in_field">#006400</color>
+    <color name="window_default_unselected_font_color">#000000</color>
+    <color name="window_title_color">#364A59</color>
+    <color name="window_title_font_color">#00FFCC</color>
+    <color name="window_border_trans_color">#2D4CAAD6</color>
+    <color name="window_border_color">#9cc2d6</color>
+    <color name="window_selected_border_color">#55A2FF</color>
+    <color name="window_tab_unselected_color">#A2A7AC</color>
+    <color name="window_tab_selected_color">#E8EFF6</color>
+    <color name="window_body_back_trans_color">#F0847139</color>
+    <color name="window_body_back_color">#847139</color>
+    <color name="window_body_selected_back_color">#DCDCDC</color>
+    <color name="window_tip_back_color">#FFFFE1</color>
+    <color name="window_tip_font_color">#000000</color>
+    <color name="window_btn_stroke_color">#C0C0C0</color>
+    <color name="window_btn_text_color">#5959FF</color>
+    <color name="window_icon_color">#8C8C8C</color>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+	<padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp" />
+	<stroke android:width="2dp" android:color="@color/window_btn_text_color" android:left="2dp" android:right="2dp" 
+	    android:top="2dp" android:bottom="2dp"/>
+	<solid android:color="@color/window_tip_back_color"/>
+	<corners android:radius="1dp" android:bottomRightRadius="@dimen/border_radius" android:bottomLeftRadius="@dimen/border_radius"
+	    android:topLeftRadius="@dimen/border_radius" android:topRightRadius="@dimen/border_radius"/>
+</shape>
