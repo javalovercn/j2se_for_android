@@ -18,26 +18,6 @@ import android.view.View;
  *
  */
 public class J2SEInitor {
-	private static String logoName = "LogoNameHere";
-	private static String contactEmail = "support@company.com";
-	
-	public static final String getLogoName(){
-		return logoName;
-	}
-	
-	public static final String getContactEmail(){
-		return contactEmail;
-	}
-	
-	private static Map<String, Object> actionMap;
-	
-	public static void doAction(Object mapKey){
-		View.OnClickListener listener = (View.OnClickListener)J2SEInitor.actionMap.get(mapKey);
-		if(listener != null){
-			listener.onClick(null);
-		}
-	}
-	
 	/**
 	 * 如果增加了新参数，请同步更改到ServerMainActivity.startHCByReflect
 	 * @param paras
@@ -60,11 +40,31 @@ public class J2SEInitor {
 		init(ActivityManager.getActivity());
 		
 		try{
-			logoName = (String)paras[3];
+			appName = (String)paras[3];
 			
 			contactEmail = (String)paras[4];
 		}catch (Throwable e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private static String appName = "appNameHere";//it is recommend to set it in method init(Object[] para)
+	private static String contactEmail = "support@company.com";//it is recommend to set it in method init(Object[] para)
+	
+	public static final String getAppName(){
+		return appName;
+	}
+	
+	public static final String getContactEmail(){
+		return contactEmail;
+	}
+	
+	private static Map<String, Object> actionMap;
+	
+	public static void doAction(Object mapKey){
+		View.OnClickListener listener = (View.OnClickListener)J2SEInitor.actionMap.get(mapKey);
+		if(listener != null){
+			listener.onClick(null);
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class J2SEInitor {
 	public static void sendNotification(){
 		Activity context = ActivityManager.getActivity();
 
-		String title = J2SEInitor.getLogoName(); 
+		String title = J2SEInitor.getAppName(); 
 		try{
 			title = context.getPackageManager().getPackageInfo(  
 					context.getPackageName(), 0).applicationInfo.loadLabel(context.getPackageManager()).toString(); 

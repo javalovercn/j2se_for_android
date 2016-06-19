@@ -795,11 +795,11 @@ public class AndroidPlatformService implements PlatformService {
 	@Override
 	public void extLog(final int level, final String msg) {
 		if(level == LOG_LEVEL_ERROR){
-			Log.e(J2SEInitor.getLogoName(), msg);
+			Log.e(J2SEInitor.getAppName(), msg);
 		}else if(level == LOG_LEVEL_WARN){
-			Log.w(J2SEInitor.getLogoName(), msg);
+			Log.w(J2SEInitor.getAppName(), msg);
 		}else{
-			Log.i(J2SEInitor.getLogoName(), msg);
+			Log.i(J2SEInitor.getAppName(), msg);
 		}
 	}
 }
