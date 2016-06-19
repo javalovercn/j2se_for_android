@@ -1,8 +1,8 @@
 <resources>
 	<dimen name="border_radius">5dp</dimen>
-	<dimen name="popup_border_stroke_width">4dp</dimen>
+	<dimen name="popup_border_stroke_width">2dp</dimen>
 	<dimen name="border_stroke_width">2dp</dimen>
-	<dimen name="button_pad_width">10dp</dimen>
-	<dimen name="button_stroke_width">6dp</dimen>
-	<dimen name="button_gap_width">4dp</dimen>
+	<dimen name="button_pad_width">3dp</dimen>
+	<dimen name="button_stroke_width">3dp</dimen>
+	<dimen name="button_gap_width">2dp</dimen>
 </resources>

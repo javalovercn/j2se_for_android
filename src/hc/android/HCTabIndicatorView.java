@@ -48,7 +48,7 @@ public class HCTabIndicatorView {
 			tabSelectedTag = new View(ActivityManager.getActivity());
 			tabSelectedTag.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_tab_item));
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT, AndroidUIUtil.getBorderStrokeWidthInPixel() * 4);
+					LinearLayout.LayoutParams.MATCH_PARENT, AndroidUIUtil.getBorderStrokeWidthInPixel() * 2);//*4在乐1中太大，*2稍大, *1在720P电视上无效果
 			tabSelectedTag.setEnabled(false);
 			defaultLinearLayout.addView(tabSelectedTag, lp);
 		}
