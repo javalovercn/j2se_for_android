@@ -63,7 +63,7 @@ public class UICore {
 	}
 
 	public static void setTextSize(TextView view, int fontSize, ScreenAdapter screenAdapter){
-		view.setTextSize(TypedValue.COMPLEX_UNIT_PX, screenAdapter==null?fontSize:screenAdapter.getFontSize(fontSize));
+		view.setTextSize(TypedValue.COMPLEX_UNIT_PX, screenAdapter==null?fontSize:screenAdapter.getFontSizeInPixel(fontSize));
 	}
 
 }

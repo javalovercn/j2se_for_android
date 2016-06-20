@@ -209,7 +209,7 @@ public class JProgressBar extends JComponent implements SwingConstants, Accessib
 				if(mPaint == null){
 					mPaint = new Paint();  
 					mPaint.setTypeface(JProgressBar.this.getFont().typeface);
-					mPaint.setTextSize(getScreenAdapterAdAPI().getFontSize(JProgressBar.this.getFont().getSize()));
+					mPaint.setTextSize(getScreenAdapterAdAPI().getFontSizeInPixel(JProgressBar.this.getFont().getSize()));
 					mPaint.setAntiAlias(true);
 			        mPaint.setColor(Color.BLACK);
 				}
@@ -217,7 +217,7 @@ public class JProgressBar extends JComponent implements SwingConstants, Accessib
 			}
 		};
 		
-		progressBar.setMinimumHeight((int)getScreenAdapterAdAPI().getFontSize(getFont().getSize()));
+		progressBar.setMinimumHeight((int)getScreenAdapterAdAPI().getFontSizeInPixel(getFont().getSize()));
 		progressBar.setFocusable(false);
 		progressBar.setClickable(false);
 		progressBar.setMax(getModel().getMaximum());

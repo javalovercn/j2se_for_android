@@ -134,7 +134,7 @@ public class JSlider extends JComponent implements SwingConstants, Accessible {
 	private void initBar() {
 		sb = new SeekBar(ActivityManager.getActivity());
 		
-		sb.setMinimumHeight((int)getScreenAdapterAdAPI().getFontSize(getFont().getSize()));
+		sb.setMinimumHeight((int)getScreenAdapterAdAPI().getFontSizeInPixel(getFont().getSize()));
 		sb.setFocusable(false);
 		sb.setClickable(true);
 		updateToSeekBar();

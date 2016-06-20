@@ -450,7 +450,7 @@ public class JRootPane extends JComponent implements Accessible {
 			llp.topMargin = shiftPixel;
 			titleBar.setTextColor(AndroidUIUtil.WINDOW_TITLE_FONT_COLOR.toAndroid());
 			titleBar.setGravity(Gravity.LEFT);
-			final int maxFontSize = Math.max(iconHeight, (int)J2SEInitor.getAndroidServerScreenAdapter().getFontSize(UICore.getDefaultDialogInputFontForSystemUIOnly().getSize()));
+			final int maxFontSize = Math.max(iconHeight, (int)J2SEInitor.getAndroidServerScreenAdapter().getFontSizeInPixel(UICore.getDefaultDialogInputFontForSystemUIOnly().getSize()));
 			titleBar.setTextSize(TypedValue.COMPLEX_UNIT_PX, maxFontSize);
 			titleBar.setBackgroundColor(0);
 

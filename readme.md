@@ -8,6 +8,7 @@
 ### License
 
 1. before using files in src directory, please read and agree the license file "license.txt".
+2. the file "dx.jar" is belong to Android Open Source Project, and is licensed under the Apache License, Version 2.0.
 
 ***
 ### How to use
@@ -23,4 +24,3 @@
 1. you can't dex if there is class in package "java" or "javax" without option "--core-library".
 2. the file "dx.jar" is removed the check code for "--core-library", so it is not required to set option "--core-library" in Eclipse to debug your project.
 3. copy a backup of original dx.jar of your ADT, replace [adt-home]/sdk/build-tools/android-X.X/lib/dx.jar with this dx.jar.
-4. the file "dx.jar" is belong to Android Open Source Project, and is licensed under the Apache License, Version 2.0.

@@ -416,7 +416,7 @@ public class Font {
 //			L.V = L.O ? false : LogManager.warning(msg);
 //			hc.util.ClassUtil.printCurrentThreadStack(msg);
 //		}
-		paint.setTextSize(screenAdapter.getFontSize(size));
+		paint.setTextSize(screenAdapter.getFontSizeInPixel(size));
 		final Rect bounds = new Rect();
 		paint.getTextBounds(str, 0, str.length(), bounds);
 		return bounds;

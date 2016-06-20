@@ -134,7 +134,7 @@ public class CanvasGraphics extends Graphics2D {
 	public void setFont(final Font font) {
 		this.font = font;
     	paint.setTypeface(font.typeface);
-    	paint.setTextSize(screenAdapter.getFontSize(font.getSize()));//paint.setTextSize单位为pixel
+    	paint.setTextSize(screenAdapter.getFontSizeInPixel(font.getSize()));//paint.setTextSize单位为pixel
 	}
 	
 	

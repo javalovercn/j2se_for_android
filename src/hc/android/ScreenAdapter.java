@@ -15,6 +15,7 @@ public class ScreenAdapter {
 	public final static float avgFontMin = STAND_SCREEN_WIDTH*1.0F/12.0F;
 	//一英寸分72磅
 	final static float ADJUST_FONT = 120F / STAND_SCREEN_WIDTH / 72;
+	final static float ADJUST_FONT_FOR_1080P = 120F / STAND_SCREEN_HEIGHT / 72;
 	
 	public final int width;
 	public final int height;
@@ -64,7 +65,7 @@ public class ScreenAdapter {
 		}
 	}
 	
-	public final float getFontSize(final int size){
+	public final float getFontSizeInPixel(final int size){
 		if(type == ScreenAdapter.TYPE_MLET){
 			return size;
 			
@@ -76,10 +77,14 @@ public class ScreenAdapter {
 //			return densityDPI * size / ScreenServer.J2SE_STANDARD_DPI;
 		}else{
 			//Android环境下，采用自适应智能大小
-			final int max = Math.max(width, height);
-			final float out = size * max * ADJUST_FONT;
+			final int minWH = Math.min(width, height);
+			if(minWH >= 1080){
+				return size * minWH * ADJUST_FONT_FOR_1080P;
+			}else{
+				final int max = Math.max(width, height);
+				return size * max * ADJUST_FONT;
+			}
 //			System.out.println("fontSizeToPixel:" + out + ", max:" + max + ", size:" + size + ", ADJ_FONT:" + ADJUST_FONT);
-			return out;
 		}
 	}
 	
