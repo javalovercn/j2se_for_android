@@ -34,6 +34,7 @@ import hc.android.HCTabHost;
 import hc.android.AndroidUIUtil;
 import hc.core.L;
 import hc.core.util.LogManager;
+import hc.util.PropertiesManager;
 
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
@@ -527,7 +528,7 @@ public class Container extends Component {
 	}
 	
 	protected void validateTree() {
-		final boolean isSimu = App.isSimu();
+		final boolean isSimu = PropertiesManager.isSimu();
 		
 		if(isSimu){
 			L.V = L.O ? false : LogManager.log(toString() + " begin validateTree.");

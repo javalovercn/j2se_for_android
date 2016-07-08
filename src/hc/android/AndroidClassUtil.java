@@ -3,6 +3,7 @@ package hc.android;
 import hc.App;
 import hc.core.L;
 import hc.core.util.LogManager;
+import hc.util.ResourceUtil;
 
 import java.awt.Component;
 import java.io.File;
@@ -30,7 +31,7 @@ public class AndroidClassUtil {
 	
 	public static Class loadClass(String className, String baseDir, String libFileName, Activity activity){
 //		final String baseDir = Environment.getExternalStorageDirectory().toString();
-		final File dexLibPath = new File(App.getBaseDir(), baseDir + File.separator + libFileName);//"test.jar"
+		final File dexLibPath = new File(ResourceUtil.getBaseDir(), baseDir + File.separator + libFileName);//"test.jar"
 		
 		//这个可以加载jar/apk/dex，也可以从SD卡中加载，也是本文的重点。
 		DexClassLoader cl = new DexClassLoader(dexLibPath.getAbsolutePath(), baseDir, null, activity.getClassLoader());

@@ -35,6 +35,7 @@ import hc.core.ConfigManager;
 import hc.core.L;
 import hc.core.util.LogManager;
 import hc.server.html5.syn.MletHtmlCanvas;
+import hc.util.PropertiesManager;
 import hc.android.ScreenAdapter;
 
 import java.awt.event.ComponentEvent;
@@ -660,7 +661,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 		this.width = width;
 		this.height = height;
 		
-		if(App.isSimu()){
+		if(PropertiesManager.isSimu()){
 			final boolean isContain = this instanceof Container;
 			final LayoutManager lm = isContain?((Container)this).getLayout():null; 
 			final String layDesc = isContain?((lm==null)?"null":lm.toString()):"null";
@@ -777,7 +778,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 			isDoneServerPreSize = false;
 			
 			if(this instanceof JScrollPane && MletHtmlCanvas.isForAddHtml((JScrollPane)this)){
-				if(App.isSimu()){
+				if(PropertiesManager.isSimu()){
 					L.V = L.O ? false : LogManager.log("ignore adapter size for AddHarHTMLMlet.");
 				}
 				return;
@@ -860,7 +861,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 			return;
 		}
 
-		if(App.isSimu()){
+		if(PropertiesManager.isSimu()){
 			final int oldW = preSize.width;
 			final int oldH = preSize.height;
 			L.V = L.O ? false : LogManager.log("adapter Component preferred size [" + oldW + ", " + oldH + "] to [" + preSize.width + ", " + preSize.height + "]");

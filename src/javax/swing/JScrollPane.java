@@ -24,32 +24,27 @@
  */
 package javax.swing;
 
-import hc.App;
 import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
 import hc.android.AndroidUIUtil;
+import hc.core.util.LogManager;
+import hc.util.PropertiesManager;
 
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.beans.Transient;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import hc.core.L;
-import hc.core.util.LogManager;
-
 import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
 import javax.swing.border.Border;
 import javax.swing.plaf.ScrollPaneUI;
-import javax.swing.plaf.UIResource;
 
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -428,7 +423,7 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 	public void setPreferredSize(Dimension preferredSize) {
 		super.setPreferredSize(preferredSize);
 //		hScrollView.setLayoutParams(new LinearLayout.LayoutParams(preSize.width, preSize.height));
-		if(App.isSimu()){
+		if(PropertiesManager.isSimu()){
 			System.out.println("setPreferredSize for JScrollPane w : " + preSize.width + ", h : " + preSize.height);
 		}
 //		LayoutParams lp = scrollView.getLayoutParams();

@@ -29,6 +29,7 @@ import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
 import hc.android.UICore;
 import hc.android.AndroidUIUtil;
+import hc.util.PropertiesManager;
 import android.view.View;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -376,7 +377,7 @@ public abstract class JTextComponent extends JComponent implements Scrollable, A
         	int modifyCount;
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if(App.isSimu()){
+				if(PropertiesManager.isSimu()){
 					System.out.println("[onTextChanged start : "+start+", before : "+before+", count : "+count+", CharSequence : " + s + "]");
 				}
 				final int sLen = s.length();
@@ -413,7 +414,7 @@ public abstract class JTextComponent extends JComponent implements Scrollable, A
 			@Override
 			public void beforeTextChanged(CharSequence s, final int start, int count,
 					int after) {
-				if(App.isSimu()){
+				if(PropertiesManager.isSimu()){
 					System.out.println("[beforeTextChanged start : "+start+", after : "+after+", count : "+count+", CharSequence : " + s + "]");
 				}
 				
@@ -449,7 +450,7 @@ public abstract class JTextComponent extends JComponent implements Scrollable, A
 			}
 			@Override
 			public void afterTextChanged(Editable s) {
-				if(App.isSimu()){
+				if(PropertiesManager.isSimu()){
 					System.out.println("[afterTextChanged Editable : "+ s + "]");
 				}
 				KeyListener[] listeners = JTextComponent.this.getKeyListeners();

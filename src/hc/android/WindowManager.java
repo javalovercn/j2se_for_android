@@ -3,6 +3,7 @@ package hc.android;
 import hc.App;
 import hc.core.util.Stack;
 import hc.util.ExitManager;
+import hc.util.PropertiesManager;
 import hc.util.ResourceUtil;
 
 import java.awt.Color;
@@ -159,7 +160,7 @@ public class WindowManager {
 			if(currentWindow != null){
 				win = currentWindow;
 			}else{
-				if(hc.App.isSimu()){//模拟环境下直接关闭退出，
+				if(PropertiesManager.isSimu()){//模拟环境下直接关闭退出，
 					quitAndExit();
 				}else{//正常用户环境下，转为后台运行
 					runInBackgroundAndJumpHome();//缺省后台运行，不提问
@@ -313,7 +314,7 @@ public class WindowManager {
 				
 				View peerView = win.getPeerAdAPI();
 				
-				if(App.isSimu()){
+				if(PropertiesManager.isSimu()){
 					AndroidUIUtil.printComponentsInfo(win.getRootPaneAdAPI().getContentPane(), 1);
 					AndroidUIUtil.printViewStructure(peerView, 1);
 				}

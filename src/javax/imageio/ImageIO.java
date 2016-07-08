@@ -29,6 +29,7 @@ import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
 import hc.android.ImageUtil;
 import hc.android.J2SEInitor;
+import hc.util.ResourceUtil;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -86,7 +87,7 @@ public final class ImageIO {
 	}
 
 	public static File getCacheDirectory() {
-		return new File(App.getBaseDir(), "");
+		return new File(ResourceUtil.getBaseDir(), "");
 	}
 
 	public static ImageInputStream createImageInputStream(Object input)

@@ -18,11 +18,18 @@ import android.view.View;
  *
  */
 public class J2SEInitor {
+	private static boolean isInited = false;
+	
 	/**
 	 * 如果增加了新参数，请同步更改到ServerMainActivity.startHCByReflect
 	 * @param paras
 	 */
-	public static void init(Object[] paras){
+	public synchronized static void init(Object[] paras){
+		if(isInited){
+			throw new Error("can NOT invoke J2SEInitor.init(Object[] paras) two times or more.");
+		}
+		isInited = true;
+		
 		final Object para1 = paras[0];
 		final Object para2 = paras[1];
 		final Object para3 = paras[2];

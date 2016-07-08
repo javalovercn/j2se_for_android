@@ -1,7 +1,7 @@
 ### What is "J2SE for Android"
 
 1. Android is based on Java, NOT J2SE, so there is no Swing and AWT classes in Android.
-2. "J2SE for Android" provides Swing and AWT classes, so you can run J2SE application on Android with this library.
+2. "J2SE for Android" provides Swing and AWT classes and API, so you can run J2SE application on Android with this library.
 3. "J2SE for Android" implements most functions, NOT all.
 
 ***

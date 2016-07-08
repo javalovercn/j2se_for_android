@@ -33,6 +33,7 @@ import hc.android.AndroidUIUtil;
 import hc.android.ViewRelation;
 import hc.core.L;
 import hc.core.util.LogManager;
+import hc.util.PropertiesManager;
 
 import java.awt.AWTKeyStroke;
 import java.awt.Color;
@@ -478,7 +479,7 @@ public abstract class JComponent extends Container implements Serializable, Tran
         Dimension size = null;
         size = getViewUISizeAdAPI(size);
         final Dimension out = (size != null) ? size : super.getPreferredSize();
-        if(App.isSimu() && this instanceof JScrollPane){
+        if(PropertiesManager.isSimu() && this instanceof JScrollPane){
         	System.out.println("getPreferredSize w : " + out.width + ", h : " + out.height + " of JScrollPane : " + this.toString());
         }
         return out;

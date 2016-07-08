@@ -34,6 +34,7 @@ import hc.android.WindowManager;
 import hc.core.ConfigManager;
 import hc.core.L;
 import hc.core.util.LogManager;
+import hc.util.PropertiesManager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
@@ -378,7 +379,7 @@ public class Window extends Container implements Accessible {
 				final int oldW = width, oldH = height;
 				width = screenAdapter.getPreAdapterWidth(width);
 				height = screenAdapter.getPreAdapterHeight(height);
-				if(App.isSimu()){
+				if(PropertiesManager.isSimu()){
 					L.V = L.O ? false : LogManager.log("auto adapter screen size from [" + oldW + ", " + oldH + "] to [" + width + ", " + height + "].");
 				}
 			}

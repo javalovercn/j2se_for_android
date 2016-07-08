@@ -374,6 +374,8 @@ public class AndroidPlatformService implements PlatformService {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);      
 			intent.addCategory(Intent.CATEGORY_HOME);      
 			ActivityManager.sysActivity.startActivity(intent);
+		}else if(bizID == BIZ_BCL){
+			return "bcl_android.txt";
 		}
 		return null;
 	}
