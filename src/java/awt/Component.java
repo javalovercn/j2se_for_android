@@ -24,19 +24,18 @@
  */
 package java.awt;
 
-import hc.App;
 import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
+import hc.android.AndroidUIUtil;
 import hc.android.HCTabHost;
 import hc.android.J2SEInitor;
+import hc.android.ScreenAdapter;
 import hc.android.UICore;
-import hc.android.AndroidUIUtil;
 import hc.core.ConfigManager;
 import hc.core.L;
 import hc.core.util.LogManager;
 import hc.server.html5.syn.MletHtmlCanvas;
 import hc.util.PropertiesManager;
-import hc.android.ScreenAdapter;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -907,6 +906,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
             		AndroidUIUtil.getViewWidthAndHeight(peer, preSize);
             	}
             }
+//            if(getScreenAdapterAdAPI().type == ScreenAdapter.TYPE_SERVER){
+//            	if(preSize.width > Window.getMaxWindowPreferredWidth()){
+//            		preSize.width = Window.getMaxWindowPreferredWidth();
+//            	}
+//            	if(preSize.height > Window.getMaxWindowPreferredHeight()){
+//            		preSize.height = Window.getMaxWindowPreferredHeight();
+//            	}
+//            }
 		}
 		return new Dimension(preSize);
 	}

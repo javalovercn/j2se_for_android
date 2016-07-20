@@ -13,6 +13,7 @@ import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.WindowEvent;
+import java.util.Enumeration;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,6 +35,7 @@ public class WindowManager {
 	private static Window currentWindow;
 	private static Stack hcWindowStack = new Stack();
 	private static final ConcurrentHashMap<Dialog, Integer> dialogLock = new ConcurrentHashMap<Dialog, Integer>();
+	private static final ConcurrentHashMap<ViewGroup, View> focusViewOfVG = new ConcurrentHashMap<ViewGroup, View>();
 	
 	private static PopupWindow currPopup;
 	private static boolean isActioned = false;
@@ -190,17 +192,26 @@ public class WindowManager {
 				}
 				sendWindowEvent(win, WindowEvent.WINDOW_CLOSED);
 				sendWindowEvent(win, WindowEvent.WINDOW_STATE_CHANGED);
+				focusViewOfVG.remove((ViewGroup)windowViewAdAPI);
 				
 				if(win == currentWindow){
 					currentWindow = (Window)hcWindowStack.pop();
 					//windowActivated
 					if(currentWindow != null){
-						currentWindow.getWindowViewAdAPI().setClickable(true);
+						final View windowView = currentWindow.getWindowViewAdAPI();
+						windowView.setClickable(true);
 						sendWindowEvent(currentWindow, WindowEvent.WINDOW_GAINED_FOCUS);
 						sendWindowEvent(currentWindow, WindowEvent.WINDOW_ACTIVATED);
 						sendWindowEvent(currentWindow, WindowEvent.WINDOW_STATE_CHANGED);
 						
+						switchFocusView((ViewGroup)windowView);
 //						show(currentWindow.getWindowViewAdAPI(), false);
+					}else{
+						//HCDesktop
+						ViewGroup vg = getHCDesktopVG();
+						if(vg != null){
+							switchFocusView(vg);
+						}
 					}
 				}
 			}
@@ -270,24 +281,52 @@ public class WindowManager {
 			sendWindowEvent(currentWindow, WindowEvent.WINDOW_LOST_FOCUS);
 			sendWindowEvent(currentWindow, WindowEvent.WINDOW_STATE_CHANGED);
 
-			currentWindow.getWindowViewAdAPI().setClickable(false);
+			final ViewGroup group = (ViewGroup)currentWindow.getWindowViewAdAPI();
+			group.setClickable(false);
+			final View focusedChild = group.getFocusedChild();
+			if(group != null && focusedChild != null){
+				saveFocusView(group, focusedChild);
+			}
+			clearFocus(focusedChild);
+			
 			hcWindowStack.push(currentWindow);
+		}else{
+			//HCDesktop
+			final ViewGroup  vg = getHCDesktopVG();
+			if(vg != null){
+				clearFocus(focusViewOfVG.get(vg));
+			}
 		}
 		
 		currentWindow = win;
 		
 		if(isOpened){
 			setTopShow(win);
-			activeWindow(win);
+			activeWindow(win, true);
 		}
 		
 		return isOpened;
 	}
 
-	private static void activeWindow(Window win) {
+	private static void clearFocus(final View focusedChild) {
+		if(focusedChild != null){
+			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					focusedChild.clearFocus();
+				}
+			});
+		}
+	}
+
+	private static void activeWindow(final Window win, final boolean switchFocusOn) {
 		sendWindowEvent(win, WindowEvent.WINDOW_ACTIVATED);
 		sendWindowEvent(win, WindowEvent.WINDOW_GAINED_FOCUS);
 		sendWindowEvent(win, WindowEvent.WINDOW_STATE_CHANGED);
+		
+		if(switchFocusOn){
+			switchFocusView((ViewGroup)win.getWindowViewAdAPI());
+		}
 	}
 	
 	public static void showWindow(final Window win){
@@ -379,7 +418,7 @@ public class WindowManager {
 				}
 				setTopShow(win);
 		
-				activeWindow(win);
+				activeWindow(win, false);
 				
 				sendWindowEvent(win, WindowEvent.WINDOW_OPENED);//requireFocus事件，不需要运行runLater
 			}
@@ -405,18 +444,25 @@ public class WindowManager {
 	
 	private static void setTopShow(Window win){
 		win.getWindowViewAdAPI().setClickable(true);
-		show(win.getWindowViewAdAPI(), false);
+		show(win.getWindowViewAdAPI(), null);
 	}
 	
 	private static boolean isNeedShowBackGray(Window window){
 		return window instanceof Dialog;
 	}
 	
-	public static void show(final View view, boolean needPushIn){
+	public static void show(final View view, final View focusView){
 //		if(needPushIn){
 //			hcWindowStack.push(view);
 //		}
+		if(focusView != null){
+			saveFocusView((ViewGroup)view, focusView);
+		}
 		UIThreadViewChanger.setCurr(view);
+	}
+
+	private static void saveFocusView(final ViewGroup group, final View focusView) {
+		focusViewOfVG.put(group, focusView);
 	}
 
 	private static void buildKeyListener(final Window win, View viewLayout) {
@@ -429,5 +475,27 @@ public class WindowManager {
 				return false;
 			}
 		});
+	}
+
+	private static void switchFocusView(final ViewGroup vg) {
+		final View focusView = focusViewOfVG.get(vg);
+		if(focusView != null){
+			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					focusView.requestFocus();
+				}
+			});
+		}
+	}
+
+	private static ViewGroup getHCDesktopVG() {
+		if(focusViewOfVG.size() == 1){
+			Enumeration<ViewGroup> evg = focusViewOfVG.keys();
+			while(evg.hasMoreElements()){
+				return evg.nextElement();
+			}
+		}
+		return null;
 	}
 }

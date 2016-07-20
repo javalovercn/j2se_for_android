@@ -425,7 +425,12 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 			rendererView.setClickable(true);
 			rendererView.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_tree_node));
 			
-			addAndRefresh(treeNode);
+			AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
+				@Override
+				public void run() {
+					addAndRefreshInUI(treeNode);
+				}
+			});
 			
 			Boolean status = expandedState.get(treeNode);
 			if(status != null && status){
@@ -505,7 +510,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		 * @param treeNode
 		 * @param refreshIconText 同时重绘内容区
 		 */
-		private final void addAndRefresh(final TreeNode treeNode) {
+		private final void addAndRefreshInUI(final TreeNode treeNode) {
 			int indent = 0;
 			if(treeNode.getChildCount() > 0){
 				refreshExpandOrCollapse(treeNode);
@@ -523,6 +528,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 			}
 		
 			nodeView.removeView(rendererView);
+//			AndroidUIUtil.removeFromParent(rendererView);
 			
 			refreshRenderer(treeNode);
 			

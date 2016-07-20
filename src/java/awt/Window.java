@@ -24,11 +24,11 @@
  */
 package java.awt;
 
-import hc.App;
 import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
-import hc.android.DebugLogger;
 import hc.android.AndroidUIUtil;
+import hc.android.DebugLogger;
+import hc.android.J2SEInitor;
 import hc.android.ScreenAdapter;
 import hc.android.WindowManager;
 import hc.core.ConfigManager;
@@ -43,7 +43,6 @@ import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
 import java.awt.image.BufferStrategy;
-import java.awt.peer.ComponentPeer;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -60,6 +59,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.plaf.synth.Region;
+
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
@@ -222,7 +223,11 @@ public class Window extends Container implements Accessible {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				Container c = Window.this;
-				doRequireFirstFocus(c);
+				if(doRequireFirstFocus(c) == false){
+					Log.w(J2SEInitor.getAppName(), "No default focus Component in current Window!!!");
+					//找一个最近可编辑;
+					doFocusOnFirstEditable(c);
+				}
 			}
 			private boolean doRequireFirstFocus(final Component c){
 				if(c.isRequireFirstFocus){
@@ -252,6 +257,36 @@ public class Window extends Container implements Accessible {
 					}
 				}
 				return false;
+			}
+			private Component doFocusOnFirstEditable(final Component c){
+				final View view = c.getFocusablePeerViewAdAPI();
+				if(view != null && view.isFocusable()){
+					view.setFocusableInTouchMode(true);
+					c.requestFocus();
+					
+					AndroidUIUtil.runDelay(new Runnable() {
+						@Override
+						public void run() {
+							try{
+								Thread.sleep(AndroidUIUtil.MS_FOCUSONTOUCH);
+							}catch (Exception e) {
+							}
+							view.setFocusableInTouchMode(false);
+						}
+					});
+					return c;
+				}
+				if(c instanceof Container){
+					Container container = (Container)c;
+					int size = container.getComponentCount();
+					for (int i = 0; i < size; i++) {
+						final Component focusC = doFocusOnFirstEditable(container.getComponent(i));
+						if(focusC != null){
+							return focusC;
+						}
+					}
+				}
+				return null;
 			}
 			@Override
 			public void windowIconified(WindowEvent e) {
@@ -312,6 +347,19 @@ public class Window extends Container implements Accessible {
     	return isPack;
     }
     
+    private static final int windowBodyPaddingPixel = AndroidUIUtil.dpToPx(2);//2 ：应同步于HCAndroidServer/res/drawable/window_body.xml
+    private static final int windowTitleBarHeight = JRootPane.getTitleBarHeight(JRootPane.getEscIconHeightAdAPI());
+    private static final int maxWindowPreferredHeight = J2SEInitor.screenHeight - windowTitleBarHeight - windowBodyPaddingPixel * 2;
+    private static final int maxWindowPreferredWidth = J2SEInitor.screenWidth - windowBodyPaddingPixel * 2;
+    
+    public static final int getMaxWindowPreferredHeight(){
+    	return maxWindowPreferredHeight;
+    }
+    
+    public static final int getMaxWindowPreferredWidth(){
+    	return maxWindowPreferredWidth;
+    }
+    
 	public void pack() {
 		isPack = true;
 		
@@ -321,6 +369,25 @@ public class Window extends Container implements Accessible {
 //        }
         Dimension newSize = getPreferredSize();
         if (getPeerAdAPI() != null) {
+        	final ScreenAdapter screenAdapter = getScreenAdapterAdAPI();
+            if(screenAdapter.type == ScreenAdapter.TYPE_SERVER){
+	        	System.out.println("Window preferredSize : [" + newSize.width + ", " + newSize.height + "], " +
+	        			"screen Size : [" + J2SEInitor.screenWidth + ", " + J2SEInitor.screenHeight + "], windowBodyPaddingPixel : " + windowBodyPaddingPixel);
+	        	boolean isAdjust = false;
+	        	if(newSize.width > maxWindowPreferredWidth){
+	        		isAdjust = true;
+	        		newSize.width = maxWindowPreferredWidth;
+	        	}
+	        	if(newSize.height > maxWindowPreferredHeight){
+	        		isAdjust = true;
+	        		newSize.height = maxWindowPreferredHeight;
+	        	}
+	        	setPreferredSize(newSize);
+	        	if(isAdjust){
+	        		System.out.println("after adjust Window preferredSize : [" + newSize.width + ", " + newSize.height + "], " +
+	            			"screen Size : [" + J2SEInitor.screenWidth + ", " + J2SEInitor.screenHeight + "]");
+	        	}
+            }
             setClientSize(newSize.width, newSize.height);
         }
         
@@ -385,7 +452,7 @@ public class Window extends Container implements Accessible {
 			}
 		}
 		
-		getRootPaneAdAPI().getContentPane().setSize(width, height);
+		setClientSize(width, height);
 //		super.setSize(width, height);
 	}
 	

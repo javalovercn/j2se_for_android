@@ -682,11 +682,16 @@ public class AndroidUIUtil {
 		 return bounds;
 	}
 	
-	public static View removeFromParent(View p_view) {
-		ViewParent vp = p_view.getParent();
+	public static View removeFromParent(final View p_view) {
+		final ViewParent vp = p_view.getParent();
 	   	if(vp != null){
 	   		if(vp instanceof ViewGroup){
-	   			((ViewGroup)vp).removeView(p_view);
+	   			AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
+					@Override
+					public void run() {
+			   			((ViewGroup)vp).removeView(p_view);
+					}
+				});
 	   		}
 	   	}
 	   	return p_view;

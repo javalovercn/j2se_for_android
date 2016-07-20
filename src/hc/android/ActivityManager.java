@@ -13,4 +13,5 @@ public class ActivityManager {
 	public static View getCurrentFocusView(){
 		return sysActivity.getCurrentFocus();
 	}
+	
 }

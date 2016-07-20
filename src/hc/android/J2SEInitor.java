@@ -3,6 +3,10 @@ package hc.android;
 import hc.core.util.CCoreUtil;
 import hc.android.ScreenAdapter;
 import hc.util.ResourceUtil;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Map;
 import java.util.Vector;
 import android.app.Activity;
@@ -11,6 +15,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -108,14 +113,40 @@ public class J2SEInitor {
 	public static int screenWidth, screenHeight, mobileDPI;
 	
 	private static void init(Activity activity){
+		{
+			OutputStream os = new OutputStream() {
+		        @Override
+		        public synchronized void write(byte[] buffer, int offset, int len) {
+		            Log.i(appName, new String(buffer, offset, len));
+		        }
+		        @Override
+		        public void write(int oneByte) throws IOException {
+		        }
+		    };
+		    System.setOut(new PrintStream(os));
+		}
+		
+		{
+			OutputStream os = new OutputStream() {
+		        @Override
+		        public synchronized void write(byte[] buffer, int offset, int len) {
+		            Log.e(appName, new String(buffer, offset, len));
+		        }
+		        @Override
+		        public void write(int oneByte) throws IOException {
+		        }
+		    };
+		    System.setErr(new PrintStream(os));
+		}
+		
 		packagePath.add(activity.getClassLoader());
 		packagePath.add(J2SEInitor.class.getClassLoader());
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-		screenHeight = Math.min(dm.widthPixels, dm.heightPixels);
-		screenWidth = Math.max(dm.widthPixels, dm.heightPixels);
+		screenHeight = Math.min(dm.widthPixels, dm.heightPixels);//横屏模式下的高
+		screenWidth = Math.max(dm.widthPixels, dm.heightPixels);//横屏模式下的宽
 		mobileDPI = activity.getResources().getDisplayMetrics().densityDpi;
 		
 		System.setProperty(CCoreUtil.SYS_SERVER_OS_PLATFORM, CCoreUtil.SYS_SERVER_OS_ANDROID_SERVER);

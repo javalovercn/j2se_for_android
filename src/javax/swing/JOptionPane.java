@@ -25,7 +25,6 @@
 package javax.swing;
 
 import hc.android.AndroidClassUtil;
-import hc.android.ImageUtil;
 import hc.android.AndroidUIUtil;
 import hc.util.ResourceUtil;
 
@@ -642,7 +641,7 @@ public class JOptionPane extends JComponent implements Accessible {
 					//Input
 					JPanel inputPanel = new JPanel(new GridLayout(2, 1));
 					inputPanel.add(new JLabel(message.toString()));
-					inputField = new JTextField("", 15);
+					inputField = new JTextField("", 22);
 					inputPanel.add(inputField);
 					
 					inputField.requestFocus();

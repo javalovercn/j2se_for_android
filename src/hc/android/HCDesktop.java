@@ -158,12 +158,12 @@ public class HCDesktop implements PlatformTrayIcon{
 		desktopLinear.setLayoutParams(new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 		desktopLinear.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_desktop_back));
-		WindowManager.show(desktopLinear, true);
+		WindowManager.show(desktopLinear, mainIconView);
 		AndroidUIUtil.runDelay(new Runnable() {
 			@Override
 			public void run() {
 				try{
-					Thread.sleep(5000);
+					Thread.sleep(1000);//5000改为1000
 				}catch (Exception e) {
 				}
 				ActivityManager.getActivity().runOnUiThread(new Runnable() {

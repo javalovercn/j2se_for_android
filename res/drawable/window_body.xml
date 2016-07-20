@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/window_body_back_color"/>
+    <!-- 如果修改以下的padding值，请同步修改HCAndroidJ2SE/Window.java/windowBodyPaddingPixel -->
     <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp" />
 	<stroke android:width="2dp" android:color="@color/window_title_color" android:left="2dp" android:right="2dp" 
 	    android:top="2dp" android:bottom="2dp"/>

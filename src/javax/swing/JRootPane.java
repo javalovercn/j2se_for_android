@@ -274,7 +274,7 @@ public class JRootPane extends JComponent implements Accessible {
 		return false;
 	}
 
-	private final int getIconSize() {
+	private static final int getIconSizeAdAPI() {
 		final int width = J2SEInitor.screenWidth;
 		final int height = J2SEInitor.screenHeight;
 		
@@ -290,6 +290,17 @@ public class JRootPane extends JComponent implements Accessible {
 		}
 	}
 	
+	final static int ESC_ICON_SIZE = getIconSizeAdAPI();
+	
+	public static int getEscIconHeightAdAPI(){
+		Bitmap bitmap = getEscIconBitmapAdAPI();
+		return bitmap.getHeight();
+	}
+
+	private static Bitmap getEscIconBitmapAdAPI() {
+		return AndroidUIUtil.getBitmap("esc_" + ESC_ICON_SIZE + ".png");
+	}
+
 	public JRootPane() {
 		setGlassPane(createGlassPane());
 		setLayeredPane(createLayeredPane());
@@ -302,9 +313,8 @@ public class JRootPane extends JComponent implements Accessible {
 		titleBar.setText("");
 
 		exitIcon = new ImageView(ActivityManager.getActivity());
-		int size = getIconSize();
 
-		Bitmap bitmap = AndroidUIUtil.getBitmap("esc_" + size + ".png");
+		Bitmap bitmap = getEscIconBitmapAdAPI();
 		iconHeight = bitmap.getHeight();
 		// if(iconHeight / 2 >= UIUtil.MIN_ICON_SIZE){
 		// iconHeight = iconHeight / 2;
@@ -450,7 +460,7 @@ public class JRootPane extends JComponent implements Accessible {
 			llp.topMargin = shiftPixel;
 			titleBar.setTextColor(AndroidUIUtil.WINDOW_TITLE_FONT_COLOR.toAndroid());
 			titleBar.setGravity(Gravity.LEFT);
-			final int maxFontSize = Math.max(iconHeight, (int)J2SEInitor.getAndroidServerScreenAdapter().getFontSizeInPixel(UICore.getDefaultDialogInputFontForSystemUIOnly().getSize()));
+			final int maxFontSize = getTitleBarHeight(iconHeight);
 			titleBar.setTextSize(TypedValue.COMPLEX_UNIT_PX, maxFontSize);
 			titleBar.setBackgroundColor(0);
 
@@ -469,6 +479,10 @@ public class JRootPane extends JComponent implements Accessible {
 			AndroidUIUtil.addView(titleView, exitIcon, llp, viewRelation);
 		}
 		return titleView;
+	}
+
+	public static int getTitleBarHeight(final int iconH) {
+		return Math.max(iconH, (int)J2SEInitor.getAndroidServerScreenAdapter().getFontSizeInPixel(UICore.getDefaultDialogInputFontForSystemUIOnly().getSize()));
 	}
 
 	@Override

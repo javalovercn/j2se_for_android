@@ -40,15 +40,20 @@ public class ViewRelation {
 	}
 	
 	public void removeAll(){
-		View[] views = new View[map.size()];
+		final View[] views = new View[map.size()];
 		map.keySet().toArray(views);
 		
-		for (int i = 0; i < views.length; i++) {
-			ViewGroup oldParent = map.get(views[i]);
-			if(oldParent != null){
-				oldParent.removeView(views[i]);
+		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i < views.length; i++) {
+					ViewGroup oldParent = map.get(views[i]);
+					if(oldParent != null){
+						oldParent.removeView(views[i]);
+					}
+				}
 			}
-		}
+		});
 		
 		map.clear();
 	}

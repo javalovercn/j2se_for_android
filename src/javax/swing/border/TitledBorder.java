@@ -345,12 +345,12 @@ public class TitledBorder extends AbstractBorder
 		    		borderView.addView(boxView, lp);
 				}
 				
-				addTitleView(component);
+				addTitleViewInUI(component);
 			}
 		});
 	}
 
-	private void addTitleView(Component component){
+	private void addTitleViewInUI(Component component){
 		if(title == null || title.trim().length() == 0){
 		}else{
     		boolean isLeftToRight = component.getComponentOrientation().isLeftToRight();
