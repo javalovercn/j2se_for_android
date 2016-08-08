@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 import hc.core.L;
 import hc.core.util.LogManager;
 import javax.swing.AbstractButton;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JViewport;
@@ -806,7 +807,8 @@ public class AndroidUIUtil {
 		final LayoutManager lm = isContain?((Container)jcomponent).getLayout():null; 
 		final String layDesc = isContain?((lm==null)?"null":lm.toString()):"null";
 		final String labelDesc = (jcomponent instanceof JLabel)?("[" + ((JLabel)jcomponent).getText() + "]"):"";
-		System.out.print("["+level+"]" + jcomponent.toString() + labelDesc +
+		final String buttonDesc = (jcomponent instanceof JButton)?("[" + ((JButton)jcomponent).getText() + "]"):"";
+		System.out.print("["+level+"]" + jcomponent.toString() + labelDesc + buttonDesc +
 				", x : " + jcomponent.getX() + ", y : " + jcomponent.getY() + ", w : " + jcomponent.getWidth() + ", h : " + jcomponent.getHeight() + ", layout : " + layDesc + "\n");
 		
 		if(jcomponent instanceof JComponent){

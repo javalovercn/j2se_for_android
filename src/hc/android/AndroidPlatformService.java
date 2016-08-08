@@ -394,18 +394,18 @@ public class AndroidPlatformService implements PlatformService {
         return null;
     }
 	
-    private static void put(final Object ruby, final String name, final Object object) {
-        try {
-            final Method putMethod = ruby.getClass().getMethod("put", String.class, Object.class);
-            putMethod.invoke(ruby, name, object);
-        } catch (final NoSuchMethodException nsme) {
-            throw new RuntimeException(nsme);
-        } catch (final IllegalAccessException iae) {
-            throw new RuntimeException(iae);
-        } catch (final java.lang.reflect.InvocationTargetException ite) {
-            throw new RuntimeException(ite);
-        }
-    }
+//    private static void put(final Object ruby, final String name, final Object object) {
+//        try {
+//            final Method putMethod = ruby.getClass().getMethod("put", String.class, Object.class);
+//            putMethod.invoke(ruby, name, object);
+//        } catch (final NoSuchMethodException nsme) {
+//            throw new RuntimeException(nsme);
+//        } catch (final IllegalAccessException iae) {
+//            throw new RuntimeException(iae);
+//        } catch (final java.lang.reflect.InvocationTargetException ite) {
+//            throw new RuntimeException(ite);
+//        }
+//    }
     
 	private boolean pasteStr(final View currFocusView, final String str) {
 		if(currFocusView instanceof EditText){
@@ -674,7 +674,7 @@ public class AndroidPlatformService implements PlatformService {
 							e.printStackTrace();
 							final String dxFileName = dexFile.getName();
 							String msg = StringUtil.replace((String)ResourceUtil.get(9189), "{file}", dxFileName);
-							msg = StringUtil.replace(msg, "{error}", App.getErrorI18N());
+							msg = StringUtil.replace(msg, "{error}", ResourceUtil.getErrorI18N());
 							AddHarHTMLMlet.showMsgForAddHar(IContext.ERROR, msg);
 							App.showMessageDialog(null, "<html>Fail to dex file : " + dxFileName + ", at Exception : [" + e.getMessage() + 
 									"]<BR>close other applications and try again, or restart.</html>", 
@@ -803,5 +803,18 @@ public class AndroidPlatformService implements PlatformService {
 		}else{
 			Log.i(J2SEInitor.getAppName(), msg);
 		}
+	}
+	
+	android.app.ActivityManager.MemoryInfo info;
+	
+	@Override
+	public long getFreeMem() {
+		if(info == null){
+			info =new android.app.ActivityManager.MemoryInfo();   
+		}
+		
+		final android.app.ActivityManager activityManager = (android.app.ActivityManager)hc.android.ActivityManager.sysActivity.getSystemService(Context.ACTIVITY_SERVICE);
+		activityManager.getMemoryInfo(info);
+		return (info.availMem>>20);
 	}
 }

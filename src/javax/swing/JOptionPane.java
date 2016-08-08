@@ -24,8 +24,10 @@
  */
 package javax.swing;
 
+import hc.App;
 import hc.android.AndroidClassUtil;
 import hc.android.AndroidUIUtil;
+import hc.server.ui.ClientDesc;
 import hc.util.ResourceUtil;
 
 import java.awt.BorderLayout;
@@ -397,23 +399,74 @@ public class JOptionPane extends JComponent implements Accessible {
 			Object message, String title, int messageType, Icon icon,
 			Object[] selectionValues, Object initialSelectionValue)
 			throws HeadlessException {
-		JOptionPane pane = new JOptionPane(message, messageType,
-				OK_CANCEL_OPTION, icon, selectionValues, initialSelectionValue);
+		if(title == null){
+			title = "Input";
+		}
 		
-		pane.setWantsInput(true);
-
-		int style = styleFromMessageType(messageType);
-		JDialog dialog = pane.createDialog(parentComponent, title, style);
-
-		dialog.show();
-		dialog.dispose();
-
-		Object value = pane.getInputValue();
-
-		if (value == UNINITIALIZED_VALUE) {
+		final Window dialog = App.buildCloseableWindow(false, null, title, true);
+		
+		JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		JLabel lable = new JLabel(message.toString(), icon, SwingConstants.LEADING);
+		c.anchor = GridBagConstraints.LINE_START;
+		panel.add(lable, c);
+		
+		c.gridy = 1;
+		JComboBox select = null;
+		JTextField field = null;
+		if(selectionValues != null){
+			select = new JComboBox(selectionValues);
+			select.setSelectedItem(initialSelectionValue);
+			panel.add(select, c);
+		}else{
+			String initV = null;
+			if(initialSelectionValue != null){
+				initV = initialSelectionValue.toString();
+			}
+			field = new JTextField(initV);
+			panel.add(field, c);
+		}
+		
+		final Boolean[] out = new Boolean[1];
+		
+		JButton ok = App.buildDefaultOKButton();
+		ok.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				out[0] = Boolean.TRUE;
+				dialog.dispose();
+			}
+		});
+		JButton cancel = App.buildDefaultCancelButton();
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+		});
+		
+		JPanel btnPanel = new JPanel(new GridLayout(1, 2));
+		btnPanel.add(cancel);
+		btnPanel.add(ok);
+		
+		c.gridy = 2;
+		c.anchor = GridBagConstraints.CENTER;
+		c.insets = new Insets(ClientDesc.hgap, ClientDesc.hgap, 0, ClientDesc.hgap);
+		panel.add(btnPanel, c);
+		
+		App.showCenterPanelWindowWithoutButton(panel, 0, 0, dialog, null, false);
+		
+		if(out[0] != null && out[0]){
+			if(select != null){
+				return select.getSelectedItem();
+			}else if(field != null){
+				return field.getText();
+			}
+			return null;
+		}else{
 			return null;
 		}
-		return value;
 	}
 
 	public static void showMessageDialog(Component parentComponent,
@@ -465,26 +518,64 @@ public class JOptionPane extends JComponent implements Accessible {
 	}
 
 	public static int showOptionDialog(Component parentComponent,
-			Object message, String title, int optionType, int messageType,
+			Object message, String title, final int optionType, int messageType,
 			Icon icon, Object[] options, Object initialValue)
 			throws HeadlessException {
-		JOptionPane pane = new JOptionPane(message, messageType, optionType,
-				icon, options, initialValue);
-
-		pane.setInitialValue(initialValue);
-
-		int style = styleFromMessageType(messageType);
-		JDialog dialog = pane.createDialog(parentComponent, title, style);
-
-		dialog.show();
-		dialog.dispose();
-
-		Object selectedValue = pane.getValue();
-		if(selectedValue != null && selectedValue instanceof Integer){
-			return (Integer)selectedValue;
+		if(title == null){
+			title = "Options";
 		}
 		
-		return CLOSED_OPTION;
+		if(options == null){
+			options = getOptionTypeButtonNumAdAPI(optionType);
+			initialValue = options[0];
+		}
+		
+		final Window dialog = App.buildCloseableWindow(false, null, title, true);
+		
+		JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		JLabel lable = new JLabel(message.toString(), icon, SwingConstants.LEADING);
+		c.anchor = GridBagConstraints.LINE_START;
+		panel.add(lable, c);
+		
+		final Integer[] out = new Integer[1];
+		out[0] = CLOSED_OPTION;
+		
+		final int length = options.length;
+		JButton[] btns = new JButton[length];
+		for (int i = 0; i < length; i++) {
+			final String btnText = options[i].toString();
+			final JButton btn = new JButton(btnText);
+			final int currentIdx = i;
+			btn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(optionType == OK_CANCEL_OPTION && currentIdx == 1){
+						out[0] = CANCEL_OPTION;
+					}else{
+						out[0] = currentIdx;
+					}
+					dialog.dispose();
+				}
+			});
+			if(btnText.equals(initialValue)){
+				btn.requestFocus();
+			}
+			btns[i] = btn;
+		}
+		JPanel btnPanel = new JPanel(new GridLayout(1, length));
+		for (int i = length - 1; i >= 0; i--) {//注意：0在最后
+			btnPanel.add(btns[i]);
+		}
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.CENTER;
+		c.insets = new Insets(ClientDesc.hgap, ClientDesc.hgap, 0, ClientDesc.hgap);
+		panel.add(btnPanel, c);
+		
+		App.showCenterPanelWindowWithoutButton(panel, 0, 0, dialog, null, false);
+		
+		return out[0];
 	}
 
 	public JDialog createDialog(Component parentComponent, String title)
@@ -505,7 +596,7 @@ public class JOptionPane extends JComponent implements Accessible {
 	private static final String[] OK_CANCEL_OPTIONS = {(String)ResourceUtil.get(1010), (String)ResourceUtil.get(1018)};
 	private static final String[] DEFAULT_OPTIONS = {(String)ResourceUtil.get(1010)};
 	
-	private Object[] getOptionTypeButtonNumAdAPI(){
+	private static Object[] getOptionTypeButtonNumAdAPI(final int optionType){
 		if(optionType == YES_NO_OPTION){
 			return YES_NO_OPTIONS;
 		}else if(optionType == YES_NO_CANCEL_OPTION){
@@ -663,7 +754,7 @@ public class JOptionPane extends JComponent implements Accessible {
 		{
 			if(options == null){
 				useInnerOptions = true;
-				options = getOptionTypeButtonNumAdAPI();
+				options = getOptionTypeButtonNumAdAPI(optionType);
 			}
 			int cols = options.length;
 			buttonPanel = new JPanel(new GridLayout(1, cols));

@@ -25,7 +25,6 @@
 
 package javax.imageio;
 
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
@@ -35,15 +34,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 import java.util.Set;
-import javax.imageio.spi.ImageReaderSpi;
-import javax.imageio.event.IIOReadWarningListener;
-import javax.imageio.event.IIOReadProgressListener;
-import javax.imageio.event.IIOReadUpdateListener;
+
 import javax.imageio.metadata.IIOMetadata;
-import javax.imageio.metadata.IIOMetadataFormatImpl;
 import javax.imageio.stream.ImageInputStream;
 
 /**
@@ -72,12 +65,12 @@ import javax.imageio.stream.ImageInputStream;
  */
 public abstract class ImageReader {
 
-    /**
-     * The <code>ImageReaderSpi</code> that instantiated this object,
-     * or <code>null</code> if its identity is not known or none
-     * exists.  By default it is initialized to <code>null</code>.
-     */
-    protected ImageReaderSpi originatingProvider;
+//    /**
+//     * The <code>ImageReaderSpi</code> that instantiated this object,
+//     * or <code>null</code> if its identity is not known or none
+//     * exists.  By default it is initialized to <code>null</code>.
+//     */
+//    protected ImageReaderSpi originatingProvider;
 
     /**
      * The <code>ImageInputStream</code> or other
@@ -131,37 +124,37 @@ public abstract class ImageReader {
      */
     protected Locale locale = null;
 
-    /**
-     * A <code>List</code> of currently registered
-     * <code>IIOReadWarningListener</code>s, initialized by default to
-     * <code>null</code>, which is synonymous with an empty
-     * <code>List</code>.
-     */
-    protected List<IIOReadWarningListener> warningListeners = null;
-
-    /**
-     * A <code>List</code> of the <code>Locale</code>s associated with
-     * each currently registered <code>IIOReadWarningListener</code>,
-     * initialized by default to <code>null</code>, which is
-     * synonymous with an empty <code>List</code>.
-     */
-    protected List<Locale> warningLocales = null;
-
-    /**
-     * A <code>List</code> of currently registered
-     * <code>IIOReadProgressListener</code>s, initialized by default
-     * to <code>null</code>, which is synonymous with an empty
-     * <code>List</code>.
-     */
-    protected List<IIOReadProgressListener> progressListeners = null;
-
-    /**
-     * A <code>List</code> of currently registered
-     * <code>IIOReadUpdateListener</code>s, initialized by default to
-     * <code>null</code>, which is synonymous with an empty
-     * <code>List</code>.
-     */
-    protected List<IIOReadUpdateListener> updateListeners = null;
+//    /**
+//     * A <code>List</code> of currently registered
+//     * <code>IIOReadWarningListener</code>s, initialized by default to
+//     * <code>null</code>, which is synonymous with an empty
+//     * <code>List</code>.
+//     */
+//    protected List<IIOReadWarningListener> warningListeners = null;
+//
+//    /**
+//     * A <code>List</code> of the <code>Locale</code>s associated with
+//     * each currently registered <code>IIOReadWarningListener</code>,
+//     * initialized by default to <code>null</code>, which is
+//     * synonymous with an empty <code>List</code>.
+//     */
+//    protected List<Locale> warningLocales = null;
+//
+//    /**
+//     * A <code>List</code> of currently registered
+//     * <code>IIOReadProgressListener</code>s, initialized by default
+//     * to <code>null</code>, which is synonymous with an empty
+//     * <code>List</code>.
+//     */
+//    protected List<IIOReadProgressListener> progressListeners = null;
+//
+//    /**
+//     * A <code>List</code> of currently registered
+//     * <code>IIOReadUpdateListener</code>s, initialized by default to
+//     * <code>null</code>, which is synonymous with an empty
+//     * <code>List</code>.
+//     */
+//    protected List<IIOReadUpdateListener> updateListeners = null;
 
     /**
      * If <code>true</code>, the current read operation should be
@@ -169,22 +162,22 @@ public abstract class ImageReader {
      */
     private boolean abortFlag = false;
 
-    /**
-     * Constructs an <code>ImageReader</code> and sets its
-     * <code>originatingProvider</code> field to the supplied value.
-     *
-     * <p> Subclasses that make use of extensions should provide a
-     * constructor with signature <code>(ImageReaderSpi,
-     * Object)</code> in order to retrieve the extension object.  If
-     * the extension object is unsuitable, an
-     * <code>IllegalArgumentException</code> should be thrown.
-     *
-     * @param originatingProvider the <code>ImageReaderSpi</code> that is
-     * invoking this constructor, or <code>null</code>.
-     */
-    protected ImageReader(ImageReaderSpi originatingProvider) {
-        this.originatingProvider = originatingProvider;
-    }
+//    /**
+//     * Constructs an <code>ImageReader</code> and sets its
+//     * <code>originatingProvider</code> field to the supplied value.
+//     *
+//     * <p> Subclasses that make use of extensions should provide a
+//     * constructor with signature <code>(ImageReaderSpi,
+//     * Object)</code> in order to retrieve the extension object.  If
+//     * the extension object is unsuitable, an
+//     * <code>IllegalArgumentException</code> should be thrown.
+//     *
+//     * @param originatingProvider the <code>ImageReaderSpi</code> that is
+//     * invoking this constructor, or <code>null</code>.
+//     */
+//    protected ImageReader(ImageReaderSpi originatingProvider) {
+//        this.originatingProvider = originatingProvider;
+//    }
 
     /**
      * Returns a <code>String</code> identifying the format of the
@@ -202,20 +195,21 @@ public abstract class ImageReader {
      * @return the format name, as a <code>String</code>.
      */
     public String getFormatName() throws IOException {
-        return originatingProvider.getFormatNames()[0];
+//        return originatingProvider.getFormatNames()[0];
+    	return null;
     }
 
-    /**
-     * Returns the <code>ImageReaderSpi</code> that was passed in on
-     * the constructor.  Note that this value may be <code>null</code>.
-     *
-     * @return an <code>ImageReaderSpi</code>, or <code>null</code>.
-     *
-     * @see ImageReaderSpi
-     */
-    public ImageReaderSpi getOriginatingProvider() {
-        return originatingProvider;
-    }
+//    /**
+//     * Returns the <code>ImageReaderSpi</code> that was passed in on
+//     * the constructor.  Note that this value may be <code>null</code>.
+//     *
+//     * @return an <code>ImageReaderSpi</code>, or <code>null</code>.
+//     *
+//     * @see ImageReaderSpi
+//     */
+//    public ImageReaderSpi getOriginatingProvider() {
+//        return originatingProvider;
+//    }
 
     /**
      * Sets the input source to use to the given
@@ -288,31 +282,31 @@ public abstract class ImageReader {
     public void setInput(Object input,
                          boolean seekForwardOnly,
                          boolean ignoreMetadata) {
-        if (input != null) {
-            boolean found = false;
-            if (originatingProvider != null) {
-                Class[] classes = originatingProvider.getInputTypes();
-                for (int i = 0; i < classes.length; i++) {
-                    if (classes[i].isInstance(input)) {
-                        found = true;
-                        break;
-                    }
-                }
-            } else {
-                if (input instanceof ImageInputStream) {
-                    found = true;
-                }
-            }
-            if (!found) {
-                throw new IllegalArgumentException("Incorrect input type!");
-            }
-
-            this.seekForwardOnly = seekForwardOnly;
-            this.ignoreMetadata = ignoreMetadata;
-            this.minIndex = 0;
-        }
-
-        this.input = input;
+//        if (input != null) {
+//            boolean found = false;
+//            if (originatingProvider != null) {
+//                Class[] classes = originatingProvider.getInputTypes();
+//                for (int i = 0; i < classes.length; i++) {
+//                    if (classes[i].isInstance(input)) {
+//                        found = true;
+//                        break;
+//                    }
+//                }
+//            } else {
+//                if (input instanceof ImageInputStream) {
+//                    found = true;
+//                }
+//            }
+//            if (!found) {
+//                throw new IllegalArgumentException("Incorrect input type!");
+//            }
+//
+//            this.seekForwardOnly = seekForwardOnly;
+//            this.ignoreMetadata = ignoreMetadata;
+//            this.minIndex = 0;
+//        }
+//
+//        this.input = input;
     }
 
     /**
@@ -797,35 +791,35 @@ public abstract class ImageReader {
                                     Set nodeNames,
                                     boolean wantStream,
                                     int imageIndex) throws IOException {
-        if (formatName == null) {
-            throw new IllegalArgumentException("formatName == null!");
-        }
-        if (nodeNames == null) {
-            throw new IllegalArgumentException("nodeNames == null!");
-        }
-        IIOMetadata metadata =
-            wantStream
-            ? getStreamMetadata()
-            : getImageMetadata(imageIndex);
-        if (metadata != null) {
-            if (metadata.isStandardMetadataFormatSupported() &&
-                formatName.equals
-                (IIOMetadataFormatImpl.standardMetadataFormatName)) {
-                return metadata;
-            }
-            String nativeName = metadata.getNativeMetadataFormatName();
-            if (nativeName != null && formatName.equals(nativeName)) {
-                return metadata;
-            }
-            String[] extraNames = metadata.getExtraMetadataFormatNames();
-            if (extraNames != null) {
-                for (int i = 0; i < extraNames.length; i++) {
-                    if (formatName.equals(extraNames[i])) {
-                        return metadata;
-                    }
-                }
-            }
-        }
+//        if (formatName == null) {
+//            throw new IllegalArgumentException("formatName == null!");
+//        }
+//        if (nodeNames == null) {
+//            throw new IllegalArgumentException("nodeNames == null!");
+//        }
+//        IIOMetadata metadata =
+//            wantStream
+//            ? getStreamMetadata()
+//            : getImageMetadata(imageIndex);
+//        if (metadata != null) {
+//            if (metadata.isStandardMetadataFormatSupported() &&
+//                formatName.equals
+//                (IIOMetadataFormatImpl.standardMetadataFormatName)) {
+//                return metadata;
+//            }
+//            String nativeName = metadata.getNativeMetadataFormatName();
+//            if (nativeName != null && formatName.equals(nativeName)) {
+//                return metadata;
+//            }
+//            String[] extraNames = metadata.getExtraMetadataFormatNames();
+//            if (extraNames != null) {
+//                for (int i = 0; i < extraNames.length; i++) {
+//                    if (formatName.equals(extraNames[i])) {
+//                        return metadata;
+//                    }
+//                }
+//            }
+//        }
         return null;
     }
 
@@ -1157,57 +1151,58 @@ public abstract class ImageReader {
         readAll(Iterator<? extends ImageReadParam> params)
         throws IOException
     {
-        List output = new ArrayList();
-
-        int imageIndex = getMinIndex();
-
-        // Inform IIOReadProgressListeners we're starting a sequence
-        processSequenceStarted(imageIndex);
-
-        while (true) {
-            // Inform IIOReadProgressListeners and IIOReadUpdateListeners
-            // that we're starting a new image
-
-            ImageReadParam param = null;
-            if (params != null && params.hasNext()) {
-                Object o = params.next();
-                if (o != null) {
-                    if (o instanceof ImageReadParam) {
-                        param = (ImageReadParam)o;
-                    } else {
-                        throw new IllegalArgumentException
-                            ("Non-ImageReadParam supplied as part of params!");
-                    }
-                }
-            }
-
-            BufferedImage bi = null;
-            try {
-                bi = read(imageIndex, param);
-            } catch (IndexOutOfBoundsException e) {
-                break;
-            }
-
-            ArrayList thumbnails = null;
-            int numThumbnails = getNumThumbnails(imageIndex);
-            if (numThumbnails > 0) {
-                thumbnails = new ArrayList();
-                for (int j = 0; j < numThumbnails; j++) {
-                    thumbnails.add(readThumbnail(imageIndex, j));
-                }
-            }
-
-            IIOMetadata metadata = getImageMetadata(imageIndex);
-            IIOImage im = new IIOImage(bi, thumbnails, metadata);
-            output.add(im);
-
-            ++imageIndex;
-        }
-
-        // Inform IIOReadProgressListeners we're ending a sequence
-        processSequenceComplete();
-
-        return output.iterator();
+//        List output = new ArrayList();
+//
+//        int imageIndex = getMinIndex();
+//
+//        // Inform IIOReadProgressListeners we're starting a sequence
+//        processSequenceStarted(imageIndex);
+//
+//        while (true) {
+//            // Inform IIOReadProgressListeners and IIOReadUpdateListeners
+//            // that we're starting a new image
+//
+//            ImageReadParam param = null;
+//            if (params != null && params.hasNext()) {
+//                Object o = params.next();
+//                if (o != null) {
+//                    if (o instanceof ImageReadParam) {
+//                        param = (ImageReadParam)o;
+//                    } else {
+//                        throw new IllegalArgumentException
+//                            ("Non-ImageReadParam supplied as part of params!");
+//                    }
+//                }
+//            }
+//
+//            BufferedImage bi = null;
+//            try {
+//                bi = read(imageIndex, param);
+//            } catch (IndexOutOfBoundsException e) {
+//                break;
+//            }
+//
+//            ArrayList thumbnails = null;
+//            int numThumbnails = getNumThumbnails(imageIndex);
+//            if (numThumbnails > 0) {
+//                thumbnails = new ArrayList();
+//                for (int j = 0; j < numThumbnails; j++) {
+//                    thumbnails.add(readThumbnail(imageIndex, j));
+//                }
+//            }
+//
+//            IIOMetadata metadata = getImageMetadata(imageIndex);
+//            IIOImage im = new IIOImage(bi, thumbnails, metadata);
+//            output.add(im);
+//
+//            ++imageIndex;
+//        }
+//
+//        // Inform IIOReadProgressListeners we're ending a sequence
+//        processSequenceComplete();
+//
+//        return output.iterator();
+    	return null;
     }
 
     /**
@@ -1822,51 +1817,51 @@ public abstract class ImageReader {
         return l;
     }
 
-    /**
-     * Adds an <code>IIOReadWarningListener</code> to the list of
-     * registered warning listeners.  If <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.  Messages sent to the given listener will be
-     * localized, if possible, to match the current
-     * <code>Locale</code>.  If no <code>Locale</code> has been set,
-     * warning messages may be localized as the reader sees fit.
-     *
-     * @param listener an <code>IIOReadWarningListener</code> to be registered.
-     *
-     * @see #removeIIOReadWarningListener
-     */
-    public void addIIOReadWarningListener(IIOReadWarningListener listener) {
-        if (listener == null) {
-            return;
-        }
-        warningListeners = addToList(warningListeners, listener);
-        warningLocales = addToList(warningLocales, getLocale());
-    }
+//    /**
+//     * Adds an <code>IIOReadWarningListener</code> to the list of
+//     * registered warning listeners.  If <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.  Messages sent to the given listener will be
+//     * localized, if possible, to match the current
+//     * <code>Locale</code>.  If no <code>Locale</code> has been set,
+//     * warning messages may be localized as the reader sees fit.
+//     *
+//     * @param listener an <code>IIOReadWarningListener</code> to be registered.
+//     *
+//     * @see #removeIIOReadWarningListener
+//     */
+//    public void addIIOReadWarningListener(IIOReadWarningListener listener) {
+//        if (listener == null) {
+//            return;
+//        }
+//        warningListeners = addToList(warningListeners, listener);
+//        warningLocales = addToList(warningLocales, getLocale());
+//    }
 
-    /**
-     * Removes an <code>IIOReadWarningListener</code> from the list of
-     * registered error listeners.  If the listener was not previously
-     * registered, or if <code>listener</code> is <code>null</code>,
-     * no exception will be thrown and no action will be taken.
-     *
-     * @param listener an IIOReadWarningListener to be unregistered.
-     *
-     * @see #addIIOReadWarningListener
-     */
-    public void removeIIOReadWarningListener(IIOReadWarningListener listener) {
-        if (listener == null || warningListeners == null) {
-            return;
-        }
-        int index = warningListeners.indexOf(listener);
-        if (index != -1) {
-            warningListeners.remove(index);
-            warningLocales.remove(index);
-            if (warningListeners.size() == 0) {
-                warningListeners = null;
-                warningLocales = null;
-            }
-        }
-    }
+//    /**
+//     * Removes an <code>IIOReadWarningListener</code> from the list of
+//     * registered error listeners.  If the listener was not previously
+//     * registered, or if <code>listener</code> is <code>null</code>,
+//     * no exception will be thrown and no action will be taken.
+//     *
+//     * @param listener an IIOReadWarningListener to be unregistered.
+//     *
+//     * @see #addIIOReadWarningListener
+//     */
+//    public void removeIIOReadWarningListener(IIOReadWarningListener listener) {
+//        if (listener == null || warningListeners == null) {
+//            return;
+//        }
+//        int index = warningListeners.indexOf(listener);
+//        if (index != -1) {
+//            warningListeners.remove(index);
+//            warningLocales.remove(index);
+//            if (warningListeners.size() == 0) {
+//                warningListeners = null;
+//                warningLocales = null;
+//            }
+//        }
+//    }
 
     /**
      * Removes all currently registered
@@ -1877,45 +1872,45 @@ public abstract class ImageReader {
      * instance variables to <code>null</code>.
      */
     public void removeAllIIOReadWarningListeners() {
-        warningListeners = null;
-        warningLocales = null;
+//        warningListeners = null;
+//        warningLocales = null;
     }
 
-    /**
-     * Adds an <code>IIOReadProgressListener</code> to the list of
-     * registered progress listeners.  If <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.
-     *
-     * @param listener an IIOReadProgressListener to be registered.
-     *
-     * @see #removeIIOReadProgressListener
-     */
-    public void addIIOReadProgressListener(IIOReadProgressListener listener) {
-        if (listener == null) {
-            return;
-        }
-        progressListeners = addToList(progressListeners, listener);
-    }
+//    /**
+//     * Adds an <code>IIOReadProgressListener</code> to the list of
+//     * registered progress listeners.  If <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.
+//     *
+//     * @param listener an IIOReadProgressListener to be registered.
+//     *
+//     * @see #removeIIOReadProgressListener
+//     */
+//    public void addIIOReadProgressListener(IIOReadProgressListener listener) {
+//        if (listener == null) {
+//            return;
+//        }
+//        progressListeners = addToList(progressListeners, listener);
+//    }
 
-    /**
-     * Removes an <code>IIOReadProgressListener</code> from the list
-     * of registered progress listeners.  If the listener was not
-     * previously registered, or if <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.
-     *
-     * @param listener an IIOReadProgressListener to be unregistered.
-     *
-     * @see #addIIOReadProgressListener
-     */
-    public void
-        removeIIOReadProgressListener (IIOReadProgressListener listener) {
-        if (listener == null || progressListeners == null) {
-            return;
-        }
-        progressListeners = removeFromList(progressListeners, listener);
-    }
+//    /**
+//     * Removes an <code>IIOReadProgressListener</code> from the list
+//     * of registered progress listeners.  If the listener was not
+//     * previously registered, or if <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.
+//     *
+//     * @param listener an IIOReadProgressListener to be unregistered.
+//     *
+//     * @see #addIIOReadProgressListener
+//     */
+//    public void
+//        removeIIOReadProgressListener (IIOReadProgressListener listener) {
+//        if (listener == null || progressListeners == null) {
+//            return;
+//        }
+//        progressListeners = removeFromList(progressListeners, listener);
+//    }
 
     /**
      * Removes all currently registered
@@ -1926,67 +1921,67 @@ public abstract class ImageReader {
      * <code>null</code>.
      */
     public void removeAllIIOReadProgressListeners() {
-        progressListeners = null;
+//        progressListeners = null;
     }
 
-    /**
-     * Adds an <code>IIOReadUpdateListener</code> to the list of
-     * registered update listeners.  If <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.  The listener will receive notification of pixel
-     * updates as images and thumbnails are decoded, including the
-     * starts and ends of progressive passes.
-     *
-     * <p> If no update listeners are present, the reader may choose
-     * to perform fewer updates to the pixels of the destination
-     * images and/or thumbnails, which may result in more efficient
-     * decoding.
-     *
-     * <p> For example, in progressive JPEG decoding each pass
-     * contains updates to a set of coefficients, which would have to
-     * be transformed into pixel values and converted to an RGB color
-     * space for each pass if listeners are present.  If no listeners
-     * are present, the coefficients may simply be accumulated and the
-     * final results transformed and color converted one time only.
-     *
-     * <p> The final results of decoding will be the same whether or
-     * not intermediate updates are performed.  Thus if only the final
-     * image is desired it may be perferable not to register any
-     * <code>IIOReadUpdateListener</code>s.  In general, progressive
-     * updating is most effective when fetching images over a network
-     * connection that is very slow compared to local CPU processing;
-     * over a fast connection, progressive updates may actually slow
-     * down the presentation of the image.
-     *
-     * @param listener an IIOReadUpdateListener to be registered.
-     *
-     * @see #removeIIOReadUpdateListener
-     */
-    public void
-        addIIOReadUpdateListener(IIOReadUpdateListener listener) {
-        if (listener == null) {
-            return;
-        }
-        updateListeners = addToList(updateListeners, listener);
-    }
+//    /**
+//     * Adds an <code>IIOReadUpdateListener</code> to the list of
+//     * registered update listeners.  If <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.  The listener will receive notification of pixel
+//     * updates as images and thumbnails are decoded, including the
+//     * starts and ends of progressive passes.
+//     *
+//     * <p> If no update listeners are present, the reader may choose
+//     * to perform fewer updates to the pixels of the destination
+//     * images and/or thumbnails, which may result in more efficient
+//     * decoding.
+//     *
+//     * <p> For example, in progressive JPEG decoding each pass
+//     * contains updates to a set of coefficients, which would have to
+//     * be transformed into pixel values and converted to an RGB color
+//     * space for each pass if listeners are present.  If no listeners
+//     * are present, the coefficients may simply be accumulated and the
+//     * final results transformed and color converted one time only.
+//     *
+//     * <p> The final results of decoding will be the same whether or
+//     * not intermediate updates are performed.  Thus if only the final
+//     * image is desired it may be perferable not to register any
+//     * <code>IIOReadUpdateListener</code>s.  In general, progressive
+//     * updating is most effective when fetching images over a network
+//     * connection that is very slow compared to local CPU processing;
+//     * over a fast connection, progressive updates may actually slow
+//     * down the presentation of the image.
+//     *
+//     * @param listener an IIOReadUpdateListener to be registered.
+//     *
+//     * @see #removeIIOReadUpdateListener
+//     */
+//    public void
+//        addIIOReadUpdateListener(IIOReadUpdateListener listener) {
+//        if (listener == null) {
+//            return;
+//        }
+//        updateListeners = addToList(updateListeners, listener);
+//    }
 
-    /**
-     * Removes an <code>IIOReadUpdateListener</code> from the list of
-     * registered update listeners.  If the listener was not
-     * previously registered, or if <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.
-     *
-     * @param listener an IIOReadUpdateListener to be unregistered.
-     *
-     * @see #addIIOReadUpdateListener
-     */
-    public void removeIIOReadUpdateListener(IIOReadUpdateListener listener) {
-        if (listener == null || updateListeners == null) {
-            return;
-        }
-        updateListeners = removeFromList(updateListeners, listener);
-    }
+//    /**
+//     * Removes an <code>IIOReadUpdateListener</code> from the list of
+//     * registered update listeners.  If the listener was not
+//     * previously registered, or if <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.
+//     *
+//     * @param listener an IIOReadUpdateListener to be unregistered.
+//     *
+//     * @see #addIIOReadUpdateListener
+//     */
+//    public void removeIIOReadUpdateListener(IIOReadUpdateListener listener) {
+//        if (listener == null || updateListeners == null) {
+//            return;
+//        }
+//        updateListeners = removeFromList(updateListeners, listener);
+//    }
 
     /**
      * Removes all currently registered
@@ -1997,7 +1992,7 @@ public abstract class ImageReader {
      * <code>null</code>.
      */
     public void removeAllIIOReadUpdateListeners() {
-        updateListeners = null;
+//        updateListeners = null;
     }
 
     /**
@@ -2009,34 +2004,34 @@ public abstract class ImageReader {
      * @param minIndex the lowest index being read.
      */
     protected void processSequenceStarted(int minIndex) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.sequenceStarted(this, minIndex);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.sequenceStarted(this, minIndex);
+//        }
     }
 
-    /**
-     * Broadcasts the completion of an sequence of image reads to all
-     * registered <code>IIOReadProgressListener</code>s by calling
-     * their <code>sequenceComplete</code> method.  Subclasses may use
-     * this method as a convenience.
-     */
-    protected void processSequenceComplete() {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.sequenceComplete(this);
-        }
-    }
+//    /**
+//     * Broadcasts the completion of an sequence of image reads to all
+//     * registered <code>IIOReadProgressListener</code>s by calling
+//     * their <code>sequenceComplete</code> method.  Subclasses may use
+//     * this method as a convenience.
+//     */
+//    protected void processSequenceComplete() {
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.sequenceComplete(this);
+//        }
+//    }
 
     /**
      * Broadcasts the start of an image read to all registered
@@ -2047,15 +2042,15 @@ public abstract class ImageReader {
      * @param imageIndex the index of the image about to be read.
      */
     protected void processImageStarted(int imageIndex) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.imageStarted(this, imageIndex);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.imageStarted(this, imageIndex);
+//        }
     }
 
     /**
@@ -2068,15 +2063,15 @@ public abstract class ImageReader {
      * as a <code>float</code>.
      */
     protected void processImageProgress(float percentageDone) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.imageProgress(this, percentageDone);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.imageProgress(this, percentageDone);
+//        }
     }
 
     /**
@@ -2086,15 +2081,15 @@ public abstract class ImageReader {
      * method as a convenience.
      */
     protected void processImageComplete() {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.imageComplete(this);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.imageComplete(this);
+//        }
     }
 
     /**
@@ -2109,15 +2104,15 @@ public abstract class ImageReader {
      */
     protected void processThumbnailStarted(int imageIndex,
                                            int thumbnailIndex) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.thumbnailStarted(this, imageIndex, thumbnailIndex);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.thumbnailStarted(this, imageIndex, thumbnailIndex);
+//        }
     }
 
     /**
@@ -2130,15 +2125,15 @@ public abstract class ImageReader {
      * as a <code>float</code>.
      */
     protected void processThumbnailProgress(float percentageDone) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.thumbnailProgress(this, percentageDone);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.thumbnailProgress(this, percentageDone);
+//        }
     }
 
     /**
@@ -2148,15 +2143,15 @@ public abstract class ImageReader {
      * method as a convenience.
      */
     protected void processThumbnailComplete() {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.thumbnailComplete(this);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.thumbnailComplete(this);
+//        }
     }
 
     /**
@@ -2166,15 +2161,15 @@ public abstract class ImageReader {
      * method as a convenience.
      */
     protected void processReadAborted() {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadProgressListener listener =
-                (IIOReadProgressListener)progressListeners.get(i);
-            listener.readAborted(this);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadProgressListener listener =
+//                (IIOReadProgressListener)progressListeners.get(i);
+//            listener.readAborted(this);
+//        }
     }
 
     /**
@@ -2202,20 +2197,20 @@ public abstract class ImageReader {
                                       int minX, int minY,
                                       int periodX, int periodY,
                                       int[] bands) {
-        if (updateListeners == null) {
-            return;
-        }
-        int numListeners = updateListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadUpdateListener listener =
-                (IIOReadUpdateListener)updateListeners.get(i);
-            listener.passStarted(this, theImage, pass,
-                                 minPass,
-                                 maxPass,
-                                 minX, minY,
-                                 periodX, periodY,
-                                 bands);
-        }
+//        if (updateListeners == null) {
+//            return;
+//        }
+//        int numListeners = updateListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadUpdateListener listener =
+//                (IIOReadUpdateListener)updateListeners.get(i);
+//            listener.passStarted(this, theImage, pass,
+//                                 minPass,
+//                                 maxPass,
+//                                 minX, minY,
+//                                 periodX, periodY,
+//                                 bands);
+//        }
     }
 
     /**
@@ -2243,20 +2238,20 @@ public abstract class ImageReader {
                                       int width, int height,
                                       int periodX, int periodY,
                                       int[] bands) {
-        if (updateListeners == null) {
-            return;
-        }
-        int numListeners = updateListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadUpdateListener listener =
-                (IIOReadUpdateListener)updateListeners.get(i);
-            listener.imageUpdate(this,
-                                 theImage,
-                                 minX, minY,
-                                 width, height,
-                                 periodX, periodY,
-                                 bands);
-        }
+//        if (updateListeners == null) {
+//            return;
+//        }
+//        int numListeners = updateListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadUpdateListener listener =
+//                (IIOReadUpdateListener)updateListeners.get(i);
+//            listener.imageUpdate(this,
+//                                 theImage,
+//                                 minX, minY,
+//                                 width, height,
+//                                 periodX, periodY,
+//                                 bands);
+//        }
     }
 
     /**
@@ -2268,15 +2263,15 @@ public abstract class ImageReader {
      * @param theImage the <code>BufferedImage</code> being updated.
      */
     protected void processPassComplete(BufferedImage theImage) {
-        if (updateListeners == null) {
-            return;
-        }
-        int numListeners = updateListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadUpdateListener listener =
-                (IIOReadUpdateListener)updateListeners.get(i);
-            listener.passComplete(this, theImage);
-        }
+//        if (updateListeners == null) {
+//            return;
+//        }
+//        int numListeners = updateListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadUpdateListener listener =
+//                (IIOReadUpdateListener)updateListeners.get(i);
+//            listener.passComplete(this, theImage);
+//        }
     }
 
     /**
@@ -2305,20 +2300,20 @@ public abstract class ImageReader {
                                                int minX, int minY,
                                                int periodX, int periodY,
                                                int[] bands) {
-        if (updateListeners == null) {
-            return;
-        }
-        int numListeners = updateListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadUpdateListener listener =
-                (IIOReadUpdateListener)updateListeners.get(i);
-            listener.thumbnailPassStarted(this, theThumbnail, pass,
-                                          minPass,
-                                          maxPass,
-                                          minX, minY,
-                                          periodX, periodY,
-                                          bands);
-        }
+//        if (updateListeners == null) {
+//            return;
+//        }
+//        int numListeners = updateListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadUpdateListener listener =
+//                (IIOReadUpdateListener)updateListeners.get(i);
+//            listener.thumbnailPassStarted(this, theThumbnail, pass,
+//                                          minPass,
+//                                          maxPass,
+//                                          minX, minY,
+//                                          periodX, periodY,
+//                                          bands);
+//        }
     }
 
     /**
@@ -2347,20 +2342,20 @@ public abstract class ImageReader {
                                           int width, int height,
                                           int periodX, int periodY,
                                           int[] bands) {
-        if (updateListeners == null) {
-            return;
-        }
-        int numListeners = updateListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadUpdateListener listener =
-                (IIOReadUpdateListener)updateListeners.get(i);
-            listener.thumbnailUpdate(this,
-                                     theThumbnail,
-                                     minX, minY,
-                                     width, height,
-                                     periodX, periodY,
-                                     bands);
-        }
+//        if (updateListeners == null) {
+//            return;
+//        }
+//        int numListeners = updateListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadUpdateListener listener =
+//                (IIOReadUpdateListener)updateListeners.get(i);
+//            listener.thumbnailUpdate(this,
+//                                     theThumbnail,
+//                                     minX, minY,
+//                                     width, height,
+//                                     periodX, periodY,
+//                                     bands);
+//        }
     }
 
     /**
@@ -2373,15 +2368,15 @@ public abstract class ImageReader {
      * being updated.
      */
     protected void processThumbnailPassComplete(BufferedImage theThumbnail) {
-        if (updateListeners == null) {
-            return;
-        }
-        int numListeners = updateListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadUpdateListener listener =
-                (IIOReadUpdateListener)updateListeners.get(i);
-            listener.thumbnailPassComplete(this, theThumbnail);
-        }
+//        if (updateListeners == null) {
+//            return;
+//        }
+//        int numListeners = updateListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadUpdateListener listener =
+//                (IIOReadUpdateListener)updateListeners.get(i);
+//            listener.thumbnailPassComplete(this, theThumbnail);
+//        }
     }
 
     /**
@@ -2396,19 +2391,19 @@ public abstract class ImageReader {
      * is <code>null</code>.
      */
     protected void processWarningOccurred(String warning) {
-        if (warningListeners == null) {
-            return;
-        }
-        if (warning == null) {
-            throw new IllegalArgumentException("warning == null!");
-        }
-        int numListeners = warningListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadWarningListener listener =
-                (IIOReadWarningListener)warningListeners.get(i);
-
-            listener.warningOccurred(this, warning);
-        }
+//        if (warningListeners == null) {
+//            return;
+//        }
+//        if (warning == null) {
+//            throw new IllegalArgumentException("warning == null!");
+//        }
+//        int numListeners = warningListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadWarningListener listener =
+//                (IIOReadWarningListener)warningListeners.get(i);
+//
+//            listener.warningOccurred(this, warning);
+//        }
     }
 
     /**
@@ -2438,62 +2433,62 @@ public abstract class ImageReader {
      */
     protected void processWarningOccurred(String baseName,
                                           String keyword) {
-        if (warningListeners == null) {
-            return;
-        }
-        if (baseName == null) {
-            throw new IllegalArgumentException("baseName == null!");
-        }
-        if (keyword == null) {
-            throw new IllegalArgumentException("keyword == null!");
-        }
-        int numListeners = warningListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOReadWarningListener listener =
-                (IIOReadWarningListener)warningListeners.get(i);
-            Locale locale = (Locale)warningLocales.get(i);
-            if (locale == null) {
-                locale = Locale.getDefault();
-            }
-
-            /**
-             * If an applet supplies an implementation of ImageReader and
-             * resource bundles, then the resource bundle will need to be
-             * accessed via the applet class loader. So first try the context
-             * class loader to locate the resource bundle.
-             * If that throws MissingResourceException, then try the
-             * system class loader.
-             */
-            ClassLoader loader = (ClassLoader)
-                java.security.AccessController.doPrivileged(
-                   new java.security.PrivilegedAction() {
-                      public Object run() {
-                        return Thread.currentThread().getContextClassLoader();
-                      }
-                });
-
-            ResourceBundle bundle = null;
-            try {
-                bundle = ResourceBundle.getBundle(baseName, locale, loader);
-            } catch (MissingResourceException mre) {
-                try {
-                    bundle = ResourceBundle.getBundle(baseName, locale);
-                } catch (MissingResourceException mre1) {
-                    throw new IllegalArgumentException("Bundle not found!");
-                }
-            }
-
-            String warning = null;
-            try {
-                warning = bundle.getString(keyword);
-            } catch (ClassCastException cce) {
-                throw new IllegalArgumentException("Resource is not a String!");
-            } catch (MissingResourceException mre) {
-                throw new IllegalArgumentException("Resource is missing!");
-            }
-
-            listener.warningOccurred(this, warning);
-        }
+//        if (warningListeners == null) {
+//            return;
+//        }
+//        if (baseName == null) {
+//            throw new IllegalArgumentException("baseName == null!");
+//        }
+//        if (keyword == null) {
+//            throw new IllegalArgumentException("keyword == null!");
+//        }
+//        int numListeners = warningListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOReadWarningListener listener =
+//                (IIOReadWarningListener)warningListeners.get(i);
+//            Locale locale = (Locale)warningLocales.get(i);
+//            if (locale == null) {
+//                locale = Locale.getDefault();
+//            }
+//
+//            /**
+//             * If an applet supplies an implementation of ImageReader and
+//             * resource bundles, then the resource bundle will need to be
+//             * accessed via the applet class loader. So first try the context
+//             * class loader to locate the resource bundle.
+//             * If that throws MissingResourceException, then try the
+//             * system class loader.
+//             */
+//            ClassLoader loader = (ClassLoader)
+//                java.security.AccessController.doPrivileged(
+//                   new java.security.PrivilegedAction() {
+//                      public Object run() {
+//                        return Thread.currentThread().getContextClassLoader();
+//                      }
+//                });
+//
+//            ResourceBundle bundle = null;
+//            try {
+//                bundle = ResourceBundle.getBundle(baseName, locale, loader);
+//            } catch (MissingResourceException mre) {
+//                try {
+//                    bundle = ResourceBundle.getBundle(baseName, locale);
+//                } catch (MissingResourceException mre1) {
+//                    throw new IllegalArgumentException("Bundle not found!");
+//                }
+//            }
+//
+//            String warning = null;
+//            try {
+//                warning = bundle.getString(keyword);
+//            } catch (ClassCastException cce) {
+//                throw new IllegalArgumentException("Resource is not a String!");
+//            } catch (MissingResourceException mre) {
+//                throw new IllegalArgumentException("Resource is missing!");
+//            }
+//
+//            listener.warningOccurred(this, warning);
+//        }
     }
 
     // State management

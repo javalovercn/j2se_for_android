@@ -37,7 +37,11 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
@@ -45,6 +49,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import javax.swing.plaf.SpinnerUI;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 
 /**
  * A single line input field that lets the user select a
@@ -565,6 +571,183 @@ public class JSpinner extends JComponent implements Accessible
     private void writeObject(ObjectOutputStream s) throws IOException {
     }
 
+    /**
+     * This subclass of javax.swing.NumberFormatter maps the minimum/maximum
+     * properties to a SpinnerNumberModel and initializes the valueClass
+     * of the NumberFormatter to match the type of the initial models value.
+     */
+    private static class NumberEditorFormatter extends NumberFormatter {
+        private final SpinnerNumberModel model;
+
+        NumberEditorFormatter(SpinnerNumberModel model, NumberFormat format) {
+            super(format);
+            this.model = model;
+            setValueClass(model.getValue().getClass());
+        }
+
+        public void setMinimum(Comparable min) {
+            model.setMinimum(min);
+        }
+
+        public Comparable getMinimum() {
+            return  model.getMinimum();
+        }
+
+        public void setMaximum(Comparable max) {
+            model.setMaximum(max);
+        }
+
+        public Comparable getMaximum() {
+            return model.getMaximum();
+        }
+    }
+    
+    /**
+     * An editor for a <code>JSpinner</code> whose model is a
+     * <code>SpinnerNumberModel</code>.  The value of the editor is
+     * displayed with a <code>JFormattedTextField</code> whose format
+     * is defined by a <code>NumberFormatter</code> instance whose
+     * <code>minimum</code> and <code>maximum</code> properties
+     * are mapped to the <code>SpinnerNumberModel</code>.
+     * @since 1.4
+     */
+    // PENDING(hmuller): more example javadoc
+    public static class NumberEditor extends DefaultEditor
+    {
+        // This is here until DecimalFormat gets a constructor that
+        // takes a Locale: 4923525
+        private static String getDefaultPattern(Locale locale) {
+            // Get the pattern for the default locale.
+//            ResourceBundle rb = LocaleData.getNumberFormatData(locale);
+//            String[] all = rb.getStringArray("NumberPatterns");
+//            return all[0];
+        	return "#,##0.###;-#,##0.###";//Locale.ENGLISH
+        }
+
+        /**
+         * Construct a <code>JSpinner</code> editor that supports displaying
+         * and editing the value of a <code>SpinnerNumberModel</code>
+         * with a <code>JFormattedTextField</code>.  <code>This</code>
+         * <code>NumberEditor</code> becomes both a <code>ChangeListener</code>
+         * on the spinner and a <code>PropertyChangeListener</code>
+         * on the new <code>JFormattedTextField</code>.
+         *
+         * @param spinner the spinner whose model <code>this</code> editor will monitor
+         * @exception IllegalArgumentException if the spinners model is not
+         *     an instance of <code>SpinnerNumberModel</code>
+         *
+         * @see #getModel
+         * @see #getFormat
+         * @see SpinnerNumberModel
+         */
+        public NumberEditor(JSpinner spinner) {
+            this(spinner, getDefaultPattern(spinner.getLocale()));
+        }
+
+        /**
+         * Construct a <code>JSpinner</code> editor that supports displaying
+         * and editing the value of a <code>SpinnerNumberModel</code>
+         * with a <code>JFormattedTextField</code>.  <code>This</code>
+         * <code>NumberEditor</code> becomes both a <code>ChangeListener</code>
+         * on the spinner and a <code>PropertyChangeListener</code>
+         * on the new <code>JFormattedTextField</code>.
+         *
+         * @param spinner the spinner whose model <code>this</code> editor will monitor
+         * @param decimalFormatPattern the initial pattern for the
+         *     <code>DecimalFormat</code> object that's used to display
+         *     and parse the value of the text field.
+         * @exception IllegalArgumentException if the spinners model is not
+         *     an instance of <code>SpinnerNumberModel</code> or if
+         *     <code>decimalFormatPattern</code> is not a legal
+         *     argument to <code>DecimalFormat</code>
+         *
+         * @see #getTextField
+         * @see SpinnerNumberModel
+         * @see java.text.DecimalFormat
+         */
+        public NumberEditor(JSpinner spinner, String decimalFormatPattern) {
+            this(spinner, new DecimalFormat(decimalFormatPattern));
+        }
+
+
+        /**
+         * Construct a <code>JSpinner</code> editor that supports displaying
+         * and editing the value of a <code>SpinnerNumberModel</code>
+         * with a <code>JFormattedTextField</code>.  <code>This</code>
+         * <code>NumberEditor</code> becomes both a <code>ChangeListener</code>
+         * on the spinner and a <code>PropertyChangeListener</code>
+         * on the new <code>JFormattedTextField</code>.
+         *
+         * @param spinner the spinner whose model <code>this</code> editor will monitor
+         * @param decimalFormatPattern the initial pattern for the
+         *     <code>DecimalFormat</code> object that's used to display
+         *     and parse the value of the text field.
+         * @exception IllegalArgumentException if the spinners model is not
+         *     an instance of <code>SpinnerNumberModel</code>
+         *
+         * @see #getTextField
+         * @see SpinnerNumberModel
+         * @see java.text.DecimalFormat
+         */
+        private NumberEditor(JSpinner spinner, DecimalFormat format) {
+            super(spinner);
+            if (!(spinner.getModel() instanceof SpinnerNumberModel)) {
+                throw new IllegalArgumentException(
+                          "model not a SpinnerNumberModel");
+            }
+
+            SpinnerNumberModel model = (SpinnerNumberModel)spinner.getModel();
+            NumberFormatter formatter = new NumberEditorFormatter(model,
+                                                                  format);
+            DefaultFormatterFactory factory = new DefaultFormatterFactory(
+                                                  formatter);
+            JFormattedTextField ftf = getTextField();
+            ftf.setEditable(true);
+            ftf.setFormatterFactory(factory);
+            ftf.setHorizontalAlignment(JTextField.RIGHT);
+
+            /* TBD - initializing the column width of the text field
+             * is imprecise and doing it here is tricky because
+             * the developer may configure the formatter later.
+             */
+            try {
+                String maxString = formatter.valueToString(model.getMinimum());
+                String minString = formatter.valueToString(model.getMaximum());
+                ftf.setColumns(Math.max(maxString.length(),
+                                        minString.length()));
+            }
+            catch (ParseException e) {
+                // TBD should throw a chained error here
+            }
+
+        }
+
+
+        /**
+         * Returns the <code>java.text.DecimalFormat</code> object the
+         * <code>JFormattedTextField</code> uses to parse and format
+         * numbers.
+         *
+         * @return the value of <code>getTextField().getFormatter().getFormat()</code>.
+         * @see #getTextField
+         * @see java.text.DecimalFormat
+         */
+        public DecimalFormat getFormat() {
+            return (DecimalFormat)((NumberFormatter)(getTextField().getFormatter())).getFormat();
+        }
+
+
+        /**
+         * Return our spinner ancestor's <code>SpinnerNumberModel</code>.
+         *
+         * @return <code>getSpinner().getModel()</code>
+         * @see #getSpinner
+         * @see #getTextField
+         */
+        public SpinnerNumberModel getModel() {
+            return (SpinnerNumberModel)(getSpinner().getModel());
+        }
+    }    
 
     /**
      * A simple base class for more specialized editors

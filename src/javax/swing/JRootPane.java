@@ -455,7 +455,7 @@ public class JRootPane extends JComponent implements Accessible {
 		{
 			final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT, 1.0F);
+					LinearLayout.LayoutParams.MATCH_PARENT, 0.5F);//当title区宽度大于contentPane宽度时，缩小以适合
 			llp.gravity = Gravity.CENTER_VERTICAL;
 			llp.topMargin = shiftPixel;
 			titleBar.setTextColor(AndroidUIUtil.WINDOW_TITLE_FONT_COLOR.toAndroid());
@@ -500,7 +500,7 @@ public class JRootPane extends JComponent implements Accessible {
 			{
 				final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
 						LinearLayout.LayoutParams.MATCH_PARENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT);
+						LinearLayout.LayoutParams.WRAP_CONTENT, 0.5F);
 				AndroidUIUtil.addView(rootLinearView, buildTitleView(), llp,
 						viewRelation);
 			}
@@ -519,8 +519,8 @@ public class JRootPane extends JComponent implements Accessible {
 		if (contentPane != null || glassPane != null) {
 			if (contentPane != null) {
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						FrameLayout.LayoutParams.MATCH_PARENT,
-						FrameLayout.LayoutParams.MATCH_PARENT);
+						FrameLayout.LayoutParams.WRAP_CONTENT,
+						FrameLayout.LayoutParams.WRAP_CONTENT, 1.0F);
 				View contentView = contentPane.getPeerAdAPI();
 				if (isFrame) {
 					contentView.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_window_body));

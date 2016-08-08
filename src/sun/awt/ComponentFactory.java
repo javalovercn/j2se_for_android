@@ -31,8 +31,6 @@ import java.awt.peer.RobotPeer;
 /**
  * Interface for component creation support in toolkits
  */
-public class ComponentFactory {
-	public RobotPeer createRobot(Robot robot, GraphicsDevice device){
-		return null;
-	}
+public interface ComponentFactory {
+	public RobotPeer createRobot(Robot robot, GraphicsDevice device);
 }

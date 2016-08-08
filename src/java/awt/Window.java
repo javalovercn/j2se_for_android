@@ -417,6 +417,8 @@ public class Window extends Container implements Accessible {
 
     void setClientSize(int w, int h) {
     	getRootPaneAdAPI().getContentPane().setSize(w, h);
+    	super.width = w;
+    	super.height = h;
 //        synchronized (getTreeLock()) {
 //            setBoundsOp(ComponentPeer.SET_CLIENT_SIZE);
 //            setBounds(getX(), getY(), w, h);

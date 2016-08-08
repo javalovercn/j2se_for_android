@@ -27,16 +27,12 @@ package javax.imageio;
 
 import java.awt.Point;
 import java.awt.Transparency;
+import java.awt.color.ColorSpace;
 import java.awt.image.BandedSampleModel;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
-import java.awt.color.ColorSpace;
-import java.awt.image.IndexColorModel;
-import java.awt.image.ComponentColorModel;
 import java.awt.image.DataBuffer;
 import java.awt.image.DirectColorModel;
-import java.awt.image.MultiPixelPackedSampleModel;
-import java.awt.image.PixelInterleavedSampleModel;
 import java.awt.image.Raster;
 import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
@@ -241,22 +237,23 @@ public class ImageTypeSpecifier {
                                         int dataType,
                                         boolean hasAlpha,
                                         boolean isAlphaPremultiplied) {
-        int transparency =
-            hasAlpha ? Transparency.TRANSLUCENT : Transparency.OPAQUE;
-
-        int[] numBits = new int[numBands];
-        int bits = DataBuffer.getDataTypeSize(dataType);
-
-        for (int i = 0; i < numBands; i++) {
-            numBits[i] = bits;
-        }
-
-        return new ComponentColorModel(colorSpace,
-                                       numBits,
-                                       hasAlpha,
-                                       isAlphaPremultiplied,
-                                       transparency,
-                                       dataType);
+    	return null;
+//        int transparency =
+//            hasAlpha ? Transparency.TRANSLUCENT : Transparency.OPAQUE;
+//
+//        int[] numBits = new int[numBands];
+//        int bits = DataBuffer.getDataTypeSize(dataType);
+//
+//        for (int i = 0; i < numBands; i++) {
+//            numBits[i] = bits;
+//        }
+//
+//        return new ComponentColorModel(colorSpace,
+//                                       numBits,
+//                                       hasAlpha,
+//                                       isAlphaPremultiplied,
+//                                       transparency,
+//                                       dataType);
     }
 
     // Interleaved
@@ -318,12 +315,12 @@ public class ImageTypeSpecifier {
 
             int w = 1;
             int h = 1;
-            this.sampleModel =
-                new PixelInterleavedSampleModel(dataType,
-                                                w, h,
-                                                pixelStride,
-                                                w*pixelStride,
-                                                bandOffsets);
+            this.sampleModel = null;
+//                new PixelInterleavedSampleModel(dataType,
+//                                                w, h,
+//                                                pixelStride,
+//                                                w*pixelStride,
+//                                                bandOffsets);
         }
 
         public boolean equals(Object o) {
@@ -618,13 +615,13 @@ public class ImageTypeSpecifier {
                 if (numBands == 2) {
                     nBits[1] = bits;
                 }
-                this.colorModel =
-                    new ComponentColorModel(colorSpace,
-                                            nBits,
-                                            hasAlpha,
-                                            isAlphaPremultiplied,
-                                            transparency,
-                                            dataType);
+                this.colorModel = null;
+//                    new ComponentColorModel(colorSpace,
+//                                            nBits,
+//                                            hasAlpha,
+//                                            isAlphaPremultiplied,
+//                                            transparency,
+//                                            dataType);
 
                 int[] bandOffsets = new int[numBands];
                 bandOffsets[0] = 0;
@@ -634,22 +631,22 @@ public class ImageTypeSpecifier {
 
                 int w = 1;
                 int h = 1;
-                this.sampleModel =
-                    new PixelInterleavedSampleModel(dataType,
-                                                    w, h,
-                                                    numBands, w*numBands,
-                                                    bandOffsets);
+                this.sampleModel = null;
+//                    new PixelInterleavedSampleModel(dataType,
+//                                                    w, h,
+//                                                    numBands, w*numBands,
+//                                                    bandOffsets);
             } else {
                 int numEntries = 1 << bits;
                 byte[] arr = new byte[numEntries];
                 for (int i = 0; i < numEntries; i++) {
                     arr[i] = (byte)(i*255/(numEntries - 1));
                 }
-                this.colorModel =
-                    new IndexColorModel(bits, numEntries, arr, arr, arr);
+                this.colorModel = null;
+//                    new IndexColorModel(bits, numEntries, arr, arr, arr);
 
-                this.sampleModel =
-                    new MultiPixelPackedSampleModel(dataType, 1, 1, bits);
+                this.sampleModel = null;
+//                    new MultiPixelPackedSampleModel(dataType, 1, 1, bits);
             }
         }
     }
@@ -778,18 +775,20 @@ public class ImageTypeSpecifier {
             this.dataType = dataType;
 
             if (alphaLUT == null) {
-                this.colorModel = new IndexColorModel(bits,
-                                                      redLUT.length,
-                                                      redLUT,
-                                                      greenLUT,
-                                                      blueLUT);
+                this.colorModel = null;
+//                new IndexColorModel(bits,
+//                                                      redLUT.length,
+//                                                      redLUT,
+//                                                      greenLUT,
+//                                                      blueLUT);
             } else {
-                this.colorModel = new IndexColorModel(bits,
-                                                      redLUT.length,
-                                                      redLUT,
-                                                      greenLUT,
-                                                      blueLUT,
-                                                      alphaLUT);
+                this.colorModel = null;
+//                new IndexColorModel(bits,
+//                                                      redLUT.length,
+//                                                      redLUT,
+//                                                      greenLUT,
+//                                                      blueLUT,
+//                                                      alphaLUT);
             }
 
             if ((bits == 8 && dataType == DataBuffer.TYPE_BYTE) ||
@@ -797,13 +796,13 @@ public class ImageTypeSpecifier {
                  (dataType == DataBuffer.TYPE_SHORT ||
                   dataType == DataBuffer.TYPE_USHORT))) {
                 int[] bandOffsets = { 0 };
-                this.sampleModel =
-                    new PixelInterleavedSampleModel(dataType,
-                                                    1, 1, 1, 1,
-                                                    bandOffsets);
+                this.sampleModel = null;
+//                    new PixelInterleavedSampleModel(dataType,
+//                                                    1, 1, 1, 1,
+//                                                    bandOffsets);
             } else {
-                this.sampleModel =
-                    new MultiPixelPackedSampleModel(dataType, 1, 1, bits);
+                this.sampleModel = null;
+//                    new MultiPixelPackedSampleModel(dataType, 1, 1, bits);
             }
         }
     }
@@ -1216,21 +1215,22 @@ public class ImageTypeSpecifier {
 
               BufferedImage bi =
                   new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_INDEXED);
-              IndexColorModel icm = (IndexColorModel)bi.getColorModel();
-              int mapSize = icm.getMapSize();
-              byte[] redLUT = new byte[mapSize];
-              byte[] greenLUT = new byte[mapSize];
-              byte[] blueLUT = new byte[mapSize];
-              byte[] alphaLUT = new byte[mapSize];
-
-              icm.getReds(redLUT);
-              icm.getGreens(greenLUT);
-              icm.getBlues(blueLUT);
-              icm.getAlphas(alphaLUT);
-
-              return createIndexed(redLUT, greenLUT, blueLUT, alphaLUT,
-                                   8,
-                                   DataBuffer.TYPE_BYTE);
+////              IndexColorModel icm = (IndexColorModel)bi.getColorModel();
+//              int mapSize = icm.getMapSize();
+//              byte[] redLUT = new byte[mapSize];
+//              byte[] greenLUT = new byte[mapSize];
+//              byte[] blueLUT = new byte[mapSize];
+//              byte[] alphaLUT = new byte[mapSize];
+//
+//              icm.getReds(redLUT);
+//              icm.getGreens(greenLUT);
+//              icm.getBlues(blueLUT);
+//              icm.getAlphas(alphaLUT);
+//
+//              return createIndexed(redLUT, greenLUT, blueLUT, alphaLUT,
+//                                   8,
+//                                   DataBuffer.TYPE_BYTE);
+              return null;
           }
           default:
               throw new IllegalArgumentException("Invalid BufferedImage type!");

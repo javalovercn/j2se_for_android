@@ -31,16 +31,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.awt.image.Raster;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import javax.imageio.event.IIOWriteWarningListener;
-import javax.imageio.event.IIOWriteProgressListener;
 import javax.imageio.metadata.IIOMetadata;
-import javax.imageio.stream.ImageOutputStream;
-import javax.imageio.spi.ImageWriterSpi;
 
 /**
  * An abstract superclass for encoding and writing images.  This class
@@ -63,12 +56,12 @@ import javax.imageio.spi.ImageWriterSpi;
  */
 public abstract class ImageWriter implements ImageTranscoder {
 
-    /**
-     * The <code>ImageWriterSpi</code> that instantiated this object,
-     * or <code>null</code> if its identity is not known or none
-     * exists.  By default it is initialized to <code>null</code>.
-     */
-    protected ImageWriterSpi originatingProvider = null;
+//    /**
+//     * The <code>ImageWriterSpi</code> that instantiated this object,
+//     * or <code>null</code> if its identity is not known or none
+//     * exists.  By default it is initialized to <code>null</code>.
+//     */
+//    protected ImageWriterSpi originatingProvider = null;
 
     /**
      * The <code>ImageOutputStream</code> or other <code>Object</code>
@@ -93,13 +86,13 @@ public abstract class ImageWriter implements ImageTranscoder {
      */
     protected Locale locale = null;
 
-    /**
-     * A <code>List</code> of currently registered
-     * <code>IIOWriteWarningListener</code>s, initialized by default to
-     * <code>null</code>, which is synonymous with an empty
-     * <code>List</code>.
-     */
-    protected List<IIOWriteWarningListener> warningListeners = null;
+//    /**
+//     * A <code>List</code> of currently registered
+//     * <code>IIOWriteWarningListener</code>s, initialized by default to
+//     * <code>null</code>, which is synonymous with an empty
+//     * <code>List</code>.
+//     */
+//    protected List<IIOWriteWarningListener> warningListeners = null;
 
     /**
      * A <code>List</code> of <code>Locale</code>s, one for each
@@ -109,13 +102,13 @@ public abstract class ImageWriter implements ImageTranscoder {
      */
     protected List<Locale> warningLocales = null;
 
-    /**
-     * A <code>List</code> of currently registered
-     * <code>IIOWriteProgressListener</code>s, initialized by default
-     * <code>null</code>, which is synonymous with an empty
-     * <code>List</code>.
-     */
-    protected List<IIOWriteProgressListener> progressListeners = null;
+//    /**
+//     * A <code>List</code> of currently registered
+//     * <code>IIOWriteProgressListener</code>s, initialized by default
+//     * <code>null</code>, which is synonymous with an empty
+//     * <code>List</code>.
+//     */
+//    protected List<IIOWriteProgressListener> progressListeners = null;
 
     /**
      * If <code>true</code>, the current write operation should be
@@ -123,39 +116,39 @@ public abstract class ImageWriter implements ImageTranscoder {
      */
     private boolean abortFlag = false;
 
-    /**
-     * Constructs an <code>ImageWriter</code> and sets its
-     * <code>originatingProvider</code> instance variable to the
-     * supplied value.
-     *
-     * <p> Subclasses that make use of extensions should provide a
-     * constructor with signature <code>(ImageWriterSpi,
-     * Object)</code> in order to retrieve the extension object.  If
-     * the extension object is unsuitable, an
-     * <code>IllegalArgumentException</code> should be thrown.
-     *
-     * @param originatingProvider the <code>ImageWriterSpi</code> that
-     * is constructing this object, or <code>null</code>.
-     */
-    protected ImageWriter(ImageWriterSpi originatingProvider) {
-        this.originatingProvider = originatingProvider;
-    }
-
-    /**
-     * Returns the <code>ImageWriterSpi</code> object that created
-     * this <code>ImageWriter</code>, or <code>null</code> if this
-     * object was not created through the <code>IIORegistry</code>.
-     *
-     * <p> The default implementation returns the value of the
-     * <code>originatingProvider</code> instance variable.
-     *
-     * @return an <code>ImageWriterSpi</code>, or <code>null</code>.
-     *
-     * @see ImageWriterSpi
-     */
-    public ImageWriterSpi getOriginatingProvider() {
-        return originatingProvider;
-    }
+//    /**
+//     * Constructs an <code>ImageWriter</code> and sets its
+//     * <code>originatingProvider</code> instance variable to the
+//     * supplied value.
+//     *
+//     * <p> Subclasses that make use of extensions should provide a
+//     * constructor with signature <code>(ImageWriterSpi,
+//     * Object)</code> in order to retrieve the extension object.  If
+//     * the extension object is unsuitable, an
+//     * <code>IllegalArgumentException</code> should be thrown.
+//     *
+//     * @param originatingProvider the <code>ImageWriterSpi</code> that
+//     * is constructing this object, or <code>null</code>.
+//     */
+//    protected ImageWriter(ImageWriterSpi originatingProvider) {
+//        this.originatingProvider = originatingProvider;
+//    }
+//
+//    /**
+//     * Returns the <code>ImageWriterSpi</code> object that created
+//     * this <code>ImageWriter</code>, or <code>null</code> if this
+//     * object was not created through the <code>IIORegistry</code>.
+//     *
+//     * <p> The default implementation returns the value of the
+//     * <code>originatingProvider</code> instance variable.
+//     *
+//     * @return an <code>ImageWriterSpi</code>, or <code>null</code>.
+//     *
+//     * @see ImageWriterSpi
+//     */
+//    public ImageWriterSpi getOriginatingProvider() {
+//        return originatingProvider;
+//    }
 
     /**
      * Sets the destination to the given
@@ -204,24 +197,24 @@ public abstract class ImageWriter implements ImageTranscoder {
      * @see #getOutput
      */
     public void setOutput(Object output) {
-        if (output != null) {
-            ImageWriterSpi provider = getOriginatingProvider();
-            if (provider != null) {
-                Class[] classes = provider.getOutputTypes();
-                boolean found = false;
-                for (int i = 0; i < classes.length; i++) {
-                    if (classes[i].isInstance(output)) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    throw new IllegalArgumentException("Illegal output type!");
-                }
-            }
-        }
-
-        this.output = output;
+//        if (output != null) {
+//            ImageWriterSpi provider = getOriginatingProvider();
+//            if (provider != null) {
+//                Class[] classes = provider.getOutputTypes();
+//                boolean found = false;
+//                for (int i = 0; i < classes.length; i++) {
+//                    if (classes[i].isInstance(output)) {
+//                        found = true;
+//                        break;
+//                    }
+//                }
+//                if (!found) {
+//                    throw new IllegalArgumentException("Illegal output type!");
+//                }
+//            }
+//        }
+//
+//        this.output = output;
     }
 
     /**
@@ -1626,55 +1619,55 @@ public abstract class ImageWriter implements ImageTranscoder {
 
     // Listeners
 
-    /**
-     * Adds an <code>IIOWriteWarningListener</code> to the list of
-     * registered warning listeners.  If <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.  Messages sent to the given listener will be
-     * localized, if possible, to match the current
-     * <code>Locale</code>.  If no <code>Locale</code> has been set,
-     * warning messages may be localized as the writer sees fit.
-     *
-     * @param listener an <code>IIOWriteWarningListener</code> to be
-     * registered.
-     *
-     * @see #removeIIOWriteWarningListener
-     */
-    public void addIIOWriteWarningListener(IIOWriteWarningListener listener) {
-        if (listener == null) {
-            return;
-        }
-        warningListeners = ImageReader.addToList(warningListeners, listener);
-        warningLocales = ImageReader.addToList(warningLocales, getLocale());
-    }
+//    /**
+//     * Adds an <code>IIOWriteWarningListener</code> to the list of
+//     * registered warning listeners.  If <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.  Messages sent to the given listener will be
+//     * localized, if possible, to match the current
+//     * <code>Locale</code>.  If no <code>Locale</code> has been set,
+//     * warning messages may be localized as the writer sees fit.
+//     *
+//     * @param listener an <code>IIOWriteWarningListener</code> to be
+//     * registered.
+//     *
+//     * @see #removeIIOWriteWarningListener
+//     */
+//    public void addIIOWriteWarningListener(IIOWriteWarningListener listener) {
+//        if (listener == null) {
+//            return;
+//        }
+//        warningListeners = ImageReader.addToList(warningListeners, listener);
+//        warningLocales = ImageReader.addToList(warningLocales, getLocale());
+//    }
 
-    /**
-     * Removes an <code>IIOWriteWarningListener</code> from the list
-     * of registered warning listeners.  If the listener was not
-     * previously registered, or if <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.
-     *
-     * @param listener an <code>IIOWriteWarningListener</code> to be
-     * deregistered.
-     *
-     * @see #addIIOWriteWarningListener
-     */
-    public
-        void removeIIOWriteWarningListener(IIOWriteWarningListener listener) {
-        if (listener == null || warningListeners == null) {
-            return;
-        }
-        int index = warningListeners.indexOf(listener);
-        if (index != -1) {
-            warningListeners.remove(index);
-            warningLocales.remove(index);
-            if (warningListeners.size() == 0) {
-                warningListeners = null;
-                warningLocales = null;
-            }
-        }
-    }
+//    /**
+//     * Removes an <code>IIOWriteWarningListener</code> from the list
+//     * of registered warning listeners.  If the listener was not
+//     * previously registered, or if <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.
+//     *
+//     * @param listener an <code>IIOWriteWarningListener</code> to be
+//     * deregistered.
+//     *
+//     * @see #addIIOWriteWarningListener
+//     */
+//    public
+//        void removeIIOWriteWarningListener(IIOWriteWarningListener listener) {
+//        if (listener == null || warningListeners == null) {
+//            return;
+//        }
+//        int index = warningListeners.indexOf(listener);
+//        if (index != -1) {
+//            warningListeners.remove(index);
+//            warningLocales.remove(index);
+//            if (warningListeners.size() == 0) {
+//                warningListeners = null;
+//                warningLocales = null;
+//            }
+//        }
+//    }
 
     /**
      * Removes all currently registered
@@ -1685,49 +1678,49 @@ public abstract class ImageWriter implements ImageTranscoder {
      * instance variables to <code>null</code>.
      */
     public void removeAllIIOWriteWarningListeners() {
-        this.warningListeners = null;
-        this.warningLocales = null;
+//        this.warningListeners = null;
+//        this.warningLocales = null;
     }
 
-    /**
-     * Adds an <code>IIOWriteProgressListener</code> to the list of
-     * registered progress listeners.  If <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.
-     *
-     * @param listener an <code>IIOWriteProgressListener</code> to be
-     * registered.
-     *
-     * @see #removeIIOWriteProgressListener
-     */
-    public void
-        addIIOWriteProgressListener(IIOWriteProgressListener listener) {
-        if (listener == null) {
-            return;
-        }
-        progressListeners = ImageReader.addToList(progressListeners, listener);
-    }
+//    /**
+//     * Adds an <code>IIOWriteProgressListener</code> to the list of
+//     * registered progress listeners.  If <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.
+//     *
+//     * @param listener an <code>IIOWriteProgressListener</code> to be
+//     * registered.
+//     *
+//     * @see #removeIIOWriteProgressListener
+//     */
+//    public void
+//        addIIOWriteProgressListener(IIOWriteProgressListener listener) {
+//        if (listener == null) {
+//            return;
+//        }
+//        progressListeners = ImageReader.addToList(progressListeners, listener);
+//    }
 
-    /**
-     * Removes an <code>IIOWriteProgressListener</code> from the list
-     * of registered progress listeners.  If the listener was not
-     * previously registered, or if <code>listener</code> is
-     * <code>null</code>, no exception will be thrown and no action
-     * will be taken.
-     *
-     * @param listener an <code>IIOWriteProgressListener</code> to be
-     * deregistered.
-     *
-     * @see #addIIOWriteProgressListener
-     */
-    public void
-        removeIIOWriteProgressListener(IIOWriteProgressListener listener) {
-        if (listener == null || progressListeners == null) {
-            return;
-        }
-        progressListeners =
-            ImageReader.removeFromList(progressListeners, listener);
-    }
+//    /**
+//     * Removes an <code>IIOWriteProgressListener</code> from the list
+//     * of registered progress listeners.  If the listener was not
+//     * previously registered, or if <code>listener</code> is
+//     * <code>null</code>, no exception will be thrown and no action
+//     * will be taken.
+//     *
+//     * @param listener an <code>IIOWriteProgressListener</code> to be
+//     * deregistered.
+//     *
+//     * @see #addIIOWriteProgressListener
+//     */
+//    public void
+//        removeIIOWriteProgressListener(IIOWriteProgressListener listener) {
+//        if (listener == null || progressListeners == null) {
+//            return;
+//        }
+//        progressListeners =
+//            ImageReader.removeFromList(progressListeners, listener);
+//    }
 
     /**
      * Removes all currently registered
@@ -1738,7 +1731,7 @@ public abstract class ImageWriter implements ImageTranscoder {
      * <code>null</code>.
      */
     public void removeAllIIOWriteProgressListeners() {
-        this.progressListeners = null;
+//        this.progressListeners = null;
     }
 
     /**
@@ -1750,15 +1743,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * @param imageIndex the index of the image about to be written.
      */
     protected void processImageStarted(int imageIndex) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteProgressListener listener =
-                (IIOWriteProgressListener)progressListeners.get(i);
-            listener.imageStarted(this, imageIndex);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteProgressListener listener =
+//                (IIOWriteProgressListener)progressListeners.get(i);
+//            listener.imageStarted(this, imageIndex);
+//        }
     }
 
     /**
@@ -1771,15 +1764,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * as a <code>float</code>.
      */
     protected void processImageProgress(float percentageDone) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteProgressListener listener =
-                (IIOWriteProgressListener)progressListeners.get(i);
-            listener.imageProgress(this, percentageDone);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteProgressListener listener =
+//                (IIOWriteProgressListener)progressListeners.get(i);
+//            listener.imageProgress(this, percentageDone);
+//        }
     }
 
     /**
@@ -1789,15 +1782,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * method as a convenience.
      */
     protected void processImageComplete() {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteProgressListener listener =
-                (IIOWriteProgressListener)progressListeners.get(i);
-            listener.imageComplete(this);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteProgressListener listener =
+//                (IIOWriteProgressListener)progressListeners.get(i);
+//            listener.imageComplete(this);
+//        }
     }
 
     /**
@@ -1812,15 +1805,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      */
     protected void processThumbnailStarted(int imageIndex,
                                            int thumbnailIndex) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteProgressListener listener =
-                (IIOWriteProgressListener)progressListeners.get(i);
-            listener.thumbnailStarted(this, imageIndex, thumbnailIndex);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteProgressListener listener =
+//                (IIOWriteProgressListener)progressListeners.get(i);
+//            listener.thumbnailStarted(this, imageIndex, thumbnailIndex);
+//        }
     }
 
     /**
@@ -1833,15 +1826,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * as a <code>float</code>.
      */
     protected void processThumbnailProgress(float percentageDone) {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteProgressListener listener =
-                (IIOWriteProgressListener)progressListeners.get(i);
-            listener.thumbnailProgress(this, percentageDone);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteProgressListener listener =
+//                (IIOWriteProgressListener)progressListeners.get(i);
+//            listener.thumbnailProgress(this, percentageDone);
+//        }
     }
 
     /**
@@ -1851,15 +1844,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * method as a convenience.
      */
     protected void processThumbnailComplete() {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteProgressListener listener =
-                (IIOWriteProgressListener)progressListeners.get(i);
-            listener.thumbnailComplete(this);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteProgressListener listener =
+//                (IIOWriteProgressListener)progressListeners.get(i);
+//            listener.thumbnailComplete(this);
+//        }
     }
 
     /**
@@ -1869,15 +1862,15 @@ public abstract class ImageWriter implements ImageTranscoder {
      * method as a convenience.
      */
     protected void processWriteAborted() {
-        if (progressListeners == null) {
-            return;
-        }
-        int numListeners = progressListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteProgressListener listener =
-                (IIOWriteProgressListener)progressListeners.get(i);
-            listener.writeAborted(this);
-        }
+//        if (progressListeners == null) {
+//            return;
+//        }
+//        int numListeners = progressListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteProgressListener listener =
+//                (IIOWriteProgressListener)progressListeners.get(i);
+//            listener.writeAborted(this);
+//        }
     }
 
     /**
@@ -1895,19 +1888,19 @@ public abstract class ImageWriter implements ImageTranscoder {
      */
     protected void processWarningOccurred(int imageIndex,
                                           String warning) {
-        if (warningListeners == null) {
-            return;
-        }
-        if (warning == null) {
-            throw new IllegalArgumentException("warning == null!");
-        }
-        int numListeners = warningListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteWarningListener listener =
-                (IIOWriteWarningListener)warningListeners.get(i);
-
-            listener.warningOccurred(this, imageIndex, warning);
-        }
+//        if (warningListeners == null) {
+//            return;
+//        }
+//        if (warning == null) {
+//            throw new IllegalArgumentException("warning == null!");
+//        }
+//        int numListeners = warningListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteWarningListener listener =
+//                (IIOWriteWarningListener)warningListeners.get(i);
+//
+//            listener.warningOccurred(this, imageIndex, warning);
+//        }
     }
 
     /**
@@ -1940,62 +1933,62 @@ public abstract class ImageWriter implements ImageTranscoder {
     protected void processWarningOccurred(int imageIndex,
                                           String baseName,
                                           String keyword) {
-        if (warningListeners == null) {
-            return;
-        }
-        if (baseName == null) {
-            throw new IllegalArgumentException("baseName == null!");
-        }
-        if (keyword == null) {
-            throw new IllegalArgumentException("keyword == null!");
-        }
-        int numListeners = warningListeners.size();
-        for (int i = 0; i < numListeners; i++) {
-            IIOWriteWarningListener listener =
-                (IIOWriteWarningListener)warningListeners.get(i);
-            Locale locale = (Locale)warningLocales.get(i);
-            if (locale == null) {
-                locale = Locale.getDefault();
-            }
-
-            /**
-             * If an applet supplies an implementation of ImageWriter and
-             * resource bundles, then the resource bundle will need to be
-             * accessed via the applet class loader. So first try the context
-             * class loader to locate the resource bundle.
-             * If that throws MissingResourceException, then try the
-             * system class loader.
-             */
-            ClassLoader loader = (ClassLoader)
-                java.security.AccessController.doPrivileged(
-                   new java.security.PrivilegedAction() {
-                      public Object run() {
-                        return Thread.currentThread().getContextClassLoader();
-                      }
-                });
-
-            ResourceBundle bundle = null;
-            try {
-                bundle = ResourceBundle.getBundle(baseName, locale, loader);
-            } catch (MissingResourceException mre) {
-                try {
-                    bundle = ResourceBundle.getBundle(baseName, locale);
-                } catch (MissingResourceException mre1) {
-                    throw new IllegalArgumentException("Bundle not found!");
-                }
-            }
-
-            String warning = null;
-            try {
-                warning = bundle.getString(keyword);
-            } catch (ClassCastException cce) {
-                throw new IllegalArgumentException("Resource is not a String!");
-            } catch (MissingResourceException mre) {
-                throw new IllegalArgumentException("Resource is missing!");
-            }
-
-            listener.warningOccurred(this, imageIndex, warning);
-        }
+//        if (warningListeners == null) {
+//            return;
+//        }
+//        if (baseName == null) {
+//            throw new IllegalArgumentException("baseName == null!");
+//        }
+//        if (keyword == null) {
+//            throw new IllegalArgumentException("keyword == null!");
+//        }
+//        int numListeners = warningListeners.size();
+//        for (int i = 0; i < numListeners; i++) {
+//            IIOWriteWarningListener listener =
+//                (IIOWriteWarningListener)warningListeners.get(i);
+//            Locale locale = (Locale)warningLocales.get(i);
+//            if (locale == null) {
+//                locale = Locale.getDefault();
+//            }
+//
+//            /**
+//             * If an applet supplies an implementation of ImageWriter and
+//             * resource bundles, then the resource bundle will need to be
+//             * accessed via the applet class loader. So first try the context
+//             * class loader to locate the resource bundle.
+//             * If that throws MissingResourceException, then try the
+//             * system class loader.
+//             */
+//            ClassLoader loader = (ClassLoader)
+//                java.security.AccessController.doPrivileged(
+//                   new java.security.PrivilegedAction() {
+//                      public Object run() {
+//                        return Thread.currentThread().getContextClassLoader();
+//                      }
+//                });
+//
+//            ResourceBundle bundle = null;
+//            try {
+//                bundle = ResourceBundle.getBundle(baseName, locale, loader);
+//            } catch (MissingResourceException mre) {
+//                try {
+//                    bundle = ResourceBundle.getBundle(baseName, locale);
+//                } catch (MissingResourceException mre1) {
+//                    throw new IllegalArgumentException("Bundle not found!");
+//                }
+//            }
+//
+//            String warning = null;
+//            try {
+//                warning = bundle.getString(keyword);
+//            } catch (ClassCastException cce) {
+//                throw new IllegalArgumentException("Resource is not a String!");
+//            } catch (MissingResourceException mre) {
+//                throw new IllegalArgumentException("Resource is missing!");
+//            }
+//
+//            listener.warningOccurred(this, imageIndex, warning);
+//        }
     }
 
     // State management
