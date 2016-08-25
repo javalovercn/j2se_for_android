@@ -530,7 +530,7 @@ public class JFileChooser extends JComponent implements Accessible {
 			}
 		};
 		
-		return (JDialog)App.showCenterPanel(filePanel, 0, 0, (dialogTitle==null)?"Choose / Save file":dialogTitle, 
+		return (JDialog)App.showCenterPanelMain(filePanel, 0, 0, (dialogTitle==null)?"Choose / Save file":dialogTitle, 
 				true, null, null, listener, cancelListener, null, true, false, parent, false, false);
 	}
 

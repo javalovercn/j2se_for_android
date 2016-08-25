@@ -152,7 +152,8 @@ public class J2SEInitor {
 		System.setProperty(CCoreUtil.SYS_SERVER_OS_PLATFORM, CCoreUtil.SYS_SERVER_OS_ANDROID_SERVER);
 		
 		try{
-			System.setProperty(CCoreUtil.SYS_ANDROID_SERVER_JAVA_VERSION, "1.6");//必须是可转换为Float，参见hc.App.getJREVer()
+			//考虑到自动升级HAR的版本检测，改为1.7
+			System.setProperty(CCoreUtil.SYS_ANDROID_SERVER_JAVA_VERSION, "1.7");//必须是可转换为Float，参见hc.App.getJREVer()
 		}catch (Throwable e) {
 			e.printStackTrace();
 		}
