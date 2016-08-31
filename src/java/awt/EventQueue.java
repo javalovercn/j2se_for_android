@@ -25,6 +25,7 @@
 package java.awt;
 
 import hc.android.AndroidClassUtil;
+import hc.core.ContextManager;
 import hc.core.util.LogManager;
 import hc.core.util.Stack;
 import java.awt.event.InvocationEvent;
@@ -193,7 +194,12 @@ public class EventQueue {
 	}
 
 	protected void dispatchEvent(final AWTEvent event) {
-		dispatchEventImpl(event, event.getSource());
+		ContextManager.getThreadPool().run(new Runnable() {
+			@Override
+			public void run() {
+				dispatchEventImpl(event, event.getSource());
+			}
+		});
 	}
 
 	private void dispatchEventImpl(final AWTEvent event, final Object src) {
