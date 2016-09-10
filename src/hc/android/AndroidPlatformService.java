@@ -340,7 +340,7 @@ public class AndroidPlatformService implements PlatformService {
 			return convertToAndroidKeyCodeAdAPI((Integer)para);
 		}else if(bizID == BIZ_CTRL_V){
 			try{
-				final String str = ScreenCapturer.getTxtFromClipboard();
+				final String str = ResourceUtil.getTxtFromClipboard();
 				if(str != null && str.length() > 0){
 					ActivityManager.getActivity().runOnUiThread(new Runnable() {
 						@Override

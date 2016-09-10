@@ -14,7 +14,7 @@
 ### How to use
 
 1. this library is based on library of HomeCenter, please download it from https://github.com/javalovercn/homecenter
-2. this is NOT an Android Project, and there is no Activity in it, you should create new Android project and include this library.
+2. this is NOT an Android project, and there is no Activity in it, you should create new Android project and include this library.
 3. an instance of Activity and res are required by this library, please invoke "hc.android.J2SEInitor.init(Object[] paras)" in construction and pass them in. For more detail, see method "init".
 4. the files in res directory should be copied to your res directory of Android project.
 
