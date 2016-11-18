@@ -583,11 +583,11 @@ public class AndroidPlatformService implements PlatformService {
 	}
 
 	@Override
-	public void startCapture() {
+	public void startCaptureIfEnable() {
 	}
 
 	@Override
-	public void stopCapture() {
+	public void stopCaptureIfEnable() {
 	}
 
 	@Override

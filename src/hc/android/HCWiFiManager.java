@@ -1,7 +1,7 @@
 package hc.android;
 
-import hc.core.ConditionWatcher;
 import hc.core.ConfigManager;
+import hc.core.GlobalConditionWatcher;
 import hc.core.IWatcher;
 
 import java.lang.reflect.Method;
@@ -58,7 +58,7 @@ public class HCWiFiManager {
         if(result){
             enableWifiAp(manager, wcg, true);
         	final AutoDisappearAPWatcher watcher = new AutoDisappearAPWatcher(wcg, disappearSeconds);
-        	ConditionWatcher.addWatcher(watcher);
+        	GlobalConditionWatcher.addWatcher(watcher);
         }
         return result;
 	}

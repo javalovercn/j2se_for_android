@@ -7,13 +7,13 @@ public class HardwareConfig {
 	static HardwareConfig serverHC;
 	static HardwareConfig clientHC;
 	
-	public static HardwareConfig getClientHardwareConfig(){
-		if(clientHC == null){
-			clientHC = new HardwareConfig(ClientDesc.getClientWidth(), ClientDesc.getClientHeight(), ClientDesc.getDPI(), 
-				ClientDesc.getXDPI(), ClientDesc.getYDPI(), ClientDesc.getDensity(), ClientDesc.getClientLang(), ClientDesc.getHCClientVer());
-		}
-		return clientHC;
-	}
+//	public static HardwareConfig getClientHardwareConfig(){
+//		if(clientHC == null){
+//			clientHC = new HardwareConfig(ClientDesc.getClientWidth(), ClientDesc.getClientHeight(), ClientDesc.getDPI(), 
+//				ClientDesc.getXDPI(), ClientDesc.getYDPI(), ClientDesc.getDensity(), ClientDesc.getClientLang(), ClientDesc.getHCClientVer());
+//		}
+//		return clientHC;
+//	}
 	
 	public static HardwareConfig getServerHardwareConfig(){
 		if(serverHC == null){
