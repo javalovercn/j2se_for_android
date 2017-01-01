@@ -817,4 +817,8 @@ public class AndroidPlatformService implements PlatformService {
 		activityManager.getMemoryInfo(info);
 		return (info.availMem>>20);
 	}
+
+	@Override
+	public void closeLoader(ClassLoader loader) {
+	}
 }
