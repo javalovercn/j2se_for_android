@@ -385,7 +385,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 
 		// set the current selected item.
 		selectedItemReminder = dataModel.getSelectedItem();
-//		firePropertyChange("model", oldModel, dataModel);
+		firePropertyChange("model", oldModel, dataModel);
 	}
 
 	public ComboBoxModel<E> getModel() {
