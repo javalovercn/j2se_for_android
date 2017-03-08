@@ -5,13 +5,11 @@ import hc.PlatformTrayIcon;
 import hc.android.loader.AndroidDX;
 import hc.core.IConstant;
 import hc.core.IContext;
-import hc.core.L;
 import hc.core.util.LogManager;
 import hc.core.util.StringUtil;
 import hc.core.util.WiFiDeviceManager;
 import hc.server.PlatformService;
 import hc.server.data.screen.KeyComper;
-import hc.server.data.screen.ScreenCapturer;
 import hc.server.ui.design.AddHarHTMLMlet;
 import hc.util.ClassUtil;
 import hc.util.PropertiesManager;
@@ -67,7 +65,7 @@ public class AndroidPlatformService implements PlatformService {
 		//1.7.19
 		String jrubyHome = "file:" + absPath + "!/jruby.home";
         System.setProperty("jruby.home", jrubyHome);
-        L.V = L.O ? false : LogManager.log("successful set system property [jruby.home] : " + jrubyHome);
+        LogManager.log("successful set system property [jruby.home] : " + jrubyHome);
 	}
 	
 	public void setAutoStart(final boolean isAutoStart){
@@ -329,7 +327,7 @@ public class AndroidPlatformService implements PlatformService {
 	}
 	
 	private static void printConvertInfo(final String from, final String to){
-		L.V = L.O ? false : LogManager.log("convert J2SE key : " + from + " to Android key : " + to + ".");
+		LogManager.log("convert J2SE key : " + from + " to Android key : " + to + ".");
 	}
 	
 	@Override
@@ -592,7 +590,7 @@ public class AndroidPlatformService implements PlatformService {
 
 	@Override
 	public void printAndroidServerInfo() {
-		L.V = L.O ? false : LogManager.log("Android API (SDK) : " + android.os.Build.VERSION.SDK_INT);
+		LogManager.log("Android API (SDK) : " + android.os.Build.VERSION.SDK_INT);
 	}
 
 	@Override
@@ -633,7 +631,7 @@ public class AndroidPlatformService implements PlatformService {
 	public ClassLoader thirdClassLoader;
 	
 	@Override
-	public  synchronized ClassLoader get3rdClassLoader(final File[] files) {
+	public  synchronized ClassLoader get3rdAndServClassLoader(final File[] files) {
 		if(files == null && thirdClassLoader != null){
 		}else{
 			thirdClassLoader = loadClasses(files, SYSTEM_CLASS_LOADER, false, "hc.thirdLibs");
@@ -660,7 +658,7 @@ public class AndroidPlatformService implements PlatformService {
 					dexFileAbsPaths[i] = filePaths[i].getAbsolutePath() + ResourceUtil.EXT_DEX_JAR;
 					final File dexFile = new File(dexFileAbsPaths[i]);
 					if(dexFile.exists() == false){
-						L.V = L.O ? false : LogManager.log("dexing... : " + dexFile.getAbsolutePath());
+						LogManager.log("dexing... : " + dexFile.getAbsolutePath());
 						try{
 							if(isDxMessageOut == false){
 								isDxMessageOut = true;
@@ -668,7 +666,7 @@ public class AndroidPlatformService implements PlatformService {
 							}
 							AndroidDX.dx(filePaths[i], dexFile);
 							totalLastModiMS += dexFile.lastModified();
-							L.V = L.O ? false : LogManager.log("successful dex : " + dexFile.getAbsolutePath());
+							LogManager.log("successful dex : " + dexFile.getAbsolutePath());
 						}catch (final Throwable e) {
 							isDxError = true;
 							e.printStackTrace();
@@ -696,10 +694,10 @@ public class AndroidPlatformService implements PlatformService {
 			boolean isNewItem = false;
 			if(item != null){
 				if(item.lastModifySum == totalLastModiMS){
-					L.V = L.O ? false : LogManager.log(dexFileAbsPaths[0] + "[...] is not modified, use old optimize directory.");
+					LogManager.log(dexFileAbsPaths[0] + "[...] is not modified, use old optimize directory.");
 				}else{
 					isNewItem = true;
-					L.V = L.O ? false : LogManager.log(dexFileAbsPaths[0] + "[...] is new/modified, del old and use new optimize directory.");
+					LogManager.log(dexFileAbsPaths[0] + "[...] is new/modified, del old and use new optimize directory.");
 					PropertiesManager.addDelDir(new File(optimizBaseDir, item.optimizeRandomDir).getAbsolutePath());
 					PropertiesManager.saveFile();
 				}
@@ -712,7 +710,7 @@ public class AndroidPlatformService implements PlatformService {
 				}
 				item.lastModifySum = totalLastModiMS;
 				item.optimizeRandomDir = ResourceUtil.createRandomFileNameWithExt(optimizBaseDir, "");
-				L.V = L.O ? false : LogManager.log("create optimize dir : " + item.optimizeRandomDir + " for loadID : " + loadOpID);
+				LogManager.log("create optimize dir : " + item.optimizeRandomDir + " for loadID : " + loadOpID);
 				DexOptimizeSet.putItem(item);
 				DexOptimizeSet.save();
 			}
@@ -821,4 +819,5 @@ public class AndroidPlatformService implements PlatformService {
 	@Override
 	public void closeLoader(ClassLoader loader) {
 	}
+
 }

@@ -38,7 +38,7 @@ public class ImageUtil {
 	public static Bitmap zoomBitmap(Bitmap bitmap,int w,int h){
 		int width = bitmap.getWidth();
 		int height = bitmap.getHeight();
-//		L.V = L.O ? false : LogManager.log("ImageZoom from [" + width + ", " + height + "] to [" + w + ", " + h + "].");
+//		LogManager.log("ImageZoom from [" + width + ", " + height + "] to [" + w + ", " + h + "].");
 		Matrix matrix = new Matrix();
 		float scaleWidht = ((float)w / width);
 		float scaleHeight = ((float)h / height);

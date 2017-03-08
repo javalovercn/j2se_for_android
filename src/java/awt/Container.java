@@ -531,7 +531,7 @@ public class Container extends Component {
 		final boolean isSimu = PropertiesManager.isSimu();
 		
 		if(isSimu){
-			L.V = L.O ? false : LogManager.log(toString() + " begin validateTree.");
+			LogManager.log(toString() + " begin validateTree.");
 		}
 
 		if(AndroidUIUtil.isJViewportInstance(this)){
@@ -554,7 +554,7 @@ public class Container extends Component {
 		super.validate();
 		
 		if(isSimu){
-			L.V = L.O ? false : LogManager.log(toString() + " end validateTree.");
+			LogManager.log(toString() + " end validateTree.");
 		}
     }
 	
@@ -568,6 +568,8 @@ public class Container extends Component {
 	public static final boolean isDisablePaintGAdAPI = true;//不实现paint(g)
 	
 	public void doLayout() {
+		L.V = L.WShop ? false : LogManager.log("doLayout() -- " + toString());
+		
 		if(isLayoutValidAdAPI()){//container含有多个组件
 			if(isUsePaintView){
 				isUsePaintView = false;
@@ -601,9 +603,11 @@ public class Container extends Component {
 	}
 
 	public void layout() {
+		L.V = L.WShop ? false : LogManager.log("layout() -- " + toString());
 		synchronized(this){
 			final LayoutManager layoutMgr = layout;
 			if (layoutMgr != null) {
+				L.V = L.WShop ? false : LogManager.log("layoutContainer() -- " + layoutMgr.toString());
 				layoutMgr.layoutContainer(this);// TODO
 			}
 		}
@@ -838,12 +842,6 @@ public class Container extends Component {
 	}
 
 	public void applyComponentOrientation(final ComponentOrientation o) {
-		if(o.equals(componentOrientation)){
-			return;
-		}
-		
-		final ComponentOrientation old = getComponentOrientation();
-		
 		super.applyComponentOrientation(o);
 		if(components != null){
 			synchronized (this) {
@@ -854,9 +852,9 @@ public class Container extends Component {
 			}
 		}
 		
-		if(old.equals(o) == false){
-			revalidate();
-		}
+//		if(old.equals(o) == false){//必须另执行validate()后生效
+//			revalidate();
+//		}
 	}
 
 	@Override

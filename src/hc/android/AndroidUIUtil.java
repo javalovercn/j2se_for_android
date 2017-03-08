@@ -169,7 +169,7 @@ public class AndroidUIUtil {
 
 	public static void printViewStructure(View view, int level) {
 		if(view == null){
-			L.V = L.O ? false : LogManager.log("null view, skip print view structure.");
+			LogManager.log("null view, skip print view structure.");
 		}
 		printViewInfo(view, level++);
 		if(view instanceof ViewGroup){
@@ -226,7 +226,7 @@ public class AndroidUIUtil {
 			sb.append("]");
 		}
 		
-		L.V = L.O ? false : LogManager.log(sb.toString());
+		LogManager.log(sb.toString());
 	}
 	
 	public static float isAutoConvertDIPImage() {

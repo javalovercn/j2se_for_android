@@ -402,7 +402,7 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 ////			if(vcDim.width < jsDim.width && vcDim.height < jsDim.height){
 ////				viewportComponent.setPreferredSize(jsDim);
 ////				viewportComponent.validate();
-////				L.V = L.O ? false : LogManager.log("viewportComponent validate to fit JScrollPane.");
+////				LogManager.log("viewportComponent validate to fit JScrollPane.");
 ////			}
 //		}
 //	}
@@ -471,6 +471,14 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 
 	public void setComponentOrientation(ComponentOrientation co) {
 		super.setComponentOrientation(co);
+	}
+	
+	public void applyComponentOrientation(final ComponentOrientation o) {
+		super.applyComponentOrientation(o);
+		
+		if(viewportComponent != null){
+			viewportComponent.applyComponentOrientation(o);
+		}
 	}
 
 	public boolean isWheelScrollingEnabled() {

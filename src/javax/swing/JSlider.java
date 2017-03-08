@@ -145,7 +145,7 @@ public class JSlider extends JComponent implements SwingConstants, Accessible {
             @Override  
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             	synchronized (lock) {
-	            	L.V = L.O ? false : LogManager.log("onProgressChanged");
+	            	LogManager.log("onProgressChanged");
 	            	if(progress != getValue()){
 	            		setValue(progress);
 	            	}
@@ -154,12 +154,12 @@ public class JSlider extends JComponent implements SwingConstants, Accessible {
   
             @Override  
             public void onStartTrackingTouch(SeekBar seekBar) {
-            	L.V = L.O ? false : LogManager.log("onStartTrackingTouch");
+            	LogManager.log("onStartTrackingTouch");
             }
   
             @Override  
             public void onStopTrackingTouch(SeekBar seekBar) {
-            	L.V = L.O ? false : LogManager.log("onStopTrackingTouch");
+            	LogManager.log("onStopTrackingTouch");
             }
         };
   

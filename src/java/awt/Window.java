@@ -361,6 +361,8 @@ public class Window extends Container implements Accessible {
     }
     
 	public void pack() {
+		L.V = L.WShop ? false : LogManager.log("pack() -- " + toString());
+		
 		isPack = true;
 		
 //        Dimension newSize = getPreferredSize();
@@ -449,7 +451,7 @@ public class Window extends Container implements Accessible {
 				width = screenAdapter.getPreAdapterWidth(width);
 				height = screenAdapter.getPreAdapterHeight(height);
 				if(PropertiesManager.isSimu()){
-					L.V = L.O ? false : LogManager.log("auto adapter screen size from [" + oldW + ", " + oldH + "] to [" + width + ", " + height + "].");
+					LogManager.log("auto adapter screen size from [" + oldW + ", " + oldH + "] to [" + width + ", " + height + "].");
 				}
 			}
 		}

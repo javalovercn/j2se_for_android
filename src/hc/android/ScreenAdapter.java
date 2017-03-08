@@ -1,7 +1,5 @@
 package hc.android;
 
-import hc.core.L;
-import hc.core.util.LogManager;
 import hc.server.ui.ProjectContext;
 import hc.server.util.ContextSecurityConfig;
 import hc.server.util.ContextSecurityManager;
@@ -60,7 +58,7 @@ public class ScreenAdapter {
 		}else{
 			final int max = Math.max(width, height);
 			final int out = (int)( max * size * zoom / ScreenAdapter.STAND_SCREEN_HEIGHT);//UICore.getDeviceDensity()
-//			L.V = L.O ? false : LogManager.log("resize image from : " + size + ", to : " + out + ", zoom : " + zoom);
+//			LogManager.log("resize image from : " + size + ", to : " + out + ", zoom : " + zoom);
 			return out;
 		}
 	}

@@ -413,7 +413,7 @@ public class Font {
 		paint.setTypeface(typeface);
 //		if(screenAdapter == null){
 //			final String msg = "Warning : java.awt.Font should be instanced in Mlet constructor";
-//			L.V = L.O ? false : LogManager.warning(msg);
+//			LogManager.warning(msg);
 //			hc.util.ClassUtil.printCurrentThreadStack(msg);
 //		}
 		paint.setTextSize(screenAdapter.getFontSizeInPixel(size));

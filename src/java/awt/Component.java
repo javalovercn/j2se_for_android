@@ -380,12 +380,17 @@ public abstract class Component implements ImageObserver, MenuContainer,
 		if(o == null){
 			return;
 		}
+		ComponentOrientation oldValue = componentOrientation;
 		componentOrientation = o;
 //		if(o.isLeftToRight() == false && peer != null){
 //			Class[] para = {Integer.class};
 //			Object[] paraValues = {Integer.valueOf(View.TEXT_DIRECTION_ANY_RTL)};
 //			ClassUtil.invoke(View.class, peer, "setTextDirection", para, paraValues);
 //		}
+		
+        firePropertyChange("componentOrientation", oldValue, o);
+        // This could change the preferred size of the Component.
+        invalidateIfValid();
 	}
 
 	public boolean contains(final int x, final int y) {
@@ -497,7 +502,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 //				return UIUtil.toJ2SEColor(colorint[0]);
 //			}
 //		}
-		L.V = L.O ? false : LogManager.log("return [WHITE] getForeground for Component : " + this.getClass().getName());
+		LogManager.log("return [WHITE] getForeground for Component : " + this.getClass().getName());
 		return Color.WHITE;
 	}
 
@@ -512,7 +517,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 //				return;
 //			}
 //		}
-		L.V = L.O ? false : LogManager.log("skip setForeground for Component : " + this.getClass().getName());
+		LogManager.log("skip setForeground for Component : " + this.getClass().getName());
 	}
 
 	public boolean isForegroundSet() {
@@ -520,7 +525,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 	}
 
 	public Color getBackground() {
-		L.V = L.O ? false : LogManager.log("return [WHITE] getBackground for Component : " + this.getClass().getName());
+		LogManager.log("return [WHITE] getBackground for Component : " + this.getClass().getName());
 		return Color.WHITE;
 	}
 
@@ -532,7 +537,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 			peer.setBackgroundColor(c.toAndroid());
 			return;
 		}
-		L.V = L.O ? false : LogManager.log("skip setBackground for Component : " + this.getClass().getName());
+		LogManager.log("skip setBackground for Component : " + this.getClass().getName());
 	}
 
 	public boolean isBackgroundSet() {
@@ -561,7 +566,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 //			if(peer instanceof TextView){
 //			}
 //		}
-//		L.V = L.O ? false : LogManager.log("skip setFont for Component : " + this.getClass().getName());
+//		LogManager.log("skip setFont for Component : " + this.getClass().getName());
 	}
 
 	public boolean isFontSet() {
@@ -664,14 +669,14 @@ public abstract class Component implements ImageObserver, MenuContainer,
 			final boolean isContain = this instanceof Container;
 			final LayoutManager lm = isContain?((Container)this).getLayout():null; 
 			final String layDesc = isContain?((lm==null)?"null":lm.toString()):"null";
-			L.V = L.O ? false : LogManager.log("setBounds [x : " + x + ", y : " + y + ", w : " + width + ", h : " + height + "] for " + this.toString() + ", layout : " + layDesc);
+			LogManager.log("setBounds [x : " + x + ", y : " + y + ", w : " + width + ", h : " + height + "] for " + this.toString() + ", layout : " + layDesc);
 		}
 		
 		if(peer != null){
 			addViewToParentAdAPI();
 			return;
 		}
-		L.V = L.O ? false : LogManager.log("skip setBounds for Component : " + this.getClass().getName());
+		LogManager.log("skip setBounds for Component : " + this.getClass().getName());
 	}
 
 	public final void addViewToParentAdAPI() {
@@ -683,7 +688,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 					AndroidUIUtil.removeFromParent(peer);
 					AbsoluteLayout vg = (AbsoluteLayout)containerView;
 					
-	//					L.V = L.O ? false : LogManager.log("AbsoluteLayout addView for " + this.toString());
+	//					LogManager.log("AbsoluteLayout addView for " + this.toString());
 					final Border border = (parent instanceof JComponent)?((JComponent)parent).getBorder():null;
 					final Insets insets = (border != null)?border.getBorderInsets(parent):null;
 					vg.addView(peer, new AbsoluteLayout.LayoutParams(width, height, x - ((insets != null)?insets.left:0), y - ((insets != null)?insets.top:0)));
@@ -726,7 +731,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 		rv.width = width;
 		rv.height = height;
 		
-//		L.V = L.O ? false : LogManager.log("getBounds [x : "+ x + ", y : " + y + ", w : " + width+ ", h : " + height + "] for " + this.toString());
+//		LogManager.log("getBounds [x : "+ x + ", y : " + y + ", w : " + width+ ", h : " + height + "] for " + this.toString());
 		
 		return rv;
 	}
@@ -759,7 +764,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
 	public void setPreferredSize(final Dimension preferredSize) {
 		if(this instanceof Dialog || this instanceof Frame){
-			L.V = L.O ? false : LogManager.log("skip setPreferredSize for Dialog/Frame.");
+			LogManager.log("skip setPreferredSize for Dialog/Frame.");
 		}else{
 			this.preSize = preferredSize;
 			isSetPrefSize = (preferredSize != null);
@@ -778,7 +783,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 			
 			if(this instanceof JScrollPane && MletHtmlCanvas.isForAddHtml((JScrollPane)this)){
 				if(PropertiesManager.isSimu()){
-					L.V = L.O ? false : LogManager.log("ignore adapter size for AddHarHTMLMlet.");
+					LogManager.log("ignore adapter size for AddHarHTMLMlet.");
 				}
 				return;
 			}
@@ -863,7 +868,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 		if(PropertiesManager.isSimu()){
 			final int oldW = preSize.width;
 			final int oldH = preSize.height;
-			L.V = L.O ? false : LogManager.log("adapter Component preferred size [" + oldW + ", " + oldH + "] to [" + preSize.width + ", " + preSize.height + "]");
+			LogManager.log("adapter Component preferred size [" + oldW + ", " + oldH + "] to [" + preSize.width + ", " + preSize.height + "]");
 		}
 		
 		preSize.width = screenAdapter.getPreAdapterWidth(preSize.width);
@@ -920,7 +925,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
 	public void setMinimumSize(final Dimension minimumSize) {
 		if(this instanceof Dialog || this instanceof Frame){
-			L.V = L.O ? false : LogManager.log("skip setPreferredSize for Dialog/Frame.");
+			LogManager.log("skip setPreferredSize for Dialog/Frame.");
 		}else{
 			this.minSize = minimumSize;
 			isSetMinSize = (minimumSize != null);
@@ -963,7 +968,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
 	public void setFocusable(final boolean focusable) {
 		AndroidClassUtil.callEmptyMethod();
-//		L.V = L.O ? false : LogManager.log("skip setFocusable for Component : " + this.getClass().getName());
+//		LogManager.log("skip setFocusable for Component : " + this.getClass().getName());
 		return;
 //		if(isValid()){
 //			peer.setFocusable(focusable);
@@ -1286,7 +1291,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 
 	public void setMaximumSize(final Dimension maximumSize) {
 		if(this instanceof Dialog || this instanceof Frame){
-			L.V = L.O ? false : LogManager.log("skip setMaximumSize for Dialog/Frame.");
+			LogManager.log("skip setMaximumSize for Dialog/Frame.");
 		}else{
 			this.maxSize = maximumSize;
 			isSetMaxSize = (maximumSize != null);

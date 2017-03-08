@@ -584,11 +584,11 @@ public abstract class JComponent extends Container implements Serializable, Tran
 
 	private final void restructView(final View layoutView) {
 		if(containerView != null){
-			L.V = L.O ? false : LogManager.log("can NOT setBorder again!!!");
+			LogManager.log("can NOT setBorder again!!!");
 			return;
 		}
 		
-//		L.V = L.O ? false : LogManager.log("restruct border view for " + toString());
+//		LogManager.log("restruct border view for " + toString());
 		
 		//必须先取出。因本类重载getPeerAdAPI
 		this.containerView = layoutView;
@@ -630,7 +630,7 @@ public abstract class JComponent extends Container implements Serializable, Tran
 	public Insets getInsets() {
 		if (border != null) {
 			final Insets insets = border.getBorderInsets(this);
-//			L.V = L.O ? false : LogManager.log("getBorderInsets [" + toString() + "] top : " + insets.top + ", left : " + insets.left + ", right : " + insets.right + ", bottom : " + insets.bottom);
+//			LogManager.log("getBorderInsets [" + toString() + "] top : " + insets.top + ", left : " + insets.left + ", right : " + insets.right + ", bottom : " + insets.bottom);
 			return insets;
 		}
 		return super.getInsets();
@@ -1297,7 +1297,7 @@ public abstract class JComponent extends Container implements Serializable, Tran
 
 	public void repaint(final long tm, final int x, final int y, final int width, final int height) {
 		super.getPeerAdAPI().invalidate(x, y, x + width, y + height);
-//		L.V = L.O ? false : LogManager.log("repain x : " + x + ", y : " + y + ", width : " + width + ", height : " + height);
+//		LogManager.log("repain x : " + x + ", y : " + y + ", width : " + width + ", height : " + height);
 	}
 
 	public void repaint(final Rectangle r) {
