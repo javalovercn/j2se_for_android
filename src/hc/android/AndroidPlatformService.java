@@ -820,4 +820,9 @@ public class AndroidPlatformService implements PlatformService {
 	public void closeLoader(ClassLoader loader) {
 	}
 
+	@Override
+	public String getOsNameAndVersion() {
+		return "Android/" + android.os.Build.VERSION.RELEASE;
+	}
+
 }
