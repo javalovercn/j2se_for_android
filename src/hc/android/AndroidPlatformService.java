@@ -825,4 +825,13 @@ public class AndroidPlatformService implements PlatformService {
 		return "Android/" + android.os.Build.VERSION.RELEASE;
 	}
 
+	@Override
+	public String[] getMethodCodeParameter(Method method) {
+		return null;
+	}
+
+	@Override
+	public void resetClassPool() {
+	}
+
 }
