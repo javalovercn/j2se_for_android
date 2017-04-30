@@ -264,7 +264,7 @@ public class JButton extends AbstractButton implements Accessible {
 		if(defaultIcon != null){
 			imageButton = new ImageView(ActivityManager.getActivity());
 			
-			imageButton.setImageDrawable(icon.getAdapterBitmapDrawableAdAPI(this));
+			imageButton.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)icon, this));
 			
 			LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.gravity = (Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL | Gravity.CENTER);

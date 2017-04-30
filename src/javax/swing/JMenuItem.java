@@ -320,7 +320,7 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 		}
 		
 		ImageView iconView = new ImageView(ActivityManager.getActivity());
-		iconView.setImageDrawable(icon.getAdapterBitmapDrawableAdAPI(this));
+		iconView.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)icon, this));
 		
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);

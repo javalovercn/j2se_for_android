@@ -216,7 +216,8 @@ public class JLabel extends JComponent implements SwingConstants, Accessible {
 						}
 						
 						iconView = new ImageView(ActivityManager.getActivity());
-						iconView.setImageDrawable((isEnable?getIcon():getDisabledIcon()).getAdapterBitmapDrawableAdAPI(JLabel.this));
+						final Icon icon = isEnable?getIcon():getDisabledIcon();
+						iconView.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)icon, JLabel.this));
 						iconView.setFocusable(false);
 						AndroidUIUtil.addView(defaultLinearLayout, iconView, lp, viewRelation);
 					}else{
@@ -296,7 +297,7 @@ public class JLabel extends JComponent implements SwingConstants, Accessible {
 	public Icon getDisabledIcon() {
 		if(disabledIcon == null){
 			if(defaultIcon != null){
-				disabledIcon = defaultIcon.toGrayAdAPI();
+				disabledIcon = ImageIcon.toGrayAdAPI((ImageIcon)defaultIcon);
 				refreshIconToMobile(null);
 			}
 		}

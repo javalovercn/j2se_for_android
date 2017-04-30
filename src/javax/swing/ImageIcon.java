@@ -279,14 +279,14 @@ public class ImageIcon implements Icon, Serializable, Accessible {
 
 	BitmapDrawable drawable;
 
-	public Bitmap getBitmapAdAPI(){
-		return image.getBitmapAdAPI();
+	public static Bitmap getBitmapAdAPI(final ImageIcon imageIcon){
+		return imageIcon.image.getBitmapAdAPI();
 	}
 	
-	public final ImageIcon toGrayAdAPI(){
-		Bitmap gray = ImageUtil.toGray(image.getBitmapAdAPI());
+	public static ImageIcon toGrayAdAPI(final ImageIcon imageIcon){
+		Bitmap gray = ImageUtil.toGray(imageIcon.image.getBitmapAdAPI());
 		final BufferedImage bi = new BufferedImage(gray);
-		bi.initZoom = image.initZoom;
+		bi.initZoom = imageIcon.image.initZoom;
 		ImageIcon out = new ImageIcon(bi);
 		return out;
 	}
@@ -297,8 +297,7 @@ public class ImageIcon implements Icon, Serializable, Accessible {
 //		return new BitmapDrawable(ActivityManager.getActivity().getResources(), bitmap);
 //	}
 
-	@Override
-	public Drawable getAdapterBitmapDrawableAdAPI(Component component) {
-		return image.getAdapterBitmapDrawableAdAPI(component);
+	public static Drawable getAdapterBitmapDrawableAdAPI(final ImageIcon imageIcon, final Component component) {
+		return imageIcon.image.getAdapterBitmapDrawableAdAPI(component);
 	}
 }

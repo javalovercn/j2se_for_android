@@ -266,7 +266,7 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	public void setIcon(Icon defaultIcon) {
-		if(defaultIcon == null){
+		if(defaultIcon == null || (defaultIcon instanceof ImageIcon) == false){
 			return;
 		}
 		Icon oldValue = this.defaultIcon;
@@ -276,7 +276,7 @@ public abstract class AbstractButton extends JHCComponent implements
 			refreshIconToMobile(oldValue);
 		}
 		//生成缺省的灰色图片
-		setDisabledIcon(defaultIcon.toGrayAdAPI());
+		setDisabledIcon(ImageIcon.toGrayAdAPI((ImageIcon)defaultIcon));
 		updateUI();
 	}
 
@@ -293,13 +293,13 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	public void setSelectedIcon(Icon selectedIcon) {
-		if(selectedIcon == null){
+		if(selectedIcon == null || (defaultIcon instanceof ImageIcon) == false){
 			return;
 		}
 
 		this.selectedIcon = selectedIcon;
 		//生成缺省的灰色图片
-		setDisabledSelectedIcon(selectedIcon.toGrayAdAPI());
+		setDisabledSelectedIcon(ImageIcon.toGrayAdAPI((ImageIcon)selectedIcon));
 		updateUI();
 	}
 
@@ -324,7 +324,7 @@ public abstract class AbstractButton extends JHCComponent implements
 	public Icon getDisabledIcon() {
 		if (disabledIcon == null) {
 			if(defaultIcon != null){
-				disabledIcon = defaultIcon.toGrayAdAPI();
+				disabledIcon = ImageIcon.toGrayAdAPI((ImageIcon)defaultIcon);
 				refreshIconToMobile(null);
 			}
 		}

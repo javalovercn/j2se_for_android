@@ -95,7 +95,8 @@ public class HCDesktop implements PlatformTrayIcon{
 		//添加主按钮
 		{
 			mainIconView = new ImageView(ActivityManager.getActivity());
-			mainIconView.setImageBitmap(new ImageIcon("/hc/android/res/hc_128.png").getBitmapAdAPI());
+			final ImageIcon imageIcon = new ImageIcon("/hc/android/res/hc_128.png");
+			mainIconView.setImageBitmap(ImageIcon.getBitmapAdAPI(imageIcon));
 			
 			mainIconView.setFocusable(true);
 			mainIconView.setFocusableInTouchMode(false);

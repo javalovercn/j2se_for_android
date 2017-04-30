@@ -27,9 +27,6 @@ package javax.swing;
 import java.awt.Component;
 import java.awt.Graphics;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-
 /**
  * A small fixed size picture, typically used to decorate components.
  *
@@ -42,9 +39,4 @@ public interface Icon {
 
 	int getIconHeight();
 	
-	public ImageIcon toGrayAdAPI();
-	
-	public Bitmap getBitmapAdAPI();
-
-	Drawable getAdapterBitmapDrawableAdAPI(Component component);
 }

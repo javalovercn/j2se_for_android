@@ -266,7 +266,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 		        	item = "";
 		        }
 		        if (item instanceof Icon) {
-		            bitmapView.setImageDrawable(((Icon)item).getAdapterBitmapDrawableAdAPI(JComboBox.this));
+		            bitmapView.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)item, JComboBox.this));
 		        }
 		        return view;
 		    }

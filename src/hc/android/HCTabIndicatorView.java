@@ -2,6 +2,7 @@ package hc.android;
 
 import java.awt.Color;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.ToolTipManager;
 import hc.android.HCRUtil;
@@ -130,7 +131,7 @@ public class HCTabIndicatorView {
 		if(ico != null){
 			ImageView imageButton = new ImageView(ActivityManager.getActivity());
 			
-			imageButton.setImageDrawable(ico.getAdapterBitmapDrawableAdAPI(tabHost.ori_comp));
+			imageButton.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)ico, tabHost.ori_comp));
 			
 			LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.gravity = (Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL | Gravity.CENTER);
