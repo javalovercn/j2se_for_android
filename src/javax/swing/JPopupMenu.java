@@ -288,13 +288,21 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 	}
 	
 	private void showPopupAdAPI(Component invoker, int offx, int offy) {
+		if (popupWindow != null) {
+			dismissMenuAdAPI();
+		}
+		
 		if (popupWindow == null) {
 			buildPopupFrame();
 
 			popupWindow = new PopupWindow(mainAndSub, 
 					LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
 			popupWindow.setAnimationStyle(HCRUtil.getResource(HCRUtil.R_style_PopupMenuAnimation));
-			popupWindow.setFocusable(true);
+			
+			popupWindow.setTouchable(true);
+			popupWindow.setFocusable(true);//遥控器版安卓必须
+			//Controls whether the pop-up will be informed of touch events outside of its window. 
+			//This only makes sense for pop-ups that are touchable but not focusable
 			popupWindow.setOutsideTouchable(false);
 			
 			popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -374,6 +382,7 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 	}
 	
 	final boolean dismissMenuAdAPI(){
+		WindowManager.notifyPopupWindowActioned();
 		isDismissPop = true;
 		return WindowManager.disposePopupWindow();
 	}

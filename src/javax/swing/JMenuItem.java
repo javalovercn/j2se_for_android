@@ -362,7 +362,6 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 		if(this instanceof JMenu){
 			getPeerAdAPI().requestFocus();
 		}else{
-			WindowManager.notifyPopupWindowActioned();
 			getPopupMenuAdAPI().dismissMenuAdAPI();
 			super.processActionListenerAdAPI(event);
 		}
