@@ -120,7 +120,7 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 		time.setIntervalMS(milliseconds);
 	}
 
-	public int getInitialDelay() {
+	public long getInitialDelay() {
 		return time.getIntervalMS();
 	}
 
