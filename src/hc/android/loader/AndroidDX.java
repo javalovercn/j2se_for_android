@@ -61,6 +61,10 @@ public class AndroidDX {
 		Class cd = dexFileClassLoader.loadClass(dexerMain);
 		
 		Class[] paraTypes = {String[].class};
+		
+//		测试通过
+//		String[] dexparas = {"--core-library", "--output=" + outputFileName.getAbsolutePath(), srcFile.getAbsolutePath()};
+		
 		String[] dexparas = {"--output=" + outputFileName.getAbsolutePath(), srcFile.getAbsolutePath()};
 		Object[] paras = {dexparas};
 		//--dex --output=dexed.jar hello.jar

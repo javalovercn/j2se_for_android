@@ -14,6 +14,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -152,8 +153,17 @@ public class J2SEInitor {
 		System.setProperty(CCoreUtil.SYS_SERVER_OS_PLATFORM, CCoreUtil.SYS_SERVER_OS_ANDROID_SERVER);
 		
 		try{
-			//考虑到自动升级HAR的版本检测，改为1.7
-			System.setProperty(CCoreUtil.SYS_ANDROID_SERVER_JAVA_VERSION, "1.7");//必须是可转换为Float，参见hc.App.getJREVer()
+			final int sdkInt = Build.VERSION.SDK_INT;
+			final String javaVer = CCoreUtil.SYS_ANDROID_SERVER_JAVA_VERSION;
+			
+			//必须是可转换为Float，参见hc.App.getJREVer()
+			if(sdkInt >= 24){//Android 7.0 Nougat (API 24)
+				System.setProperty(javaVer, "1.8");
+			}else if(sdkInt >= 19){//Android 4.4 KitKat (API 19)
+				System.setProperty(javaVer, "1.7");
+			}else{
+				System.setProperty(javaVer, "1.6");
+			}
 		}catch (Throwable e) {
 			e.printStackTrace();
 		}
