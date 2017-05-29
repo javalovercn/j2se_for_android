@@ -221,7 +221,10 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 			}
 			@Override
 			public int getViewTypeCount() {
-				return 2;
+				//注意：
+				//05-18 11:57:21.581: E/HomeCenter(29594): java.lang.IllegalArgumentException: Spinner adapter view type count must be 1
+				//This error is being reported for targetSdkVersion of 21.
+				return 1;
 			}
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {

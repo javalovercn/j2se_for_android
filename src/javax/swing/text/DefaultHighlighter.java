@@ -78,7 +78,11 @@ public class DefaultHighlighter extends LayeredHighlighter {
         
         highlights.add(i);
         i.span = p.getCharacterStyleAdAPI();
-        spannable.setSpan(i.span, startIdx, endIdx, FLAG_SPAN_INCLUSIVE_EXCLUSIVE);
+        try{
+        	spannable.setSpan(i.span, startIdx, endIdx, FLAG_SPAN_INCLUSIVE_EXCLUSIVE);
+        }catch (Throwable e) {//IndexOutOfBoundsException setSpan (0 … 1) ends beyond length 0
+        	e.printStackTrace();
+        }
         return i;
     }
 

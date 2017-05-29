@@ -983,8 +983,13 @@ public abstract class JTextComponent extends JComponent implements Scrollable, A
         select(getSelectionStart(), selectionEnd);
     }
 
-    public void select(int selectionStart, int selectionEnd) {
-    	editText.setSelection(selectionStart, selectionEnd);
+    public void select(final int selectionStart, final int selectionEnd) {
+    	ActivityManager.getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+		    	editText.setSelection(selectionStart, selectionEnd);
+			}
+		});
     }
 
     public void setToolTipText(String tip){
