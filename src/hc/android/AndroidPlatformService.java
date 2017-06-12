@@ -87,8 +87,8 @@ public class AndroidPlatformService implements PlatformService {
         fileStats.restat(path);  
         try{
 //        	return (long) fileStats.getAvailableBlocksLong() * fileStats.getBlockSizeLong();//API level 18
-        	final long getAvailableBlocksLong = (Long)ClassUtil.invokeWithExceptionOut(StatFs.class, fileStats, "getAvailableBlocksLong", ClassUtil.nullParaTypes, ClassUtil.nullParas, false);
-        	final long getBlockSizeLong = (Long)ClassUtil.invokeWithExceptionOut(StatFs.class, fileStats, "getBlockSizeLong", ClassUtil.nullParaTypes, ClassUtil.nullParas, false);
+        	final long getAvailableBlocksLong = (Long)ClassUtil.invokeWithExceptionOut(StatFs.class, fileStats, "getAvailableBlocksLong", ClassUtil.NULL_PARA_TYPES, ClassUtil.NULL_PARAS, false);
+        	final long getBlockSizeLong = (Long)ClassUtil.invokeWithExceptionOut(StatFs.class, fileStats, "getBlockSizeLong", ClassUtil.NULL_PARA_TYPES, ClassUtil.NULL_PARAS, false);
         	return getAvailableBlocksLong * getBlockSizeLong;
         }catch (Throwable e) {
             return (long) fileStats.getAvailableBlocks() * fileStats.getBlockSize();
