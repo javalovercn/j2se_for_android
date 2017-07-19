@@ -7,6 +7,7 @@ import hc.util.ResourceUtil;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 import android.app.Activity;
@@ -61,6 +62,22 @@ public class J2SEInitor {
 		}
 	}
 	
+	/**
+	 * 此方法被ServerMainActivity的升级模块使用
+	 * @return
+	 */
+	public static HashMap getResMap(){
+		return new HashMap<Object, Object>(){
+			public Object get(Object key) {
+				if(key instanceof Integer){
+					return ResourceUtil.get((Integer)key);
+				}else{
+					return null;
+				}
+			}
+		};
+	}
+	
 	private static String appName = "appNameHere";//it is recommend to set it in method init(Object[] para)
 	private static String contactEmail = "support@company.com";//it is recommend to set it in method init(Object[] para)
 	
@@ -79,30 +96,6 @@ public class J2SEInitor {
 		if(listener != null){
 			listener.onClick(null);
 		}
-	}
-	
-	/**
-	 * 注意：请勿改方法名。
-	 * 本方法被HCAndroidServer下的ServerMainActivity.startHCByReflect()反射式调用
-	 */
-	public static void sendNotification(){
-		Activity context = ActivityManager.getActivity();
-
-		String title = J2SEInitor.getAppName(); 
-		try{
-			title = context.getPackageManager().getPackageInfo(  
-					context.getPackageName(), 0).applicationInfo.loadLabel(context.getPackageManager()).toString(); 
-		}catch (Exception e) {
-		}
-	    String msg = (String)ResourceUtil.get(6002);
-	    Notification n = new Notification(HCRUtil.getResource(HCRUtil.R_drawable_hc_48), msg, System.currentTimeMillis());
-		n.flags = Notification.FLAG_ONGOING_EVENT;
-		Intent intent = new Intent(context, context.getClass());
-		PendingIntent pi = PendingIntent.getActivity(context, 0, intent, 0);
-		n.setLatestEventInfo(context, title, msg, pi);
-
-	    NotificationManager nm = (NotificationManager)context.getSystemService(Activity.NOTIFICATION_SERVICE);
-	    nm.notify(100, n);
 	}
 	
 	final static Vector<ClassLoader> packagePath = new Vector<ClassLoader>();

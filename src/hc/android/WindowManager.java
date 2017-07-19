@@ -2,6 +2,7 @@ package hc.android;
 
 import hc.App;
 import hc.core.util.Stack;
+import hc.server.PlatformManager;
 import hc.util.ExitManager;
 import hc.util.PropertiesManager;
 import hc.util.ResourceUtil;
@@ -142,6 +143,7 @@ public class WindowManager {
 		nm.cancelAll();
 		
 		ExitManager.startExitSystem();
+    	PlatformManager.getService().exitSystem();
 	}
 
 	private static void runInBackgroundAndJumpHome() {

@@ -3,8 +3,10 @@ package hc.android;
 import hc.App;
 import hc.PlatformTrayIcon;
 import hc.android.loader.AndroidDX;
+import hc.core.ContextManager;
 import hc.core.IConstant;
 import hc.core.IContext;
+import hc.core.util.CCoreUtil;
 import hc.core.util.LogManager;
 import hc.core.util.StringUtil;
 import hc.core.util.WiFiDeviceManager;
@@ -12,6 +14,7 @@ import hc.server.PlatformService;
 import hc.server.data.screen.KeyComper;
 import hc.server.ui.design.AddHarHTMLMlet;
 import hc.util.ClassUtil;
+import hc.util.LogServerSide;
 import hc.util.PropertiesManager;
 import hc.util.ResourceUtil;
 
@@ -38,7 +41,6 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StatFs;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -75,6 +77,24 @@ public class AndroidPlatformService implements PlatformService {
 		ClassUtil.invoke(activity.getClass(), activity, "setAutoStart", paraTypes, para, false);
 		PropertiesManager.setValue(PropertiesManager.p_autoStart, isAutoStart?IConstant.TRUE:IConstant.FALSE);
 		PropertiesManager.saveFile();
+		
+//		if(isAutoStart){
+//			PackageManager mPackageManager = ActivityManager.sysActivity.getPackageManager();
+//			Intent intent  = new Intent();
+//			intent.setAction(Intent.ACTION_BOOT_COMPLETED );
+//			List<ResolveInfo> resolveInfoList = mPackageManager.queryBroadcastReceivers(intent, PackageManager.GET_DISABLED_COMPONENTS);
+//	
+//			final String packageName = activity.getPackageName();
+//			final int size = resolveInfoList.size();
+//			for (int i = 0; i < size; i++) {
+//				ResolveInfo ri = resolveInfoList.get(i);
+//				Log.e("HomeCenter", ri.toString());
+//				if(ri.activityInfo.applicationInfo.packageName.equals(packageName)){
+//					AndroidUIUtil.showCenterToast((String)ResourceUtil.get(5002));
+//					return;
+//				}
+//			}
+//		}
 	}
 	
 	/** 
@@ -595,10 +615,20 @@ public class AndroidPlatformService implements PlatformService {
 
 	@Override
 	public void exitSystem() {
-		try{
-			hc.android.ActivityManager.getActivity().finish();
-		}catch (final Throwable e) {
-		}
+		CCoreUtil.checkAccess();
+		
+		J2SEInitor.doAction(J2SEActionMap.shutdownHC);
+		ContextManager.getThreadPool().run(new Runnable() {
+			@Override
+			public void run() {
+				try{
+					Thread.sleep(500);//等待stop service
+				}catch (Exception e) {
+				}
+				final Activity activity = hc.android.ActivityManager.getActivity();
+				activity.finish();
+			}
+		});
 	}
 
 	/**
@@ -651,84 +681,84 @@ public class AndroidPlatformService implements PlatformService {
 		final String[] dexFileAbsPaths = new String[filePaths.length];
 		
 		long totalLastModiMS = 0; 
-			if(isDex == false){
-				boolean isDxMessageOut = false;
-				boolean isDxError = false;
-				for (int i = 0; i < dexFileAbsPaths.length; i++) {
-					dexFileAbsPaths[i] = filePaths[i].getAbsolutePath() + ResourceUtil.EXT_DEX_JAR;
-					final File dexFile = new File(dexFileAbsPaths[i]);
-					if(dexFile.exists() == false){
-						LogManager.log("dexing... : " + dexFile.getAbsolutePath());
-						try{
-							if(isDxMessageOut == false){
-								isDxMessageOut = true;
-								AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(9188));
-							}
-							AndroidDX.dx(filePaths[i], dexFile);
-							totalLastModiMS += dexFile.lastModified();
-							LogManager.log("successful dex : " + dexFile.getAbsolutePath());
-						}catch (final Throwable e) {
-							isDxError = true;
-							e.printStackTrace();
-							final String dxFileName = dexFile.getName();
-							String msg = StringUtil.replace((String)ResourceUtil.get(9189), "{file}", dxFileName);
-							msg = StringUtil.replace(msg, "{error}", ResourceUtil.getErrorI18N());
-							AddHarHTMLMlet.showMsgForAddHar(IContext.ERROR, msg);
-							App.showMessageDialog(null, "<html>Fail to dex file : " + dxFileName + ", at Exception : [" + e.getMessage() + 
-									"]<BR>close other applications and try again, or restart.</html>", 
-									"Error", JOptionPane.ERROR_MESSAGE);
+		if(isDex == false){
+			boolean isDxMessageOut = false;
+			boolean isDxError = false;
+			for (int i = 0; i < dexFileAbsPaths.length; i++) {
+				dexFileAbsPaths[i] = filePaths[i].getAbsolutePath() + ResourceUtil.EXT_DEX_JAR;
+				final File dexFile = new File(dexFileAbsPaths[i]);
+				if(dexFile.exists() == false){
+					LogManager.log("dexing... : " + dexFile.getAbsolutePath());
+					try{
+						if(isDxMessageOut == false){
+							isDxMessageOut = true;
+							AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(9188));
 						}
+						AndroidDX.dx(filePaths[i], dexFile);
+						totalLastModiMS += dexFile.lastModified();
+						LogManager.log("successful dex : " + dexFile.getAbsolutePath());
+					}catch (final Throwable e) {
+						isDxError = true;
+						e.printStackTrace();
+						final String dxFileName = dexFile.getName();
+						String msg = StringUtil.replace((String)ResourceUtil.get(9189), "{file}", dxFileName);
+						msg = StringUtil.replace(msg, "{error}", ResourceUtil.getErrorI18N());
+						AddHarHTMLMlet.showMsgForAddHar(IContext.ERROR, msg);
+						App.showMessageDialog(null, "<html>Fail to dex file : " + dxFileName + ", at Exception : [" + e.getMessage() + 
+								"]<BR>close other applications and try again, or restart.</html>", 
+								"Error", JOptionPane.ERROR_MESSAGE);
 					}
 				}
-				if(isDxMessageOut && isDxError == false){
-					AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(9190));
-				}
-			}else{
-				for (int i = 0; i < dexFileAbsPaths.length; i++) {
-					totalLastModiMS += filePaths[i].lastModified();
-					dexFileAbsPaths[i] = filePaths[i].getAbsolutePath();
-				}
 			}
-			
-			DexOptimizeItem item = DexOptimizeSet.getItem(loadOpID);
-			boolean isNewItem = false;
-			if(item != null){
-				if(item.lastModifySum == totalLastModiMS){
-					LogManager.log(dexFileAbsPaths[0] + "[...] is not modified, use old optimize directory.");
-				}else{
-					isNewItem = true;
-					LogManager.log(dexFileAbsPaths[0] + "[...] is new/modified, del old and use new optimize directory.");
-					PropertiesManager.addDelDir(new File(optimizBaseDir, item.optimizeRandomDir).getAbsolutePath());
-					PropertiesManager.saveFile();
-				}
+			if(isDxMessageOut && isDxError == false){
+				AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(9190));
 			}
-			
-			if(isNewItem || item == null){
-				if(item == null){
-					item = new DexOptimizeItem();
-					item.optimizeID = loadOpID;
-				}
-				item.lastModifySum = totalLastModiMS;
-				item.optimizeRandomDir = ResourceUtil.createRandomFileNameWithExt(optimizBaseDir, "");
-				LogManager.log("create optimize dir : " + item.optimizeRandomDir + " for loadID : " + loadOpID);
-				DexOptimizeSet.putItem(item);
-				DexOptimizeSet.save();
-			}
-			
-			final File newSubOptDirFile = new File(optimizBaseDir, item.optimizeRandomDir);
-			newSubOptDirFile.mkdirs();
-			final String absolutePath = newSubOptDirFile.getAbsolutePath();
-			
-			final StringBuilder sb = new StringBuilder();
+		}else{
 			for (int i = 0; i < dexFileAbsPaths.length; i++) {
-				if(sb.length() > 0){
-					sb.append(":");
-				}
-				sb.append(dexFileAbsPaths[i]);
+				totalLastModiMS += filePaths[i].lastModified();
+				dexFileAbsPaths[i] = filePaths[i].getAbsolutePath();
 			}
-			
-			final ClassLoader cl = new DexClassLoader(sb.toString(), absolutePath, null, parent);
-			return cl;
+		}
+		
+		DexOptimizeItem item = DexOptimizeSet.getItem(loadOpID);
+		boolean isNewItem = false;
+		if(item != null){
+			if(item.lastModifySum == totalLastModiMS){
+				LogManager.log(dexFileAbsPaths[0] + "[...] is not modified, use old optimize directory.");
+			}else{
+				isNewItem = true;
+				LogManager.log(dexFileAbsPaths[0] + "[...] is new/modified, del old and use new optimize directory.");
+				PropertiesManager.addDelDir(new File(optimizBaseDir, item.optimizeRandomDir).getAbsolutePath());
+				PropertiesManager.saveFile();
+			}
+		}
+		
+		if(isNewItem || item == null){
+			if(item == null){
+				item = new DexOptimizeItem();
+				item.optimizeID = loadOpID;
+			}
+			item.lastModifySum = totalLastModiMS;
+			item.optimizeRandomDir = ResourceUtil.createRandomFileNameWithExt(optimizBaseDir, "");
+			LogManager.log("create optimize dir : " + item.optimizeRandomDir + " for loadID : " + loadOpID);
+			DexOptimizeSet.putItem(item);
+			DexOptimizeSet.save();
+		}
+		
+		final File newSubOptDirFile = new File(optimizBaseDir, item.optimizeRandomDir);
+		newSubOptDirFile.mkdirs();
+		final String absolutePath = newSubOptDirFile.getAbsolutePath();
+		
+		final StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < dexFileAbsPaths.length; i++) {
+			if(sb.length() > 0){
+				sb.append(":");
+			}
+			sb.append(dexFileAbsPaths[i]);
+		}
+		
+		final ClassLoader cl = new DexClassLoader(sb.toString(), absolutePath, null, parent);
+		return cl;
 	}
 
 	WiFiDeviceManager wifiDeviceManager;
@@ -793,14 +823,8 @@ public class AndroidPlatformService implements PlatformService {
 	}
 
 	@Override
-	public void extLog(final int level, final String msg) {
-		if(level == LOG_LEVEL_ERROR){
-			Log.e(J2SEInitor.getAppName(), msg);
-		}else if(level == LOG_LEVEL_WARN){
-			Log.w(J2SEInitor.getAppName(), msg);
-		}else{
-			Log.i(J2SEInitor.getAppName(), msg);
-		}
+	public LogServerSide getLog() {
+		return new AndroidLogServerSide();
 	}
 	
 	android.app.ActivityManager.MemoryInfo info;

@@ -11,6 +11,7 @@ public class J2SEActionMap {
 	public static final String onConfigurationChanged = "onConfigurationChanged";
 	public static final String startBringToFrontService = "startBringToFrontService";
 	public static final String stopBringToFrontService = "stopBringToFrontService";
+	public static final String shutdownHC = "shutdownHC";
 	
 	public static final String map_para = "map_para";
 	

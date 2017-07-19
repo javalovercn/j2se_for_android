@@ -38,6 +38,7 @@ import javax.swing.ToolTipManager;
 
 import hc.android.HCRUtil;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -59,6 +60,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 public class AndroidUIUtil {
@@ -104,6 +106,19 @@ public class AndroidUIUtil {
 	
 	public static final int getBorderStrokeWidthInPixel(){
 		return dpToPx(BORDER_STROKE_WIDTH);
+	}
+	
+	public static final void showCenterToast(final String msg){
+		final Activity activity = ActivityManager.sysActivity;
+		
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
+			}
+		});
 	}
 	
 	public static void addView(ViewGroup parent, View view, ViewRelation viewRelation){
