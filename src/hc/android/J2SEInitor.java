@@ -27,6 +27,10 @@ import android.view.View;
 public class J2SEInitor {
 	private static boolean isInited = false;
 	
+	public static final String getVersion(){
+		return "3.1";
+	}
+	
 	/**
 	 * 如果增加了新参数，请同步更改到ServerMainActivity.startHCByReflect
 	 * @param paras

@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 public class WindowManager {
 //	private static View dialogBackView = buildDialogBackView();
@@ -127,7 +128,7 @@ public class WindowManager {
 		int out = App.showOptionDialog(null, areQuit, (String)ResourceUtil.get(5), JOptionPane.YES_NO_CANCEL_OPTION, 
 				JOptionPane.QUESTION_MESSAGE, null, options, runInBackground);//App.getSysIcon(App.SYS_QUES_ICON)
 		if(out == JOptionPane.YES_OPTION){
-			runInBackgroundAndJumpHome();  
+			runInBackgroundAndJumpHome(false);  
 	        return;
 		}else if(out == JOptionPane.NO_OPTION){
 			DebugLogger.log(fullExit);
@@ -146,8 +147,21 @@ public class WindowManager {
     	PlatformManager.getService().exitSystem();
 	}
 
-	private static void runInBackgroundAndJumpHome() {
-		DebugLogger.log((String)ResourceUtil.get(7001));
+	private static void runInBackgroundAndJumpHome(final boolean tipBackground) {
+		final String background = (String)ResourceUtil.get(7001);
+		DebugLogger.log(background);
+		
+		if(tipBackground){
+			final Activity activity = ActivityManager.getActivity();
+			activity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast toast = Toast.makeText(activity, background, Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
+				}
+			});
+		}
 		
 		jumpToHomeScreen();
 	}
@@ -167,7 +181,7 @@ public class WindowManager {
 				if(PropertiesManager.isSimu()){//模拟环境下直接关闭退出，
 					quitAndExit();
 				}else{//正常用户环境下，转为后台运行
-					runInBackgroundAndJumpHome();//缺省后台运行，不提问
+					runInBackgroundAndJumpHome(true);//缺省后台运行，不提问
 				}
 //				askMainBoardExit();
 				return true;
