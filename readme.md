@@ -6,6 +6,20 @@
 4. this project applies successfully to [HomeCenter](https://github.com/javalovercn/hc_server_dist/).
 
 ***
+### Snapshot
+Tip : some functions are for J2SE only, for example, skin for UI and designer.
+
+| Android | J2SE |
+| :------: | :------: |
+| ![Menu](http://homecenter.mobi/images/server_cap/menu_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/menu_j2se.png) |
+| ![Menu](http://homecenter.mobi/images/server_cap/pwd_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/pwd_j2se.png) |
+| ![Menu](http://homecenter.mobi/images/server_cap/proj_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/proj_j2se.png) |
+| ![Menu](http://homecenter.mobi/images/server_cap/opt_sec_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/opt_sec_j2se.png) |
+| ![Menu](http://homecenter.mobi/images/server_cap/opt_lib_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/opt_lib_j2se.png) |
+| ![Menu](http://homecenter.mobi/images/server_cap/opt_oth_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/opt_oth_j2se.png) |
+| ![Menu](http://homecenter.mobi/images/server_cap/opt_dev_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/opt_dev_j2se.png) |
+
+***
 ### License
 
 1. before using files in src directory, please read and agree the license file "license.txt".
