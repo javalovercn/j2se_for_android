@@ -9,10 +9,10 @@
 ### Snapshot
 Tip : some functions are for J2SE only, for example, skin for UI and designer.
 
-| Android | J2SE |
+| Android | Oracle JRE |
 | :------: | :------: |
 | ![Menu](http://homecenter.mobi/images/server_cap/menu_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/menu_j2se.png) |
-| ![Menu](http://homecenter.mobi/images/server_cap/pwd_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/pwd_j2se.png) |
+| ![PWD](http://homecenter.mobi/images/server_cap/pwd_android.png) | ![PWD](http://homecenter.mobi/images/server_cap/pwd_j2se.png) |
 | ![Menu](http://homecenter.mobi/images/server_cap/proj_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/proj_j2se.png) |
 | ![Menu](http://homecenter.mobi/images/server_cap/opt_sec_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/opt_sec_j2se.png) |
 | ![Menu](http://homecenter.mobi/images/server_cap/opt_lib_android.png) | ![Menu](http://homecenter.mobi/images/server_cap/opt_lib_j2se.png) |
