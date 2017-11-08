@@ -13,6 +13,7 @@ import hc.core.util.WiFiDeviceManager;
 import hc.server.PlatformService;
 import hc.server.data.screen.KeyComper;
 import hc.server.ui.design.AddHarHTMLMlet;
+import hc.server.ui.design.J2SESession;
 import hc.util.ClassUtil;
 import hc.util.LogServerSide;
 import hc.util.PropertiesManager;
@@ -692,7 +693,8 @@ public class AndroidPlatformService implements PlatformService {
 					try{
 						if(isDxMessageOut == false){
 							isDxMessageOut = true;
-							AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(9188));
+							final J2SESession coreSS = AddHarHTMLMlet.getCurrAddHarHTMLMletCoreSession();
+							AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(coreSS, 9188));
 						}
 						AndroidDX.dx(filePaths[i], dexFile);
 						totalLastModiMS += dexFile.lastModified();
@@ -701,8 +703,9 @@ public class AndroidPlatformService implements PlatformService {
 						isDxError = true;
 						e.printStackTrace();
 						final String dxFileName = dexFile.getName();
-						String msg = StringUtil.replace((String)ResourceUtil.get(9189), "{file}", dxFileName);
-						msg = StringUtil.replace(msg, "{error}", ResourceUtil.getErrorI18N());
+						final J2SESession coreSS = AddHarHTMLMlet.getCurrAddHarHTMLMletCoreSession();
+						String msg = StringUtil.replace((String)ResourceUtil.get(coreSS, 9189), "{file}", dxFileName);
+						msg = StringUtil.replace(msg, "{error}", ResourceUtil.getErrorI18N(coreSS));
 						AddHarHTMLMlet.showMsgForAddHar(IContext.ERROR, msg);
 						App.showMessageDialog(null, "<html>Fail to dex file : " + dxFileName + ", at Exception : [" + e.getMessage() + 
 								"]<BR>close other applications and try again, or restart.</html>", 
@@ -711,7 +714,8 @@ public class AndroidPlatformService implements PlatformService {
 				}
 			}
 			if(isDxMessageOut && isDxError == false){
-				AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(9190));
+				final J2SESession coreSS = AddHarHTMLMlet.getCurrAddHarHTMLMletCoreSession();
+				AddHarHTMLMlet.showMsgForAddHar(IContext.INFO, (String)ResourceUtil.get(coreSS, 9190));
 			}
 		}else{
 			for (int i = 0; i < dexFileAbsPaths.length; i++) {

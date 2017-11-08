@@ -1,7 +1,6 @@
 package hc.android;
 
 import hc.core.util.CCoreUtil;
-import hc.android.ScreenAdapter;
 import hc.util.ResourceUtil;
 
 import java.io.IOException;
@@ -10,11 +9,8 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -28,7 +24,7 @@ public class J2SEInitor {
 	private static boolean isInited = false;
 	
 	public static final String getVersion(){
-		return "3.1";
+		return "3.2";
 	}
 	
 	/**

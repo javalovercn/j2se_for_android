@@ -1,6 +1,8 @@
 package hc.android;
 
-import hc.server.ui.ProjectContext;
+import hc.server.msb.UserThreadResourceUtil;
+import hc.server.ui.design.ProjResponser;
+import hc.server.ui.design.SessionContext;
 import hc.server.util.ContextSecurityConfig;
 import hc.server.util.ContextSecurityManager;
 
@@ -103,9 +105,16 @@ public class ScreenAdapter {
 		final ContextSecurityConfig csc = ContextSecurityManager.getConfig(Thread.currentThread().getThreadGroup());
 		if(csc != null){
 			if(forHCFont){
-				final ProjectContext projectContext = csc.getProjectContext();
-				return new ScreenAdapter(projectContext.getMobileWidth(), projectContext.getMobileHeight(), 
-						projectContext.getMobileDPI(), TYPE_SERVER);
+				final ProjResponser resp = csc.getProjResponser();
+				final SessionContext sessionContext = resp.getSessionContextFromCurrThread();
+				if(sessionContext == null || sessionContext.j2seSocketSession == null){
+					return mletScreenAdapter;
+				}
+
+				final int w = UserThreadResourceUtil.getMletWidthFrom(sessionContext.j2seSocketSession, false);
+				final int h = UserThreadResourceUtil.getMletHeightFrom(sessionContext.j2seSocketSession, false);
+				final int dpi = UserThreadResourceUtil.getMletDPIFrom(sessionContext.j2seSocketSession);
+				return new ScreenAdapter(w, h, dpi, TYPE_SERVER);
 			}else{
 				return mletScreenAdapter;
 			}

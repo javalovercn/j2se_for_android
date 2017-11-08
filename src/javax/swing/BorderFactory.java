@@ -69,10 +69,6 @@ public class BorderFactory {
 		return new LineBorder(color, thickness, rounded);
 	}
 
-	static final Border sharedRaisedBevel = new BevelBorder(BevelBorder.RAISED);
-	static final Border sharedLoweredBevel = new BevelBorder(
-			BevelBorder.LOWERED);
-
 	public static Border createRaisedBevelBorder() {
 		return createSharedBevel(BevelBorder.RAISED);
 	}
@@ -98,28 +94,19 @@ public class BorderFactory {
 
 	static Border createSharedBevel(int type) {
 		if (type == BevelBorder.RAISED) {
-			return sharedRaisedBevel;
+			return new BevelBorder(BevelBorder.RAISED);
 		} else if (type == BevelBorder.LOWERED) {
-			return sharedLoweredBevel;
+			return new BevelBorder(BevelBorder.LOWERED);
 		}
 		return null;
 	}
 
-	private static Border sharedSoftRaisedBevel;
-	private static Border sharedSoftLoweredBevel;
-
 	public static Border createRaisedSoftBevelBorder() {
-		if (sharedSoftRaisedBevel == null) {
-			sharedSoftRaisedBevel = new SoftBevelBorder(BevelBorder.RAISED);
-		}
-		return sharedSoftRaisedBevel;
+		return new SoftBevelBorder(BevelBorder.RAISED);
 	}
 
 	public static Border createLoweredSoftBevelBorder() {
-		if (sharedSoftLoweredBevel == null) {
-			sharedSoftLoweredBevel = new SoftBevelBorder(BevelBorder.LOWERED);
-		}
-		return sharedSoftLoweredBevel;
+		return new SoftBevelBorder(BevelBorder.LOWERED);
 	}
 
 	public static Border createSoftBevelBorder(int type) {
@@ -143,11 +130,8 @@ public class BorderFactory {
 				shadowOuter, shadowInner);
 	}
 
-	static final Border sharedEtchedBorder = new EtchedBorder();
-	private static Border sharedRaisedEtchedBorder;
-
 	public static Border createEtchedBorder() {
-		return sharedEtchedBorder;
+		return new EtchedBorder();
 	}
 
 	public static Border createEtchedBorder(Color highlight, Color shadow) {
@@ -157,12 +141,9 @@ public class BorderFactory {
 	public static Border createEtchedBorder(int type) {
 		switch (type) {
 		case EtchedBorder.RAISED:
-			if (sharedRaisedEtchedBorder == null) {
-				sharedRaisedEtchedBorder = new EtchedBorder(EtchedBorder.RAISED);
-			}
-			return sharedRaisedEtchedBorder;
+			return new EtchedBorder(EtchedBorder.RAISED);
 		case EtchedBorder.LOWERED:
-			return sharedEtchedBorder;
+			return new EtchedBorder();
 		default:
 			throw new IllegalArgumentException(
 					"type must be one of EtchedBorder.RAISED or EtchedBorder.LOWERED");
@@ -205,10 +186,8 @@ public class BorderFactory {
 				titlePosition, titleFont, titleColor);
 	}
 
-	final static Border emptyBorder = new EmptyBorder(0, 0, 0, 0);
-
 	public static Border createEmptyBorder() {
-		return emptyBorder;
+		return new EmptyBorder(0, 0, 0, 0);
 	}
 
 	public static Border createEmptyBorder(int top, int left, int bottom,
@@ -242,8 +221,6 @@ public class BorderFactory {
 	public static Border createStrokeBorder(BasicStroke stroke, Paint paint) {
 		return new StrokeBorder(stroke, paint);
 	}
-
-	private static Border sharedDashedBorder;
 
 	public static Border createDashedBorder(Paint paint) {
 		return createDashedBorder(paint, 1.0f, 1.0f, 1.0f, false);

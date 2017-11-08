@@ -920,6 +920,7 @@ public abstract class Component implements ImageObserver, MenuContainer,
 //            	}
 //            }
 		}
+		L.V = L.WShop ? false : LogManager.log("preferredSize() -- " + toString() + " : " + preSize.toString());
 		return new Dimension(preSize);
 	}
 
@@ -961,8 +962,13 @@ public abstract class Component implements ImageObserver, MenuContainer,
             	}
             	minSize.width = peer.getMeasuredWidth();
             	minSize.height = peer.getMeasuredHeight();
+            	if(minSize.width == 0 || minSize.height == 0){
+            		AndroidUIUtil.getViewWidthAndHeight(peer, minSize);
+            	}
             }
 		}
+		
+		L.V = L.WShop ? false : LogManager.log("minimumSize() -- " + toString() + " : " + minSize.toString());
 		return new Dimension(minSize);
 	}
 

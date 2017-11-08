@@ -211,8 +211,11 @@ public class AndroidUIUtil {
 		}
 		sb.append(":");
 		if(isTextView){
-			sb.append(((TextView)view).getText());
-			sb.append(", ");
+			final TextView textView = (TextView)view;
+			sb.append(textView.getText());
+			sb.append(" (gravity : ");
+			sb.append(textView.getGravity());
+			sb.append("), ");
 		}
 		sb.append("[w:");
 		sb.append(view.getMeasuredWidth());
@@ -820,7 +823,7 @@ public class AndroidUIUtil {
 		}
 		final boolean isContain = jcomponent instanceof Container;
 		final LayoutManager lm = isContain?((Container)jcomponent).getLayout():null; 
-		final String layDesc = isContain?((lm==null)?"null":lm.toString()):"null";
+		final String layDesc = isContain?((lm==null)?"null":(lm.toString() + " " + ((Container)jcomponent).getPeerAdAPI())):"null";//getContainerViewAdAPI
 		final String labelDesc = (jcomponent instanceof JLabel)?("[" + ((JLabel)jcomponent).getText() + "]"):"";
 		final String buttonDesc = (jcomponent instanceof JButton)?("[" + ((JButton)jcomponent).getText() + "]"):"";
 		System.out.print("["+level+"]" + jcomponent.toString() + labelDesc + buttonDesc +
@@ -850,6 +853,41 @@ public class AndroidUIUtil {
 
 	public static boolean isJViewportInstance(final Component component) {
 		return component instanceof JViewport;
+	}
+
+	public static void setViewHorizontalAlignment(final JComponent comp, final TextView editText, final int alignment, final boolean isVerticalCenter) {
+		ActivityManager.sysActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				final int result;
+				if (alignment == SwingConstants.LEFT) {
+					result = Gravity.LEFT;
+				} else if (alignment == SwingConstants.CENTER) {
+					result = Gravity.CENTER;
+				} else if (alignment == SwingConstants.RIGHT) {
+					result = Gravity.RIGHT;
+				} else if (alignment == SwingConstants.TRAILING) {
+					if (comp.getComponentOrientation().isLeftToRight()) {
+						result = Gravity.RIGHT;
+					} else {
+						result = Gravity.LEFT;
+					}
+				} else if (alignment == SwingConstants.LEADING) {
+					if (comp.getComponentOrientation().isLeftToRight()) {
+						result = Gravity.LEFT;
+					} else {
+						result = Gravity.RIGHT;
+					}
+				}else{
+					result = Gravity.LEFT;
+				}
+				if(isVerticalCenter){
+					editText.setGravity(result | Gravity.CENTER_VERTICAL);
+				}else{
+					editText.setGravity(result);
+				}
+			}
+		});
 	}
 }
 

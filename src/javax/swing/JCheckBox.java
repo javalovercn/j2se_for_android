@@ -96,10 +96,7 @@ public class JCheckBox extends JToggleButton implements Accessible {
 	
 	public void applyComponentOrientation(ComponentOrientation o) {
 		super.applyComponentOrientation(o);
-		CheckBox snap = checkBox;
-		if(snap != null){
-			snap.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
-		}
+		setHorizontalAlignment(getHorizontalAlignment());
 	}
 	
 	public JCheckBox(int drawabel) {
@@ -222,6 +219,7 @@ public class JCheckBox extends JToggleButton implements Accessible {
 					checkBox.setTextColor(enabled?AndroidUIUtil.WIN_FONT_COLOR.toAndroid():AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
 					UICore.setTextSize(checkBox, JCheckBox.this.getFont(), JCheckBox.this.getScreenAdapterAdAPI());
 					checkBox.setText(text);
+					AndroidUIUtil.setViewHorizontalAlignment(JCheckBox.this, checkBox, getHorizontalAlignment(), true);
 					checkBox.setChecked(JCheckBox.this.isSelected());
 					AndroidUIUtil.buildListenersForComponent(checkBox, JCheckBox.this);
 
@@ -231,6 +229,13 @@ public class JCheckBox extends JToggleButton implements Accessible {
 				}
 			}
 		});
+	}
+	
+	public void setHorizontalAlignment(int alignment) {
+		super.setHorizontalAlignment(alignment);
+		if(checkBox != null){
+			AndroidUIUtil.setViewHorizontalAlignment(this, checkBox, getHorizontalAlignment(), true);
+		}
 	}
 
 	public View getFocusablePeerViewAdAPI(){

@@ -1,6 +1,8 @@
 package hc.android;
 
 import hc.App;
+import hc.core.L;
+import hc.core.util.LogManager;
 import hc.core.util.Stack;
 import hc.server.PlatformManager;
 import hc.util.ExitManager;
@@ -33,7 +35,6 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 public class WindowManager {
-//	private static View dialogBackView = buildDialogBackView();
 	private static Window currentWindow;
 	private static Stack hcWindowStack = new Stack();
 	private static final ConcurrentHashMap<Dialog, Integer> dialogLock = new ConcurrentHashMap<Dialog, Integer>();
@@ -85,13 +86,6 @@ public class WindowManager {
 		}else{
 			return false;
 		}
-	}
-	
-	private static View buildDialogBackView(){
-		View view = new View(ActivityManager.getActivity());
-		view.setBackgroundColor(Color.darkGray.toAndroid() | 0x30000000);//半透明
-		view.setClickable(true);
-		return view;
 	}
 	
 	public static Window getFocusWindow(){
@@ -395,9 +389,23 @@ public class WindowManager {
 					winHeight = rect.height;
 				}
 				
-				if(winWidth != Window.ANDROID_FULL_SCREEN_AD_API 
-						&& (winWidth < J2SEInitor.screenWidth) 
-						&& winHeight < J2SEInitor.screenHeight){
+				L.V = L.WShop ? false : LogManager.log("Window width : " + winWidth + ", height : " + winHeight + ", screen width : " + J2SEInitor.screenWidth + ", screen height : " + J2SEInitor.screenHeight);
+				
+				final boolean isSmallWidthThanScreen = winWidth < J2SEInitor.screenWidth;
+				final boolean isSmallHeightThanScreen = winHeight < J2SEInitor.screenHeight;
+				if(winWidth == Window.ANDROID_FULL_SCREEN_AD_API ||
+						(isSmallWidthThanScreen == false && isSmallHeightThanScreen == false)){
+					L.V = L.WShop ? false : LogManager.log("show window without back trans layer");
+
+					//超过最大尺寸
+					final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+							(winWidth >= J2SEInitor.screenWidth)?FrameLayout.LayoutParams.MATCH_PARENT:FrameLayout.LayoutParams.WRAP_CONTENT, 
+							(winHeight >= J2SEInitor.screenHeight)?FrameLayout.LayoutParams.MATCH_PARENT:FrameLayout.LayoutParams.WRAP_CONTENT);
+					lp.gravity = (Gravity.CENTER);
+					peerView.setLayoutParams(lp);
+					buildKeyListener(win, peerView);
+				}else{
+					L.V = L.WShop ? false : LogManager.log("show window with back trans layer");
 					
 					FrameLayout frameLayout = new FrameLayout(ActivityManager.getActivity());
 					frameLayout.setBackgroundColor(AndroidUIUtil.WINDOW_TRANS_LAYER_COLOR.toAndroid());
@@ -411,26 +419,21 @@ public class WindowManager {
 					win.setWindowViewAdAPI(frameLayout);
 						
 					FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-							FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+							isSmallWidthThanScreen?FrameLayout.LayoutParams.WRAP_CONTENT:FrameLayout.LayoutParams.MATCH_PARENT, 
+							isSmallHeightThanScreen?FrameLayout.LayoutParams.WRAP_CONTENT:FrameLayout.LayoutParams.MATCH_PARENT);
 					lp.gravity = (Gravity.CENTER);
 					LinearLayout linear = new LinearLayout(ActivityManager.getActivity());
 					linear.setGravity(Gravity.CENTER);
 					linear.setOrientation(LinearLayout.VERTICAL);
 					linear.setBackgroundColor(android.graphics.Color.TRANSPARENT);
 					{
-						LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(winWidth, winHeight);
+						LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
+								isSmallWidthThanScreen?winWidth:J2SEInitor.screenWidth, 
+								isSmallHeightThanScreen?winHeight:J2SEInitor.screenHeight);
 //								LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 						linear.addView(peerView, llp);
 					}
-					frameLayout.addView(linear, lp);
-				}else{
-					//超过最大尺寸
-					final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-							(winWidth >= J2SEInitor.screenWidth)?FrameLayout.LayoutParams.MATCH_PARENT:FrameLayout.LayoutParams.WRAP_CONTENT, 
-							(winHeight >= J2SEInitor.screenHeight)?FrameLayout.LayoutParams.MATCH_PARENT:FrameLayout.LayoutParams.WRAP_CONTENT);
-					lp.gravity = (Gravity.CENTER);
-					peerView.setLayoutParams(lp);
-					buildKeyListener(win, peerView);
+					frameLayout.addView(linear, lp);				
 				}
 				setTopShow(win);
 		

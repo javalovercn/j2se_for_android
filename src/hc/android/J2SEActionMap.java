@@ -1,5 +1,6 @@
 package hc.android;
 
+import hc.util.ExitManager;
 import hc.util.ResourceUtil;
 import java.util.Map;
 import android.app.AlertDialog;
@@ -12,10 +13,18 @@ public class J2SEActionMap {
 	public static final String startBringToFrontService = "startBringToFrontService";
 	public static final String stopBringToFrontService = "stopBringToFrontService";
 	public static final String shutdownHC = "shutdownHC";
+	public static final String shutdownBroadcase = "shutdownBroadcase";
 	
 	public static final String map_para = "map_para";
 	
 	public static void init(final Map<String, Object> map){
+		map.put(shutdownBroadcase, new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ExitManager.startExitSystem();
+			}
+		});
+		
 		map.put(onBackPressed, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

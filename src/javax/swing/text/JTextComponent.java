@@ -511,14 +511,14 @@ public abstract class JTextComponent extends JComponent implements Scrollable, A
     public void applyComponentOrientation(final ComponentOrientation o) {
 		super.applyComponentOrientation(o);
 
-		ActivityManager.getActivity().runOnUiThread(new Runnable() {
-			public void run(){
-				editText.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
-				if(JTextComponent.this instanceof JEditorPane){
-					editText.setGravity(editText.getGravity() | Gravity.TOP);
-				}
-			}
-		});
+//		ActivityManager.getActivity().runOnUiThread(new Runnable() {
+//			public void run(){
+//				editText.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
+//				if(JTextComponent.this instanceof JEditorPane){
+//					editText.setGravity(editText.getGravity() | Gravity.TOP);//继承时，//setHorizontalAlignment已有
+//				}
+//			}
+//		});
 	}
     
     public android.text.Spannable getSpannableAdAPI(){

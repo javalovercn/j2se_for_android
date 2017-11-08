@@ -102,7 +102,7 @@ public class JRadioButton extends JToggleButton implements Accessible {
 		super.applyComponentOrientation(o);
 		RadioButton snap = radioButton;
 		if(snap != null){
-			snap.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
+			setHorizontalAlignment(getHorizontalAlignment());
 		}
 	}
 	
@@ -189,7 +189,7 @@ public class JRadioButton extends JToggleButton implements Accessible {
 					radioButton.setTextColor(enabled?AndroidUIUtil.WIN_FONT_COLOR.toAndroid():AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
 					UICore.setTextSize(radioButton, JRadioButton.this.getFont(), JRadioButton.this.getScreenAdapterAdAPI());
 					radioButton.setText(text);
-						
+					AndroidUIUtil.setViewHorizontalAlignment(JRadioButton.this, radioButton, getHorizontalAlignment(), true);
 					radioButton.setChecked(JRadioButton.this.isSelected());
 					
 					AndroidUIUtil.buildListenersForComponent(radioButton, JRadioButton.this);
@@ -212,6 +212,13 @@ public class JRadioButton extends JToggleButton implements Accessible {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
+	public void setHorizontalAlignment(int alignment) {
+		super.setHorizontalAlignment(alignment);
+		if(radioButton != null){
+			AndroidUIUtil.setViewHorizontalAlignment(this, radioButton, getHorizontalAlignment(), true);
+		}
+	}
+	
 	protected String paramString() {
 		return super.paramString();
 	}

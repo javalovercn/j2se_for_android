@@ -667,6 +667,7 @@ public class Container extends Component {
         		return super.preferredSize();
         	}
         }
+		L.V = L.WShop ? false : LogManager.log("preferredSize() -- " + toString() + " : " + preSize.toString());
         return new Dimension(preSize);
 	}
 
@@ -696,13 +697,19 @@ public class Container extends Component {
 	}
 
 	public Dimension minimumSize() {
-		if (layout != null) {
-			final Dimension dimension = new Dimension();
-			AndroidUIUtil.getViewWidthAndHeight(layoutView, dimension);
-			return dimension;
-			//layout.minimumLayoutSize(this);没有实现，关闭
+		if(minSize == null || !isMinimumSizeSet()){
+			if (layout != null) {
+	//			final Dimension dimension = new Dimension();
+	//			AndroidUIUtil.getViewWidthAndHeight(layoutView, dimension);
+				synchronized (getTreeLock()) {
+					minSize = layout.minimumLayoutSize(this);
+	    		}
+			}else{
+				return super.minimumSize();
+			}
 		}
-		return super.minimumSize();
+		L.V = L.WShop ? false : LogManager.log("minimumSize() -- " + toString() + " : " + minSize.toString());
+		return new Dimension(minSize);
 	}
 
 	protected final boolean isLayoutValidAdAPI() {
@@ -713,7 +720,7 @@ public class Container extends Component {
 		Dimension dim = maxSize;
         if (dim == null || !(isMaximumSizeSet() || isValid())) {
             synchronized (getTreeLock()) {
-               if (layout instanceof LayoutManager2) {
+               if (layout != null && layout instanceof LayoutManager2) {
                     LayoutManager2 lm = (LayoutManager2) layout;
                     maxSize = lm.maximumLayoutSize(this);
                } else {
@@ -724,8 +731,7 @@ public class Container extends Component {
         }
         if (dim != null){
             return new Dimension(dim);
-        }
-        else{
+        }else{
             return dim;
         }
 	}

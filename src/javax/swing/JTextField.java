@@ -26,6 +26,8 @@ package javax.swing;
 
 import hc.android.AndroidClassUtil;
 import hc.android.AndroidUIUtil;
+
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FontMetrics;
@@ -46,7 +48,8 @@ import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.TextAction;
 
-import android.view.Gravity;
+import android.widget.RadioButton;
+
 
 /**
  * <code>JTextField</code> is a lightweight component that allows the editing
@@ -192,6 +195,7 @@ public class JTextField extends JTextComponent implements SwingConstants {
 		editText.setLines(1);
 		editText.setMaxWidth(2048);
 		super.setText(text);
+		setHorizontalAlignment(LEADING);
 		//保留以下代码，采用系统缺省，以与JTextArea一致
 //		editText.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_textfield));
 	}
@@ -213,32 +217,20 @@ public class JTextField extends JTextComponent implements SwingConstants {
 		return horizontalAlignment;
 	}
 
-	public void setHorizontalAlignment(int alignment) {
+	public void applyComponentOrientation(ComponentOrientation o) {
+		super.applyComponentOrientation(o);
+		setHorizontalAlignment(getHorizontalAlignment());
+	}
+	
+	public void setHorizontalAlignment(final int alignment) {
 		if (alignment == horizontalAlignment)
 			return;
 		if ((alignment == LEFT) || (alignment == CENTER)
 				|| (alignment == RIGHT) || (alignment == LEADING)
 				|| (alignment == TRAILING)) {
 			horizontalAlignment = alignment;
-
-			if (alignment == LEFT) {
-				editText.setGravity(Gravity.LEFT);
-			} else if (alignment == CENTER) {
-				editText.setGravity(Gravity.CENTER);
-			} else if (alignment == RIGHT) {
-				editText.setGravity(Gravity.RIGHT);
-			} else if (alignment == LEADING) {
-				if (getComponentOrientation().isLeftToRight()) {
-					editText.setGravity(Gravity.LEFT);
-				} else {
-					editText.setGravity(Gravity.RIGHT);
-				}
-			} else if (alignment == TRAILING) {
-				if (getComponentOrientation().isLeftToRight()) {
-					editText.setGravity(Gravity.RIGHT);
-				} else {
-					editText.setGravity(Gravity.LEFT);
-				}
+			if(editText != null){
+				AndroidUIUtil.setViewHorizontalAlignment(this, editText, alignment, false);
 			}
 		} else {
 			throw new IllegalArgumentException("horizontalAlignment");
@@ -411,7 +403,7 @@ public class JTextField extends JTextComponent implements SwingConstants {
 
 	public static final String notifyAction = "notify-field-accept";
 
-	private int horizontalAlignment = LEADING;
+	private int horizontalAlignment = 0;//LEADING 参见构造方法
 	private int columns;
 	private String command;
 
