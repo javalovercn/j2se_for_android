@@ -19,6 +19,17 @@
 4. the files in res directory should be copied to your res directory of Android project.
 
 ***
+### Why is it not a Android project and pass main method entry.
+
+for some J2SE Application, it runs only a trayIcon, so the desktop of application should be customized, not only providing a main method entry for starting.
+
+on the other hands, if we provides a full Android project, you should do following works:
+1. change packageID, icons.
+2. if we upgrade source codes, how about these changed configuration?
+3. how to download new version and upgrade your Android App.
+3. ......
+
+***
 ### Important
 
 1. you can't dex if there is class in package "java" or "javax" without option "--core-library".
