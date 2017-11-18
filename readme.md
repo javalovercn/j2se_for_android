@@ -26,8 +26,8 @@ for some J2SE Application, it runs only a trayIcon, so the desktop of applicatio
 on the other hands, if we provides a full Android project, you should do following works:
 1. change packageID, icons.
 2. if we upgrade source codes, how about these changed configuration?
-3. how to download new version and upgrade your Android App.
-3. ......
+3. check and download new version Android App.
+3. permissions and other features of Android.
 
 ***
 ### Important
