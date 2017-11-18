@@ -35,3 +35,9 @@ on the other hands, if we provides a full Android project, you should do followi
 1. you can't dex if there is class in package "java" or "javax" without option "--core-library".
 2. the file "dx.jar" is removed the check code for "--core-library", so it is not required to set option "--core-library" in Eclipse to debug your project.
 3. copy a backup of original dx.jar of your ADT, replace [adt-home]/sdk/build-tools/android-X.X/lib/dx.jar with this dx.jar.
+
+***
+### Note for develop
+
+1. JButton can be added to multiple JFrame/JPanel, but in Android, a UIView (JButton) can only be added into one parent.
+2. JTree is not perfect, not recommended.
