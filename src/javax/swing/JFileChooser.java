@@ -537,7 +537,7 @@ public class JFileChooser extends JComponent implements Accessible {
 	private File[] convertToFileAdAPI(int[] rows){
 		File[] out = new File[rows.length];
 		for (int i = 0; i < out.length; i++) {
-			out[i] = dataFileVector.elementAt(rows[i]);
+			out[i] = dataFileVector.elementAt(rows[i]);//TOFIX:可能用户在没有内容时，点击，导致此处OutIdx异常 
 		}
 		return out;
 	}

@@ -406,7 +406,7 @@ public abstract class IIOMetadata {
 //            ClassLoader loader = (ClassLoader)
 //                java.security.AccessController.doPrivileged(
 //                    new java.security.PrivilegedAction() {
-//                            public Object run() {
+//                            public Object run() throws Throwable {
 //                                return o.getClass().getClassLoader();
 //                            }
 //                        });
@@ -421,7 +421,7 @@ public abstract class IIOMetadata {
 //                loader = (ClassLoader)
 //                    java.security.AccessController.doPrivileged(
 //                        new java.security.PrivilegedAction() {
-//                                public Object run() {
+//                                public Object run() throws Throwable {
 //                                    return Thread.currentThread().getContextClassLoader();
 //                                }
 //                        });

@@ -8,6 +8,11 @@ import android.content.res.Configuration;
 import android.view.View;
 
 public class J2SEActionMap {
+	/**
+	 * Important :
+	 * for example, to press back key to close current J2SE window, you should implement a method "public void onBackPressed()" in activity 
+	 * and invoke the action from map.
+	 */
 	public static final String onBackPressed = "onBackPressed";
 	public static final String onConfigurationChanged = "onConfigurationChanged";
 	public static final String startBringToFrontService = "startBringToFrontService";

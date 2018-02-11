@@ -326,7 +326,13 @@ public class Robot {
 		            final KeyEvent altUp = new KeyEvent(downTime, eventTime, KeyEvent.ACTION_UP,
 		            		keycode, 1, mask);
 
-		            inst.sendKeySync(altDown);
+		            inst.sendKeySync(altDown);//TOFIX:会抛出如下异常
+//		        	Exception : java.lang.SecurityException
+//		        	at : android.os.Parcel.readException(Parcel.java:1546)
+//		        	at : android.os.Parcel.readException(Parcel.java:1499)
+//		        	at : android.hardware.input.IInputManager$Stub$Proxy.injectInputEvent(IInputManager.java:417)
+//		        	at : android.hardware.input.InputManager.injectInputEvent(InputManager.java:685)
+//		        	at : android.app.Instrumentation.sendKeySync(Instrumentation.java:904)
 		            inst.sendKeySync(altUp);
 				}
 			}

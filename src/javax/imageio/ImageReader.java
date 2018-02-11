@@ -2462,7 +2462,7 @@ public abstract class ImageReader {
 //            ClassLoader loader = (ClassLoader)
 //                java.security.AccessController.doPrivileged(
 //                   new java.security.PrivilegedAction() {
-//                      public Object run() {
+//                      public Object run() throws Throwable {
 //                        return Thread.currentThread().getContextClassLoader();
 //                      }
 //                });

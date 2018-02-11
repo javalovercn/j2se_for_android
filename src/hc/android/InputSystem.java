@@ -16,7 +16,7 @@ public class InputSystem {
 	private static boolean runProcess(final String cmd, final String inputPara, final boolean isErrorWithPrint) {
 		return (Boolean)AndroidUIUtil.runAndWait(new ReturnableRunnable() {
 			@Override
-			public Object run() {
+			public Object run() throws Throwable{
 				boolean out = Boolean.TRUE;
 				synchronized (clickProcessBuilder) {
 					Process process = null;

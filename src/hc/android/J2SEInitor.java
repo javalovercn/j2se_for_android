@@ -24,7 +24,7 @@ public class J2SEInitor {
 	private static boolean isInited = false;
 	
 	public static final String getVersion(){
-		return "3.2";
+		return "3.3";
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class J2SEInitor {
 		
 		//------------para2-----------------
 		actionMap = (Map<String, Object>)para2;
-		J2SEActionMap.init(actionMap);
+		J2SEActionMap.init(actionMap);//*** see J2SEActionMap.onBackPressed for more
 		
 		//------------para3-----------------
 		hc.android.ActivityManager.sysActivity = (Activity)para3;

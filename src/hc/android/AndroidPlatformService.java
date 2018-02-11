@@ -462,7 +462,7 @@ public class AndroidPlatformService implements PlatformService {
 	}
 	
 	@Override
-	public void setWindowOpaque(final Window win, final boolean bool) {
+	public void setWindowOpaque(final Window win, final boolean bool) throws Exception{
 	}
 
 	HCDesktop hcDesktop;
@@ -587,7 +587,7 @@ public class AndroidPlatformService implements PlatformService {
 	}
 
 	@Override
-	public void setWindowShape(final Window win, final Shape shape) {
+	public void setWindowShape(final Window win, final Shape shape) throws Exception{
 		// TODO Auto-generated method stub
 	}
 
@@ -860,6 +860,28 @@ public class AndroidPlatformService implements PlatformService {
 
 	@Override
 	public void resetClassPool() {
+	}
+
+	private File rubotoFile;
+	
+	@Override
+	public File[] getRubotoAndDxFiles() {
+		synchronized (AndroidPlatformService.class) {
+			if(rubotoFile == null) {
+				final String ruboto = "mini_ruboto";
+				final File rubotoDir = new File(optimizBaseDir, ruboto);
+				ResourceUtil.deleteDirectoryNow(rubotoDir, false);
+				rubotoDir.mkdirs();
+				
+				final String rubotoFileName = "ruboto.dex.jar";
+				rubotoFile = new File(rubotoDir, rubotoFileName);
+				
+				final InputStream is = AndroidPlatformService.class.getClassLoader().getResourceAsStream("hc/android/res/" + rubotoFileName);
+				ResourceUtil.saveToFile(is, rubotoFile);
+			}
+		}
+
+		return new File[] {rubotoFile, new File(getBaseDir(), AndroidDX.DX_DEX)};
 	}
 
 }

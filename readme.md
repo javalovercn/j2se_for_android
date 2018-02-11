@@ -1,4 +1,4 @@
-### What is "J2SE for Android" (Swing for Android)
+### What is "J2SE for Android"
 
 1. Android is based on Java, NOT J2SE, so there is no Swing and AWT classes in Android.
 2. "J2SE for Android" provides Swing and AWT classes and API, so you can run J2SE application on Android with this library.
@@ -19,25 +19,8 @@
 4. the files in res directory should be copied to your res directory of Android project.
 
 ***
-### Why is it not a Android project and pass main method entry.
-
-for some J2SE Application, it runs only a trayIcon, so the desktop of application should be customized, not only providing a main method entry for starting.
-
-on the other hands, if we provides a full Android project, you should do following works:
-1. change packageID, icons.
-2. if we upgrade source codes, how about these changed configuration?
-3. check and download new version Android App.
-3. permissions and other features of Android.
-
-***
 ### Important
 
 1. you can't dex if there is class in package "java" or "javax" without option "--core-library".
 2. the file "dx.jar" is removed the check code for "--core-library", so it is not required to set option "--core-library" in Eclipse to debug your project.
 3. copy a backup of original dx.jar of your ADT, replace [adt-home]/sdk/build-tools/android-X.X/lib/dx.jar with this dx.jar.
-
-***
-### Note for develop
-
-1. JButton can be added to multiple JFrame/JPanel, but in Android, a UIView (JButton) can only be added into one parent.
-2. JTree is not perfect, not recommended.

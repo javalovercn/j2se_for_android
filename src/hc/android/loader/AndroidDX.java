@@ -14,6 +14,7 @@ import java.util.jar.JarOutputStream;
 import dalvik.system.DexClassLoader;
 
 public class AndroidDX {
+	public static final String DX_DEX = "dx.dex";
 	private static final File tempWriteDir = new File(ActivityManager.getActivity().getFilesDir(), "_dx_tmp_");
 	
 	static{
@@ -44,7 +45,7 @@ public class AndroidDX {
 		File baseDir = PlatformManager.getService().getBaseDir();
 		
 		//重要：dx.dex在Starter也出现，请注意同步
-		File dex = new File(baseDir, "dx.dex");//如果此包发生升级，由HCAndroidStarter负责维持升级及optDir
+		File dex = new File(baseDir, DX_DEX);//如果此包发生升级，由HCAndroidStarter负责维持升级及optDir
 		if(dex.canRead() == false){
 			throw new Error("dx.dex is NOT exists!");
 		}
