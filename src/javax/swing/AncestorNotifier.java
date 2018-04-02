@@ -38,8 +38,7 @@ import javax.swing.event.AncestorListener;
  * @author Dave Moore
  */
 
-class AncestorNotifier implements ComponentListener, PropertyChangeListener,
-		Serializable {
+class AncestorNotifier implements ComponentListener, PropertyChangeListener, Serializable {
 	AncestorNotifier(JComponent root) {
 	}
 
@@ -53,16 +52,16 @@ class AncestorNotifier implements ComponentListener, PropertyChangeListener,
 		return null;
 	}
 
-	protected void fireAncestorAdded(JComponent source, int id,
-			Container ancestor, Container ancestorParent) {
+	protected void fireAncestorAdded(JComponent source, int id, Container ancestor,
+			Container ancestorParent) {
 	}
 
-	protected void fireAncestorRemoved(JComponent source, int id,
-			Container ancestor, Container ancestorParent) {
+	protected void fireAncestorRemoved(JComponent source, int id, Container ancestor,
+			Container ancestorParent) {
 	}
 
-	protected void fireAncestorMoved(JComponent source, int id,
-			Container ancestor, Container ancestorParent) {
+	protected void fireAncestorMoved(JComponent source, int id, Container ancestor,
+			Container ancestorParent) {
 	}
 
 	void removeAllListeners() {

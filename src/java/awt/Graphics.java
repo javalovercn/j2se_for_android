@@ -28,14 +28,13 @@ import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 
 /**
- * The <code>Graphics</code> class is the abstract base class for
- * all graphics contexts that allow an application to draw onto
- * components that are realized on various devices, as well as
- * onto off-screen images.
+ * The <code>Graphics</code> class is the abstract base class for all graphics
+ * contexts that allow an application to draw onto components that are realized
+ * on various devices, as well as onto off-screen images.
  * <p>
- * A <code>Graphics</code> object encapsulates state information needed
- * for the basic rendering operations that Java supports.  This
- * state information includes the following properties:
+ * A <code>Graphics</code> object encapsulates state information needed for the
+ * basic rendering operations that Java supports. This state information
+ * includes the following properties:
  * <p>
  * <ul>
  * <li>The <code>Component</code> object on which to draw.
@@ -44,59 +43,56 @@ import java.text.AttributedCharacterIterator;
  * <li>The current color.
  * <li>The current font.
  * <li>The current logical pixel operation function (XOR or Paint).
- * <li>The current XOR alternation color
- *     (see {@link Graphics#setXORMode}).
+ * <li>The current XOR alternation color (see {@link Graphics#setXORMode}).
  * </ul>
  * <p>
- * Coordinates are infinitely thin and lie between the pixels of the
- * output device.
- * Operations that draw the outline of a figure operate by traversing
- * an infinitely thin path between pixels with a pixel-sized pen that hangs
- * down and to the right of the anchor point on the path.
- * Operations that fill a figure operate by filling the interior
- * of that infinitely thin path.
- * Operations that render horizontal text render the ascending
- * portion of character glyphs entirely above the baseline coordinate.
+ * Coordinates are infinitely thin and lie between the pixels of the output
+ * device. Operations that draw the outline of a figure operate by traversing an
+ * infinitely thin path between pixels with a pixel-sized pen that hangs down
+ * and to the right of the anchor point on the path. Operations that fill a
+ * figure operate by filling the interior of that infinitely thin path.
+ * Operations that render horizontal text render the ascending portion of
+ * character glyphs entirely above the baseline coordinate.
  * <p>
- * The graphics pen hangs down and to the right from the path it traverses.
- * This has the following implications:
- * <p><ul>
- * <li>If you draw a figure that covers a given rectangle, that
- * figure occupies one extra row of pixels on the right and bottom edges
- * as compared to filling a figure that is bounded by that same rectangle.
- * <li>If you draw a horizontal line along the same <i>y</i> coordinate as
- * the baseline of a line of text, that line is drawn entirely below
- * the text, except for any descenders.
- * </ul><p>
+ * The graphics pen hangs down and to the right from the path it traverses. This
+ * has the following implications:
+ * <p>
+ * <ul>
+ * <li>If you draw a figure that covers a given rectangle, that figure occupies
+ * one extra row of pixels on the right and bottom edges as compared to filling
+ * a figure that is bounded by that same rectangle.
+ * <li>If you draw a horizontal line along the same <i>y</i> coordinate as the
+ * baseline of a line of text, that line is drawn entirely below the text,
+ * except for any descenders.
+ * </ul>
+ * <p>
  * All coordinates that appear as arguments to the methods of this
- * <code>Graphics</code> object are considered relative to the
- * translation origin of this <code>Graphics</code> object prior to
- * the invocation of the method.
+ * <code>Graphics</code> object are considered relative to the translation
+ * origin of this <code>Graphics</code> object prior to the invocation of the
+ * method.
  * <p>
- * All rendering operations modify only pixels which lie within the
- * area bounded by the current clip, which is specified by a {@link Shape}
- * in user space and is controlled by the program using the
- * <code>Graphics</code> object.  This <i>user clip</i>
- * is transformed into device space and combined with the
- * <i>device clip</i>, which is defined by the visibility of windows and
- * device extents.  The combination of the user clip and device clip
- * defines the <i>composite clip</i>, which determines the final clipping
- * region.  The user clip cannot be modified by the rendering
- * system to reflect the resulting composite clip. The user clip can only
- * be changed through the <code>setClip</code> or <code>clipRect</code>
- * methods.
- * All drawing or writing is done in the current color,
- * using the current paint mode, and in the current font.
+ * All rendering operations modify only pixels which lie within the area bounded
+ * by the current clip, which is specified by a {@link Shape} in user space and
+ * is controlled by the program using the <code>Graphics</code> object. This
+ * <i>user clip</i> is transformed into device space and combined with the
+ * <i>device clip</i>, which is defined by the visibility of windows and device
+ * extents. The combination of the user clip and device clip defines the
+ * <i>composite clip</i>, which determines the final clipping region. The user
+ * clip cannot be modified by the rendering system to reflect the resulting
+ * composite clip. The user clip can only be changed through the
+ * <code>setClip</code> or <code>clipRect</code> methods. All drawing or writing
+ * is done in the current color, using the current paint mode, and in the
+ * current font.
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
- * @see     java.awt.Component
- * @see     java.awt.Graphics#clipRect(int, int, int, int)
- * @see     java.awt.Graphics#setColor(java.awt.Color)
- * @see     java.awt.Graphics#setPaintMode()
- * @see     java.awt.Graphics#setXORMode(java.awt.Color)
- * @see     java.awt.Graphics#setFont(java.awt.Font)
- * @since       JDK1.0
+ * @author Sami Shaio
+ * @author Arthur van Hoff
+ * @see java.awt.Component
+ * @see java.awt.Graphics#clipRect(int, int, int, int)
+ * @see java.awt.Graphics#setColor(java.awt.Color)
+ * @see java.awt.Graphics#setPaintMode()
+ * @see java.awt.Graphics#setXORMode(java.awt.Color)
+ * @see java.awt.Graphics#setFont(java.awt.Font)
+ * @since JDK1.0
  */
 public abstract class Graphics {
 
@@ -113,7 +109,7 @@ public abstract class Graphics {
 		g.clipRect(0, 0, width, height);
 		return g;
 	}
-	
+
 	public abstract void translate(int x, int y);
 
 	public abstract Color getColor();
@@ -126,12 +122,12 @@ public abstract class Graphics {
 
 	public abstract Font getFont();
 
-    public FontMetrics getFontMetrics() {
-        return getFontMetrics(getFont());
-    }
+	public FontMetrics getFontMetrics() {
+		return getFontMetrics(getFont());
+	}
 
-    public abstract FontMetrics getFontMetrics(Font f);
-    
+	public abstract FontMetrics getFontMetrics(Font f);
+
 	public abstract void setFont(Font font);
 
 	public abstract Rectangle getClipBounds();
@@ -151,29 +147,30 @@ public abstract class Graphics {
 	public abstract void fillRect(int x, int y, int width, int height);
 
 	public abstract void drawRect(int x, int y, int width, int height);// {
-//		if ((width < 0) || (height < 0)) {
-//			return;
-//		}
-//
-//		if (height == 0 || width == 0) {
-//			drawLine(x, y, x + width, y + height);
-//		} else {
-//			drawLine(x, y, x + width - 1, y);
-//			drawLine(x + width, y, x + width, y + height - 1);
-//			drawLine(x + width, y + height, x + 1, y + height);
-//			drawLine(x, y + height, x, y + 1);
-//		}
-//	}
+	// if ((width < 0) || (height < 0)) {
+	// return;
+	// }
+	//
+	// if (height == 0 || width == 0) {
+	// drawLine(x, y, x + width, y + height);
+	// } else {
+	// drawLine(x, y, x + width - 1, y);
+	// drawLine(x + width, y, x + width, y + height - 1);
+	// drawLine(x + width, y + height, x + 1, y + height);
+	// drawLine(x, y + height, x, y + 1);
+	// }
+	// }
 
 	public abstract void clearRect(int x, int y, int width, int height);
 
-	public abstract void drawRoundRect(int x, int y, int width, int height,
-			int arcWidth, int arcHeight);
+	public abstract void drawRoundRect(int x, int y, int width, int height, int arcWidth,
+			int arcHeight);
 
-	public abstract void fillRoundRect(int x, int y, int width, int height,
-			int arcWidth, int arcHeight);
+	public abstract void fillRoundRect(int x, int y, int width, int height, int arcWidth,
+			int arcHeight);
 
-	public void draw3DRect(final int x, final int y, final int width, final int height, final boolean raised) {
+	public void draw3DRect(final int x, final int y, final int width, final int height,
+			final boolean raised) {
 		final Color c = getColor();
 		final Color brighter = c.brighter();
 		final Color darker = c.darker();
@@ -187,7 +184,8 @@ public abstract class Graphics {
 		setColor(c);
 	}
 
-	public void fill3DRect(final int x, final int y, final int width, final int height, final boolean raised) {
+	public void fill3DRect(final int x, final int y, final int width, final int height,
+			final boolean raised) {
 		final Color c = getColor();
 		final Color brighter = c.brighter();
 		final Color darker = c.darker();
@@ -209,11 +207,9 @@ public abstract class Graphics {
 
 	public abstract void fillOval(int x, int y, int width, int height);
 
-	public abstract void drawArc(int x, int y, int width, int height,
-			int startAngle, int arcAngle);
+	public abstract void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle);
 
-	public abstract void fillArc(int x, int y, int width, int height,
-			int startAngle, int arcAngle);
+	public abstract void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle);
 
 	public abstract void drawPolyline(int xPoints[], int yPoints[], int nPoints);
 
@@ -233,11 +229,13 @@ public abstract class Graphics {
 
 	public abstract void drawString(AttributedCharacterIterator iterator, int x, int y);
 
-	public void drawChars(final char data[], final int offset, final int length, final int x, final int y) {
+	public void drawChars(final char data[], final int offset, final int length, final int x,
+			final int y) {
 		drawString(new String(data, offset, length), x, y);
 	}
 
-	public void drawBytes(final byte data[], final int offset, final int length, final int x, final int y) {
+	public void drawBytes(final byte data[], final int offset, final int length, final int x,
+			final int y) {
 		drawString(new String(data, 0, offset, length), x, y);
 	}
 
@@ -274,8 +272,7 @@ public abstract class Graphics {
 	 * @see java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int,
 	 *      int, int, int)
 	 */
-	public abstract boolean drawImage(Image img, int x, int y,
-			ImageObserver observer);
+	public abstract boolean drawImage(Image img, int x, int y, ImageObserver observer);
 
 	/**
 	 * Draws as much of the specified image as has already been scaled to fit
@@ -318,8 +315,8 @@ public abstract class Graphics {
 	 * @see java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int,
 	 *      int, int, int)
 	 */
-	public abstract boolean drawImage(Image img, int x, int y, int width,
-			int height, ImageObserver observer);
+	public abstract boolean drawImage(Image img, int x, int y, int width, int height,
+			ImageObserver observer);
 
 	/**
 	 * Draws as much of the specified image as is currently available. The image
@@ -411,8 +408,8 @@ public abstract class Graphics {
 	 * @see java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int,
 	 *      int, int, int)
 	 */
-	public abstract boolean drawImage(Image img, int x, int y, int width,
-			int height, Color bgcolor, ImageObserver observer);
+	public abstract boolean drawImage(Image img, int x, int y, int width, int height, Color bgcolor,
+			ImageObserver observer);
 
 	/**
 	 * Draws as much of the specified area of the specified image as is
@@ -474,8 +471,8 @@ public abstract class Graphics {
 	 *      int, int, int)
 	 * @since JDK1.1
 	 */
-	public abstract boolean drawImage(Image img, int dx1, int dy1, int dx2,
-			int dy2, int sx1, int sy1, int sx2, int sy2, ImageObserver observer);
+	public abstract boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1,
+			int sy1, int sx2, int sy2, ImageObserver observer);
 
 	/**
 	 * Draws as much of the specified area of the specified image as is
@@ -544,9 +541,8 @@ public abstract class Graphics {
 	 *      int, int, int)
 	 * @since JDK1.1
 	 */
-	public abstract boolean drawImage(Image img, int dx1, int dy1, int dx2,
-			int dy2, int sx1, int sy1, int sx2, int sy2, Color bgcolor,
-			ImageObserver observer);
+	public abstract boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1,
+			int sy1, int sx2, int sy2, Color bgcolor, ImageObserver observer);
 
 	/**
 	 * Disposes of this graphics context and releases any system resources that
@@ -591,8 +587,7 @@ public abstract class Graphics {
 	 * @return a string representation of this graphics context.
 	 */
 	public String toString() {
-		return getClass().getName() + "[font=" + getFont() + ",color="
-				+ getColor() + "]";
+		return getClass().getName() + "[font=" + getFont() + ",color=" + getColor() + "]";
 	}
 
 	/**

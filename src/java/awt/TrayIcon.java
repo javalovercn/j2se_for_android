@@ -35,42 +35,43 @@ import java.security.AccessController;
 import javax.swing.event.EventListenerList;
 
 /**
- * A <code>TrayIcon</code> object represents a tray icon that can be
- * added to the {@link SystemTray system tray}. A
- * <code>TrayIcon</code> can have a tooltip (text), an image, a popup
- * menu, and a set of listeners associated with it.
+ * A <code>TrayIcon</code> object represents a tray icon that can be added to
+ * the {@link SystemTray system tray}. A <code>TrayIcon</code> can have a
+ * tooltip (text), an image, a popup menu, and a set of listeners associated
+ * with it.
  *
- * <p>A <code>TrayIcon</code> can generate various {@link MouseEvent
- * MouseEvents} and supports adding corresponding listeners to receive
- * notification of these events.  <code>TrayIcon</code> processes some
- * of the events by itself.  For example, by default, when the
- * right-mouse click is performed on the <code>TrayIcon</code> it
- * displays the specified popup menu.  When the mouse hovers
- * over the <code>TrayIcon</code> the tooltip is displayed.
+ * <p>
+ * A <code>TrayIcon</code> can generate various {@link MouseEvent MouseEvents}
+ * and supports adding corresponding listeners to receive notification of these
+ * events. <code>TrayIcon</code> processes some of the events by itself. For
+ * example, by default, when the right-mouse click is performed on the
+ * <code>TrayIcon</code> it displays the specified popup menu. When the mouse
+ * hovers over the <code>TrayIcon</code> the tooltip is displayed.
  *
- * <p><strong>Note:</strong> When the <code>MouseEvent</code> is
- * dispatched to its registered listeners its <code>component</code>
- * property will be set to <code>null</code>.  (See {@link
- * java.awt.event.ComponentEvent#getComponent}) The
- * <code>source</code> property will be set to this
- * <code>TrayIcon</code>. (See {@link
- * java.util.EventObject#getSource})
+ * <p>
+ * <strong>Note:</strong> When the <code>MouseEvent</code> is dispatched to its
+ * registered listeners its <code>component</code> property will be set to
+ * <code>null</code>. (See {@link java.awt.event.ComponentEvent#getComponent})
+ * The <code>source</code> property will be set to this <code>TrayIcon</code>.
+ * (See {@link java.util.EventObject#getSource})
  *
- * <p><b>Note:</b> A well-behaved {@link TrayIcon} implementation
- * will assign different gestures to showing a popup menu and
- * selecting a tray icon.
+ * <p>
+ * <b>Note:</b> A well-behaved {@link TrayIcon} implementation will assign
+ * different gestures to showing a popup menu and selecting a tray icon.
  *
- * <p>A <code>TrayIcon</code> can generate an {@link ActionEvent
- * ActionEvent}.  On some platforms, this occurs when the user selects
- * the tray icon using either the mouse or keyboard.
+ * <p>
+ * A <code>TrayIcon</code> can generate an {@link ActionEvent ActionEvent}. On
+ * some platforms, this occurs when the user selects the tray icon using either
+ * the mouse or keyboard.
  *
- * <p>If a SecurityManager is installed, the AWTPermission
- * {@code accessSystemTray} must be granted in order to create
- * a {@code TrayIcon}. Otherwise the constructor will throw a
- * SecurityException.
+ * <p>
+ * If a SecurityManager is installed, the AWTPermission {@code accessSystemTray}
+ * must be granted in order to create a {@code TrayIcon}. Otherwise the
+ * constructor will throw a SecurityException.
  *
- * <p> See the {@link SystemTray} class overview for an example on how
- * to use the <code>TrayIcon</code> API.
+ * <p>
+ * See the {@link SystemTray} class overview for an example on how to use the
+ * <code>TrayIcon</code> API.
  *
  * @since 1.6
  * @see SystemTray#add
@@ -106,14 +107,12 @@ public class TrayIcon {
 	 */
 	final AccessControlContext getAccessControlContext() {
 		if (acc == null) {
-			throw new SecurityException(
-					"TrayIcon is missing AccessControlContext");
+			throw new SecurityException("TrayIcon is missing AccessControlContext");
 		}
 		return acc;
 	}
 
-	private TrayIcon() throws UnsupportedOperationException, HeadlessException,
-			SecurityException {
+	private TrayIcon() throws UnsupportedOperationException, HeadlessException, SecurityException {
 	}
 
 	/**
@@ -139,8 +138,7 @@ public class TrayIcon {
 	public TrayIcon(Image image) {
 		this();
 		if (image == null) {
-			throw new IllegalArgumentException(
-					"creating TrayIcon with null Image");
+			throw new IllegalArgumentException("creating TrayIcon with null Image");
 		}
 		setImage(image);
 	}
@@ -433,8 +431,7 @@ public class TrayIcon {
 	public synchronized void addMouseMotionListener(MouseMotionListener listener) {
 	}
 
-	public synchronized void removeMouseMotionListener(
-			MouseMotionListener listener) {
+	public synchronized void removeMouseMotionListener(MouseMotionListener listener) {
 	}
 
 	public synchronized MouseMotionListener[] getMouseMotionListeners() {
@@ -514,8 +511,7 @@ public class TrayIcon {
 	 *             if both <code>caption</code> and <code>text</code> are
 	 *             <code>null</code>
 	 */
-	public void displayMessage(String caption, String text,
-			MessageType messageType) {
+	public void displayMessage(String caption, String text, MessageType messageType) {
 		if (caption == null && text == null) {
 			throw new NullPointerException(
 					"displaying the message with both caption and text being null");

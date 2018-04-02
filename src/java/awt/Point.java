@@ -27,11 +27,11 @@ package java.awt;
 import java.awt.geom.Point2D;
 
 /**
- * A point representing a location in {@code (x,y)} coordinate space,
- * specified in integer precision.
+ * A point representing a location in {@code (x,y)} coordinate space, specified
+ * in integer precision.
  *
- * @author      Sami Shaio
- * @since       1.0
+ * @author Sami Shaio
+ * @since 1.0
  */
 public class Point extends Point2D implements java.io.Serializable {
 	public int x;

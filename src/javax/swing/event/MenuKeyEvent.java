@@ -31,38 +31,34 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 
 /**
- * MenuKeyEvent is used to notify interested parties that
- * the menu element has received a KeyEvent forwarded to it
- * in a menu tree.
+ * MenuKeyEvent is used to notify interested parties that the menu element has
+ * received a KeyEvent forwarded to it in a menu tree.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Georges Saab
  */
 public class MenuKeyEvent extends KeyEvent {
-    private MenuElement path[];
-    private MenuSelectionManager manager;
+	private MenuElement path[];
+	private MenuSelectionManager manager;
 
-    public MenuKeyEvent(Component source, int id, long when, int modifiers,
-                        int keyCode, char keyChar,
-                        MenuElement p[], MenuSelectionManager m) {
-        super(source, id, when, modifiers, keyCode, keyChar);
-        path = p;
-        manager = m;
-    }
+	public MenuKeyEvent(Component source, int id, long when, int modifiers, int keyCode,
+			char keyChar, MenuElement p[], MenuSelectionManager m) {
+		super(source, id, when, modifiers, keyCode, keyChar);
+		path = p;
+		manager = m;
+	}
 
-    public MenuElement[] getPath() {
-        return path;
-    }
+	public MenuElement[] getPath() {
+		return path;
+	}
 
-    public MenuSelectionManager getMenuSelectionManager() {
-        return manager;
-    }
+	public MenuSelectionManager getMenuSelectionManager() {
+		return manager;
+	}
 }

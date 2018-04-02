@@ -29,43 +29,41 @@ import java.awt.Container;
 import javax.swing.JComponent;
 
 /**
- * An event reported to a child component that originated from an
- * ancestor in the component hierarchy.
+ * An event reported to a child component that originated from an ancestor in
+ * the component hierarchy.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Dave Moore
  */
 public class AncestorEvent extends AWTEvent {
-    public static final int ANCESTOR_ADDED = 1;
-    public static final int ANCESTOR_REMOVED = 2;
-    public static final int ANCESTOR_MOVED = 3;
+	public static final int ANCESTOR_ADDED = 1;
+	public static final int ANCESTOR_REMOVED = 2;
+	public static final int ANCESTOR_MOVED = 3;
 
-    Container ancestor;
-    Container ancestorParent;
+	Container ancestor;
+	Container ancestorParent;
 
-    public AncestorEvent(JComponent source, int id, Container ancestor, Container ancestorParent) {
-        super(source, id);
-        this.ancestor = ancestor;
-        this.ancestorParent = ancestorParent;
-    }
+	public AncestorEvent(JComponent source, int id, Container ancestor, Container ancestorParent) {
+		super(source, id);
+		this.ancestor = ancestor;
+		this.ancestorParent = ancestorParent;
+	}
 
-    public Container getAncestor() {
-        return ancestor;
-    }
+	public Container getAncestor() {
+		return ancestor;
+	}
 
-    public Container getAncestorParent() {
-        return ancestorParent;
-    }
+	public Container getAncestorParent() {
+		return ancestorParent;
+	}
 
-    public JComponent getComponent() {
-        return (JComponent)getSource();
-    }
+	public JComponent getComponent() {
+		return (JComponent) getSource();
+	}
 }

@@ -31,8 +31,8 @@ import java.awt.dnd.InvalidDnDOperationException;
 
 /**
  * <p>
- * This interface is exposed by the underlying window system platform to
- * enable control of platform DnD operations
+ * This interface is exposed by the underlying window system platform to enable
+ * control of platform DnD operations
  * </p>
  *
  * @since 1.2
@@ -41,26 +41,26 @@ import java.awt.dnd.InvalidDnDOperationException;
 
 public interface DropTargetContextPeer {
 
-    void setTargetActions(int actions);
+	void setTargetActions(int actions);
 
-    int getTargetActions();
+	int getTargetActions();
 
-    DropTarget getDropTarget();
+	DropTarget getDropTarget();
 
-    DataFlavor[] getTransferDataFlavors();
+	DataFlavor[] getTransferDataFlavors();
 
-    Transferable getTransferable() throws InvalidDnDOperationException;
+	Transferable getTransferable() throws InvalidDnDOperationException;
 
-    boolean isTransferableJVMLocal();
+	boolean isTransferableJVMLocal();
 
-    void acceptDrag(int dragAction);
+	void acceptDrag(int dragAction);
 
-    void rejectDrag();
+	void rejectDrag();
 
-    void acceptDrop(int dropAction);
+	void acceptDrop(int dropAction);
 
-    void rejectDrop();
+	void rejectDrop();
 
-    void dropComplete(boolean success);
+	void dropComplete(boolean success);
 
 }

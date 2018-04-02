@@ -25,12 +25,12 @@
 package java.beans;
 
 /**
- * An IndexedPropertyDescriptor describes a property that acts like an
- * array and has an indexed read and/or indexed write method to access
- * specific elements of the array.
+ * An IndexedPropertyDescriptor describes a property that acts like an array and
+ * has an indexed read and/or indexed write method to access specific elements
+ * of the array.
  * <p>
  * An indexed property may also provide simple non-indexed read and write
- * methods.  If these are present, they read and write arrays of the type
+ * methods. If these are present, they read and write arrays of the type
  * returned by the indexed read method.
  */
 

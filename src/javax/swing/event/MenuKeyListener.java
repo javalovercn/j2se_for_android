@@ -32,9 +32,9 @@ import java.util.EventListener;
  * @author Georges Saab
  */
 public interface MenuKeyListener extends EventListener {
-    void menuKeyTyped(MenuKeyEvent e);
+	void menuKeyTyped(MenuKeyEvent e);
 
-    void menuKeyPressed(MenuKeyEvent e);
+	void menuKeyPressed(MenuKeyEvent e);
 
-    void menuKeyReleased(MenuKeyEvent e);
+	void menuKeyReleased(MenuKeyEvent e);
 }

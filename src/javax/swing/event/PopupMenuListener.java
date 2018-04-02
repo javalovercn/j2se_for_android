@@ -32,9 +32,9 @@ import java.util.EventListener;
  * @author Arnaud Weber
  */
 public interface PopupMenuListener extends EventListener {
-    void popupMenuWillBecomeVisible(PopupMenuEvent e);
+	void popupMenuWillBecomeVisible(PopupMenuEvent e);
 
-    void popupMenuWillBecomeInvisible(PopupMenuEvent e);
+	void popupMenuWillBecomeInvisible(PopupMenuEvent e);
 
-    void popupMenuCanceled(PopupMenuEvent e);
+	void popupMenuCanceled(PopupMenuEvent e);
 }

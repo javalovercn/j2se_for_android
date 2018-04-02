@@ -51,17 +51,18 @@ public class HCRUtil {
 	public static String R_dimen_border_radius = "R.dimen.border_radius";
 	public static String R_anim_window_enter = "R.anim.window_enter";
 	public static String R_anim_window_exit = "R.anim.window_exit";
-	
+
 	public static String R_drawable_hc_48 = "R.drawable.hc_48";
-	
+
 	/**
 	 * convert J2SE res to Android res.
+	 * 
 	 * @param resID
 	 * @return
 	 */
-	public static final int getResource(final String resID){
+	public static final int getResource(final String resID) {
 		return resMap.get(resID);
 	}
-	
+
 	public static Map<String, Integer> resMap;
 }

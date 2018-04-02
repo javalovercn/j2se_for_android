@@ -43,8 +43,7 @@ public class Downloader {
 					raf.seek(start);
 					hasIOException = false;
 					try {
-						while (((start + downloadBS) <= end)
-								&& (len = inStream.read(b)) != -1) {
+						while (((start + downloadBS) <= end) && (len = inStream.read(b)) != -1) {
 							raf.write(b, 0, len);
 							downloadBS += len;
 						}
@@ -65,8 +64,7 @@ public class Downloader {
 						conn = (HttpURLConnection) url.openConnection();
 						conn.setRequestMethod("GET");
 						// conn.setReadTimeout(0);//无穷
-						conn.setRequestProperty("Range", "bytes=" + start + "-"
-								+ end);
+						conn.setRequestProperty("Range", "bytes=" + start + "-" + end);
 						inStream = conn.getInputStream();
 					}
 				} while (hasIOException);

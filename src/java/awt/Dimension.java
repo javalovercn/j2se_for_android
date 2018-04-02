@@ -27,27 +27,23 @@ package java.awt;
 import java.awt.geom.Dimension2D;
 
 /**
- * The <code>Dimension</code> class encapsulates the width and
- * height of a component (in integer precision) in a single object.
- * The class is
- * associated with certain properties of components. Several methods
- * defined by the <code>Component</code> class and the
- * <code>LayoutManager</code> interface return a
- * <code>Dimension</code> object.
+ * The <code>Dimension</code> class encapsulates the width and height of a
+ * component (in integer precision) in a single object. The class is associated
+ * with certain properties of components. Several methods defined by the
+ * <code>Component</code> class and the <code>LayoutManager</code> interface
+ * return a <code>Dimension</code> object.
  * <p>
- * Normally the values of <code>width</code>
- * and <code>height</code> are non-negative integers.
- * The constructors that allow you to create a dimension do
- * not prevent you from setting a negative value for these properties.
- * If the value of <code>width</code> or <code>height</code> is
- * negative, the behavior of some methods defined by other objects is
- * undefined.
+ * Normally the values of <code>width</code> and <code>height</code> are
+ * non-negative integers. The constructors that allow you to create a dimension
+ * do not prevent you from setting a negative value for these properties. If the
+ * value of <code>width</code> or <code>height</code> is negative, the behavior
+ * of some methods defined by other objects is undefined.
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
- * @see         java.awt.Component
- * @see         java.awt.LayoutManager
- * @since       1.0
+ * @author Sami Shaio
+ * @author Arthur van Hoff
+ * @see java.awt.Component
+ * @see java.awt.LayoutManager
+ * @since 1.0
  */
 public class Dimension extends Dimension2D implements java.io.Serializable {
 
@@ -108,10 +104,9 @@ public class Dimension extends Dimension2D implements java.io.Serializable {
 	}
 
 	public String toString() {
-		return getClass().getName() + "[width=" + width + ",height=" + height
-				+ "]";
+		return getClass().getName() + "[width=" + width + ",height=" + height + "]";
 	}
-	
+
 	public Object clone() {
 		Dimension out = new Dimension();
 		out.width = width;

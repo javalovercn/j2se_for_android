@@ -25,10 +25,10 @@
 package java.awt;
 
 /**
- * Signals that an AWT component is not in an appropriate state for
- * the requested operation.
+ * Signals that an AWT component is not in an appropriate state for the
+ * requested operation.
  *
- * @author      Jonni Kanerva
+ * @author Jonni Kanerva
  */
 public class IllegalComponentStateException extends IllegalStateException {
 	public IllegalComponentStateException() {

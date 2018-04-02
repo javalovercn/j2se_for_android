@@ -53,14 +53,12 @@ import android.widget.TextView;
 /**
  * This is the object which manages the header of the <code>JTable</code>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Alan Chung
  * @author Philip Milne
@@ -88,7 +86,7 @@ public class JTableHeader extends JComponent implements TableColumnModelListener
 	public JTableHeader(TableColumnModel cm) {
 		super();
 
-		if (cm == null){
+		if (cm == null) {
 			cm = createDefaultColumnModel();
 		}
 		setColumnModel(cm);
@@ -176,10 +174,10 @@ public class JTableHeader extends JComponent implements TableColumnModelListener
 	public void repaint() {
 		updateUI();
 	}
-	
+
 	public void updateUI() {
 		JTable refreshTable = getTable();
-		if(refreshTable != null){
+		if (refreshTable != null) {
 			refreshTable.updateUI();
 		}
 	}
@@ -237,7 +235,8 @@ public class JTableHeader extends JComponent implements TableColumnModelListener
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value,
 					boolean isSelected, boolean hasFocus, int row, int column) {
-				Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				Component component = super.getTableCellRendererComponent(table, value, isSelected,
+						hasFocus, row, column);
 				component.setForeground(Color.BLACK);
 				setHorizontalAlignment(JLabel.CENTER);
 				return component;
@@ -284,8 +283,7 @@ public class JTableHeader extends JComponent implements TableColumnModelListener
 
 	public AccessibleContext getAccessibleContext() {
 		if (accessibleContext == null) {
-			accessibleContext = new AndroidClassUtil()
-					.buildAccessibleContext(this);
+			accessibleContext = new AndroidClassUtil().buildAccessibleContext(this);
 		}
 		return accessibleContext;
 	}

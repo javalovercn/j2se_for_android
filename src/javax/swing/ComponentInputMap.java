@@ -25,10 +25,9 @@
 package javax.swing;
 
 /**
- * A <code>ComponentInputMap</code> is an <code>InputMap</code>
- * associated with a particular <code>JComponent</code>.
- * The component is automatically notified whenever
- * the <code>ComponentInputMap</code> changes.
+ * A <code>ComponentInputMap</code> is an <code>InputMap</code> associated with
+ * a particular <code>JComponent</code>. The component is automatically notified
+ * whenever the <code>ComponentInputMap</code> changes.
  * <code>ComponentInputMap</code>s are used for
  * <code>WHEN_IN_FOCUSED_WINDOW</code> bindings.
  *

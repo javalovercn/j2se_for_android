@@ -25,8 +25,8 @@
 package java.awt;
 
 /**
- * The <code>Transparency</code> interface defines the common transparency
- * modes for implementing classes.
+ * The <code>Transparency</code> interface defines the common transparency modes
+ * for implementing classes.
  */
 public interface Transparency {
 	public final static int OPAQUE = 1;

@@ -27,43 +27,41 @@ package java.awt;
 import java.awt.image.ColorModel;
 
 /**
- * The <code>GraphicsDevice</code> class describes the graphics devices
- * that might be available in a particular graphics environment.  These
- * include screen and printer devices. Note that there can be many screens
- * and many printers in an instance of {@link GraphicsEnvironment}. Each
- * graphics device has one or more {@link GraphicsConfiguration} objects
- * associated with it.  These objects specify the different configurations
- * in which the <code>GraphicsDevice</code> can be used.
+ * The <code>GraphicsDevice</code> class describes the graphics devices that
+ * might be available in a particular graphics environment. These include screen
+ * and printer devices. Note that there can be many screens and many printers in
+ * an instance of {@link GraphicsEnvironment}. Each graphics device has one or
+ * more {@link GraphicsConfiguration} objects associated with it. These objects
+ * specify the different configurations in which the <code>GraphicsDevice</code>
+ * can be used.
  * <p>
- * In a multi-screen environment, the <code>GraphicsConfiguration</code>
- * objects can be used to render components on multiple screens.  The
- * following code sample demonstrates how to create a <code>JFrame</code>
- * object for each <code>GraphicsConfiguration</code> on each screen
- * device in the <code>GraphicsEnvironment</code>:
+ * In a multi-screen environment, the <code>GraphicsConfiguration</code> objects
+ * can be used to render components on multiple screens. The following code
+ * sample demonstrates how to create a <code>JFrame</code> object for each
+ * <code>GraphicsConfiguration</code> on each screen device in the
+ * <code>GraphicsEnvironment</code>:
+ * 
  * <pre>
- *   GraphicsEnvironment ge = GraphicsEnvironment.
- *   getLocalGraphicsEnvironment();
- *   GraphicsDevice[] gs = ge.getScreenDevices();
- *   for (int j = 0; j < gs.length; j++) {
- *      GraphicsDevice gd = gs[j];
- *      GraphicsConfiguration[] gc =
- *      gd.getConfigurations();
- *      for (int i=0; i < gc.length; i++) {
- *         JFrame f = new
- *         JFrame(gs[j].getDefaultConfiguration());
- *         Canvas c = new Canvas(gc[i]);
- *         Rectangle gcBounds = gc[i].getBounds();
- *         int xoffs = gcBounds.x;
- *         int yoffs = gcBounds.y;
- *         f.getContentPane().add(c);
- *         f.setLocation((i*50)+xoffs, (i*60)+yoffs);
- *         f.show();
- *      }
- *   }
+ * GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+ * GraphicsDevice[] gs = ge.getScreenDevices();
+ * for (int j = 0; j < gs.length; j++) {
+ * 	GraphicsDevice gd = gs[j];
+ * 	GraphicsConfiguration[] gc = gd.getConfigurations();
+ * 	for (int i = 0; i < gc.length; i++) {
+ * 		JFrame f = new JFrame(gs[j].getDefaultConfiguration());
+ * 		Canvas c = new Canvas(gc[i]);
+ * 		Rectangle gcBounds = gc[i].getBounds();
+ * 		int xoffs = gcBounds.x;
+ * 		int yoffs = gcBounds.y;
+ * 		f.getContentPane().add(c);
+ * 		f.setLocation((i * 50) + xoffs, (i * 60) + yoffs);
+ * 		f.show();
+ * 	}
+ * }
  * </pre>
  * <p>
- * For more information on full-screen exclusive mode API, see the
- * <a href="http://java.sun.com/docs/books/tutorial/extra/fullscreen/index.html">
+ * For more information on full-screen exclusive mode API, see the <a href=
+ * "http://java.sun.com/docs/books/tutorial/extra/fullscreen/index.html">
  * Full-Screen Exclusive Mode API Tutorial</a>.
  *
  * @see GraphicsEnvironment
@@ -130,8 +128,7 @@ public abstract class GraphicsDevice {
 		return -1;
 	}
 
-	public boolean isWindowTranslucencySupported(
-			WindowTranslucency translucencyKind) {
+	public boolean isWindowTranslucencySupported(WindowTranslucency translucencyKind) {
 		switch (translucencyKind) {
 		case PERPIXEL_TRANSPARENT:
 			return isWindowShapingSupported();

@@ -44,49 +44,42 @@ import android.widget.RadioButton;
 
 /**
  * An implementation of a radio button -- an item that can be selected or
- * deselected, and which displays its state to the user.
- * Used with a {@link ButtonGroup} object to create a group of buttons
- * in which only one button at a time can be selected. (Create a ButtonGroup
- * object and use its <code>add</code> method to include the JRadioButton objects
- * in the group.)
- * <blockquote>
- * <strong>Note:</strong>
- * The ButtonGroup object is a logical grouping -- not a physical grouping.
- * To create a button panel, you should still create a {@link JPanel} or similar
- * container-object and add a {@link javax.swing.border.Border} to it to set it off from surrounding
- * components.
- * </blockquote>
+ * deselected, and which displays its state to the user. Used with a
+ * {@link ButtonGroup} object to create a group of buttons in which only one
+ * button at a time can be selected. (Create a ButtonGroup object and use its
+ * <code>add</code> method to include the JRadioButton objects in the group.)
+ * <blockquote> <strong>Note:</strong> The ButtonGroup object is a logical
+ * grouping -- not a physical grouping. To create a button panel, you should
+ * still create a {@link JPanel} or similar container-object and add a
+ * {@link javax.swing.border.Border} to it to set it off from surrounding
+ * components. </blockquote>
  * <p>
  * Buttons can be configured, and to some degree controlled, by
- * <code><a href="Action.html">Action</a></code>s.  Using an
- * <code>Action</code> with a button has many benefits beyond directly
- * configuring a button.  Refer to <a href="Action.html#buttonActions">
- * Swing Components Supporting <code>Action</code></a> for more
- * details, and you can find more information in <a
- * href="http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How
- * to Use Actions</a>, a section in <em>The Java Tutorial</em>.
+ * <code><a href="Action.html">Action</a></code>s. Using an <code>Action</code>
+ * with a button has many benefits beyond directly configuring a button. Refer
+ * to <a href="Action.html#buttonActions"> Swing Components Supporting
+ * <code>Action</code></a> for more details, and you can find more information
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How to Use
+ * Actions</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * See <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How to Use Buttons, Check Boxes, and Radio Buttons</a>
- * in <em>The Java Tutorial</em>
- * for further documentation.
+ * See <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How
+ * to Use Buttons, Check Boxes, and Radio Buttons</a> in <em>The Java
+ * Tutorial</em> for further documentation.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A component which can display it's state as selected or deselected.
+ * @beaninfo attribute: isContainer false description: A component which can
+ *           display it's state as selected or deselected.
  *
  * @see ButtonGroup
  * @see JCheckBox
@@ -95,17 +88,17 @@ import android.widget.RadioButton;
 public class JRadioButton extends JToggleButton implements Accessible {
 	private RadioButton radioButton;
 	LinearLayout defaultLinearLayout;
-	
+
 	private static final String uiClassID = "RadioButtonUI";
 
 	public void applyComponentOrientation(ComponentOrientation o) {
 		super.applyComponentOrientation(o);
 		RadioButton snap = radioButton;
-		if(snap != null){
+		if (snap != null) {
 			setHorizontalAlignment(getHorizontalAlignment());
 		}
 	}
-	
+
 	public JRadioButton() {
 		this(null, null, false);
 	}
@@ -144,16 +137,16 @@ public class JRadioButton extends JToggleButton implements Accessible {
 	public void setFont(Font font) {
 		super.setFont(font);
 		RadioButton snap = radioButton;
-		if(snap != null){
+		if (snap != null) {
 			UICore.setTextSize(snap, font, getScreenAdapterAdAPI());
 		}
 	}
-	
+
 	public void setSelected(final boolean b) {
 		super.setSelected(b);
 		final RadioButton snap = radioButton;
-		if(snap != null){
-			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+		if (snap != null) {
+			AndroidUIUtil.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					snap.setChecked(b);
@@ -161,41 +154,46 @@ public class JRadioButton extends JToggleButton implements Accessible {
 			});
 		}
 	}
-	
-	public View getFocusablePeerViewAdAPI(){
+
+	public View getFocusablePeerViewAdAPI() {
 		return radioButton;
 	}
-	
+
 	public void updateUI() {
 		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 			@Override
 			public void run() {
-				if(defaultLinearLayout == null){
-					defaultLinearLayout = new LinearLayout(ActivityManager.getActivity());
+				if (defaultLinearLayout == null) {
+					defaultLinearLayout = new LinearLayout(ActivityManager.applicationContext);
 					JRadioButton.this.setPeerAdAPI(defaultLinearLayout);
 					JRadioButton.this.addOnLayoutChangeListenerAdAPI(defaultLinearLayout);
 				}
 				defaultLinearLayout.removeAllViews();
-//				defaultLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-				
+				// defaultLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
 				viewRelation.unregisterView(radioButton);
 				radioButton = null;
-				
-				if(JRadioButton.this.isVisible){
-					radioButton = new RadioButton(ActivityManager.getActivity());
-					
+
+				if (JRadioButton.this.isVisible) {
+					radioButton = new RadioButton(ActivityManager.applicationContext);
+
 					boolean enabled = JRadioButton.this.isEnabled();
 					radioButton.setEnabled(enabled);
-					radioButton.setTextColor(enabled?AndroidUIUtil.WIN_FONT_COLOR.toAndroid():AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
-					UICore.setTextSize(radioButton, JRadioButton.this.getFont(), JRadioButton.this.getScreenAdapterAdAPI());
+					radioButton.setTextColor(enabled ? AndroidUIUtil.WIN_FONT_COLOR.toAndroid()
+							: AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
+					UICore.setTextSize(radioButton, JRadioButton.this.getFont(),
+							JRadioButton.this.getScreenAdapterAdAPI());
 					radioButton.setText(text);
-					AndroidUIUtil.setViewHorizontalAlignment(JRadioButton.this, radioButton, getHorizontalAlignment(), true);
+					AndroidUIUtil.setViewHorizontalAlignment(JRadioButton.this, radioButton,
+							getHorizontalAlignment(), true);
 					radioButton.setChecked(JRadioButton.this.isSelected());
-					
+
 					AndroidUIUtil.buildListenersForComponent(radioButton, JRadioButton.this);
 
-					LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-					lp.gravity = (Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL | Gravity.CENTER);
+					LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+							LayoutParams.WRAP_CONTENT);
+					lp.gravity = (Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL
+							| Gravity.CENTER);
 					AndroidUIUtil.addView(defaultLinearLayout, radioButton, lp, viewRelation);
 				}
 			}
@@ -214,11 +212,12 @@ public class JRadioButton extends JToggleButton implements Accessible {
 
 	public void setHorizontalAlignment(int alignment) {
 		super.setHorizontalAlignment(alignment);
-		if(radioButton != null){
-			AndroidUIUtil.setViewHorizontalAlignment(this, radioButton, getHorizontalAlignment(), true);
+		if (radioButton != null) {
+			AndroidUIUtil.setViewHorizontalAlignment(this, radioButton, getHorizontalAlignment(),
+					true);
 		}
 	}
-	
+
 	protected String paramString() {
 		return super.paramString();
 	}

@@ -28,8 +28,7 @@ import java.awt.Point;
 import java.util.EventObject;
 
 /**
- * This class is the base class for
- * <code>DragSourceDragEvent</code> and
+ * This class is the base class for <code>DragSourceDragEvent</code> and
  * <code>DragSourceDropEvent</code>.
  * <p>
  * <code>DragSourceEvent</code>s are generated whenever the drag enters, moves
@@ -38,61 +37,61 @@ import java.util.EventObject;
  * the mouse cursor location in screen coordinates at the moment this event
  * occured.
  * <p>
- * In a multi-screen environment without a virtual device, the cursor location is
- * specified in the coordinate system of the <i>initiator</i>
+ * In a multi-screen environment without a virtual device, the cursor location
+ * is specified in the coordinate system of the <i>initiator</i>
  * <code>GraphicsConfiguration</code>. The <i>initiator</i>
  * <code>GraphicsConfiguration</code> is the <code>GraphicsConfiguration</code>
  * of the <code>Component</code> on which the drag gesture for the current drag
- * operation was recognized. If the cursor location is outside the bounds of
- * the initiator <code>GraphicsConfiguration</code>, the reported coordinates are
+ * operation was recognized. If the cursor location is outside the bounds of the
+ * initiator <code>GraphicsConfiguration</code>, the reported coordinates are
  * clipped to fit within the bounds of that <code>GraphicsConfiguration</code>.
  * <p>
- * In a multi-screen environment with a virtual device, the location is specified
- * in the corresponding virtual coordinate system. If the cursor location is
- * outside the bounds of the virtual device the reported coordinates are
- * clipped to fit within the bounds of the virtual device.
+ * In a multi-screen environment with a virtual device, the location is
+ * specified in the corresponding virtual coordinate system. If the cursor
+ * location is outside the bounds of the virtual device the reported coordinates
+ * are clipped to fit within the bounds of the virtual device.
  *
  * @since 1.2
  */
 
 public class DragSourceEvent extends EventObject {
-    private final boolean locationSpecified;
+	private final boolean locationSpecified;
 
-    private final int x;
+	private final int x;
 
-    private final int y;
+	private final int y;
 
-    public DragSourceEvent(DragSourceContext dsc) {
-        super(dsc);
-        locationSpecified = false;
-        this.x = 0;
-        this.y = 0;
-    }
+	public DragSourceEvent(DragSourceContext dsc) {
+		super(dsc);
+		locationSpecified = false;
+		this.x = 0;
+		this.y = 0;
+	}
 
-    public DragSourceEvent(DragSourceContext dsc, int x, int y) {
-        super(dsc);
-        locationSpecified = true;
-        this.x = x;
-        this.y = y;
-    }
+	public DragSourceEvent(DragSourceContext dsc, int x, int y) {
+		super(dsc);
+		locationSpecified = true;
+		this.x = x;
+		this.y = y;
+	}
 
-    public DragSourceContext getDragSourceContext() {
-        return (DragSourceContext)getSource();
-    }
+	public DragSourceContext getDragSourceContext() {
+		return (DragSourceContext) getSource();
+	}
 
-    public Point getLocation() {
-        if (locationSpecified) {
-            return new Point(x, y);
-        } else {
-            return null;
-        }
-    }
+	public Point getLocation() {
+		if (locationSpecified) {
+			return new Point(x, y);
+		} else {
+			return null;
+		}
+	}
 
-    public int getX() {
-        return x;
-    }
+	public int getX() {
+		return x;
+	}
 
-    public int getY() {
-        return y;
-    }
+	public int getY() {
+		return y;
+	}
 }

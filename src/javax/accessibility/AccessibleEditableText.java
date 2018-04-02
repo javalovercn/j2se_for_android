@@ -27,16 +27,17 @@ package javax.accessibility;
 import javax.swing.text.AttributeSet;
 
 /**
- * <P>The AccessibleEditableText interface should be implemented by all
- * classes that present editable textual information on the display.
- * Along with the AccessibleText interface, this interface provides
- * the standard mechanism for an assistive technology to access
- * that text via its content, attributes, and spatial location.
- * Applications can determine if an object supports the AccessibleEditableText
- * interface by first obtaining its AccessibleContext (see {@link Accessible})
- * and then calling the {@link AccessibleContext#getAccessibleEditableText}
- * method of AccessibleContext.  If the return value is not null, the object
- * supports this interface.
+ * <P>
+ * The AccessibleEditableText interface should be implemented by all classes
+ * that present editable textual information on the display. Along with the
+ * AccessibleText interface, this interface provides the standard mechanism for
+ * an assistive technology to access that text via its content, attributes, and
+ * spatial location. Applications can determine if an object supports the
+ * AccessibleEditableText interface by first obtaining its AccessibleContext
+ * (see {@link Accessible}) and then calling the
+ * {@link AccessibleContext#getAccessibleEditableText} method of
+ * AccessibleContext. If the return value is not null, the object supports this
+ * interface.
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
@@ -44,7 +45,7 @@ import javax.swing.text.AttributeSet;
  * @see AccessibleContext#getAccessibleText
  * @see AccessibleContext#getAccessibleEditableText
  *
- * @author      Lynn Monsanto
+ * @author Lynn Monsanto
  * @since 1.4
  */
 public interface AccessibleEditableText extends AccessibleText {

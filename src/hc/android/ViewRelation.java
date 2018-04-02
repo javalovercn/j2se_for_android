@@ -8,28 +8,28 @@ import android.view.ViewGroup;
 
 public class ViewRelation {
 	private final HashMap<View, ViewGroup> map = new HashMap<View, ViewGroup>();
-	
-	public void registerViewRelation(ViewGroup parent, View view){
-		if(view == null){
+
+	public void registerViewRelation(ViewGroup parent, View view) {
+		if (view == null) {
 			return;
 		}
-		
+
 		unregisterView(view);
-		
-		if(parent == null){
+
+		if (parent == null) {
 			return;
 		}
 		map.put(view, parent);
 	}
 
 	public void unregisterView(final View view) {
-		if(view == null){
+		if (view == null) {
 			return;
 		}
-		
+
 		final ViewGroup oldParent = map.get(view);
-		if(oldParent != null){
-			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+		if (oldParent != null) {
+			AndroidUIUtil.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					oldParent.removeView(view);
@@ -38,23 +38,23 @@ public class ViewRelation {
 			map.remove(view);
 		}
 	}
-	
-	public void removeAll(){
+
+	public void removeAll() {
 		final View[] views = new View[map.size()];
 		map.keySet().toArray(views);
-		
+
 		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 			@Override
 			public void run() {
 				for (int i = 0; i < views.length; i++) {
 					ViewGroup oldParent = map.get(views[i]);
-					if(oldParent != null){
+					if (oldParent != null) {
 						oldParent.removeView(views[i]);
 					}
 				}
 			}
 		});
-		
+
 		map.clear();
 	}
 }

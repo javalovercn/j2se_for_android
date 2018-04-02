@@ -36,122 +36,132 @@ import javax.accessibility.AccessibleKeyBinding;
 import javax.accessibility.AccessibleRole;
 
 /**
- * <code>JLayeredPane</code> adds depth to a JFC/Swing container,
- * allowing components to overlap each other when needed.
- * An <code>Integer</code> object specifies each component's depth in the
- * container, where higher-numbered components sit &quot;on top&quot; of other
- * components.
- * For task-oriented documentation and examples of using layered panes see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/layeredpane.html">How to Use a Layered Pane</a>,
- * a section in <em>The Java Tutorial</em>.
+ * <code>JLayeredPane</code> adds depth to a JFC/Swing container, allowing
+ * components to overlap each other when needed. An <code>Integer</code> object
+ * specifies each component's depth in the container, where higher-numbered
+ * components sit &quot;on top&quot; of other components. For task-oriented
+ * documentation and examples of using layered panes see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/layeredpane.html">How
+ * to Use a Layered Pane</a>, a section in <em>The Java Tutorial</em>.
  * <P>
  * <TABLE ALIGN="RIGHT" BORDER="0" SUMMARY="layout">
  * <TR>
- *   <TD ALIGN="CENTER">
- *     <P ALIGN="CENTER"><IMG SRC="doc-files/JLayeredPane-1.gif"
- *     alt="The following text describes this image."
- *     WIDTH="269" HEIGHT="264" ALIGN="BOTTOM" BORDER="0">
- *   </TD>
+ * <TD ALIGN="CENTER">
+ * <P ALIGN="CENTER">
+ * <IMG SRC="doc-files/JLayeredPane-1.gif" alt="The following text describes
+ * this image." WIDTH="269" HEIGHT="264" ALIGN="BOTTOM" BORDER="0"></TD>
  * </TR>
  * </TABLE>
- * For convenience, <code>JLayeredPane</code> divides the depth-range
- * into several different layers. Putting a component into one of those
- * layers makes it easy to ensure that components overlap properly,
- * without having to worry about specifying numbers for specific depths:
+ * For convenience, <code>JLayeredPane</code> divides the depth-range into
+ * several different layers. Putting a component into one of those layers makes
+ * it easy to ensure that components overlap properly, without having to worry
+ * about specifying numbers for specific depths:
  * <DL>
- *    <DT><FONT SIZE="2">DEFAULT_LAYER</FONT></DT>
- *         <DD>The standard layer, where most components go. This the bottommost
- *         layer.
- *    <DT><FONT SIZE="2">PALETTE_LAYER</FONT></DT>
- *         <DD>The palette layer sits over the default layer. Useful for floating
- *         toolbars and palettes, so they can be positioned above other components.
- *    <DT><FONT SIZE="2">MODAL_LAYER</FONT></DT>
- *         <DD>The layer used for modal dialogs. They will appear on top of any
- *         toolbars, palettes, or standard components in the container.
- *    <DT><FONT SIZE="2">POPUP_LAYER</FONT></DT>
- *         <DD>The popup layer displays above dialogs. That way, the popup windows
- *         associated with combo boxes, tooltips, and other help text will appear
- *         above the component, palette, or dialog that generated them.
- *    <DT><FONT SIZE="2">DRAG_LAYER</FONT></DT>
- *         <DD>When dragging a component, reassigning it to the drag layer ensures
- *         that it is positioned over every other component in the container. When
- *         finished dragging, it can be reassigned to its normal layer.
+ * <DT><FONT SIZE="2">DEFAULT_LAYER</FONT></DT>
+ * <DD>The standard layer, where most components go. This the bottommost layer.
+ * <DT><FONT SIZE="2">PALETTE_LAYER</FONT></DT>
+ * <DD>The palette layer sits over the default layer. Useful for floating
+ * toolbars and palettes, so they can be positioned above other components.
+ * <DT><FONT SIZE="2">MODAL_LAYER</FONT></DT>
+ * <DD>The layer used for modal dialogs. They will appear on top of any
+ * toolbars, palettes, or standard components in the container.
+ * <DT><FONT SIZE="2">POPUP_LAYER</FONT></DT>
+ * <DD>The popup layer displays above dialogs. That way, the popup windows
+ * associated with combo boxes, tooltips, and other help text will appear above
+ * the component, palette, or dialog that generated them.
+ * <DT><FONT SIZE="2">DRAG_LAYER</FONT></DT>
+ * <DD>When dragging a component, reassigning it to the drag layer ensures that
+ * it is positioned over every other component in the container. When finished
+ * dragging, it can be reassigned to its normal layer.
  * </DL>
  * The <code>JLayeredPane</code> methods <code>moveToFront(Component)</code>,
  * <code>moveToBack(Component)</code> and <code>setPosition</code> can be used
  * to reposition a component within its layer. The <code>setLayer</code> method
  * can also be used to change the component's current layer.
  *
- * <h2>Details</h2>
- * <code>JLayeredPane</code> manages its list of children like
- * <code>Container</code>, but allows for the definition of a several
- * layers within itself. Children in the same layer are managed exactly
- * like the normal <code>Container</code> object,
- * with the added feature that when children components overlap, children
- * in higher layers display above the children in lower layers.
+ * <h2>Details</h2> <code>JLayeredPane</code> manages its list of children like
+ * <code>Container</code>, but allows for the definition of a several layers
+ * within itself. Children in the same layer are managed exactly like the normal
+ * <code>Container</code> object, with the added feature that when children
+ * components overlap, children in higher layers display above the children in
+ * lower layers.
  * <p>
- * Each layer is a distinct integer number. The layer attribute can be set
- * on a <code>Component</code> by passing an <code>Integer</code>
- * object during the add call.<br> For example:
+ * Each layer is a distinct integer number. The layer attribute can be set on a
+ * <code>Component</code> by passing an <code>Integer</code> object during the
+ * add call.<br>
+ * For example:
+ * 
  * <PRE>
  *     layeredPane.add(child, JLayeredPane.DEFAULT_LAYER);
  * or
  *     layeredPane.add(child, new Integer(10));
  * </PRE>
- * The layer attribute can also be set on a Component by calling<PRE>
- *     layeredPaneParent.setLayer(child, 10)</PRE>
+ * 
+ * The layer attribute can also be set on a Component by calling
+ * 
+ * <PRE>
+ * layeredPaneParent.setLayer(child, 10)
+ * </PRE>
+ * 
  * on the <code>JLayeredPane</code> that is the parent of component. The layer
  * should be set <i>before</i> adding the child to the parent.
  * <p>
- * Higher number layers display above lower number layers. So, using
- * numbers for the layers and letters for individual components, a
- * representative list order would look like this:<PRE>
- *       5a, 5b, 5c, 2a, 2b, 2c, 1a </PRE>
+ * Higher number layers display above lower number layers. So, using numbers for
+ * the layers and letters for individual components, a representative list order
+ * would look like this:
+ * 
+ * <PRE>
+ *       5a, 5b, 5c, 2a, 2b, 2c, 1a
+ * </PRE>
+ * 
  * where the leftmost components are closest to the top of the display.
  * <p>
- * A component can be moved to the top or bottom position within its
- * layer by calling <code>moveToFront</code> or <code>moveToBack</code>.
+ * A component can be moved to the top or bottom position within its layer by
+ * calling <code>moveToFront</code> or <code>moveToBack</code>.
  * <p>
  * The position of a component within a layer can also be specified directly.
- * Valid positions range from 0 up to one less than the number of
- * components in that layer. A value of -1 indicates the bottommost
- * position. A value of 0 indicates the topmost position. Unlike layer
- * numbers, higher position values are <i>lower</i> in the display.
- * <blockquote>
- * <b>Note:</b> This sequence (defined by java.awt.Container) is the reverse
- * of the layer numbering sequence. Usually though, you will use <code>moveToFront</code>,
- * <code>moveToBack</code>, and <code>setLayer</code>.
- * </blockquote>
- * Here are some examples using the method add(Component, layer, position):
- * Calling add(5x, 5, -1) results in:<PRE>
- *       5a, 5b, 5c, 5x, 2a, 2b, 2c, 1a </PRE>
+ * Valid positions range from 0 up to one less than the number of components in
+ * that layer. A value of -1 indicates the bottommost position. A value of 0
+ * indicates the topmost position. Unlike layer numbers, higher position values
+ * are <i>lower</i> in the display. <blockquote> <b>Note:</b> This sequence
+ * (defined by java.awt.Container) is the reverse of the layer numbering
+ * sequence. Usually though, you will use <code>moveToFront</code>,
+ * <code>moveToBack</code>, and <code>setLayer</code>. </blockquote> Here are
+ * some examples using the method add(Component, layer, position): Calling
+ * add(5x, 5, -1) results in:
+ * 
+ * <PRE>
+ *       5a, 5b, 5c, 5x, 2a, 2b, 2c, 1a
+ * </PRE>
  *
- * Calling add(5z, 5, 2) results in:<PRE>
- *       5a, 5b, 5z, 5c, 5x, 2a, 2b, 2c, 1a </PRE>
+ * Calling add(5z, 5, 2) results in:
+ * 
+ * <PRE>
+ *       5a, 5b, 5z, 5c, 5x, 2a, 2b, 2c, 1a
+ * </PRE>
  *
- * Calling add(3a, 3, 7) results in:<PRE>
- *       5a, 5b, 5z, 5c, 5x, 3a, 2a, 2b, 2c, 1a </PRE>
+ * Calling add(3a, 3, 7) results in:
+ * 
+ * <PRE>
+ *       5a, 5b, 5z, 5c, 5x, 3a, 2a, 2b, 2c, 1a
+ * </PRE>
  *
- * Using normal paint/event mechanics results in 1a appearing at the bottom
- * and 5a being above all other components.
+ * Using normal paint/event mechanics results in 1a appearing at the bottom and
+ * 5a being above all other components.
  * <p>
- * <b>Note:</b> that these layers are simply a logical construct and LayoutManagers
- * will affect all child components of this container without regard for
- * layer settings.
+ * <b>Note:</b> that these layers are simply a logical construct and
+ * LayoutManagers will affect all child components of this container without
+ * regard for layer settings.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author David Kloba
  */

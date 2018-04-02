@@ -46,37 +46,33 @@ import android.widget.TextView;
 
 /**
  * An implementation of a "push" button.
-  * <p>
+ * <p>
  * Buttons can be configured, and to some degree controlled, by
- * <code><a href="Action.html">Action</a></code>s.  Using an
- * <code>Action</code> with a button has many benefits beyond directly
- * configuring a button.  Refer to <a href="Action.html#buttonActions">
- * Swing Components Supporting <code>Action</code></a> for more
- * details, and you can find more information in <a
- * href="http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How
- * to Use Actions</a>, a section in <em>The Java Tutorial</em>.
+ * <code><a href="Action.html">Action</a></code>s. Using an <code>Action</code>
+ * with a button has many benefits beyond directly configuring a button. Refer
+ * to <a href="Action.html#buttonActions"> Swing Components Supporting
+ * <code>Action</code></a> for more details, and you can find more information
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How to Use
+ * Actions</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * See <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How to Use Buttons, Check Boxes, and Radio Buttons</a>
- * in <em>The Java Tutorial</em>
- * for information and examples of using buttons.
+ * See <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How
+ * to Use Buttons, Check Boxes, and Radio Buttons</a> in <em>The Java
+ * Tutorial</em> for information and examples of using buttons.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: An implementation of a \"push\" button.
+ * @beaninfo attribute: isContainer false description: An implementation of a
+ *           \"push\" button.
  *
  * @author Jeff Dinkins
  */
@@ -84,7 +80,7 @@ public class JButton extends AbstractButton implements Accessible {
 	LinearLayout buttonLinearLayout, defaultLinearLayout;
 	ImageView imageButton;
 	TextView btnTextView;
-	
+
 	private static final String uiClassID = "ButtonUI";
 
 	public JButton() {
@@ -106,108 +102,109 @@ public class JButton extends AbstractButton implements Accessible {
 
 	public JButton(String text, Icon icon) {
 		init(text, icon);
-		defaultLinearLayout = new LinearLayout(ActivityManager.getActivity());
-		buttonLinearLayout = new LinearLayout(ActivityManager.getActivity());
+		defaultLinearLayout = new LinearLayout(ActivityManager.applicationContext);
+		buttonLinearLayout = new LinearLayout(ActivityManager.applicationContext);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 		lp.topMargin = lp.bottomMargin = lp.leftMargin = lp.rightMargin = AndroidUIUtil.BUTTON_GAP_PX;
 		defaultLinearLayout.addView(buttonLinearLayout, lp);
-		
+
 		setPeerAdAPI(defaultLinearLayout);
 		this.addOnLayoutChangeListenerAdAPI(defaultLinearLayout);
-		
+
 		updateUI();
 	}
-	
-	public View getFocusablePeerViewAdAPI(){
+
+	public View getFocusablePeerViewAdAPI() {
 		return buttonLinearLayout;
 	}
-	
+
 	public void setText(final String text) {
-		if(text == null){
+		if (text == null) {
 			return;
 		}
-		if(btnTextView != null){
+		if (btnTextView != null) {
 			trigPropertyChangeAdAPI(text);
-			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+			AndroidUIUtil.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					btnTextView.setText(text);
 				}
 			});
-		}else{
+		} else {
 			super.setText(text);
 		}
 	}
-	
-	public void setVisible(boolean isVisible){
+
+	public void setVisible(boolean isVisible) {
 		super.setVisible(isVisible);
 	}
 
 	public void setIcon(Icon defaultIcon) {
 		super.setIcon(defaultIcon);
 	}
-	
+
 	public void applyComponentOrientation(final ComponentOrientation o) {
 		super.applyComponentOrientation(o);
-//		final TextView snap = btnTextView;
-//		if(snap != null){
-//			ServerMainActivity.activity.runOnUiThread(new Runnable() {
-//				@Override
-//				public void run() {
-//					snap.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
-//				}
-//			});
-//		}
+		// final TextView snap = btnTextView;
+		// if(snap != null){
+		// ServerMainActivity.activity.runOnUiThread(new Runnable() {
+		// @Override
+		// public void run() {
+		// snap.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
+		// }
+		// });
+		// }
 	}
-	
+
 	public void setDisabledIcon(Icon disabledIcon) {
 		super.setDisabledIcon(disabledIcon);
 	}
-	
-	public void setEnabled(boolean enabled){
+
+	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 	}
-	
+
 	public void setFont(Font font) {
 		super.setFont(font);
 		TextView snap = btnTextView;
-		if(snap != null){
+		if (snap != null) {
 			UICore.setTextSize(snap, font, getScreenAdapterAdAPI());
 		}
 	}
-	
+
 	public void updateUI() {
-		if(buttonLinearLayout == null){
+		if (buttonLinearLayout == null) {
 			return;
 		}
-		
+
 		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 			@Override
 			public void run() {
 				buttonLinearLayout.removeAllViews();
 				buttonLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-				
+
 				viewRelation.unregisterView(btnTextView);
 				btnTextView = null;
 				viewRelation.unregisterView(imageButton);
 				imageButton = null;
-				
+
 				boolean btnEnabled = JButton.this.isEnabled();
 
 				AndroidUIUtil.buildListenersForComponent(buttonLinearLayout, JButton.this);
 				buttonLinearLayout.setEnabled(btnEnabled);
-				
-				buttonLinearLayout.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_button));
+
+				buttonLinearLayout
+						.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_button));
 				buttonLinearLayout.setFocusable(btnEnabled);
 				buttonLinearLayout.setFocusableInTouchMode(false);
 				buttonLinearLayout.setClickable(btnEnabled);
 
-				if(JButton.this.isVisible){
-					if(JButton.this.getComponentOrientation().isLeftToRight()){
+				if (JButton.this.isVisible) {
+					if (JButton.this.getComponentOrientation().isLeftToRight()) {
 						addIconAdAPI();
 						addTextAdAPI();
-					}else{
+					} else {
 						addTextAdAPI();
 						addIconAdAPI();
 					}
@@ -216,17 +213,17 @@ public class JButton extends AbstractButton implements Accessible {
 		});
 	}
 
-	private Icon getDrawableIcon(){
-		if(JButton.this.isEnabled() == false && disabledIcon != null){
+	private Icon getDrawableIcon() {
+		if (JButton.this.isEnabled() == false && disabledIcon != null) {
 			return disabledIcon;
-		}else{
-			if(defaultIcon != null){
+		} else {
+			if (defaultIcon != null) {
 				return defaultIcon;
 			}
 		}
 		return null;
 	}
-	
+
 	public String getUIClassID() {
 		return uiClassID;
 	}
@@ -261,36 +258,40 @@ public class JButton extends AbstractButton implements Accessible {
 
 	private Icon addIconAdAPI() {
 		Icon icon = getDrawableIcon();
-		if(defaultIcon != null){
-			imageButton = new ImageView(ActivityManager.getActivity());
-			
-			imageButton.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)icon, this));
-			
-			LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		if (defaultIcon != null) {
+			imageButton = new ImageView(ActivityManager.applicationContext);
+
+			imageButton.setImageDrawable(
+					ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon) icon, this));
+
+			LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT);
 			lp.gravity = (Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL | Gravity.CENTER);
-			
+
 			AndroidUIUtil.addView(buttonLinearLayout, imageButton, lp, viewRelation);
 		}
 		return icon;
 	}
 
 	private final void addTextAdAPI() {
-		if(text.length() != 0){
-			LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1.0F);
+		if (text.length() != 0) {
+			LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT, 1.0F);
 			lp.gravity = (Gravity.CENTER);
-			
-			if(btnTextView == null){
-				btnTextView = new TextView(ActivityManager.getActivity());
-//				btnTextView.setSingleLine(true);//会导致JComponent.print(Graphics)时，不出现。
+
+			if (btnTextView == null) {
+				btnTextView = new TextView(ActivityManager.applicationContext);
+				// btnTextView.setSingleLine(true);//会导致JComponent.print(Graphics)时，不出现。
 				btnTextView.setMaxWidth(2048);
 			}
-			btnTextView.setTextColor(isEnable?AndroidUIUtil.WINDOW_BTN_TEXT_COLOR.toAndroid():AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
-			if(AndroidUIUtil.setTextForTextViewAdAPI(text, btnTextView) == false){
+			btnTextView.setTextColor(isEnable ? AndroidUIUtil.WINDOW_BTN_TEXT_COLOR.toAndroid()
+					: AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
+			if (AndroidUIUtil.setTextForTextViewAdAPI(text, btnTextView) == false) {
 				btnTextView.setLines(1);
 			}
 			btnTextView.setGravity(Gravity.CENTER);
 			UICore.setTextSize(btnTextView, getFont(), getScreenAdapterAdAPI());
-			
+
 			AndroidUIUtil.addView(buttonLinearLayout, btnTextView, lp, viewRelation);
 		}
 	}

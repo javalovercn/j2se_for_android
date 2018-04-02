@@ -25,8 +25,8 @@
 package javax.swing;
 
 /**
- * Drop modes, used to determine the method by which a component
- * tracks and indicates a drop location during drag and drop.
+ * Drop modes, used to determine the method by which a component tracks and
+ * indicates a drop location during drag and drop.
  *
  * @author Shannon Hickey
  * @see JTable#setDropMode

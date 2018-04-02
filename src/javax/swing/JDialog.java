@@ -42,73 +42,63 @@ import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
 
 /**
- * The main class for creating a dialog window. You can use this class
- * to create a custom dialog, or invoke the many class methods
- * in {@link JOptionPane} to create a variety of standard dialogs.
- * For information about creating dialogs, see
- * <em>The Java Tutorial</em> section
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/dialog.html">How
+ * The main class for creating a dialog window. You can use this class to create
+ * a custom dialog, or invoke the many class methods in {@link JOptionPane} to
+ * create a variety of standard dialogs. For information about creating dialogs,
+ * see <em>The Java Tutorial</em> section <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/dialog.html">How
  * to Make Dialogs</a>.
  *
  * <p>
  *
- * The {@code JDialog} component contains a {@code JRootPane}
- * as its only child.
+ * The {@code JDialog} component contains a {@code JRootPane} as its only child.
  * The {@code contentPane} should be the parent of any children of the
- * {@code JDialog}.
- * As a convenience {@code add} and its variants, {@code remove} and
- * {@code setLayout} have been overridden to forward to the
+ * {@code JDialog}. As a convenience {@code add} and its variants,
+ * {@code remove} and {@code setLayout} have been overridden to forward to the
  * {@code contentPane} as necessary. This means you can write:
+ * 
  * <pre>
- *       dialog.add(child);
+ * dialog.add(child);
  * </pre>
- * And the child will be added to the contentPane.
- * The {@code contentPane} is always non-{@code null}.
- * Attempting to set it to {@code null} generates an exception.
- * The default {@code contentPane} has a {@code BorderLayout}
- * manager set on it.
- * Refer to {@link javax.swing.RootPaneContainer}
- * for details on adding, removing and setting the {@code LayoutManager}
- * of a {@code JDialog}.
+ * 
+ * And the child will be added to the contentPane. The {@code contentPane} is
+ * always non-{@code null}. Attempting to set it to {@code null} generates an
+ * exception. The default {@code contentPane} has a {@code BorderLayout} manager
+ * set on it. Refer to {@link javax.swing.RootPaneContainer} for details on
+ * adding, removing and setting the {@code LayoutManager} of a {@code JDialog}.
  * <p>
- * Please see the {@code JRootPane} documentation for a complete
- * description of the {@code contentPane}, {@code glassPane},
- * and {@code layeredPane} components.
+ * Please see the {@code JRootPane} documentation for a complete description of
+ * the {@code contentPane}, {@code glassPane}, and {@code layeredPane}
+ * components.
  * <p>
- * In a multi-screen environment, you can create a {@code JDialog}
- * on a different screen device than its owner.  See {@link java.awt.Frame} for
- * more information.
+ * In a multi-screen environment, you can create a {@code JDialog} on a
+ * different screen device than its owner. See {@link java.awt.Frame} for more
+ * information.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the {@code java.beans} package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * {@code java.beans} package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JOptionPane
  * @see JRootPane
  * @see javax.swing.RootPaneContainer
  *
- * @beaninfo
- *      attribute: isContainer true
- *      attribute: containerDelegate getContentPane
- *    description: A toplevel window for creating dialog boxes.
+ * @beaninfo attribute: isContainer true attribute: containerDelegate
+ *           getContentPane description: A toplevel window for creating dialog
+ *           boxes.
  *
  * @author David Kloba
  * @author James Gosling
  * @author Scott Violet
  */
-public class JDialog extends Dialog implements WindowConstants, Accessible,
-		RootPaneContainer, TransferHandler.HasGetTransferHandler {
+public class JDialog extends Dialog implements WindowConstants, Accessible, RootPaneContainer,
+		TransferHandler.HasGetTransferHandler {
 	private static final Object defaultLookAndFeelDecoratedKey = new StringBuffer(
 			"JDialog.defaultLookAndFeelDecorated");
 
@@ -134,8 +124,7 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 	}
 
 	public JDialog(Frame owner, String title, boolean modal) {
-		super(owner == null ? SwingUtilities.getSharedOwnerFrame() : owner,
-				title, modal);
+		super(owner == null ? SwingUtilities.getSharedOwnerFrame() : owner, title, modal);
 		if (owner == null) {
 			WindowListener ownerShutdownListener = SwingUtilities
 					.getSharedOwnerFrameShutdownListener();
@@ -144,10 +133,8 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 		dialogInit(title);
 	}
 
-	public JDialog(Frame owner, String title, boolean modal,
-			GraphicsConfiguration gc) {
-		super(owner == null ? SwingUtilities.getSharedOwnerFrame() : owner,
-				title, modal, gc);
+	public JDialog(Frame owner, String title, boolean modal, GraphicsConfiguration gc) {
+		super(owner == null ? SwingUtilities.getSharedOwnerFrame() : owner, title, modal, gc);
 		if (owner == null) {
 			WindowListener ownerShutdownListener = SwingUtilities
 					.getSharedOwnerFrameShutdownListener();
@@ -173,8 +160,7 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 		dialogInit(title);
 	}
 
-	public JDialog(Dialog owner, String title, boolean modal,
-			GraphicsConfiguration gc) {
+	public JDialog(Dialog owner, String title, boolean modal, GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
 		dialogInit(title);
 	}
@@ -196,7 +182,8 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 		dialogInit(title);
 	}
 
-	public JDialog(Window owner, String title, Dialog.ModalityType modalityType, GraphicsConfiguration gc) {
+	public JDialog(Window owner, String title, Dialog.ModalityType modalityType,
+			GraphicsConfiguration gc) {
 		super(owner, title, modalityType, gc);
 		dialogInit(title);
 	}
@@ -217,18 +204,18 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 
 	protected void processWindowEvent(WindowEvent e) {
 		super.processWindowEvent(e);
-		
-		if(e.getID() == WindowEvent.WINDOW_CLOSING){
+
+		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
 			switch (defaultCloseOperation) {
-				case WindowConstants.HIDE_ON_CLOSE:
-					setVisible(false);
-					break;
-				case WindowConstants.DISPOSE_ON_CLOSE:
-					dispose();
-					break;
-				case WindowConstants.DO_NOTHING_ON_CLOSE:
-				default:
-					break;
+			case WindowConstants.HIDE_ON_CLOSE:
+				setVisible(false);
+				break;
+			case WindowConstants.DISPOSE_ON_CLOSE:
+				dispose();
+				break;
+			case WindowConstants.DO_NOTHING_ON_CLOSE:
+			default:
+				break;
 			}
 		}
 	}
@@ -277,11 +264,11 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 	}
 
 	protected void addImpl(Component comp, Object constraints, int index) {
-//		if (isRootPaneCheckingEnabled()) {
-			getContentPane().add(comp, constraints, index);
-//		} else {
-//			super.addImpl(comp, constraints, index);
-//		}
+		// if (isRootPaneCheckingEnabled()) {
+		getContentPane().add(comp, constraints, index);
+		// } else {
+		// super.addImpl(comp, constraints, index);
+		// }
 	}
 
 	public void remove(Component comp) {
@@ -293,11 +280,11 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 	}
 
 	public void setLayout(LayoutManager manager) {
-//		if (isRootPaneCheckingEnabled()) {
-			getContentPane().setLayout(manager);
-//		} else {
-//			super.setLayout(manager);
-//		}
+		// if (isRootPaneCheckingEnabled()) {
+		getContentPane().setLayout(manager);
+		// } else {
+		// super.setLayout(manager);
+		// }
 	}
 
 	public JRootPane getRootPane() {
@@ -309,15 +296,15 @@ public class JDialog extends Dialog implements WindowConstants, Accessible,
 			remove(rootPane);
 		}
 		rootPane = root;
-//		if (rootPane != null) {
-//			boolean checkingEnabled = isRootPaneCheckingEnabled();
-//			try {
-//				setRootPaneCheckingEnabled(false);
-//				add(rootPane, BorderLayout.CENTER);
-//			} finally {
-//				setRootPaneCheckingEnabled(checkingEnabled);
-//			}
-//		}
+		// if (rootPane != null) {
+		// boolean checkingEnabled = isRootPaneCheckingEnabled();
+		// try {
+		// setRootPaneCheckingEnabled(false);
+		// add(rootPane, BorderLayout.CENTER);
+		// } finally {
+		// setRootPaneCheckingEnabled(checkingEnabled);
+		// }
+		// }
 	}
 
 	public Container getContentPane() {

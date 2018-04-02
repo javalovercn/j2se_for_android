@@ -48,26 +48,26 @@ import javax.swing.plaf.TabbedPaneUI;
 
 /**
  * A component that lets the user switch between a group of components by
- * clicking on a tab with a given title and/or icon.
- * For examples and information on using tabbed panes see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/tabbedpane.html">How to Use Tabbed Panes</a>,
- * a section in <em>The Java Tutorial</em>.
+ * clicking on a tab with a given title and/or icon. For examples and
+ * information on using tabbed panes see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/tabbedpane.html">How
+ * to Use Tabbed Panes</a>, a section in <em>The Java Tutorial</em>.
  * <p>
  * Tabs/components are added to a <code>TabbedPane</code> object by using the
- * <code>addTab</code> and <code>insertTab</code> methods.
- * A tab is represented by an index corresponding
- * to the position it was added in, where the first tab has an index equal to 0
- * and the last tab has an index equal to the tab count minus 1.
+ * <code>addTab</code> and <code>insertTab</code> methods. A tab is represented
+ * by an index corresponding to the position it was added in, where the first
+ * tab has an index equal to 0 and the last tab has an index equal to the tab
+ * count minus 1.
  * <p>
- * The <code>TabbedPane</code> uses a <code>SingleSelectionModel</code>
- * to represent the set
- * of tab indices and the currently selected index.  If the tab count
- * is greater than 0, then there will always be a selected index, which
- * by default will be initialized to the first tab.  If the tab count is
- * 0, then the selected index will be -1.
+ * The <code>TabbedPane</code> uses a <code>SingleSelectionModel</code> to
+ * represent the set of tab indices and the currently selected index. If the tab
+ * count is greater than 0, then there will always be a selected index, which by
+ * default will be initialized to the first tab. If the tab count is 0, then the
+ * selected index will be -1.
  * <p>
- * The tab title can be rendered by a <code>Component</code>.
- * For example, the following produce similar results:
+ * The tab title can be rendered by a <code>Component</code>. For example, the
+ * following produce similar results:
+ * 
  * <pre>
  * // In this case the look and feel renders the title for the tab.
  * tabbedPane.addTab("Tab", myComponent);
@@ -76,36 +76,31 @@ import javax.swing.plaf.TabbedPaneUI;
  * tabbedPane.addTab(null, myComponent);
  * tabbedPane.setTabComponentAt(0, new JLabel("Tab"));
  * </pre>
+ * 
  * The latter is typically used when you want a more complex user interaction
- * that requires custom components on the tab.  For example, you could
- * provide a custom component that animates or one that has widgets for
- * closing the tab.
+ * that requires custom components on the tab. For example, you could provide a
+ * custom component that animates or one that has widgets for closing the tab.
  * <p>
- * If you specify a component for a tab, the <code>JTabbedPane</code>
- * will not render any text or icon you have specified for the tab.
+ * If you specify a component for a tab, the <code>JTabbedPane</code> will not
+ * render any text or icon you have specified for the tab.
  * <p>
- * <strong>Note:</strong>
- * Do not use <code>setVisible</code> directly on a tab component to make it visible,
- * use <code>setSelectedComponent</code> or <code>setSelectedIndex</code> methods instead.
+ * <strong>Note:</strong> Do not use <code>setVisible</code> directly on a tab
+ * component to make it visible, use <code>setSelectedComponent</code> or
+ * <code>setSelectedIndex</code> methods instead.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *      attribute: isContainer true
- *    description: A component which provides a tab folder metaphor for
- *                 displaying one component from a set of components.
+ * @beaninfo attribute: isContainer true description: A component which provides
+ *           a tab folder metaphor for displaying one component from a set of
+ *           components.
  *
  * @author Dave Moore
  * @author Philip Milne
@@ -224,7 +219,7 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	 * @see EventListenerList
 	 */
 	protected void fireStateChanged() {
-		if (changeEvent == null){
+		if (changeEvent == null) {
 			changeEvent = new ChangeEvent(this);
 		}
 		ChangeListener[] listeners = list.getListeners(ChangeListener.class);
@@ -255,23 +250,28 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 					JTabbedPane.this.getHCTabHostAdAPI().setCurrentTab(index);
 					model.setSelectedIndex(index);
 				}
+
 				@Override
 				public void removeChangeListener(ChangeListener listener) {
 					model.removeChangeListener(listener);
 				}
+
 				@Override
 				public boolean isSelected() {
 					return model.isSelected();
 				}
+
 				@Override
 				public int getSelectedIndex() {
 					return model.getSelectedIndex();
 				}
+
 				@Override
 				public void clearSelection() {
-					//因为JTabbedPane须显示一个，同时与CardLayout逻辑一致。所以关闭此功能
-//					model.clearSelection();
+					// 因为JTabbedPane须显示一个，同时与CardLayout逻辑一致。所以关闭此功能
+					// model.clearSelection();
 				}
+
 				@Override
 				public void addChangeListener(ChangeListener listener) {
 					model.addChangeListener(listener);
@@ -283,11 +283,11 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	}
 
 	private HCCardLayout getCardLayoutAdAPI() {
-		return (HCCardLayout)this.getLayout();
+		return (HCCardLayout) this.getLayout();
 	}
-	
-	private HCTabHost getHCTabHostAdAPI(){
-		return (HCTabHost)this.getContainerViewAdAPI();
+
+	private HCTabHost getHCTabHostAdAPI() {
+		return (HCTabHost) this.getContainerViewAdAPI();
 	}
 
 	public int getTabPlacement() {
@@ -295,8 +295,8 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	}
 
 	public void setTabPlacement(int tabPlacement) {
-		if (tabPlacement != TOP && tabPlacement != LEFT
-				&& tabPlacement != BOTTOM && tabPlacement != RIGHT) {
+		if (tabPlacement != TOP && tabPlacement != LEFT && tabPlacement != BOTTOM
+				&& tabPlacement != RIGHT) {
 			throw new IllegalArgumentException(
 					"illegal tab placement: must be TOP, BOTTOM, LEFT, or RIGHT");
 		}
@@ -310,8 +310,7 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	}
 
 	public void setTabLayoutPolicy(int tabLayoutPolicy) {
-		if (tabLayoutPolicy != WRAP_TAB_LAYOUT
-				&& tabLayoutPolicy != SCROLL_TAB_LAYOUT) {
+		if (tabLayoutPolicy != WRAP_TAB_LAYOUT && tabLayoutPolicy != SCROLL_TAB_LAYOUT) {
 			throw new IllegalArgumentException(
 					"illegal tab layout policy: must be WRAP_TAB_LAYOUT or SCROLL_TAB_LAYOUT");
 		}
@@ -346,14 +345,13 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 		if (index != -1) {
 			setSelectedIndex(index);
 		} else {
-			throw new IllegalArgumentException(
-					"component not found in tabbed pane");
+			throw new IllegalArgumentException("component not found in tabbed pane");
 		}
 	}
 
 	public void insertTab(String title, Icon icon, Component component, String tip, int index) {
 		if (component != null) {
-			TabParameter  para = new TabParameter(title, icon, tip, index);
+			TabParameter para = new TabParameter(title, icon, tip, index);
 			addImpl(component, para, index);
 		}
 	}
@@ -381,8 +379,7 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	}
 
 	public Component add(Component component, int index) {
-		insertTab(component.getName(), null, component, null,
-				index == -1 ? getTabCount() : index);
+		insertTab(component.getName(), null, component, null, index == -1 ? getTabCount() : index);
 		return component;
 	}
 
@@ -524,18 +521,19 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	public void setComponentAt(int index, Component component) {
 		int oldIdx = indexOfComponent(component);
 		HCCardLayout.Card oldCard = null;
-		if(oldIdx >= 0){
+		if (oldIdx >= 0) {
 			super.remove(component);
 			oldCard = getCardLayoutAdAPI().vector.remove(oldIdx);
 		}
 		super.add(component, index);
-		if(oldCard == null){
-			oldCard = new HCCardLayout.Card(new TabParameter(component.getName(), null, "", index), component);
-		}else{
+		if (oldCard == null) {
+			oldCard = new HCCardLayout.Card(new TabParameter(component.getName(), null, "", index),
+					component);
+		} else {
 			oldCard.comp = component;
 		}
 		getCardLayoutAdAPI().vector.add(oldIdx, oldCard);
-		
+
 		validate();
 		revalidate();
 	}
@@ -562,8 +560,7 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	public int indexOfTab(Icon icon) {
 		for (int i = 0; i < getTabCount(); i++) {
 			Icon tabIcon = getIconAt(i);
-			if ((tabIcon != null && tabIcon.equals(icon))
-					|| (tabIcon == null && tabIcon == icon)) {
+			if ((tabIcon != null && tabIcon.equals(icon)) || (tabIcon == null && tabIcon == icon)) {
 				return i;
 			}
 		}
@@ -573,8 +570,7 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	public int indexOfComponent(Component component) {
 		for (int i = 0; i < getTabCount(); i++) {
 			Component c = getComponentAt(i);
-			if ((c != null && c.equals(component))
-					|| (c == null && c == component)) {
+			if ((c != null && c.equals(component)) || (c == null && c == component)) {
 				return i;
 			}
 		}
@@ -593,8 +589,8 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 
 	private void checkIndex(int index) {
 		if (index < 0 || index >= getComponentCount()) {
-			throw new IndexOutOfBoundsException("Index: " + index
-					+ ", Tab count: " + getComponentCount());
+			throw new IndexOutOfBoundsException(
+					"Index: " + index + ", Tab count: " + getComponentCount());
 		}
 	}
 
@@ -604,8 +600,7 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 	void compWriteObjectNotify() {
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 	}
 
 	protected String paramString() {
@@ -621,8 +616,7 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 
 	public void setTabComponentAt(int index, Component component) {
 		if (component != null && indexOfComponent(component) != -1) {
-			throw new IllegalArgumentException(
-					"Component is already added to this JTabbedPane");
+			throw new IllegalArgumentException("Component is already added to this JTabbedPane");
 		}
 		setComponentAt(index, component);
 	}
@@ -640,14 +634,14 @@ public class JTabbedPane extends JComponent implements Serializable, Accessible,
 		}
 		return -1;
 	}
-	
+
 	public static class TabParameter {
 		public String tag;
 		public Icon icon;
 		public String tip;
 		public int idx;
-		
-		public TabParameter(String tag, Icon icon, String tip, int idx){
+
+		public TabParameter(String tag, Icon icon, String tip, int idx) {
 			this.tag = tag;
 			this.icon = icon;
 			this.tip = tip;

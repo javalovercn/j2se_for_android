@@ -28,10 +28,10 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 
 /**
- * An interface that provides information to a scrolling container
- * like JScrollPane.  A complex component that's likely to be used
- * as a viewing a JScrollPane viewport (or other scrolling container)
- * should implement this interface.
+ * An interface that provides information to a scrolling container like
+ * JScrollPane. A complex component that's likely to be used as a viewing a
+ * JScrollPane viewport (or other scrolling container) should implement this
+ * interface.
  *
  * @see JViewport
  * @see JScrollPane
@@ -41,11 +41,9 @@ import java.awt.Rectangle;
 public interface Scrollable {
 	Dimension getPreferredScrollableViewportSize();
 
-	int getScrollableUnitIncrement(Rectangle visibleRect, int orientation,
-			int direction);
+	int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction);
 
-	int getScrollableBlockIncrement(Rectangle visibleRect, int orientation,
-			int direction);
+	int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction);
 
 	boolean getScrollableTracksViewportWidth();
 

@@ -33,40 +33,34 @@ import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
 
 /**
- * An implementation of a two-state button.
- * The <code>JRadioButton</code> and <code>JCheckBox</code> classes
- * are subclasses of this class.
- * For information on using them see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How to Use Buttons, Check Boxes, and Radio Buttons</a>,
- * a section in <em>The Java Tutorial</em>.
+ * An implementation of a two-state button. The <code>JRadioButton</code> and
+ * <code>JCheckBox</code> classes are subclasses of this class. For information
+ * on using them see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How
+ * to Use Buttons, Check Boxes, and Radio Buttons</a>, a section in <em>The Java
+ * Tutorial</em>.
  * <p>
  * Buttons can be configured, and to some degree controlled, by
- * <code><a href="Action.html">Action</a></code>s.  Using an
- * <code>Action</code> with a button has many benefits beyond directly
- * configuring a button.  Refer to <a href="Action.html#buttonActions">
- * Swing Components Supporting <code>Action</code></a> for more
- * details, and you can find more information in <a
- * href="http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How
- * to Use Actions</a>, a section in <em>The Java Tutorial</em>.
+ * <code><a href="Action.html">Action</a></code>s. Using an <code>Action</code>
+ * with a button has many benefits beyond directly configuring a button. Refer
+ * to <a href="Action.html#buttonActions"> Swing Components Supporting
+ * <code>Action</code></a> for more details, and you can find more information
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How to Use
+ * Actions</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: An implementation of a two-state button.
+ * @beaninfo attribute: isContainer false description: An implementation of a
+ *           two-state button.
  *
  * @see JRadioButton
  * @see JCheckBox
@@ -107,14 +101,14 @@ public class JToggleButton extends AbstractButton implements Accessible {
 
 	public JToggleButton(String text, Icon icon, boolean selected, int drawable) {
 		checkBoxForTableDrawable = drawable;
-		
+
 		setModel(new ToggleButtonModel(this));
 
 		model.setSelected(selected);
 
 		init(text, icon);
 	}
-	
+
 	public JToggleButton(String text, Icon icon, boolean selected) {
 		this(text, icon, selected, 0);
 	}
@@ -130,14 +124,14 @@ public class JToggleButton extends AbstractButton implements Accessible {
 		super.setSelected(b);
 		model.setSelected(b);
 	}
-	
+
 	boolean shouldUpdateSelectedStateFromAction() {
 		return true;
 	}
 
 	public static class ToggleButtonModel extends DefaultButtonModel {
 		AbstractButton source;
-		
+
 		public ToggleButtonModel(AbstractButton s) {
 			source = s;
 		}

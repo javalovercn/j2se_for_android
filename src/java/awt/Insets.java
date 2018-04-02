@@ -25,16 +25,15 @@
 package java.awt;
 
 /**
- * An <code>Insets</code> object is a representation of the borders
- * of a container. It specifies the space that a container must leave
- * at each of its edges. The space can be a border, a blank space, or
- * a title.
+ * An <code>Insets</code> object is a representation of the borders of a
+ * container. It specifies the space that a container must leave at each of its
+ * edges. The space can be a border, a blank space, or a title.
  *
- * @author      Arthur van Hoff
- * @author      Sami Shaio
- * @see         java.awt.LayoutManager
- * @see         java.awt.Container
- * @since       JDK1.0
+ * @author Arthur van Hoff
+ * @author Sami Shaio
+ * @see java.awt.LayoutManager
+ * @see java.awt.Container
+ * @since JDK1.0
  */
 public class Insets implements Cloneable, java.io.Serializable {
 
@@ -60,8 +59,8 @@ public class Insets implements Cloneable, java.io.Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof Insets) {
 			Insets insets = (Insets) obj;
-			return ((top == insets.top) && (left == insets.left)
-					&& (bottom == insets.bottom) && (right == insets.right));
+			return ((top == insets.top) && (left == insets.left) && (bottom == insets.bottom)
+					&& (right == insets.right));
 		}
 		return false;
 	}
@@ -81,7 +80,7 @@ public class Insets implements Cloneable, java.io.Serializable {
 	}
 
 	public String toString() {
-		return getClass().getName() + "[top=" + top + ",left=" + left
-				+ ",bottom=" + bottom + ",right=" + right + "]";
+		return getClass().getName() + "[top=" + top + ",left=" + left + ",bottom=" + bottom
+				+ ",right=" + right + "]";
 	}
 }

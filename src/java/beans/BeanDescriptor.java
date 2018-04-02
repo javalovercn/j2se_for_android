@@ -27,11 +27,11 @@ package java.beans;
 import java.lang.ref.Reference;
 
 /**
- * A BeanDescriptor provides global information about a "bean",
- * including its Java class, its displayName, etc.
+ * A BeanDescriptor provides global information about a "bean", including its
+ * Java class, its displayName, etc.
  * <p>
- * This is one of the kinds of descriptor returned by a BeanInfo object,
- * which also returns descriptors for properties, method, and events.
+ * This is one of the kinds of descriptor returned by a BeanInfo object, which
+ * also returns descriptors for properties, method, and events.
  */
 
 public class BeanDescriptor extends FeatureDescriptor {
@@ -58,8 +58,7 @@ public class BeanDescriptor extends FeatureDescriptor {
 	}
 
 	public Class<?> getCustomizerClass() {
-		return (this.customizerClassRef != null) ? this.customizerClassRef
-				.get() : null;
+		return (this.customizerClassRef != null) ? this.customizerClassRef.get() : null;
 	}
 
 	BeanDescriptor(BeanDescriptor old) {

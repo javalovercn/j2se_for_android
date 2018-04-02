@@ -27,14 +27,12 @@ package javax.swing.event;
 import java.util.EventListener;
 
 /**
- * The listener that's notified when a lists selection value
- * changes.
+ * The listener that's notified when a lists selection value changes.
  *
  * @see javax.swing.ListSelectionModel
  *
  * @author Hans Muller
  */
-public interface ListSelectionListener extends EventListener
-{
-  void valueChanged(ListSelectionEvent e);
+public interface ListSelectionListener extends EventListener {
+	void valueChanged(ListSelectionEvent e);
 }

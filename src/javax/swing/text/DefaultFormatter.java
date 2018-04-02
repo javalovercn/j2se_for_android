@@ -33,25 +33,21 @@ import javax.swing.SwingConstants;
 
 /**
  * <code>DefaultFormatter</code> formats aribtrary objects. Formatting is done
- * by invoking the <code>toString</code> method. In order to convert the
- * value back to a String, your class must provide a constructor that
- * takes a String argument. If no single argument constructor that takes a
- * String is found, the returned value will be the String passed into
- * <code>stringToValue</code>.
+ * by invoking the <code>toString</code> method. In order to convert the value
+ * back to a String, your class must provide a constructor that takes a String
+ * argument. If no single argument constructor that takes a String is found, the
+ * returned value will be the String passed into <code>stringToValue</code>.
  * <p>
  * Instances of <code>DefaultFormatter</code> can not be used in multiple
- * instances of <code>JFormattedTextField</code>. To obtain a copy of
- * an already configured <code>DefaultFormatter</code>, use the
- * <code>clone</code> method.
+ * instances of <code>JFormattedTextField</code>. To obtain a copy of an already
+ * configured <code>DefaultFormatter</code>, use the <code>clone</code> method.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see javax.swing.JFormattedTextField.AbstractFormatter
  *
@@ -483,18 +479,15 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 	 * Resets the cursor by using getNextCursorPosition.
 	 */
 	void repositionCursor(int offset, int direction) {
-		getFormattedTextField().getCaret().setDot(
-				getNextCursorPosition(offset, direction));
+		getFormattedTextField().getCaret().setDot(getNextCursorPosition(offset, direction));
 	}
 
 	/**
 	 * Finds the next navigatable character.
 	 */
-	int getNextVisualPositionFrom(JTextComponent text, int pos,
-			Position.Bias bias, int direction, Position.Bias[] biasRet)
-			throws BadLocationException {
-		int value = text.getUI().getNextVisualPositionFrom(text, pos, bias,
-				direction, biasRet);
+	int getNextVisualPositionFrom(JTextComponent text, int pos, Position.Bias bias, int direction,
+			Position.Bias[] biasRet) throws BadLocationException {
+		int value = text.getUI().getNextVisualPositionFrom(text, pos, bias, direction, biasRet);
 
 		if (value == -1) {
 			return -1;
@@ -505,8 +498,8 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 
 			while (!isNavigatable(value) && value != last) {
 				last = value;
-				value = text.getUI().getNextVisualPositionFrom(text, value,
-						bias, direction, biasRet);
+				value = text.getUI().getNextVisualPositionFrom(text, value, bias, direction,
+						biasRet);
 			}
 			int max = getFormattedTextField().getDocument().getLength();
 			if (last == value || value == max) {
@@ -535,8 +528,8 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 	/**
 	 * DocumentFilter method, funnels into <code>replace</code>.
 	 */
-	void replace(DocumentFilter.FilterBypass fb, int offset, int length,
-			String text, AttributeSet attrs) throws BadLocationException {
+	void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text,
+			AttributeSet attrs) throws BadLocationException {
 		ReplaceHolder rh = getReplaceHolder(fb, offset, length, text, attrs);
 
 		replace(rh);
@@ -555,19 +548,17 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 		boolean valid = true;
 		int direction = 1;
 
-		if (rh.length > 0
-				&& (rh.text == null || rh.text.length() == 0)
+		if (rh.length > 0 && (rh.text == null || rh.text.length() == 0)
 				&& (getFormattedTextField().getSelectionStart() != rh.offset || rh.length > 1)) {
 			direction = -1;
 		}
 
 		if (getOverwriteMode() && rh.text != null
 				&& getFormattedTextField().getSelectedText() == null) {
-			rh.length = Math.min(Math.max(rh.length, rh.text.length()), rh.fb
-					.getDocument().getLength() - rh.offset);
+			rh.length = Math.min(Math.max(rh.length, rh.text.length()),
+					rh.fb.getDocument().getLength() - rh.offset);
 		}
-		if ((rh.text != null && !isLegalInsertText(rh.text))
-				|| !canReplace(rh)
+		if ((rh.text != null && !isLegalInsertText(rh.text)) || !canReplace(rh)
 				|| (rh.length == 0 && (rh.text == null || rh.text.length() == 0))) {
 			valid = false;
 		}
@@ -609,8 +600,8 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 	/**
 	 * Returns the ReplaceHolder to track the replace of the specified text.
 	 */
-	ReplaceHolder getReplaceHolder(DocumentFilter.FilterBypass fb, int offset,
-			int length, String text, AttributeSet attrs) {
+	ReplaceHolder getReplaceHolder(DocumentFilter.FilterBypass fb, int offset, int length,
+			String text, AttributeSet attrs) {
 		if (replaceHolder == null) {
 			replaceHolder = new ReplaceHolder();
 		}
@@ -643,8 +634,8 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 		 */
 		int cursorPosition;
 
-		void reset(DocumentFilter.FilterBypass fb, int offset, int length,
-				String text, AttributeSet attrs) {
+		void reset(DocumentFilter.FilterBypass fb, int offset, int length, String text,
+				AttributeSet attrs) {
 			this.fb = fb;
 			this.offset = offset;
 			this.length = length;
@@ -659,8 +650,7 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 	 * NavigationFilter implementation that calls back to methods with same name
 	 * in DefaultFormatter.
 	 */
-	private class DefaultNavigationFilter extends NavigationFilter implements
-			Serializable {
+	private class DefaultNavigationFilter extends NavigationFilter implements Serializable {
 		public void setDot(FilterBypass fb, int dot, Position.Bias bias) {
 			JTextComponent tc = DefaultFormatter.this.getFormattedTextField();
 			if (tc.composedTextExists()) {
@@ -681,16 +671,14 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 			}
 		}
 
-		public int getNextVisualPositionFrom(JTextComponent text, int pos,
-				Position.Bias bias, int direction, Position.Bias[] biasRet)
-				throws BadLocationException {
+		public int getNextVisualPositionFrom(JTextComponent text, int pos, Position.Bias bias,
+				int direction, Position.Bias[] biasRet) throws BadLocationException {
 			if (text.composedTextExists()) {
 				// forward the call to the UI directly
-				return text.getUI().getNextVisualPositionFrom(text, pos, bias,
-						direction, biasRet);
+				return text.getUI().getNextVisualPositionFrom(text, pos, bias, direction, biasRet);
 			} else {
-				return DefaultFormatter.this.getNextVisualPositionFrom(text,
-						pos, bias, direction, biasRet);
+				return DefaultFormatter.this.getNextVisualPositionFrom(text, pos, bias, direction,
+						biasRet);
 			}
 		}
 	}
@@ -699,10 +687,8 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 	 * DocumentFilter implementation that calls back to the replace method of
 	 * DefaultFormatter.
 	 */
-	private class DefaultDocumentFilter extends DocumentFilter implements
-			Serializable {
-		public void remove(FilterBypass fb, int offset, int length)
-				throws BadLocationException {
+	private class DefaultDocumentFilter extends DocumentFilter implements Serializable {
+		public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
 			JTextComponent tc = DefaultFormatter.this.getFormattedTextField();
 			if (tc.composedTextExists()) {
 				// bypass the filter
@@ -712,8 +698,8 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 			}
 		}
 
-		public void insertString(FilterBypass fb, int offset, String string,
-				AttributeSet attr) throws BadLocationException {
+		public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+				throws BadLocationException {
 			JTextComponent tc = DefaultFormatter.this.getFormattedTextField();
 			if (tc.composedTextExists()) {
 				fb.insertString(offset, string, attr);
@@ -722,8 +708,8 @@ public class DefaultFormatter extends JFormattedTextField.AbstractFormatter
 			}
 		}
 
-		public void replace(FilterBypass fb, int offset, int length,
-				String text, AttributeSet attr) throws BadLocationException {
+		public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attr)
+				throws BadLocationException {
 			JTextComponent tc = DefaultFormatter.this.getFormattedTextField();
 			if (tc.composedTextExists()) {
 				// bypass the filter

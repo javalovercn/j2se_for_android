@@ -43,36 +43,30 @@ import android.widget.ScrollView;
 
 /**
  * An implementation of a scrollbar. The user positions the knob in the
- * scrollbar to determine the contents of the viewing area. The
- * program typically adjusts the display so that the end of the
- * scrollbar represents the end of the displayable contents, or 100%
- * of the contents. The start of the scrollbar is the beginning of the
- * displayable contents, or 0%. The position of the knob within
- * those bounds then translates to the corresponding percentage of
- * the displayable contents.
+ * scrollbar to determine the contents of the viewing area. The program
+ * typically adjusts the display so that the end of the scrollbar represents the
+ * end of the displayable contents, or 100% of the contents. The start of the
+ * scrollbar is the beginning of the displayable contents, or 0%. The position
+ * of the knob within those bounds then translates to the corresponding
+ * percentage of the displayable contents.
  * <p>
- * Typically, as the position of the knob in the scrollbar changes
- * a corresponding change is made to the position of the JViewport on
- * the underlying view, changing the contents of the JViewport.
+ * Typically, as the position of the knob in the scrollbar changes a
+ * corresponding change is made to the position of the JViewport on the
+ * underlying view, changing the contents of the JViewport.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JScrollPane
- * @beaninfo
- *      attribute: isContainer false
- *    description: A component that helps determine the visible content range of an area.
+ * @beaninfo attribute: isContainer false description: A component that helps
+ *           determine the visible content range of an area.
  *
  * @author David Kloba
  */
@@ -85,15 +79,14 @@ public class JScrollBar extends JComponent implements Adjustable, Accessible {
 	protected int unitIncrement;
 	protected int blockIncrement;
 	protected int min, max;
-	
+
 	private void checkOrientation(int orientation) {
 		switch (orientation) {
 		case VERTICAL:
 		case HORIZONTAL:
 			break;
 		default:
-			throw new IllegalArgumentException(
-					"orientation must be one of: VERTICAL, HORIZONTAL");
+			throw new IllegalArgumentException("orientation must be one of: VERTICAL, HORIZONTAL");
 		}
 	}
 
@@ -112,7 +105,7 @@ public class JScrollBar extends JComponent implements Adjustable, Accessible {
 	}
 
 	public void setUI(ScrollBarUI ui) {
-		//由于J2SE/JScrollPane需要ScrollBarUI不可见时，设置尺寸为0。故本方法被调用
+		// 由于J2SE/JScrollPane需要ScrollBarUI不可见时，设置尺寸为0。故本方法被调用
 		AndroidClassUtil.callEmptyMethod();
 		super.setUI(ui);
 	}
@@ -178,9 +171,9 @@ public class JScrollBar extends JComponent implements Adjustable, Accessible {
 	}
 
 	public void setValue(int value) {
-		if(value == min){
+		if (value == min) {
 			scrollPane.scrollView.fullScroll(ScrollView.FOCUS_UP);
-		}else if(value == max){
+		} else if (value == max) {
 			scrollPane.scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 		}
 	}
@@ -239,8 +232,7 @@ public class JScrollBar extends JComponent implements Adjustable, Accessible {
 		fireAdjustmentValueChanged(id, type, value, getValueIsAdjusting());
 	}
 
-	private void fireAdjustmentValueChanged(int id, int type, int value,
-			boolean isAdjusting) {
+	private void fireAdjustmentValueChanged(int id, int type, int value, boolean isAdjusting) {
 		AndroidClassUtil.callEmptyMethod();
 	}
 

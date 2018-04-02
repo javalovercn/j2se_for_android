@@ -63,8 +63,7 @@ public class SwingUtilities implements SwingConstants {
 	static void installSwingDropTargetAsNecessary(Component c, TransferHandler t) {
 	}
 
-	public static final boolean isRectangleContainingRectangle(Rectangle a,
-			Rectangle b) {
+	public static final boolean isRectangleContainingRectangle(Rectangle a, Rectangle b) {
 		return b.x >= a.x && (b.x + b.width) <= (a.x + a.width) && b.y >= a.y
 				&& (b.y + b.height) <= (a.y + a.height);
 	}
@@ -84,23 +83,20 @@ public class SwingUtilities implements SwingConstants {
 		return null;
 	}
 
-	public static Point convertPoint(Component source, Point aPoint,
-			Component destination) {
+	public static Point convertPoint(Component source, Point aPoint, Component destination) {
 		return null;
 	}
 
-	public static Point convertPoint(Component source, int x, int y,
-			Component destination) {
+	public static Point convertPoint(Component source, int x, int y, Component destination) {
 		Point point = new Point(x, y);
 		return convertPoint(source, point, destination);
 	}
 
-	public static Rectangle convertRectangle(Component source,
-			Rectangle aRectangle, Component destination) {
+	public static Rectangle convertRectangle(Component source, Rectangle aRectangle,
+			Component destination) {
 		Point point = new Point(aRectangle.x, aRectangle.y);
 		point = convertPoint(source, point, destination);
-		return new Rectangle(point.x, point.y, aRectangle.width,
-				aRectangle.height);
+		return new Rectangle(point.x, point.y, aRectangle.width, aRectangle.height);
 	}
 
 	public static Container getAncestorOfClass(Class<?> c, Component comp) {
@@ -115,8 +111,8 @@ public class SwingUtilities implements SwingConstants {
 		return null;
 	}
 
-	public static MouseEvent convertMouseEvent(Component source,
-			MouseEvent sourceEvent, Component destination) {
+	public static MouseEvent convertMouseEvent(Component source, MouseEvent sourceEvent,
+			Component destination) {
 		return null;
 	}
 
@@ -134,13 +130,12 @@ public class SwingUtilities implements SwingConstants {
 		return false;
 	}
 
-	public static Rectangle computeIntersection(int x, int y, int width,
-			int height, Rectangle dest) {
+	public static Rectangle computeIntersection(int x, int y, int width, int height,
+			Rectangle dest) {
 		return null;
 	}
 
-	public static Rectangle computeUnion(int x, int y, int width, int height,
-			Rectangle dest) {
+	public static Rectangle computeUnion(int x, int y, int width, int height, Rectangle dest) {
 		return null;
 	}
 
@@ -164,37 +159,33 @@ public class SwingUtilities implements SwingConstants {
 		return 0;
 	}
 
-	public static String layoutCompoundLabel(JComponent c, FontMetrics fm,
-			String text, Icon icon, int verticalAlignment,
-			int horizontalAlignment, int verticalTextPosition,
-			int horizontalTextPosition, Rectangle viewR, Rectangle iconR,
-			Rectangle textR, int textIconGap) {
+	public static String layoutCompoundLabel(JComponent c, FontMetrics fm, String text, Icon icon,
+			int verticalAlignment, int horizontalAlignment, int verticalTextPosition,
+			int horizontalTextPosition, Rectangle viewR, Rectangle iconR, Rectangle textR,
+			int textIconGap) {
 		return null;
 	}
 
-	public static String layoutCompoundLabel(FontMetrics fm, String text,
-			Icon icon, int verticalAlignment, int horizontalAlignment,
-			int verticalTextPosition, int horizontalTextPosition,
-			Rectangle viewR, Rectangle iconR, Rectangle textR, int textIconGap) {
-		return layoutCompoundLabelImpl(null, fm, text, icon, verticalAlignment,
-				horizontalAlignment, verticalTextPosition,
-				horizontalTextPosition, viewR, iconR, textR, textIconGap);
+	public static String layoutCompoundLabel(FontMetrics fm, String text, Icon icon,
+			int verticalAlignment, int horizontalAlignment, int verticalTextPosition,
+			int horizontalTextPosition, Rectangle viewR, Rectangle iconR, Rectangle textR,
+			int textIconGap) {
+		return layoutCompoundLabelImpl(null, fm, text, icon, verticalAlignment, horizontalAlignment,
+				verticalTextPosition, horizontalTextPosition, viewR, iconR, textR, textIconGap);
 	}
 
-	private static String layoutCompoundLabelImpl(JComponent c, FontMetrics fm,
-			String text, Icon icon, int verticalAlignment,
-			int horizontalAlignment, int verticalTextPosition,
-			int horizontalTextPosition, Rectangle viewR, Rectangle iconR,
-			Rectangle textR, int textIconGap) {
+	private static String layoutCompoundLabelImpl(JComponent c, FontMetrics fm, String text,
+			Icon icon, int verticalAlignment, int horizontalAlignment, int verticalTextPosition,
+			int horizontalTextPosition, Rectangle viewR, Rectangle iconR, Rectangle textR,
+			int textIconGap) {
 		return "";
 	}
 
-	public static void paintComponent(Graphics g, Component c, Container p,
-			int x, int y, int w, int h) {
+	public static void paintComponent(Graphics g, Component c, Container p, int x, int y, int w,
+			int h) {
 	}
 
-	public static void paintComponent(Graphics g, Component c, Container p,
-			Rectangle r) {
+	public static void paintComponent(Graphics g, Component c, Container p, Rectangle r) {
 	}
 
 	public static void updateComponentTreeUI(Component c) {
@@ -266,17 +257,15 @@ public class SwingUtilities implements SwingConstants {
 		return true;
 	}
 
-	public static boolean notifyAction(Action action, KeyStroke ks,
-			KeyEvent event, Object sender, int modifiers) {
+	public static boolean notifyAction(Action action, KeyStroke ks, KeyEvent event, Object sender,
+			int modifiers) {
 		return true;
 	}
 
-	public static void replaceUIInputMap(JComponent component, int type,
-			InputMap uiInputMap) {
+	public static void replaceUIInputMap(JComponent component, int type, InputMap uiInputMap) {
 	}
 
-	public static void replaceUIActionMap(JComponent component,
-			ActionMap uiActionMap) {
+	public static void replaceUIActionMap(JComponent component, ActionMap uiActionMap) {
 	}
 
 	public static InputMap getUIInputMap(JComponent component, int condition) {
@@ -331,8 +320,7 @@ public class SwingUtilities implements SwingConstants {
 		return null;
 	}
 
-	static WindowListener getSharedOwnerFrameShutdownListener()
-			throws HeadlessException {
+	static WindowListener getSharedOwnerFrameShutdownListener() throws HeadlessException {
 		return null;
 	}
 
@@ -346,10 +334,8 @@ public class SwingUtilities implements SwingConstants {
 	static void appContextRemove(Object key) {
 	}
 
-	static Class<?> loadSystemClass(String className)
-			throws ClassNotFoundException {
-		return Class.forName(className, true, Thread.currentThread()
-				.getContextClassLoader());
+	static Class<?> loadSystemClass(String className) throws ClassNotFoundException {
+		return Class.forName(className, true, Thread.currentThread().getContextClassLoader());
 	}
 
 	static boolean isLeftToRight(Component c) {

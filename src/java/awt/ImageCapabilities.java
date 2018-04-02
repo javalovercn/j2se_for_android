@@ -26,6 +26,7 @@ package java.awt;
 
 /**
  * Capabilities and properties of images.
+ * 
  * @author Michael Martak
  * @since 1.4
  */

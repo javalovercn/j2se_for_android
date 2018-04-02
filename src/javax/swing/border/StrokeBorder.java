@@ -36,13 +36,11 @@ import android.view.View;
 /**
  * A class which implements a border of an arbitrary stroke.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI
- * between applications running the same version of Swing.
- * As of 1.4, support for long term storage of all JavaBeans&trade;
- * has been added to the <code>java.beans</code> package.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans&trade; has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
  * @author Sergey A. Malenkov
@@ -50,40 +48,40 @@ import android.view.View;
  * @since 1.7
  */
 public class StrokeBorder extends AbstractBorder {
-    private final BasicStroke stroke;
-    private final Paint paint;
+	private final BasicStroke stroke;
+	private final Paint paint;
 
-    public StrokeBorder(BasicStroke stroke) {
-        this(stroke, null);
-    }
+	public StrokeBorder(BasicStroke stroke) {
+		this(stroke, null);
+	}
 
-    public StrokeBorder(BasicStroke stroke, Paint paint) {
-        if (stroke == null) {
-            throw new NullPointerException("border's stroke");
-        }
-        this.stroke = stroke;
-        this.paint = paint;
-        throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
-    }
+	public StrokeBorder(BasicStroke stroke, Paint paint) {
+		if (stroke == null) {
+			throw new NullPointerException("border's stroke");
+		}
+		this.stroke = stroke;
+		this.paint = paint;
+		throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
+	}
 
-    @Override
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-    }
+	@Override
+	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+	}
 
-    @Override
-    public Insets getBorderInsets(Component c, Insets insets) {
-        int size = (int) Math.ceil(this.stroke.getLineWidth());
-        insets.set(size, size, size, size);
-        return insets;
-    }
+	@Override
+	public Insets getBorderInsets(Component c, Insets insets) {
+		int size = (int) Math.ceil(this.stroke.getLineWidth());
+		insets.set(size, size, size, size);
+		return insets;
+	}
 
-    public BasicStroke getStroke() {
-        return this.stroke;
-    }
+	public BasicStroke getStroke() {
+		return this.stroke;
+	}
 
-    public Paint getPaint() {
-        return this.paint;
-    }
+	public Paint getPaint() {
+		return this.paint;
+	}
 
 	@Override
 	public View getBorderViewAdAPI() {
@@ -92,6 +90,6 @@ public class StrokeBorder extends AbstractBorder {
 
 	@Override
 	public void setComponentViewAdAPI(View view, Component component) {
-//		ActivityManager.getActivity().runOnUiThread(action)
+		// AndroidUIUtil.runOnUiThread(action)
 	}
 }

@@ -47,17 +47,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 /**
- * A table of defaults for Swing components.  Applications can set/get
- * default values via the <code>UIManager</code>.
+ * A table of defaults for Swing components. Applications can set/get default
+ * values via the <code>UIManager</code>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see UIManager
  * @author Hans Muller
@@ -75,7 +73,7 @@ public class UIDefaults extends Hashtable<Object, Object> {
 	public static final String FILE_VIEW_DIRECTORY_ICON = "FileView.directoryIcon";
 
 	public static final String FILE_VIEW_FILE_ICON = "FileView.fileIcon";
-	
+
 	public UIDefaults() {
 		this(700, .75f);
 	}
@@ -96,19 +94,19 @@ public class UIDefaults extends Hashtable<Object, Object> {
 		Object value = getFromHashtable(key);
 		return (value != null) ? value : getFromResourceBundle(key, null);
 	}
-	
+
 	private Object getFromHashtable(Object key) {
-		if(key.equals(UIDefaults.FILE_VIEW_DIRECTORY_ICON)){
+		if (key.equals(UIDefaults.FILE_VIEW_DIRECTORY_ICON)) {
 			return getFileIcon("/hc/android/res/folder_64.png", key);
-		}else if(key.equals(UIDefaults.FILE_VIEW_FILE_ICON)){
+		} else if (key.equals(UIDefaults.FILE_VIEW_FILE_ICON)) {
 			return getFileIcon("/hc/android/res/file_64.png", key);
-		}else if(key.equals("OptionPane.errorIcon")){
+		} else if (key.equals("OptionPane.errorIcon")) {
 			return getSysIcon(AndroidUIUtil.DRAW_ERROR_ID, key);
-		}else if(key.equals("OptionPane.informationIcon")){
+		} else if (key.equals("OptionPane.informationIcon")) {
 			return getSysIcon(AndroidUIUtil.DRAW_INFO_ID, key);
-		}else if(key.equals("OptionPane.questionIcon")){
+		} else if (key.equals("OptionPane.questionIcon")) {
 			return getSysIcon(AndroidUIUtil.DRAW_HELP_ID, key);
-		}else if(key.equals("OptionPane.warningIcon")){
+		} else if (key.equals("OptionPane.warningIcon")) {
 			return getSysIcon(AndroidUIUtil.DRAW_WARNING_ID, key);
 		}
 		return null;
@@ -116,21 +114,22 @@ public class UIDefaults extends Hashtable<Object, Object> {
 
 	private Object getSysIcon(int res_id, Object key) {
 		return new ImageIcon(new BufferedImage(AndroidUIUtil.getSystemDefaultDrawable(res_id)), "");
-//		Object out = keyValues.get(key);
-//		if(out == null){
-//			out = new ImageIcon(new BufferedImage(UIUtil.getSystemDefaultDrawable(res_id)), "");
-//			keyValues.put(key, out);
-//		}
-//		return out;
+		// Object out = keyValues.get(key);
+		// if(out == null){
+		// out = new ImageIcon(new
+		// BufferedImage(UIUtil.getSystemDefaultDrawable(res_id)), "");
+		// keyValues.put(key, out);
+		// }
+		// return out;
 	}
 
 	private Object getFileIcon(String fileName, Object key) {
 		Object out = keyValues.get(key);
-		if(out == null){
+		if (out == null) {
 			InputStream is = J2SEInitor.class.getResourceAsStream(fileName);
 			Bitmap bitmap = BitmapFactory.decodeStream(is);
 			BufferedImage bi = new BufferedImage(bitmap);
-			bi.initZoom = 0.375F;//缺省zoom= 0.25，即16。 0.375F,即24
+			bi.initZoom = 0.375F;// 缺省zoom= 0.25，即16。 0.375F,即24
 			out = new ImageIcon(bi);
 			keyValues.put(key, out);
 		}
@@ -143,8 +142,7 @@ public class UIDefaults extends Hashtable<Object, Object> {
 	}
 
 	private Object getFromResourceBundle(Object key, Locale l) {
-		if (resourceBundles == null || resourceBundles.isEmpty()
-				|| !(key instanceof String)) {
+		if (resourceBundles == null || resourceBundles.isEmpty() || !(key instanceof String)) {
 			return null;
 		}
 
@@ -166,8 +164,7 @@ public class UIDefaults extends Hashtable<Object, Object> {
 	}
 
 	public Object put(Object key, Object value) {
-		Object oldValue = (value == null) ? super.remove(key) : super.put(key,
-				value);
+		Object oldValue = (value == null) ? super.remove(key) : super.put(key, value);
 		if (key instanceof String) {
 			firePropertyChange((String) key, oldValue, value);
 		}
@@ -239,14 +236,12 @@ public class UIDefaults extends Hashtable<Object, Object> {
 
 	public boolean getBoolean(Object key) {
 		Object value = get(key);
-		return (value instanceof Boolean) ? ((Boolean) value).booleanValue()
-				: false;
+		return (value instanceof Boolean) ? ((Boolean) value).booleanValue() : false;
 	}
 
 	public boolean getBoolean(Object key, Locale l) {
 		Object value = get(key, l);
-		return (value instanceof Boolean) ? ((Boolean) value).booleanValue()
-				: false;
+		return (value instanceof Boolean) ? ((Boolean) value).booleanValue() : false;
 	}
 
 	public Insets getInsets(Object key) {
@@ -269,8 +264,7 @@ public class UIDefaults extends Hashtable<Object, Object> {
 		return (value instanceof Dimension) ? (Dimension) value : null;
 	}
 
-	public Class<? extends ComponentUI> getUIClass(String uiClassID,
-			ClassLoader uiClassLoader) {
+	public Class<? extends ComponentUI> getUIClass(String uiClassID, ClassLoader uiClassLoader) {
 		return null;
 	}
 
@@ -291,20 +285,17 @@ public class UIDefaults extends Hashtable<Object, Object> {
 		return null;
 	}
 
-	public synchronized void addPropertyChangeListener(
-			PropertyChangeListener listener) {
+	public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
 	}
 
-	public synchronized void removePropertyChangeListener(
-			PropertyChangeListener listener) {
+	public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
 	}
 
 	public synchronized PropertyChangeListener[] getPropertyChangeListeners() {
 		return new PropertyChangeListener[0];
 	}
 
-	protected void firePropertyChange(String propertyName, Object oldValue,
-			Object newValue) {
+	protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
 	}
 
 	public synchronized void addResourceBundle(String bundleName) {

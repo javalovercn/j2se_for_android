@@ -32,108 +32,108 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 /**
- *  This abstract class provides default implementations for most of
- *  the methods in the <code>TableModel</code> interface. It takes care of
- *  the management of listeners and provides some conveniences for generating
- *  <code>TableModelEvents</code> and dispatching them to the listeners.
- *  To create a concrete <code>TableModel</code> as a subclass of
- *  <code>AbstractTableModel</code> you need only provide implementations
- *  for the following three methods:
+ * This abstract class provides default implementations for most of the methods
+ * in the <code>TableModel</code> interface. It takes care of the management of
+ * listeners and provides some conveniences for generating
+ * <code>TableModelEvents</code> and dispatching them to the listeners. To
+ * create a concrete <code>TableModel</code> as a subclass of
+ * <code>AbstractTableModel</code> you need only provide implementations for the
+ * following three methods:
  *
- *  <pre>
- *  public int getRowCount();
- *  public int getColumnCount();
- *  public Object getValueAt(int row, int column);
- *  </pre>
+ * <pre>
+ * public int getRowCount();
+ * 
+ * public int getColumnCount();
+ * 
+ * public Object getValueAt(int row, int column);
+ * </pre>
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Alan Chung
  * @author Philip Milne
  */
-public abstract class AbstractTableModel implements TableModel, Serializable{
-    protected EventListenerList listenerList = new EventListenerList();
+public abstract class AbstractTableModel implements TableModel, Serializable {
+	protected EventListenerList listenerList = new EventListenerList();
 
-    public String getColumnName(int column) {
-        return "column " + column;
-    }
+	public String getColumnName(int column) {
+		return "column " + column;
+	}
 
-    public int findColumn(String columnName) {
-        for (int i = 0; i < getColumnCount(); i++) {
-            if (columnName.equals(getColumnName(i))) {
-                return i;
-            }
-        }
-        return -1;
-    }
+	public int findColumn(String columnName) {
+		for (int i = 0; i < getColumnCount(); i++) {
+			if (columnName.equals(getColumnName(i))) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
-    public Class<?> getColumnClass(int columnIndex) {
-        return Object.class;
-    }
+	public Class<?> getColumnClass(int columnIndex) {
+		return Object.class;
+	}
 
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
-    }
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return false;
+	}
 
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    }
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+	}
 
-    public void addTableModelListener(TableModelListener l) {
-        listenerList.add(TableModelListener.class, l);
-    }
+	public void addTableModelListener(TableModelListener l) {
+		listenerList.add(TableModelListener.class, l);
+	}
 
-    public void removeTableModelListener(TableModelListener l) {
-        listenerList.remove(TableModelListener.class, l);
-    }
+	public void removeTableModelListener(TableModelListener l) {
+		listenerList.remove(TableModelListener.class, l);
+	}
 
-    public TableModelListener[] getTableModelListeners() {
-        return listenerList.getListeners(TableModelListener.class);
-    }
+	public TableModelListener[] getTableModelListeners() {
+		return listenerList.getListeners(TableModelListener.class);
+	}
 
-    public void fireTableDataChanged() {
-        fireTableChanged(new TableModelEvent(this));
-    }
+	public void fireTableDataChanged() {
+		fireTableChanged(new TableModelEvent(this));
+	}
 
-    public void fireTableStructureChanged() {
-        fireTableChanged(new TableModelEvent(this, TableModelEvent.HEADER_ROW));
-    }
+	public void fireTableStructureChanged() {
+		fireTableChanged(new TableModelEvent(this, TableModelEvent.HEADER_ROW));
+	}
 
-    public void fireTableRowsInserted(int firstRow, int lastRow) {
-        fireTableChanged(new TableModelEvent(this, firstRow, lastRow,
-                             TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
-    }
+	public void fireTableRowsInserted(int firstRow, int lastRow) {
+		fireTableChanged(new TableModelEvent(this, firstRow, lastRow, TableModelEvent.ALL_COLUMNS,
+				TableModelEvent.INSERT));
+	}
 
-    public void fireTableRowsUpdated(int firstRow, int lastRow) {
-        fireTableChanged(new TableModelEvent(this, firstRow, lastRow,
-                             TableModelEvent.ALL_COLUMNS, TableModelEvent.UPDATE));
-    }
+	public void fireTableRowsUpdated(int firstRow, int lastRow) {
+		fireTableChanged(new TableModelEvent(this, firstRow, lastRow, TableModelEvent.ALL_COLUMNS,
+				TableModelEvent.UPDATE));
+	}
 
-    public void fireTableRowsDeleted(int firstRow, int lastRow) {
-        fireTableChanged(new TableModelEvent(this, firstRow, lastRow,
-                             TableModelEvent.ALL_COLUMNS, TableModelEvent.DELETE));
-    }
+	public void fireTableRowsDeleted(int firstRow, int lastRow) {
+		fireTableChanged(new TableModelEvent(this, firstRow, lastRow, TableModelEvent.ALL_COLUMNS,
+				TableModelEvent.DELETE));
+	}
 
-    public void fireTableCellUpdated(int row, int column) {
-        fireTableChanged(new TableModelEvent(this, row, row, column));
-    }
+	public void fireTableCellUpdated(int row, int column) {
+		fireTableChanged(new TableModelEvent(this, row, row, column));
+	}
 
-    public void fireTableChanged(TableModelEvent e) {
-        Object[] listeners = listenerList.getListenerList();
-        for (int i = listeners.length-2; i>=0; i-=2) {
-            if (listeners[i]==TableModelListener.class) {
-                ((TableModelListener)listeners[i+1]).tableChanged(e);
-            }
-        }
-    }
+	public void fireTableChanged(TableModelEvent e) {
+		Object[] listeners = listenerList.getListenerList();
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == TableModelListener.class) {
+				((TableModelListener) listeners[i + 1]).tableChanged(e);
+			}
+		}
+	}
 
-    public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
-        return listenerList.getListeners(listenerType);
-    }
+	public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
+		return listenerList.getListeners(listenerType);
+	}
 }

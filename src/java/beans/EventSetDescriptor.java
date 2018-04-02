@@ -28,12 +28,12 @@ import java.lang.ref.Reference;
 import java.lang.reflect.Method;
 
 /**
- * An EventSetDescriptor describes a group of events that a given Java
- * bean fires.
+ * An EventSetDescriptor describes a group of events that a given Java bean
+ * fires.
  * <P>
- * The given group of events are all delivered as method calls on a single
- * event listener interface, and an event listener object can be registered
- * via a call on a registration method supplied by the event source.
+ * The given group of events are all delivered as method calls on a single event
+ * listener interface, and an event listener object can be registered via a call
+ * on a registration method supplied by the event source.
  */
 public class EventSetDescriptor extends FeatureDescriptor {
 
@@ -48,18 +48,12 @@ public class EventSetDescriptor extends FeatureDescriptor {
 	private boolean unicast;
 	private boolean inDefaultEventSet = true;
 
-	public EventSetDescriptor(Class<?> sourceClass, String eventSetName,
-			Class<?> listenerType, String listenerMethodName)
-			throws IntrospectionException {
-		this(
-				sourceClass,
-				eventSetName,
-				listenerType,
-				new String[] { listenerMethodName },
+	public EventSetDescriptor(Class<?> sourceClass, String eventSetName, Class<?> listenerType,
+			String listenerMethodName) throws IntrospectionException {
+		this(sourceClass, eventSetName, listenerType, new String[] { listenerMethodName },
 				Introspector.ADD_PREFIX + getListenerClassName(listenerType),
 				Introspector.REMOVE_PREFIX + getListenerClassName(listenerType),
-				Introspector.GET_PREFIX + getListenerClassName(listenerType)
-						+ "s");
+				Introspector.GET_PREFIX + getListenerClassName(listenerType) + "s");
 	}
 
 	private static String getListenerClassName(Class cls) {
@@ -67,18 +61,17 @@ public class EventSetDescriptor extends FeatureDescriptor {
 		return className.substring(className.lastIndexOf('.') + 1);
 	}
 
-	public EventSetDescriptor(Class<?> sourceClass, String eventSetName,
-			Class<?> listenerType, String listenerMethodNames[],
-			String addListenerMethodName, String removeListenerMethodName)
-			throws IntrospectionException {
-		this(sourceClass, eventSetName, listenerType, listenerMethodNames,
-				addListenerMethodName, removeListenerMethodName, null);
+	public EventSetDescriptor(Class<?> sourceClass, String eventSetName, Class<?> listenerType,
+			String listenerMethodNames[], String addListenerMethodName,
+			String removeListenerMethodName) throws IntrospectionException {
+		this(sourceClass, eventSetName, listenerType, listenerMethodNames, addListenerMethodName,
+				removeListenerMethodName, null);
 	}
 
-	public EventSetDescriptor(Class<?> sourceClass, String eventSetName,
-			Class<?> listenerType, String listenerMethodNames[],
-			String addListenerMethodName, String removeListenerMethodName,
-			String getListenerMethodName) throws IntrospectionException {
+	public EventSetDescriptor(Class<?> sourceClass, String eventSetName, Class<?> listenerType,
+			String listenerMethodNames[], String addListenerMethodName,
+			String removeListenerMethodName, String getListenerMethodName)
+			throws IntrospectionException {
 	}
 
 	private static Method getMethod(Class cls, String name, int args)
@@ -86,23 +79,20 @@ public class EventSetDescriptor extends FeatureDescriptor {
 		return null;
 	}
 
+	public EventSetDescriptor(String eventSetName, Class<?> listenerType, Method listenerMethods[],
+			Method addListenerMethod, Method removeListenerMethod) throws IntrospectionException {
+		this(eventSetName, listenerType, listenerMethods, addListenerMethod, removeListenerMethod,
+				null);
+	}
+
+	public EventSetDescriptor(String eventSetName, Class<?> listenerType, Method listenerMethods[],
+			Method addListenerMethod, Method removeListenerMethod, Method getListenerMethod)
+			throws IntrospectionException {
+	}
+
 	public EventSetDescriptor(String eventSetName, Class<?> listenerType,
-			Method listenerMethods[], Method addListenerMethod,
+			MethodDescriptor listenerMethodDescriptors[], Method addListenerMethod,
 			Method removeListenerMethod) throws IntrospectionException {
-		this(eventSetName, listenerType, listenerMethods, addListenerMethod,
-				removeListenerMethod, null);
-	}
-
-	public EventSetDescriptor(String eventSetName, Class<?> listenerType,
-			Method listenerMethods[], Method addListenerMethod,
-			Method removeListenerMethod, Method getListenerMethod)
-			throws IntrospectionException {
-	}
-
-	public EventSetDescriptor(String eventSetName, Class<?> listenerType,
-			MethodDescriptor listenerMethodDescriptors[],
-			Method addListenerMethod, Method removeListenerMethod)
-			throws IntrospectionException {
 	}
 
 	public Class<?> getListenerType() {
@@ -178,8 +168,7 @@ public class EventSetDescriptor extends FeatureDescriptor {
 		appendTo(sb, "listenerType", this.listenerTypeRef);
 		appendTo(sb, "getListenerMethod", getMethod(this.getMethodDescriptor));
 		appendTo(sb, "addListenerMethod", getMethod(this.addMethodDescriptor));
-		appendTo(sb, "removeListenerMethod",
-				getMethod(this.removeMethodDescriptor));
+		appendTo(sb, "removeListenerMethod", getMethod(this.removeMethodDescriptor));
 	}
 
 	private static Method getMethod(MethodDescriptor descriptor) {

@@ -30,36 +30,40 @@ import java.awt.Shape;
 import android.text.style.CharacterStyle;
 
 /**
- * An interface for an object that allows one to mark up the background
- * with colored areas.
+ * An interface for an object that allows one to mark up the background with
+ * colored areas.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public interface Highlighter {
-    public void install(JTextComponent c);
+	public void install(JTextComponent c);
 
-    public void deinstall(JTextComponent c);
+	public void deinstall(JTextComponent c);
 
-    public void paint(Graphics g);
+	public void paint(Graphics g);
 
-    public Object addHighlight(int p0, int p1, HighlightPainter p) throws BadLocationException;
+	public Object addHighlight(int p0, int p1, HighlightPainter p) throws BadLocationException;
 
-    public void removeHighlight(Object tag);
+	public void removeHighlight(Object tag);
 
-    public void removeAllHighlights();
+	public void removeAllHighlights();
 
-    public void changeHighlight(Object tag, int p0, int p1) throws BadLocationException;
-    public Highlight[] getHighlights();
-    
-    public interface HighlightPainter {
-        public void paint(Graphics g, int p0, int p1, Shape bounds, JTextComponent c);
-        public CharacterStyle getCharacterStyleAdAPI();
-    }
+	public void changeHighlight(Object tag, int p0, int p1) throws BadLocationException;
 
-    public interface Highlight {
-        public int getStartOffset();
-        public int getEndOffset();
-        public HighlightPainter getPainter();
-    }
+	public Highlight[] getHighlights();
+
+	public interface HighlightPainter {
+		public void paint(Graphics g, int p0, int p1, Shape bounds, JTextComponent c);
+
+		public CharacterStyle getCharacterStyleAdAPI();
+	}
+
+	public interface Highlight {
+		public int getStartOffset();
+
+		public int getEndOffset();
+
+		public HighlightPainter getPainter();
+	}
 
 };

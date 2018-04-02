@@ -27,32 +27,30 @@ package java.awt.dnd;
 import java.util.EventListener;
 
 /**
- * The <code>DragSourceListener</code> defines the
- * event interface for originators of
- * Drag and Drop operations to track the state of the user's gesture, and to
- * provide appropriate &quot;drag over&quot;
- * feedback to the user throughout the
- * Drag and Drop operation.
+ * The <code>DragSourceListener</code> defines the event interface for
+ * originators of Drag and Drop operations to track the state of the user's
+ * gesture, and to provide appropriate &quot;drag over&quot; feedback to the
+ * user throughout the Drag and Drop operation.
  * <p>
  * The drop site is <i>associated with the previous <code>dragEnter()</code>
  * invocation</i> if the latest invocation of <code>dragEnter()</code> on this
  * listener:
  * <ul>
  * <li>corresponds to that drop site and
- * <li> is not followed by a <code>dragExit()</code> invocation on this listener.
+ * <li>is not followed by a <code>dragExit()</code> invocation on this listener.
  * </ul>
  *
  * @since 1.2
  */
 
 public interface DragSourceListener extends EventListener {
-    void dragEnter(DragSourceDragEvent dsde);
+	void dragEnter(DragSourceDragEvent dsde);
 
-    void dragOver(DragSourceDragEvent dsde);
+	void dragOver(DragSourceDragEvent dsde);
 
-    void dropActionChanged(DragSourceDragEvent dsde);
+	void dropActionChanged(DragSourceDragEvent dsde);
 
-    void dragExit(DragSourceEvent dse);
+	void dragExit(DragSourceEvent dse);
 
-    void dragDropEnd(DragSourceDropEvent dsde);
+	void dragDropEnd(DragSourceDropEvent dsde);
 }

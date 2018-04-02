@@ -28,17 +28,18 @@ import java.io.Serializable;
 
 /**
  * The <code>GraphicsConfigTemplate</code> class is used to obtain a valid
- * {@link GraphicsConfiguration}.  A user instantiates one of these
- * objects and then sets all non-default attributes as desired.  The
+ * {@link GraphicsConfiguration}. A user instantiates one of these objects and
+ * then sets all non-default attributes as desired. The
  * {@link GraphicsDevice#getBestConfiguration} method found in the
  * {@link GraphicsDevice} class is then called with this
- * <code>GraphicsConfigTemplate</code>.  A valid
- * <code>GraphicsConfiguration</code> is returned that meets or exceeds
- * what was requested in the <code>GraphicsConfigTemplate</code>.
+ * <code>GraphicsConfigTemplate</code>. A valid
+ * <code>GraphicsConfiguration</code> is returned that meets or exceeds what was
+ * requested in the <code>GraphicsConfigTemplate</code>.
+ * 
  * @see GraphicsDevice
  * @see GraphicsConfiguration
  *
- * @since       1.2
+ * @since 1.2
  */
 public abstract class GraphicsConfigTemplate implements Serializable {
 	public GraphicsConfigTemplate() {
@@ -48,8 +49,7 @@ public abstract class GraphicsConfigTemplate implements Serializable {
 	public static final int PREFERRED = 2;
 	public static final int UNNECESSARY = 3;
 
-	public abstract GraphicsConfiguration getBestConfiguration(
-			GraphicsConfiguration[] gc);
+	public abstract GraphicsConfiguration getBestConfiguration(GraphicsConfiguration[] gc);
 
 	public abstract boolean isGraphicsConfigSupported(GraphicsConfiguration gc);
 

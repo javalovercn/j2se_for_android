@@ -34,53 +34,50 @@
  ******************************************************************/
 
 package java.awt.image;
+
 import java.awt.Point;
 
 /**
- * WriteableRenderedImage is a common interface for objects which
- * contain or can produce image data in the form of Rasters and
- * which can be modified and/or written over.  The image
- * data may be stored/produced as a single tile or a regular array
- * of tiles.
+ * WriteableRenderedImage is a common interface for objects which contain or can
+ * produce image data in the form of Rasters and which can be modified and/or
+ * written over. The image data may be stored/produced as a single tile or a
+ * regular array of tiles.
  * <p>
- * WritableRenderedImage provides notification to other interested
- * objects when a tile is checked out for writing (via the
- * getWritableTile method) and when the last writer of a particular
- * tile relinquishes its access (via a call to releaseWritableTile).
- * Additionally, it allows any caller to determine whether any tiles
- * are currently checked out (via hasTileWriters), and to obtain a
- * list of such tiles (via getWritableTileIndices, in the form of a Vector
- * of Point objects).
+ * WritableRenderedImage provides notification to other interested objects when
+ * a tile is checked out for writing (via the getWritableTile method) and when
+ * the last writer of a particular tile relinquishes its access (via a call to
+ * releaseWritableTile). Additionally, it allows any caller to determine whether
+ * any tiles are currently checked out (via hasTileWriters), and to obtain a
+ * list of such tiles (via getWritableTileIndices, in the form of a Vector of
+ * Point objects).
  * <p>
- * Objects wishing to be notified of changes in tile writability must
- * implement the TileObserver interface, and are added by a
- * call to addTileObserver.  Multiple calls to
- * addTileObserver for the same object will result in multiple
- * notifications.  An existing observer may reduce its notifications
- * by calling removeTileObserver; if the observer had no
- * notifications the operation is a no-op.
+ * Objects wishing to be notified of changes in tile writability must implement
+ * the TileObserver interface, and are added by a call to addTileObserver.
+ * Multiple calls to addTileObserver for the same object will result in multiple
+ * notifications. An existing observer may reduce its notifications by calling
+ * removeTileObserver; if the observer had no notifications the operation is a
+ * no-op.
  * <p>
- * It is necessary for a WritableRenderedImage to ensure that
- * notifications occur only when the first writer acquires a tile and
- * the last writer releases it.
+ * It is necessary for a WritableRenderedImage to ensure that notifications
+ * occur only when the first writer acquires a tile and the last writer releases
+ * it.
  *
  */
-public interface WritableRenderedImage extends RenderedImage
-{
-  public void addTileObserver(TileObserver to);
+public interface WritableRenderedImage extends RenderedImage {
+	public void addTileObserver(TileObserver to);
 
-  public void removeTileObserver(TileObserver to);
+	public void removeTileObserver(TileObserver to);
 
-  public WritableRaster getWritableTile(int tileX, int tileY);
+	public WritableRaster getWritableTile(int tileX, int tileY);
 
-  public void releaseWritableTile(int tileX, int tileY);
+	public void releaseWritableTile(int tileX, int tileY);
 
-  public boolean isTileWritable(int tileX, int tileY);
+	public boolean isTileWritable(int tileX, int tileY);
 
-  public Point[] getWritableTileIndices();
+	public Point[] getWritableTileIndices();
 
-  public boolean hasTileWriters();
+	public boolean hasTileWriters();
 
-  public void setData(Raster r);
+	public void setData(Raster r);
 
 }

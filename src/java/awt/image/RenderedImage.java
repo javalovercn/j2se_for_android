@@ -34,59 +34,59 @@
  ******************************************************************/
 
 package java.awt.image;
+
 import java.awt.Rectangle;
 import android.graphics.Bitmap;
 import java.util.Vector;
 
 /**
- * RenderedImage is a common interface for objects which contain
- * or can produce image data in the form of Rasters.  The image
- * data may be stored/produced as a single tile or a regular array
- * of tiles.
+ * RenderedImage is a common interface for objects which contain or can produce
+ * image data in the form of Rasters. The image data may be stored/produced as a
+ * single tile or a regular array of tiles.
  */
 
 public interface RenderedImage {
 	public Bitmap getBitmapAdAPI();
-	
-    Vector<RenderedImage> getSources();
 
-    Object getProperty(String name);
+	Vector<RenderedImage> getSources();
 
-    String[] getPropertyNames();
+	Object getProperty(String name);
 
-    ColorModel getColorModel();
+	String[] getPropertyNames();
 
-    SampleModel getSampleModel();
+	ColorModel getColorModel();
 
-    int getWidth();
+	SampleModel getSampleModel();
 
-    int getHeight();
+	int getWidth();
 
-    int getMinX();
+	int getHeight();
 
-    int getMinY();
+	int getMinX();
 
-    int getNumXTiles();
+	int getMinY();
 
-    int getNumYTiles();
+	int getNumXTiles();
 
-    int getMinTileX();
+	int getNumYTiles();
 
-    int getMinTileY();
+	int getMinTileX();
 
-    int getTileWidth();
+	int getMinTileY();
 
-    int getTileHeight();
+	int getTileWidth();
 
-    int getTileGridXOffset();
+	int getTileHeight();
 
-    int getTileGridYOffset();
+	int getTileGridXOffset();
 
-   Raster getTile(int tileX, int tileY);
+	int getTileGridYOffset();
 
-    Raster getData();
+	Raster getTile(int tileX, int tileY);
 
-    Raster getData(Rectangle rect);
+	Raster getData();
 
-    WritableRaster copyData(WritableRaster raster);
+	Raster getData(Rectangle rect);
+
+	WritableRaster copyData(WritableRaster raster);
 }

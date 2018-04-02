@@ -38,67 +38,68 @@ import java.awt.Component;
  * <p>
  * There are two levels of focus events: permanent and temporary. Permanent
  * focus change events occur when focus is directly moved from one Component to
- * another, such as through a call to requestFocus() or as the user uses the
- * TAB key to traverse Components. Temporary focus change events occur when
- * focus is temporarily lost for a Component as the indirect result of another
- * operation, such as Window deactivation or a Scrollbar drag. In this case,
- * the original focus state will automatically be restored once that operation
- * is finished, or, for the case of Window deactivation, when the Window is
- * reactivated. Both permanent and temporary focus events are delivered using
- * the FOCUS_GAINED and FOCUS_LOST event ids; the level may be distinguished in
- * the event using the isTemporary() method.
+ * another, such as through a call to requestFocus() or as the user uses the TAB
+ * key to traverse Components. Temporary focus change events occur when focus is
+ * temporarily lost for a Component as the indirect result of another operation,
+ * such as Window deactivation or a Scrollbar drag. In this case, the original
+ * focus state will automatically be restored once that operation is finished,
+ * or, for the case of Window deactivation, when the Window is reactivated. Both
+ * permanent and temporary focus events are delivered using the FOCUS_GAINED and
+ * FOCUS_LOST event ids; the level may be distinguished in the event using the
+ * isTemporary() method.
  * <p>
- * An unspecified behavior will be caused if the {@code id} parameter
- * of any particular {@code FocusEvent} instance is not
- * in the range from {@code FOCUS_FIRST} to {@code FOCUS_LAST}.
+ * An unspecified behavior will be caused if the {@code id} parameter of any
+ * particular {@code FocusEvent} instance is not in the range from
+ * {@code FOCUS_FIRST} to {@code FOCUS_LAST}.
  *
  * @see FocusAdapter
  * @see FocusListener
- * @see <a href="http://java.sun.com/docs/books/tutorial/post1.0/ui/focuslistener.html">Tutorial: Writing a Focus Listener</a>
+ * @see <a href=
+ *      "http://java.sun.com/docs/books/tutorial/post1.0/ui/focuslistener.html">Tutorial:
+ *      Writing a Focus Listener</a>
  *
  * @author Carl Quinn
  * @author Amy Fowler
  * @since 1.1
  */
 public class FocusEvent extends ComponentEvent {
-    public static final int FOCUS_FIRST         = 1004;
-    public static final int FOCUS_LAST          = 1005;
-    public static final int FOCUS_GAINED = FOCUS_FIRST;
-    public static final int FOCUS_LOST = 1 + FOCUS_FIRST;
+	public static final int FOCUS_FIRST = 1004;
+	public static final int FOCUS_LAST = 1005;
+	public static final int FOCUS_GAINED = FOCUS_FIRST;
+	public static final int FOCUS_LOST = 1 + FOCUS_FIRST;
 
-    boolean temporary;
-    transient Component opposite;
+	boolean temporary;
+	transient Component opposite;
 
-    public FocusEvent(Component source, int id, boolean temporary,
-                      Component opposite) {
-        super(source, id);
-        this.temporary = temporary;
-        this.opposite = opposite;
-    }
+	public FocusEvent(Component source, int id, boolean temporary, Component opposite) {
+		super(source, id);
+		this.temporary = temporary;
+		this.opposite = opposite;
+	}
 
-    public FocusEvent(Component source, int id, boolean temporary) {
-        this(source, id, temporary, null);
-    }
+	public FocusEvent(Component source, int id, boolean temporary) {
+		this(source, id, temporary, null);
+	}
 
-    public FocusEvent(Component source, int id) {
-        this(source, id, false);
-    }
+	public FocusEvent(Component source, int id) {
+		this(source, id, false);
+	}
 
-    public boolean isTemporary() {
-        return temporary;
-    }
+	public boolean isTemporary() {
+		return temporary;
+	}
 
-    public Component getOppositeComponent() {
-        if (opposite == null) {
-            return null;
-        }
+	public Component getOppositeComponent() {
+		if (opposite == null) {
+			return null;
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public String paramString() {
-        return "FocusEvent id:" + id + (temporary ? ",temporary" : ",permanent") +
-            ",opposite=" + getOppositeComponent();
-    }
+	public String paramString() {
+		return "FocusEvent id:" + id + (temporary ? ",temporary" : ",permanent") + ",opposite="
+				+ getOppositeComponent();
+	}
 
 }

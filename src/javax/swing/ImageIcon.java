@@ -55,25 +55,22 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 /**
- * An implementation of the Icon interface that paints Icons
- * from Images. Images that are created from a URL, filename or byte array
- * are preloaded using MediaTracker to monitor the loaded state
- * of the image.
+ * An implementation of the Icon interface that paints Icons from Images. Images
+ * that are created from a URL, filename or byte array are preloaded using
+ * MediaTracker to monitor the loaded state of the image.
  *
  * <p>
  * For further information and examples of using image icons, see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/icon.html">How to Use Icons</a>
- * in <em>The Java Tutorial.</em>
+ * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/icon.html">How
+ * to Use Icons</a> in <em>The Java Tutorial.</em>
  *
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Jeff Dinkins
  * @author Lynn Monsanto
@@ -95,6 +92,7 @@ public class ImageIcon implements Icon, Serializable, Accessible {
 
 	/**
 	 * for example : /hc/android/res/hc_128.png
+	 * 
 	 * @param filename
 	 */
 	public ImageIcon(String filename) {
@@ -206,8 +204,7 @@ public class ImageIcon implements Icon, Serializable, Accessible {
 		return super.toString();
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException {
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
 	}
 
 	private void writeObject(ObjectOutputStream s) throws IOException {
@@ -222,8 +219,8 @@ public class ImageIcon implements Icon, Serializable, Accessible {
 		return accessibleContext;
 	}
 
-	protected class AccessibleImageIcon extends AccessibleContext implements
-			AccessibleIcon, Serializable {
+	protected class AccessibleImageIcon extends AccessibleContext
+			implements AccessibleIcon, Serializable {
 
 		public AccessibleRole getAccessibleRole() {
 			return AccessibleRole.ICON;
@@ -269,8 +266,7 @@ public class ImageIcon implements Icon, Serializable, Accessible {
 			return ImageIcon.this.getIconWidth();
 		}
 
-		private void readObject(ObjectInputStream s)
-				throws ClassNotFoundException, IOException {
+		private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
 		}
 
 		private void writeObject(ObjectOutputStream s) throws IOException {
@@ -279,25 +275,27 @@ public class ImageIcon implements Icon, Serializable, Accessible {
 
 	BitmapDrawable drawable;
 
-	public static Bitmap getBitmapAdAPI(final ImageIcon imageIcon){
+	public static Bitmap getBitmapAdAPI(final ImageIcon imageIcon) {
 		return imageIcon.image.getBitmapAdAPI();
 	}
-	
-	public static ImageIcon toGrayAdAPI(final ImageIcon imageIcon){
+
+	public static ImageIcon toGrayAdAPI(final ImageIcon imageIcon) {
 		Bitmap gray = ImageUtil.toGray(imageIcon.image.getBitmapAdAPI());
 		final BufferedImage bi = new BufferedImage(gray);
 		bi.initZoom = imageIcon.image.initZoom;
 		ImageIcon out = new ImageIcon(bi);
 		return out;
 	}
-	
-//	@Override
-//	public BitmapDrawable getOriBitmapDrawableAdAPI() {
-//		Bitmap bitmap = image.getBitmapAdAPI();//一个图片被多处使用，所以要生成新实例
-//		return new BitmapDrawable(ActivityManager.getActivity().getResources(), bitmap);
-//	}
 
-	public static Drawable getAdapterBitmapDrawableAdAPI(final ImageIcon imageIcon, final Component component) {
+	// @Override
+	// public BitmapDrawable getOriBitmapDrawableAdAPI() {
+	// Bitmap bitmap = image.getBitmapAdAPI();//一个图片被多处使用，所以要生成新实例
+	// return new BitmapDrawable(ActivityManager.applicationContext.getResources(),
+	// bitmap);
+	// }
+
+	public static Drawable getAdapterBitmapDrawableAdAPI(final ImageIcon imageIcon,
+			final Component component) {
 		return imageIcon.image.getAdapterBitmapDrawableAdAPI(component);
 	}
 }

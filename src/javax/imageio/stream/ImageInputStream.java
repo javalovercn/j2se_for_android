@@ -30,11 +30,10 @@ import java.io.IOException;
 import java.nio.ByteOrder;
 
 /**
- * A seekable input stream interface for use by
- * <code>ImageReader</code>s.  Various input sources, such as
- * <code>InputStream</code>s and <code>File</code>s,
- * as well as future fast I/O sources may be "wrapped" by a suitable
- * implementation of this interface for use by the Image I/O API.
+ * A seekable input stream interface for use by <code>ImageReader</code>s.
+ * Various input sources, such as <code>InputStream</code>s and
+ * <code>File</code>s, as well as future fast I/O sources may be "wrapped" by a
+ * suitable implementation of this interface for use by the Image I/O API.
  *
  * @see ImageInputStreamImpl
  * @see FileImageInputStream

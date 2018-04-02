@@ -30,13 +30,14 @@ import java.awt.event.MouseEvent;
 
 /**
  * Any component that can be placed into a menu should implement this interface.
- * This interface is used by <code>MenuSelectionManager</code>
- * to handle selection and navigation in menu hierarchies.
+ * This interface is used by <code>MenuSelectionManager</code> to handle
+ * selection and navigation in menu hierarchies.
  *
  * @author Arnaud Weber
  */
 public interface MenuElement {
-	public void processMouseEvent(MouseEvent event, MenuElement path[], MenuSelectionManager manager);
+	public void processMouseEvent(MouseEvent event, MenuElement path[],
+			MenuSelectionManager manager);
 
 	public void processKeyEvent(KeyEvent event, MenuElement path[], MenuSelectionManager manager);
 

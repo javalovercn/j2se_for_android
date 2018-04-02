@@ -32,5 +32,5 @@ package javax.swing.event;
  * @since 1.6
  */
 public interface RowSorterListener extends java.util.EventListener {
-    public void sorterChanged(RowSorterEvent e);
+	public void sorterChanged(RowSorterEvent e);
 }

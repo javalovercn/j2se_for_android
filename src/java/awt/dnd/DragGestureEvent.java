@@ -37,23 +37,22 @@ import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 
-
 /**
- * A <code>DragGestureEvent</code> is passed
- * to <code>DragGestureListener</code>'s
- * dragGestureRecognized() method
- * when a particular <code>DragGestureRecognizer</code> detects that a
- * platform dependent drag initiating gesture has occurred
- * on the <code>Component</code> that it is tracking.
+ * A <code>DragGestureEvent</code> is passed to
+ * <code>DragGestureListener</code>'s dragGestureRecognized() method when a
+ * particular <code>DragGestureRecognizer</code> detects that a platform
+ * dependent drag initiating gesture has occurred on the <code>Component</code>
+ * that it is tracking.
  *
- * The {@code action} field of any {@code DragGestureEvent} instance should take one of the following
- * values:
+ * The {@code action} field of any {@code DragGestureEvent} instance should take
+ * one of the following values:
  * <ul>
- * <li> {@code DnDConstants.ACTION_COPY}
- * <li> {@code DnDConstants.ACTION_MOVE}
- * <li> {@code DnDConstants.ACTION_LINK}
+ * <li>{@code DnDConstants.ACTION_COPY}
+ * <li>{@code DnDConstants.ACTION_MOVE}
+ * <li>{@code DnDConstants.ACTION_LINK}
  * </ul>
- * Assigning the value different from listed above will cause an unspecified behavior.
+ * Assigning the value different from listed above will cause an unspecified
+ * behavior.
  *
  * @see java.awt.dnd.DragGestureRecognizer
  * @see java.awt.dnd.DragGestureListener
@@ -62,64 +61,75 @@ import java.util.List;
  */
 
 public class DragGestureEvent extends EventObject {
-    public DragGestureEvent(DragGestureRecognizer dgr, int act, Point ori,
-                            List<? extends InputEvent> evs)
-    {
-        super(dgr);
-        events     = evs;
-        action     = act;
-        origin     = ori;
-    }
+	public DragGestureEvent(DragGestureRecognizer dgr, int act, Point ori,
+			List<? extends InputEvent> evs) {
+		super(dgr);
+		events = evs;
+		action = act;
+		origin = ori;
+	}
 
-    public DragGestureRecognizer getSourceAsDragGestureRecognizer() {
-        return (DragGestureRecognizer)getSource();
-    }
+	public DragGestureRecognizer getSourceAsDragGestureRecognizer() {
+		return (DragGestureRecognizer) getSource();
+	}
 
-    public Component getComponent() { return component; }
+	public Component getComponent() {
+		return component;
+	}
 
-    public DragSource getDragSource() { return dragSource; }
+	public DragSource getDragSource() {
+		return dragSource;
+	}
 
-    public Point getDragOrigin() {
-        return origin;
-    }
+	public Point getDragOrigin() {
+		return origin;
+	}
 
-    public Iterator<InputEvent> iterator() { return events.iterator(); }
+	public Iterator<InputEvent> iterator() {
+		return events.iterator();
+	}
 
-    public Object[] toArray() { return events.toArray(); }
+	public Object[] toArray() {
+		return events.toArray();
+	}
 
-    public Object[] toArray(Object[] array) { return events.toArray(array); }
+	public Object[] toArray(Object[] array) {
+		return events.toArray(array);
+	}
 
-    public int getDragAction() { return action; }
+	public int getDragAction() {
+		return action;
+	}
 
-    public InputEvent getTriggerEvent() {
-        return getSourceAsDragGestureRecognizer().getTriggerEvent();
-    }
+	public InputEvent getTriggerEvent() {
+		return getSourceAsDragGestureRecognizer().getTriggerEvent();
+	}
 
-    public void startDrag(Cursor dragCursor, Transferable transferable)
-      throws InvalidDnDOperationException {
-    }
+	public void startDrag(Cursor dragCursor, Transferable transferable)
+			throws InvalidDnDOperationException {
+	}
 
-    public void startDrag(Cursor dragCursor, Transferable transferable, DragSourceListener dsl) throws InvalidDnDOperationException {
-    }
+	public void startDrag(Cursor dragCursor, Transferable transferable, DragSourceListener dsl)
+			throws InvalidDnDOperationException {
+	}
 
-    public void startDrag(Cursor dragCursor, Image dragImage, Point imageOffset, Transferable transferable, DragSourceListener dsl) throws InvalidDnDOperationException {
-    }
+	public void startDrag(Cursor dragCursor, Image dragImage, Point imageOffset,
+			Transferable transferable, DragSourceListener dsl) throws InvalidDnDOperationException {
+	}
 
-    private void writeObject(ObjectOutputStream s) throws IOException {
-    }
+	private void writeObject(ObjectOutputStream s) throws IOException {
+	}
 
-    private void readObject(ObjectInputStream s)
-        throws ClassNotFoundException, IOException
-    {
-    }
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
+	}
 
-    private transient List events;
+	private transient List events;
 
-    private DragSource dragSource;
+	private DragSource dragSource;
 
-    private Component  component;
+	private Component component;
 
-    private Point      origin;
+	private Point origin;
 
-    private int        action;
+	private int action;
 }

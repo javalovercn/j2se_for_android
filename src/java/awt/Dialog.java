@@ -32,46 +32,43 @@ import javax.swing.JDialog;
 import javax.swing.JRootPane;
 
 /**
- * A Dialog is a top-level window with a title and a border
- * that is typically used to take some form of input from the user.
+ * A Dialog is a top-level window with a title and a border that is typically
+ * used to take some form of input from the user.
  *
- * The size of the dialog includes any area designated for the
- * border.  The dimensions of the border area can be obtained
- * using the <code>getInsets</code> method, however, since
- * these dimensions are platform-dependent, a valid insets
- * value cannot be obtained until the dialog is made displayable
- * by either calling <code>pack</code> or <code>show</code>.
- * Since the border area is included in the overall size of the
- * dialog, the border effectively obscures a portion of the dialog,
- * constraining the area available for rendering and/or displaying
- * subcomponents to the rectangle which has an upper-left corner
- * location of <code>(insets.left, insets.top)</code>, and has a size of
+ * The size of the dialog includes any area designated for the border. The
+ * dimensions of the border area can be obtained using the
+ * <code>getInsets</code> method, however, since these dimensions are
+ * platform-dependent, a valid insets value cannot be obtained until the dialog
+ * is made displayable by either calling <code>pack</code> or <code>show</code>.
+ * Since the border area is included in the overall size of the dialog, the
+ * border effectively obscures a portion of the dialog, constraining the area
+ * available for rendering and/or displaying subcomponents to the rectangle
+ * which has an upper-left corner location of
+ * <code>(insets.left, insets.top)</code>, and has a size of
  * <code>width - (insets.left + insets.right)</code> by
  * <code>height - (insets.top + insets.bottom)</code>.
  * <p>
  * The default layout for a dialog is <code>BorderLayout</code>.
  * <p>
  * A dialog may have its native decorations (i.e. Frame & Titlebar) turned off
- * with <code>setUndecorated</code>.  This can only be done while the dialog
- * is not {@link Component#isDisplayable() displayable}.
+ * with <code>setUndecorated</code>. This can only be done while the dialog is
+ * not {@link Component#isDisplayable() displayable}.
  * <p>
- * A dialog may have another window as its owner when it's constructed.  When
- * the owner window of a visible dialog is minimized, the dialog will
- * automatically be hidden from the user. When the owner window is subsequently
- * restored, the dialog is made visible to the user again.
+ * A dialog may have another window as its owner when it's constructed. When the
+ * owner window of a visible dialog is minimized, the dialog will automatically
+ * be hidden from the user. When the owner window is subsequently restored, the
+ * dialog is made visible to the user again.
  * <p>
- * In a multi-screen environment, you can create a <code>Dialog</code>
- * on a different screen device than its owner.  See {@link java.awt.Frame} for
- * more information.
+ * In a multi-screen environment, you can create a <code>Dialog</code> on a
+ * different screen device than its owner. See {@link java.awt.Frame} for more
+ * information.
  * <p>
- * A dialog can be either modeless (the default) or modal.  A modal
- * dialog is one which blocks input to some other top-level windows
- * in the application, except for any windows created with the dialog
- * as their owner. See <a href="doc-files/Modality.html">AWT Modality</a>
- * specification for details.
+ * A dialog can be either modeless (the default) or modal. A modal dialog is one
+ * which blocks input to some other top-level windows in the application, except
+ * for any windows created with the dialog as their owner. See
+ * <a href="doc-files/Modality.html">AWT Modality</a> specification for details.
  * <p>
- * Dialogs are capable of generating the following
- * <code>WindowEvents</code>:
+ * Dialogs are capable of generating the following <code>WindowEvents</code>:
  * <code>WindowOpened</code>, <code>WindowClosing</code>,
  * <code>WindowClosed</code>, <code>WindowActivated</code>,
  * <code>WindowDeactivated</code>, <code>WindowGainedFocus</code>,
@@ -80,9 +77,9 @@ import javax.swing.JRootPane;
  * @see WindowEvent
  * @see Window#addWindowListener
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
- * @since       JDK1.0
+ * @author Sami Shaio
+ * @author Arthur van Hoff
+ * @since JDK1.0
  */
 public class Dialog extends Window {
 	boolean resizable = false;
@@ -119,14 +116,11 @@ public class Dialog extends Window {
 	}
 
 	public Dialog(Frame owner, String title, boolean modal) {
-		this(owner, title, modal ? DEFAULT_MODALITY_TYPE
-				: ModalityType.MODELESS);
+		this(owner, title, modal ? DEFAULT_MODALITY_TYPE : ModalityType.MODELESS);
 	}
 
-	public Dialog(Frame owner, String title, boolean modal,
-			GraphicsConfiguration gc) {
-		this(owner, title, modal ? DEFAULT_MODALITY_TYPE
-				: ModalityType.MODELESS, gc);
+	public Dialog(Frame owner, String title, boolean modal, GraphicsConfiguration gc) {
+		this(owner, title, modal ? DEFAULT_MODALITY_TYPE : ModalityType.MODELESS, gc);
 	}
 
 	public Dialog(Dialog owner) {
@@ -138,14 +132,11 @@ public class Dialog extends Window {
 	}
 
 	public Dialog(Dialog owner, String title, boolean modal) {
-		this(owner, title, modal ? DEFAULT_MODALITY_TYPE
-				: ModalityType.MODELESS);
+		this(owner, title, modal ? DEFAULT_MODALITY_TYPE : ModalityType.MODELESS);
 	}
 
-	public Dialog(Dialog owner, String title, boolean modal,
-			GraphicsConfiguration gc) {
-		this(owner, title, modal ? DEFAULT_MODALITY_TYPE
-				: ModalityType.MODELESS, gc);
+	public Dialog(Dialog owner, String title, boolean modal, GraphicsConfiguration gc) {
+		this(owner, title, modal ? DEFAULT_MODALITY_TYPE : ModalityType.MODELESS, gc);
 	}
 
 	public Dialog(Window owner) {
@@ -160,20 +151,18 @@ public class Dialog extends Window {
 		this(owner, "", modalityType);
 	}
 
-	public Dialog(Window owner, String title, ModalityType modalityType,
-			GraphicsConfiguration gc) {
+	public Dialog(Window owner, String title, ModalityType modalityType, GraphicsConfiguration gc) {
 		this(owner, title, modalityType);
 	}
 
 	public Dialog(Window owner, String title, ModalityType modalityType) {
 		super(owner);
 
-		if ((owner != null) && !(owner instanceof Frame)
-				&& !(owner instanceof Dialog)) {
+		if ((owner != null) && !(owner instanceof Frame) && !(owner instanceof Dialog)) {
 			throw new IllegalArgumentException("Wrong owner. It should be Frame or Dialog");
 		}
 
-//		setTitle(title);
+		// setTitle(title);
 		setModalityType(modalityType);
 	}
 
@@ -218,8 +207,8 @@ public class Dialog extends Window {
 
 	public void setTitle(String title) {
 		this.title = title;
-		if(this instanceof JDialog){
-			((JDialog)this).getRootPane().setTitleAdAPI(title);
+		if (this instanceof JDialog) {
+			((JDialog) this).getRootPane().setTitleAdAPI(title);
 		}
 	}
 
@@ -251,11 +240,11 @@ public class Dialog extends Window {
 
 	public void setUndecorated(boolean undecorated) {
 		this.undecorated = undecorated;
-		if(this instanceof JDialog){
-			if(undecorated == false){
-				((JDialog)this).getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
-			}else{
-				((JDialog)this).getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+		if (this instanceof JDialog) {
+			if (undecorated == false) {
+				((JDialog) this).getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+			} else {
+				((JDialog) this).getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 			}
 		}
 	}
@@ -314,8 +303,8 @@ public class Dialog extends Window {
 		AndroidClassUtil.callEmptyMethod();
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException, HeadlessException {
+	private void readObject(ObjectInputStream s)
+			throws ClassNotFoundException, IOException, HeadlessException {
 	}
 
 	public AccessibleContext getAccessibleContext() {

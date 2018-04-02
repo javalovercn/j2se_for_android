@@ -32,22 +32,21 @@ import java.awt.Frame;
 import java.awt.Window;
 
 /**
- * Popups are used to display a <code>Component</code> to the user, typically
- * on top of all the other <code>Component</code>s in a particular containment
- * hierarchy. <code>Popup</code>s have a very small life cycle. Once you
- * have obtained a <code>Popup</code>, and hidden it (invoked the
- * <code>hide</code> method), you should no longer
- * invoke any methods on it. This allows the <code>PopupFactory</code> to cache
- * <code>Popup</code>s for later use.
+ * Popups are used to display a <code>Component</code> to the user, typically on
+ * top of all the other <code>Component</code>s in a particular containment
+ * hierarchy. <code>Popup</code>s have a very small life cycle. Once you have
+ * obtained a <code>Popup</code>, and hidden it (invoked the <code>hide</code>
+ * method), you should no longer invoke any methods on it. This allows the
+ * <code>PopupFactory</code> to cache <code>Popup</code>s for later use.
  * <p>
  * The general contract is that if you need to change the size of the
  * <code>Component</code>, or location of the <code>Popup</code>, you should
  * obtain a new <code>Popup</code>.
  * <p>
  * <code>Popup</code> does not descend from <code>Component</code>, rather
- * implementations of <code>Popup</code> are responsible for creating
- * and maintaining their own <code>Component</code>s to render the
- * requested <code>Component</code> to the user.
+ * implementations of <code>Popup</code> are responsible for creating and
+ * maintaining their own <code>Component</code>s to render the requested
+ * <code>Component</code> to the user.
  * <p>
  * You typically do not explicitly create an instance of <code>Popup</code>,
  * instead obtain one from a <code>PopupFactory</code>.

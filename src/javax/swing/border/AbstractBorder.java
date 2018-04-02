@@ -34,72 +34,68 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 /**
- * A class that implements an empty border with no size.
- * This provides a convenient base class from which other border
- * classes can be easily derived.
+ * A class that implements an empty border with no size. This provides a
+ * convenient base class from which other border classes can be easily derived.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author David Kloba
  */
-public abstract class AbstractBorder implements Border, Serializable{
+public abstract class AbstractBorder implements Border, Serializable {
 	public ScreenAdapter screenAdapter = J2SEInitor.initAdapter();
-	
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-    }
 
-    public Insets getBorderInsets(Component c)       {
-        return getBorderInsets(c, new Insets(0, 0, 0, 0));
-    }
+	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+	}
 
-    public Insets getBorderInsets(Component c, Insets insets) {
-        insets.left = insets.top = insets.right = insets.bottom = 0;
-        return insets;
-    }
+	public Insets getBorderInsets(Component c) {
+		return getBorderInsets(c, new Insets(0, 0, 0, 0));
+	}
 
-    public boolean isBorderOpaque() { return false; }
+	public Insets getBorderInsets(Component c, Insets insets) {
+		insets.left = insets.top = insets.right = insets.bottom = 0;
+		return insets;
+	}
 
-    public Rectangle getInteriorRectangle(Component c, int x, int y, int width, int height) {
-        return getInteriorRectangle(c, this, x, y, width, height);
-    }
+	public boolean isBorderOpaque() {
+		return false;
+	}
 
-    public static Rectangle getInteriorRectangle(Component c, Border b, int x, int y, int width, int height) {
-        Insets insets;
-        if(b != null)
-            insets = b.getBorderInsets(c);
-        else
-            insets = new Insets(0, 0, 0, 0);
-        return new Rectangle(x + insets.left,
-                                    y + insets.top,
-                                    width - insets.right - insets.left,
-                                    height - insets.top - insets.bottom);
-    }
+	public Rectangle getInteriorRectangle(Component c, int x, int y, int width, int height) {
+		return getInteriorRectangle(c, this, x, y, width, height);
+	}
 
-    public int getBaseline(Component c, int width, int height) {
-        if (width < 0 || height < 0) {
-            throw new IllegalArgumentException(
-                    "Width and height must be >= 0");
-        }
-        return -1;
-    }
+	public static Rectangle getInteriorRectangle(Component c, Border b, int x, int y, int width,
+			int height) {
+		Insets insets;
+		if (b != null)
+			insets = b.getBorderInsets(c);
+		else
+			insets = new Insets(0, 0, 0, 0);
+		return new Rectangle(x + insets.left, y + insets.top, width - insets.right - insets.left,
+				height - insets.top - insets.bottom);
+	}
 
-    public Component.BaselineResizeBehavior getBaselineResizeBehavior(
-            Component c) {
-        if (c == null) {
-            throw new NullPointerException("Component must be non-null");
-        }
-        return Component.BaselineResizeBehavior.OTHER;
-    }
+	public int getBaseline(Component c, int width, int height) {
+		if (width < 0 || height < 0) {
+			throw new IllegalArgumentException("Width and height must be >= 0");
+		}
+		return -1;
+	}
 
-    static boolean isLeftToRight( Component c ) {
-        return c.getComponentOrientation().isLeftToRight();
-    }
+	public Component.BaselineResizeBehavior getBaselineResizeBehavior(Component c) {
+		if (c == null) {
+			throw new NullPointerException("Component must be non-null");
+		}
+		return Component.BaselineResizeBehavior.OTHER;
+	}
+
+	static boolean isLeftToRight(Component c) {
+		return c.getComponentOrientation().isLeftToRight();
+	}
 
 }

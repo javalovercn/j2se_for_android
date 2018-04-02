@@ -32,7 +32,9 @@ import java.util.EventListener;
  * @author Georges Saab
  */
 public interface MenuListener extends EventListener {
-    void menuSelected(MenuEvent e);
-    void menuDeselected(MenuEvent e);
-    void menuCanceled(MenuEvent e);
+	void menuSelected(MenuEvent e);
+
+	void menuDeselected(MenuEvent e);
+
+	void menuCanceled(MenuEvent e);
 }

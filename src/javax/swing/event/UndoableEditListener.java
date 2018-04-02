@@ -25,12 +25,12 @@
 package javax.swing.event;
 
 /**
- * Interface implemented by a class interested in hearing about
- * undoable operations.
+ * Interface implemented by a class interested in hearing about undoable
+ * operations.
  *
  * @author Ray Ryan
  */
 public interface UndoableEditListener extends java.util.EventListener {
 
-    void undoableEditHappened(UndoableEditEvent e);
+	void undoableEditHappened(UndoableEditEvent e);
 }

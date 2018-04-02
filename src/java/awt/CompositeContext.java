@@ -28,12 +28,12 @@ import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 
 /**
- * The <code>CompositeContext</code> interface defines the encapsulated
- * and optimized environment for a compositing operation.
- * <code>CompositeContext</code> objects maintain state for
- * compositing operations.  In a multi-threaded environment, several
- * contexts can exist simultaneously for a single {@link Composite}
- * object.
+ * The <code>CompositeContext</code> interface defines the encapsulated and
+ * optimized environment for a compositing operation.
+ * <code>CompositeContext</code> objects maintain state for compositing
+ * operations. In a multi-threaded environment, several contexts can exist
+ * simultaneously for a single {@link Composite} object.
+ * 
  * @see Composite
  */
 public interface CompositeContext {

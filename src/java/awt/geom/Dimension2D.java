@@ -25,36 +25,35 @@
 package java.awt.geom;
 
 /**
- * The <code>Dimension2D</code> class is to encapsulate a width
- * and a height dimension.
+ * The <code>Dimension2D</code> class is to encapsulate a width and a height
+ * dimension.
  * <p>
- * This class is only the abstract superclass for all objects that
- * store a 2D dimension.
- * The actual storage representation of the sizes is left to
- * the subclass.
+ * This class is only the abstract superclass for all objects that store a 2D
+ * dimension. The actual storage representation of the sizes is left to the
+ * subclass.
  *
- * @author      Jim Graham
+ * @author Jim Graham
  * @since 1.2
  */
 public abstract class Dimension2D implements Cloneable {
-    protected Dimension2D() {
-    }
+	protected Dimension2D() {
+	}
 
-    public abstract double getWidth();
+	public abstract double getWidth();
 
-    public abstract double getHeight();
+	public abstract double getHeight();
 
-    public abstract void setSize(double width, double height);
+	public abstract void setSize(double width, double height);
 
-    public void setSize(Dimension2D d) {
-        setSize(d.getWidth(), d.getHeight());
-    }
+	public void setSize(Dimension2D d) {
+		setSize(d.getWidth(), d.getHeight());
+	}
 
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new InternalError();
-        }
-    }
+	public Object clone() {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError();
+		}
+	}
 }

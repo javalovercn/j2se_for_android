@@ -29,23 +29,20 @@ import java.awt.AWTEvent;
 import javax.swing.JInternalFrame;
 
 /**
- * An <code>AWTEvent</code> that adds support for
- * <code>JInternalFrame</code> objects as the event source.  This class has the
- * same event types as <code>WindowEvent</code>,
- * although different IDs are used.
- * Help on handling internal frame events
- * is in
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/events/internalframelistener.html" target="_top">How to Write an Internal Frame Listener</a>,
- * a section in <em>The Java Tutorial</em>.
+ * An <code>AWTEvent</code> that adds support for <code>JInternalFrame</code>
+ * objects as the event source. This class has the same event types as
+ * <code>WindowEvent</code>, although different IDs are used. Help on handling
+ * internal frame events is in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/events/internalframelistener.html"
+ * target="_top">How to Write an Internal Frame Listener</a>, a section in
+ * <em>The Java Tutorial</em>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see java.awt.event.WindowEvent
  * @see java.awt.event.WindowListener
@@ -55,28 +52,27 @@ import javax.swing.JInternalFrame;
  * @author Thomas Ball
  */
 public class InternalFrameEvent extends AWTEvent {
-    public static final int INTERNAL_FRAME_FIRST        = 25549;
-    public static final int INTERNAL_FRAME_LAST         = 25555;
-    public static final int INTERNAL_FRAME_OPENED       = INTERNAL_FRAME_FIRST;
+	public static final int INTERNAL_FRAME_FIRST = 25549;
+	public static final int INTERNAL_FRAME_LAST = 25555;
+	public static final int INTERNAL_FRAME_OPENED = INTERNAL_FRAME_FIRST;
 
-    public static final int INTERNAL_FRAME_CLOSING      = 1 + INTERNAL_FRAME_FIRST;
-    public static final int INTERNAL_FRAME_CLOSED       = 2 + INTERNAL_FRAME_FIRST;
-    public static final int INTERNAL_FRAME_ICONIFIED    = 3 + INTERNAL_FRAME_FIRST;
-    public static final int INTERNAL_FRAME_DEICONIFIED  = 4 + INTERNAL_FRAME_FIRST;
-    public static final int INTERNAL_FRAME_ACTIVATED    = 5 + INTERNAL_FRAME_FIRST;
-    public static final int INTERNAL_FRAME_DEACTIVATED  = 6 + INTERNAL_FRAME_FIRST;
+	public static final int INTERNAL_FRAME_CLOSING = 1 + INTERNAL_FRAME_FIRST;
+	public static final int INTERNAL_FRAME_CLOSED = 2 + INTERNAL_FRAME_FIRST;
+	public static final int INTERNAL_FRAME_ICONIFIED = 3 + INTERNAL_FRAME_FIRST;
+	public static final int INTERNAL_FRAME_DEICONIFIED = 4 + INTERNAL_FRAME_FIRST;
+	public static final int INTERNAL_FRAME_ACTIVATED = 5 + INTERNAL_FRAME_FIRST;
+	public static final int INTERNAL_FRAME_DEACTIVATED = 6 + INTERNAL_FRAME_FIRST;
 
-    public InternalFrameEvent(JInternalFrame source, int id) {
-        super(source, id);
-    }
+	public InternalFrameEvent(JInternalFrame source, int id) {
+		super(source, id);
+	}
 
-    public String paramString() {
-        return "";
-    }
+	public String paramString() {
+		return "";
+	}
 
-    public JInternalFrame getInternalFrame () {
-      return (source instanceof JInternalFrame)? (JInternalFrame)source : null;
-    }
-
+	public JInternalFrame getInternalFrame() {
+		return (source instanceof JInternalFrame) ? (JInternalFrame) source : null;
+	}
 
 }

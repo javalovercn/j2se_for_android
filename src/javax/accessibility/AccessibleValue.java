@@ -25,25 +25,23 @@
 package javax.accessibility;
 
 /**
- * The AccessibleValue interface should be supported by any object
- * that supports a numerical value (e.g., a scroll bar).  This interface
- * provides the standard mechanism for an assistive technology to determine
- * and set the numerical value as well as get the minimum and maximum values.
- * Applications can determine
- * if an object supports the AccessibleValue interface by first
- * obtaining its AccessibleContext (see
- * {@link Accessible}) and then calling the
- * {@link AccessibleContext#getAccessibleValue} method.
- * If the return value is not null, the object supports this interface.
+ * The AccessibleValue interface should be supported by any object that supports
+ * a numerical value (e.g., a scroll bar). This interface provides the standard
+ * mechanism for an assistive technology to determine and set the numerical
+ * value as well as get the minimum and maximum values. Applications can
+ * determine if an object supports the AccessibleValue interface by first
+ * obtaining its AccessibleContext (see {@link Accessible}) and then calling the
+ * {@link AccessibleContext#getAccessibleValue} method. If the return value is
+ * not null, the object supports this interface.
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
  * @see AccessibleContext
  * @see AccessibleContext#getAccessibleValue
  *
- * @author      Peter Korn
- * @author      Hans Muller
- * @author      Willie Walker
+ * @author Peter Korn
+ * @author Hans Muller
+ * @author Willie Walker
  */
 public interface AccessibleValue {
 

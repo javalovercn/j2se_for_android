@@ -25,12 +25,13 @@
 package java.awt;
 
 /**
- * The {@code GridBagLayoutInfo} is an utility class for
- * {@code GridBagLayout} layout manager.
- * It stores align, size and baseline parameters for every component within a container.
+ * The {@code GridBagLayoutInfo} is an utility class for {@code GridBagLayout}
+ * layout manager. It stores align, size and baseline parameters for every
+ * component within a container.
  * <p>
- * @see       java.awt.GridBagLayout
- * @see       java.awt.GridBagConstraints
+ * 
+ * @see java.awt.GridBagLayout
+ * @see java.awt.GridBagConstraints
  * @since 1.6
  */
 public class GridBagLayoutInfo implements java.io.Serializable {
@@ -51,8 +52,8 @@ public class GridBagLayoutInfo implements java.io.Serializable {
 	}
 
 	boolean hasConstantDescent(int row) {
-		return ((baselineType[row] & (1 << Component.BaselineResizeBehavior.CONSTANT_DESCENT
-				.ordinal())) != 0);
+		return ((baselineType[row]
+				& (1 << Component.BaselineResizeBehavior.CONSTANT_DESCENT.ordinal())) != 0);
 	}
 
 	boolean hasBaseline(int row) {

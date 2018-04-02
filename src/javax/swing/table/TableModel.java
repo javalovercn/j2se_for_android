@@ -27,39 +27,45 @@ package javax.swing.table;
 import javax.swing.event.TableModelListener;
 
 /**
- *  The <code>TableModel</code> interface specifies the methods the
- *  <code>JTable</code> will use to interrogate a tabular data model. <p>
- *
- *  The <code>JTable</code> can be set up to display any data
- *  model which implements the
- *  <code>TableModel</code> interface with a couple of lines of code:  <p>
- *  <pre>
- *      TableModel myData = new MyTableModel();
- *      JTable table = new JTable(myData);
- *  </pre><p>
- *
- * For further documentation, see <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/table.html#data">Creating a Table Model</a>
- * in <em>The Java Tutorial</em>.
+ * The <code>TableModel</code> interface specifies the methods the
+ * <code>JTable</code> will use to interrogate a tabular data model.
  * <p>
+ *
+ * The <code>JTable</code> can be set up to display any data model which
+ * implements the <code>TableModel</code> interface with a couple of lines of
+ * code:
+ * <p>
+ * 
+ * <pre>
+ * TableModel myData = new MyTableModel();
+ * JTable table = new JTable(myData);
+ * </pre>
+ * <p>
+ *
+ * For further documentation, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/table.html#data">Creating
+ * a Table Model</a> in <em>The Java Tutorial</em>.
+ * <p>
+ * 
  * @author Philip Milne
  * @see JTable
  */
-public interface TableModel{
-    public int getRowCount();
+public interface TableModel {
+	public int getRowCount();
 
-    public int getColumnCount();
+	public int getColumnCount();
 
-    public String getColumnName(int columnIndex);
+	public String getColumnName(int columnIndex);
 
-    public Class<?> getColumnClass(int columnIndex);
+	public Class<?> getColumnClass(int columnIndex);
 
-    public boolean isCellEditable(int rowIndex, int columnIndex);
+	public boolean isCellEditable(int rowIndex, int columnIndex);
 
-    public Object getValueAt(int rowIndex, int columnIndex);
+	public Object getValueAt(int rowIndex, int columnIndex);
 
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex);
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex);
 
-    public void addTableModelListener(TableModelListener l);
+	public void addTableModelListener(TableModelListener l);
 
-    public void removeTableModelListener(TableModelListener l);
+	public void removeTableModelListener(TableModelListener l);
 }

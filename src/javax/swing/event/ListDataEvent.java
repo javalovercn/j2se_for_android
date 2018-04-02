@@ -29,43 +29,45 @@ import java.util.EventObject;
 /**
  * Defines an event that encapsulates changes to a list.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Hans Muller
  */
-public class ListDataEvent extends EventObject
-{
-    public static final int CONTENTS_CHANGED = 0;
-    public static final int INTERVAL_ADDED = 1;
-    public static final int INTERVAL_REMOVED = 2;
+public class ListDataEvent extends EventObject {
+	public static final int CONTENTS_CHANGED = 0;
+	public static final int INTERVAL_ADDED = 1;
+	public static final int INTERVAL_REMOVED = 2;
 
-    private int type;
-    private int index0;
-    private int index1;
+	private int type;
+	private int index0;
+	private int index1;
 
-    public int getType() { return type; }
+	public int getType() {
+		return type;
+	}
 
-    public int getIndex0() { return index0; }
-    public int getIndex1() { return index1; }
+	public int getIndex0() {
+		return index0;
+	}
 
-    public ListDataEvent(Object source, int type, int index0, int index1) {
-        super(source);
-        this.type = type;
-        this.index0 = Math.min(index0, index1);
-        this.index1 = Math.max(index0, index1);
-    }
+	public int getIndex1() {
+		return index1;
+	}
 
-    public String toString() {
-        return getClass().getName() +
-        "[type=" + type +
-        ",index0=" + index0 +
-        ",index1=" + index1 + "]";
-    }
+	public ListDataEvent(Object source, int type, int index0, int index1) {
+		super(source);
+		this.type = type;
+		this.index0 = Math.min(index0, index1);
+		this.index1 = Math.max(index0, index1);
+	}
+
+	public String toString() {
+		return getClass().getName() + "[type=" + type + ",index0=" + index0 + ",index1=" + index1
+				+ "]";
+	}
 }

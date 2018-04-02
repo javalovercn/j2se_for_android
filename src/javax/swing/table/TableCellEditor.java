@@ -30,16 +30,15 @@ import javax.swing.CellEditor;
 import javax.swing.JTable;
 
 /**
- * This interface defines the method any object that would like to be
- * an editor of values for components such as <code>JListBox</code>,
- * <code>JComboBox</code>, <code>JTree</code>, or <code>JTable</code>
- * needs to implement.
+ * This interface defines the method any object that would like to be an editor
+ * of values for components such as <code>JListBox</code>,
+ * <code>JComboBox</code>, <code>JTree</code>, or <code>JTable</code> needs to
+ * implement.
  *
  * @author Alan Chung
  */
 public interface TableCellEditor extends CellEditor {
 
-    Component getTableCellEditorComponent(JTable table, Object value,
-                                          boolean isSelected,
-                                          int row, int column);
+	Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
+			int column);
 }

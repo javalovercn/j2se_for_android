@@ -38,41 +38,36 @@ import java.util.TooManyListenersException;
 
 /**
  * The <code>DragSourceContext</code> class is responsible for managing the
- * initiator side of the Drag and Drop protocol. In particular, it is responsible
- * for managing drag event notifications to the
- * {@linkplain DragSourceListener DragSourceListeners}
- * and {@linkplain DragSourceMotionListener DragSourceMotionListeners}, and providing the
- * {@link Transferable} representing the source data for the drag operation.
+ * initiator side of the Drag and Drop protocol. In particular, it is
+ * responsible for managing drag event notifications to the
+ * {@linkplain DragSourceListener DragSourceListeners} and
+ * {@linkplain DragSourceMotionListener DragSourceMotionListeners}, and
+ * providing the {@link Transferable} representing the source data for the drag
+ * operation.
  * <p>
- * Note that the <code>DragSourceContext</code> itself
- * implements the <code>DragSourceListener</code> and
- * <code>DragSourceMotionListener</code> interfaces.
- * This is to allow the platform peer
- * (the {@link DragSourceContextPeer} instance)
- * created by the {@link DragSource} to notify
- * the <code>DragSourceContext</code> of
- * state changes in the ongoing operation. This allows the
- * <code>DragSourceContext</code> object to interpose
- * itself between the platform and the
- * listeners provided by the initiator of the drag operation.
+ * Note that the <code>DragSourceContext</code> itself implements the
+ * <code>DragSourceListener</code> and <code>DragSourceMotionListener</code>
+ * interfaces. This is to allow the platform peer (the
+ * {@link DragSourceContextPeer} instance) created by the {@link DragSource} to
+ * notify the <code>DragSourceContext</code> of state changes in the ongoing
+ * operation. This allows the <code>DragSourceContext</code> object to interpose
+ * itself between the platform and the listeners provided by the initiator of
+ * the drag operation.
  * <p>
- * <a name="defaultCursor" />
- * By default, {@code DragSourceContext} sets the cursor as appropriate
- * for the current state of the drag and drop operation. For example, if
- * the user has chosen {@linkplain DnDConstants#ACTION_MOVE the move action},
- * and the pointer is over a target that accepts
- * the move action, the default move cursor is shown. When
- * the pointer is over an area that does not accept the transfer,
- * the default "no drop" cursor is shown.
+ * <a name="defaultCursor" /> By default, {@code DragSourceContext} sets the
+ * cursor as appropriate for the current state of the drag and drop operation.
+ * For example, if the user has chosen {@linkplain DnDConstants#ACTION_MOVE the
+ * move action}, and the pointer is over a target that accepts the move action,
+ * the default move cursor is shown. When the pointer is over an area that does
+ * not accept the transfer, the default "no drop" cursor is shown.
  * <p>
- * This default handling mechanism is disabled when a custom cursor is set
- * by the {@link #setCursor} method. When the default handling is disabled,
- * it becomes the responsibility
- * of the developer to keep the cursor up to date, by listening
- * to the {@code DragSource} events and calling the {@code setCursor()} method.
- * Alternatively, you can provide custom cursor behavior by providing
- * custom implementations of the {@code DragSource}
- * and the {@code DragSourceContext} classes.
+ * This default handling mechanism is disabled when a custom cursor is set by
+ * the {@link #setCursor} method. When the default handling is disabled, it
+ * becomes the responsibility of the developer to keep the cursor up to date, by
+ * listening to the {@code DragSource} events and calling the
+ * {@code setCursor()} method. Alternatively, you can provide custom cursor
+ * behavior by providing custom implementations of the {@code DragSource} and
+ * the {@code DragSourceContext} classes.
  *
  * @see DragSourceListener
  * @see DragSourceMotionListener
@@ -80,89 +75,99 @@ import java.util.TooManyListenersException;
  * @since 1.2
  */
 
-public class DragSourceContext implements DragSourceListener, DragSourceMotionListener, Serializable {
-protected static final int DEFAULT = 0;
-protected static final int ENTER   = 1;
-protected static final int OVER    = 2;
-protected static final int CHANGED = 3;
-public DragSourceContext(DragSourceContextPeer dscp,
-                         DragGestureEvent trigger, Cursor dragCursor,
-                         Image dragImage, Point offset, Transferable t,
-                         DragSourceListener dsl) {
-	sourceActions = 0;
-}
+public class DragSourceContext
+		implements DragSourceListener, DragSourceMotionListener, Serializable {
+	protected static final int DEFAULT = 0;
+	protected static final int ENTER = 1;
+	protected static final int OVER = 2;
+	protected static final int CHANGED = 3;
 
-public DragSource   getDragSource() { return trigger.getDragSource(); }
+	public DragSourceContext(DragSourceContextPeer dscp, DragGestureEvent trigger,
+			Cursor dragCursor, Image dragImage, Point offset, Transferable t,
+			DragSourceListener dsl) {
+		sourceActions = 0;
+	}
 
-public Component    getComponent() { return trigger.getComponent(); }
+	public DragSource getDragSource() {
+		return trigger.getDragSource();
+	}
 
-public DragGestureEvent getTrigger() { return trigger; }
+	public Component getComponent() {
+		return trigger.getComponent();
+	}
 
-public int  getSourceActions() {
-    return sourceActions;
-}
+	public DragGestureEvent getTrigger() {
+		return trigger;
+	}
 
-public synchronized void setCursor(Cursor c) {
-}
+	public int getSourceActions() {
+		return sourceActions;
+	}
 
-public Cursor getCursor() { return cursor; }
+	public synchronized void setCursor(Cursor c) {
+	}
 
-public synchronized void addDragSourceListener(DragSourceListener dsl) throws TooManyListenersException {
-}
+	public Cursor getCursor() {
+		return cursor;
+	}
 
-public synchronized void removeDragSourceListener(DragSourceListener dsl) {
-}
+	public synchronized void addDragSourceListener(DragSourceListener dsl)
+			throws TooManyListenersException {
+	}
 
-public void transferablesFlavorsChanged() {
-}
+	public synchronized void removeDragSourceListener(DragSourceListener dsl) {
+	}
 
-public void dragEnter(DragSourceDragEvent dsde) {
-}
+	public void transferablesFlavorsChanged() {
+	}
 
-public void dragOver(DragSourceDragEvent dsde) {
-}
+	public void dragEnter(DragSourceDragEvent dsde) {
+	}
 
-public void dragExit(DragSourceEvent dse) {
-}
+	public void dragOver(DragSourceDragEvent dsde) {
+	}
 
-public void dropActionChanged(DragSourceDragEvent dsde) {
-}
+	public void dragExit(DragSourceEvent dse) {
+	}
 
-public void dragDropEnd(DragSourceDropEvent dsde) {
-}
+	public void dropActionChanged(DragSourceDragEvent dsde) {
+	}
 
-public void dragMouseMoved(DragSourceDragEvent dsde) {
-}
+	public void dragDropEnd(DragSourceDropEvent dsde) {
+	}
 
-public Transferable getTransferable() { return transferable; }
+	public void dragMouseMoved(DragSourceDragEvent dsde) {
+	}
 
-protected synchronized void updateCurrentCursor(int sourceAct, int targetAct, int status) {
-}
+	public Transferable getTransferable() {
+		return transferable;
+	}
 
-private void setCursorImpl(Cursor c) {
-}
+	protected synchronized void updateCurrentCursor(int sourceAct, int targetAct, int status) {
+	}
 
-private void writeObject(ObjectOutputStream s) throws IOException {
-}
+	private void setCursorImpl(Cursor c) {
+	}
 
-private void readObject(ObjectInputStream s)
-    throws ClassNotFoundException, IOException
-{
-}
+	private void writeObject(ObjectOutputStream s) throws IOException {
+	}
 
-private static Transferable emptyTransferable;
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
+	}
 
-private transient DragSourceContextPeer peer;
+	private static Transferable emptyTransferable;
 
-private DragGestureEvent    trigger;
+	private transient DragSourceContextPeer peer;
 
-private Cursor              cursor;
+	private DragGestureEvent trigger;
 
-private transient Transferable      transferable;
+	private Cursor cursor;
 
-private transient DragSourceListener    listener;
+	private transient Transferable transferable;
 
-private boolean useCustomCursor;
+	private transient DragSourceListener listener;
 
-private final int sourceActions;
+	private boolean useCustomCursor;
+
+	private final int sourceActions;
 }

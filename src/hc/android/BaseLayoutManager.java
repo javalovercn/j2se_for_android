@@ -9,7 +9,7 @@ public abstract class BaseLayoutManager implements LayoutManager {
 	protected final ViewRelation viewRelation = new ViewRelation();
 	protected boolean isLayout = false;
 	protected Container parent;
-	
+
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
 		isModified = true;
@@ -25,7 +25,7 @@ public abstract class BaseLayoutManager implements LayoutManager {
 		isModified = false;
 		isLayout = true;
 		this.parent = parent;
-		
+
 		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 			@Override
 			public void run() {

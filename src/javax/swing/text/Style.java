@@ -27,24 +27,22 @@ package javax.swing.text;
 import javax.swing.event.ChangeListener;
 
 /**
- * A collection of attributes to associate with an element in a document.
- * Since these are typically used to associate character and paragraph
- * styles with the element, operations for this are provided.  Other
- * customized attributes that get associated with the element will
- * effectively be name-value pairs that live in a hierarchy and if a name
- * (key) is not found locally, the request is forwarded to the parent.
- * Commonly used attributes are separated out to facilitate alternative
- * implementations that are more efficient.
+ * A collection of attributes to associate with an element in a document. Since
+ * these are typically used to associate character and paragraph styles with the
+ * element, operations for this are provided. Other customized attributes that
+ * get associated with the element will effectively be name-value pairs that
+ * live in a hierarchy and if a name (key) is not found locally, the request is
+ * forwarded to the parent. Commonly used attributes are separated out to
+ * facilitate alternative implementations that are more efficient.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public interface Style extends MutableAttributeSet {
 
-    public String getName();
+	public String getName();
 
-    public void addChangeListener(ChangeListener l);
+	public void addChangeListener(ChangeListener l);
 
-    public void removeChangeListener(ChangeListener l);
-
+	public void removeChangeListener(ChangeListener l);
 
 }

@@ -38,5 +38,5 @@ public interface Icon {
 	int getIconWidth();
 
 	int getIconHeight();
-	
+
 }

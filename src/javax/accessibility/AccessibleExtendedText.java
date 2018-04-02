@@ -27,13 +27,14 @@ package javax.accessibility;
 import java.awt.Rectangle;
 
 /**
- * <P>The AccessibleExtendedText interface contains additional methods
- * not provided by the AccessibleText interface
+ * <P>
+ * The AccessibleExtendedText interface contains additional methods not provided
+ * by the AccessibleText interface
  *
  * Applications can determine if an object supports the AccessibleExtendedText
  * interface by first obtaining its AccessibleContext (see {@link Accessible})
  * and then calling the {@link AccessibleContext#getAccessibleText} method of
- * AccessibleContext.  If the return value is an instance of
+ * AccessibleContext. If the return value is an instance of
  * AccessibleExtendedText, the object supports this interface.
  *
  * @see Accessible
@@ -41,8 +42,8 @@ import java.awt.Rectangle;
  * @see AccessibleContext
  * @see AccessibleContext#getAccessibleText
  *
- * @author       Peter Korn
- * @author       Lynn Monsanto
+ * @author Peter Korn
+ * @author Lynn Monsanto
  * @since 1.5
  */
 public interface AccessibleExtendedText {

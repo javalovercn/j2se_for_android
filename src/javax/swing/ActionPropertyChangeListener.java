@@ -34,27 +34,26 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
 /**
- * A package-private PropertyChangeListener which listens for
- * property changes on an Action and updates the properties
- * of an ActionEvent source.
+ * A package-private PropertyChangeListener which listens for property changes
+ * on an Action and updates the properties of an ActionEvent source.
  * <p>
- * Subclasses must override the actionPropertyChanged method,
- * which is invoked from the propertyChange method as long as
- * the target is still valid.
+ * Subclasses must override the actionPropertyChanged method, which is invoked
+ * from the propertyChange method as long as the target is still valid.
  * </p>
  * <p>
  * WARNING WARNING WARNING WARNING WARNING WARNING:<br>
- * Do NOT create an annonymous inner class that extends this!  If you do
- * a strong reference will be held to the containing class, which in most
- * cases defeats the purpose of this class.
+ * Do NOT create an annonymous inner class that extends this! If you do a strong
+ * reference will be held to the containing class, which in most cases defeats
+ * the purpose of this class.
  *
- * @param T the type of JComponent the underlying Action is attached to
+ * @param T
+ *            the type of JComponent the underlying Action is attached to
  *
  * @author Georges Saab
  * @see AbstractButton
  */
-abstract class ActionPropertyChangeListener<T extends JComponent> implements
-		PropertyChangeListener, Serializable {
+abstract class ActionPropertyChangeListener<T extends JComponent>
+		implements PropertyChangeListener, Serializable {
 	private static ReferenceQueue<JComponent> queue;
 
 	private transient OwnedWeakReference<T> target;
@@ -84,8 +83,7 @@ abstract class ActionPropertyChangeListener<T extends JComponent> implements
 		}
 	}
 
-	protected abstract void actionPropertyChanged(T target, Action action,
-			PropertyChangeEvent e);
+	protected abstract void actionPropertyChanged(T target, Action action, PropertyChangeEvent e);
 
 	private void setTarget(T c) {
 		ReferenceQueue<JComponent> queue = getQueue();
@@ -116,8 +114,7 @@ abstract class ActionPropertyChangeListener<T extends JComponent> implements
 		s.writeObject(getTarget());
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 		s.defaultReadObject();
 		T target = (T) s.readObject();
 		if (target != null) {
@@ -125,8 +122,7 @@ abstract class ActionPropertyChangeListener<T extends JComponent> implements
 		}
 	}
 
-	private static class OwnedWeakReference<U extends JComponent> extends
-			WeakReference<U> {
+	private static class OwnedWeakReference<U extends JComponent> extends WeakReference<U> {
 		private ActionPropertyChangeListener owner;
 
 		OwnedWeakReference(U target, ReferenceQueue<? super U> queue,

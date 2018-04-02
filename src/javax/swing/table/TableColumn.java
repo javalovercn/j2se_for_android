@@ -34,40 +34,36 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 /**
- *  A <code>TableColumn</code> represents all the attributes of a column in a
- *  <code>JTable</code>, such as width, resizibility, minimum and maximum width.
- *  In addition, the <code>TableColumn</code> provides slots for a renderer and
- *  an editor that can be used to display and edit the values in this column.
- *  <p>
- *  It is also possible to specify renderers and editors on a per type basis
- *  rather than a per column basis - see the
- *  <code>setDefaultRenderer</code> method in the <code>JTable</code> class.
- *  This default mechanism is only used when the renderer (or
- *  editor) in the <code>TableColumn</code> is <code>null</code>.
+ * A <code>TableColumn</code> represents all the attributes of a column in a
+ * <code>JTable</code>, such as width, resizibility, minimum and maximum width.
+ * In addition, the <code>TableColumn</code> provides slots for a renderer and
+ * an editor that can be used to display and edit the values in this column.
  * <p>
- *  The <code>TableColumn</code> stores the link between the columns in the
- *  <code>JTable</code> and the columns in the <code>TableModel</code>.
- *  The <code>modelIndex</code> is the column in the
- *  <code>TableModel</code>, which will be queried for the data values for the
- *  cells in this column. As the column moves around in the view this
- *  <code>modelIndex</code> does not change.
- *  <p>
+ * It is also possible to specify renderers and editors on a per type basis
+ * rather than a per column basis - see the <code>setDefaultRenderer</code>
+ * method in the <code>JTable</code> class. This default mechanism is only used
+ * when the renderer (or editor) in the <code>TableColumn</code> is
+ * <code>null</code>.
+ * <p>
+ * The <code>TableColumn</code> stores the link between the columns in the
+ * <code>JTable</code> and the columns in the <code>TableModel</code>. The
+ * <code>modelIndex</code> is the column in the <code>TableModel</code>, which
+ * will be queried for the data values for the cells in this column. As the
+ * column moves around in the view this <code>modelIndex</code> does not change.
+ * <p>
  * <b>Note:</b> Some implementations may assume that all
- *    <code>TableColumnModel</code>s are unique, therefore we would
- *    recommend that the same <code>TableColumn</code> instance
- *    not be added more than once to a <code>TableColumnModel</code>.
- *    To show <code>TableColumn</code>s with the same column of
- *    data from the model, create a new instance with the same
- *    <code>modelIndex</code>.
- *  <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <code>TableColumnModel</code>s are unique, therefore we would recommend that
+ * the same <code>TableColumn</code> instance not be added more than once to a
+ * <code>TableColumnModel</code>. To show <code>TableColumn</code>s with the
+ * same column of data from the model, create a new instance with the same
+ * <code>modelIndex</code>.
+ * <p>
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Alan Chung
  * @author Philip Milne
@@ -118,8 +114,8 @@ public class TableColumn extends Object implements Serializable {
 		this(modelIndex, width, null, null);
 	}
 
-	public TableColumn(int modelIndex, int width,
-			TableCellRenderer cellRenderer, TableCellEditor cellEditor) {
+	public TableColumn(int modelIndex, int width, TableCellRenderer cellRenderer,
+			TableCellEditor cellEditor) {
 		super();
 		this.modelIndex = modelIndex;
 		preferredWidth = this.width = Math.max(width, 0);
@@ -188,8 +184,8 @@ public class TableColumn extends Object implements Serializable {
 	}
 
 	public int getWidth() {
-//		System.out.println("TableColumn getPreferredWidth : " + width);
-		return width;//real width
+		// System.out.println("TableColumn getPreferredWidth : " + width);
+		return width;// real width
 	}
 
 	public void setPreferredWidth(int preferredWidth) {
@@ -197,7 +193,8 @@ public class TableColumn extends Object implements Serializable {
 	}
 
 	public int getPreferredWidth() {
-//		System.out.println("TableColumn getPreferredWidth : " + preferredWidth);
+		// System.out.println("TableColumn getPreferredWidth : " +
+		// preferredWidth);
 		return preferredWidth;
 	}
 
@@ -267,9 +264,8 @@ public class TableColumn extends Object implements Serializable {
 
 	protected TableCellRenderer createDefaultHeaderRenderer() {
 		DefaultTableCellRenderer label = new DefaultTableCellRenderer() {
-			public Component getTableCellRendererComponent(JTable table,
-					Object value, boolean isSelected, boolean hasFocus,
-					int row, int column) {
+			public Component getTableCellRendererComponent(JTable table, Object value,
+					boolean isSelected, boolean hasFocus, int row, int column) {
 				if (table != null) {
 					JTableHeader header = table.getTableHeader();
 					if (header != null) {
@@ -280,7 +276,7 @@ public class TableColumn extends Object implements Serializable {
 				}
 
 				setText((value == null) ? "" : value.toString());
-//				setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+				// setBorder(UIManager.getBorder("TableHeader.cellBorder"));
 				return this;
 			}
 		};

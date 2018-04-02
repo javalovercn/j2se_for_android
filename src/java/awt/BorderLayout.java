@@ -25,98 +25,101 @@
 package java.awt;
 
 /**
- * A border layout lays out a container, arranging and resizing
- * its components to fit in five regions:
- * north, south, east, west, and center.
- * Each region may contain no more than one component, and
- * is identified by a corresponding constant:
- * <code>NORTH</code>, <code>SOUTH</code>, <code>EAST</code>,
- * <code>WEST</code>, and <code>CENTER</code>.  When adding a
- * component to a container with a border layout, use one of these
- * five constants, for example:
+ * A border layout lays out a container, arranging and resizing its components
+ * to fit in five regions: north, south, east, west, and center. Each region may
+ * contain no more than one component, and is identified by a corresponding
+ * constant: <code>NORTH</code>, <code>SOUTH</code>, <code>EAST</code>,
+ * <code>WEST</code>, and <code>CENTER</code>. When adding a component to a
+ * container with a border layout, use one of these five constants, for example:
+ * 
  * <pre>
- *    Panel p = new Panel();
- *    p.setLayout(new BorderLayout());
- *    p.add(new Button("Okay"), BorderLayout.SOUTH);
+ * Panel p = new Panel();
+ * p.setLayout(new BorderLayout());
+ * p.add(new Button("Okay"), BorderLayout.SOUTH);
  * </pre>
- * As a convenience, <code>BorderLayout</code> interprets the
- * absence of a string specification the same as the constant
- * <code>CENTER</code>:
+ * 
+ * As a convenience, <code>BorderLayout</code> interprets the absence of a
+ * string specification the same as the constant <code>CENTER</code>:
+ * 
  * <pre>
- *    Panel p2 = new Panel();
- *    p2.setLayout(new BorderLayout());
- *    p2.add(new TextArea());  // Same as p.add(new TextArea(), BorderLayout.CENTER);
+ * Panel p2 = new Panel();
+ * p2.setLayout(new BorderLayout());
+ * p2.add(new TextArea()); // Same as p.add(new TextArea(),
+ * 						// BorderLayout.CENTER);
  * </pre>
  * <p>
- * In addition, <code>BorderLayout</code> supports the relative
- * positioning constants, <code>PAGE_START</code>, <code>PAGE_END</code>,
- * <code>LINE_START</code>, and <code>LINE_END</code>.
- * In a container whose <code>ComponentOrientation</code> is set to
+ * In addition, <code>BorderLayout</code> supports the relative positioning
+ * constants, <code>PAGE_START</code>, <code>PAGE_END</code>,
+ * <code>LINE_START</code>, and <code>LINE_END</code>. In a container whose
+ * <code>ComponentOrientation</code> is set to
  * <code>ComponentOrientation.LEFT_TO_RIGHT</code>, these constants map to
  * <code>NORTH</code>, <code>SOUTH</code>, <code>WEST</code>, and
  * <code>EAST</code>, respectively.
  * <p>
- * For compatibility with previous releases, <code>BorderLayout</code>
- * also includes the relative positioning constants <code>BEFORE_FIRST_LINE</code>,
+ * For compatibility with previous releases, <code>BorderLayout</code> also
+ * includes the relative positioning constants <code>BEFORE_FIRST_LINE</code>,
  * <code>AFTER_LAST_LINE</code>, <code>BEFORE_LINE_BEGINS</code> and
- * <code>AFTER_LINE_ENDS</code>.  These are equivalent to
- * <code>PAGE_START</code>, <code>PAGE_END</code>, <code>LINE_START</code>
- * and <code>LINE_END</code> respectively.  For
- * consistency with the relative positioning constants used by other
- * components, the latter constants are preferred.
+ * <code>AFTER_LINE_ENDS</code>. These are equivalent to
+ * <code>PAGE_START</code>, <code>PAGE_END</code>, <code>LINE_START</code> and
+ * <code>LINE_END</code> respectively. For consistency with the relative
+ * positioning constants used by other components, the latter constants are
+ * preferred.
  * <p>
  * Mixing both absolute and relative positioning constants can lead to
- * unpredicable results.  If
- * you use both types, the relative constants will take precedence.
- * For example, if you add components using both the <code>NORTH</code>
- * and <code>PAGE_START</code> constants in a container whose
- * orientation is <code>LEFT_TO_RIGHT</code>, only the
- * <code>PAGE_START</code> will be layed out.
+ * unpredicable results. If you use both types, the relative constants will take
+ * precedence. For example, if you add components using both the
+ * <code>NORTH</code> and <code>PAGE_START</code> constants in a container whose
+ * orientation is <code>LEFT_TO_RIGHT</code>, only the <code>PAGE_START</code>
+ * will be layed out.
  * <p>
- * NOTE: Currently (in the Java 2 platform v1.2),
- * <code>BorderLayout</code> does not support vertical
- * orientations.  The <code>isVertical</code> setting on the container's
- * <code>ComponentOrientation</code> is not respected.
+ * NOTE: Currently (in the Java 2 platform v1.2), <code>BorderLayout</code> does
+ * not support vertical orientations. The <code>isVertical</code> setting on the
+ * container's <code>ComponentOrientation</code> is not respected.
  * <p>
- * The components are laid out according to their
- * preferred sizes and the constraints of the container's size.
- * The <code>NORTH</code> and <code>SOUTH</code> components may
- * be stretched horizontally; the <code>EAST</code> and
- * <code>WEST</code> components may be stretched vertically;
- * the <code>CENTER</code> component may stretch both horizontally
+ * The components are laid out according to their preferred sizes and the
+ * constraints of the container's size. The <code>NORTH</code> and
+ * <code>SOUTH</code> components may be stretched horizontally; the
+ * <code>EAST</code> and <code>WEST</code> components may be stretched
+ * vertically; the <code>CENTER</code> component may stretch both horizontally
  * and vertically to fill any space left over.
  * <p>
- * Here is an example of five buttons in an applet laid out using
- * the <code>BorderLayout</code> layout manager:
+ * Here is an example of five buttons in an applet laid out using the
+ * <code>BorderLayout</code> layout manager:
  * <p>
- * <img src="doc-files/BorderLayout-1.gif"
- * alt="Diagram of an applet demonstrating BorderLayout.
- *      Each section of the BorderLayout contains a Button corresponding to its position in the layout, one of:
- *      North, West, Center, East, or South."
- * ALIGN=center HSPACE=10 VSPACE=7>
+ * <img src="doc-files/BorderLayout-1.gif" alt="Diagram of an applet
+ * demonstrating BorderLayout. Each section of the BorderLayout contains a
+ * Button corresponding to its position in the layout, one of: North, West,
+ * Center, East, or South." ALIGN=center HSPACE=10 VSPACE=7>
  * <p>
  * The code for this applet is as follows:
  * <p>
- * <hr><blockquote><pre>
+ * <hr>
+ * <blockquote>
+ * 
+ * <pre>
  * import java.awt.*;
  * import java.applet.Applet;
  *
  * public class buttonDir extends Applet {
- *   public void init() {
- *     setLayout(new BorderLayout());
- *     add(new Button("North"), BorderLayout.NORTH);
- *     add(new Button("South"), BorderLayout.SOUTH);
- *     add(new Button("East"), BorderLayout.EAST);
- *     add(new Button("West"), BorderLayout.WEST);
- *     add(new Button("Center"), BorderLayout.CENTER);
- *   }
+ * 	public void init() {
+ * 		setLayout(new BorderLayout());
+ * 		add(new Button("North"), BorderLayout.NORTH);
+ * 		add(new Button("South"), BorderLayout.SOUTH);
+ * 		add(new Button("East"), BorderLayout.EAST);
+ * 		add(new Button("West"), BorderLayout.WEST);
+ * 		add(new Button("Center"), BorderLayout.CENTER);
+ * 	}
  * }
- * </pre></blockquote><hr>
+ * </pre>
+ * 
+ * </blockquote>
+ * <hr>
  * <p>
- * @author      Arthur van Hoff
- * @see         java.awt.Container#add(String, Component)
- * @see         java.awt.ComponentOrientation
- * @since       JDK1.0
+ * 
+ * @author Arthur van Hoff
+ * @see java.awt.Container#add(String, Component)
+ * @see java.awt.ComponentOrientation
+ * @since JDK1.0
  */
 public class BorderLayout implements LayoutManager2, java.io.Serializable {
 	/**

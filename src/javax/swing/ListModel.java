@@ -27,14 +27,14 @@ package javax.swing;
 import javax.swing.event.ListDataListener;
 
 /**
- * This interface defines the methods components like JList use
- * to get the value of each cell in a list and the length of the list.
- * Logically the model is a vector, indices vary from 0 to
- * ListDataModel.getSize() - 1.  Any change to the contents or
- * length of the data model must be reported to all of the
+ * This interface defines the methods components like JList use to get the value
+ * of each cell in a list and the length of the list. Logically the model is a
+ * vector, indices vary from 0 to ListDataModel.getSize() - 1. Any change to the
+ * contents or length of the data model must be reported to all of the
  * ListDataListeners.
  *
- * @param <E> the type of the elements of this model
+ * @param <E>
+ *            the type of the elements of this model
  *
  * @author Hans Muller
  * @see JList

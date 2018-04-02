@@ -27,22 +27,22 @@ package java.awt.datatransfer;
 import java.io.IOException;
 
 /**
- * Defines the interface for classes that can be used to provide data
- * for a transfer operation.
+ * Defines the interface for classes that can be used to provide data for a
+ * transfer operation.
  * <p>
  * For information on using data transfer with Swing, see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/dnd.html">
- * How to Use Drag and Drop and Data Transfer</a>,
- * a section in <em>The Java Tutorial</em>, for more information.
+ * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/dnd.html"> How
+ * to Use Drag and Drop and Data Transfer</a>, a section in <em>The Java
+ * Tutorial</em>, for more information.
  *
- * @author      Amy Fowler
+ * @author Amy Fowler
  */
 
 public interface Transferable {
-    public DataFlavor[] getTransferDataFlavors();
+	public DataFlavor[] getTransferDataFlavors();
 
-    public boolean isDataFlavorSupported(DataFlavor flavor);
+	public boolean isDataFlavorSupported(DataFlavor flavor);
 
-    public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException;
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException;
 
 }

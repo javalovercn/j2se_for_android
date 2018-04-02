@@ -34,28 +34,22 @@ import javax.accessibility.AccessibleContext;
 import javax.swing.plaf.PanelUI;
 
 /**
- * <code>JPanel</code> is a generic lightweight container.
- * For examples and task-oriented documentation for JPanel, see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/panel.html">How to Use Panels</a>,
- * a section in <em>The Java Tutorial</em>.
+ * <code>JPanel</code> is a generic lightweight container. For examples and
+ * task-oriented documentation for JPanel, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/panel.html">How
+ * to Use Panels</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- * description: A generic lightweight container.
+ * @beaninfo description: A generic lightweight container.
  *
  * @author Arnaud Weber
  * @author Steve Wilson

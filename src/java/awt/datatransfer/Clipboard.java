@@ -34,99 +34,102 @@ import android.content.ClipboardManager;
 import android.content.Context;
 
 /**
- * A class that implements a mechanism to transfer data using
- * cut/copy/paste operations.
+ * A class that implements a mechanism to transfer data using cut/copy/paste
+ * operations.
  * <p>
- * {@link FlavorListener}s may be registered on an instance of the
- * Clipboard class to be notified about changes to the set of
- * {@link DataFlavor}s available on this clipboard (see
- * {@link #addFlavorListener}).
+ * {@link FlavorListener}s may be registered on an instance of the Clipboard
+ * class to be notified about changes to the set of {@link DataFlavor}s
+ * available on this clipboard (see {@link #addFlavorListener}).
  *
  * @see java.awt.Toolkit#getSystemClipboard
  * @see java.awt.Toolkit#getSystemSelection
  *
- * @author      Amy Fowler
- * @author      Alexander Gerasimov
+ * @author Amy Fowler
+ * @author Alexander Gerasimov
  */
 public class Clipboard {
 	ClipboardManager cm;
-    String name;
+	String name;
 
-    public Clipboard(String name) {
-        this.name = name;
-        AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
+	public Clipboard(String name) {
+		this.name = name;
+		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 			@Override
 			public void run() {
-		        cm = (ClipboardManager)ActivityManager.getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+				cm = (ClipboardManager) ActivityManager.applicationContext
+						.getSystemService(Context.CLIPBOARD_SERVICE);
 			}
 		});
-    }
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public synchronized void setContents(Transferable contents, ClipboardOwner owner) {
-    	if(contents instanceof StringSelection){
-    		try {
-				cm.setPrimaryClip(ClipData.newPlainText("hc_clip", (String)contents.getTransferData(DataFlavor.stringFlavor)));
+	public synchronized void setContents(Transferable contents, ClipboardOwner owner) {
+		if (contents instanceof StringSelection) {
+			try {
+				cm.setPrimaryClip(ClipData.newPlainText("hc_clip",
+						(String) contents.getTransferData(DataFlavor.stringFlavor)));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-    		return;
-    	}
-    }
+			return;
+		}
+	}
 
-    public synchronized Transferable getContents(Object requestor) {
-        return new Transferable() {
+	public synchronized Transferable getContents(Object requestor) {
+		return new Transferable() {
 			@Override
 			public boolean isDataFlavorSupported(DataFlavor flavor) {
-				if(flavor.equals(DataFlavor.stringFlavor)){
+				if (flavor.equals(DataFlavor.stringFlavor)) {
 					return true;
 				}
 				return false;
 			}
+
 			@Override
 			public DataFlavor[] getTransferDataFlavors() {
-				DataFlavor[] out = {DataFlavor.stringFlavor};
+				DataFlavor[] out = { DataFlavor.stringFlavor };
 				return out;
 			}
+
 			@Override
 			public Object getTransferData(DataFlavor flavor)
 					throws UnsupportedFlavorException, IOException {
-				if(flavor.equals(DataFlavor.stringFlavor)){
-					if (cm.hasPrimaryClip()){  
-					    return cm.getPrimaryClip().getItemAt(0).getText();  
-					}else{
+				if (flavor.equals(DataFlavor.stringFlavor)) {
+					if (cm.hasPrimaryClip()) {
+						return cm.getPrimaryClip().getItemAt(0).getText();
+					} else {
 						return "";
 					}
 				}
 				return null;
 			}
 		};
-    }
+	}
 
-    public DataFlavor[] getAvailableDataFlavors() {
-    	DataFlavor[] out = {DataFlavor.stringFlavor};
+	public DataFlavor[] getAvailableDataFlavors() {
+		DataFlavor[] out = { DataFlavor.stringFlavor };
 		return out;
-    }
+	}
 
-    public boolean isDataFlavorAvailable(DataFlavor flavor) {
-    	if(flavor.equals(DataFlavor.stringFlavor) && cm.hasPrimaryClip()){
-    		return true;
-    	}
-    	return false;
-    }
+	public boolean isDataFlavorAvailable(DataFlavor flavor) {
+		if (flavor.equals(DataFlavor.stringFlavor) && cm.hasPrimaryClip()) {
+			return true;
+		}
+		return false;
+	}
 
-    public synchronized Object getData(DataFlavor flavor){
-    	if(flavor.equals(DataFlavor.stringFlavor)){
-    		if (cm.hasPrimaryClip()){  
-			    return cm.getPrimaryClip().getItemAt(0).getText();  
-			}else{
+	public synchronized Object getData(DataFlavor flavor) {
+		if (flavor.equals(DataFlavor.stringFlavor)) {
+			if (cm.hasPrimaryClip()) {
+				return cm.getPrimaryClip().getItemAt(0).getText();
+			} else {
 				return "";
 			}
 		}
-    	return null;
-    }
+		return null;
+	}
 
 }

@@ -34,120 +34,99 @@
  ******************************************************************/
 
 package java.awt.image;
+
 import java.awt.Rectangle;
 import java.awt.Point;
 
 /**
- * This class extends Raster to provide pixel writing capabilities.
- * Refer to the class comment for Raster for descriptions of how
- * a Raster stores pixels.
+ * This class extends Raster to provide pixel writing capabilities. Refer to the
+ * class comment for Raster for descriptions of how a Raster stores pixels.
  *
- * <p> The constructors of this class are protected.  To instantiate
- * a WritableRaster, use one of the createWritableRaster factory methods
- * in the Raster class.
+ * <p>
+ * The constructors of this class are protected. To instantiate a
+ * WritableRaster, use one of the createWritableRaster factory methods in the
+ * Raster class.
  */
 public class WritableRaster extends Raster {
-    protected WritableRaster(SampleModel sampleModel,
-                             Point origin) {
-        this(sampleModel,
-             sampleModel.createDataBuffer(),
-             new Rectangle(origin.x,
-                           origin.y,
-                           sampleModel.getWidth(),
-                           sampleModel.getHeight()),
-             origin,
-             null);
-    }
+	protected WritableRaster(SampleModel sampleModel, Point origin) {
+		this(sampleModel, sampleModel.createDataBuffer(),
+				new Rectangle(origin.x, origin.y, sampleModel.getWidth(), sampleModel.getHeight()),
+				origin, null);
+	}
 
-    protected WritableRaster(SampleModel sampleModel,
-                             DataBuffer dataBuffer,
-                             Point origin) {
-        this(sampleModel,
-             dataBuffer,
-             new Rectangle(origin.x,
-                           origin.y,
-                           sampleModel.getWidth(),
-                           sampleModel.getHeight()),
-             origin,
-             null);
-    }
+	protected WritableRaster(SampleModel sampleModel, DataBuffer dataBuffer, Point origin) {
+		this(sampleModel, dataBuffer,
+				new Rectangle(origin.x, origin.y, sampleModel.getWidth(), sampleModel.getHeight()),
+				origin, null);
+	}
 
-    protected WritableRaster(SampleModel sampleModel,
-                             DataBuffer dataBuffer,
-                             Rectangle aRegion,
-                             Point sampleModelTranslate,
-                             WritableRaster parent){
-        super(sampleModel,dataBuffer,aRegion,sampleModelTranslate,parent);
-    }
+	protected WritableRaster(SampleModel sampleModel, DataBuffer dataBuffer, Rectangle aRegion,
+			Point sampleModelTranslate, WritableRaster parent) {
+		super(sampleModel, dataBuffer, aRegion, sampleModelTranslate, parent);
+	}
 
-    public WritableRaster getWritableParent() {
-        return (WritableRaster)parent;
-    }
+	public WritableRaster getWritableParent() {
+		return (WritableRaster) parent;
+	}
 
-    public WritableRaster createWritableTranslatedChild(int childMinX,
-                                                        int childMinY) {
-        return null;
-    }
+	public WritableRaster createWritableTranslatedChild(int childMinX, int childMinY) {
+		return null;
+	}
 
-    public WritableRaster createWritableChild(int parentX, int parentY,
-                                              int w, int h,
-                                              int childMinX, int childMinY,
-                                              int bandList[]) {
-        return null;
-    }
+	public WritableRaster createWritableChild(int parentX, int parentY, int w, int h, int childMinX,
+			int childMinY, int bandList[]) {
+		return null;
+	}
 
-    public void setDataElements(int x, int y, Object inData) {
-    }
+	public void setDataElements(int x, int y, Object inData) {
+	}
 
-    public void setDataElements(int x, int y, Raster inRaster) {
-    }
+	public void setDataElements(int x, int y, Raster inRaster) {
+	}
 
-    public void setDataElements(int x, int y, int w, int h, Object inData) {
-    }
+	public void setDataElements(int x, int y, int w, int h, Object inData) {
+	}
 
-    public void setRect(Raster srcRaster) {
-    }
+	public void setRect(Raster srcRaster) {
+	}
 
-    public void setRect(int dx, int dy, Raster srcRaster) {
-    }
+	public void setRect(int dx, int dy, Raster srcRaster) {
+	}
 
-    public void setPixel(int x, int y, int iArray[]) {
-    }
+	public void setPixel(int x, int y, int iArray[]) {
+	}
 
-    public void setPixel(int x, int y, float fArray[]) {
-    }
+	public void setPixel(int x, int y, float fArray[]) {
+	}
 
-    public void setPixel(int x, int y, double dArray[]) {
-    }
+	public void setPixel(int x, int y, double dArray[]) {
+	}
 
-    public void setPixels(int x, int y, int w, int h, int iArray[]) {
-    }
+	public void setPixels(int x, int y, int w, int h, int iArray[]) {
+	}
 
-    public void setPixels(int x, int y, int w, int h, float fArray[]) {
-    }
+	public void setPixels(int x, int y, int w, int h, float fArray[]) {
+	}
 
-    public void setPixels(int x, int y, int w, int h, double dArray[]) {
-    }
+	public void setPixels(int x, int y, int w, int h, double dArray[]) {
+	}
 
-    public void setSample(int x, int y, int b, int s) {
-    }
+	public void setSample(int x, int y, int b, int s) {
+	}
 
-    public void setSample(int x, int y, int b, float s){
-    }
+	public void setSample(int x, int y, int b, float s) {
+	}
 
-    public void setSample(int x, int y, int b, double s){
-    }
+	public void setSample(int x, int y, int b, double s) {
+	}
 
-    public void setSamples(int x, int y, int w, int h, int b,
-                           int iArray[]) {
-    }
+	public void setSamples(int x, int y, int w, int h, int b, int iArray[]) {
+	}
 
-    public void setSamples(int x, int y, int w, int h, int b,
-                           float fArray[]) {
-    }
+	public void setSamples(int x, int y, int w, int h, int b, float fArray[]) {
+	}
 
-    public void setSamples(int x, int y, int w, int h, int b,
-                           double dArray[]) {
-    }
+	public void setSamples(int x, int y, int w, int h, int b, double dArray[]) {
+	}
 
 }

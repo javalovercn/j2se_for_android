@@ -32,9 +32,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * DefaultLookup provides a way to customize the lookup done by the
- * UIManager. The default implementation of DefaultLookup forwards
- * the call to the UIManager.
+ * DefaultLookup provides a way to customize the lookup done by the UIManager.
+ * The default implementation of DefaultLookup forwards the call to the
+ * UIManager.
  * <p>
  * <b>WARNING:</b> While this class is public, it should not be treated as
  * public API and its API may change in incompatable ways between dot dot
@@ -44,14 +44,14 @@ import javax.swing.plaf.ComponentUI;
  * @author Scott Violet
  */
 public class DefaultLookup {
-	public static Border getBorder(DefaultListCellRenderer cr, ComponentUI ui, String desc){
+	public static Border getBorder(DefaultListCellRenderer cr, ComponentUI ui, String desc) {
 		return new EmptyBorder(1, 1, 1, 1);
 	}
 
-	public static Color getColor(DefaultListCellRenderer cr, ComponentUI ui, String desc){
-		if(desc.equals("List.dropCellBackground")){
+	public static Color getColor(DefaultListCellRenderer cr, ComponentUI ui, String desc) {
+		if (desc.equals("List.dropCellBackground")) {
 			return Color.GRAY;
-		}else if(desc.equals("List.dropCellForeground")){
+		} else if (desc.equals("List.dropCellForeground")) {
 			return Color.DARK_GRAY;
 		}
 		return null;

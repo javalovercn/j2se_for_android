@@ -47,54 +47,48 @@ import javax.swing.plaf.DesktopIconUI;
 import javax.swing.plaf.InternalFrameUI;
 
 /**
- * A lightweight object that provides many of the features of
- * a native frame, including dragging, closing, becoming an icon,
- * resizing, title display, and support for a menu bar.
- * For task-oriented documentation and examples of using internal frames,
- * see <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/internalframe.html" target="_top">How to Use Internal Frames</a>,
- * a section in <em>The Java Tutorial</em>.
+ * A lightweight object that provides many of the features of a native frame,
+ * including dragging, closing, becoming an icon, resizing, title display, and
+ * support for a menu bar. For task-oriented documentation and examples of using
+ * internal frames, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/internalframe.html"
+ * target="_top">How to Use Internal Frames</a>, a section in <em>The Java
+ * Tutorial</em>.
  *
  * <p>
  *
- * Generally,
- * you add <code>JInternalFrame</code>s to a <code>JDesktopPane</code>. The UI
- * delegates the look-and-feel-specific actions to the
- * <code>DesktopManager</code>
- * object maintained by the <code>JDesktopPane</code>.
+ * Generally, you add <code>JInternalFrame</code>s to a
+ * <code>JDesktopPane</code>. The UI delegates the look-and-feel-specific
+ * actions to the <code>DesktopManager</code> object maintained by the
+ * <code>JDesktopPane</code>.
  * <p>
- * The <code>JInternalFrame</code> content pane
- * is where you add child components.
- * As a conveniance <code>add</code> and its variants, <code>remove</code> and
- * <code>setLayout</code> have been overridden to forward to the
- * <code>contentPane</code> as necessary. This means you can write:
+ * The <code>JInternalFrame</code> content pane is where you add child
+ * components. As a conveniance <code>add</code> and its variants,
+ * <code>remove</code> and <code>setLayout</code> have been overridden to
+ * forward to the <code>contentPane</code> as necessary. This means you can
+ * write:
+ * 
  * <pre>
- *       internalFrame.add(child);
+ * internalFrame.add(child);
  * </pre>
- * And the child will be added to the contentPane.
- * The content pane is actually managed by an instance of
- * <code>JRootPane</code>,
- * which also manages a layout pane, glass pane, and
- * optional menu bar for the internal frame. Please see the
- * <code>JRootPane</code>
- * documentation for a complete description of these components.
- * Refer to {@link javax.swing.RootPaneContainer}
- * for details on adding, removing and setting the <code>LayoutManager</code>
- * of a <code>JInternalFrame</code>.
+ * 
+ * And the child will be added to the contentPane. The content pane is actually
+ * managed by an instance of <code>JRootPane</code>, which also manages a layout
+ * pane, glass pane, and optional menu bar for the internal frame. Please see
+ * the <code>JRootPane</code> documentation for a complete description of these
+ * components. Refer to {@link javax.swing.RootPaneContainer} for details on
+ * adding, removing and setting the <code>LayoutManager</code> of a
+ * <code>JInternalFrame</code>.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see InternalFrameEvent
  * @see JDesktopPane
@@ -105,14 +99,12 @@ import javax.swing.plaf.InternalFrameUI;
  *
  * @author David Kloba
  * @author Rich Schiavi
- * @beaninfo
- *      attribute: isContainer true
- *      attribute: containerDelegate getContentPane
- *      description: A frame container which is contained within
- *                   another window.
+ * @beaninfo attribute: isContainer true attribute: containerDelegate
+ *           getContentPane description: A frame container which is contained
+ *           within another window.
  */
-public class JInternalFrame extends JComponent implements Accessible,
-		WindowConstants, RootPaneContainer {
+public class JInternalFrame extends JComponent
+		implements Accessible, WindowConstants, RootPaneContainer {
 	private static final String uiClassID = "InternalFrameUI";
 
 	protected JRootPane rootPane;
@@ -162,13 +154,12 @@ public class JInternalFrame extends JComponent implements Accessible,
 		this(title, resizable, closable, false, false);
 	}
 
-	public JInternalFrame(String title, boolean resizable, boolean closable,
-			boolean maximizable) {
+	public JInternalFrame(String title, boolean resizable, boolean closable, boolean maximizable) {
 		this(title, resizable, closable, maximizable, false);
 	}
 
-	public JInternalFrame(String title, boolean resizable, boolean closable,
-			boolean maximizable, boolean iconifiable) {
+	public JInternalFrame(String title, boolean resizable, boolean closable, boolean maximizable,
+			boolean iconifiable) {
 
 		setLayout(new BorderLayout());
 		setRootPane(createRootPane());
@@ -514,32 +505,25 @@ public class JInternalFrame extends JComponent implements Accessible,
 				}
 				switch (e.getID()) {
 				case InternalFrameEvent.INTERNAL_FRAME_OPENED:
-					((InternalFrameListener) listeners[i + 1])
-							.internalFrameOpened(e);
+					((InternalFrameListener) listeners[i + 1]).internalFrameOpened(e);
 					break;
 				case InternalFrameEvent.INTERNAL_FRAME_CLOSING:
-					((InternalFrameListener) listeners[i + 1])
-							.internalFrameClosing(e);
+					((InternalFrameListener) listeners[i + 1]).internalFrameClosing(e);
 					break;
 				case InternalFrameEvent.INTERNAL_FRAME_CLOSED:
-					((InternalFrameListener) listeners[i + 1])
-							.internalFrameClosed(e);
+					((InternalFrameListener) listeners[i + 1]).internalFrameClosed(e);
 					break;
 				case InternalFrameEvent.INTERNAL_FRAME_ICONIFIED:
-					((InternalFrameListener) listeners[i + 1])
-							.internalFrameIconified(e);
+					((InternalFrameListener) listeners[i + 1]).internalFrameIconified(e);
 					break;
 				case InternalFrameEvent.INTERNAL_FRAME_DEICONIFIED:
-					((InternalFrameListener) listeners[i + 1])
-							.internalFrameDeiconified(e);
+					((InternalFrameListener) listeners[i + 1]).internalFrameDeiconified(e);
 					break;
 				case InternalFrameEvent.INTERNAL_FRAME_ACTIVATED:
-					((InternalFrameListener) listeners[i + 1])
-							.internalFrameActivated(e);
+					((InternalFrameListener) listeners[i + 1]).internalFrameActivated(e);
 					break;
 				case InternalFrameEvent.INTERNAL_FRAME_DEACTIVATED:
-					((InternalFrameListener) listeners[i + 1])
-							.internalFrameDeactivated(e);
+					((InternalFrameListener) listeners[i + 1]).internalFrameDeactivated(e);
 					break;
 				default:
 					break;
@@ -563,11 +547,9 @@ public class JInternalFrame extends JComponent implements Accessible,
 			break;
 		case DISPOSE_ON_CLOSE:
 			try {
-				fireVetoableChange(IS_CLOSED_PROPERTY, Boolean.FALSE,
-						Boolean.TRUE);
+				fireVetoableChange(IS_CLOSED_PROPERTY, Boolean.FALSE, Boolean.TRUE);
 				setVisible(false);
-				firePropertyChange(IS_CLOSED_PROPERTY, Boolean.FALSE,
-						Boolean.TRUE);
+				firePropertyChange(IS_CLOSED_PROPERTY, Boolean.FALSE, Boolean.TRUE);
 				dispose();
 			} catch (Exception pve) {
 			}

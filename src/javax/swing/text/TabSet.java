@@ -31,59 +31,56 @@ import java.io.Serializable;
  * closest TabStop to a given position and finding all the potential TabStops.
  * It is also immutable.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @author  Scott Violet
+ * @author Scott Violet
  */
-public class TabSet implements Serializable
-{
-    private TabStop[]              tabs;
-    private int hashCode = Integer.MAX_VALUE;
+public class TabSet implements Serializable {
+	private TabStop[] tabs;
+	private int hashCode = Integer.MAX_VALUE;
 
-    public TabSet(TabStop[] tabs) {
-    }
+	public TabSet(TabStop[] tabs) {
+	}
 
-    public int getTabCount() {
-        return (tabs == null) ? 0 : tabs.length;
-    }
+	public int getTabCount() {
+		return (tabs == null) ? 0 : tabs.length;
+	}
 
-    public TabStop getTab(int index) {
-        return tabs[index];
-    }
+	public TabStop getTab(int index) {
+		return tabs[index];
+	}
 
-    public TabStop getTabAfter(float location) {
-        int     index = getTabIndexAfter(location);
-        return (index == -1) ? null : tabs[index];
-    }
+	public TabStop getTabAfter(float location) {
+		int index = getTabIndexAfter(location);
+		return (index == -1) ? null : tabs[index];
+	}
 
-    public int getTabIndex(TabStop tab) {
-        for(int counter = getTabCount() - 1; counter >= 0; counter--)
-            if(getTab(counter) == tab)
-                return counter;
-        return -1;
-    }
+	public int getTabIndex(TabStop tab) {
+		for (int counter = getTabCount() - 1; counter >= 0; counter--)
+			if (getTab(counter) == tab)
+				return counter;
+		return -1;
+	}
 
-    public int getTabIndexAfter(float location) {
-        return -1;
-    }
+	public int getTabIndexAfter(float location) {
+		return -1;
+	}
 
-    public boolean equals(Object o) {
-        return false;
-    }
+	public boolean equals(Object o) {
+		return false;
+	}
 
-    public int hashCode() {
-            hashCode = 0;
-        return hashCode;
-    }
+	public int hashCode() {
+		hashCode = 0;
+		return hashCode;
+	}
 
-    public String toString() {
-        return "";
-    }
+	public String toString() {
+		return "";
+	}
 }

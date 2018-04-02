@@ -25,31 +25,30 @@
 package java.awt.event;
 
 /**
- * An abstract adapter class for receiving mouse events.
- * The methods in this class are empty. This class exists as
- * convenience for creating listener objects.
+ * An abstract adapter class for receiving mouse events. The methods in this
+ * class are empty. This class exists as convenience for creating listener
+ * objects.
  * <P>
- * Mouse events let you track when a mouse is pressed, released, clicked,
- * moved, dragged, when it enters a component, when it exits and
- * when a mouse wheel is moved.
+ * Mouse events let you track when a mouse is pressed, released, clicked, moved,
+ * dragged, when it enters a component, when it exits and when a mouse wheel is
+ * moved.
  * <P>
- * Extend this class to create a {@code MouseEvent}
- * (including drag and motion events) or/and {@code MouseWheelEvent}
- * listener and override the methods for the events of interest. (If you implement the
- * {@code MouseListener},
- * {@code MouseMotionListener}
- * interface, you have to define all of
- * the methods in it. This abstract class defines null methods for them
- * all, so you can only have to define methods for events you care about.)
+ * Extend this class to create a {@code MouseEvent} (including drag and motion
+ * events) or/and {@code MouseWheelEvent} listener and override the methods for
+ * the events of interest. (If you implement the {@code MouseListener},
+ * {@code MouseMotionListener} interface, you have to define all of the methods
+ * in it. This abstract class defines null methods for them all, so you can only
+ * have to define methods for events you care about.)
  * <P>
- * Create a listener object using the extended class and then register it with
- * a component using the component's {@code addMouseListener}
- * {@code addMouseMotionListener}, {@code addMouseWheelListener}
- * methods.
- * The relevant method in the listener object is invoked  and the {@code MouseEvent}
- * or {@code MouseWheelEvent}  is passed to it in following cases:
- * <p><ul>
- * <li>when a mouse button is pressed, released, or clicked (pressed and  released)
+ * Create a listener object using the extended class and then register it with a
+ * component using the component's {@code addMouseListener}
+ * {@code addMouseMotionListener}, {@code addMouseWheelListener} methods. The
+ * relevant method in the listener object is invoked and the {@code MouseEvent}
+ * or {@code MouseWheelEvent} is passed to it in following cases:
+ * <p>
+ * <ul>
+ * <li>when a mouse button is pressed, released, or clicked (pressed and
+ * released)
  * <li>when the mouse cursor enters or exits the component
  * <li>when the mouse wheel rotated, or mouse moved or dragged
  * </ul>
@@ -62,24 +61,35 @@ package java.awt.event;
  * @see MouseListener
  * @see MouseMotionListener
  * @see MouseWheelListener
- * @see <a href="http://java.sun.com/docs/books/tutorial/post1.0/ui/mouselistener.html">Tutorial: Writing a Mouse Listener</a>
+ * @see <a href=
+ *      "http://java.sun.com/docs/books/tutorial/post1.0/ui/mouselistener.html">Tutorial:
+ *      Writing a Mouse Listener</a>
  *
  * @since 1.1
  */
-public abstract class MouseAdapter implements MouseListener, MouseWheelListener, MouseMotionListener {
-    public void mouseClicked(MouseEvent e) {}
+public abstract class MouseAdapter
+		implements MouseListener, MouseWheelListener, MouseMotionListener {
+	public void mouseClicked(MouseEvent e) {
+	}
 
-    public void mousePressed(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+	}
 
-    public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+	}
 
-    public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+	}
 
-    public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+	}
 
-    public void mouseWheelMoved(MouseWheelEvent e){}
+	public void mouseWheelMoved(MouseWheelEvent e) {
+	}
 
-    public void mouseDragged(MouseEvent e){}
+	public void mouseDragged(MouseEvent e) {
+	}
 
-    public void mouseMoved(MouseEvent e){}
+	public void mouseMoved(MouseEvent e) {
+	}
 }

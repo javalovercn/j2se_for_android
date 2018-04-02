@@ -55,149 +55,135 @@ import android.widget.TextView;
 import hc.android.HCRUtil;
 
 /**
- * A lightweight container used behind the scenes by
- * <code>JFrame</code>, <code>JDialog</code>, <code>JWindow</code>,
- * <code>JApplet</code>, and <code>JInternalFrame</code>.
- * For task-oriented information on functionality provided by root panes
- * see <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/rootpane.html">How to Use Root Panes</a>,
- * a section in <em>The Java Tutorial</em>.
+ * A lightweight container used behind the scenes by <code>JFrame</code>,
+ * <code>JDialog</code>, <code>JWindow</code>, <code>JApplet</code>, and
+ * <code>JInternalFrame</code>. For task-oriented information on functionality
+ * provided by root panes see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/rootpane.html">How
+ * to Use Root Panes</a>, a section in <em>The Java Tutorial</em>.
  *
  * <p>
- * The following image shows the relationships between
- * the classes that use root panes.
- * <p align=center><img src="doc-files/JRootPane-1.gif"
- * alt="The following text describes this graphic."
- * HEIGHT=484 WIDTH=629></p>
- * The &quot;heavyweight&quot; components (those that delegate to a peer, or native
- * component on the host system) are shown with a darker, heavier box. The four
- * heavyweight JFC/Swing containers (<code>JFrame</code>, <code>JDialog</code>,
- * <code>JWindow</code>, and <code>JApplet</code>) are
- * shown in relation to the AWT classes they extend.
- * These four components are the
- * only heavyweight containers in the Swing library. The lightweight container
- * <code>JInternalFrame</code> is also shown.
- * All five of these JFC/Swing containers implement the
- * <code>RootPaneContainer</code> interface,
- * and they all delegate their operations to a
- * <code>JRootPane</code> (shown with a little "handle" on top).
- * <blockquote>
- * <b>Note:</b> The <code>JComponent</code> method <code>getRootPane</code>
- * can be used to obtain the <code>JRootPane</code> that contains
- * a given component.
- * </blockquote>
+ * The following image shows the relationships between the classes that use root
+ * panes.
+ * <p align=center>
+ * <img src="doc-files/JRootPane-1.gif" alt="The following text describes this
+ * graphic." HEIGHT=484 WIDTH=629>
+ * </p>
+ * The &quot;heavyweight&quot; components (those that delegate to a peer, or
+ * native component on the host system) are shown with a darker, heavier box.
+ * The four heavyweight JFC/Swing containers (<code>JFrame</code>,
+ * <code>JDialog</code>, <code>JWindow</code>, and <code>JApplet</code>) are
+ * shown in relation to the AWT classes they extend. These four components are
+ * the only heavyweight containers in the Swing library. The lightweight
+ * container <code>JInternalFrame</code> is also shown. All five of these
+ * JFC/Swing containers implement the <code>RootPaneContainer</code> interface,
+ * and they all delegate their operations to a <code>JRootPane</code> (shown
+ * with a little "handle" on top). <blockquote> <b>Note:</b> The
+ * <code>JComponent</code> method <code>getRootPane</code> can be used to obtain
+ * the <code>JRootPane</code> that contains a given component. </blockquote>
  * <table align="right" border="0" summary="layout">
  * <tr>
  * <td align="center">
- * <img src="doc-files/JRootPane-2.gif"
- * alt="The following text describes this graphic." HEIGHT=386 WIDTH=349>
- * </td>
+ * <img src="doc-files/JRootPane-2.gif" alt="The following text describes this
+ * graphic." HEIGHT=386 WIDTH=349></td>
  * </tr>
  * </table>
- * The diagram at right shows the structure of a <code>JRootPane</code>.
- * A <code>JRootpane</code> is made up of a <code>glassPane</code>,
- * an optional <code>menuBar</code>, and a <code>contentPane</code>.
- * (The <code>JLayeredPane</code> manages the <code>menuBar</code>
- * and the <code>contentPane</code>.)
- * The <code>glassPane</code> sits over the top of everything,
- * where it is in a position to intercept mouse movements.
- * Since the <code>glassPane</code> (like the <code>contentPane</code>)
- * can be an arbitrary component, it is also possible to set up the
- * <code>glassPane</code> for drawing. Lines and images on the
- * <code>glassPane</code> can then range
+ * The diagram at right shows the structure of a <code>JRootPane</code>. A
+ * <code>JRootpane</code> is made up of a <code>glassPane</code>, an optional
+ * <code>menuBar</code>, and a <code>contentPane</code>. (The
+ * <code>JLayeredPane</code> manages the <code>menuBar</code> and the
+ * <code>contentPane</code>.) The <code>glassPane</code> sits over the top of
+ * everything, where it is in a position to intercept mouse movements. Since the
+ * <code>glassPane</code> (like the <code>contentPane</code>) can be an
+ * arbitrary component, it is also possible to set up the <code>glassPane</code>
+ * for drawing. Lines and images on the <code>glassPane</code> can then range
  * over the frames underneath without being limited by their boundaries.
  * <p>
- * Although the <code>menuBar</code> component is optional,
- * the <code>layeredPane</code>, <code>contentPane</code>,
- * and <code>glassPane</code> always exist.
- * Attempting to set them to <code>null</code> generates an exception.
+ * Although the <code>menuBar</code> component is optional, the
+ * <code>layeredPane</code>, <code>contentPane</code>, and
+ * <code>glassPane</code> always exist. Attempting to set them to
+ * <code>null</code> generates an exception.
  * <p>
- * To add components to the <code>JRootPane</code> (other than the
- * optional menu bar), you add the object to the <code>contentPane</code>
- * of the <code>JRootPane</code>, like this:
+ * To add components to the <code>JRootPane</code> (other than the optional menu
+ * bar), you add the object to the <code>contentPane</code> of the
+ * <code>JRootPane</code>, like this:
+ * 
  * <pre>
- *       rootPane.getContentPane().add(child);
+ * rootPane.getContentPane().add(child);
  * </pre>
+ * 
  * The same principle holds true for setting layout managers, removing
- * components, listing children, etc. All these methods are invoked on
- * the <code>contentPane</code> instead of on the <code>JRootPane</code>.
- * <blockquote>
- * <b>Note:</b> The default layout manager for the <code>contentPane</code> is
- *  a <code>BorderLayout</code> manager. However, the <code>JRootPane</code>
- *  uses a custom <code>LayoutManager</code>.
- *  So, when you want to change the layout manager for the components you added
- *  to a <code>JRootPane</code>, be sure to use code like this:
+ * components, listing children, etc. All these methods are invoked on the
+ * <code>contentPane</code> instead of on the <code>JRootPane</code>.
+ * <blockquote> <b>Note:</b> The default layout manager for the
+ * <code>contentPane</code> is a <code>BorderLayout</code> manager. However, the
+ * <code>JRootPane</code> uses a custom <code>LayoutManager</code>. So, when you
+ * want to change the layout manager for the components you added to a
+ * <code>JRootPane</code>, be sure to use code like this:
+ * 
  * <pre>
- *    rootPane.getContentPane().setLayout(new BoxLayout());
- * </pre></blockquote>
- * If a <code>JMenuBar</code> component is set on the <code>JRootPane</code>,
- * it is positioned along the upper edge of the frame.
- * The <code>contentPane</code> is adjusted in location and size to
- * fill the remaining area.
- * (The <code>JMenuBar</code> and the <code>contentPane</code> are added to the
- * <code>layeredPane</code> component at the
+ * rootPane.getContentPane().setLayout(new BoxLayout());
+ * </pre>
+ * 
+ * </blockquote> If a <code>JMenuBar</code> component is set on the
+ * <code>JRootPane</code>, it is positioned along the upper edge of the frame.
+ * The <code>contentPane</code> is adjusted in location and size to fill the
+ * remaining area. (The <code>JMenuBar</code> and the <code>contentPane</code>
+ * are added to the <code>layeredPane</code> component at the
  * <code>JLayeredPane.FRAME_CONTENT_LAYER</code> layer.)
  * <p>
  * The <code>layeredPane</code> is the parent of all children in the
- * <code>JRootPane</code> -- both as the direct parent of the menu and
- * the grandparent of all components added to the <code>contentPane</code>.
- * It is an instance of <code>JLayeredPane</code>,
- * which provides the ability to add components at several layers.
- * This capability is very useful when working with menu popups,
- * dialog boxes, and dragging -- situations in which you need to place
- * a component on top of all other components in the pane.
+ * <code>JRootPane</code> -- both as the direct parent of the menu and the
+ * grandparent of all components added to the <code>contentPane</code>. It is an
+ * instance of <code>JLayeredPane</code>, which provides the ability to add
+ * components at several layers. This capability is very useful when working
+ * with menu popups, dialog boxes, and dragging -- situations in which you need
+ * to place a component on top of all other components in the pane.
  * <p>
  * The <code>glassPane</code> sits on top of all other components in the
- * <code>JRootPane</code>.
- * That provides a convenient place to draw above all other components,
- * and makes it possible to intercept mouse events,
- * which is useful both for dragging and for drawing.
- * Developers can use <code>setVisible</code> on the <code>glassPane</code>
- * to control when the <code>glassPane</code> displays over the other children.
- * By default the <code>glassPane</code> is not visible.
+ * <code>JRootPane</code>. That provides a convenient place to draw above all
+ * other components, and makes it possible to intercept mouse events, which is
+ * useful both for dragging and for drawing. Developers can use
+ * <code>setVisible</code> on the <code>glassPane</code> to control when the
+ * <code>glassPane</code> displays over the other children. By default the
+ * <code>glassPane</code> is not visible.
  * <p>
- * The custom <code>LayoutManager</code> used by <code>JRootPane</code>
- * ensures that:
+ * The custom <code>LayoutManager</code> used by <code>JRootPane</code> ensures
+ * that:
  * <OL>
- * <LI>The <code>glassPane</code> fills the entire viewable
- *     area of the <code>JRootPane</code> (bounds - insets).
+ * <LI>The <code>glassPane</code> fills the entire viewable area of the
+ * <code>JRootPane</code> (bounds - insets).
  * <LI>The <code>layeredPane</code> fills the entire viewable area of the
- *     <code>JRootPane</code>. (bounds - insets)
+ * <code>JRootPane</code>. (bounds - insets)
  * <LI>The <code>menuBar</code> is positioned at the upper edge of the
- *     <code>layeredPane</code>.
- * <LI>The <code>contentPane</code> fills the entire viewable area,
- *     minus the <code>menuBar</code>, if present.
+ * <code>layeredPane</code>.
+ * <LI>The <code>contentPane</code> fills the entire viewable area, minus the
+ * <code>menuBar</code>, if present.
  * </OL>
  * Any other views in the <code>JRootPane</code> view hierarchy are ignored.
  * <p>
  * If you replace the <code>LayoutManager</code> of the <code>JRootPane</code>,
- * you are responsible for managing all of these views.
- * So ordinarily you will want to be sure that you
- * change the layout manager for the <code>contentPane</code> rather than
- * for the <code>JRootPane</code> itself!
+ * you are responsible for managing all of these views. So ordinarily you will
+ * want to be sure that you change the layout manager for the
+ * <code>contentPane</code> rather than for the <code>JRootPane</code> itself!
  * <p>
- * The painting architecture of Swing requires an opaque
- * <code>JComponent</code>
+ * The painting architecture of Swing requires an opaque <code>JComponent</code>
  * to exist in the containment hieararchy above all other components. This is
  * typically provided by way of the content pane. If you replace the content
- * pane, it is recommended that you make the content pane opaque
- * by way of <code>setOpaque(true)</code>. Additionally, if the content pane
- * overrides <code>paintComponent</code>, it
- * will need to completely fill in the background in an opaque color in
- * <code>paintComponent</code>.
+ * pane, it is recommended that you make the content pane opaque by way of
+ * <code>setOpaque(true)</code>. Additionally, if the content pane overrides
+ * <code>paintComponent</code>, it will need to completely fill in the
+ * background in an opaque color in <code>paintComponent</code>.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JLayeredPane
  * @see JMenuBar
@@ -209,8 +195,8 @@ import hc.android.HCRUtil;
  * @see JComponent
  * @see BoxLayout
  *
- * @see <a href="http://java.sun.com/products/jfc/tsc/articles/mixing/">
- * Mixing Heavy and Light Components</a>
+ * @see <a href="http://java.sun.com/products/jfc/tsc/articles/mixing/"> Mixing
+ *      Heavy and Light Components</a>
  *
  * @author David Kloba
  */
@@ -257,18 +243,18 @@ public class JRootPane extends JComponent implements Accessible {
 	KeyStroke keyStroke;
 
 	@Override
-	public void registerKeyboardAction(ActionListener anAction,
-			KeyStroke aKeyStroke, int aCondition) {
+	public void registerKeyboardAction(ActionListener anAction, KeyStroke aKeyStroke,
+			int aCondition) {
 		this.keyActionListener = anAction;
 		this.keyStroke = aKeyStroke;
 	}
 
 	public boolean matchKeyStrokeAdAPI(int keyCode) {
 		int regKeyCode = keyStroke.getKeyCode();
-		if (regKeyCode == KeyEvent.VK_ESCAPE
-				&& (keyCode == android.view.KeyEvent.KEYCODE_BACK || keyCode == android.view.KeyEvent.KEYCODE_ESCAPE)) {
-			keyActionListener.actionPerformed(new ActionEvent(this,
-					ActionEvent.ACTION_PERFORMED, ""));
+		if (regKeyCode == KeyEvent.VK_ESCAPE && (keyCode == android.view.KeyEvent.KEYCODE_BACK
+				|| keyCode == android.view.KeyEvent.KEYCODE_ESCAPE)) {
+			keyActionListener
+					.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
 			return true;
 		}
 		return false;
@@ -277,22 +263,23 @@ public class JRootPane extends JComponent implements Accessible {
 	private static final int getIconSizeAdAPI() {
 		final int width = J2SEInitor.screenWidth;
 		final int height = J2SEInitor.screenHeight;
-		
-		if(width >= 720 && height >= 720){
-			//Integer.parseInt((String)ConfigManager.get(ConfigManager.DEVICE_DPI, "100")) >= 160
-			//以上参数为32寸电视配置
-			return 64/2;
+
+		if (width >= 720 && height >= 720) {
+			// Integer.parseInt((String)ConfigManager.get(ConfigManager.DEVICE_DPI,
+			// "100")) >= 160
+			// 以上参数为32寸电视配置
+			return 64 / 2;
 		}
-		if(width >= 280 && height >= 280){
-			return 32/2;
-		}else{
-			return AndroidUIUtil.MIN_ICON_SIZE;			
+		if (width >= 280 && height >= 280) {
+			return 32 / 2;
+		} else {
+			return AndroidUIUtil.MIN_ICON_SIZE;
 		}
 	}
-	
+
 	final static int ESC_ICON_SIZE = getIconSizeAdAPI();
-	
-	public static int getEscIconHeightAdAPI(){
+
+	public static int getEscIconHeightAdAPI() {
 		Bitmap bitmap = getEscIconBitmapAdAPI();
 		return bitmap.getHeight();
 	}
@@ -309,10 +296,10 @@ public class JRootPane extends JComponent implements Accessible {
 
 		setDoubleBuffered(true);
 
-		titleBar = new TextView(ActivityManager.getActivity());
+		titleBar = new TextView(ActivityManager.applicationContext);
 		titleBar.setText("");
 
-		exitIcon = new ImageView(ActivityManager.getActivity());
+		exitIcon = new ImageView(ActivityManager.applicationContext);
 
 		Bitmap bitmap = getEscIconBitmapAdAPI();
 		iconHeight = bitmap.getHeight();
@@ -435,7 +422,7 @@ public class JRootPane extends JComponent implements Accessible {
 	LinearLayout rootLinearView;
 
 	private View buildTitleView() {
-		LinearLayout titleView = new LinearLayout(ActivityManager.getActivity());
+		LinearLayout titleView = new LinearLayout(ActivityManager.applicationContext);
 		titleView.setFocusable(false);
 		titleView.setOrientation(LinearLayout.HORIZONTAL);
 		// titleView.setBackgroundColor(TITLE_BORDER_COLOR);
@@ -443,10 +430,14 @@ public class JRootPane extends JComponent implements Accessible {
 			// ShapeDrawable sd = new ShapeDrawable();
 			// sd.setShape(new sh))
 			// String xml =
-			// "<shape xmlns:android=\"http://schemas.android.com/apk/res/android\" android:shape=\"rectangle\">"+
-			// "  <stroke android:width=\"1dp\" android:color=\"#FF404040\" /> "+
-			// "  <corners android:radius=\"6dp\" /> "+
-			// "  <gradient android:startColor=\"#FF6800\" android:centerColor=\"#FF8000\" android:endColor=\"#FF9700\" android:angle=\"90\" /> "+
+			// "<shape
+			// xmlns:android=\"http://schemas.android.com/apk/res/android\"
+			// android:shape=\"rectangle\">"+
+			// " <stroke android:width=\"1dp\" android:color=\"#FF404040\" /> "+
+			// " <corners android:radius=\"6dp\" /> "+
+			// " <gradient android:startColor=\"#FF6800\"
+			// android:centerColor=\"#FF8000\" android:endColor=\"#FF9700\"
+			// android:angle=\"90\" /> "+
 			// "</shape>";
 			// titleView.setBackground(UIUtil.buildDrawbleFromString(xml));
 			titleView.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_window_title));
@@ -454,8 +445,8 @@ public class JRootPane extends JComponent implements Accessible {
 
 		{
 			final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.WRAP_CONTENT,
-					LinearLayout.LayoutParams.MATCH_PARENT, 0.5F);//当title区宽度大于contentPane宽度时，缩小以适合
+					LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT,
+					0.5F);// 当title区宽度大于contentPane宽度时，缩小以适合
 			llp.gravity = Gravity.CENTER_VERTICAL;
 			llp.topMargin = shiftPixel;
 			titleBar.setTextColor(AndroidUIUtil.WINDOW_TITLE_FONT_COLOR.toAndroid());
@@ -471,8 +462,7 @@ public class JRootPane extends JComponent implements Accessible {
 
 		{
 			final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.WRAP_CONTENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT);
+					LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 			llp.gravity = (Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
 			llp.topMargin = shiftPixel;
 			llp.rightMargin = 10;
@@ -482,13 +472,14 @@ public class JRootPane extends JComponent implements Accessible {
 	}
 
 	public static int getTitleBarHeight(final int iconH) {
-		return Math.max(iconH, (int)J2SEInitor.getAndroidServerScreenAdapter().getFontSizeInPixel(UICore.getDefaultDialogInputFontForSystemUIOnly().getSize()));
+		return Math.max(iconH, (int) J2SEInitor.getAndroidServerScreenAdapter()
+				.getFontSizeInPixel(UICore.getDefaultDialogInputFontForSystemUIOnly().getSize()));
 	}
 
 	@Override
 	public View getPeerAdAPI() {
 		if (rootLinearView == null) {
-			rootLinearView = new LinearLayout(ActivityManager.getActivity());
+			rootLinearView = new LinearLayout(ActivityManager.applicationContext);
 		}
 
 		rootLinearView.removeAllViews();
@@ -501,8 +492,7 @@ public class JRootPane extends JComponent implements Accessible {
 				final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
 						LinearLayout.LayoutParams.MATCH_PARENT,
 						LinearLayout.LayoutParams.WRAP_CONTENT, 0.5F);
-				AndroidUIUtil.addView(rootLinearView, buildTitleView(), llp,
-						viewRelation);
+				AndroidUIUtil.addView(rootLinearView, buildTitleView(), llp, viewRelation);
 			}
 
 			if (menuBar != null && menuBar.isVisible()) {
@@ -511,7 +501,8 @@ public class JRootPane extends JComponent implements Accessible {
 						LinearLayout.LayoutParams.WRAP_CONTENT);
 
 				View menuBarView = menuBar.getPeerAdAPI();
-				menuBarView.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_window_menu_bar));
+				menuBarView.setBackgroundResource(
+						HCRUtil.getResource(HCRUtil.R_drawable_window_menu_bar));
 				AndroidUIUtil.addView(rootLinearView, menuBarView, llp, viewRelation);
 			}
 		}
@@ -523,10 +514,10 @@ public class JRootPane extends JComponent implements Accessible {
 						FrameLayout.LayoutParams.WRAP_CONTENT, 1.0F);
 				View contentView = contentPane.getPeerAdAPI();
 				if (isFrame) {
-					contentView.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_window_body));
+					contentView.setBackgroundResource(
+							HCRUtil.getResource(HCRUtil.R_drawable_window_body));
 				} else {
-					contentView.setBackgroundColor(AndroidUIUtil.WIN_BODY_BACK
-							.toAndroid());// 专供无标题的窗口背景，否则会透明。
+					contentView.setBackgroundColor(AndroidUIUtil.WIN_BODY_BACK.toAndroid());// 专供无标题的窗口背景，否则会透明。
 				}
 				AndroidUIUtil.addView(rootLinearView, contentView, lp, viewRelation);
 			}
@@ -650,8 +641,7 @@ public class JRootPane extends JComponent implements Accessible {
 		super.addImpl(comp, constraints, index);
 
 		// set glassPane to top.
-		if (glassPane != null && glassPane.getParent() == this
-				&& getComponent(0) != glassPane) {
+		if (glassPane != null && glassPane.getParent() == this && getComponent(0) != glassPane) {
 			add(glassPane, 0);
 		}
 	}
@@ -662,8 +652,7 @@ public class JRootPane extends JComponent implements Accessible {
 
 	public AccessibleContext getAccessibleContext() {
 		if (accessibleContext == null) {
-			accessibleContext = new AndroidClassUtil()
-					.buildAccessibleContext(this);
+			accessibleContext = new AndroidClassUtil().buildAccessibleContext(this);
 		}
 		return accessibleContext;
 	}

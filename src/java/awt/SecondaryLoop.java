@@ -28,27 +28,23 @@ package java.awt;
  * A helper interface to run the nested event loop.
  * <p>
  * Objects that implement this interface are created with the
- * {@link EventQueue#createSecondaryLoop} method. The interface
- * provides two methods, {@link #enter} and {@link #exit},
- * which can be used to start and stop the event loop.
+ * {@link EventQueue#createSecondaryLoop} method. The interface provides two
+ * methods, {@link #enter} and {@link #exit}, which can be used to start and
+ * stop the event loop.
  * <p>
- * When the {@link #enter} method is called, the current
- * thread is blocked until the loop is terminated by the
- * {@link #exit} method. Also, a new event loop is started
- * on the event dispatch thread, which may or may not be
- * the current thread. The loop can be terminated on any
- * thread by calling its {@link #exit} method. After the
- * loop is terminated, the {@code SecondaryLoop} object can
- * be reused to run a new nested event loop.
+ * When the {@link #enter} method is called, the current thread is blocked until
+ * the loop is terminated by the {@link #exit} method. Also, a new event loop is
+ * started on the event dispatch thread, which may or may not be the current
+ * thread. The loop can be terminated on any thread by calling its {@link #exit}
+ * method. After the loop is terminated, the {@code SecondaryLoop} object can be
+ * reused to run a new nested event loop.
  * <p>
- * A typical use case of applying this interface is AWT
- * and Swing modal dialogs. When a modal dialog is shown on
- * the event dispatch thread, it enters a new secondary loop.
- * Later, when the dialog is hidden or disposed, it exits
- * the loop, and the thread continues its execution.
+ * A typical use case of applying this interface is AWT and Swing modal dialogs.
+ * When a modal dialog is shown on the event dispatch thread, it enters a new
+ * secondary loop. Later, when the dialog is hidden or disposed, it exits the
+ * loop, and the thread continues its execution.
  * <p>
- * The following example illustrates a simple use case of
- * secondary loops:
+ * The following example illustrates a simple use case of secondary loops:
  *
  * <pre>
  *   SecondaryLoop loop;

@@ -32,48 +32,44 @@ import javax.swing.event.TreeModelListener;
  * <code>JTree</code> and its related classes make extensive use of
  * <code>TreePath</code>s for indentifying nodes in the <code>TreeModel</code>.
  * If a <code>TreeModel</code> returns the same object, as compared by
- * <code>equals</code>, at two different indices under the same parent
- * than the resulting <code>TreePath</code> objects will be considered equal
- * as well. Some implementations may assume that if two
- * <code>TreePath</code>s are equal, they identify the same node. If this
- * condition is not met, painting problems and other oddities may result.
- * In other words, if <code>getChild</code> for a given parent returns
- * the same Object (as determined by <code>equals</code>) problems may
- * result, and it is recommended you avoid doing this.
+ * <code>equals</code>, at two different indices under the same parent than the
+ * resulting <code>TreePath</code> objects will be considered equal as well.
+ * Some implementations may assume that if two <code>TreePath</code>s are equal,
+ * they identify the same node. If this condition is not met, painting problems
+ * and other oddities may result. In other words, if <code>getChild</code> for a
+ * given parent returns the same Object (as determined by <code>equals</code>)
+ * problems may result, and it is recommended you avoid doing this.
  * <p>
  * Similarly <code>JTree</code> and its related classes place
- * <code>TreePath</code>s in <code>Map</code>s.  As such if
- * a node is requested twice, the return values must be equal
- * (using the <code>equals</code> method) and have the same
- * <code>hashCode</code>.
+ * <code>TreePath</code>s in <code>Map</code>s. As such if a node is requested
+ * twice, the return values must be equal (using the <code>equals</code> method)
+ * and have the same <code>hashCode</code>.
  * <p>
- * For further information on tree models,
- * including an example of a custom implementation,
- * see <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to Use Trees</a>
- * in <em>The Java Tutorial.</em>
+ * For further information on tree models, including an example of a custom
+ * implementation, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to
+ * Use Trees</a> in <em>The Java Tutorial.</em>
  *
  * @see TreePath
  *
  * @author Rob Davis
  * @author Ray Ryan
  */
-public interface TreeModel
-{
-    public Object getRoot();
+public interface TreeModel {
+	public Object getRoot();
 
-    public Object getChild(Object parent, int index);
+	public Object getChild(Object parent, int index);
 
-    public int getChildCount(Object parent);
+	public int getChildCount(Object parent);
 
-    public boolean isLeaf(Object node);
+	public boolean isLeaf(Object node);
 
-    public void valueForPathChanged(TreePath path, Object newValue);
+	public void valueForPathChanged(TreePath path, Object newValue);
 
-    public int getIndexOfChild(Object parent, Object child);
+	public int getIndexOfChild(Object parent, Object child);
 
-    void addTreeModelListener(TreeModelListener l);
+	void addTreeModelListener(TreeModelListener l);
 
-    void removeTreeModelListener(TreeModelListener l);
+	void removeTreeModelListener(TreeModelListener l);
 
 }

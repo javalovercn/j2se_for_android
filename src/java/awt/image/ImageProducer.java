@@ -25,24 +25,23 @@
 package java.awt.image;
 
 /**
- * The interface for objects which can produce the image data for Images.
- * Each image contains an ImageProducer which is used to reconstruct
- * the image whenever it is needed, for example, when a new size of the
- * Image is scaled, or when the width or height of the Image is being
- * requested.
+ * The interface for objects which can produce the image data for Images. Each
+ * image contains an ImageProducer which is used to reconstruct the image
+ * whenever it is needed, for example, when a new size of the Image is scaled,
+ * or when the width or height of the Image is being requested.
  *
  * @see ImageConsumer
  *
- * @author      Jim Graham
+ * @author Jim Graham
  */
 public interface ImageProducer {
-    public void addConsumer(ImageConsumer ic);
+	public void addConsumer(ImageConsumer ic);
 
-    public boolean isConsumer(ImageConsumer ic);
+	public boolean isConsumer(ImageConsumer ic);
 
-    public void removeConsumer(ImageConsumer ic);
+	public void removeConsumer(ImageConsumer ic);
 
-    public void startProduction(ImageConsumer ic);
+	public void startProduction(ImageConsumer ic);
 
-    public void requestTopDownLeftRightResend(ImageConsumer ic);
+	public void requestTopDownLeftRightResend(ImageConsumer ic);
 }

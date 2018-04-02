@@ -25,47 +25,48 @@
 package java.awt.dnd;
 
 /**
- * The <code>DragSourceDropEvent</code> is delivered
- * from the <code>DragSourceContextPeer</code>,
- * via the <code>DragSourceContext</code>, to the <code>dragDropEnd</code>
- * method of <code>DragSourceListener</code>s registered with that
- * <code>DragSourceContext</code> and with its associated
- * <code>DragSource</code>.
- * It contains sufficient information for the
- * originator of the operation
- * to provide appropriate feedback to the end user
+ * The <code>DragSourceDropEvent</code> is delivered from the
+ * <code>DragSourceContextPeer</code>, via the <code>DragSourceContext</code>,
+ * to the <code>dragDropEnd</code> method of <code>DragSourceListener</code>s
+ * registered with that <code>DragSourceContext</code> and with its associated
+ * <code>DragSource</code>. It contains sufficient information for the
+ * originator of the operation to provide appropriate feedback to the end user
  * when the operation completes.
  * <P>
  * <P>
+ * 
  * @since 1.2
  */
 
 public class DragSourceDropEvent extends DragSourceEvent {
-    public DragSourceDropEvent(DragSourceContext dsc, int action, boolean success) {
-        super(dsc);
+	public DragSourceDropEvent(DragSourceContext dsc, int action, boolean success) {
+		super(dsc);
 
-        dropSuccess = success;
-        dropAction  = action;
-    }
+		dropSuccess = success;
+		dropAction = action;
+	}
 
-    public DragSourceDropEvent(DragSourceContext dsc, int action,
-                               boolean success, int x, int y) {
-        super(dsc, x, y);
+	public DragSourceDropEvent(DragSourceContext dsc, int action, boolean success, int x, int y) {
+		super(dsc, x, y);
 
-        dropSuccess = success;
-        dropAction  = action;
-    }
+		dropSuccess = success;
+		dropAction = action;
+	}
 
-    public DragSourceDropEvent(DragSourceContext dsc) {
-        super(dsc);
+	public DragSourceDropEvent(DragSourceContext dsc) {
+		super(dsc);
 
-        dropSuccess = false;
-    }
+		dropSuccess = false;
+	}
 
-    public boolean getDropSuccess() { return dropSuccess; }
+	public boolean getDropSuccess() {
+		return dropSuccess;
+	}
 
-    public int getDropAction() { return dropAction; }
+	public int getDropAction() {
+		return dropAction;
+	}
 
-    private boolean dropSuccess;
-    private int     dropAction   = DnDConstants.ACTION_NONE;
+	private boolean dropSuccess;
+	private int dropAction = DnDConstants.ACTION_NONE;
 }

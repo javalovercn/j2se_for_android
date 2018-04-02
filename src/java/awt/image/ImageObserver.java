@@ -25,10 +25,10 @@
 package java.awt.image;
 
 /**
- * An asynchronous update interface for receiving notifications about
- * Image information as the Image is constructed.
+ * An asynchronous update interface for receiving notifications about Image
+ * information as the Image is constructed.
  *
- * @author      Jim Graham
+ * @author Jim Graham
  */
 public interface ImageObserver {
 }

@@ -27,36 +27,31 @@ package java.awt;
 import java.awt.event.KeyEvent;
 
 /**
- * <b>NOTE:</b> The <code>Event</code> class is obsolete and is
- * available only for backwards compatilibility.  It has been replaced
- * by the <code>AWTEvent</code> class and its subclasses.
+ * <b>NOTE:</b> The <code>Event</code> class is obsolete and is available only
+ * for backwards compatilibility. It has been replaced by the
+ * <code>AWTEvent</code> class and its subclasses.
  * <p>
- * <code>Event</code> is a platform-independent class that
- * encapsulates events from the platform's Graphical User
- * Interface in the Java&nbsp;1.0 event model. In Java&nbsp;1.1
- * and later versions, the <code>Event</code> class is maintained
- * only for backwards compatibilty. The information in this
- * class description is provided to assist programmers in
- * converting Java&nbsp;1.0 programs to the new event model.
+ * <code>Event</code> is a platform-independent class that encapsulates events
+ * from the platform's Graphical User Interface in the Java&nbsp;1.0 event
+ * model. In Java&nbsp;1.1 and later versions, the <code>Event</code> class is
+ * maintained only for backwards compatibilty. The information in this class
+ * description is provided to assist programmers in converting Java&nbsp;1.0
+ * programs to the new event model.
  * <p>
- * In the Java&nbsp;1.0 event model, an event contains an
- * {@link Event#id} field
- * that indicates what type of event it is and which other
- * <code>Event</code> variables are relevant for the event.
+ * In the Java&nbsp;1.0 event model, an event contains an {@link Event#id} field
+ * that indicates what type of event it is and which other <code>Event</code>
+ * variables are relevant for the event.
  * <p>
- * For keyboard events, {@link Event#key}
- * contains a value indicating which key was activated, and
- * {@link Event#modifiers} contains the
- * modifiers for that event.  For the KEY_PRESS and KEY_RELEASE
- * event ids, the value of <code>key</code> is the unicode
- * character code for the key. For KEY_ACTION and
- * KEY_ACTION_RELEASE, the value of <code>key</code> is
- * one of the defined action-key identifiers in the
- * <code>Event</code> class (<code>PGUP</code>,
+ * For keyboard events, {@link Event#key} contains a value indicating which key
+ * was activated, and {@link Event#modifiers} contains the modifiers for that
+ * event. For the KEY_PRESS and KEY_RELEASE event ids, the value of
+ * <code>key</code> is the unicode character code for the key. For KEY_ACTION
+ * and KEY_ACTION_RELEASE, the value of <code>key</code> is one of the defined
+ * action-key identifiers in the <code>Event</code> class (<code>PGUP</code>,
  * <code>PGDN</code>, <code>F1</code>, <code>F2</code>, etc).
  *
- * @author     Sami Shaio
- * @since      JDK1.0
+ * @author Sami Shaio
+ * @since JDK1.0
  */
 public class Event implements java.io.Serializable {
 	private transient long data;
@@ -143,30 +138,25 @@ public class Event implements java.io.Serializable {
 	public Object arg;
 	public Event evt;
 
-	private static final int actionKeyCodes[][] = {
-			{ KeyEvent.VK_HOME, Event.HOME }, { KeyEvent.VK_END, Event.END },
-			{ KeyEvent.VK_PAGE_UP, Event.PGUP },
-			{ KeyEvent.VK_PAGE_DOWN, Event.PGDN },
-			{ KeyEvent.VK_UP, Event.UP }, { KeyEvent.VK_DOWN, Event.DOWN },
-			{ KeyEvent.VK_LEFT, Event.LEFT },
+	private static final int actionKeyCodes[][] = { { KeyEvent.VK_HOME, Event.HOME },
+			{ KeyEvent.VK_END, Event.END }, { KeyEvent.VK_PAGE_UP, Event.PGUP },
+			{ KeyEvent.VK_PAGE_DOWN, Event.PGDN }, { KeyEvent.VK_UP, Event.UP },
+			{ KeyEvent.VK_DOWN, Event.DOWN }, { KeyEvent.VK_LEFT, Event.LEFT },
 			{ KeyEvent.VK_RIGHT, Event.RIGHT }, { KeyEvent.VK_F1, Event.F1 },
 			{ KeyEvent.VK_F2, Event.F2 }, { KeyEvent.VK_F3, Event.F3 },
 			{ KeyEvent.VK_F4, Event.F4 }, { KeyEvent.VK_F5, Event.F5 },
 			{ KeyEvent.VK_F6, Event.F6 }, { KeyEvent.VK_F7, Event.F7 },
 			{ KeyEvent.VK_F8, Event.F8 }, { KeyEvent.VK_F9, Event.F9 },
 			{ KeyEvent.VK_F10, Event.F10 }, { KeyEvent.VK_F11, Event.F11 },
-			{ KeyEvent.VK_F12, Event.F12 },
-			{ KeyEvent.VK_PRINTSCREEN, Event.PRINT_SCREEN },
+			{ KeyEvent.VK_F12, Event.F12 }, { KeyEvent.VK_PRINTSCREEN, Event.PRINT_SCREEN },
 			{ KeyEvent.VK_SCROLL_LOCK, Event.SCROLL_LOCK },
-			{ KeyEvent.VK_CAPS_LOCK, Event.CAPS_LOCK },
-			{ KeyEvent.VK_NUM_LOCK, Event.NUM_LOCK },
-			{ KeyEvent.VK_PAUSE, Event.PAUSE },
-			{ KeyEvent.VK_INSERT, Event.INSERT } };
+			{ KeyEvent.VK_CAPS_LOCK, Event.CAPS_LOCK }, { KeyEvent.VK_NUM_LOCK, Event.NUM_LOCK },
+			{ KeyEvent.VK_PAUSE, Event.PAUSE }, { KeyEvent.VK_INSERT, Event.INSERT } };
 
 	private boolean consumed = false;
 
-	public Event(Object target, long when, int id, int x, int y, int key,
-			int modifiers, Object arg) {
+	public Event(Object target, long when, int id, int x, int y, int key, int modifiers,
+			Object arg) {
 		this.target = target;
 		this.when = when;
 		this.id = id;
@@ -198,8 +188,7 @@ public class Event implements java.io.Serializable {
 		}
 	}
 
-	public Event(Object target, long when, int id, int x, int y, int key,
-			int modifiers) {
+	public Event(Object target, long when, int id, int x, int y, int key, int modifiers) {
 		this(target, when, id, x, y, key, modifiers, null);
 	}
 

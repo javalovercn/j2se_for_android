@@ -34,53 +34,54 @@
  **********************************************************************/
 
 package java.awt.image.renderable;
+
 import java.util.Vector;
 import java.awt.RenderingHints;
 import java.awt.image.*;
 
 /**
- * A RenderableImage is a common interface for rendering-independent
- * images (a notion which subsumes resolution independence).  That is,
- * images which are described and have operations applied to them
- * independent of any specific rendering of the image.  For example, a
- * RenderableImage can be rotated and cropped in
- * resolution-independent terms.  Then, it can be rendered for various
- * specific contexts, such as a draft preview, a high-quality screen
- * display, or a printer, each in an optimal fashion.
+ * A RenderableImage is a common interface for rendering-independent images (a
+ * notion which subsumes resolution independence). That is, images which are
+ * described and have operations applied to them independent of any specific
+ * rendering of the image. For example, a RenderableImage can be rotated and
+ * cropped in resolution-independent terms. Then, it can be rendered for various
+ * specific contexts, such as a draft preview, a high-quality screen display, or
+ * a printer, each in an optimal fashion.
  *
- * <p> A RenderedImage is returned from a RenderableImage via the
- * createRendering() method, which takes a RenderContext.  The
- * RenderContext specifies how the RenderedImage should be
- * constructed.  Note that it is not possible to extract pixels
- * directly from a RenderableImage.
+ * <p>
+ * A RenderedImage is returned from a RenderableImage via the createRendering()
+ * method, which takes a RenderContext. The RenderContext specifies how the
+ * RenderedImage should be constructed. Note that it is not possible to extract
+ * pixels directly from a RenderableImage.
  *
- * <p> The createDefaultRendering() and createScaledRendering() methods are
- * convenience methods that construct an appropriate RenderContext
- * internally.  All of the rendering methods may return a reference to a
- * previously produced rendering.
+ * <p>
+ * The createDefaultRendering() and createScaledRendering() methods are
+ * convenience methods that construct an appropriate RenderContext internally.
+ * All of the rendering methods may return a reference to a previously produced
+ * rendering.
  */
 public interface RenderableImage {
-     static final String HINTS_OBSERVED = "HINTS_OBSERVED";
+	static final String HINTS_OBSERVED = "HINTS_OBSERVED";
 
-    Vector<RenderableImage> getSources();
+	Vector<RenderableImage> getSources();
 
-    Object getProperty(String name);
+	Object getProperty(String name);
 
-    String[] getPropertyNames();
+	String[] getPropertyNames();
 
-    boolean isDynamic();
+	boolean isDynamic();
 
-    float getWidth();
+	float getWidth();
 
-    float getHeight();
+	float getHeight();
 
-    float getMinX();
+	float getMinX();
 
-    float getMinY();
+	float getMinY();
 
-    RenderedImage createScaledRendering(int w, int h, RenderingHints hints);
+	RenderedImage createScaledRendering(int w, int h, RenderingHints hints);
 
-    RenderedImage createDefaultRendering();
+	RenderedImage createDefaultRendering();
 
-    RenderedImage createRendering(RenderContext renderContext);
+	RenderedImage createRendering(RenderContext renderContext);
 }

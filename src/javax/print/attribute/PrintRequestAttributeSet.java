@@ -25,11 +25,11 @@
 package javax.print.attribute;
 
 /**
- * Interface PrintRequestAttributeSet specifies the interface for a set of
- * print request attributes, i.e. printing attributes that implement interface
- * {@link PrintRequestAttribute PrintRequestAttribute}.
- * The client uses a PrintRequestAttributeSet to specify the settings to be
- * applied to a whole print job and to all the docs in the print job.
+ * Interface PrintRequestAttributeSet specifies the interface for a set of print
+ * request attributes, i.e. printing attributes that implement interface
+ * {@link PrintRequestAttribute PrintRequestAttribute}. The client uses a
+ * PrintRequestAttributeSet to specify the settings to be applied to a whole
+ * print job and to all the docs in the print job.
  * <P>
  * PrintRequestAttributeSet is just an {@link AttributeSet AttributeSet} whose
  * constructors and mutating operations guarantee an additional invariant,
@@ -40,7 +40,7 @@ package javax.print.attribute;
  * are respecified below to guarantee this additional invariant.
  * <P>
  *
- * @author  Alan Kaminsky
+ * @author Alan Kaminsky
  */
 public interface PrintRequestAttributeSet extends AttributeSet {
 

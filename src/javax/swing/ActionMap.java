@@ -31,22 +31,22 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * <code>ActionMap</code> provides mappings from
- * <code>Object</code>s
- * (called <em>keys</em> or <em><code>Action</code> names</em>)
- * to <code>Action</code>s.
- * An <code>ActionMap</code> is usually used with an <code>InputMap</code>
- * to locate a particular action
- * when a key is pressed. As with <code>InputMap</code>,
- * an <code>ActionMap</code> can have a parent
- * that is searched for keys not defined in the <code>ActionMap</code>.
- * <p>As with <code>InputMap</code> if you create a cycle, eg:
+ * <code>ActionMap</code> provides mappings from <code>Object</code>s (called
+ * <em>keys</em> or <em><code>Action</code> names</em>) to <code>Action</code>s.
+ * An <code>ActionMap</code> is usually used with an <code>InputMap</code> to
+ * locate a particular action when a key is pressed. As with
+ * <code>InputMap</code>, an <code>ActionMap</code> can have a parent that is
+ * searched for keys not defined in the <code>ActionMap</code>.
+ * <p>
+ * As with <code>InputMap</code> if you create a cycle, eg:
+ * 
  * <pre>
  *   ActionMap am = new ActionMap();
  *   ActionMap bm = new ActionMap():
  *   am.setParent(bm);
  *   bm.setParent(am);
  * </pre>
+ * 
  * some of the methods will cause a StackOverflowError to be thrown.
  *
  * @see InputMap
@@ -57,7 +57,7 @@ import java.util.HashMap;
 public class ActionMap implements Serializable {
 	private ActionMap parent;
 	private transient HashMap<Object, Action> table;
-	
+
 	public ActionMap() {
 		table = new HashMap<Object, Action>();
 	}
@@ -71,13 +71,13 @@ public class ActionMap implements Serializable {
 	}
 
 	public void put(Object key, Action action) {
-        if (key == null) {
-            return;
-        }
-        if (action == null) {
-            remove(key);
-        }
-        
+		if (key == null) {
+			return;
+		}
+		if (action == null) {
+			remove(key);
+		}
+
 		table.put(key, action);
 	}
 
@@ -108,7 +108,6 @@ public class ActionMap implements Serializable {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException {
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
 	}
 }

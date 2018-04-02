@@ -42,150 +42,152 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 
 /**
- * A class which implements a simple etched border which can
- * either be etched-in or etched-out.  If no highlight/shadow
- * colors are initialized when the border is created, then
- * these colors will be dynamically derived from the background
- * color of the component argument passed into the paintBorder()
- * method.
+ * A class which implements a simple etched border which can either be etched-in
+ * or etched-out. If no highlight/shadow colors are initialized when the border
+ * is created, then these colors will be dynamically derived from the background
+ * color of the component argument passed into the paintBorder() method.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author David Kloba
  * @author Amy Fowler
  */
-public class EtchedBorder extends AbstractBorder
-{
-    public static final int RAISED  = 0;
-    public static final int LOWERED = 1;
+public class EtchedBorder extends AbstractBorder {
+	public static final int RAISED = 0;
+	public static final int LOWERED = 1;
 
-    private final Insets insets = new Insets(2, 2, 2, 2);
-    protected int etchType;
-    protected Color highlight;
-    protected Color shadow;
+	private final Insets insets = new Insets(2, 2, 2, 2);
+	protected int etchType;
+	protected Color highlight;
+	protected Color shadow;
 
-    FrameLayout borderView;
-    private View componentView;
-    
-    public EtchedBorder()    {
-        this(LOWERED);
-    }
+	FrameLayout borderView;
+	private View componentView;
 
-    public EtchedBorder(int etchType)    {
-        this(etchType, AndroidUIUtil.WIN_BODY_BACK.brighter(), AndroidUIUtil.WIN_BODY_BACK.darker());
-    }
+	public EtchedBorder() {
+		this(LOWERED);
+	}
 
-    public EtchedBorder(Color highlight, Color shadow)    {
-        this(LOWERED, highlight, shadow);
-    }
+	public EtchedBorder(int etchType) {
+		this(etchType, AndroidUIUtil.WIN_BODY_BACK.brighter(),
+				AndroidUIUtil.WIN_BODY_BACK.darker());
+	}
 
-    public EtchedBorder(int etchType, Color highlight, Color shadow)    {
-        this.etchType = etchType;
-        this.highlight = highlight;
-        this.shadow = shadow;
-        
-        if(this.shadow == null){
-        	this.shadow = AndroidUIUtil.WIN_BODY_BACK.darker();
-        }
-        if(this.highlight == null){
-        	this.highlight = AndroidUIUtil.WIN_BODY_BACK.brighter();
-        }
-        
-        build();
-    }
-    
-    private void build(){
-    	FrameLayout framelayout = new FrameLayout(ActivityManager.getActivity());
-    	framelayout.setBackgroundColor(0);
-    	
-    	final View boxView = new View(ActivityManager.getActivity());
-    	
-    	//upgrade API
-    	boxView.setBackgroundDrawable(new Drawable() {
+	public EtchedBorder(Color highlight, Color shadow) {
+		this(LOWERED, highlight, shadow);
+	}
+
+	public EtchedBorder(int etchType, Color highlight, Color shadow) {
+		this.etchType = etchType;
+		this.highlight = highlight;
+		this.shadow = shadow;
+
+		if (this.shadow == null) {
+			this.shadow = AndroidUIUtil.WIN_BODY_BACK.darker();
+		}
+		if (this.highlight == null) {
+			this.highlight = AndroidUIUtil.WIN_BODY_BACK.brighter();
+		}
+
+		build();
+	}
+
+	private void build() {
+		FrameLayout framelayout = new FrameLayout(ActivityManager.applicationContext);
+		framelayout.setBackgroundColor(0);
+
+		final View boxView = new View(ActivityManager.applicationContext);
+
+		// upgrade API
+		boxView.setBackgroundDrawable(new Drawable() {
 			@Override
 			public void setColorFilter(ColorFilter cf) {
 			}
+
 			@Override
 			public void setAlpha(int alpha) {
 			}
+
 			@Override
 			public int getOpacity() {
 				return 0;
 			}
+
 			@Override
 			public void draw(Canvas canvas) {
 				CanvasGraphics g = new CanvasGraphics(canvas, screenAdapter);
 				int width = boxView.getWidth();
 				int height = boxView.getHeight();
-//				System.out.println("EtchedBorder MesuredWidth : " + boxView.getMeasuredWidth() + 
-//						", boxView : " + boxView.getWidth());
+				// System.out.println("EtchedBorder MesuredWidth : " +
+				// boxView.getMeasuredWidth() +
+				// ", boxView : " + boxView.getWidth());
 
-				g.setColor(etchType==RAISED?highlight:shadow);
-				g.drawLine(0, 0, width - 2, 0);//上外
-				g.drawLine(0, 0, 0, height - 2);//左外
-    	
-    			g.setColor(etchType==RAISED?shadow:highlight);
-    			g.drawLine(1, 1, width - 2, 1);//上内
-    			g.drawLine(1, 1, 1, height - 2);//左内
-    			
-    			g.setColor(etchType==RAISED?highlight:shadow);
-    			g.drawLine(width - 2, 1, width - 2, height - 2);//右内
-    			g.drawLine(1, height - 2, width - 2, height - 2);//底上
-    			
-    			g.setColor(etchType==RAISED?shadow:highlight);
-    			g.drawLine(width - 1, 0, width - 1, height - 1);//右外
-    			g.drawLine(0, height - 1, width - 1, height - 1);//底下
+				g.setColor(etchType == RAISED ? highlight : shadow);
+				g.drawLine(0, 0, width - 2, 0);// 上外
+				g.drawLine(0, 0, 0, height - 2);// 左外
+
+				g.setColor(etchType == RAISED ? shadow : highlight);
+				g.drawLine(1, 1, width - 2, 1);// 上内
+				g.drawLine(1, 1, 1, height - 2);// 左内
+
+				g.setColor(etchType == RAISED ? highlight : shadow);
+				g.drawLine(width - 2, 1, width - 2, height - 2);// 右内
+				g.drawLine(1, height - 2, width - 2, height - 2);// 底上
+
+				g.setColor(etchType == RAISED ? shadow : highlight);
+				g.drawLine(width - 1, 0, width - 1, height - 1);// 右外
+				g.drawLine(0, height - 1, width - 1, height - 1);// 底下
 			}
 		});
-    	
-    	{
-    		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-    				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-//    		lp.setMargins(insets.left, insets.top, insets.right, insets.bottom);
-    		
-    		framelayout.addView(boxView, lp);
-    	}
 
-    	borderView = framelayout;
-    }
+		{
+			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT);
+			// lp.setMargins(insets.left, insets.top, insets.right,
+			// insets.bottom);
 
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-    }
+			framelayout.addView(boxView, lp);
+		}
 
-    public Insets getBorderInsets(Component c, Insets in) {
-        in.set(insets.top, insets.left, insets.bottom, insets.right);
-        return in;
-    }
+		borderView = framelayout;
+	}
 
-    public boolean isBorderOpaque() { return true; }
+	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+	}
 
-    public int getEtchType() {
-        return etchType;
-    }
+	public Insets getBorderInsets(Component c, Insets in) {
+		in.set(insets.top, insets.left, insets.bottom, insets.right);
+		return in;
+	}
 
-    public Color getHighlightColor(Component c)   {
-        return highlight != null? highlight :
-                                       c.getBackground().brighter();
-    }
+	public boolean isBorderOpaque() {
+		return true;
+	}
 
-    public Color getHighlightColor()   {
-        return highlight;
-    }
+	public int getEtchType() {
+		return etchType;
+	}
 
-    public Color getShadowColor(Component c)   {
-        return shadow != null? shadow : c.getBackground().darker();
-    }
+	public Color getHighlightColor(Component c) {
+		return highlight != null ? highlight : c.getBackground().brighter();
+	}
 
-    public Color getShadowColor()   {
-        return shadow;
-    }
+	public Color getHighlightColor() {
+		return highlight;
+	}
+
+	public Color getShadowColor(Component c) {
+		return shadow != null ? shadow : c.getBackground().darker();
+	}
+
+	public Color getShadowColor() {
+		return shadow;
+	}
 
 	@Override
 	public View getBorderViewAdAPI() {
@@ -194,21 +196,23 @@ public class EtchedBorder extends AbstractBorder
 
 	@Override
 	public void setComponentViewAdAPI(final View view, final Component component) {
-		ActivityManager.getActivity().runOnUiThread(new Runnable() {
+		AndroidUIUtil.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if(componentView != null){
+				if (componentView != null) {
 					borderView.removeView(componentView);
 				}
-				
+
 				{
-		    		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-		    				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-		    		lp.setMargins(insets.left, insets.top, insets.right, insets.bottom);
-		    		lp.gravity = (Gravity.TOP | (component.getComponentOrientation().isLeftToRight()?Gravity.LEFT:Gravity.RIGHT));
-		    		borderView.addView(view, lp);
+					FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+							LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+					lp.setMargins(insets.left, insets.top, insets.right, insets.bottom);
+					lp.gravity = (Gravity.TOP
+							| (component.getComponentOrientation().isLeftToRight() ? Gravity.LEFT
+									: Gravity.RIGHT));
+					borderView.addView(view, lp);
 				}
-				componentView = view;				
+				componentView = view;
 			}
 		});
 	}

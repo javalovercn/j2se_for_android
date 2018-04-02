@@ -29,28 +29,31 @@ import java.util.ResourceBundle;
 
 /**
  * The ComponentOrientation class encapsulates the language-sensitive
- * orientation that is to be used to order the elements of a component
- * or of text. It is used to reflect the differences in this ordering
- * between Western alphabets, Middle Eastern (such as Hebrew), and Far
- * Eastern (such as Japanese).
+ * orientation that is to be used to order the elements of a component or of
+ * text. It is used to reflect the differences in this ordering between Western
+ * alphabets, Middle Eastern (such as Hebrew), and Far Eastern (such as
+ * Japanese).
  * <p>
- * Fundamentally, this governs items (such as characters) which are laid out
- * in lines, with the lines then laid out in a block. This also applies
- * to items in a widget: for example, in a check box where the box is
- * positioned relative to the text.
+ * Fundamentally, this governs items (such as characters) which are laid out in
+ * lines, with the lines then laid out in a block. This also applies to items in
+ * a widget: for example, in a check box where the box is positioned relative to
+ * the text.
  * <p>
- * There are four different orientations used in modern languages
- * as in the following table.<br>
+ * There are four different orientations used in modern languages as in the
+ * following table.<br>
+ * 
  * <pre>
  * LT          RT          TL          TR
  * A B C       C B A       A D G       G D A
  * D E F       F E D       B E H       H E B
  * G H I       I H G       C F I       I F C
- * </pre><br>
- * (In the header, the two-letter abbreviation represents the item direction
- * in the first letter, and the line direction in the second. For example,
- * LT means "items left-to-right, lines top-to-bottom",
- * TL means "items top-to-bottom, lines left-to-right", and so on.)
+ * </pre>
+ * 
+ * <br>
+ * (In the header, the two-letter abbreviation represents the item direction in
+ * the first letter, and the line direction in the second. For example, LT means
+ * "items left-to-right, lines top-to-bottom", TL means "items top-to-bottom,
+ * lines left-to-right", and so on.)
  * <p>
  * The orientations are:
  * <ul>
@@ -59,11 +62,11 @@ import java.util.ResourceBundle;
  * <li>TR - Japanese, Chinese, Korean
  * <li>TL - Mongolian
  * </ul>
- * Components whose view and controller code depends on orientation
- * should use the <code>isLeftToRight()</code> and
- * <code>isHorizontal()</code> methods to
- * determine their behavior. They should not include switch-like
- * code that keys off of the constants, such as:
+ * Components whose view and controller code depends on orientation should use
+ * the <code>isLeftToRight()</code> and <code>isHorizontal()</code> methods to
+ * determine their behavior. They should not include switch-like code that keys
+ * off of the constants, such as:
+ * 
  * <pre>
  * if (orientation == LEFT_TO_RIGHT) {
  *   ...
@@ -73,8 +76,9 @@ import java.util.ResourceBundle;
  *   // Oops
  * }
  * </pre>
- * This is unsafe, since more constants may be added in the future and
- * since it is not guaranteed that orientation objects will be unique.
+ * 
+ * This is unsafe, since more constants may be added in the future and since it
+ * is not guaranteed that orientation objects will be unique.
  */
 public final class ComponentOrientation {
 	private static final int UNK_BIT = 1;
@@ -84,8 +88,7 @@ public final class ComponentOrientation {
 	public static final ComponentOrientation LEFT_TO_RIGHT = new ComponentOrientation(
 			HORIZ_BIT | LTR_BIT);
 
-	public static final ComponentOrientation RIGHT_TO_LEFT = new ComponentOrientation(
-			HORIZ_BIT);
+	public static final ComponentOrientation RIGHT_TO_LEFT = new ComponentOrientation(HORIZ_BIT);
 
 	public static final ComponentOrientation UNKNOWN = new ComponentOrientation(
 			HORIZ_BIT | LTR_BIT | UNK_BIT);
@@ -100,8 +103,7 @@ public final class ComponentOrientation {
 
 	public static ComponentOrientation getOrientation(Locale locale) {
 		String lang = locale.getLanguage();
-		if ("iw".equals(lang) || "ar".equals(lang) || "fa".equals(lang)
-				|| "ur".equals(lang)) {
+		if ("iw".equals(lang) || "ar".equals(lang) || "fa".equals(lang) || "ur".equals(lang)) {
 			return RIGHT_TO_LEFT;
 		} else {
 			return LEFT_TO_RIGHT;
@@ -130,16 +132,16 @@ public final class ComponentOrientation {
 	private ComponentOrientation(int value) {
 		orientation = value;
 	}
-	
-	public boolean equals(Object old){
-		if(old == null){
+
+	public boolean equals(Object old) {
+		if (old == null) {
 			return false;
 		}
-		
-		if(old instanceof ComponentOrientation){
-			return (((ComponentOrientation)old).orientation == this.orientation);
+
+		if (old instanceof ComponentOrientation) {
+			return (((ComponentOrientation) old).orientation == this.orientation);
 		}
-		
+
 		return false;
 	}
 }

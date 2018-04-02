@@ -26,12 +26,13 @@ package java.awt.datatransfer;
 
 /**
  * Signals that the requested data is not supported in this flavor.
+ * 
  * @see Transferable#getTransferData
  *
- * @author      Amy Fowler
+ * @author Amy Fowler
  */
 public class UnsupportedFlavorException extends Exception {
-    public UnsupportedFlavorException(DataFlavor flavor) {
-        super((flavor != null) ? flavor.getHumanPresentableName() : null);
-    }
+	public UnsupportedFlavorException(DataFlavor flavor) {
+		super((flavor != null) ? flavor.getHumanPresentableName() : null);
+	}
 }

@@ -25,19 +25,18 @@
 package javax.accessibility;
 
 /**
- * The AccessibleKeyBinding interface should be supported by any object
- * that has a keyboard bindings such as a keyboard mnemonic and/or keyboard
- * shortcut which can be used to select the object.  This interface provides
- * the standard mechanism for an assistive technology to determine the
- * key bindings which exist for this object.
- * Any object that has such key bindings should support this
- * interface.
+ * The AccessibleKeyBinding interface should be supported by any object that has
+ * a keyboard bindings such as a keyboard mnemonic and/or keyboard shortcut
+ * which can be used to select the object. This interface provides the standard
+ * mechanism for an assistive technology to determine the key bindings which
+ * exist for this object. Any object that has such key bindings should support
+ * this interface.
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
  * @see AccessibleContext
  *
- * @author      Lynn Monsanto
+ * @author Lynn Monsanto
  * @since 1.4
  */
 public interface AccessibleKeyBinding {

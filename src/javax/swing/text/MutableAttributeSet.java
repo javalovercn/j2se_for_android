@@ -29,23 +29,22 @@ import java.util.Enumeration;
 /**
  * A generic interface for a mutable collection of unique attributes.
  *
- * Implementations will probably want to provide a constructor of the
- * form:<tt>
+ * Implementations will probably want to provide a constructor of the form:<tt>
  * public XXXAttributeSet(ConstAttributeSet source);</tt>
  *
  */
 public interface MutableAttributeSet extends AttributeSet {
 
-    public void addAttribute(Object name, Object value);
+	public void addAttribute(Object name, Object value);
 
-    public void addAttributes(AttributeSet attributes);
+	public void addAttributes(AttributeSet attributes);
 
-    public void removeAttribute(Object name);
+	public void removeAttribute(Object name);
 
-    public void removeAttributes(Enumeration<?> names);
+	public void removeAttributes(Enumeration<?> names);
 
-    public void removeAttributes(AttributeSet attributes);
+	public void removeAttributes(AttributeSet attributes);
 
-    public void setResolveParent(AttributeSet parent);
+	public void setResolveParent(AttributeSet parent);
 
 }

@@ -25,31 +25,31 @@
 package javax.accessibility;
 
 /**
- * The AccessibleTableModelChange interface describes a change to
- * the table model.  The attributes of the model change can be
- * obtained by the following methods:
+ * The AccessibleTableModelChange interface describes a change to the table
+ * model. The attributes of the model change can be obtained by the following
+ * methods:
  * <ul>
- * <li> public int getType()
- * <li> public int getFirstRow();
- * <li> public int getLastRow();
- * <li> public int getFirstColumn();
- * <li> public int getLastColumn();
+ * <li>public int getType()
+ * <li>public int getFirstRow();
+ * <li>public int getLastRow();
+ * <li>public int getFirstColumn();
+ * <li>public int getLastColumn();
  * </ul>
  * The model change type returned by getType() will be one of:
  * <ul>
- * <li> INSERT - one or more rows and/or columns have been inserted
- * <li> UPDATE - some of the table data has changed
- * <li> DELETE - one or more rows and/or columns have been deleted
+ * <li>INSERT - one or more rows and/or columns have been inserted
+ * <li>UPDATE - some of the table data has changed
+ * <li>DELETE - one or more rows and/or columns have been deleted
  * </ul>
- * The affected area of the table can be determined by the other
- * four methods which specify ranges of rows and columns
+ * The affected area of the table can be determined by the other four methods
+ * which specify ranges of rows and columns
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
  * @see AccessibleContext
  * @see AccessibleContext#getAccessibleTable
  *
- * @author      Lynn Monsanto
+ * @author Lynn Monsanto
  * @since 1.3
  */
 public interface AccessibleTableModelChange {

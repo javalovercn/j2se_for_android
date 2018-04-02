@@ -28,27 +28,27 @@ import javax.print.attribute.Attribute;
 
 /**
  * Interface PrintService is the factory for a DocPrintJob. A PrintService
- * describes the capabilities of a Printer and can be queried regarding
- * a printer's supported attributes.
+ * describes the capabilities of a Printer and can be queried regarding a
+ * printer's supported attributes.
  * <P>
  * Example:
- *   <PRE>
- *   DocFlavor flavor = DocFlavor.INPUT_STREAM.POSTSCRIPT;
- *   PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
- *   aset.add(MediaSizeName.ISO_A4);
- *   PrintService[] pservices =
- *                 PrintServiceLookup.lookupPrintServices(flavor, aset);
- *   if (pservices.length > 0) {
- *       DocPrintJob pj = pservices[0].createPrintJob();
- *       try {
- *           FileInputStream fis = new FileInputStream("test.ps");
- *           Doc doc = new SimpleDoc(fis, flavor, null);
- *           pj.print(doc, aset);
- *        } catch (FileNotFoundException fe) {
- *        } catch (PrintException e) {
- *        }
- *   }
- *   </PRE>
+ * 
+ * <PRE>
+ * DocFlavor flavor = DocFlavor.INPUT_STREAM.POSTSCRIPT;
+ * PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+ * aset.add(MediaSizeName.ISO_A4);
+ * PrintService[] pservices = PrintServiceLookup.lookupPrintServices(flavor, aset);
+ * if (pservices.length > 0) {
+ * 	DocPrintJob pj = pservices[0].createPrintJob();
+ * 	try {
+ * 		FileInputStream fis = new FileInputStream("test.ps");
+ * 		Doc doc = new SimpleDoc(fis, flavor, null);
+ * 		pj.print(doc, aset);
+ * 	} catch (FileNotFoundException fe) {
+ * 	} catch (PrintException e) {
+ * 	}
+ * }
+ * </PRE>
  */
 public interface PrintService {
 
@@ -56,8 +56,7 @@ public interface PrintService {
 
 	public Class<?>[] getSupportedAttributeCategories();
 
-	public boolean isAttributeCategorySupported(
-			Class<? extends Attribute> category);
+	public boolean isAttributeCategorySupported(Class<? extends Attribute> category);
 
 	public Object getDefaultAttributeValue(Class<? extends Attribute> category);
 

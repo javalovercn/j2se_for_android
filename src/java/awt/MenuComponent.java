@@ -38,16 +38,16 @@ import javax.accessibility.AccessibleSelection;
 import javax.accessibility.AccessibleStateSet;
 
 /**
- * The abstract class <code>MenuComponent</code> is the superclass
- * of all menu-related components. In this respect, the class
+ * The abstract class <code>MenuComponent</code> is the superclass of all
+ * menu-related components. In this respect, the class
  * <code>MenuComponent</code> is analogous to the abstract superclass
  * <code>Component</code> for AWT components.
  * <p>
  * Menu components receive and process AWT events, just as components do,
  * through the method <code>processEvent</code>.
  *
- * @author      Arthur van Hoff
- * @since       JDK1.0
+ * @author Arthur van Hoff
+ * @since JDK1.0
  */
 public abstract class MenuComponent implements java.io.Serializable {
 
@@ -104,7 +104,7 @@ public abstract class MenuComponent implements java.io.Serializable {
 	}
 
 	public void setFont(Font f) {
-		//TODO f.screenAdapter
+		// TODO f.screenAdapter
 		font = f;
 	}
 
@@ -142,8 +142,8 @@ public abstract class MenuComponent implements java.io.Serializable {
 		return this;
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException, HeadlessException {
+	private void readObject(ObjectInputStream s)
+			throws ClassNotFoundException, IOException, HeadlessException {
 	}
 
 	public AccessibleContext getAccessibleContext() {
@@ -153,9 +153,8 @@ public abstract class MenuComponent implements java.io.Serializable {
 		return accessibleContext;
 	}
 
-	protected abstract class AccessibleAWTMenuComponent extends
-			AccessibleContext implements java.io.Serializable,
-			AccessibleComponent, AccessibleSelection {
+	protected abstract class AccessibleAWTMenuComponent extends AccessibleContext
+			implements java.io.Serializable, AccessibleComponent, AccessibleSelection {
 		protected AccessibleAWTMenuComponent() {
 		}
 

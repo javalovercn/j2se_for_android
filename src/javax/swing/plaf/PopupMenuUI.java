@@ -36,11 +36,11 @@ import javax.swing.Popup;
  * @author David Karlton
  */
 public abstract class PopupMenuUI extends ComponentUI {
-    public boolean isPopupTrigger(MouseEvent e) {
-        return e.isPopupTrigger();
-    }
+	public boolean isPopupTrigger(MouseEvent e) {
+		return e.isPopupTrigger();
+	}
 
-    public Popup getPopup(JPopupMenu popup, int x, int y) {
-        return null;
-    }
+	public Popup getPopup(JPopupMenu popup, int x, int y) {
+		return null;
+	}
 }

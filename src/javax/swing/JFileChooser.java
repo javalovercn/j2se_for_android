@@ -55,43 +55,37 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- * <code>JFileChooser</code> provides a simple mechanism for the user to
- * choose a file.
- * For information about using <code>JFileChooser</code>, see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/filechooser.html">How to Use File Choosers</a>,
- * a section in <em>The Java Tutorial</em>.
+ * <code>JFileChooser</code> provides a simple mechanism for the user to choose
+ * a file. For information about using <code>JFileChooser</code>, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/filechooser.html">How
+ * to Use File Choosers</a>, a section in <em>The Java Tutorial</em>.
  *
  * <p>
  *
  * The following code pops up a file chooser for the user's home directory that
  * sees only .jpg and .gif images:
+ * 
  * <pre>
- *    JFileChooser chooser = new JFileChooser();
- *    FileNameExtensionFilter filter = new FileNameExtensionFilter(
- *        "JPG & GIF Images", "jpg", "gif");
- *    chooser.setFileFilter(filter);
- *    int returnVal = chooser.showOpenDialog(parent);
- *    if(returnVal == JFileChooser.APPROVE_OPTION) {
- *       System.out.println("You chose to open this file: " +
- *            chooser.getSelectedFile().getName());
- *    }
+ * JFileChooser chooser = new JFileChooser();
+ * FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
+ * chooser.setFileFilter(filter);
+ * int returnVal = chooser.showOpenDialog(parent);
+ * if (returnVal == JFileChooser.APPROVE_OPTION) {
+ * 	System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
+ * }
  * </pre>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A component which allows for the interactive selection of a file.
+ * @beaninfo attribute: isContainer false description: A component which allows
+ *           for the interactive selection of a file.
  *
  * @author Jeff Dinkins
  *
  */
 public class JFileChooser extends JComponent implements Accessible {
-	
+
 	private static final File UP_LEVEL_FILE = new File(FileSystemView.UP_LEVEL_DIR_TAG);
 
 	private static final String uiClassID = "FileChooserUI";
@@ -169,13 +163,13 @@ public class JFileChooser extends JComponent implements Accessible {
 		public String getDescription() {
 			return "all files (*.*)";
 		}
-		
+
 		@Override
 		public boolean accept(File f) {
 			return true;
 		}
 	};
-	
+
 	public JFileChooser() {
 		this((File) null, (FileSystemView) null);
 	}
@@ -202,8 +196,7 @@ public class JFileChooser extends JComponent implements Accessible {
 		if (currentDirectoryPath == null) {
 			setCurrentDirectory(null);
 		} else {
-			setCurrentDirectory(fileSystemView
-					.createFileObject(currentDirectoryPath));
+			setCurrentDirectory(fileSystemView.createFileObject(currentDirectoryPath));
 		}
 	}
 
@@ -213,26 +206,32 @@ public class JFileChooser extends JComponent implements Accessible {
 		}
 		setFileSystemView(view);
 		filterVector.add(allFileFilter);
-		filterCB = new JComboBox<String>(new ComboBoxModel<String>(){
+		filterCB = new JComboBox<String>(new ComboBoxModel<String>() {
 			@Override
 			public void removeListDataListener(ListDataListener l) {
 			}
+
 			@Override
 			public int getSize() {
 				return filterVector.size();
 			}
+
 			@Override
 			public String getElementAt(int index) {
 				return filterVector.elementAt(index).getDescription();
 			}
+
 			@Override
 			public void addListDataListener(ListDataListener l) {
 			}
+
 			@Override
 			public void setSelectedItem(Object anItem) {
 				selected = anItem;
 			}
+
 			Object selected;
+
 			@Override
 			public Object getSelectedItem() {
 				return selected;
@@ -261,12 +260,10 @@ public class JFileChooser extends JComponent implements Accessible {
 		selectedFile = file;
 		if (selectedFile != null) {
 			if (file.isAbsolute()
-					&& !getFileSystemView().isParent(getCurrentDirectory(),
-							selectedFile)) {
+					&& !getFileSystemView().isParent(getCurrentDirectory(), selectedFile)) {
 				setCurrentDirectory(selectedFile.getParentFile());
 			}
-			if (!isMultiSelectionEnabled() || selectedFiles == null
-					|| selectedFiles.length == 1) {
+			if (!isMultiSelectionEnabled() || selectedFiles == null || selectedFiles.length == 1) {
 				ensureFileIsVisible(selectedFile);
 			}
 		}
@@ -313,11 +310,11 @@ public class JFileChooser extends JComponent implements Accessible {
 
 	public void changeToParentDirectory() {
 		String absPath = currentDirectory.getAbsolutePath();
-		if((absPath.equals("/") == false)){
+		if ((absPath.equals("/") == false)) {
 			int idx = absPath.lastIndexOf("/");
-			if(idx == 0){
+			if (idx == 0) {
 				setCurrentDirectory(new File("/"));
-			}else{
+			} else {
 				setCurrentDirectory(new File(absPath.substring(0, idx)));
 			}
 		}
@@ -341,8 +338,7 @@ public class JFileChooser extends JComponent implements Accessible {
 		return showDialog(parent, null);
 	}
 
-	public int showDialog(Component parent, String approveButtonText)
-			throws HeadlessException {
+	public int showDialog(Component parent, String approveButtonText) throws HeadlessException {
 		if (approveButtonText != null) {
 			setApproveButtonText(approveButtonText);
 			setDialogType(CUSTOM_DIALOG);
@@ -354,43 +350,43 @@ public class JFileChooser extends JComponent implements Accessible {
 		return returnValue;
 	}
 
-	private void enterOrSelectRowAdAPI(int row, boolean isTouch){
-		if(row < dataFileVector.size() && row >= 0){//注意：与filesTable.addMouseListener进入保持同步
-			if(dataFileVector.elementAt(row) == UP_LEVEL_FILE){//注意：与filesTable.addMouseListener进入保持同步
+	private void enterOrSelectRowAdAPI(int row, boolean isTouch) {
+		if (row < dataFileVector.size() && row >= 0) {// 注意：与filesTable.addMouseListener进入保持同步
+			if (dataFileVector.elementAt(row) == UP_LEVEL_FILE) {// 注意：与filesTable.addMouseListener进入保持同步
 				changeToParentDirectory();
 				refreshTableAdAPI();
-			}else if(dataFileVector.elementAt(row).isDirectory()){
+			} else if (dataFileVector.elementAt(row).isDirectory()) {
 				setCurrentDirectory(dataFileVector.elementAt(row));
 				refreshTableAdAPI();
-			}else{
-				if(isTouch){
-					//因Click事件自动选中
-				}else{
-					//选择或反选
-					if(filesTable.isRowSelected(row)){
+			} else {
+				if (isTouch) {
+					// 因Click事件自动选中
+				} else {
+					// 选择或反选
+					if (filesTable.isRowSelected(row)) {
 						filesTable.removeRowSelectionInterval(row, row);
-					}else{
+					} else {
 						filesTable.addRowSelectionInterval(row, row);
 					}
 				}
 			}
 		}
 	}
-	
-	private String[] convertFilterStrAdAPI(){
+
+	private String[] convertFilterStrAdAPI() {
 		String[] out = new String[filterVector.size()];
 		for (int i = 0; i < out.length; i++) {
 			out[i] = filterVector.elementAt(i).getDescription();
 		}
 		return out;
 	}
-	
+
 	protected JDialog createDialog(Component parent) throws HeadlessException {
 		JPanel filePanel = new JPanel(new BorderLayout());
 		{
 			String[] rootDir = convertRootToStr();
 			rootCB = new JComboBox<String>(rootDir);
-			
+
 			filesTable = new JTable();
 			scrollTable = new JScrollPane(filesTable);
 
@@ -398,16 +394,16 @@ public class JFileChooser extends JComponent implements Accessible {
 			filesTable.setFocusableColumnAdAPI(new JTable.FocusableColumn() {
 				@Override
 				public boolean isFocusable(int columnIdx) {
-					if(columnIdx == 0){
+					if (columnIdx == 0) {
 						return true;
 					}
 					return false;
 				}
 			});
 			filesTable.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) { 
-					final int row =filesTable.rowAtPoint(e.getPoint());//获得行位置
-					//e.getClickCount() == 2 || e.getClickCount() == 1
+				public void mouseClicked(MouseEvent e) {
+					final int row = filesTable.rowAtPoint(e.getPoint());// 获得行位置
+					// e.getClickCount() == 2 || e.getClickCount() == 1
 					enterOrSelectRowAdAPI(row, true);
 				}
 			});
@@ -415,75 +411,89 @@ public class JFileChooser extends JComponent implements Accessible {
 				@Override
 				public void keyTyped(KeyEvent e) {
 				}
+
 				@Override
 				public void keyReleased(KeyEvent e) {
 				}
+
 				@Override
 				public void keyPressed(KeyEvent e) {
-					if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 						enterOrSelectRowAdAPI(filesTable.getCurrentFocusRowAdAPI(), false);
 					}
 				}
 			});
-			filesTable.setSelectionMode(multiSelectionEnabled?ListSelectionModel.MULTIPLE_INTERVAL_SELECTION:ListSelectionModel.SINGLE_SELECTION);
+			filesTable.setSelectionMode(
+					multiSelectionEnabled ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION
+							: ListSelectionModel.SINGLE_SELECTION);
 			final Vector<String> dataTableTitleVector = new Vector<String>();
-			dataTableTitleVector.add((String)ResourceUtil.get(7004));//select file name
+			dataTableTitleVector.add((String) ResourceUtil.get(7004));// select
+																		// file
+																		// name
 			refreshTableAdAPI();
-			filesTable.setModel(new AbstractTableModel() {//dataFileVector, dataTableTitleVector){
+			filesTable.setModel(new AbstractTableModel() {// dataFileVector,
+															// dataTableTitleVector){
 				@Override
 				public Object getValueAt(int rowIndex, int columnIndex) {
 					File file = null;
-					try{
+					try {
 						file = dataFileVector.elementAt(rowIndex);
-					}catch (Exception e) {
+					} catch (Exception e) {
 					}
-					if(file == null){
+					if (file == null) {
 						return "";
-					}else{
+					} else {
 						return JFileChooser.this.getFileSystemView().getSystemDisplayName(file);
 					}
 				}
+
 				@Override
 				public int getRowCount() {
 					return dataFileVector.size();
 				}
+
 				@Override
 				public int getColumnCount() {
 					return dataTableTitleVector.size();
 				}
+
 				@Override
 				public String getColumnName(int column) {
-			        return dataTableTitleVector.elementAt(column);
-			    }
+					return dataTableTitleVector.elementAt(column);
+				}
+
 				@Override
-			    public int findColumn(String columnName) {
-			        for (int i = 0; i < getColumnCount(); i++) {
-			            if (columnName.equals(getColumnName(i))) {
-			                return i;
-			            }
-			        }
-			        return -1;
-			    }
+				public int findColumn(String columnName) {
+					for (int i = 0; i < getColumnCount(); i++) {
+						if (columnName.equals(getColumnName(i))) {
+							return i;
+						}
+					}
+					return -1;
+				}
 			});
-			filesTable.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer(){
-    			public Component getTableCellRendererComponent(JTable table, Object value,
-    					boolean isSelected, boolean hasFocus, int row, int column) {
-    				JLabel label = (JLabel)super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-    				if(value == null){
-    					label.setText("");
-    				}else{
-    					label.setText((String)value);
-    				}
-    				if(row < dataFileVector.size()){
-	    				File file = dataFileVector.elementAt(row);
-	    				Icon icon = JFileChooser.this.getFileSystemView().getSystemIcon(file);
-	    				label.setIcon(icon);
-    				}else{
-    					label.setIcon(null);
-    				}
-    				return label;
-    			}
-    		});
+			filesTable.getColumnModel().getColumn(0)
+					.setCellRenderer(new DefaultTableCellRenderer() {
+						public Component getTableCellRendererComponent(JTable table, Object value,
+								boolean isSelected, boolean hasFocus, int row, int column) {
+							JLabel label = (JLabel) super.getTableCellRendererComponent(table,
+									value, isSelected, hasFocus, row, column);
+							if (value == null) {
+								label.setText("");
+							} else {
+								label.setText((String) value);
+							}
+							if (row < dataFileVector.size()) {
+								File file = dataFileVector.elementAt(row);
+								Icon icon = JFileChooser.this.getFileSystemView()
+										.getSystemIcon(file);
+								label.setIcon(icon);
+							} else {
+								label.setIcon(null);
+							}
+							return label;
+						}
+					});
 			rootCB.addItemListener(new ItemListener() {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
@@ -503,21 +513,29 @@ public class JFileChooser extends JComponent implements Accessible {
 			});
 			filePanel.add(rootCB, BorderLayout.NORTH);
 			rootCB.requestFocus();
-			
+
 			filePanel.add(scrollTable, BorderLayout.CENTER);
-			
+
 			filePanel.add(filterCB, BorderLayout.SOUTH);
 		}
 
 		ActionListener listener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(isMultiSelectionEnabled()){
+				if (isMultiSelectionEnabled()) {
 					int[] rows = filesTable.getSelectedRows();
+					if(rows.length == 0 || rows.length > 0 && rows[0] == -1) {
+						cancelSelection();
+						return;
+					}
 					selectedFiles = convertToFileAdAPI(rows);
-				}else{
+				} else {
 					int selectedRow = filesTable.getSelectedRow();
-					int[] rows = {selectedRow};
+					if(selectedRow == -1) {
+						cancelSelection();
+						return;
+					}
+					int[] rows = { selectedRow };
 					selectedFile = convertToFileAdAPI(rows)[0];
 				}
 				approveSelection();
@@ -529,62 +547,63 @@ public class JFileChooser extends JComponent implements Accessible {
 				cancelSelection();
 			}
 		};
-		
-		return (JDialog)App.showCenterPanelMain(filePanel, 0, 0, (dialogTitle==null)?"Choose / Save file":dialogTitle, 
-				true, null, null, listener, cancelListener, null, true, false, parent, false, false);
+
+		return (JDialog) App.showCenterPanelMain(filePanel, 0, 0,
+				(dialogTitle == null) ? "Choose / Save file" : dialogTitle, true, null, null,
+				listener, cancelListener, null, true, false, parent, false, false);
 	}
 
-	private File[] convertToFileAdAPI(int[] rows){
+	private final File[] convertToFileAdAPI(int[] rows) {
 		File[] out = new File[rows.length];
 		for (int i = 0; i < out.length; i++) {
-			out[i] = dataFileVector.elementAt(rows[i]);//TOFIX:可能用户在没有内容时，点击，导致此处OutIdx异常 
+			out[i] = dataFileVector.elementAt(rows[i]);
 		}
 		return out;
 	}
-	
-	private void refreshTableAdAPI(){
-		if(rootCB != null && filesTable != null){
+
+	private void refreshTableAdAPI() {
+		if (rootCB != null && filesTable != null) {
 			dataFileVector.clear();
-			
-			if(currentDirectory == null){
+
+			if (currentDirectory == null) {
 				int idx = rootCB.getSelectedIndex();
 				currentDirectory = getFileSystemView().getRoots()[idx];
 			}
-			
+
 			File[] currDirList = currentDirectory.listFiles();
-			//优先显示过滤文件
+			// 优先显示过滤文件
 			addItemToTable(currDirList, false);
-			if(currentDirectory.getAbsolutePath().equals("/") == false){
-				//增加上一级
+			if (currentDirectory.getAbsolutePath().equals("/") == false) {
+				// 增加上一级
 				dataFileVector.add(UP_LEVEL_FILE);
 			}
-			//其次是文件夹
+			// 其次是文件夹
 			addItemToTable(currDirList, true);
-			
+
 			filesTable.clearSelection();
 			filesTable.setRequireFirstRowFocusAfterRefreshContentAdAPI(true, 0);
 			filesTable.tableChanged(new TableModelEvent(filesTable.getModel()));
-			
+
 			final JScrollBar verticalScrollBar = scrollTable.getVerticalScrollBar();
 			verticalScrollBar.setValue(verticalScrollBar.getMinimum());
-//			filesTable.updateUI();
+			// filesTable.updateUI();
 		}
 	}
 
 	private void addItemToTable(File[] currDirList, boolean isLimitDirectory) {
-		if(currDirList != null){//没有访问权限时，会返回null
+		if (currDirList != null) {// 没有访问权限时，会返回null
 			for (int i = 0; i < currDirList.length; i++) {
 				File file = currDirList[i];
-				if(file.isDirectory() == isLimitDirectory){
-					if(fileFilter == null || fileFilter.accept(file)){
+				if (file.isDirectory() == isLimitDirectory) {
+					if (fileFilter == null || fileFilter.accept(file)) {
 						dataFileVector.add(file);
 					}
 				}
 			}
 		}
 	}
-	
-	private String[] convertRootToStr(){
+
+	private String[] convertRootToStr() {
 		File[] files = getFileSystemView().getRoots();
 		String[] out = new String[files.length];
 		for (int i = 0; i < out.length; i++) {
@@ -592,7 +611,7 @@ public class JFileChooser extends JComponent implements Accessible {
 		}
 		return out;
 	}
-	
+
 	public boolean getControlButtonsAreShown() {
 		return controlsShown;
 	}
@@ -612,9 +631,9 @@ public class JFileChooser extends JComponent implements Accessible {
 		if (this.dialogType == dialogType) {
 			return;
 		}
-		if (!(dialogType == OPEN_DIALOG || dialogType == SAVE_DIALOG || dialogType == CUSTOM_DIALOG)) {
-			throw new IllegalArgumentException("Incorrect Dialog Type: "
-					+ dialogType);
+		if (!(dialogType == OPEN_DIALOG || dialogType == SAVE_DIALOG
+				|| dialogType == CUSTOM_DIALOG)) {
+			throw new IllegalArgumentException("Incorrect Dialog Type: " + dialogType);
 		}
 		this.dialogType = dialogType;
 		if (dialogType == OPEN_DIALOG || dialogType == SAVE_DIALOG) {
@@ -740,12 +759,10 @@ public class JFileChooser extends JComponent implements Accessible {
 			return;
 		}
 
-		if ((mode == FILES_ONLY) || (mode == DIRECTORIES_ONLY)
-				|| (mode == FILES_AND_DIRECTORIES)) {
+		if ((mode == FILES_ONLY) || (mode == DIRECTORIES_ONLY) || (mode == FILES_AND_DIRECTORIES)) {
 			fileSelectionMode = mode;
 		} else {
-			throw new IllegalArgumentException(
-					"Incorrect Mode for file selection: " + mode);
+			throw new IllegalArgumentException("Incorrect Mode for file selection: " + mode);
 		}
 	}
 
@@ -758,7 +775,8 @@ public class JFileChooser extends JComponent implements Accessible {
 	}
 
 	public boolean isDirectorySelectionEnabled() {
-		return ((fileSelectionMode == DIRECTORIES_ONLY) || (fileSelectionMode == FILES_AND_DIRECTORIES));
+		return ((fileSelectionMode == DIRECTORIES_ONLY)
+				|| (fileSelectionMode == FILES_AND_DIRECTORIES));
 	}
 
 	public void setMultiSelectionEnabled(boolean b) {
@@ -779,15 +797,15 @@ public class JFileChooser extends JComponent implements Accessible {
 	public void setFileHidingEnabled(boolean b) {
 		useFileHiding = b;
 	}
-	
+
 	public void setFileFilter(FileFilter filter) {
 		fileFilter = filter;
 		if (filter != null) {
-			if(filterVector.size() > 1){
+			if (filterVector.size() > 1) {
 				filterVector.remove(1);
 			}
 			filterVector.add(fileFilter);
-//			因为addItem事件会处理，所以关闭下列代码
+			// 因为addItem事件会处理，所以关闭下列代码
 			filterCB.setSelectedIndex(1);
 		}
 	}
@@ -805,33 +823,33 @@ public class JFileChooser extends JComponent implements Accessible {
 	}
 
 	public String getName(File f) {
-		if(fileView == null){
+		if (fileView == null) {
 			return f.getName();
-		}else{
+		} else {
 			return fileView.getName(f);
 		}
 	}
 
 	public String getDescription(File f) {
-		if(fileView == null){
+		if (fileView == null) {
 			return f.getName();
-		}else{
+		} else {
 			return fileView.getDescription(f);
 		}
 	}
 
 	public String getTypeDescription(File f) {
-		if(fileView == null){
+		if (fileView == null) {
 			return f.getName();
-		}else{
+		} else {
 			return fileView.getTypeDescription(f);
 		}
 	}
 
 	public Icon getIcon(File f) {
-		if(fileView == null){
+		if (fileView == null) {
 			return getFileSystemView().getSystemIcon(f);
-		}else{
+		} else {
 			return fileView.getIcon(f);
 		}
 	}
@@ -897,8 +915,8 @@ public class JFileChooser extends JComponent implements Accessible {
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ActionListener.class) {
 				if (e == null) {
-					e = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,
-							command, System.currentTimeMillis(), 0);
+					e = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, command,
+							System.currentTimeMillis(), 0);
 				}
 				((ActionListener) listeners[i + 1]).actionPerformed(e);
 			}
@@ -917,8 +935,8 @@ public class JFileChooser extends JComponent implements Accessible {
 		return (FileChooserUI) null;
 	}
 
-	private void readObject(java.io.ObjectInputStream in) throws IOException,
-			ClassNotFoundException {
+	private void readObject(java.io.ObjectInputStream in)
+			throws IOException, ClassNotFoundException {
 	}
 
 	private void writeObject(ObjectOutputStream s) throws IOException {

@@ -33,48 +33,43 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.EmptyStackException;
 
 /**
- * <code>EventQueue</code> is a platform-independent class
- * that queues events, both from the underlying peer classes
- * and from trusted application classes.
+ * <code>EventQueue</code> is a platform-independent class that queues events,
+ * both from the underlying peer classes and from trusted application classes.
  * <p>
- * It encapsulates asynchronous event dispatch machinery which
- * extracts events from the queue and dispatches them by calling
- * {@link #dispatchEvent(AWTEvent) dispatchEvent(AWTEvent)} method
- * on this <code>EventQueue</code> with the event to be dispatched
- * as an argument.  The particular behavior of this machinery is
- * implementation-dependent.  The only requirements are that events
- * which were actually enqueued to this queue (note that events
- * being posted to the <code>EventQueue</code> can be coalesced)
- * are dispatched:
+ * It encapsulates asynchronous event dispatch machinery which extracts events
+ * from the queue and dispatches them by calling {@link #dispatchEvent(AWTEvent)
+ * dispatchEvent(AWTEvent)} method on this <code>EventQueue</code> with the
+ * event to be dispatched as an argument. The particular behavior of this
+ * machinery is implementation-dependent. The only requirements are that events
+ * which were actually enqueued to this queue (note that events being posted to
+ * the <code>EventQueue</code> can be coalesced) are dispatched:
  * <dl>
- *   <dt> Sequentially.
- *   <dd> That is, it is not permitted that several events from
- *        this queue are dispatched simultaneously.
- *   <dt> In the same order as they are enqueued.
- *   <dd> That is, if <code>AWTEvent</code>&nbsp;A is enqueued
- *        to the <code>EventQueue</code> before
- *        <code>AWTEvent</code>&nbsp;B then event B will not be
- *        dispatched before event A.
+ * <dt>Sequentially.
+ * <dd>That is, it is not permitted that several events from this queue are
+ * dispatched simultaneously.
+ * <dt>In the same order as they are enqueued.
+ * <dd>That is, if <code>AWTEvent</code>&nbsp;A is enqueued to the
+ * <code>EventQueue</code> before <code>AWTEvent</code>&nbsp;B then event B will
+ * not be dispatched before event A.
  * </dl>
  * <p>
- * Some browsers partition applets in different code bases into
- * separate contexts, and establish walls between these contexts.
- * In such a scenario, there will be one <code>EventQueue</code>
- * per context. Other browsers place all applets into the same
- * context, implying that there will be only a single, global
- * <code>EventQueue</code> for all applets. This behavior is
- * implementation-dependent.  Consult your browser's documentation
- * for more information.
+ * Some browsers partition applets in different code bases into separate
+ * contexts, and establish walls between these contexts. In such a scenario,
+ * there will be one <code>EventQueue</code> per context. Other browsers place
+ * all applets into the same context, implying that there will be only a single,
+ * global <code>EventQueue</code> for all applets. This behavior is
+ * implementation-dependent. Consult your browser's documentation for more
+ * information.
  * <p>
- * For information on the threading issues of the event dispatch
- * machinery, see <a href="doc-files/AWTThreadIssues.html#Autoshutdown"
- * >AWT Threading Issues</a>.
+ * For information on the threading issues of the event dispatch machinery, see
+ * <a href="doc-files/AWTThreadIssues.html#Autoshutdown" >AWT Threading
+ * Issues</a>.
  *
  * @author Thomas Ball
  * @author Fred Ecks
  * @author David Mendenhall
  *
- * @since       1.1
+ * @since 1.1
  */
 public class EventQueue {
 	private final Queue queues;
@@ -100,17 +95,17 @@ public class EventQueue {
 			return;
 		}
 
-		synchronized(this){
+		synchronized (this) {
 			EventQueueNode newItem = EventQueueNode.getFree();
 			newItem.event = theEvent;
-	
+
 			if (queues.head == null) {
 				queues.head = queues.tail = newItem;
 			} else {
 				queues.tail.next = newItem;
 				queues.tail = newItem;
 			}
-	
+
 			this.notify();
 		}
 	}
@@ -134,7 +129,7 @@ public class EventQueue {
 	}
 
 	AWTEvent getNextEventPrivate() throws InterruptedException {
-		synchronized(this){
+		synchronized (this) {
 			if (queues.head != null) {
 				EventQueueNode entry = queues.head;
 				EventQueueNode nextNode = entry.next;
@@ -151,7 +146,7 @@ public class EventQueue {
 	}
 
 	AWTEvent getNextEvent(int id) throws InterruptedException {
-		synchronized(this){
+		synchronized (this) {
 			for (EventQueueNode entry = queues.head, prev = null; entry != null; prev = entry, entry = entry.next) {
 				if (entry.event.getID() == id) {
 					if (prev == null) {
@@ -172,7 +167,7 @@ public class EventQueue {
 	}
 
 	public AWTEvent peekEvent() {
-		synchronized(this){
+		synchronized (this) {
 			if (queues.head != null) {
 				return queues.head.event;
 			}
@@ -181,7 +176,7 @@ public class EventQueue {
 	}
 
 	public AWTEvent peekEvent(int id) {
-		synchronized(this){
+		synchronized (this) {
 			EventQueueNode q = queues.head;
 			for (; q != null; q = q.next) {
 				if (q.event.getID() == id) {
@@ -189,7 +184,7 @@ public class EventQueue {
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -237,15 +232,15 @@ public class EventQueue {
 
 	private AWTEvent getCurrentEventImpl() {
 		AndroidClassUtil.callEmptyMethod();
-		
+
 		return new AWTEvent(this, 0) {
 		};
 	}
 
 	public void push(EventQueue newEventQueue) {
-//		dispatchThread.setEventQueue(newEventQueue);
-//		newEventQueue.dispatchThread = dispatchThread;
-		dispatchThread = newEventQueue.dispatchThread;//修复切换时Bug
+		// dispatchThread.setEventQueue(newEventQueue);
+		// newEventQueue.dispatchThread = dispatchThread;
+		dispatchThread = newEventQueue.dispatchThread;// 修复切换时Bug
 		Toolkit.getDefaultToolkit().setSystemEventQueueAdAPI(this);
 	}
 
@@ -256,23 +251,21 @@ public class EventQueue {
 		return createSecondaryLoop(null, null, 0);
 	}
 
-	SecondaryLoop createSecondaryLoop(Conditional cond, EventFilter filter,
-			long interval) {
+	SecondaryLoop createSecondaryLoop(Conditional cond, EventFilter filter, long interval) {
 		return null;
 	}
 
 	public static boolean isDispatchThread() {
 		EventQueue eq = Toolkit.getEventQueue();
 		return eq.isDispatchThreadImpl();
-//		return true;//关闭DispatchThread
+		// return true;//关闭DispatchThread
 	}
 
 	final boolean isDispatchThreadImpl() {
 		return Thread.currentThread() == dispatchThread;
 	}
 
-	final boolean detachDispatchThread(EventDispatchThread edt,
-			boolean forceDetach) {
+	final boolean detachDispatchThread(EventDispatchThread edt, boolean forceDetach) {
 		return false;
 	}
 
@@ -280,8 +273,7 @@ public class EventQueue {
 		return dispatchThread;
 	}
 
-	synchronized final void removeSourceEvents(Object source,
-			boolean removeAllEvents) {
+	synchronized final void removeSourceEvents(Object source, boolean removeAllEvents) {
 	}
 
 	static void setCurrentEventAndMostRecentTime(AWTEvent e) {
@@ -292,8 +284,8 @@ public class EventQueue {
 	}
 
 	public static void invokeLater(Runnable runnable) {
-		Toolkit.getEventQueue().postEvent(
-				new InvocationEvent(Toolkit.getDefaultToolkit(), runnable));
+		Toolkit.getEventQueue()
+				.postEvent(new InvocationEvent(Toolkit.getDefaultToolkit(), runnable));
 	}
 
 	public static void invokeAndWait(Runnable runnable)
@@ -304,8 +296,10 @@ public class EventQueue {
 	static void invokeAndWait(Object source, Runnable runnable)
 			throws InterruptedException, InvocationTargetException {
 		if (EventQueue.isDispatchThread()) {
-//			throw new Error("Cannot call invokeAndWait from the event dispatcher thread");
-			hc.core.util.LogManager.warning("exec Runnable.run in EventQueue.invokeAndWait at DispatchThread.");
+			// throw new Error("Cannot call invokeAndWait from the event
+			// dispatcher thread");
+			hc.core.util.LogManager
+					.warning("exec Runnable.run in EventQueue.invokeAndWait at DispatchThread.");
 			runnable.run();
 			return;
 		}
@@ -314,8 +308,7 @@ public class EventQueue {
 		}
 		Object lock = new AWTInvocationLock();
 
-		InvocationEvent event = new InvocationEvent(source, runnable, lock,
-				true);
+		InvocationEvent event = new InvocationEvent(source, runnable, lock, true);
 
 		synchronized (lock) {
 			Toolkit.getEventQueue().postEvent(event);

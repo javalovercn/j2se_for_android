@@ -26,7 +26,6 @@ package java.awt.datatransfer;
 
 import java.util.Map;
 
-
 /**
  * A two-way Map between "natives" (Strings), which correspond to platform-
  * specfic data formats, and "flavors" (DataFlavors), which corerspond to
@@ -38,7 +37,7 @@ import java.util.Map;
  */
 
 public interface FlavorMap {
-    Map<DataFlavor,String> getNativesForFlavors(DataFlavor[] flavors);
+	Map<DataFlavor, String> getNativesForFlavors(DataFlavor[] flavors);
 
-    Map<String,DataFlavor> getFlavorsForNatives(String[] natives);
+	Map<String, DataFlavor> getFlavorsForNatives(String[] natives);
 }

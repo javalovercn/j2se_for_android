@@ -50,76 +50,72 @@ import javax.swing.text.TextAction;
 
 import android.widget.RadioButton;
 
-
 /**
- * <code>JTextField</code> is a lightweight component that allows the editing
- * of a single line of text.
- * For information on and examples of using text fields,
- * see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/textfield.html">How to Use Text Fields</a>
- * in <em>The Java Tutorial.</em>
+ * <code>JTextField</code> is a lightweight component that allows the editing of
+ * a single line of text. For information on and examples of using text fields,
+ * see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/textfield.html">How
+ * to Use Text Fields</a> in <em>The Java Tutorial.</em>
  *
  * <p>
- * <code>JTextField</code> is intended to be source-compatible
- * with <code>java.awt.TextField</code> where it is reasonable to do so.  This
+ * <code>JTextField</code> is intended to be source-compatible with
+ * <code>java.awt.TextField</code> where it is reasonable to do so. This
  * component has capabilities not found in the <code>java.awt.TextField</code>
- * class.  The superclass should be consulted for additional capabilities.
+ * class. The superclass should be consulted for additional capabilities.
  * <p>
  * <code>JTextField</code> has a method to establish the string used as the
- * command string for the action event that gets fired.  The
+ * command string for the action event that gets fired. The
  * <code>java.awt.TextField</code> used the text of the field as the command
- * string for the <code>ActionEvent</code>.
- * <code>JTextField</code> will use the command
- * string set with the <code>setActionCommand</code> method if not <code>null</code>,
- * otherwise it will use the text of the field as a compatibility with
- * <code>java.awt.TextField</code>.
+ * string for the <code>ActionEvent</code>. <code>JTextField</code> will use the
+ * command string set with the <code>setActionCommand</code> method if not
+ * <code>null</code>, otherwise it will use the text of the field as a
+ * compatibility with <code>java.awt.TextField</code>.
  * <p>
- * The method <code>setEchoChar</code> and <code>getEchoChar</code>
- * are not provided directly to avoid a new implementation of a
- * pluggable look-and-feel inadvertently exposing password characters.
- * To provide password-like services a separate class <code>JPasswordField</code>
- * extends <code>JTextField</code> to provide this service with an independently
- * pluggable look-and-feel.
+ * The method <code>setEchoChar</code> and <code>getEchoChar</code> are not
+ * provided directly to avoid a new implementation of a pluggable look-and-feel
+ * inadvertently exposing password characters. To provide password-like services
+ * a separate class <code>JPasswordField</code> extends <code>JTextField</code>
+ * to provide this service with an independently pluggable look-and-feel.
  * <p>
  * The <code>java.awt.TextField</code> could be monitored for changes by adding
- * a <code>TextListener</code> for <code>TextEvent</code>'s.
- * In the <code>JTextComponent</code> based
- * components, changes are broadcasted from the model via a
- * <code>DocumentEvent</code> to <code>DocumentListeners</code>.
- * The <code>DocumentEvent</code> gives
- * the location of the change and the kind of change if desired.
- * The code fragment might look something like:
- * <pre><code>
+ * a <code>TextListener</code> for <code>TextEvent</code>'s. In the
+ * <code>JTextComponent</code> based components, changes are broadcasted from
+ * the model via a <code>DocumentEvent</code> to <code>DocumentListeners</code>.
+ * The <code>DocumentEvent</code> gives the location of the change and the kind
+ * of change if desired. The code fragment might look something like:
+ * 
+ * <pre>
+ * <code>
  * &nbsp;   DocumentListener myListener = ??;
  * &nbsp;   JTextField myArea = ??;
  * &nbsp;   myArea.getDocument().addDocumentListener(myListener);
- * </code></pre>
+ * </code>
+ * </pre>
  * <p>
  * The horizontal alignment of <code>JTextField</code> can be set to be left
- * justified, leading justified, centered, right justified or trailing justified.
- * Right/trailing justification is useful if the required size
- * of the field text is smaller than the size allocated to it.
- * This is determined by the <code>setHorizontalAlignment</code>
- * and <code>getHorizontalAlignment</code> methods.  The default
- * is to be leading justified.
+ * justified, leading justified, centered, right justified or trailing
+ * justified. Right/trailing justification is useful if the required size of the
+ * field text is smaller than the size allocated to it. This is determined by
+ * the <code>setHorizontalAlignment</code> and
+ * <code>getHorizontalAlignment</code> methods. The default is to be leading
+ * justified.
  * <p>
- * How the text field consumes VK_ENTER events depends
- * on whether the text field has any action listeners.
- * If so, then VK_ENTER results in the listeners
- * getting an ActionEvent,
- * and the VK_ENTER event is consumed.
- * This is compatible with how AWT text fields handle VK_ENTER events.
- * If the text field has no action listeners, then as of v 1.3 the VK_ENTER
- * event is not consumed.  Instead, the bindings of ancestor components
- * are processed, which enables the default button feature of
- * JFC/Swing to work.
+ * How the text field consumes VK_ENTER events depends on whether the text field
+ * has any action listeners. If so, then VK_ENTER results in the listeners
+ * getting an ActionEvent, and the VK_ENTER event is consumed. This is
+ * compatible with how AWT text fields handle VK_ENTER events. If the text field
+ * has no action listeners, then as of v 1.3 the VK_ENTER event is not consumed.
+ * Instead, the bindings of ancestor components are processed, which enables the
+ * default button feature of JFC/Swing to work.
  * <p>
- * Customized fields can easily be created by extending the model and
- * changing the default model provided.  For example, the following piece
- * of code will create a field that holds only upper case characters.  It
- * will work even if text is pasted into from the clipboard or it is altered via
- * programmatic changes.
- * <pre><code>
+ * Customized fields can easily be created by extending the model and changing
+ * the default model provided. For example, the following piece of code will
+ * create a field that holds only upper case characters. It will work even if
+ * text is pasted into from the clipboard or it is altered via programmatic
+ * changes.
+ * 
+ * <pre>
+ * <code>
 
 &nbsp;public class UpperCaseField extends JTextField {
 &nbsp;
@@ -148,27 +144,23 @@ import android.widget.RadioButton;
 &nbsp;    }
 &nbsp;}
 
- * </code></pre>
+ * </code>
+ * </pre>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A component which allows for the editing of a single line of text.
+ * @beaninfo attribute: isContainer false description: A component which allows
+ *           for the editing of a single line of text.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  * @see #setActionCommand
  * @see JPasswordField
  * @see #addActionListener
@@ -196,8 +188,8 @@ public class JTextField extends JTextComponent implements SwingConstants {
 		editText.setMaxWidth(2048);
 		super.setText(text);
 		setHorizontalAlignment(LEADING);
-		//保留以下代码，采用系统缺省，以与JTextArea一致
-//		editText.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_textfield));
+		// 保留以下代码，采用系统缺省，以与JTextArea一致
+		// editText.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_textfield));
 	}
 
 	public String getUIClassID() {
@@ -212,7 +204,7 @@ public class JTextField extends JTextComponent implements SwingConstants {
 	public boolean isValidateRoot() {
 		return false;
 	}
-	
+
 	public int getHorizontalAlignment() {
 		return horizontalAlignment;
 	}
@@ -221,15 +213,14 @@ public class JTextField extends JTextComponent implements SwingConstants {
 		super.applyComponentOrientation(o);
 		setHorizontalAlignment(getHorizontalAlignment());
 	}
-	
+
 	public void setHorizontalAlignment(final int alignment) {
 		if (alignment == horizontalAlignment)
 			return;
-		if ((alignment == LEFT) || (alignment == CENTER)
-				|| (alignment == RIGHT) || (alignment == LEADING)
-				|| (alignment == TRAILING)) {
+		if ((alignment == LEFT) || (alignment == CENTER) || (alignment == RIGHT)
+				|| (alignment == LEADING) || (alignment == TRAILING)) {
 			horizontalAlignment = alignment;
-			if(editText != null){
+			if (editText != null) {
 				AndroidUIUtil.setViewHorizontalAlignment(this, editText, alignment, false);
 			}
 		} else {
@@ -246,21 +237,21 @@ public class JTextField extends JTextComponent implements SwingConstants {
 	}
 
 	public void setColumns(int columns) {
-		if(columns == 0){
+		if (columns == 0) {
 			return;
 		}
 		if (columns < 0) {
 			columns = 10;
 		}
 		this.columns = columns;
-		
+
 		editText.setMinWidth(getColumnWidth());
 	}
 
 	protected int getColumnWidth() {
-		if(columns == 0){
+		if (columns == 0) {
 			return 160;
-		}else{
+		} else {
 			FontMetrics metrics = getFontMetrics(getFont());
 			return columns * metrics.charWidth('m');
 		}
@@ -289,15 +280,15 @@ public class JTextField extends JTextComponent implements SwingConstants {
 	protected void fireActionPerformed() {
 		ActionListener[] listeners = list.getListeners(ActionListener.class);
 		int modifiers = 0;
-//		AWTEvent currentEvent = EventQueue.getCurrentEvent();
-//		if (currentEvent instanceof InputEvent) {
-//			modifiers = ((InputEvent) currentEvent).getModifiers();
-//		} else if (currentEvent instanceof ActionEvent) {
-//			modifiers = ((ActionEvent) currentEvent).getModifiers();
-//		}
+		// AWTEvent currentEvent = EventQueue.getCurrentEvent();
+		// if (currentEvent instanceof InputEvent) {
+		// modifiers = ((InputEvent) currentEvent).getModifiers();
+		// } else if (currentEvent instanceof ActionEvent) {
+		// modifiers = ((ActionEvent) currentEvent).getModifiers();
+		// }
 		ActionEvent e = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,
-				(command != null) ? command : getText(),
-				EventQueue.getMostRecentEventTime(), modifiers);
+				(command != null) ? command : getText(), EventQueue.getMostRecentEventTime(),
+				modifiers);
 
 		for (int i = 0; i < listeners.length; i++) {
 			listeners[i].actionPerformed(e);
@@ -339,22 +330,22 @@ public class JTextField extends JTextComponent implements SwingConstants {
 	}
 
 	private void setActionCommandFromAction(Action action) {
-		setActionCommand((action == null) ? null : (String) action
-				.getValue(Action.ACTION_COMMAND_KEY));
+		setActionCommand(
+				(action == null) ? null : (String) action.getValue(Action.ACTION_COMMAND_KEY));
 	}
 
 	protected PropertyChangeListener createActionPropertyChangeListener(Action a) {
 		return new TextFieldActionPropertyChangeListener(this, a);
 	}
 
-	private static class TextFieldActionPropertyChangeListener extends
-			ActionPropertyChangeListener<JTextField> {
+	private static class TextFieldActionPropertyChangeListener
+			extends ActionPropertyChangeListener<JTextField> {
 		TextFieldActionPropertyChangeListener(JTextField tf, Action a) {
 			super(tf, a);
 		}
 
-		protected void actionPropertyChanged(JTextField textField,
-				Action action, PropertyChangeEvent e) {
+		protected void actionPropertyChanged(JTextField textField, Action action,
+				PropertyChangeEvent e) {
 			if (AbstractAction.shouldReconfigure(e)) {
 				textField.configurePropertiesFromAction(action);
 			} else {
@@ -379,16 +370,30 @@ public class JTextField extends JTextComponent implements SwingConstants {
 	public int getScrollOffset() {
 		return 0;
 	}
-
-	public void setToolTipText(String tip){
-    	super.setToolTipText(tip);
-    	
-    	if(AndroidUIUtil.containsHTML(tip) || tip.length() > getColumns()){
-		}else{
-	    	editText.setHint(tip);
-		}
-    }
 	
+	boolean isDisableFieldHint = false;
+	
+	public final void setDisableFieldHintAD(final boolean isDisableFieldHint) {
+		this.isDisableFieldHint = isDisableFieldHint;
+	}
+
+	public void setToolTipText(final String tip) {
+		if (isDisableFieldHint || AndroidUIUtil.containsHTML(tip)) {
+			super.setToolTipText(tip);// 弹出提示式，而非原生hint
+		} else {
+			if(isDisableFieldHint) {//会导致Field过宽
+				return;
+			}
+			
+			AndroidUIUtil.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					editText.setHint(tip);
+				}
+			});
+		}
+	}
+
 	public void setScrollOffset(int scrollOffset) {
 		AndroidClassUtil.callEmptyMethod();
 	}
@@ -403,7 +408,7 @@ public class JTextField extends JTextComponent implements SwingConstants {
 
 	public static final String notifyAction = "notify-field-accept";
 
-	private int horizontalAlignment = 0;//LEADING 参见构造方法
+	private int horizontalAlignment = 0;// LEADING 参见构造方法
 	private int columns;
 	private String command;
 

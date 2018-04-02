@@ -25,14 +25,14 @@
 package javax.swing.text;
 
 /**
- * A factory to create a view of some portion of document subject.
- * This is intended to enable customization of how views get
- * mapped over a document model.
+ * A factory to create a view of some portion of document subject. This is
+ * intended to enable customization of how views get mapped over a document
+ * model.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public interface ViewFactory {
 
-    public View create(Element elem);
+	public View create(Element elem);
 
 }

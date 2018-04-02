@@ -30,22 +30,22 @@ import java.awt.Rectangle;
 import javax.swing.text.AttributeSet;
 
 /**
- * <P>The AccessibleText interface should be implemented by all
- * classes that present textual information on the display.  This interface
- * provides the standard mechanism for an assistive technology to access
- * that text via its content, attributes, and spatial location.
- * Applications can determine if an object supports the AccessibleText
- * interface by first obtaining its AccessibleContext (see {@link Accessible})
- * and then calling the {@link AccessibleContext#getAccessibleText} method of
- * AccessibleContext.  If the return value is not null, the object supports this
- * interface.
+ * <P>
+ * The AccessibleText interface should be implemented by all classes that
+ * present textual information on the display. This interface provides the
+ * standard mechanism for an assistive technology to access that text via its
+ * content, attributes, and spatial location. Applications can determine if an
+ * object supports the AccessibleText interface by first obtaining its
+ * AccessibleContext (see {@link Accessible}) and then calling the
+ * {@link AccessibleContext#getAccessibleText} method of AccessibleContext. If
+ * the return value is not null, the object supports this interface.
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
  * @see AccessibleContext
  * @see AccessibleContext#getAccessibleText
  *
- * @author      Peter Korn
+ * @author Peter Korn
  */
 public interface AccessibleText {
 

@@ -30,20 +30,20 @@ import java.util.Locale;
 import android.graphics.Typeface;
 
 /**
-*
-* The <code>GraphicsEnvironment</code> class describes the collection
-* of {@link GraphicsDevice} objects and {@link java.awt.Font} objects
-* available to a Java(tm) application on a particular platform.
-* The resources in this <code>GraphicsEnvironment</code> might be local
-* or on a remote machine.  <code>GraphicsDevice</code> objects can be
-* screens, printers or image buffers and are the destination of
-* {@link Graphics2D} drawing methods.  Each <code>GraphicsDevice</code>
-* has a number of {@link GraphicsConfiguration} objects associated with
-* it.  These objects specify the different configurations in which the
-* <code>GraphicsDevice</code> can be used.
-* @see GraphicsDevice
-* @see GraphicsConfiguration
-*/
+ *
+ * The <code>GraphicsEnvironment</code> class describes the collection of
+ * {@link GraphicsDevice} objects and {@link java.awt.Font} objects available to
+ * a Java(tm) application on a particular platform. The resources in this
+ * <code>GraphicsEnvironment</code> might be local or on a remote machine.
+ * <code>GraphicsDevice</code> objects can be screens, printers or image buffers
+ * and are the destination of {@link Graphics2D} drawing methods. Each
+ * <code>GraphicsDevice</code> has a number of {@link GraphicsConfiguration}
+ * objects associated with it. These objects specify the different
+ * configurations in which the <code>GraphicsDevice</code> can be used.
+ * 
+ * @see GraphicsDevice
+ * @see GraphicsConfiguration
+ */
 public abstract class GraphicsEnvironment {
 	private static GraphicsEnvironment localEnv;
 
@@ -83,23 +83,29 @@ public abstract class GraphicsEnvironment {
 			public GraphicsDevice[] getScreenDevices() throws HeadlessException {
 				return null;
 			}
+
 			@Override
 			public GraphicsDevice getDefaultScreenDevice() throws HeadlessException {
 				return null;
 			}
+
 			@Override
 			public String[] getAvailableFontFamilyNames(Locale l) {
 				return getAvailableFontFamilyNames();
 			}
+
 			@Override
 			public String[] getAvailableFontFamilyNames() {
-				String[] out = {Font.DIALOG, Font.DIALOG_INPUT, Font.MONOSPACED, Font.SANS_SERIF, Font.SERIF};
+				String[] out = { Font.DIALOG, Font.DIALOG_INPUT, Font.MONOSPACED, Font.SANS_SERIF,
+						Font.SERIF };
 				return out;
 			}
+
 			@Override
 			public Font[] getAllFonts() {
 				return null;
 			}
+
 			@Override
 			public Graphics2D createGraphics(BufferedImage img) {
 				return null;
@@ -183,8 +189,7 @@ public abstract class GraphicsEnvironment {
 	 *                if isHeadless() returns true
 	 * @see #isHeadless()
 	 */
-	public abstract GraphicsDevice[] getScreenDevices()
-			throws HeadlessException;
+	public abstract GraphicsDevice[] getScreenDevices() throws HeadlessException;
 
 	/**
 	 * Returns the default screen <code>GraphicsDevice</code>.
@@ -195,8 +200,7 @@ public abstract class GraphicsEnvironment {
 	 *                if isHeadless() returns true
 	 * @see #isHeadless()
 	 */
-	public abstract GraphicsDevice getDefaultScreenDevice()
-			throws HeadlessException;
+	public abstract GraphicsDevice getDefaultScreenDevice() throws HeadlessException;
 
 	/**
 	 * Returns a <code>Graphics2D</code> object for rendering into the specified

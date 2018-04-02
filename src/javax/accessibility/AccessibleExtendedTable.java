@@ -25,17 +25,15 @@
 package javax.accessibility;
 
 /**
- * Class AccessibleExtendedTable provides extended information about
- * a user-interface component that presents data in a two-dimensional
- * table format.
- * Applications can determine if an object supports the
- * AccessibleExtendedTable interface by first obtaining its
- * AccessibleContext and then calling the
- * {@link AccessibleContext#getAccessibleTable} method.
- * If the return value is not null and the type of the return value is
+ * Class AccessibleExtendedTable provides extended information about a
+ * user-interface component that presents data in a two-dimensional table
+ * format. Applications can determine if an object supports the
+ * AccessibleExtendedTable interface by first obtaining its AccessibleContext
+ * and then calling the {@link AccessibleContext#getAccessibleTable} method. If
+ * the return value is not null and the type of the return value is
  * AccessibleExtendedTable, the object supports this interface.
  *
- * @author      Lynn Monsanto
+ * @author Lynn Monsanto
  * @since 1.4
  */
 public interface AccessibleExtendedTable extends AccessibleTable {

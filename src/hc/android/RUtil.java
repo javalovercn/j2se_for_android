@@ -6,22 +6,22 @@ import hc.core.util.LogManager;
 
 public class RUtil {
 	public static final String INNER_R = "com.android.internal.R";
-	
-	public static Object getRResource(String RClassName, String innerLeverClass, String fieldName){
+
+	public static Object getRResource(String RClassName, String innerLeverClass, String fieldName) {
 		try {
 			Class rClass = Class.forName(RClassName);
 			Class[] declaredClasses = rClass.getDeclaredClasses();
 			for (int i = 0; i < declaredClasses.length; i++) {
-				if(declaredClasses[i].getSimpleName().equals(innerLeverClass)){
+				if (declaredClasses[i].getSimpleName().equals(innerLeverClass)) {
 					Field[] fields = declaredClasses[i].getDeclaredFields();
 					for (int j = 0; j < fields.length; j++) {
 						Field field = fields[j];
-						if(field.getName().equals(fieldName)){
+						if (field.getName().equals(fieldName)) {
 							boolean isStatic = Modifier.isStatic(field.getModifiers());
-					        if(isStatic) {
-					            Object out = field.get(null);
-					            return out;
-					        }
+							if (isStatic) {
+								Object out = field.get(null);
+								return out;
+							}
 						}
 					}
 				}

@@ -66,36 +66,30 @@ import android.widget.ScrollView;
 import hc.android.HCRUtil;
 
 /**
- * An implementation of a popup menu -- a small window that pops up
- * and displays a series of choices. A <code>JPopupMenu</code> is used for the
- * menu that appears when the user selects an item on the menu bar.
- * It is also used for "pull-right" menu that appears when the
- * selects a menu item that activates it. Finally, a <code>JPopupMenu</code>
- * can also be used anywhere else you want a menu to appear.  For
- * example, when the user right-clicks in a specified area.
+ * An implementation of a popup menu -- a small window that pops up and displays
+ * a series of choices. A <code>JPopupMenu</code> is used for the menu that
+ * appears when the user selects an item on the menu bar. It is also used for
+ * "pull-right" menu that appears when the selects a menu item that activates
+ * it. Finally, a <code>JPopupMenu</code> can also be used anywhere else you
+ * want a menu to appear. For example, when the user right-clicks in a specified
+ * area.
  * <p>
- * For information and examples of using popup menus, see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to Use Menus</a>
- * in <em>The Java Tutorial.</em>
+ * For information and examples of using popup menus, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to
+ * Use Menus</a> in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A small window that pops up and displays a series of choices.
+ * @beaninfo attribute: isContainer false description: A small window that pops
+ *           up and displays a series of choices.
  *
  * @author Georges Saab
  * @author David Karlton
@@ -140,56 +134,59 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 	}
 
 	final HashMap<JMenu, LinearLayout> subMenuMapList = new HashMap<JMenu, LinearLayout>();
-	
+
 	LinearLayout mainAndSub;
 	FrameLayout subFrames;
 	LinearLayout mainMenu;
 	ScrollView scrollView;
-	
-	private void buildPopupFrame(){
-		subFrames = new FrameLayout(ActivityManager.getActivity());
-		
+
+	private void buildPopupFrame() {
+		subFrames = new FrameLayout(ActivityManager.applicationContext);
+
 		mainMenu = buildMenuView(this, null);
-		
+
 		buildSubMenuView(mainMenu);
-		
-		mainAndSub = new LinearLayout(ActivityManager.getActivity());
+
+		mainAndSub = new LinearLayout(ActivityManager.applicationContext);
 		{
-			scrollView = new ScrollView(ActivityManager.getActivity());
+			scrollView = new ScrollView(ActivityManager.applicationContext);
 			{
-				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
+						LayoutParams.MATCH_PARENT);
 				scrollView.addView(mainMenu, lp);
 			}
-			
+
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 			AndroidUIUtil.addView(mainAndSub, scrollView, lp, viewRelation);
 		}
-		
-		if(subMenuMapList != null && subMenuMapList.size() > 0){
+
+		if (subMenuMapList != null && subMenuMapList.size() > 0) {
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 			lp.leftMargin = 2;
 			AndroidUIUtil.addView(mainAndSub, subFrames, lp, viewRelation);
 		}
 	}
-	
-	private void buildSubMenuView(LinearLayout mainMenu){
+
+	private void buildSubMenuView(LinearLayout mainMenu) {
 		subMenuMapList.clear();
-		
+
 		int size = getComponentCount();
 		for (int i = 0; i < size; i++) {
 			Component componentAtIndex = getComponent(i);
-			if(componentAtIndex instanceof JMenu){
+			if (componentAtIndex instanceof JMenu) {
 				View backView = mainMenu.getChildAt(i);
-				LinearLayout subMenu = buildMenuView(((JMenu)componentAtIndex).getPopupMenu(), backView);
-//				subMenu.setVisibility(View.INVISIBLE);
-				
-				subMenuMapList.put((JMenu)componentAtIndex, subMenu);
+				LinearLayout subMenu = buildMenuView(((JMenu) componentAtIndex).getPopupMenu(),
+						backView);
+				// subMenu.setVisibility(View.INVISIBLE);
+
+				subMenuMapList.put((JMenu) componentAtIndex, subMenu);
 				{
 					FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-							FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+							FrameLayout.LayoutParams.WRAP_CONTENT,
+							FrameLayout.LayoutParams.WRAP_CONTENT);
 					lp.leftMargin = 0;
 					lp.topMargin = backView.getTop();
 					AndroidUIUtil.addView(subFrames, subMenu, lp, viewRelation);
@@ -197,126 +194,129 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 			}
 		}
 	}
-	
-	void setVisibleSubmenus(boolean isVisible){
-		Iterator<JMenu > it = subMenuMapList.keySet().iterator();
-		while(it.hasNext()){
+
+	void setVisibleSubmenus(boolean isVisible) {
+		Iterator<JMenu> it = subMenuMapList.keySet().iterator();
+		while (it.hasNext()) {
 			LinearLayout linearLayout = subMenuMapList.get(it.next());
-			if(isVisible){
-				linearLayout.setVisibility(View.VISIBLE);				
-			}else{
+			if (isVisible) {
+				linearLayout.setVisibility(View.VISIBLE);
+			} else {
 				linearLayout.setVisibility(View.INVISIBLE);
 			}
 		}
 	}
-	
+
 	LinearLayout lastShowLayout;
-	
-	void showSubMenu(JMenu menu){
-		if(lastShowLayout != null){
+
+	void showSubMenu(JMenu menu) {
+		if (lastShowLayout != null) {
 			lastShowLayout.setVisibility(View.INVISIBLE);
 		}
-		
+
 		LinearLayout layout = subMenuMapList.get(menu);
-		if(layout != null){
+		if (layout != null) {
 			lastShowLayout = layout;
 			final int limitBottom = mainAndSub.getMeasuredHeight() - layout.getMeasuredHeight();
 			int menuTop = menu.getPeerAdAPI().getTop() - scrollView.getScrollY();
-			if(menuTop > limitBottom){
+			if (menuTop > limitBottom) {
 				menuTop = limitBottom;
 			}
-			((FrameLayout.LayoutParams)layout.getLayoutParams()).topMargin = menuTop;
+			((FrameLayout.LayoutParams) layout.getLayoutParams()).topMargin = menuTop;
 			layout.requestLayout();
 			layout.setVisibility(View.VISIBLE);
 		}
 	}
-	
-	private LinearLayout buildMenuView(JPopupMenu popMenu, View backView){
-		LinearLayout listMenu = new LinearLayout(ActivityManager.getActivity());
+
+	private LinearLayout buildMenuView(JPopupMenu popMenu, View backView) {
+		LinearLayout listMenu = new LinearLayout(ActivityManager.applicationContext);
 		listMenu.setOrientation(LinearLayout.VERTICAL);
-		int startID = (backView==null)?10000:backView.getId();
-		int stepIDNum = (backView==null)?1000:1;
-		
+		int startID = (backView == null) ? 10000 : backView.getId();
+		int stepIDNum = (backView == null) ? 1000 : 1;
+
 		int size = popMenu.getComponentCount();
 		for (int i = 0; i < size; i++) {
 			Component componentAtIndex = popMenu.getComponent(i);
-			boolean isMenuItem = ! (componentAtIndex instanceof JMenu);
+			boolean isMenuItem = !(componentAtIndex instanceof JMenu);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);//必须，才能满框选中
-			lp.topMargin = lp.leftMargin = lp.rightMargin = lp.bottomMargin = AndroidUIUtil.dpToPx(1);
-			if(componentAtIndex instanceof JSeparator){
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);// 必须，才能满框选中
+			lp.topMargin = lp.leftMargin = lp.rightMargin = lp.bottomMargin = AndroidUIUtil
+					.dpToPx(1);
+			if (componentAtIndex instanceof JSeparator) {
 				lp.width = LinearLayout.LayoutParams.MATCH_PARENT;
 			}
 			View itemView = componentAtIndex.getPeerAdAPI();
 			itemView.setId(startID + stepIDNum * (i + 1));
-			if(backView != null){
-				if(componentAtIndex.getComponentOrientation().isLeftToRight()){
+			if (backView != null) {
+				if (componentAtIndex.getComponentOrientation().isLeftToRight()) {
 					itemView.setNextFocusLeftId(backView.getId());
-					if(isMenuItem){
-						itemView.setNextFocusRightId(itemView.getId());//设置自己
+					if (isMenuItem) {
+						itemView.setNextFocusRightId(itemView.getId());// 设置自己
 					}
-				}else{
+				} else {
 					itemView.setNextFocusRightId(backView.getId());
-					if(isMenuItem){
+					if (isMenuItem) {
 						itemView.setNextFocusLeftId(itemView.getId());
 					}
 				}
-			}else{
-				if(isMenuItem){
-					itemView.setNextFocusRightId(itemView.getId());//设置自己
+			} else {
+				if (isMenuItem) {
+					itemView.setNextFocusRightId(itemView.getId());// 设置自己
 					itemView.setNextFocusLeftId(itemView.getId());
 				}
 			}
 			AndroidUIUtil.addView(listMenu, itemView, lp, viewRelation);
 		}
-		
-		if(size > 1){
-			//底部转顶，顶转底
+
+		if (size > 1) {
+			// 底部转顶，顶转底
 			View bottomView = popMenu.getComponent(size - 1).getPeerAdAPI();
 			View topView = popMenu.getComponent(0).getPeerAdAPI();
 			bottomView.setNextFocusDownId(topView.getId());
 			topView.setNextFocusUpId(bottomView.getId());
-		}else{
+		} else {
 			View topView = popMenu.getComponent(0).getPeerAdAPI();
 			topView.setNextFocusUpId(topView.getId());
 			topView.setNextFocusDownId(topView.getId());
 		}
-		
-		listMenu.setBackgroundDrawable(ActivityManager.getActivity().getResources().getDrawable(
-				HCRUtil.getResource(HCRUtil.R_drawable_popup_window)));
+
+		listMenu.setBackgroundDrawable(ActivityManager.applicationContext.getResources()
+				.getDrawable(HCRUtil.getResource(HCRUtil.R_drawable_popup_window)));
 		return listMenu;
 	}
-	
+
 	private void showPopupAdAPI(Component invoker, int offx, int offy) {
 		if (popupWindow != null) {
 			dismissMenuAdAPI();
 		}
-		
+
 		if (popupWindow == null) {
 			buildPopupFrame();
 
-			popupWindow = new PopupWindow(mainAndSub, 
-					LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+			popupWindow = new PopupWindow(mainAndSub, LinearLayout.LayoutParams.WRAP_CONTENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT, true);
 			popupWindow.setAnimationStyle(HCRUtil.getResource(HCRUtil.R_style_PopupMenuAnimation));
-			
+
 			popupWindow.setTouchable(true);
-			popupWindow.setFocusable(true);//遥控器版安卓必须
-			//Controls whether the pop-up will be informed of touch events outside of its window. 
-			//This only makes sense for pop-ups that are touchable but not focusable
+			popupWindow.setFocusable(true);// 遥控器版安卓必须
+			// Controls whether the pop-up will be informed of touch events
+			// outside of its window.
+			// This only makes sense for pop-ups that are touchable but not
+			// focusable
 			popupWindow.setOutsideTouchable(false);
-			
+
 			popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
 				@Override
 				public void onDismiss() {
-					if(WindowManager.isLastPopupWindowActioned()){
-					}else{
+					if (WindowManager.isLastPopupWindowActioned()) {
+					} else {
 						firePopupMenuCanceled();
 					}
 					firePopupMenuWillBecomeInvisible();
 				}
 			});
 		}
-		
+
 		if (!popupWindow.isShowing()) {
 			firePopupMenuWillBecomeVisible();
 			setVisibleSubmenus(false);
@@ -324,69 +324,69 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 			isFirstFocus = true;
 			isDismissPop = false;
 		}
-		
-		//落定焦点
+
+		// 落定焦点
 		Component focusComponent = null;
-		try{
-			focusComponent = getComponent(0);//getComponentCount() - 1
-			if(focusComponent.getPeerAdAPI().isFocused()){
+		try {
+			focusComponent = getComponent(0);// getComponentCount() - 1
+			if (focusComponent.getPeerAdAPI().isFocused()) {
 				focusComponent.getPeerAdAPI().clearFocus();
 			}
 			focusComponent.requestFocus();
-			
-			AndroidUIUtil.runDelay(new Runnable() {
+
+			AndroidUIUtil.runDelayNotInUIThread(new Runnable() {
 				@Override
 				public void run() {
-					try{
+					try {
 						Thread.sleep(AndroidUIUtil.MS_FOCUSONTOUCH);
-					}catch (Exception e) {
+					} catch (Exception e) {
 					}
-					setFocusableOnlyToJMenu(JPopupMenu.this);//关闭setFocusableInTouchMode，以保留初次焦点
+					setFocusableOnlyToJMenu(JPopupMenu.this);// 关闭setFocusableInTouchMode，以保留初次焦点
 				}
 			});
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private void setFocusableOnlyToJMenu(Container c){
+
+	private void setFocusableOnlyToJMenu(Container c) {
 		int size = c.getComponentCount();
 		for (int i = 0; i < size; i++) {
 			Component comp = c.getComponent(i);
 			final boolean isJMenu = comp instanceof JMenu;
-			if(isJMenu){
-				setFocusableOnlyToJMenu(((JMenu)comp).getPopupMenu());
-			}else if(comp instanceof JMenuItem){
-				try{
+			if (isJMenu) {
+				setFocusableOnlyToJMenu(((JMenu) comp).getPopupMenu());
+			} else if (comp instanceof JMenuItem) {
+				try {
 					comp.getPeerAdAPI().setFocusableInTouchMode(isJMenu);
-				}catch (Exception e) {
+				} catch (Exception e) {
 				}
 			}
 		}
 	}
-	
+
 	static boolean isFirstFocus = true;
 	static boolean isDismissPop = false;
-	
-	public boolean isDismissPopupMenuAdAPI(){
+
+	public boolean isDismissPopupMenuAdAPI() {
 		return isDismissPop;
 	}
-	
-	public boolean isFirstFocusOnPopupMenuAdAPI(){
-		if(isFirstFocus){
+
+	public boolean isFirstFocusOnPopupMenuAdAPI() {
+		if (isFirstFocus) {
 			isFirstFocus = false;
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	final boolean dismissMenuAdAPI(){
+
+	final boolean dismissMenuAdAPI() {
 		WindowManager.notifyPopupWindowActioned();
 		isDismissPop = true;
 		return WindowManager.disposePopupWindow();
 	}
-	
+
 	public String getUIClassID() {
 		return uiClassID;
 	}
@@ -439,8 +439,7 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 
 	protected JMenuItem createActionComponent(Action a) {
 		JMenuItem mi = new JMenuItem() {
-			protected PropertyChangeListener createActionPropertyChangeListener(
-					Action a) {
+			protected PropertyChangeListener createActionPropertyChangeListener(Action a) {
 				PropertyChangeListener pcl = createActionChangeListener(this);
 				if (pcl == null) {
 					pcl = super.createActionPropertyChangeListener(a);
@@ -540,8 +539,7 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 			if (listeners[i] == PopupMenuListener.class) {
 				if (e == null)
 					e = new PopupMenuEvent(this);
-				((PopupMenuListener) listeners[i + 1])
-						.popupMenuWillBecomeVisible(e);
+				((PopupMenuListener) listeners[i + 1]).popupMenuWillBecomeVisible(e);
 			}
 		}
 	}
@@ -553,8 +551,7 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 			if (listeners[i] == PopupMenuListener.class) {
 				if (e == null)
 					e = new PopupMenuEvent(this);
-				((PopupMenuListener) listeners[i + 1])
-						.popupMenuWillBecomeInvisible(e);
+				((PopupMenuListener) listeners[i + 1]).popupMenuWillBecomeInvisible(e);
 			}
 		}
 	}
@@ -602,15 +599,14 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 	public void setInvoker(Component invoker) {
 		this.invoker = invoker;
 	}
-	
+
 	public void show(Component invoker, int x, int y) {
 		showPopupAdAPI(invoker, x, y);
 	}
 
 	JPopupMenu getRootPopupMenu() {
 		JPopupMenu mp = this;
-		while ((mp != null) && (mp.isPopupMenu() != true)
-				&& (mp.getInvoker() != null)
+		while ((mp != null) && (mp.isPopupMenu() != true) && (mp.getInvoker() != null)
 				&& (mp.getInvoker().getParent() != null)
 				&& (mp.getInvoker().getParent() instanceof JPopupMenu)) {
 			mp = (JPopupMenu) mp.getInvoker().getParent();
@@ -695,20 +691,19 @@ public class JPopupMenu extends JComponent implements Accessible, MenuElement {
 		return accessibleContext;
 	}
 
-
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 	}
 
-	public void processMouseEvent(MouseEvent event, MenuElement path[], MenuSelectionManager manager) {
+	public void processMouseEvent(MouseEvent event, MenuElement path[],
+			MenuSelectionManager manager) {
 	}
 
 	public void processKeyEvent(KeyEvent e, MenuElement path[], MenuSelectionManager manager) {
-		MenuKeyEvent mke = new MenuKeyEvent(e.getComponent(), e.getID(),
-				e.getWhen(), e.getModifiers(), e.getKeyCode(), e.getKeyChar(),
-				path, manager);
+		MenuKeyEvent mke = new MenuKeyEvent(e.getComponent(), e.getID(), e.getWhen(),
+				e.getModifiers(), e.getKeyCode(), e.getKeyChar(), path, manager);
 		processMenuKeyEvent(mke);
 
 		if (mke.isConsumed()) {

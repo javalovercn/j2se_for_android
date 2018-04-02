@@ -45,47 +45,41 @@ import android.view.View;
 
 /**
  * An implementation of a menu -- a popup window containing
- * <code>JMenuItem</code>s that
- * is displayed when the user selects an item on the <code>JMenuBar</code>.
- * In addition to <code>JMenuItem</code>s, a <code>JMenu</code> can
- * also contain <code>JSeparator</code>s.
+ * <code>JMenuItem</code>s that is displayed when the user selects an item on
+ * the <code>JMenuBar</code>. In addition to <code>JMenuItem</code>s, a
+ * <code>JMenu</code> can also contain <code>JSeparator</code>s.
  * <p>
  * In essence, a menu is a button with an associated <code>JPopupMenu</code>.
  * When the "button" is pressed, the <code>JPopupMenu</code> appears. If the
- * "button" is on the <code>JMenuBar</code>, the menu is a top-level window.
- * If the "button" is another menu item, then the <code>JPopupMenu</code> is
+ * "button" is on the <code>JMenuBar</code>, the menu is a top-level window. If
+ * the "button" is another menu item, then the <code>JPopupMenu</code> is
  * "pull-right" menu.
  * <p>
  * Menus can be configured, and to some degree controlled, by
- * <code><a href="Action.html">Action</a></code>s.  Using an
- * <code>Action</code> with a menu has many benefits beyond directly
- * configuring a menu.  Refer to <a href="Action.html#buttonActions">
- * Swing Components Supporting <code>Action</code></a> for more
- * details, and you can find more information in <a
- * href="http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How
- * to Use Actions</a>, a section in <em>The Java Tutorial</em>.
+ * <code><a href="Action.html">Action</a></code>s. Using an <code>Action</code>
+ * with a menu has many benefits beyond directly configuring a menu. Refer to
+ * <a href="Action.html#buttonActions"> Swing Components Supporting
+ * <code>Action</code></a> for more details, and you can find more information
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How to Use
+ * Actions</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * For information and examples of using menus see
- * <a href="http://java.sun.com/doc/books/tutorial/uiswing/components/menu.html">How to Use Menus</a>,
- * a section in <em>The Java Tutorial.</em>
+ * For information and examples of using menus see <a href=
+ * "http://java.sun.com/doc/books/tutorial/uiswing/components/menu.html">How to
+ * Use Menus</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer true
- * description: A popup window containing menu items displayed in a menu bar.
+ * @beaninfo attribute: isContainer true description: A popup window containing
+ *           menu items displayed in a menu bar.
  *
  * @author Georges Saab
  * @author David Karlton
@@ -109,9 +103,9 @@ public class JMenu extends JMenuItem implements Accessible, MenuElement {
 
 	public JMenu(String s) {
 		super(s);
-		
+
 		popupMenu = new JPopupMenu();
-        popupMenu.setInvoker(this);
+		popupMenu.setInvoker(this);
 	}
 
 	public JMenu(Action a) {
@@ -127,7 +121,7 @@ public class JMenu extends JMenuItem implements Accessible, MenuElement {
 	}
 
 	public void updateUI() {
-		super.updateUI();//必须
+		super.updateUI();// 必须
 	}
 
 	public String getUIClassID() {
@@ -135,10 +129,10 @@ public class JMenu extends JMenuItem implements Accessible, MenuElement {
 	}
 
 	View desktopView;
-	
+
 	public void setModel(ButtonModel newModel) {
 	}
-	
+
 	public boolean isSelected() {
 		return getModel().isSelected();
 	}
@@ -151,7 +145,7 @@ public class JMenu extends JMenuItem implements Accessible, MenuElement {
 	}
 
 	public void setPopupMenuVisible(boolean b) {
-		//TODO
+		// TODO
 	}
 
 	protected Point getPopupMenuOrigin() {
@@ -237,7 +231,7 @@ public class JMenu extends JMenuItem implements Accessible, MenuElement {
 	}
 
 	public JMenuItem getItem(int pos) {
-		return (JMenuItem)popupMenu.getComponentAtIndex(pos);
+		return (JMenuItem) popupMenu.getComponentAtIndex(pos);
 	}
 
 	public int getItemCount() {
@@ -309,36 +303,36 @@ public class JMenu extends JMenuItem implements Accessible, MenuElement {
 	}
 
 	protected void fireMenuSelected() {
-        Object[] listeners = list.getListenerList();
-        for (int i = listeners.length-2; i>=0; i-=2) {
-            if (listeners[i]==MenuListener.class) {
-                if (menuEvent == null)
-                    menuEvent = new MenuEvent(this);
-                ((MenuListener)listeners[i+1]).menuSelected(menuEvent);
-            }
-        }
+		Object[] listeners = list.getListenerList();
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == MenuListener.class) {
+				if (menuEvent == null)
+					menuEvent = new MenuEvent(this);
+				((MenuListener) listeners[i + 1]).menuSelected(menuEvent);
+			}
+		}
 	}
 
 	protected void fireMenuDeselected() {
-        Object[] listeners = list.getListenerList();
-        for (int i = listeners.length-2; i>=0; i-=2) {
-            if (listeners[i]==MenuListener.class) {
-                if (menuEvent == null)
-                    menuEvent = new MenuEvent(this);
-                ((MenuListener)listeners[i+1]).menuDeselected(menuEvent);
-            }
-        }
+		Object[] listeners = list.getListenerList();
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == MenuListener.class) {
+				if (menuEvent == null)
+					menuEvent = new MenuEvent(this);
+				((MenuListener) listeners[i + 1]).menuDeselected(menuEvent);
+			}
+		}
 	}
 
 	protected void fireMenuCanceled() {
-        Object[] listeners = list.getListenerList();
-        for (int i = listeners.length-2; i>=0; i-=2) {
-            if (listeners[i]==MenuListener.class) {
-                if (menuEvent == null)
-                    menuEvent = new MenuEvent(this);
-                ((MenuListener)listeners[i+1]).menuCanceled(menuEvent);
-            }
-        }
+		Object[] listeners = list.getListenerList();
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == MenuListener.class) {
+				if (menuEvent == null)
+					menuEvent = new MenuEvent(this);
+				((MenuListener) listeners[i + 1]).menuCanceled(menuEvent);
+			}
+		}
 	}
 
 	void configureAcceleratorFromAction(Action a) {

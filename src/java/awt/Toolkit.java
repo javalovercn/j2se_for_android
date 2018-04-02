@@ -40,57 +40,51 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 
 /**
- * This class is the abstract superclass of all actual
- * implementations of the Abstract Window Toolkit. Subclasses of
- * the <code>Toolkit</code> class are used to bind the various components
- * to particular native toolkit implementations.
+ * This class is the abstract superclass of all actual implementations of the
+ * Abstract Window Toolkit. Subclasses of the <code>Toolkit</code> class are
+ * used to bind the various components to particular native toolkit
+ * implementations.
  * <p>
- * Many GUI events may be delivered to user
- * asynchronously, if the opposite is not specified explicitly.
- * As well as
- * many GUI operations may be performed asynchronously.
- * This fact means that if the state of a component is set, and then
- * the state immediately queried, the returned value may not yet
- * reflect the requested change.  This behavior includes, but is not
- * limited to:
+ * Many GUI events may be delivered to user asynchronously, if the opposite is
+ * not specified explicitly. As well as many GUI operations may be performed
+ * asynchronously. This fact means that if the state of a component is set, and
+ * then the state immediately queried, the returned value may not yet reflect
+ * the requested change. This behavior includes, but is not limited to:
  * <ul>
- * <li>Scrolling to a specified position.
- * <br>For example, calling <code>ScrollPane.setScrollPosition</code>
- *     and then <code>getScrollPosition</code> may return an incorrect
- *     value if the original request has not yet been processed.
+ * <li>Scrolling to a specified position. <br>
+ * For example, calling <code>ScrollPane.setScrollPosition</code> and then
+ * <code>getScrollPosition</code> may return an incorrect value if the original
+ * request has not yet been processed.
  * <p>
- * <li>Moving the focus from one component to another.
- * <br>For more information, see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/focus.html#transferTiming">Timing
+ * <li>Moving the focus from one component to another. <br>
+ * For more information, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/focus.html#transferTiming">Timing
  * Focus Transfers</a>, a section in
  * <a href="http://java.sun.com/docs/books/tutorial/uiswing/">The Swing
  * Tutorial</a>.
  * <p>
- * <li>Making a top-level container visible.
- * <br>Calling <code>setVisible(true)</code> on a <code>Window</code>,
- *     <code>Frame</code> or <code>Dialog</code> may occur
- *     asynchronously.
+ * <li>Making a top-level container visible. <br>
+ * Calling <code>setVisible(true)</code> on a <code>Window</code>,
+ * <code>Frame</code> or <code>Dialog</code> may occur asynchronously.
  * <p>
- * <li>Setting the size or location of a top-level container.
- * <br>Calls to <code>setSize</code>, <code>setBounds</code> or
- *     <code>setLocation</code> on a <code>Window</code>,
- *     <code>Frame</code> or <code>Dialog</code> are forwarded
- *     to the underlying window management system and may be
- *     ignored or modified.  See {@link java.awt.Window} for
- *     more information.
+ * <li>Setting the size or location of a top-level container. <br>
+ * Calls to <code>setSize</code>, <code>setBounds</code> or
+ * <code>setLocation</code> on a <code>Window</code>, <code>Frame</code> or
+ * <code>Dialog</code> are forwarded to the underlying window management system
+ * and may be ignored or modified. See {@link java.awt.Window} for more
+ * information.
  * </ul>
  * <p>
- * Most applications should not call any of the methods in this
- * class directly. The methods defined by <code>Toolkit</code> are
- * the "glue" that joins the platform-independent classes in the
- * <code>java.awt</code> package with their counterparts in
- * <code>java.awt.peer</code>. Some methods defined by
+ * Most applications should not call any of the methods in this class directly.
+ * The methods defined by <code>Toolkit</code> are the "glue" that joins the
+ * platform-independent classes in the <code>java.awt</code> package with their
+ * counterparts in <code>java.awt.peer</code>. Some methods defined by
  * <code>Toolkit</code> query the native operating system directly.
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
- * @author      Fred Ecks
- * @since       JDK1.0
+ * @author Sami Shaio
+ * @author Arthur van Hoff
+ * @author Fred Ecks
+ * @since JDK1.0
  */
 public abstract class Toolkit {
 	static EventQueue getEventQueue() {
@@ -103,9 +97,10 @@ public abstract class Toolkit {
 
 	private final static Toolkit toolkit = new Toolkit() {
 		Clipboard clipboard;
+
 		@Override
 		public Clipboard getSystemClipboard() {
-			if(clipboard == null){
+			if (clipboard == null) {
 				clipboard = new Clipboard("");
 			}
 			return clipboard;
@@ -131,10 +126,9 @@ public abstract class Toolkit {
 
 		@Override
 		public Image getImage(String filename) {
-			InputStream is = J2SEInitor.class
-					.getResourceAsStream(filename);
+			InputStream is = J2SEInitor.class.getResourceAsStream(filename);
 			Bitmap bitmap = BitmapFactory.decodeStream(is);
-			
+
 			BufferedImage bi = new BufferedImage(bitmap);
 			return bi;
 		}
@@ -168,15 +162,14 @@ public abstract class Toolkit {
 
 		@Override
 		public void beep() {
-			ToneGenerator toneGenerator = new ToneGenerator(
-					AudioManager.STREAM_SYSTEM, ToneGenerator.MAX_VOLUME);
+			ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_SYSTEM,
+					ToneGenerator.MAX_VOLUME);
 			toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP);
 		}
 
 		@Override
 		public Dimension getScreenSize() throws HeadlessException {
-			return new Dimension(J2SEInitor.screenWidth,
-					J2SEInitor.screenHeight);
+			return new Dimension(J2SEInitor.screenWidth, J2SEInitor.screenHeight);
 		}
 	};
 
@@ -196,8 +189,7 @@ public abstract class Toolkit {
 		return createImage(imagedata, 0, imagedata.length);
 	}
 
-	public abstract Image createImage(byte[] imagedata, int imageoffset,
-			int imagelength);
+	public abstract Image createImage(byte[] imagedata, int imageoffset, int imagelength);
 
 	public abstract Clipboard getSystemClipboard();
 
@@ -229,8 +221,7 @@ public abstract class Toolkit {
 			throws IndexOutOfBoundsException, HeadlessException {
 		// Override to implement custom cursor support.
 		if (this != Toolkit.getDefaultToolkit()) {
-			return Toolkit.getDefaultToolkit().createCustomCursor(cursor,
-					hotSpot, name);
+			return Toolkit.getDefaultToolkit().createCustomCursor(cursor, hotSpot, name);
 		} else {
 			return new Cursor(Cursor.DEFAULT_CURSOR);
 		}
@@ -250,8 +241,7 @@ public abstract class Toolkit {
 
 		// Override to implement custom cursor support.
 		if (this != Toolkit.getDefaultToolkit()) {
-			return Toolkit.getDefaultToolkit().getBestCursorSize(
-					preferredWidth, preferredHeight);
+			return Toolkit.getDefaultToolkit().getBestCursorSize(preferredWidth, preferredHeight);
 		} else {
 			return new Dimension(0, 0);
 		}

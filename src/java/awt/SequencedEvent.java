@@ -25,13 +25,13 @@
 package java.awt;
 
 /**
- * A mechanism for ensuring that a series of AWTEvents are executed in a
- * precise order, even across multiple AppContexts. The nested events will be
- * dispatched in the order in which their wrapping SequencedEvents were
- * constructed. The only exception to this rule is if the peer of the target of
- * the nested event was destroyed (with a call to Component.removeNotify)
- * before the wrapping SequencedEvent was able to be dispatched. In this case,
- * the nested event is never dispatched.
+ * A mechanism for ensuring that a series of AWTEvents are executed in a precise
+ * order, even across multiple AppContexts. The nested events will be dispatched
+ * in the order in which their wrapping SequencedEvents were constructed. The
+ * only exception to this rule is if the peer of the target of the nested event
+ * was destroyed (with a call to Component.removeNotify) before the wrapping
+ * SequencedEvent was able to be dispatched. In this case, the nested event is
+ * never dispatched.
  *
  * @author David Mendenhall
  */

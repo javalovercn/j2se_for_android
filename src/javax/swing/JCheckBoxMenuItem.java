@@ -33,51 +33,45 @@ import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
 
 /**
- * A menu item that can be selected or deselected. If selected, the menu
- * item typically appears with a checkmark next to it. If unselected or
- * deselected, the menu item appears without a checkmark. Like a regular
- * menu item, a check box menu item can have either text or a graphic
- * icon associated with it, or both.
+ * A menu item that can be selected or deselected. If selected, the menu item
+ * typically appears with a checkmark next to it. If unselected or deselected,
+ * the menu item appears without a checkmark. Like a regular menu item, a check
+ * box menu item can have either text or a graphic icon associated with it, or
+ * both.
  * <p>
  * Either <code>isSelected</code>/<code>setSelected</code> or
- * <code>getState</code>/<code>setState</code> can be used
- * to determine/specify the menu item's selection state. The
- * preferred methods are <code>isSelected</code> and
- * <code>setSelected</code>, which work for all menus and buttons.
- * The <code>getState</code> and <code>setState</code> methods exist for
- * compatibility with other component sets.
+ * <code>getState</code>/<code>setState</code> can be used to determine/specify
+ * the menu item's selection state. The preferred methods are
+ * <code>isSelected</code> and <code>setSelected</code>, which work for all
+ * menus and buttons. The <code>getState</code> and <code>setState</code>
+ * methods exist for compatibility with other component sets.
  * <p>
  * Menu items can be configured, and to some degree controlled, by
- * <code><a href="Action.html">Action</a></code>s.  Using an
- * <code>Action</code> with a menu item has many benefits beyond directly
- * configuring a menu item.  Refer to <a href="Action.html#buttonActions">
- * Swing Components Supporting <code>Action</code></a> for more
- * details, and you can find more information in <a
- * href="http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How
- * to Use Actions</a>, a section in <em>The Java Tutorial</em>.
+ * <code><a href="Action.html">Action</a></code>s. Using an <code>Action</code>
+ * with a menu item has many benefits beyond directly configuring a menu item.
+ * Refer to <a href="Action.html#buttonActions"> Swing Components Supporting
+ * <code>Action</code></a> for more details, and you can find more information
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How to Use
+ * Actions</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * For further information and examples of using check box menu items,
- * see <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to Use Menus</a>,
- * a section in <em>The Java Tutorial.</em>
+ * For further information and examples of using check box menu items, see
+ * <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to
+ * Use Menus</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A menu item which can be selected or deselected.
+ * @beaninfo attribute: isContainer false description: A menu item which can be
+ *           selected or deselected.
  *
  * @author Georges Saab
  * @author David Karlton
@@ -114,7 +108,7 @@ public class JCheckBoxMenuItem extends JMenuItem implements SwingConstants, Acce
 		super(text, icon);
 		setModel(new JToggleButton.ToggleButtonModel(this));
 		setSelected(b);
-//		setFocusable(false);
+		// setFocusable(false);
 	}
 
 	public String getUIClassID() {

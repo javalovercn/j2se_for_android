@@ -41,17 +41,15 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 
 /**
- * The <code>Font</code> class represents fonts, which are used to
- * render text in a visible way.
- * A font provides the information needed to map sequences of
- * <em>characters</em> to sequences of <em>glyphs</em>
- * and to render sequences of glyphs on <code>Graphics</code> and
- * <code>Component</code> objects.
+ * The <code>Font</code> class represents fonts, which are used to render text
+ * in a visible way. A font provides the information needed to map sequences of
+ * <em>characters</em> to sequences of <em>glyphs</em> and to render sequences
+ * of glyphs on <code>Graphics</code> and <code>Component</code> objects.
  *
  * <h4>Characters and Glyphs</h4>
  *
- * A <em>character</em> is a symbol that represents an item such as a letter,
- * a digit, or punctuation in an abstract way. For example, <code>'g'</code>,
+ * A <em>character</em> is a symbol that represents an item such as a letter, a
+ * digit, or punctuation in an abstract way. For example, <code>'g'</code>,
  * <font size=-1>LATIN SMALL LETTER G</font>, is a character.
  * <p>
  * A <em>glyph</em> is a shape used to render a character or a sequence of
@@ -60,11 +58,11 @@ import android.graphics.Typeface;
  * have one-to-one correspondence. For example, the character '&aacute;'
  * <font size=-1>LATIN SMALL LETTER A WITH ACUTE</font>, can be represented by
  * two glyphs: one for 'a' and one for '&acute;'. On the other hand, the
- * two-character string "fi" can be represented by a single glyph, an
- * "fi" ligature. In complex writing systems, such as Arabic or the South
- * and South-East Asian writing systems, the relationship between characters
- * and glyphs can be more complicated and involve context-dependent selection
- * of glyphs as well as glyph reordering.
+ * two-character string "fi" can be represented by a single glyph, an "fi"
+ * ligature. In complex writing systems, such as Arabic or the South and
+ * South-East Asian writing systems, the relationship between characters and
+ * glyphs can be more complicated and involve context-dependent selection of
+ * glyphs as well as glyph reordering.
  *
  * A font encapsulates the collection of glyphs needed to render a selected set
  * of characters as well as the tables needed to map sequences of characters to
@@ -72,131 +70,123 @@ import android.graphics.Typeface;
  *
  * <h4>Physical and Logical Fonts</h4>
  *
- * The Java Platform distinguishes between two kinds of fonts:
- * <em>physical</em> fonts and <em>logical</em> fonts.
+ * The Java Platform distinguishes between two kinds of fonts: <em>physical</em>
+ * fonts and <em>logical</em> fonts.
  * <p>
  * <em>Physical</em> fonts are the actual font libraries containing glyph data
  * and tables to map from character sequences to glyph sequences, using a font
- * technology such as TrueType or PostScript Type 1.
- * All implementations of the Java Platform must support TrueType fonts;
- * support for other font technologies is implementation dependent.
- * Physical fonts may use names such as Helvetica, Palatino, HonMincho, or
- * any number of other font names.
- * Typically, each physical font supports only a limited set of writing
- * systems, for example, only Latin characters or only Japanese and Basic
- * Latin.
- * The set of available physical fonts varies between configurations.
- * Applications that require specific fonts can bundle them and instantiate
- * them using the {@link #createFont createFont} method.
+ * technology such as TrueType or PostScript Type 1. All implementations of the
+ * Java Platform must support TrueType fonts; support for other font
+ * technologies is implementation dependent. Physical fonts may use names such
+ * as Helvetica, Palatino, HonMincho, or any number of other font names.
+ * Typically, each physical font supports only a limited set of writing systems,
+ * for example, only Latin characters or only Japanese and Basic Latin. The set
+ * of available physical fonts varies between configurations. Applications that
+ * require specific fonts can bundle them and instantiate them using the
+ * {@link #createFont createFont} method.
  * <p>
  * <em>Logical</em> fonts are the five font families defined by the Java
- * platform which must be supported by any Java runtime environment:
- * Serif, SansSerif, Monospaced, Dialog, and DialogInput.
- * These logical fonts are not actual font libraries. Instead, the logical
- * font names are mapped to physical fonts by the Java runtime environment.
- * The mapping is implementation and usually locale dependent, so the look
- * and the metrics provided by them vary.
+ * platform which must be supported by any Java runtime environment: Serif,
+ * SansSerif, Monospaced, Dialog, and DialogInput. These logical fonts are not
+ * actual font libraries. Instead, the logical font names are mapped to physical
+ * fonts by the Java runtime environment. The mapping is implementation and
+ * usually locale dependent, so the look and the metrics provided by them vary.
  * Typically, each logical font name maps to several physical fonts in order to
  * cover a large range of characters.
  * <p>
- * Peered AWT components, such as {@link Label Label} and
- * {@link TextField TextField}, can only use logical fonts.
+ * Peered AWT components, such as {@link Label Label} and {@link TextField
+ * TextField}, can only use logical fonts.
  * <p>
  * For a discussion of the relative advantages and disadvantages of using
- * physical or logical fonts, see the
- * <a href="http://java.sun.com/j2se/corejava/intl/reference/faqs/index.html#desktop-rendering">Internationalization FAQ</a>
- * document.
+ * physical or logical fonts, see the <a href=
+ * "http://java.sun.com/j2se/corejava/intl/reference/faqs/index.html#desktop-rendering">Internationalization
+ * FAQ</a> document.
  *
  * <h4>Font Faces and Names</h4>
  *
- * A <code>Font</code>
- * can have many faces, such as heavy, medium, oblique, gothic and
- * regular. All of these faces have similar typographic design.
+ * A <code>Font</code> can have many faces, such as heavy, medium, oblique,
+ * gothic and regular. All of these faces have similar typographic design.
  * <p>
- * There are three different names that you can get from a
- * <code>Font</code> object.  The <em>logical font name</em> is simply the
- * name that was used to construct the font.
- * The <em>font face name</em>, or just <em>font name</em> for
- * short, is the name of a particular font face, like Helvetica Bold. The
+ * There are three different names that you can get from a <code>Font</code>
+ * object. The <em>logical font name</em> is simply the name that was used to
+ * construct the font. The <em>font face name</em>, or just <em>font name</em>
+ * for short, is the name of a particular font face, like Helvetica Bold. The
  * <em>family name</em> is the name of the font family that determines the
  * typographic design across several faces, like Helvetica.
  * <p>
- * The <code>Font</code> class represents an instance of a font face from
- * a collection of  font faces that are present in the system resources
- * of the host system.  As examples, Arial Bold and Courier Bold Italic
- * are font faces.  There can be several <code>Font</code> objects
- * associated with a font face, each differing in size, style, transform
- * and font features.
+ * The <code>Font</code> class represents an instance of a font face from a
+ * collection of font faces that are present in the system resources of the host
+ * system. As examples, Arial Bold and Courier Bold Italic are font faces. There
+ * can be several <code>Font</code> objects associated with a font face, each
+ * differing in size, style, transform and font features.
  * <p>
- * The {@link GraphicsEnvironment#getAllFonts() getAllFonts} method
- * of the <code>GraphicsEnvironment</code> class returns an
- * array of all font faces available in the system. These font faces are
- * returned as <code>Font</code> objects with a size of 1, identity
- * transform and default font features. These
- * base fonts can then be used to derive new <code>Font</code> objects
- * with varying sizes, styles, transforms and font features via the
+ * The {@link GraphicsEnvironment#getAllFonts() getAllFonts} method of the
+ * <code>GraphicsEnvironment</code> class returns an array of all font faces
+ * available in the system. These font faces are returned as <code>Font</code>
+ * objects with a size of 1, identity transform and default font features. These
+ * base fonts can then be used to derive new <code>Font</code> objects with
+ * varying sizes, styles, transforms and font features via the
  * <code>deriveFont</code> methods in this class.
  *
  * <h4>Font and TextAttribute</h4>
  *
- * <p><code>Font</code> supports most
- * <code>TextAttribute</code>s.  This makes some operations, such as
- * rendering underlined text, convenient since it is not
+ * <p>
+ * <code>Font</code> supports most <code>TextAttribute</code>s. This makes some
+ * operations, such as rendering underlined text, convenient since it is not
  * necessary to explicitly construct a <code>TextLayout</code> object.
- * Attributes can be set on a Font by constructing or deriving it
- * using a <code>Map</code> of <code>TextAttribute</code> values.
+ * Attributes can be set on a Font by constructing or deriving it using a
+ * <code>Map</code> of <code>TextAttribute</code> values.
  *
- * <p>The values of some <code>TextAttributes</code> are not
- * serializable, and therefore attempting to serialize an instance of
- * <code>Font</code> that has such values will not serialize them.
- * This means a Font deserialized from such a stream will not compare
- * equal to the original Font that contained the non-serializable
- * attributes.  This should very rarely pose a problem
- * since these attributes are typically used only in special
- * circumstances and are unlikely to be serialized.
+ * <p>
+ * The values of some <code>TextAttributes</code> are not serializable, and
+ * therefore attempting to serialize an instance of <code>Font</code> that has
+ * such values will not serialize them. This means a Font deserialized from such
+ * a stream will not compare equal to the original Font that contained the
+ * non-serializable attributes. This should very rarely pose a problem since
+ * these attributes are typically used only in special circumstances and are
+ * unlikely to be serialized.
  *
  * <ul>
  * <li><code>FOREGROUND</code> and <code>BACKGROUND</code> use
- * <code>Paint</code> values. The subclass <code>Color</code> is
- * serializable, while <code>GradientPaint</code> and
- * <code>TexturePaint</code> are not.</li>
- * <li><code>CHAR_REPLACEMENT</code> uses
- * <code>GraphicAttribute</code> values.  The subclasses
- * <code>ShapeGraphicAttribute</code> and
+ * <code>Paint</code> values. The subclass <code>Color</code> is serializable,
+ * while <code>GradientPaint</code> and <code>TexturePaint</code> are not.</li>
+ * <li><code>CHAR_REPLACEMENT</code> uses <code>GraphicAttribute</code> values.
+ * The subclasses <code>ShapeGraphicAttribute</code> and
  * <code>ImageGraphicAttribute</code> are not serializable.</li>
  * <li><code>INPUT_METHOD_HIGHLIGHT</code> uses
- * <code>InputMethodHighlight</code> values, which are
- * not serializable.  See {@link java.awt.im.InputMethodHighlight}.</li>
+ * <code>InputMethodHighlight</code> values, which are not serializable. See
+ * {@link java.awt.im.InputMethodHighlight}.</li>
  * </ul>
  *
  * Clients who create custom subclasses of <code>Paint</code> and
- * <code>GraphicAttribute</code> can make them serializable and
- * avoid this problem.  Clients who use input method highlights can
- * convert these to the platform-specific attributes for that
- * highlight on the current platform and set them on the Font as
- * a workaround.</p>
+ * <code>GraphicAttribute</code> can make them serializable and avoid this
+ * problem. Clients who use input method highlights can convert these to the
+ * platform-specific attributes for that highlight on the current platform and
+ * set them on the Font as a workaround.
+ * </p>
  *
- * <p>The <code>Map</code>-based constructor and
- * <code>deriveFont</code> APIs ignore the FONT attribute, and it is
- * not retained by the Font; the static {@link #getFont} method should
- * be used if the FONT attribute might be present.  See {@link
- * java.awt.font.TextAttribute#FONT} for more information.</p>
+ * <p>
+ * The <code>Map</code>-based constructor and <code>deriveFont</code> APIs
+ * ignore the FONT attribute, and it is not retained by the Font; the static
+ * {@link #getFont} method should be used if the FONT attribute might be
+ * present. See {@link java.awt.font.TextAttribute#FONT} for more information.
+ * </p>
  *
- * <p>Several attributes will cause additional rendering overhead
- * and potentially invoke layout.  If a <code>Font</code> has such
- * attributes, the <code>{@link #hasLayoutAttributes()}</code> method
- * will return true.</p>
+ * <p>
+ * Several attributes will cause additional rendering overhead and potentially
+ * invoke layout. If a <code>Font</code> has such attributes, the
+ * <code>{@link #hasLayoutAttributes()}</code> method will return true.
+ * </p>
  *
- * <p>Note: Font rotations can cause text baselines to be rotated.  In
- * order to account for this (rare) possibility, font APIs are
- * specified to return metrics and take parameters 'in
- * baseline-relative coordinates'.  This maps the 'x' coordinate to
- * the advance along the baseline, (positive x is forward along the
- * baseline), and the 'y' coordinate to a distance along the
- * perpendicular to the baseline at 'x' (positive y is 90 degrees
- * clockwise from the baseline vector).  APIs for which this is
- * especially important are called out as having 'baseline-relative
- * coordinates.'
+ * <p>
+ * Note: Font rotations can cause text baselines to be rotated. In order to
+ * account for this (rare) possibility, font APIs are specified to return
+ * metrics and take parameters 'in baseline-relative coordinates'. This maps the
+ * 'x' coordinate to the advance along the baseline, (positive x is forward
+ * along the baseline), and the 'y' coordinate to a distance along the
+ * perpendicular to the baseline at 'x' (positive y is 90 degrees clockwise from
+ * the baseline vector). APIs for which this is especially important are called
+ * out as having 'baseline-relative coordinates.'
  */
 public class Font {
 	public final ScreenAdapter screenAdapter = J2SEInitor.initAdapter();
@@ -228,13 +218,13 @@ public class Font {
 	protected int style;
 	protected int size;
 	protected float pointSize;
-	
+
 	public Font(final String name, final int style, final int size) {
 		this.name = (name != null) ? name : "Default";
 		this.style = (style & ~0x03) == 0 ? style : 0;
 		this.size = size;
-        this.pointSize = size;
-        
+		this.pointSize = size;
+
 		init();
 	}
 
@@ -252,7 +242,7 @@ public class Font {
 		this.name = (String) attributes.get(TextAttribute.FAMILY);
 		this.size = (int) ((Integer) attributes.get(TextAttribute.SIZE) + 0.5);
 		this.pointSize = (Integer) attributes.get(TextAttribute.SIZE);
-		
+
 		init();
 	}
 
@@ -260,15 +250,15 @@ public class Font {
 		this.name = font.name;
 		this.style = font.style;
 		this.size = font.size;
-        this.pointSize = font.pointSize;
-        
+		this.pointSize = font.pointSize;
+
 		init();
 	}
 
-    public Font deriveFont(final int style){
-    	return this;
-    }
-    
+	public Font deriveFont(final int style) {
+		return this;
+	}
+
 	private static int convertToTypefaceStyle(final int inp_style) {
 		int style = 0;
 		if (inp_style == Font.BOLD) {
@@ -286,20 +276,15 @@ public class Font {
 	private void init() {
 		try {
 			if (name.equals(DIALOG)) {
-				typeface = Typeface.create(Typeface.DEFAULT_BOLD,
-						convertToTypefaceStyle(style));
+				typeface = Typeface.create(Typeface.DEFAULT_BOLD, convertToTypefaceStyle(style));
 			} else if (name.equals(DIALOG_INPUT)) {
-				typeface = Typeface.create(Typeface.DEFAULT,
-						convertToTypefaceStyle(style));
+				typeface = Typeface.create(Typeface.DEFAULT, convertToTypefaceStyle(style));
 			} else if (name.equals(SANS_SERIF)) {
-				typeface = Typeface.create(Typeface.SANS_SERIF,
-						convertToTypefaceStyle(style));
+				typeface = Typeface.create(Typeface.SANS_SERIF, convertToTypefaceStyle(style));
 			} else if (name.equals(SERIF)) {
-				typeface = Typeface.create(Typeface.SERIF,
-						convertToTypefaceStyle(style));
+				typeface = Typeface.create(Typeface.SERIF, convertToTypefaceStyle(style));
 			} else if (name.equals(MONOSPACED)) {
-				typeface = Typeface.create(Typeface.MONOSPACE,
-						convertToTypefaceStyle(style));
+				typeface = Typeface.create(Typeface.MONOSPACE, convertToTypefaceStyle(style));
 			} else {
 				typeface = Typeface.create(name, convertToTypefaceStyle(style));
 			}
@@ -308,8 +293,7 @@ public class Font {
 
 		if (typeface == null) {
 			name = DIALOG_INPUT;
-			typeface = Typeface.create(Typeface.DEFAULT,
-					convertToTypefaceStyle(style));
+			typeface = Typeface.create(Typeface.DEFAULT, convertToTypefaceStyle(style));
 		}
 	}
 
@@ -335,8 +319,7 @@ public class Font {
 
 	public Rectangle2D getStringBounds(final String str, final FontRenderContext frc) {
 		final Rect rect = getStrRect(str);
-		final Rectangle2D.Float r2d = new Rectangle2D.Float(0, 0, rect.width(),
-				rect.height());
+		final Rectangle2D.Float r2d = new Rectangle2D.Float(0, 0, rect.width(), rect.height());
 		return r2d;
 	}
 
@@ -398,8 +381,7 @@ public class Font {
 		if (obj != null) {
 			try {
 				final Font font = (Font) obj;
-				if (size == font.size && style == font.style
-						&& name.equals(font.name)) {
+				if (size == font.size && style == font.style && name.equals(font.name)) {
 					return true;
 				}
 			} catch (final ClassCastException e) {
@@ -411,11 +393,12 @@ public class Font {
 	final Rect getStrRect(final String str) {
 		final Paint paint = new Paint();
 		paint.setTypeface(typeface);
-//		if(screenAdapter == null){
-//			final String msg = "Warning : java.awt.Font should be instanced in Mlet constructor";
-//			LogManager.warning(msg);
-//			hc.util.ClassUtil.printCurrentThreadStack(msg);
-//		}
+		// if(screenAdapter == null){
+		// final String msg = "Warning : java.awt.Font should be instanced in
+		// Mlet constructor";
+		// LogManager.warning(msg);
+		// hc.util.ClassUtil.printCurrentThreadStack(msg);
+		// }
 		paint.setTextSize(screenAdapter.getFontSizeInPixel(size));
 		final Rect bounds = new Rect();
 		paint.getTextBounds(str, 0, str.length(), bounds);

@@ -35,12 +35,10 @@ import javax.swing.UIManager;
 import android.os.Environment;
 
 /**
- * FileSystemView is JFileChooser's gateway to the
- * file system. Since the JDK1.1 File API doesn't allow
- * access to such information as root partitions, file type
- * information, or hidden file bits, this class is designed
- * to intuit as much OS-specific file system information as
- * possible.
+ * FileSystemView is JFileChooser's gateway to the file system. Since the JDK1.1
+ * File API doesn't allow access to such information as root partitions, file
+ * type information, or hidden file bits, this class is designed to intuit as
+ * much OS-specific file system information as possible.
  *
  * <p>
  *
@@ -57,317 +55,318 @@ import android.os.Environment;
 public abstract class FileSystemView {
 	public static final String UP_LEVEL_DIR_TAG = "↺";
 
-    static FileSystemView unixFileSystemView = null;
+	static FileSystemView unixFileSystemView = null;
 
-    public static FileSystemView getFileSystemView() {
-        if(unixFileSystemView == null) {
-            unixFileSystemView = new HCFileSystemView();
-        }
-        return unixFileSystemView;
-    }
-
-    public FileSystemView() {
-    }
-
-    public boolean isRoot(File f) {
-        if (f == null || !f.isAbsolute()) {
-            return false;
-        }
-
-        File[] roots = getRoots();
-        for (File root : roots) {
-            if (root.equals(f)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Boolean isTraversable(File f) {
-        return Boolean.valueOf(f.isDirectory());
-    }
-
-    /**
-     * Example from Windows: the "M:\" directory
-     * displays as "CD-ROM (M:)"
-     */
-    public String getSystemDisplayName(File f) {
-        if (f == null) {
-            return null;
-        }
-
-        return f.getName();
-
-    }
-
-    /**
-     * Example from Windows: the "Desktop" folder
-     */
-    public String getSystemTypeDescription(File f) {
-        return "";
-    }
-
-    public Icon getSystemIcon(File f) {
-        return getSystemIcon(f.isDirectory());
-    }
-
-	protected Icon getSystemIcon(boolean isDirectory) {
-		return UIManager.getIcon(isDirectory ? UIDefaults.FILE_VIEW_DIRECTORY_ICON : UIDefaults.FILE_VIEW_FILE_ICON);
+	public static FileSystemView getFileSystemView() {
+		if (unixFileSystemView == null) {
+			unixFileSystemView = new HCFileSystemView();
+		}
+		return unixFileSystemView;
 	}
 
-    public boolean isParent(File folder, File file) {
-        if (folder == null || file == null) {
-            return false;
-        }else{
-            return folder.equals(file.getParentFile());
-        }
-    }
+	public FileSystemView() {
+	}
 
-    public File getChild(File parent, String fileName) {
-        return createFileObject(parent, fileName);
-    }
+	public boolean isRoot(File f) {
+		if (f == null || !f.isAbsolute()) {
+			return false;
+		}
 
-    public boolean isFileSystem(File f) {
-            return true;
-    }
+		File[] roots = getRoots();
+		for (File root : roots) {
+			if (root.equals(f)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public abstract File createNewFolder(File containingDir) throws IOException;
+	public Boolean isTraversable(File f) {
+		return Boolean.valueOf(f.isDirectory());
+	}
 
-    public boolean isHiddenFile(File f) {
-        return f.isHidden();
-    }
+	/**
+	 * Example from Windows: the "M:\" directory displays as "CD-ROM (M:)"
+	 */
+	public String getSystemDisplayName(File f) {
+		if (f == null) {
+			return null;
+		}
 
-    public boolean isFileSystemRoot(File dir) {
-    	if(rootFiles != null){
-    		for (int i = 0; i < rootFiles.length; i++) {
-				if(dir.equals(rootFiles[i])){
+		return f.getName();
+
+	}
+
+	/**
+	 * Example from Windows: the "Desktop" folder
+	 */
+	public String getSystemTypeDescription(File f) {
+		return "";
+	}
+
+	public Icon getSystemIcon(File f) {
+		return getSystemIcon(f.isDirectory());
+	}
+
+	protected Icon getSystemIcon(boolean isDirectory) {
+		return UIManager.getIcon(
+				isDirectory ? UIDefaults.FILE_VIEW_DIRECTORY_ICON : UIDefaults.FILE_VIEW_FILE_ICON);
+	}
+
+	public boolean isParent(File folder, File file) {
+		if (folder == null || file == null) {
+			return false;
+		} else {
+			return folder.equals(file.getParentFile());
+		}
+	}
+
+	public File getChild(File parent, String fileName) {
+		return createFileObject(parent, fileName);
+	}
+
+	public boolean isFileSystem(File f) {
+		return true;
+	}
+
+	public abstract File createNewFolder(File containingDir) throws IOException;
+
+	public boolean isHiddenFile(File f) {
+		return f.isHidden();
+	}
+
+	public boolean isFileSystemRoot(File dir) {
+		if (rootFiles != null) {
+			for (int i = 0; i < rootFiles.length; i++) {
+				if (dir.equals(rootFiles[i])) {
 					return true;
 				}
 			}
-    	}
-        return false;
-    }
-    
-    File[] rootFiles;
+		}
+		return false;
+	}
 
-    public boolean isDrive(File dir) {
-        return false;
-    }
+	File[] rootFiles;
 
-    public boolean isFloppyDrive(File dir) {
-        return false;
-    }
+	public boolean isDrive(File dir) {
+		return false;
+	}
 
-    public boolean isComputerNode(File dir) {
-        return false;
-    }
+	public boolean isFloppyDrive(File dir) {
+		return false;
+	}
 
-    private File getExternalFileAdAPI(){
-    	if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED){
-    		return Environment.getExternalStorageDirectory();
-    	}else{
-    		return null;
-    	}
-    }
-    
-    final File usbCardDir = getExternalFileAdAPI();
-    
-    public File[] getRoots() {
-    	if(rootFiles == null){
-    		File[] sdcardDir = {Environment.getExternalStorageDirectory()};//外部存储，如/mnt/sdcard
-    		rootFiles = sdcardDir;
-        }
-        return rootFiles;
-    }
+	public boolean isComputerNode(File dir) {
+		return false;
+	}
 
-    public File getHomeDirectory() {
-        return createFileObject(System.getProperty("user.home"));
-    }
+	private File getExternalFileAdAPI() {
+		if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+			return Environment.getExternalStorageDirectory();
+		} else {
+			return null;
+		}
+	}
 
-    public File getDefaultDirectory() {
-        return usbCardDir;
-    }
+	final File usbCardDir = getExternalFileAdAPI();
 
-    public File createFileObject(File dir, String filename) {
-        if(dir == null) {
-            return new File(filename);
-        } else {
-            return new File(dir, filename);
-        }
-    }
+	public File[] getRoots() {
+		if (rootFiles == null) {
+			File[] sdcardDir = { Environment.getExternalStorageDirectory() };// 外部存储，如/mnt/sdcard
+			rootFiles = sdcardDir;
+		}
+		return rootFiles;
+	}
 
-    public File createFileObject(String path) {
-        File f = new File(path);
-        if (isFileSystemRoot(f)) {
-            f = createFileSystemRoot(f);
-        }
-        return f;
-    }
+	public File getHomeDirectory() {
+		return createFileObject(System.getProperty("user.home"));
+	}
 
-    public File[] getFiles(File dir, boolean useFileHiding) {
-        List<File> files = new ArrayList<File>();
+	public File getDefaultDirectory() {
+		return usbCardDir;
+	}
 
-        File[] names = dir.listFiles();
+	public File createFileObject(File dir, String filename) {
+		if (dir == null) {
+			return new File(filename);
+		} else {
+			return new File(dir, filename);
+		}
+	}
 
-        if (names == null) {
-            return new File[0];
-        }
+	public File createFileObject(String path) {
+		File f = new File(path);
+		if (isFileSystemRoot(f)) {
+			f = createFileSystemRoot(f);
+		}
+		return f;
+	}
 
-        for (File f : names) {
-            if (Thread.currentThread().isInterrupted()) {
-                break;
-            }
+	public File[] getFiles(File dir, boolean useFileHiding) {
+		List<File> files = new ArrayList<File>();
 
-            if (!useFileHiding || !isHiddenFile(f)) {
-                files.add(f);
-            }
-        }
+		File[] names = dir.listFiles();
 
-        return files.toArray(new File[files.size()]);
-    }
+		if (names == null) {
+			return new File[0];
+		}
 
-    public File getParentDirectory(File dir) {
-        if (dir == null || !dir.exists()) {
-            return null;
-        }
+		for (File f : names) {
+			if (Thread.currentThread().isInterrupted()) {
+				break;
+			}
 
-        File psf = dir.getParentFile();
+			if (!useFileHiding || !isHiddenFile(f)) {
+				files.add(f);
+			}
+		}
 
-        if (psf == null) {
-            return null;
-        }
+		return files.toArray(new File[files.size()]);
+	}
 
-        if (isFileSystem(psf)) {
-            File f = psf;
-            if (!f.exists()) {
-                File ppsf = psf.getParentFile();
-                if (ppsf == null || !isFileSystem(ppsf)) {
-                    f = createFileSystemRoot(f);
-                }
-            }
-            return f;
-        } else {
-            return psf;
-        }
-    }
+	public File getParentDirectory(File dir) {
+		if (dir == null || !dir.exists()) {
+			return null;
+		}
 
-    protected File createFileSystemRoot(File f) {
-        return new FileSystemRoot(f);
-    }
+		File psf = dir.getParentFile();
 
-    static class FileSystemRoot extends File {
-        public FileSystemRoot(File f) {
-            super(f,"");
-        }
+		if (psf == null) {
+			return null;
+		}
 
-        public FileSystemRoot(String s) {
-            super(s);
-        }
+		if (isFileSystem(psf)) {
+			File f = psf;
+			if (!f.exists()) {
+				File ppsf = psf.getParentFile();
+				if (ppsf == null || !isFileSystem(ppsf)) {
+					f = createFileSystemRoot(f);
+				}
+			}
+			return f;
+		} else {
+			return psf;
+		}
+	}
 
-        public boolean isDirectory() {
-            return true;
-        }
+	protected File createFileSystemRoot(File f) {
+		return new FileSystemRoot(f);
+	}
 
-        public String getName() {
-            return getPath();
-        }
-    }
+	static class FileSystemRoot extends File {
+		public FileSystemRoot(File f) {
+			super(f, "");
+		}
+
+		public FileSystemRoot(String s) {
+			super(s);
+		}
+
+		public boolean isDirectory() {
+			return true;
+		}
+
+		public String getName() {
+			return getPath();
+		}
+	}
 }
 
 class HCFileSystemView extends UnixFileSystemView {
 
 	public String getSystemDisplayName(File f) {
 		String name = f.getName();
-		if(name.equals(UP_LEVEL_DIR_TAG)){
+		if (name.equals(UP_LEVEL_DIR_TAG)) {
 			return "../" + UP_LEVEL_DIR_TAG;
 		}
 		String absPath = f.getAbsolutePath();
 		int idx = absPath.lastIndexOf("/");
-		if(idx > 0){
+		if (idx > 0) {
 			return absPath.substring(idx + 1);
-		}else{
+		} else {
 			return absPath;
 		}
 	}
-	
+
 	public Icon getSystemIcon(File f) {
 		String name = f.getName();
-		if(name.equals(UP_LEVEL_DIR_TAG)){
+		if (name.equals(UP_LEVEL_DIR_TAG)) {
 			return super.getSystemIcon(true);
 		}
 		return super.getSystemIcon(f);
 	}
 }
+
 class UnixFileSystemView extends FileSystemView {
 
-    private static final String newFolderString =
-            UIManager.getString("FileChooser.other.newFolder");
-    private static final String newFolderNextString  =
-            UIManager.getString("FileChooser.other.newFolder.subsequent");
+	private static final String newFolderString = UIManager
+			.getString("FileChooser.other.newFolder");
+	private static final String newFolderNextString = UIManager
+			.getString("FileChooser.other.newFolder.subsequent");
 
-    public File createNewFolder(File containingDir) throws IOException {
-        if(containingDir == null) {
-            throw new IOException("Containing directory is null:");
-        }
-        File newFolder;
-        newFolder = createFileObject(containingDir, newFolderString);
-        int i = 1;
-        while (newFolder.exists() && i < 100) {
-            newFolder = createFileObject(containingDir, MessageFormat.format(
-                    newFolderNextString, new Integer(i)));
-            i++;
-        }
+	public File createNewFolder(File containingDir) throws IOException {
+		if (containingDir == null) {
+			throw new IOException("Containing directory is null:");
+		}
+		File newFolder;
+		newFolder = createFileObject(containingDir, newFolderString);
+		int i = 1;
+		while (newFolder.exists() && i < 100) {
+			newFolder = createFileObject(containingDir,
+					MessageFormat.format(newFolderNextString, new Integer(i)));
+			i++;
+		}
 
-        if(newFolder.exists()) {
-            throw new IOException("Directory already exists:" + newFolder.getAbsolutePath());
-        } else {
-            newFolder.mkdirs();
-        }
+		if (newFolder.exists()) {
+			throw new IOException("Directory already exists:" + newFolder.getAbsolutePath());
+		} else {
+			newFolder.mkdirs();
+		}
 
-        return newFolder;
-    }
+		return newFolder;
+	}
 
-    public boolean isFileSystemRoot(File dir) {
-        return dir != null && dir.getAbsolutePath().equals("/");
-    }
+	public boolean isFileSystemRoot(File dir) {
+		return dir != null && dir.getAbsolutePath().equals("/");
+	}
 
-    public boolean isDrive(File dir) {
-        return isFloppyDrive(dir);
-    }
+	public boolean isDrive(File dir) {
+		return isFloppyDrive(dir);
+	}
 
-    public boolean isFloppyDrive(File dir) {
-        return false;
-    }
+	public boolean isFloppyDrive(File dir) {
+		return false;
+	}
 
-    public boolean isComputerNode(File dir) {
-        if (dir != null) {
-            String parent = dir.getParent();
-            if (parent != null && parent.equals("/net")) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean isComputerNode(File dir) {
+		if (dir != null) {
+			String parent = dir.getParent();
+			if (parent != null && parent.equals("/net")) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 class GenericFileSystemView extends FileSystemView {
 
-    private static final String newFolderString =
-            UIManager.getString("FileChooser.other.newFolder");
+	private static final String newFolderString = UIManager
+			.getString("FileChooser.other.newFolder");
 
-    public File createNewFolder(File containingDir) throws IOException {
-        if(containingDir == null) {
-            throw new IOException("Containing directory is null:");
-        }
-        File newFolder = createFileObject(containingDir, newFolderString);
+	public File createNewFolder(File containingDir) throws IOException {
+		if (containingDir == null) {
+			throw new IOException("Containing directory is null:");
+		}
+		File newFolder = createFileObject(containingDir, newFolderString);
 
-        if(newFolder.exists()) {
-            throw new IOException("Directory already exists:" + newFolder.getAbsolutePath());
-        } else {
-            newFolder.mkdirs();
-        }
+		if (newFolder.exists()) {
+			throw new IOException("Directory already exists:" + newFolder.getAbsolutePath());
+		} else {
+			newFolder.mkdirs();
+		}
 
-        return newFolder;
-    }
+		return newFolder;
+	}
 
 }

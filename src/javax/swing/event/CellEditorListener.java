@@ -25,14 +25,14 @@
 package javax.swing.event;
 
 /**
- * CellEditorListener defines the interface for an object that listens
- * to changes in a CellEditor
+ * CellEditorListener defines the interface for an object that listens to
+ * changes in a CellEditor
  *
  * @author Alan Chung
  */
 public interface CellEditorListener extends java.util.EventListener {
 
-    public void editingStopped(ChangeEvent e);
+	public void editingStopped(ChangeEvent e);
 
-    public void editingCanceled(ChangeEvent e);
+	public void editingCanceled(ChangeEvent e);
 }

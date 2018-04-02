@@ -63,37 +63,39 @@ import android.widget.ListView;
 import hc.android.HCRUtil;
 
 /**
- * A component that displays a list of objects and allows the user to select
- * one or more items. A separate model, {@code ListModel}, maintains the
- * contents of the list.
+ * A component that displays a list of objects and allows the user to select one
+ * or more items. A separate model, {@code ListModel}, maintains the contents of
+ * the list.
  * <p>
  * It's easy to display an array or Vector of objects, using the {@code JList}
  * constructor that automatically builds a read-only {@code ListModel} instance
  * for you:
+ * 
  * <pre>
- * {@code
- * // Create a JList that displays strings from an array
+ * {
+ * 	&#64;code
+ * 	// Create a JList that displays strings from an array
  *
- * String[] data = {"one", "two", "three", "four"};
- * JList<String> myList = new JList<String>(data);
+ * 	String[] data = { "one", "two", "three", "four" };
+ * 	JList<String> myList = new JList<String>(data);
  *
- * // Create a JList that displays the superclasses of JList.class, by
- * // creating it with a Vector populated with this data
+ * 	// Create a JList that displays the superclasses of JList.class, by
+ * 	// creating it with a Vector populated with this data
  *
- * Vector<Class<?>> superClasses = new Vector<Class<?>>();
- * Class<JList> rootClass = javax.swing.JList.class;
- * for(Class<?> cls = rootClass; cls != null; cls = cls.getSuperclass()) {
- *     superClasses.addElement(cls);
- * }
- * JList<Class<?>> myList = new JList<Class<?>>(superClasses);
+ * 	Vector<Class<?>> superClasses = new Vector<Class<?>>();
+ * 	Class<JList> rootClass = javax.swing.JList.class;
+ * 	for (Class<?> cls = rootClass; cls != null; cls = cls.getSuperclass()) {
+ * 		superClasses.addElement(cls);
+ * 	}
+ * 	JList<Class<?>> myList = new JList<Class<?>>(superClasses);
  *
- * // The automatically created model is stored in JList's "model"
- * // property, which you can retrieve
+ * 	// The automatically created model is stored in JList's "model"
+ * 	// property, which you can retrieve
  *
- * ListModel<Class<?>> model = myList.getModel();
- * for(int i = 0; i < model.getSize(); i++) {
- *     System.out.println(model.getElementAt(i));
- * }
+ * 	ListModel<Class<?>> model = myList.getModel();
+ * 	for (int i = 0; i < model.getSize(); i++) {
+ * 		System.out.println(model.getElementAt(i));
+ * 	}
  * }
  * </pre>
  * <p>
@@ -111,35 +113,42 @@ import hc.android.HCRUtil;
  * Simple, dynamic-content, {@code JList} applications can use the
  * {@code DefaultListModel} class to maintain list elements. This class
  * implements the {@code ListModel} interface and also provides a
- * <code>java.util.Vector</code>-like API. Applications that need a more
- * custom <code>ListModel</code> implementation may instead wish to subclass
+ * <code>java.util.Vector</code>-like API. Applications that need a more custom
+ * <code>ListModel</code> implementation may instead wish to subclass
  * {@code AbstractListModel}, which provides basic support for managing and
  * notifying listeners. For example, a read-only implementation of
  * {@code AbstractListModel}:
+ * 
  * <pre>
- * {@code
- * // This list model has about 2^16 elements.  Enjoy scrolling.
+ * {
+ * 	&#64;code
+ * 	// This list model has about 2^16 elements. Enjoy scrolling.
  *
- * ListModel<String> bigData = new AbstractListModel<String>() {
- *     public int getSize() { return Short.MAX_VALUE; }
- *     public String getElementAt(int index) { return "Index " + index; }
- * };
+ * 	ListModel<String> bigData = new AbstractListModel<String>() {
+ * 		public int getSize() {
+ * 			return Short.MAX_VALUE;
+ * 		}
+ * 
+ * 		public String getElementAt(int index) {
+ * 			return "Index " + index;
+ * 		}
+ * 	};
  * }
  * </pre>
  * <p>
- * The selection state of a {@code JList} is managed by another separate
- * model, an instance of {@code ListSelectionModel}. {@code JList} is
- * initialized with a selection model on construction, and also contains
- * methods to query or set this selection model. Additionally, {@code JList}
- * provides convenient methods for easily managing the selection. These methods,
- * such as {@code setSelectedIndex} and {@code getSelectedValue}, are cover
- * methods that take care of the details of interacting with the selection
- * model. By default, {@code JList}'s selection model is configured to allow any
- * combination of items to be selected at a time; selection mode
- * {@code MULTIPLE_INTERVAL_SELECTION}. The selection mode can be changed
- * on the selection model directly, or via {@code JList}'s cover method.
- * Responsibility for updating the selection model in response to user gestures
- * lies with the list's {@code ListUI}.
+ * The selection state of a {@code JList} is managed by another separate model,
+ * an instance of {@code ListSelectionModel}. {@code JList} is initialized with
+ * a selection model on construction, and also contains methods to query or set
+ * this selection model. Additionally, {@code JList} provides convenient methods
+ * for easily managing the selection. These methods, such as
+ * {@code setSelectedIndex} and {@code getSelectedValue}, are cover methods that
+ * take care of the details of interacting with the selection model. By default,
+ * {@code JList}'s selection model is configured to allow any combination of
+ * items to be selected at a time; selection mode
+ * {@code MULTIPLE_INTERVAL_SELECTION}. The selection mode can be changed on the
+ * selection model directly, or via {@code JList}'s cover method. Responsibility
+ * for updating the selection model in response to user gestures lies with the
+ * list's {@code ListUI}.
  * <p>
  * A correct {@code ListSelectionModel} implementation notifies the set of
  * {@code javax.swing.event.ListSelectionListener}s that have been added to it
@@ -155,79 +164,83 @@ import hc.android.HCRUtil;
  * Responsibility for listening to selection changes in order to keep the list's
  * visual representation up to date lies with the list's {@code ListUI}.
  * <p>
- * <a name="renderer">
- * Painting of cells in a {@code JList} is handled by a delegate called a
- * cell renderer, installed on the list as the {@code cellRenderer} property.
- * The renderer provides a {@code java.awt.Component} that is used
- * like a "rubber stamp" to paint the cells. Each time a cell needs to be
- * painted, the list's {@code ListUI} asks the cell renderer for the component,
- * moves it into place, and has it paint the contents of the cell by way of its
- * {@code paint} method. A default cell renderer, which uses a {@code JLabel}
- * component to render, is installed by the lists's {@code ListUI}. You can
- * substitute your own renderer using code like this:
+ * <a name="renderer"> Painting of cells in a {@code JList} is handled by a
+ * delegate called a cell renderer, installed on the list as the
+ * {@code cellRenderer} property. The renderer provides a
+ * {@code java.awt.Component} that is used like a "rubber stamp" to paint the
+ * cells. Each time a cell needs to be painted, the list's {@code ListUI} asks
+ * the cell renderer for the component, moves it into place, and has it paint
+ * the contents of the cell by way of its {@code paint} method. A default cell
+ * renderer, which uses a {@code JLabel} component to render, is installed by
+ * the lists's {@code ListUI}. You can substitute your own renderer using code
+ * like this:
+ * 
  * <pre>
- * {@code
- *  // Display an icon and a string for each object in the list.
+ * {
+ * 	&#64;code
+ * 	// Display an icon and a string for each object in the list.
  *
- * class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
- *     final static ImageIcon longIcon = new ImageIcon("long.gif");
- *     final static ImageIcon shortIcon = new ImageIcon("short.gif");
+ * 	class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
+ * 		final static ImageIcon longIcon = new ImageIcon("long.gif");
+ * 		final static ImageIcon shortIcon = new ImageIcon("short.gif");
  *
- *     // This is the only method defined by ListCellRenderer.
- *     // We just reconfigure the JLabel each time we're called.
+ * 		// This is the only method defined by ListCellRenderer.
+ * 		// We just reconfigure the JLabel each time we're called.
  *
- *     public Component getListCellRendererComponent(
- *       JList<?> list,           // the list
- *       Object value,            // value to display
- *       int index,               // cell index
- *       boolean isSelected,      // is the cell selected
- *       boolean cellHasFocus)    // does the cell have focus
- *     {
- *         String s = value.toString();
- *         setText(s);
- *         setIcon((s.length() > 10) ? longIcon : shortIcon);
- *         if (isSelected) {
- *             setBackground(list.getSelectionBackground());
- *             setForeground(list.getSelectionForeground());
- *         } else {
- *             setBackground(list.getBackground());
- *             setForeground(list.getForeground());
- *         }
- *         setEnabled(list.isEnabled());
- *         setFont(list.getFont());
- *         setOpaque(true);
- *         return this;
- *     }
- * }
+ * 		public Component getListCellRendererComponent(JList<?> list, // the
+ * 																		// list
+ * 				Object value, // value to display
+ * 				int index, // cell index
+ * 				boolean isSelected, // is the cell selected
+ * 				boolean cellHasFocus) // does the cell have focus
+ * 		{
+ * 			String s = value.toString();
+ * 			setText(s);
+ * 			setIcon((s.length() > 10) ? longIcon : shortIcon);
+ * 			if (isSelected) {
+ * 				setBackground(list.getSelectionBackground());
+ * 				setForeground(list.getSelectionForeground());
+ * 			} else {
+ * 				setBackground(list.getBackground());
+ * 				setForeground(list.getForeground());
+ * 			}
+ * 			setEnabled(list.isEnabled());
+ * 			setFont(list.getFont());
+ * 			setOpaque(true);
+ * 			return this;
+ * 		}
+ * 	}
  *
- * myList.setCellRenderer(new MyCellRenderer());
+ * 	myList.setCellRenderer(new MyCellRenderer());
  * }
  * </pre>
  * <p>
  * Another job for the cell renderer is in helping to determine sizing
  * information for the list. By default, the list's {@code ListUI} determines
- * the size of cells by asking the cell renderer for its preferred
- * size for each list item. This can be expensive for large lists of items.
- * To avoid these calculations, you can set a {@code fixedCellWidth} and
+ * the size of cells by asking the cell renderer for its preferred size for each
+ * list item. This can be expensive for large lists of items. To avoid these
+ * calculations, you can set a {@code fixedCellWidth} and
  * {@code fixedCellHeight} on the list, or have these values calculated
- * automatically based on a single prototype value:
- * <a name="prototype_example">
+ * automatically based on a single prototype value: <a name="prototype_example">
+ * 
  * <pre>
- * {@code
- * JList<String> bigDataList = new JList<String>(bigData);
+ * {
+ * 	&#64;code
+ * 	JList<String> bigDataList = new JList<String>(bigData);
  *
- * // We don't want the JList implementation to compute the width
- * // or height of all of the list cells, so we give it a string
- * // that's as big as we'll need for any cell.  It uses this to
- * // compute values for the fixedCellWidth and fixedCellHeight
- * // properties.
+ * 	// We don't want the JList implementation to compute the width
+ * 	// or height of all of the list cells, so we give it a string
+ * 	// that's as big as we'll need for any cell. It uses this to
+ * 	// compute values for the fixedCellWidth and fixedCellHeight
+ * 	// properties.
  *
- * bigDataList.setPrototypeCellValue("Index 1234567890");
+ * 	bigDataList.setPrototypeCellValue("Index 1234567890");
  * }
  * </pre>
  * <p>
  * {@code JList} doesn't implement scrolling directly. To create a list that
  * scrolls, make it the viewport view of a {@code JScrollPane}. For example:
+ * 
  * <pre>
  * JScrollPane scrollPane = new JScrollPane(myList);
  *
@@ -236,42 +249,44 @@ import hc.android.HCRUtil;
  * scrollPane.getViewport().setView(myList);
  * </pre>
  * <p>
- * {@code JList} doesn't provide any special handling of double or triple
- * (or N) mouse clicks, but it's easy to add a {@code MouseListener} if you
- * wish to take action on these events. Use the {@code locationToIndex}
- * method to determine what cell was clicked. For example:
+ * {@code JList} doesn't provide any special handling of double or triple (or N)
+ * mouse clicks, but it's easy to add a {@code MouseListener} if you wish to
+ * take action on these events. Use the {@code locationToIndex} method to
+ * determine what cell was clicked. For example:
+ * 
  * <pre>
  * MouseListener mouseListener = new MouseAdapter() {
- *     public void mouseClicked(MouseEvent e) {
- *         if (e.getClickCount() == 2) {
- *             int index = list.locationToIndex(e.getPoint());
- *             System.out.println("Double clicked on Item " + index);
- *          }
- *     }
+ * 	public void mouseClicked(MouseEvent e) {
+ * 		if (e.getClickCount() == 2) {
+ * 			int index = list.locationToIndex(e.getPoint());
+ * 			System.out.println("Double clicked on Item " + index);
+ * 		}
+ * 	}
  * };
  * list.addMouseListener(mouseListener);
  * </pre>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  * <p>
- * See <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/list.html">How to Use Lists</a>
- * in <a href="http://java.sun.com/Series/Tutorial/index.html"><em>The Java Tutorial</em></a>
- * for further documentation.
- * Also see the article <a href="http://java.sun.com/products/jfc/tsc/tech_topics/jlist_1/jlist.html">Advanced JList Programming</a>
- * in <a href="http://java.sun.com/products/jfc/tsc"><em>The Swing Connection</em></a>.
+ * See <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/list.html">How to
+ * Use Lists</a> in
+ * <a href="http://java.sun.com/Series/Tutorial/index.html"><em>The Java
+ * Tutorial</em></a> for further documentation. Also see the article <a href=
+ * "http://java.sun.com/products/jfc/tsc/tech_topics/jlist_1/jlist.html">Advanced
+ * JList Programming</a> in
+ * <a href="http://java.sun.com/products/jfc/tsc"><em>The Swing
+ * Connection</em></a>.
  * <p>
+ * 
  * @see ListModel
  * @see AbstractListModel
  * @see DefaultListModel
@@ -280,18 +295,18 @@ import hc.android.HCRUtil;
  * @see ListCellRenderer
  * @see DefaultListCellRenderer
  *
- * @param <E> the type of the elements of this list
+ * @param <E>
+ *            the type of the elements of this list
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A component which allows for the selection of one or more objects from a list.
+ * @beaninfo attribute: isContainer false description: A component which allows
+ *           for the selection of one or more objects from a list.
  *
  * @author Hans Muller
  */
 public class JList<E> extends JComponent implements Scrollable, Accessible {
 	private static final String uiClassID = "ListUI";
 	private ListView listView;
-	
+
 	public static final int VERTICAL = 0;
 	public static final int VERTICAL_WRAP = 1;
 	public static final int HORIZONTAL_WRAP = 2;
@@ -334,8 +349,8 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 		}
 
 		public String toString() {
-			return getClass().getName() + "[dropPoint=" + getDropPoint() + ","
-					+ "index=" + index + "," + "insert=" + isInsert + "]";
+			return getClass().getName() + "[dropPoint=" + getDropPoint() + "," + "index=" + index
+					+ "," + "insert=" + isInsert + "]";
 		}
 	}
 
@@ -343,30 +358,32 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 		if (dataModel == null) {
 			throw new IllegalArgumentException("dataModel must be non null");
 		}
-		listView = new ListView(ActivityManager.getActivity());
-//		scrollView = new ScrollView(ActivityManager.getActivity());
-		
+		listView = new ListView(ActivityManager.applicationContext);
+		// scrollView = new ScrollView(ActivityManager.applicationContext);
+
 		this.dataModel = dataModel;
-//		{
-//			LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-//			scrollView.addView(listView, lp);
-//		}
+		// {
+		// LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+		// LayoutParams.WRAP_CONTENT);
+		// scrollView.addView(listView, lp);
+		// }
 		setPeerAdAPI(listView);
 		addOnLayoutChangeListenerAdAPI(listView);
-		
-//		listView.setSelected(true);
+
+		// listView.setSelected(true);
 		listView.setItemsCanFocus(true);
 		AndroidUIUtil.buildListenersForComponent(listView, JList.this);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if(position < getModel().getSize() && position >= 0){
-					if(JList.this.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION){
-						JList.this.setSelectedIndex(position);//(position, position);
-					}else{
-						if(JList.this.isSelectedIndex(position)){
+				if (position < getModel().getSize() && position >= 0) {
+					if (JList.this.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION) {
+						JList.this.setSelectedIndex(position);// (position,
+																// position);
+					} else {
+						if (JList.this.isSelectedIndex(position)) {
 							JList.this.removeSelectionInterval(position, position);
-						}else{
+						} else {
 							JList.this.addSelectionInterval(position, position);
 						}
 					}
@@ -374,86 +391,95 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 			}
 		});
 		listAdapter = new BaseAdapter() {
-			private LayoutInflater mInflater = (LayoutInflater)ActivityManager.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			private LayoutInflater mInflater = (LayoutInflater) ActivityManager.applicationContext
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				if(JList.this.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION){
-					return createViewFromResource(position, convertView, parent, 
+				if (JList.this.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION) {
+					return createViewFromResource(position, convertView, parent,
 							HCRUtil.getResource(HCRUtil.R_layout_simple_list_item_single_choice));
-				}else{
-					return createViewFromResource(position, convertView, parent, 
+				} else {
+					return createViewFromResource(position, convertView, parent,
 							HCRUtil.getResource(HCRUtil.R_layout_simple_list_item_multiple_choice));
 				}
 			}
+
 			private View createViewFromResource(int position, View convertView, ViewGroup parent,
-		            int resource) {
-		        View view;
-		        CheckedTextView text;
-		        if (convertView == null) {
-		            view = mInflater.inflate(resource, parent, false);
-		        } else {
-		            view = convertView;
-		        }
-		        try {
-		        	int mFieldId = 0;
-		        	if (mFieldId == 0) {
-		                text = (CheckedTextView) view;
-		            } else {
-		                text = (CheckedTextView) view.findViewById(mFieldId);
-		            }
-		        } catch (ClassCastException e) {
-		            Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
-		            throw new IllegalStateException(
-		                    "ArrayAdapter requires the resource ID to be a TextView", e);
-		        }
-		        Object item = getItem(position);
-		        if(item == null){
-		        	item = "";
-		        }
-		        if (item instanceof CharSequence) {
-		            text.setText((CharSequence)item);
-		        } else {
-		            text.setText(item.toString());
-		        }
-//		        System.out.println("getView : " + JList.this.toString() + ", at Indx : " + position + ", isSelected : " + JList.this.selectionModel.isSelectedIndex(position));
-//		        text.setChecked(JList.this.selectionModel.isSelectedIndex(position));
-		        return view;
-		    }
+					int resource) {
+				View view;
+				CheckedTextView text;
+				if (convertView == null) {
+					view = mInflater.inflate(resource, parent, false);
+				} else {
+					view = convertView;
+				}
+				try {
+					int mFieldId = 0;
+					if (mFieldId == 0) {
+						text = (CheckedTextView) view;
+					} else {
+						text = (CheckedTextView) view.findViewById(mFieldId);
+					}
+				} catch (ClassCastException e) {
+					Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
+					throw new IllegalStateException(
+							"ArrayAdapter requires the resource ID to be a TextView", e);
+				}
+				Object item = getItem(position);
+				if (item == null) {
+					item = "";
+				}
+				if (item instanceof CharSequence) {
+					text.setText((CharSequence) item);
+				} else {
+					text.setText(item.toString());
+				}
+				// System.out.println("getView : " + JList.this.toString() + ",
+				// at Indx : " + position + ", isSelected : " +
+				// JList.this.selectionModel.isSelectedIndex(position));
+				// text.setChecked(JList.this.selectionModel.isSelectedIndex(position));
+				return view;
+			}
+
 			@Override
 			public long getItemId(int position) {
 				return position;
 			}
+
 			@Override
 			public Object getItem(int position) {
 				return JList.this.dataModel.getElementAt(position);
 			}
+
 			@Override
 			public int getCount() {
 				return JList.this.dataModel.getSize();
 			}
 		};
 		listView.setAdapter(listAdapter);
-		setSelectionModel(createSelectionModel());//须初始化listAdapter之后
+		setSelectionModel(createSelectionModel());// 须初始化listAdapter之后
 
 		layoutOrientation = VERTICAL;
 
 		setSelectionMode(getSelectionMode());
-//		if(selectionModel.getSelectionMode() != ListSelectionModel.SINGLE_SELECTION){
-//			if(dataModel.getSize() > 0){
-//				listView.setItemChecked(0, true);
-//				listView.setItemChecked(0, false);
-//			}
-//		}
+		// if(selectionModel.getSelectionMode() !=
+		// ListSelectionModel.SINGLE_SELECTION){
+		// if(dataModel.getSize() > 0){
+		// listView.setItemChecked(0, true);
+		// listView.setItemChecked(0, false);
+		// }
+		// }
 		listAdapter.notifyDataSetChanged();
-//		setAutoscrolls(true);
-//		setOpaque(true);
+		// setAutoscrolls(true);
+		// setOpaque(true);
 		updateUI();
 	}
 
-	public View getFocusablePeerViewAdAPI(){
+	public View getFocusablePeerViewAdAPI() {
 		return listView;
 	}
-	
+
 	public JList(final E[] listData) {
 		this(new AbstractListModel<E>() {
 			public int getSize() {
@@ -492,12 +518,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 
 	public void applyComponentOrientation(ComponentOrientation o) {
 		super.applyComponentOrientation(o);
-//		CheckBox snap = null;//TODO ########################################
-//		if(snap != null){
-//			snap.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
-//		}
+		// CheckBox snap = null;//TODO ########################################
+		// if(snap != null){
+		// snap.setGravity(o.isLeftToRight()?Gravity.LEFT:Gravity.RIGHT);
+		// }
 	}
-	
+
 	public ListUI getUI() {
 		AndroidClassUtil.callEmptyMethod();
 		return null;
@@ -510,12 +536,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 
 	public void updateUI() {
 		AndroidClassUtil.callEmptyMethod();
-//		setUI((ListUI) UIManager.getUI(this));
-//
-//		ListCellRenderer<? super E> renderer = getCellRenderer();
-//		if (renderer instanceof Component) {
-//			SwingUtilities.updateComponentTreeUI((Component) renderer);
-//		}
+		// setUI((ListUI) UIManager.getUI(this));
+		//
+		// ListCellRenderer<? super E> renderer = getCellRenderer();
+		// if (renderer instanceof Component) {
+		// SwingUtilities.updateComponentTreeUI((Component) renderer);
+		// }
 	}
 
 	public String getUIClassID() {
@@ -638,8 +664,7 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 			}
 		}
 
-		throw new IllegalArgumentException(dropMode
-				+ ": Unsupported drop mode for list");
+		throw new IllegalArgumentException(dropMode + ": Unsupported drop mode for list");
 	}
 
 	public final DropMode getDropMode() {
@@ -651,8 +676,7 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 		return new DropLocation(null, 0, false);
 	}
 
-	Object setDropLocation(TransferHandler.DropLocation location, Object state,
-			boolean forDrop) {
+	Object setDropLocation(TransferHandler.DropLocation location, Object state, boolean forDrop) {
 		AndroidClassUtil.callEmptyMethod();
 		return null;
 	}
@@ -729,27 +753,23 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 		return selectionModel;
 	}
 
-	protected void fireSelectionValueChanged(int firstIndex, int lastIndex,
-			boolean isAdjusting) {
+	protected void fireSelectionValueChanged(int firstIndex, int lastIndex, boolean isAdjusting) {
 		Object[] listeners = list.getListenerList();
 		ListSelectionEvent e = null;
 
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ListSelectionListener.class) {
 				if (e == null) {
-					e = new ListSelectionEvent(this, firstIndex, lastIndex,
-							isAdjusting);
+					e = new ListSelectionEvent(this, firstIndex, lastIndex, isAdjusting);
 				}
 				((ListSelectionListener) listeners[i + 1]).valueChanged(e);
 			}
 		}
 	}
 
-	private class ListSelectionHandler implements ListSelectionListener,
-			Serializable {
+	private class ListSelectionHandler implements ListSelectionListener, Serializable {
 		public void valueChanged(ListSelectionEvent e) {
-			fireSelectionValueChanged(e.getFirstIndex(), e.getLastIndex(),
-					e.getValueIsAdjusting());
+			fireSelectionValueChanged(e.getFirstIndex(), e.getLastIndex(), e.getValueIsAdjusting());
 		}
 	}
 
@@ -780,9 +800,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 			selectionModel.addListSelectionListener(selectionListener);
 		}
 
-		if(selectionModel instanceof JList.WrapListSelectionModel){
+		if (selectionModel instanceof JList.WrapListSelectionModel) {
 			this.selectionModel = selectionModel;
-		}else{
+		} else {
 			ListSelectionModel wrap = new WrapListSelectionModel(selectionModel);
 			this.selectionModel = wrap;
 		}
@@ -790,9 +810,9 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 	}
 
 	public void setSelectionMode(int selectionMode) {
-		if(ListSelectionModel.SINGLE_SELECTION == selectionMode){
+		if (ListSelectionModel.SINGLE_SELECTION == selectionMode) {
 			listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		}else{
+		} else {
 			listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		}
 		getSelectionModel().setSelectionMode(selectionMode);
@@ -962,8 +982,7 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 		repaint();
 	}
 
-	private void checkScrollableParameters(Rectangle visibleRect,
-			int orientation) {
+	private void checkScrollableParameters(Rectangle visibleRect, int orientation) {
 		if (visibleRect == null) {
 			throw new IllegalArgumentException("visibleRect must be non-null");
 		}
@@ -972,8 +991,7 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 		case SwingConstants.HORIZONTAL:
 			break;
 		default:
-			throw new IllegalArgumentException(
-					"orientation must be one of: VERTICAL, HORIZONTAL");
+			throw new IllegalArgumentException("orientation must be one of: VERTICAL, HORIZONTAL");
 		}
 	}
 
@@ -982,14 +1000,12 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 		return getPreferredSize();
 	}
 
-	public int getScrollableUnitIncrement(Rectangle visibleRect,
-			int orientation, int direction) {
+	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
 		AndroidClassUtil.callEmptyMethod();
 		return 1;
 	}
 
-	public int getScrollableBlockIncrement(Rectangle visibleRect,
-			int orientation, int direction) {
+	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
 		AndroidClassUtil.callEmptyMethod();
 		return 0;
 	}
@@ -1020,13 +1036,15 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 
 	class WrapListSelectionModel implements ListSelectionModel {
 		final ListSelectionModel base;
-		WrapListSelectionModel(ListSelectionModel base){
+
+		WrapListSelectionModel(ListSelectionModel base) {
 			this.base = base;
 		}
-		private void synToListView(){
-			if(selectionModel.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION){
+
+		private void synToListView() {
+			if (selectionModel.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION) {
 				listView.setItemChecked(selectionModel.getMinSelectionIndex(), true);
-			}else{
+			} else {
 				int[] indexs = getSelectedIndices();
 				listView.clearChoices();
 				for (int i = 0; i < indexs.length; i++) {
@@ -1034,95 +1052,115 @@ public class JList<E> extends JComponent implements Scrollable, Accessible {
 				}
 			}
 		}
+
 		@Override
 		public void setSelectionInterval(int index0, int index1) {
 			base.setSelectionInterval(index0, index1);
 			synToListView();
-//			listAdapter.notifyDataSetChanged();
+			// listAdapter.notifyDataSetChanged();
 		}
+
 		@Override
 		public void addSelectionInterval(int index0, int index1) {
 			base.addSelectionInterval(index0, index1);
 			synToListView();
 		}
+
 		@Override
 		public void removeSelectionInterval(int index0, int index1) {
 			base.removeSelectionInterval(index0, index1);
 			synToListView();
 		}
+
 		@Override
 		public int getMinSelectionIndex() {
 			return base.getMinSelectionIndex();
 		}
+
 		@Override
 		public int getMaxSelectionIndex() {
 			return base.getMaxSelectionIndex();
 		}
+
 		@Override
 		public boolean isSelectedIndex(int index) {
 			return base.isSelectedIndex(index);
 		}
+
 		@Override
 		public int getAnchorSelectionIndex() {
 			return base.getAnchorSelectionIndex();
 		}
+
 		@Override
 		public void setAnchorSelectionIndex(int index) {
 			base.setAnchorSelectionIndex(index);
 			synToListView();
 		}
+
 		@Override
 		public int getLeadSelectionIndex() {
 			return base.getLeadSelectionIndex();
 		}
+
 		@Override
 		public void setLeadSelectionIndex(int index) {
 			base.setLeadSelectionIndex(index);
 			synToListView();
 		}
+
 		@Override
 		public void clearSelection() {
 			base.clearSelection();
 			synToListView();
 		}
+
 		@Override
 		public boolean isSelectionEmpty() {
 			return base.isSelectionEmpty();
 		}
+
 		@Override
 		public void insertIndexInterval(int index, int length, boolean before) {
 			base.insertIndexInterval(index, length, before);
 			synToListView();
 		}
+
 		@Override
 		public void removeIndexInterval(int index0, int index1) {
 			base.removeIndexInterval(index0, index1);
 			synToListView();
 		}
+
 		@Override
 		public void setValueIsAdjusting(boolean valueIsAdjusting) {
 			base.setValueIsAdjusting(valueIsAdjusting);
 		}
+
 		@Override
 		public boolean getValueIsAdjusting() {
 			return base.getValueIsAdjusting();
 		}
+
 		@Override
 		public void setSelectionMode(int selectionMode) {
 			base.setSelectionMode(selectionMode);
 			listAdapter.notifyDataSetInvalidated();
 		}
+
 		@Override
 		public int getSelectionMode() {
 			return base.getSelectionMode();
 		}
+
 		@Override
 		public void addListSelectionListener(ListSelectionListener x) {
 			base.addListSelectionListener(x);
 		}
+
 		@Override
 		public void removeListSelectionListener(ListSelectionListener x) {
 			base.removeListSelectionListener(x);
 		}
-	}	
+	}
 }

@@ -10,18 +10,18 @@ import java.text.AttributedCharacterIterator;
 import java.text.CharacterIterator;
 
 public class StringUtil {
-	public static String toString(AttributedCharacterIterator x){
+	public static String toString(AttributedCharacterIterator x) {
 		StringBuffer sb = new StringBuffer(x.getEndIndex() - x.getIndex());
-		
-	    sb.append(x.current());
-	    while (x.getIndex() < x.getEndIndex()){
-	    	sb.append(x.next());
-	    }
-	    sb.setLength(sb.length() - 1);
-	    
-	    return sb.toString();
+
+		sb.append(x.current());
+		while (x.getIndex() < x.getEndIndex()) {
+			sb.append(x.next());
+		}
+		sb.setLength(sb.length() - 1);
+
+		return sb.toString();
 	}
-	
+
 	public static String getMD5(final File file) {
 		MessageDigest digest = null;
 		FileInputStream in = null;
@@ -37,20 +37,20 @@ public class StringUtil {
 			return bigInt.toString(16);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			try{
+		} finally {
+			try {
 				in.close();
-			}catch (Throwable e) {
+			} catch (Throwable e) {
 			}
 		}
 		return "";
 	}
-	
-	public static String toString(CharacterIterator ci, int beginIdx, int limit){
+
+	public static String toString(CharacterIterator ci, int beginIdx, int limit) {
 		StringBuffer sb = new StringBuffer(limit);
-    	for(char c = ci.setIndex(beginIdx); c != CharacterIterator.DONE; c = ci.next()) {
-            sb.append(c);
-        }
-    	return sb.toString();
+		for (char c = ci.setIndex(beginIdx); c != CharacterIterator.DONE; c = ci.next()) {
+			sb.append(c);
+		}
+		return sb.toString();
 	}
 }

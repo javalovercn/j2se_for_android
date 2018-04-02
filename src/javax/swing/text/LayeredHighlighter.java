@@ -28,20 +28,17 @@ import java.awt.Graphics;
 import java.awt.Shape;
 
 /**
-*
-* @author  Scott Violet
-* @author  Timothy Prinzing
-* @see     Highlighter
-*/
+ *
+ * @author Scott Violet
+ * @author Timothy Prinzing
+ * @see Highlighter
+ */
 public abstract class LayeredHighlighter implements Highlighter {
-    public abstract void paintLayeredHighlights(Graphics g, int p0, int p1,
-                                                Shape viewBounds,
-                                                JTextComponent editor,
-                                                View view);
+	public abstract void paintLayeredHighlights(Graphics g, int p0, int p1, Shape viewBounds,
+			JTextComponent editor, View view);
 
-    static public abstract class LayerPainter implements Highlighter.HighlightPainter {
-        public abstract Shape paintLayer(Graphics g, int p0, int p1,
-                                        Shape viewBounds,JTextComponent editor,
-                                        View view);
-    }
+	static public abstract class LayerPainter implements Highlighter.HighlightPainter {
+		public abstract Shape paintLayer(Graphics g, int p0, int p1, Shape viewBounds,
+				JTextComponent editor, View view);
+	}
 }

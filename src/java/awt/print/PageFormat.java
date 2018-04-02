@@ -25,70 +25,67 @@
 package java.awt.print;
 
 /**
- * The <code>PageFormat</code> class describes the size and
- * orientation of a page to be printed.
+ * The <code>PageFormat</code> class describes the size and orientation of a
+ * page to be printed.
  */
-public class PageFormat implements Cloneable
-{
-    public static final int LANDSCAPE = 0;
+public class PageFormat implements Cloneable {
+	public static final int LANDSCAPE = 0;
 
-    public static final int PORTRAIT = 1;
+	public static final int PORTRAIT = 1;
 
-    public static final int REVERSE_LANDSCAPE = 2;
+	public static final int REVERSE_LANDSCAPE = 2;
 
-    private Paper mPaper;
+	private Paper mPaper;
 
-    private int mOrientation = PORTRAIT;
+	private int mOrientation = PORTRAIT;
 
-    public PageFormat()
-    {
-    }
+	public PageFormat() {
+	}
 
-    public Object clone() {
-        return null;
-    }
+	public Object clone() {
+		return null;
+	}
 
-    public double getWidth() {
-        return 0;
-    }
+	public double getWidth() {
+		return 0;
+	}
 
-    public double getHeight() {
-        return 0;
-    }
+	public double getHeight() {
+		return 0;
+	}
 
-    public double getImageableX() {
-        return 0;
-    }
+	public double getImageableX() {
+		return 0;
+	}
 
-    public double getImageableY() {
-        return 0;
-    }
+	public double getImageableY() {
+		return 0;
+	}
 
-    public double getImageableWidth() {
-        return 0;
-    }
+	public double getImageableWidth() {
+		return 0;
+	}
 
-    public double getImageableHeight() {
-        return 0;
-    }
+	public double getImageableHeight() {
+		return 0;
+	}
 
-    public Paper getPaper() {
-        return null;
-    }
+	public Paper getPaper() {
+		return null;
+	}
 
-     public void setPaper(Paper paper) {
-     }
+	public void setPaper(Paper paper) {
+	}
 
-    public void setOrientation(int orientation) throws IllegalArgumentException
-    {
-    }
+	public void setOrientation(int orientation) throws IllegalArgumentException {
+	}
 
-    public int getOrientation() {
-        return mOrientation;
-    }
+	public int getOrientation() {
+		return mOrientation;
+	}
 
-    public double[] getMatrix() {
-        double[] matrix = new double[6];
-        return matrix;
-    }
+	public double[] getMatrix() {
+		double[] matrix = new double[6];
+		return matrix;
+	}
 }

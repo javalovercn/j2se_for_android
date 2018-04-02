@@ -30,4 +30,5 @@ package javax.swing.plaf;
  * @author Georges Saab
  * @author David Karlton
  */
-public abstract class MenuBarUI extends ComponentUI { }
+public abstract class MenuBarUI extends ComponentUI {
+}

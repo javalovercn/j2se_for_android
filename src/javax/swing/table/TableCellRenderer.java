@@ -29,13 +29,12 @@ import java.awt.Component;
 import javax.swing.JTable;
 
 /**
- * This interface defines the method required by any object that
- * would like to be a renderer for cells in a <code>JTable</code>.
+ * This interface defines the method required by any object that would like to
+ * be a renderer for cells in a <code>JTable</code>.
  *
  * @author Alan Chung
  */
 public interface TableCellRenderer {
-    Component getTableCellRendererComponent(JTable table, Object value,
-                                            boolean isSelected, boolean hasFocus,
-                                            int row, int column);
+	Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column);
 }

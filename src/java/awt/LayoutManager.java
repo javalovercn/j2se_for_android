@@ -31,16 +31,16 @@ import android.view.View;
  * <code>Container</code>s.
  * <p>
  * Swing's painting architecture assumes the children of a
- * <code>JComponent</code> do not overlap.  If a
- * <code>JComponent</code>'s <code>LayoutManager</code> allows
- * children to overlap, the <code>JComponent</code> must override
- * <code>isOptimizedDrawingEnabled</code> to return false.
+ * <code>JComponent</code> do not overlap. If a <code>JComponent</code>'s
+ * <code>LayoutManager</code> allows children to overlap, the
+ * <code>JComponent</code> must override <code>isOptimizedDrawingEnabled</code>
+ * to return false.
  *
  * @see Container
  * @see javax.swing.JComponent#isOptimizedDrawingEnabled
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
+ * @author Sami Shaio
+ * @author Arthur van Hoff
  */
 public interface LayoutManager {
 	void addLayoutComponent(String name, Component comp);
@@ -52,5 +52,5 @@ public interface LayoutManager {
 	Dimension minimumLayoutSize(Container parent);
 
 	void layoutContainer(Container parent);
-	
+
 }

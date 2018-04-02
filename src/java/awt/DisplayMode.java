@@ -25,14 +25,14 @@
 package java.awt;
 
 /**
- * The <code>DisplayMode</code> class encapsulates the bit depth, height,
- * width, and refresh rate of a <code>GraphicsDevice</code>. The ability to
- * change graphics device's display mode is platform- and
- * configuration-dependent and may not always be available
- * (see {@link GraphicsDevice#isDisplayChangeSupported}).
+ * The <code>DisplayMode</code> class encapsulates the bit depth, height, width,
+ * and refresh rate of a <code>GraphicsDevice</code>. The ability to change
+ * graphics device's display mode is platform- and configuration-dependent and
+ * may not always be available (see
+ * {@link GraphicsDevice#isDisplayChangeSupported}).
  * <p>
- * For more information on full-screen exclusive mode API, see the
- * <a href="http://java.sun.com/docs/books/tutorial/extra/fullscreen/index.html">
+ * For more information on full-screen exclusive mode API, see the <a href=
+ * "http://java.sun.com/docs/books/tutorial/extra/fullscreen/index.html">
  * Full-Screen Exclusive Mode API Tutorial</a>.
  *
  * @see GraphicsDevice
@@ -79,8 +79,7 @@ public final class DisplayMode {
 			return false;
 		}
 		return (getHeight() == dm.getHeight() && getWidth() == dm.getWidth()
-				&& getBitDepth() == dm.getBitDepth() && getRefreshRate() == dm
-					.getRefreshRate());
+				&& getBitDepth() == dm.getBitDepth() && getRefreshRate() == dm.getRefreshRate());
 	}
 
 	public boolean equals(Object dm) {
@@ -92,8 +91,7 @@ public final class DisplayMode {
 	}
 
 	public int hashCode() {
-		return getWidth() + getHeight() + getBitDepth() * 7 + getRefreshRate()
-				* 13;
+		return getWidth() + getHeight() + getBitDepth() * 7 + getRefreshRate() * 13;
 	}
 
 }

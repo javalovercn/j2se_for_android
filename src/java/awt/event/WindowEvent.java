@@ -32,87 +32,87 @@ import java.awt.Window;
  * activated, deactivated, iconified, or deiconified, or when focus is
  * transfered into or out of the Window.
  * <P>
- * The event is passed to every <code>WindowListener</code>
- * or <code>WindowAdapter</code> object which registered to receive such
- * events using the window's <code>addWindowListener</code> method.
- * (<code>WindowAdapter</code> objects implement the
- * <code>WindowListener</code> interface.) Each such listener object
- * gets this <code>WindowEvent</code> when the event occurs.
+ * The event is passed to every <code>WindowListener</code> or
+ * <code>WindowAdapter</code> object which registered to receive such events
+ * using the window's <code>addWindowListener</code> method.
+ * (<code>WindowAdapter</code> objects implement the <code>WindowListener</code>
+ * interface.) Each such listener object gets this <code>WindowEvent</code> when
+ * the event occurs.
  * <p>
- * An unspecified behavior will be caused if the {@code id} parameter
- * of any particular {@code WindowEvent} instance is not
- * in the range from {@code WINDOW_FIRST} to {@code WINDOW_LAST}.
+ * An unspecified behavior will be caused if the {@code id} parameter of any
+ * particular {@code WindowEvent} instance is not in the range from
+ * {@code WINDOW_FIRST} to {@code WINDOW_LAST}.
  *
  * @author Carl Quinn
  * @author Amy Fowler
  *
  * @see WindowAdapter
  * @see WindowListener
- * @see <a href="http://java.sun.com/docs/books/tutorial/post1.0/ui/windowlistener.html">Tutorial: Writing a Window Listener</a>
+ * @see <a href=
+ *      "http://java.sun.com/docs/books/tutorial/post1.0/ui/windowlistener.html">Tutorial:
+ *      Writing a Window Listener</a>
  *
  * @since JDK1.1
  */
 public class WindowEvent extends ComponentEvent {
 
-    public static final int WINDOW_FIRST        = 200;
+	public static final int WINDOW_FIRST = 200;
 
-    public static final int WINDOW_OPENED       = WINDOW_FIRST; 
+	public static final int WINDOW_OPENED = WINDOW_FIRST;
 
-    public static final int WINDOW_CLOSING      = 1 + WINDOW_FIRST; 
+	public static final int WINDOW_CLOSING = 1 + WINDOW_FIRST;
 
-    public static final int WINDOW_CLOSED       = 2 + WINDOW_FIRST;
+	public static final int WINDOW_CLOSED = 2 + WINDOW_FIRST;
 
-    public static final int WINDOW_ICONIFIED    = 3 + WINDOW_FIRST; 
+	public static final int WINDOW_ICONIFIED = 3 + WINDOW_FIRST;
 
-    public static final int WINDOW_DEICONIFIED  = 4 + WINDOW_FIRST; 
+	public static final int WINDOW_DEICONIFIED = 4 + WINDOW_FIRST;
 
-    public static final int WINDOW_ACTIVATED    = 5 + WINDOW_FIRST;
+	public static final int WINDOW_ACTIVATED = 5 + WINDOW_FIRST;
 
-    public static final int WINDOW_DEACTIVATED  = 6 + WINDOW_FIRST;
+	public static final int WINDOW_DEACTIVATED = 6 + WINDOW_FIRST;
 
-    public static final int WINDOW_GAINED_FOCUS = 7 + WINDOW_FIRST;
+	public static final int WINDOW_GAINED_FOCUS = 7 + WINDOW_FIRST;
 
-    public static final int WINDOW_LOST_FOCUS   = 8 + WINDOW_FIRST;
+	public static final int WINDOW_LOST_FOCUS = 8 + WINDOW_FIRST;
 
-    public static final int WINDOW_STATE_CHANGED = 9 + WINDOW_FIRST;
+	public static final int WINDOW_STATE_CHANGED = 9 + WINDOW_FIRST;
 
-    public static final int WINDOW_LAST         = WINDOW_STATE_CHANGED;
+	public static final int WINDOW_LAST = WINDOW_STATE_CHANGED;
 
-    public WindowEvent(Window source, int id, Window opposite,
-            int oldState, int newState)
-{
-super(source, id);
-}
+	public WindowEvent(Window source, int id, Window opposite, int oldState, int newState) {
+		super(source, id);
+	}
 
-public WindowEvent(Window source, int id, Window opposite) {
-this(source, id, opposite, 0, 0);
-}
+	public WindowEvent(Window source, int id, Window opposite) {
+		this(source, id, opposite, 0, 0);
+	}
 
-public WindowEvent(Window source, int id, int oldState, int newState) {
-this(source, id, null, oldState, newState);
-}
+	public WindowEvent(Window source, int id, int oldState, int newState) {
+		this(source, id, null, oldState, newState);
+	}
 
-public WindowEvent(Window source, int id) {
-this(source, id, null, 0, 0);
-}
+	public WindowEvent(Window source, int id) {
+		this(source, id, null, 0, 0);
+	}
 
-    public Window getWindow() {
-        return (source instanceof Window) ? (Window)source : null;
-    }
+	public Window getWindow() {
+		return (source instanceof Window) ? (Window) source : null;
+	}
 
-    public Window getOppositeWindow() {
-            return null;
-    }
+	public Window getOppositeWindow() {
+		return null;
+	}
 
-    public int getOldState() {
-        return 0;
-    }
+	public int getOldState() {
+		return 0;
+	}
 
-    public int getNewState() {
-        return 0;
-    }
+	public int getNewState() {
+		return 0;
+	}
 
-    public String paramString() {
-        return "";
-    }
+	public String paramString() {
+		return "";
+	}
 }

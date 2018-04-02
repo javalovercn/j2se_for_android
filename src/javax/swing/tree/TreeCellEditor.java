@@ -30,16 +30,13 @@ import javax.swing.CellEditor;
 import javax.swing.JTree;
 
 /**
- * Adds to CellEditor the extensions necessary to configure an editor
- * in a tree.
+ * Adds to CellEditor the extensions necessary to configure an editor in a tree.
  *
  * @see javax.swing.JTree
  *
  * @author Scott Violet
  */
-public interface TreeCellEditor extends CellEditor
-{
-    Component getTreeCellEditorComponent(JTree tree, Object value,
-                                         boolean isSelected, boolean expanded,
-                                         boolean leaf, int row);
+public interface TreeCellEditor extends CellEditor {
+	Component getTreeCellEditorComponent(JTree tree, Object value, boolean isSelected,
+			boolean expanded, boolean leaf, int row);
 }

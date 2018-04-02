@@ -29,17 +29,17 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ColorModel;
 
 /**
- * This <code>Paint</code> interface defines how color patterns
- * can be generated for {@link Graphics2D} operations.  A class
- * implementing the <code>Paint</code> interface is added to the
- * <code>Graphics2D</code> context in order to define the color
- * pattern used by the <code>draw</code> and <code>fill</code> methods.
+ * This <code>Paint</code> interface defines how color patterns can be generated
+ * for {@link Graphics2D} operations. A class implementing the
+ * <code>Paint</code> interface is added to the <code>Graphics2D</code> context
+ * in order to define the color pattern used by the <code>draw</code> and
+ * <code>fill</code> methods.
  * <p>
- * Instances of classes implementing <code>Paint</code> must be
- * read-only because the <code>Graphics2D</code> does not clone
- * these objects when they are set as an attribute with the
- * <code>setPaint</code> method or when the <code>Graphics2D</code>
- * object is itself cloned.
+ * Instances of classes implementing <code>Paint</code> must be read-only
+ * because the <code>Graphics2D</code> does not clone these objects when they
+ * are set as an attribute with the <code>setPaint</code> method or when the
+ * <code>Graphics2D</code> object is itself cloned.
+ * 
  * @see PaintContext
  * @see Color
  * @see GradientPaint
@@ -48,7 +48,7 @@ import java.awt.image.ColorModel;
  * @version 1.36, 06/05/07
  */
 public interface Paint extends Transparency {
-	public PaintContext createContext(ColorModel cm, Rectangle deviceBounds,
-			Rectangle2D userBounds, AffineTransform xform, RenderingHints hints);
+	public PaintContext createContext(ColorModel cm, Rectangle deviceBounds, Rectangle2D userBounds,
+			AffineTransform xform, RenderingHints hints);
 
 }

@@ -28,9 +28,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
- * Private storage mechanism for Action key-value pairs.
- * In most cases this will be an array of alternating
- * key-value pairs.  As it grows larger it is scaled
+ * Private storage mechanism for Action key-value pairs. In most cases this will
+ * be an array of alternating key-value pairs. As it grows larger it is scaled
  * up to a Hashtable.
  * <p>
  * This does no synchronization, if you need thread safety synchronize on
@@ -43,8 +42,7 @@ class ArrayTable implements Cloneable {
 	private Object table = null;
 	private static final int ARRAY_BOUNDARY = 8;
 
-	static void writeArrayTable(ObjectOutputStream s, ArrayTable table)
-			throws IOException {
+	static void writeArrayTable(ObjectOutputStream s, ArrayTable table) throws IOException {
 	}
 
 	public void put(Object key, Object value) {

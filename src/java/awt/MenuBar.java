@@ -36,38 +36,32 @@ import javax.accessibility.AccessibleContext;
 import javax.accessibility.AccessibleRole;
 
 /**
- * The <code>MenuBar</code> class encapsulates the platform's
- * concept of a menu bar bound to a frame. In order to associate
- * the menu bar with a <code>Frame</code> object, call the
- * frame's <code>setMenuBar</code> method.
+ * The <code>MenuBar</code> class encapsulates the platform's concept of a menu
+ * bar bound to a frame. In order to associate the menu bar with a
+ * <code>Frame</code> object, call the frame's <code>setMenuBar</code> method.
  * <p>
- * <A NAME="mbexample"></A><!-- target for cross references -->
- * This is what a menu bar might look like:
+ * <A NAME="mbexample"></A><!-- target for cross references --> This is what a
+ * menu bar might look like:
  * <p>
- * <img src="doc-files/MenuBar-1.gif"
- * <alt="Diagram of MenuBar containing 2 menus: Examples and Options.
- * Examples menu is expanded showing items: Basic, Simple, Check, and More Examples."
- * ALIGN=center HSPACE=10 VSPACE=7>
+ * <img src="doc-files/MenuBar-1.gif" <alt="Diagram of MenuBar containing 2
+ * menus: Examples and Options. Examples menu is expanded showing items: Basic,
+ * Simple, Check, and More Examples." ALIGN=center HSPACE=10 VSPACE=7>
  * <p>
- * A menu bar handles keyboard shortcuts for menu items, passing them
- * along to its child menus.
- * (Keyboard shortcuts, which are optional, provide the user with
- * an alternative to the mouse for invoking a menu item and the
- * action that is associated with it.)
- * Each menu item can maintain an instance of <code>MenuShortcut</code>.
- * The <code>MenuBar</code> class defines several methods,
- * {@link MenuBar#shortcuts} and
- * {@link MenuBar#getShortcutMenuItem}
- * that retrieve information about the shortcuts a given
- * menu bar is managing.
+ * A menu bar handles keyboard shortcuts for menu items, passing them along to
+ * its child menus. (Keyboard shortcuts, which are optional, provide the user
+ * with an alternative to the mouse for invoking a menu item and the action that
+ * is associated with it.) Each menu item can maintain an instance of
+ * <code>MenuShortcut</code>. The <code>MenuBar</code> class defines several
+ * methods, {@link MenuBar#shortcuts} and {@link MenuBar#getShortcutMenuItem}
+ * that retrieve information about the shortcuts a given menu bar is managing.
  *
  * @author Sami Shaio
- * @see        java.awt.Frame
- * @see        java.awt.Frame#setMenuBar(java.awt.MenuBar)
- * @see        java.awt.Menu
- * @see        java.awt.MenuItem
- * @see        java.awt.MenuShortcut
- * @since      JDK1.0
+ * @see java.awt.Frame
+ * @see java.awt.Frame#setMenuBar(java.awt.MenuBar)
+ * @see java.awt.Menu
+ * @see java.awt.MenuItem
+ * @see java.awt.MenuShortcut
+ * @since JDK1.0
  */
 public class MenuBar extends MenuComponent implements MenuContainer, Accessible {
 	Vector menus = new Vector();
@@ -142,8 +136,8 @@ public class MenuBar extends MenuComponent implements MenuContainer, Accessible 
 			throws java.lang.ClassNotFoundException, java.io.IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException, HeadlessException {
+	private void readObject(ObjectInputStream s)
+			throws ClassNotFoundException, IOException, HeadlessException {
 	}
 
 	public AccessibleContext getAccessibleContext() {

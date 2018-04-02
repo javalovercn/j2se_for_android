@@ -30,27 +30,23 @@ import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 
 /**
- * This is an implementation of <code>TableModel</code> that
- * uses a <code>Vector</code> of <code>Vectors</code> to store the
- * cell value objects.
+ * This is an implementation of <code>TableModel</code> that uses a
+ * <code>Vector</code> of <code>Vectors</code> to store the cell value objects.
  * <p>
- * <strong>Warning:</strong> <code>DefaultTableModel</code> returns a
- * column class of <code>Object</code>.  When
- * <code>DefaultTableModel</code> is used with a
- * <code>TableRowSorter</code> this will result in extensive use of
- * <code>toString</code>, which for non-<code>String</code> data types
- * is expensive.  If you use <code>DefaultTableModel</code> with a
+ * <strong>Warning:</strong> <code>DefaultTableModel</code> returns a column
+ * class of <code>Object</code>. When <code>DefaultTableModel</code> is used
+ * with a <code>TableRowSorter</code> this will result in extensive use of
+ * <code>toString</code>, which for non-<code>String</code> data types is
+ * expensive. If you use <code>DefaultTableModel</code> with a
  * <code>TableRowSorter</code> you are strongly encouraged to override
  * <code>getColumnClass</code> to return the appropriate type.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Philip Milne
  *
@@ -110,8 +106,7 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 	}
 
 	public void setDataVector(Object[][] dataVector, Object[] columnIdentifiers) {
-		setDataVector(convertToVector(dataVector),
-				convertToVector(columnIdentifiers));
+		setDataVector(convertToVector(dataVector), convertToVector(columnIdentifiers));
 	}
 
 	/**
@@ -124,7 +119,7 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 	private void resizeDataStoreRows(int from, int to) {
 		synchronized (this) {
 			dataVector.setSize(getRowCount());
-	
+
 			for (int i = from; i < to; i++) {
 				if (dataVector.elementAt(i) == null) {
 					dataVector.setElementAt(new Vector(), i);
@@ -215,15 +210,11 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 	}
 
 	/**
-	 *  Examples of moves:
-	 *  <br>
-	 *  1. moveRow(1,3,5);
-	 *          a|B|C|D|e|f|g|h|i|j|k   - before
-	 *          a|e|f|g|h|B|C|D|i|j|k   - after
-	 *  <br>
-	 *  2. moveRow(6,7,1);
-	 *          a|b|c|d|e|f|G|H|i|j|k   - before
-	 *          a|G|H|b|c|d|e|f|i|j|k   - after
+	 * Examples of moves: <br>
+	 * 1. moveRow(1,3,5); a|B|C|D|e|f|g|h|i|j|k - before a|e|f|g|h|B|C|D|i|j|k -
+	 * after <br>
+	 * 2. moveRow(6,7,1); a|b|c|d|e|f|G|H|i|j|k - before a|G|H|b|c|d|e|f|i|j|k -
+	 * after
 	 */
 	public void moveRow(int start, int end, int to) {
 		int first, last;
@@ -284,7 +275,7 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 				resizeDataStoreRows(0, getRowCount());
 			}
 		}
-		
+
 		fireTableStructureChanged();
 	}
 
@@ -321,7 +312,7 @@ public class DefaultTableModel extends AbstractTableModel implements Serializabl
 	public Object getValueAt(int row, int column) {
 		synchronized (this) {
 			Vector rowVector = (Vector) dataVector.elementAt(row);
-			if(rowVector == null){
+			if (rowVector == null) {
 				return null;
 			}
 			return rowVector.elementAt(column);

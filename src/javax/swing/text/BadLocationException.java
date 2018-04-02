@@ -25,31 +25,27 @@
 package javax.swing.text;
 
 /**
- * This exception is to report bad locations within a document model
- * (that is, attempts to reference a location that doesn't exist).
+ * This exception is to report bad locations within a document model (that is,
+ * attempts to reference a location that doesn't exist).
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
-public class BadLocationException extends Exception
-{
-    public BadLocationException(String s, int offs) {
-        super(s);
-        this.offs = offs;
-    }
+public class BadLocationException extends Exception {
+	public BadLocationException(String s, int offs) {
+		super(s);
+		this.offs = offs;
+	}
 
-    public int offsetRequested() {
-        return offs;
-    }
+	public int offsetRequested() {
+		return offs;
+	}
 
-    private int offs;
+	private int offs;
 }
-

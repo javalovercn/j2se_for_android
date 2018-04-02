@@ -30,14 +30,13 @@ import java.awt.Font;
  * The base interface for all kinds of menu components. This is used by
  * {@link MenuComponent}.
  *
- * The peer interfaces are intended only for use in porting
- * the AWT. They are not intended for use by application
- * developers, and developers should not implement peers
- * nor invoke any of the peer methods directly on the peer
+ * The peer interfaces are intended only for use in porting the AWT. They are
+ * not intended for use by application developers, and developers should not
+ * implement peers nor invoke any of the peer methods directly on the peer
  * instances.
  */
 public interface MenuComponentPeer {
-    void dispose();
+	void dispose();
 
-    void setFont(Font f);
+	void setFont(Font f);
 }

@@ -25,41 +25,39 @@
 package java.awt.font;
 
 /**
-* The <code>LineMetrics</code> class allows access to the
-* metrics needed to layout characters along a line
-* and to layout of a set of lines.  A <code>LineMetrics</code>
-* object encapsulates the measurement information associated
-* with a run of text.
-* <p>
-* Fonts can have different metrics for different ranges of
-* characters.  The <code>getLineMetrics</code> methods of
-* {@link java.awt.Font Font} take some text as an argument
-* and return a <code>LineMetrics</code> object describing the
-* metrics of the initial number of characters in that text, as
-* returned by {@link #getNumChars}.
-*/
+ * The <code>LineMetrics</code> class allows access to the metrics needed to
+ * layout characters along a line and to layout of a set of lines. A
+ * <code>LineMetrics</code> object encapsulates the measurement information
+ * associated with a run of text.
+ * <p>
+ * Fonts can have different metrics for different ranges of characters. The
+ * <code>getLineMetrics</code> methods of {@link java.awt.Font Font} take some
+ * text as an argument and return a <code>LineMetrics</code> object describing
+ * the metrics of the initial number of characters in that text, as returned by
+ * {@link #getNumChars}.
+ */
 
 public abstract class LineMetrics {
 
-    public abstract int getNumChars();
+	public abstract int getNumChars();
 
-    public abstract float getAscent();
+	public abstract float getAscent();
 
-    public abstract float getDescent();
+	public abstract float getDescent();
 
-    public abstract float getLeading();
+	public abstract float getLeading();
 
-    public abstract float getHeight();
+	public abstract float getHeight();
 
-    public abstract int getBaselineIndex();
+	public abstract int getBaselineIndex();
 
-    public abstract float[] getBaselineOffsets();
+	public abstract float[] getBaselineOffsets();
 
-    public abstract float getStrikethroughOffset();
+	public abstract float getStrikethroughOffset();
 
-    public abstract float getStrikethroughThickness();
+	public abstract float getStrikethroughThickness();
 
-    public abstract float getUnderlineOffset();
+	public abstract float getUnderlineOffset();
 
-    public abstract float getUnderlineThickness();
+	public abstract float getUnderlineThickness();
 }

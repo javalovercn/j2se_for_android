@@ -30,16 +30,16 @@ import javax.accessibility.AccessibleContext;
 import javax.accessibility.AccessibleRole;
 
 /**
- * A class that implements a menu which can be dynamically popped up
- * at a specified position within a component.
+ * A class that implements a menu which can be dynamically popped up at a
+ * specified position within a component.
  * <p>
- * As the inheritance hierarchy implies, a <code>PopupMenu</code>
- *  can be used anywhere a <code>Menu</code> can be used.
- * However, if you use a <code>PopupMenu</code> like a <code>Menu</code>
- * (e.g., you add it to a <code>MenuBar</code>), then you <b>cannot</b>
- * call <code>show</code> on that <code>PopupMenu</code>.
+ * As the inheritance hierarchy implies, a <code>PopupMenu</code> can be used
+ * anywhere a <code>Menu</code> can be used. However, if you use a
+ * <code>PopupMenu</code> like a <code>Menu</code> (e.g., you add it to a
+ * <code>MenuBar</code>), then you <b>cannot</b> call <code>show</code> on that
+ * <code>PopupMenu</code>.
  *
- * @author      Amy Fowler
+ * @author Amy Fowler
  */
 public class PopupMenu extends Menu {
 

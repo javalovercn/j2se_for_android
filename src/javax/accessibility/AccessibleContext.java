@@ -30,49 +30,48 @@ import java.util.Locale;
 
 /**
  * AccessibleContext represents the minimum information all accessible objects
- * return.  This information includes the accessible name, description, role,
- * and state of the object, as well as information about its parent and
- * children.  AccessibleContext also contains methods for
- * obtaining more specific accessibility information about a component.
- * If the component supports them, these methods will return an object that
- * implements one or more of the following interfaces:
- * <P><ul>
+ * return. This information includes the accessible name, description, role, and
+ * state of the object, as well as information about its parent and children.
+ * AccessibleContext also contains methods for obtaining more specific
+ * accessibility information about a component. If the component supports them,
+ * these methods will return an object that implements one or more of the
+ * following interfaces:
+ * <P>
+ * <ul>
  * <li>{@link AccessibleAction} - the object can perform one or more actions.
- * This interface provides the standard mechanism for an assistive
- * technology to determine what those actions are and tell the object
- * to perform them.  Any object that can be manipulated should
- * support this interface.
+ * This interface provides the standard mechanism for an assistive technology to
+ * determine what those actions are and tell the object to perform them. Any
+ * object that can be manipulated should support this interface.
  * <li>{@link AccessibleComponent} - the object has a graphical representation.
- * This interface provides the standard mechanism for an assistive
- * technology to determine and set the graphical representation of the
- * object.  Any object that is rendered on the screen should support
- * this interface.
- * <li>{@link  AccessibleSelection} - the object allows its children to be
- * selected.  This interface provides the standard mechanism for an
- * assistive technology to determine the currently selected children of the object
- * as well as modify its selection set.  Any object that has children
- * that can be selected should support this interface.
+ * This interface provides the standard mechanism for an assistive technology to
+ * determine and set the graphical representation of the object. Any object that
+ * is rendered on the screen should support this interface.
+ * <li>{@link AccessibleSelection} - the object allows its children to be
+ * selected. This interface provides the standard mechanism for an assistive
+ * technology to determine the currently selected children of the object as well
+ * as modify its selection set. Any object that has children that can be
+ * selected should support this interface.
  * <li>{@link AccessibleText} - the object presents editable textual information
- * on the display.  This interface provides the standard mechanism for
- * an assistive technology to access that text via its content, attributes,
- * and spatial location.  Any object that contains editable text should
+ * on the display. This interface provides the standard mechanism for an
+ * assistive technology to access that text via its content, attributes, and
+ * spatial location. Any object that contains editable text should support this
+ * interface.
+ * <li>{@link AccessibleValue} - the object supports a numerical value. This
+ * interface provides the standard mechanism for an assistive technology to
+ * determine and set the current value of the object, as well as obtain its
+ * minimum and maximum values. Any object that supports a numerical value should
  * support this interface.
- * <li>{@link AccessibleValue} - the object supports a numerical value.  This
- * interface provides the standard mechanism for an assistive technology
- * to determine and set the current value of the object, as well as obtain its
- * minimum and maximum values.  Any object that supports a numerical value
- * should support this interface.</ul>
+ * </ul>
  *
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: Minimal information that all accessible objects return
+ * @beaninfo attribute: isContainer false description: Minimal information that
+ *           all accessible objects return
  *
-
- * @author      Peter Korn
- * @author      Hans Muller
- * @author      Willie Walker
- * @author      Lynn Monsanto
+ * 
+ * @author Peter Korn
+ * @author Hans Muller
+ * @author Willie Walker
+ * @author Lynn Monsanto
  */
 public abstract class AccessibleContext {
 	public static final String ACCESSIBLE_NAME_PROPERTY = "AccessibleName";
@@ -118,8 +117,7 @@ public abstract class AccessibleContext {
 	public void setAccessibleDescription(String s) {
 		String oldDescription = accessibleDescription;
 		accessibleDescription = s;
-		firePropertyChange(ACCESSIBLE_DESCRIPTION_PROPERTY, oldDescription,
-				accessibleDescription);
+		firePropertyChange(ACCESSIBLE_DESCRIPTION_PROPERTY, oldDescription, accessibleDescription);
 	}
 
 	public abstract AccessibleRole getAccessibleRole();
@@ -183,7 +181,6 @@ public abstract class AccessibleContext {
 		return null;
 	}
 
-	public void firePropertyChange(String propertyName, Object oldValue,
-			Object newValue) {
+	public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
 	}
 }

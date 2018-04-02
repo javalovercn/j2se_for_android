@@ -35,13 +35,12 @@ import android.graphics.Rect;
  * encapsulates information about the rendering of a particular font on a
  * particular screen.
  * <p>
- * <b>Note to subclassers</b>: Since many of these methods form closed,
- * mutually recursive loops, you must take care that you implement
- * at least one of the methods in each such loop to prevent
- * infinite recursion when your subclass is used.
- * In particular, the following is the minimal suggested set of methods
- * to override in order to ensure correctness and prevent infinite
- * recursion (though other subsets are equally feasible):
+ * <b>Note to subclassers</b>: Since many of these methods form closed, mutually
+ * recursive loops, you must take care that you implement at least one of the
+ * methods in each such loop to prevent infinite recursion when your subclass is
+ * used. In particular, the following is the minimal suggested set of methods to
+ * override in order to ensure correctness and prevent infinite recursion
+ * (though other subsets are equally feasible):
  * <ul>
  * <li>{@link #getAscent()}
  * <li>{@link #getLeading()}
@@ -50,50 +49,47 @@ import android.graphics.Rect;
  * <li>{@link #charsWidth(char[], int, int)}
  * </ul>
  * <p>
- * <img src="doc-files/FontMetrics-1.gif" alt="The letter 'p' showing its 'reference point'" border=15 align
- * ALIGN=right HSPACE=10 VSPACE=7>
- * Note that the implementations of these methods are
- * inefficient, so they are usually overridden with more efficient
- * toolkit-specific implementations.
+ * <img src="doc-files/FontMetrics-1.gif" alt="The letter 'p' showing its
+ * 'reference point'" border=15 align ALIGN=right HSPACE=10 VSPACE=7> Note that
+ * the implementations of these methods are inefficient, so they are usually
+ * overridden with more efficient toolkit-specific implementations.
  * <p>
  * When an application asks to place a character at the position
- * (<i>x</i>,&nbsp;<i>y</i>), the character is placed so that its
- * reference point (shown as the dot in the accompanying image) is
- * put at that position. The reference point specifies a horizontal
- * line called the <i>baseline</i> of the character. In normal
- * printing, the baselines of characters should align.
+ * (<i>x</i>,&nbsp;<i>y</i>), the character is placed so that its reference
+ * point (shown as the dot in the accompanying image) is put at that position.
+ * The reference point specifies a horizontal line called the <i>baseline</i> of
+ * the character. In normal printing, the baselines of characters should align.
  * <p>
  * In addition, every character in a font has an <i>ascent</i>, a
- * <i>descent</i>, and an <i>advance width</i>. The ascent is the
- * amount by which the character ascends above the baseline. The
- * descent is the amount by which the character descends below the
- * baseline. The advance width indicates the position at which AWT
- * should place the next character.
+ * <i>descent</i>, and an <i>advance width</i>. The ascent is the amount by
+ * which the character ascends above the baseline. The descent is the amount by
+ * which the character descends below the baseline. The advance width indicates
+ * the position at which AWT should place the next character.
  * <p>
- * An array of characters or a string can also have an ascent, a
- * descent, and an advance width. The ascent of the array is the
- * maximum ascent of any character in the array. The descent is the
- * maximum descent of any character in the array. The advance width
- * is the sum of the advance widths of each of the characters in the
- * character array.  The advance of a <code>String</code> is the
- * distance along the baseline of the <code>String</code>.  This
- * distance is the width that should be used for centering or
- * right-aligning the <code>String</code>.
- * <p>Note that the advance of a <code>String</code> is not necessarily
- * the sum of the advances of its characters measured in isolation
- * because the width of a character can vary depending on its context.
- * For example, in Arabic text, the shape of a character can change
- * in order to connect to other characters.  Also, in some scripts,
- * certain character sequences can be represented by a single shape,
- * called a <em>ligature</em>.  Measuring characters individually does
- * not account for these transformations.
- * <p>Font metrics are baseline-relative, meaning that they are
- * generally independent of the rotation applied to the font (modulo
- * possible grid hinting effects).  See {@link java.awt.Font Font}.
+ * An array of characters or a string can also have an ascent, a descent, and an
+ * advance width. The ascent of the array is the maximum ascent of any character
+ * in the array. The descent is the maximum descent of any character in the
+ * array. The advance width is the sum of the advance widths of each of the
+ * characters in the character array. The advance of a <code>String</code> is
+ * the distance along the baseline of the <code>String</code>. This distance is
+ * the width that should be used for centering or right-aligning the
+ * <code>String</code>.
+ * <p>
+ * Note that the advance of a <code>String</code> is not necessarily the sum of
+ * the advances of its characters measured in isolation because the width of a
+ * character can vary depending on its context. For example, in Arabic text, the
+ * shape of a character can change in order to connect to other characters.
+ * Also, in some scripts, certain character sequences can be represented by a
+ * single shape, called a <em>ligature</em>. Measuring characters individually
+ * does not account for these transformations.
+ * <p>
+ * Font metrics are baseline-relative, meaning that they are generally
+ * independent of the rotation applied to the font (modulo possible grid hinting
+ * effects). See {@link java.awt.Font Font}.
  *
- * @author      Jim Graham
- * @see         java.awt.Font
- * @since       JDK1.0
+ * @author Jim Graham
+ * @see java.awt.Font
+ * @since JDK1.0
  */
 public abstract class FontMetrics implements java.io.Serializable {
 	protected Font font;
@@ -186,18 +182,16 @@ public abstract class FontMetrics implements java.io.Serializable {
 		return null;
 	}
 
-	public LineMetrics getLineMetrics(String str, int beginIndex, int limit,
-			Graphics context) {
+	public LineMetrics getLineMetrics(String str, int beginIndex, int limit, Graphics context) {
 		return null;
 	}
 
-	public LineMetrics getLineMetrics(char[] chars, int beginIndex, int limit,
-			Graphics context) {
+	public LineMetrics getLineMetrics(char[] chars, int beginIndex, int limit, Graphics context) {
 		return null;
 	}
 
-	public LineMetrics getLineMetrics(CharacterIterator ci, int beginIndex,
-			int limit, Graphics context) {
+	public LineMetrics getLineMetrics(CharacterIterator ci, int beginIndex, int limit,
+			Graphics context) {
 		return null;
 	}
 
@@ -205,18 +199,16 @@ public abstract class FontMetrics implements java.io.Serializable {
 		return font.getStringBounds(str, null);
 	}
 
-	public Rectangle2D getStringBounds(String str, int beginIndex, int limit,
-			Graphics context) {
+	public Rectangle2D getStringBounds(String str, int beginIndex, int limit, Graphics context) {
 		return font.getStringBounds(str, beginIndex, limit, myFRC(context));
 	}
 
-	public Rectangle2D getStringBounds(char[] chars, int beginIndex, int limit,
-			Graphics context) {
+	public Rectangle2D getStringBounds(char[] chars, int beginIndex, int limit, Graphics context) {
 		return font.getStringBounds(chars, beginIndex, limit, myFRC(context));
 	}
 
-	public Rectangle2D getStringBounds(CharacterIterator ci, int beginIndex,
-			int limit, Graphics context) {
+	public Rectangle2D getStringBounds(CharacterIterator ci, int beginIndex, int limit,
+			Graphics context) {
 		return font.getStringBounds(ci, beginIndex, limit, myFRC(context));
 	}
 
@@ -229,8 +221,7 @@ public abstract class FontMetrics implements java.io.Serializable {
 	}
 
 	public String toString() {
-		return getClass().getName() + "[font=" + getFont() + ", height="
-				+ getHeight() + "]";
+		return getClass().getName() + "[font=" + getFont() + ", height=" + getHeight() + "]";
 	}
 
 }

@@ -25,12 +25,10 @@
 package java.awt.dnd;
 
 /**
- * The <code>DropTargetEvent</code> is the base
- * class for both the <code>DropTargetDragEvent</code>
- * and the <code>DropTargetDropEvent</code>.
- * It encapsulates the current state of the Drag and
- * Drop operations, in particular the current
- * <code>DropTargetContext</code>.
+ * The <code>DropTargetEvent</code> is the base class for both the
+ * <code>DropTargetDragEvent</code> and the <code>DropTargetDropEvent</code>. It
+ * encapsulates the current state of the Drag and Drop operations, in particular
+ * the current <code>DropTargetContext</code>.
  *
  * @since 1.2
  *
@@ -38,15 +36,15 @@ package java.awt.dnd;
 
 public class DropTargetEvent extends java.util.EventObject {
 
-    public DropTargetEvent(DropTargetContext dtc) {
-        super(dtc.getDropTarget());
+	public DropTargetEvent(DropTargetContext dtc) {
+		super(dtc.getDropTarget());
 
-        context  = dtc;
-    }
+		context = dtc;
+	}
 
-    public DropTargetContext getDropTargetContext() {
-        return context;
-    }
+	public DropTargetContext getDropTargetContext() {
+		return context;
+	}
 
-    protected DropTargetContext   context;
+	protected DropTargetContext context;
 }

@@ -30,13 +30,14 @@ import java.util.Vector;
 /**
  * The default model for combo boxes.
  *
- * @param <E> the type of the elements of this model
+ * @param <E>
+ *            the type of the elements of this model
  *
  * @author Arnaud Weber
  * @author Tom Santos
  */
-public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements
-		MutableComboBoxModel<E>, Serializable {
+public class DefaultComboBoxModel<E> extends AbstractListModel<E>
+		implements MutableComboBoxModel<E>, Serializable {
 	Vector<E> list;
 	Object selected;
 
@@ -65,8 +66,7 @@ public class DefaultComboBoxModel<E> extends AbstractListModel<E> implements
 	}
 
 	public void setSelectedItem(Object item) {
-		if ((selected != null && !selected.equals(item))
-				|| selected == null && item != null) {
+		if ((selected != null && !selected.equals(item)) || selected == null && item != null) {
 			selected = item;
 			fireContentsChanged(this, -1, -1);
 		}

@@ -28,22 +28,21 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * A seekable output stream interface for use by
- * <code>ImageWriter</code>s.  Various output destinations, such as
- * <code>OutputStream</code>s and <code>File</code>s, as well as
- * future fast I/O destinations may be "wrapped" by a suitable
- * implementation of this interface for use by the Image I/O API.
+ * A seekable output stream interface for use by <code>ImageWriter</code>s.
+ * Various output destinations, such as <code>OutputStream</code>s and
+ * <code>File</code>s, as well as future fast I/O destinations may be "wrapped"
+ * by a suitable implementation of this interface for use by the Image I/O API.
  *
- * <p> Unlike a standard <code>OutputStream</code>, ImageOutputStream
- * extends its counterpart, <code>ImageInputStream</code>.  Thus it is
- * possible to read from the stream as it is being written.  The same
- * seek and flush positions apply to both reading and writing, although
- * the semantics for dealing with a non-zero bit offset before a byte-aligned
- * write are necessarily different from the semantics for dealing with
- * a non-zero bit offset before a byte-aligned read.  When reading bytes,
- * any bit offset is set to 0 before the read; when writing bytes, a
- * non-zero bit offset causes the remaining bits in the byte to be written
- * as 0s.  The byte-aligned write then starts at the next byte position.
+ * <p>
+ * Unlike a standard <code>OutputStream</code>, ImageOutputStream extends its
+ * counterpart, <code>ImageInputStream</code>. Thus it is possible to read from
+ * the stream as it is being written. The same seek and flush positions apply to
+ * both reading and writing, although the semantics for dealing with a non-zero
+ * bit offset before a byte-aligned write are necessarily different from the
+ * semantics for dealing with a non-zero bit offset before a byte-aligned read.
+ * When reading bytes, any bit offset is set to 0 before the read; when writing
+ * bytes, a non-zero bit offset causes the remaining bits in the byte to be
+ * written as 0s. The byte-aligned write then starts at the next byte position.
  *
  * @see ImageInputStream
  *

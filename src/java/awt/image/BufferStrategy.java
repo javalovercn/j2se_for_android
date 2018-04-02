@@ -28,31 +28,30 @@ import java.awt.BufferCapabilities;
 import java.awt.Graphics;
 
 /**
- * The <code>BufferStrategy</code> class represents the mechanism with which
- * to organize complex memory on a particular <code>Canvas</code> or
- * <code>Window</code>.  Hardware and software limitations determine whether and
- * how a particular buffer strategy can be implemented.  These limitations
- * are detectible through the capabilities of the
- * <code>GraphicsConfiguration</code> used when creating the
- * <code>Canvas</code> or <code>Window</code>.
+ * The <code>BufferStrategy</code> class represents the mechanism with which to
+ * organize complex memory on a particular <code>Canvas</code> or
+ * <code>Window</code>. Hardware and software limitations determine whether and
+ * how a particular buffer strategy can be implemented. These limitations are
+ * detectible through the capabilities of the <code>GraphicsConfiguration</code>
+ * used when creating the <code>Canvas</code> or <code>Window</code>.
  * <p>
  * It is worth noting that the terms <i>buffer</i> and <i>surface</i> are meant
- * to be synonymous: an area of contiguous memory, either in video device
- * memory or in system memory.
+ * to be synonymous: an area of contiguous memory, either in video device memory
+ * or in system memory.
  * <p>
- * There are several types of complex buffer strategies, including
- * sequential ring buffering and blit buffering.
- * Sequential ring buffering (i.e., double or triple
- * buffering) is the most common; an application draws to a single <i>back
- * buffer</i> and then moves the contents to the front (display) in a single
- * step, either by copying the data or moving the video pointer.
- * Moving the video pointer exchanges the buffers so that the first buffer
- * drawn becomes the <i>front buffer</i>, or what is currently displayed on the
+ * There are several types of complex buffer strategies, including sequential
+ * ring buffering and blit buffering. Sequential ring buffering (i.e., double or
+ * triple buffering) is the most common; an application draws to a single
+ * <i>back buffer</i> and then moves the contents to the front (display) in a
+ * single step, either by copying the data or moving the video pointer. Moving
+ * the video pointer exchanges the buffers so that the first buffer drawn
+ * becomes the <i>front buffer</i>, or what is currently displayed on the
  * device; this is called <i>page flipping</i>.
  * <p>
  * Alternatively, the contents of the back buffer can be copied, or
  * <i>blitted</i> forward in a chain instead of moving the video pointer.
  * <p>
+ * 
  * <pre>
  * Double buffering:
  *
@@ -73,7 +72,9 @@ import java.awt.Graphics;
  * </pre>
  * <p>
  * Here is an example of how buffer strategies can be created and used:
- * <pre><code>
+ * 
+ * <pre>
+ * <code>
  *
  * // Check the capabilities of the GraphicsConfiguration
  * ...
@@ -122,7 +123,8 @@ import java.awt.Graphics;
  * // Dispose the window
  * w.setVisible(false);
  * w.dispose();
- * </code></pre>
+ * </code>
+ * </pre>
  *
  * @see java.awt.Window
  * @see java.awt.Canvas
@@ -132,16 +134,16 @@ import java.awt.Graphics;
  * @since 1.4
  */
 public abstract class BufferStrategy {
-    public abstract BufferCapabilities getCapabilities();
+	public abstract BufferCapabilities getCapabilities();
 
-    public abstract Graphics getDrawGraphics();
+	public abstract Graphics getDrawGraphics();
 
-    public abstract boolean contentsLost();
+	public abstract boolean contentsLost();
 
-    public abstract boolean contentsRestored();
+	public abstract boolean contentsRestored();
 
-    public abstract void show();
+	public abstract void show();
 
-    public void dispose() {
-    }
+	public void dispose() {
+	}
 }

@@ -29,25 +29,23 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 /**
- * This interface describes single-input/single-output
- * operations performed on <CODE>BufferedImage</CODE> objects.
- * It is implemented by <CODE>AffineTransformOp</CODE>,
- * <CODE>ConvolveOp</CODE>, <CODE>ColorConvertOp</CODE>, <CODE>RescaleOp</CODE>,
- * and <CODE>LookupOp</CODE>.  These objects can be passed into
- * a <CODE>BufferedImageFilter</CODE> to operate on a
- * <CODE>BufferedImage</CODE> in the
- * ImageProducer-ImageFilter-ImageConsumer paradigm.
+ * This interface describes single-input/single-output operations performed on
+ * <CODE>BufferedImage</CODE> objects. It is implemented by
+ * <CODE>AffineTransformOp</CODE>, <CODE>ConvolveOp</CODE>,
+ * <CODE>ColorConvertOp</CODE>, <CODE>RescaleOp</CODE>, and
+ * <CODE>LookupOp</CODE>. These objects can be passed into a
+ * <CODE>BufferedImageFilter</CODE> to operate on a <CODE>BufferedImage</CODE>
+ * in the ImageProducer-ImageFilter-ImageConsumer paradigm.
  * <p>
- * Classes that implement this
- * interface must specify whether or not they allow in-place filtering--
- * filter operations where the source object is equal to the destination
- * object.
+ * Classes that implement this interface must specify whether or not they allow
+ * in-place filtering-- filter operations where the source object is equal to
+ * the destination object.
  * <p>
- * This interface cannot be used to describe more sophisticated operations
- * such as those that take multiple sources. Note that this restriction also
- * means that the values of the destination pixels prior to the operation are
- * not used as input to the filter operation.
-
+ * This interface cannot be used to describe more sophisticated operations such
+ * as those that take multiple sources. Note that this restriction also means
+ * that the values of the destination pixels prior to the operation are not used
+ * as input to the filter operation.
+ * 
  * @see BufferedImage
  * @see BufferedImageFilter
  * @see AffineTransformOp
@@ -58,14 +56,13 @@ import java.awt.geom.Rectangle2D;
  * @see RescaleOp
  */
 public interface BufferedImageOp {
-    public BufferedImage filter(BufferedImage src, BufferedImage dest);
+	public BufferedImage filter(BufferedImage src, BufferedImage dest);
 
-    public Rectangle2D getBounds2D (BufferedImage src);
+	public Rectangle2D getBounds2D(BufferedImage src);
 
-    public BufferedImage createCompatibleDestImage (BufferedImage src,
-                                                    ColorModel destCM);
+	public BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel destCM);
 
-    public Point2D getPoint2D (Point2D srcPt, Point2D dstPt);
+	public Point2D getPoint2D(Point2D srcPt, Point2D dstPt);
 
-    public RenderingHints getRenderingHints();
+	public RenderingHints getRenderingHints();
 }

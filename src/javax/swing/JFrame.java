@@ -42,89 +42,80 @@ import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
 
 /**
- * An extended version of <code>java.awt.Frame</code> that adds support for
- * the JFC/Swing component architecture.
- * You can find task-oriented documentation about using <code>JFrame</code>
- * in <em>The Java Tutorial</em>, in the section
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/frame.html">How to Make Frames</a>.
+ * An extended version of <code>java.awt.Frame</code> that adds support for the
+ * JFC/Swing component architecture. You can find task-oriented documentation
+ * about using <code>JFrame</code> in <em>The Java Tutorial</em>, in the section
+ * <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/frame.html">How
+ * to Make Frames</a>.
  *
  * <p>
- * The <code>JFrame</code> class is slightly incompatible with <code>Frame</code>.
- * Like all other JFC/Swing top-level containers,
- * a <code>JFrame</code> contains a <code>JRootPane</code> as its only child.
- * The <b>content pane</b> provided by the root pane should,
- * as a rule, contain
- * all the non-menu components displayed by the <code>JFrame</code>.
- * This is different from the AWT <code>Frame</code> case.
- * As a conveniance <code>add</code> and its variants, <code>remove</code> and
+ * The <code>JFrame</code> class is slightly incompatible with
+ * <code>Frame</code>. Like all other JFC/Swing top-level containers, a
+ * <code>JFrame</code> contains a <code>JRootPane</code> as its only child. The
+ * <b>content pane</b> provided by the root pane should, as a rule, contain all
+ * the non-menu components displayed by the <code>JFrame</code>. This is
+ * different from the AWT <code>Frame</code> case. As a conveniance
+ * <code>add</code> and its variants, <code>remove</code> and
  * <code>setLayout</code> have been overridden to forward to the
  * <code>contentPane</code> as necessary. This means you can write:
+ * 
  * <pre>
- *       frame.add(child);
+ * frame.add(child);
  * </pre>
- * And the child will be added to the contentPane.
- * The content pane will
- * always be non-null. Attempting to set it to null will cause the JFrame
- * to throw an exception. The default content pane will have a BorderLayout
- * manager set on it.
- * Refer to {@link javax.swing.RootPaneContainer}
- * for details on adding, removing and setting the <code>LayoutManager</code>
- * of a <code>JFrame</code>.
+ * 
+ * And the child will be added to the contentPane. The content pane will always
+ * be non-null. Attempting to set it to null will cause the JFrame to throw an
+ * exception. The default content pane will have a BorderLayout manager set on
+ * it. Refer to {@link javax.swing.RootPaneContainer} for details on adding,
+ * removing and setting the <code>LayoutManager</code> of a <code>JFrame</code>.
  * <p>
  * Unlike a <code>Frame</code>, a <code>JFrame</code> has some notion of how to
- * respond when the user attempts to close the window. The default behavior
- * is to simply hide the JFrame when the user closes the window. To change the
- * default behavior, you invoke the method
- * {@link #setDefaultCloseOperation}.
- * To make the <code>JFrame</code> behave the same as a <code>Frame</code>
+ * respond when the user attempts to close the window. The default behavior is
+ * to simply hide the JFrame when the user closes the window. To change the
+ * default behavior, you invoke the method {@link #setDefaultCloseOperation}. To
+ * make the <code>JFrame</code> behave the same as a <code>Frame</code>
  * instance, use
  * <code>setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE)</code>.
  * <p>
- * For more information on content panes
- * and other features that root panes provide,
- * see <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/toplevel.html">Using Top-Level Containers</a> in <em>The Java Tutorial</em>.
+ * For more information on content panes and other features that root panes
+ * provide, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/toplevel.html">Using
+ * Top-Level Containers</a> in <em>The Java Tutorial</em>.
  * <p>
- * In a multi-screen environment, you can create a <code>JFrame</code>
- * on a different screen device.  See {@link java.awt.Frame} for more
- * information.
+ * In a multi-screen environment, you can create a <code>JFrame</code> on a
+ * different screen device. See {@link java.awt.Frame} for more information.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JRootPane
  * @see #setDefaultCloseOperation
  * @see java.awt.event.WindowListener#windowClosing
  * @see javax.swing.RootPaneContainer
  *
- * @beaninfo
- *      attribute: isContainer true
- *      attribute: containerDelegate getContentPane
- *    description: A toplevel window which can be minimized to an icon.
+ * @beaninfo attribute: isContainer true attribute: containerDelegate
+ *           getContentPane description: A toplevel window which can be
+ *           minimized to an icon.
  *
  * @author Jeff Dinkins
  * @author Georges Saab
  * @author David Kloba
  */
-public class JFrame extends Frame implements WindowConstants, Accessible,
-		RootPaneContainer, TransferHandler.HasGetTransferHandler {
+public class JFrame extends Frame implements WindowConstants, Accessible, RootPaneContainer,
+		TransferHandler.HasGetTransferHandler {
 	public static final int EXIT_ON_CLOSE = 3;
 
 	private int defaultCloseOperation = HIDE_ON_CLOSE;
 	boolean rootPaneCheckingEnabled = false;
-	
+
 	public JFrame() throws HeadlessException {
 		super();
 		init("");
@@ -161,21 +152,21 @@ public class JFrame extends Frame implements WindowConstants, Accessible,
 
 	protected void processWindowEvent(WindowEvent e) {
 		super.processWindowEvent(e);
-		
-		if(e.getID() == WindowEvent.WINDOW_CLOSING){
+
+		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
 			switch (defaultCloseOperation) {
-				case WindowConstants.HIDE_ON_CLOSE:
-					setVisible(false);
-					break;
-				case WindowConstants.DISPOSE_ON_CLOSE:
-					dispose();
-					break;
-				case WindowConstants.DO_NOTHING_ON_CLOSE:
-				default:
-					break;
-				case WindowConstants.EXIT_ON_CLOSE:
-					System.exit(0);
-					break;
+			case WindowConstants.HIDE_ON_CLOSE:
+				setVisible(false);
+				break;
+			case WindowConstants.DISPOSE_ON_CLOSE:
+				dispose();
+				break;
+			case WindowConstants.DO_NOTHING_ON_CLOSE:
+			default:
+				break;
+			case WindowConstants.EXIT_ON_CLOSE:
+				System.exit(0);
+				break;
 			}
 		}
 	}
@@ -218,11 +209,11 @@ public class JFrame extends Frame implements WindowConstants, Accessible,
 	}
 
 	protected void addImpl(Component comp, Object constraints, int index) {
-//		if (isRootPaneCheckingEnabled()) {
-			getContentPane().add(comp, constraints, index);
-//		} else {
-//			super.addImpl(comp, constraints, index);
-//		}
+		// if (isRootPaneCheckingEnabled()) {
+		getContentPane().add(comp, constraints, index);
+		// } else {
+		// super.addImpl(comp, constraints, index);
+		// }
 	}
 
 	public void remove(Component comp) {
@@ -234,15 +225,16 @@ public class JFrame extends Frame implements WindowConstants, Accessible,
 	}
 
 	public void setLayout(LayoutManager manager) {
-//		if (isRootPaneCheckingEnabled()) {
-			getContentPane().setLayout(manager);
-//		} else {
-//			super.setLayout(manager);
-//		}
+		// if (isRootPaneCheckingEnabled()) {
+		getContentPane().setLayout(manager);
+		// } else {
+		// super.setLayout(manager);
+		// }
 	}
 
 	public JRootPane getRootPane() {
-//		DebugLogger.log("Warning : please don't add component to RootPane. ");
+		// DebugLogger.log("Warning : please don't add component to RootPane.
+		// ");
 		return rootPane;
 	}
 
@@ -251,16 +243,17 @@ public class JFrame extends Frame implements WindowConstants, Accessible,
 			remove(rootPane);
 		}
 		rootPane = root;
-//		if (rootPane != null) {
-//			boolean checkingEnabled = isRootPaneCheckingEnabled();
-//			try {
-//				setRootPaneCheckingEnabled(false);
-//				add(rootPane, BorderLayout.CENTER);
-//				DebugLogger.log("add JRootPane : " + root.toString() + " to JFrame Container : " + this.toString());
-//			} finally {
-//				setRootPaneCheckingEnabled(checkingEnabled);
-//			}
-//		}
+		// if (rootPane != null) {
+		// boolean checkingEnabled = isRootPaneCheckingEnabled();
+		// try {
+		// setRootPaneCheckingEnabled(false);
+		// add(rootPane, BorderLayout.CENTER);
+		// DebugLogger.log("add JRootPane : " + root.toString() + " to JFrame
+		// Container : " + this.toString());
+		// } finally {
+		// setRootPaneCheckingEnabled(checkingEnabled);
+		// }
+		// }
 	}
 
 	public void setIconImage(Image image) {

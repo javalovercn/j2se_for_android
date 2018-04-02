@@ -34,19 +34,16 @@ import javax.swing.event.EventListenerList;
 /**
  * A generic implementation of SingleSelectionModel.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Dave Moore
  */
-public class DefaultSingleSelectionModel implements SingleSelectionModel,
-		Serializable {
+public class DefaultSingleSelectionModel implements SingleSelectionModel, Serializable {
 	protected transient ChangeEvent changeEvent = null;
 	protected EventListenerList listenerList = new EventListenerList();
 
@@ -89,7 +86,7 @@ public class DefaultSingleSelectionModel implements SingleSelectionModel,
 
 	protected void fireStateChanged() {
 		ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
-		if (changeEvent == null){
+		if (changeEvent == null) {
 			changeEvent = new ChangeEvent(this);
 		}
 		for (int i = listeners.length - 1; i >= 0; i--) {

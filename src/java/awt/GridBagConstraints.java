@@ -25,9 +25,8 @@
 package java.awt;
 
 /**
- * The <code>GridBagConstraints</code> class specifies constraints
- * for components that are laid out using the
- * <code>GridBagLayout</code> class.
+ * The <code>GridBagConstraints</code> class specifies constraints for
+ * components that are laid out using the <code>GridBagLayout</code> class.
  *
  * @author Doug Stein
  * @author Bill Spitzak (orignial NeWS & OLIT implementation)
@@ -134,9 +133,8 @@ public class GridBagConstraints implements Cloneable, java.io.Serializable {
 		ipady = 0;
 	}
 
-	public GridBagConstraints(int gridx, int gridy, int gridwidth,
-			int gridheight, double weightx, double weighty, int anchor,
-			int fill, Insets insets, int ipadx, int ipady) {
+	public GridBagConstraints(int gridx, int gridy, int gridwidth, int gridheight, double weightx,
+			double weighty, int anchor, int fill, Insets insets, int ipadx, int ipady) {
 		this.gridx = gridx;
 		this.gridy = gridy;
 		this.gridwidth = gridwidth;
@@ -151,9 +149,8 @@ public class GridBagConstraints implements Cloneable, java.io.Serializable {
 	}
 
 	public Object clone() {
-		GridBagConstraints c = new GridBagConstraints(gridx, gridy, gridwidth,
-				gridheight, weightx, weighty, anchor, fill, insets, ipadx,
-				ipady);
+		GridBagConstraints c = new GridBagConstraints(gridx, gridy, gridwidth, gridheight, weightx,
+				weighty, anchor, fill, insets, ipadx, ipady);
 		c.insets = (Insets) insets.clone();
 		return c;
 	}

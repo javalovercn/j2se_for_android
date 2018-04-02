@@ -49,38 +49,32 @@ import javax.swing.plaf.ToolBarUI;
 import javax.swing.plaf.UIResource;
 
 /**
- * <code>JToolBar</code> provides a component that is useful for
- * displaying commonly used <code>Action</code>s or controls.
- * For examples and information on using tool bars see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/toolbar.html">How to Use Tool Bars</a>,
- * a section in <em>The Java Tutorial</em>.
+ * <code>JToolBar</code> provides a component that is useful for displaying
+ * commonly used <code>Action</code>s or controls. For examples and information
+ * on using tool bars see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/toolbar.html">How
+ * to Use Tool Bars</a>, a section in <em>The Java Tutorial</em>.
  *
  * <p>
- * With most look and feels,
- * the user can drag out a tool bar into a separate window
- * (unless the <code>floatable</code> property is set to <code>false</code>).
- * For drag-out to work correctly, it is recommended that you add
- * <code>JToolBar</code> instances to one of the four "sides" of a
- * container whose layout manager is a <code>BorderLayout</code>,
- * and do not add children to any of the other four "sides".
+ * With most look and feels, the user can drag out a tool bar into a separate
+ * window (unless the <code>floatable</code> property is set to
+ * <code>false</code>). For drag-out to work correctly, it is recommended that
+ * you add <code>JToolBar</code> instances to one of the four "sides" of a
+ * container whose layout manager is a <code>BorderLayout</code>, and do not add
+ * children to any of the other four "sides".
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer true
- * description: A component which displays commonly used controls or Actions.
+ * @beaninfo attribute: isContainer true description: A component which displays
+ *           commonly used controls or Actions.
  *
  * @author Georges Saab
  * @author Jeff Shapiro
@@ -427,8 +421,7 @@ public class JToolBar extends JComponent implements SwingConstants, Accessible {
 	 *           description: Will draw rollover button borders in the toolbar.
 	 */
 	public void setRollover(boolean rollover) {
-		putClientProperty("JToolBar.isRollover", rollover ? Boolean.TRUE
-				: Boolean.FALSE);
+		putClientProperty("JToolBar.isRollover", rollover ? Boolean.TRUE : Boolean.FALSE);
 	}
 
 	/**
@@ -452,8 +445,7 @@ public class JToolBar extends JComponent implements SwingConstants, Accessible {
 		case HORIZONTAL:
 			break;
 		default:
-			throw new IllegalArgumentException(
-					"orientation must be one of: VERTICAL, HORIZONTAL");
+			throw new IllegalArgumentException("orientation must be one of: VERTICAL, HORIZONTAL");
 		}
 	}
 
@@ -503,8 +495,7 @@ public class JToolBar extends JComponent implements SwingConstants, Accessible {
 	 */
 	protected JButton createActionComponent(Action a) {
 		JButton b = new JButton() {
-			protected PropertyChangeListener createActionPropertyChangeListener(
-					Action a) {
+			protected PropertyChangeListener createActionPropertyChangeListener(Action a) {
 				PropertyChangeListener pcl = createActionChangeListener(this);
 				if (pcl == null) {
 					pcl = super.createActionPropertyChangeListener(a);
@@ -512,9 +503,8 @@ public class JToolBar extends JComponent implements SwingConstants, Accessible {
 				return pcl;
 			}
 		};
-		if (a != null
-				&& (a.getValue(Action.SMALL_ICON) != null || a
-						.getValue(Action.LARGE_ICON_KEY) != null)) {
+		if (a != null && (a.getValue(Action.SMALL_ICON) != null
+				|| a.getValue(Action.LARGE_ICON_KEY) != null)) {
 			b.setHideActionText(true);
 		}
 		b.setHorizontalTextPosition(JButton.CENTER);
@@ -686,16 +676,14 @@ public class JToolBar extends JComponent implements SwingConstants, Accessible {
 		String paintBorderString = (paintBorder ? "true" : "false");
 		String marginString = (margin != null ? margin.toString() : "");
 		String floatableString = (floatable ? "true" : "false");
-		String orientationString = (orientation == HORIZONTAL ? "HORIZONTAL"
-				: "VERTICAL");
+		String orientationString = (orientation == HORIZONTAL ? "HORIZONTAL" : "VERTICAL");
 
-		return super.paramString() + ",floatable=" + floatableString
-				+ ",margin=" + marginString + ",orientation="
-				+ orientationString + ",paintBorder=" + paintBorderString;
+		return super.paramString() + ",floatable=" + floatableString + ",margin=" + marginString
+				+ ",orientation=" + orientationString + ",paintBorder=" + paintBorderString;
 	}
 
-	private class DefaultToolBarLayout extends BaseLayoutManager2 implements Serializable,
-			PropertyChangeListener, UIResource {
+	private class DefaultToolBarLayout extends BaseLayoutManager2
+			implements Serializable, PropertyChangeListener, UIResource {
 
 		BoxLayout lm;
 
@@ -715,7 +703,7 @@ public class JToolBar extends JComponent implements SwingConstants, Accessible {
 		public void addLayoutComponent(Component comp, Object constraints) {
 			super.addLayoutComponent(comp, constraints);
 			lm.addLayoutComponent(comp, constraints);
-			if(isLayout){
+			if (isLayout) {
 				layoutContainer(parent);
 			}
 		}
@@ -723,7 +711,7 @@ public class JToolBar extends JComponent implements SwingConstants, Accessible {
 		public void removeLayoutComponent(Component comp) {
 			super.removeLayoutComponent(comp);
 			lm.removeLayoutComponent(comp);
-			if(isLayout){
+			if (isLayout) {
 				layoutContainer(parent);
 			}
 		}

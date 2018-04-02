@@ -30,26 +30,23 @@ import java.util.EventObject;
 import javax.swing.event.CellEditorListener;
 
 /**
-*
-* A base class for <code>CellEditors</code>, providing default
-* implementations for the methods in the <code>CellEditor</code>
-* interface except <code>getCellEditorValue()</code>.
-* Like the other abstract implementations in Swing, also manages a list
-* of listeners.
-*
-* <p>
-* <strong>Warning:</strong>
-* Serialized objects of this class will not be compatible with
-* future Swing releases. The current serialization support is
-* appropriate for short term storage or RMI between applications running
-* the same version of Swing.  As of 1.4, support for long term storage
-* of all JavaBeans<sup><font size="-2">TM</font></sup>
-* has been added to the <code>java.beans</code> package.
-* Please see {@link java.beans.XMLEncoder}.
-*
-* @author Philip Milne
-* @since 1.3
-*/
+ *
+ * A base class for <code>CellEditors</code>, providing default implementations
+ * for the methods in the <code>CellEditor</code> interface except
+ * <code>getCellEditorValue()</code>. Like the other abstract implementations in
+ * Swing, also manages a list of listeners.
+ *
+ * <p>
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
+ *
+ * @author Philip Milne
+ * @since 1.3
+ */
 public abstract class AbstractCellEditor implements CellEditor, Serializable {
 
 	public boolean isCellEditable(EventObject e) {

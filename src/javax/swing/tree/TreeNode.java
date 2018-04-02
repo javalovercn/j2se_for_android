@@ -27,34 +27,32 @@ package javax.swing.tree;
 import java.util.Enumeration;
 
 /**
- * Defines the requirements for an object that can be used as a
- * tree node in a JTree.
+ * Defines the requirements for an object that can be used as a tree node in a
+ * JTree.
  * <p>
  * Implementations of <code>TreeNode</code> that override <code>equals</code>
- * will typically need to override <code>hashCode</code> as well.  Refer
- * to {@link javax.swing.tree.TreeModel} for more information.
+ * will typically need to override <code>hashCode</code> as well. Refer to
+ * {@link javax.swing.tree.TreeModel} for more information.
  *
- * For further information and examples of using tree nodes,
- * see <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to Use Tree Nodes</a>
- * in <em>The Java Tutorial.</em>
+ * For further information and examples of using tree nodes, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to
+ * Use Tree Nodes</a> in <em>The Java Tutorial.</em>
  *
  * @author Rob Davis
  * @author Scott Violet
  */
-public interface TreeNode
-{
-    TreeNode getChildAt(int childIndex);
+public interface TreeNode {
+	TreeNode getChildAt(int childIndex);
 
-    int getChildCount();
+	int getChildCount();
 
-    TreeNode getParent();
+	TreeNode getParent();
 
-    int getIndex(TreeNode node);
+	int getIndex(TreeNode node);
 
-    boolean getAllowsChildren();
+	boolean getAllowsChildren();
 
-    boolean isLeaf();
+	boolean isLeaf();
 
-    Enumeration children();
+	Enumeration children();
 }

@@ -51,110 +51,95 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 /**
- * Provides a scrollable view of a lightweight component.
- * A <code>JScrollPane</code> manages a viewport, optional
- * vertical and horizontal scroll bars, and optional row and
- * column heading viewports.
- * You can find task-oriented documentation of <code>JScrollPane</code> in
- *  <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/scrollpane.html">How to Use Scroll Panes</a>,
- * a section in <em>The Java Tutorial</em>.  Note that
+ * Provides a scrollable view of a lightweight component. A
+ * <code>JScrollPane</code> manages a viewport, optional vertical and horizontal
+ * scroll bars, and optional row and column heading viewports. You can find
+ * task-oriented documentation of <code>JScrollPane</code> in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/scrollpane.html">How
+ * to Use Scroll Panes</a>, a section in <em>The Java Tutorial</em>. Note that
  * <code>JScrollPane</code> does not support heavyweight components.
  * <p>
  * <TABLE ALIGN="RIGHT" BORDER="0" SUMMARY="layout">
- *    <TR>
- *    <TD ALIGN="CENTER">
- *      <P ALIGN="CENTER"><IMG SRC="doc-files/JScrollPane-1.gif"
- *      alt="The following text describes this image."
- *      WIDTH="256" HEIGHT="248" ALIGN="BOTTOM" BORDER="0">
- *    </TD>
- *    </TR>
+ * <TR>
+ * <TD ALIGN="CENTER">
+ * <P ALIGN="CENTER">
+ * <IMG SRC="doc-files/JScrollPane-1.gif" alt="The following text describes this
+ * image." WIDTH="256" HEIGHT="248" ALIGN="BOTTOM" BORDER="0"></TD>
+ * </TR>
  * </TABLE>
- * The <code>JViewport</code> provides a window,
- * or &quot;viewport&quot; onto a data
- * source -- for example, a text file. That data source is the
+ * The <code>JViewport</code> provides a window, or &quot;viewport&quot; onto a
+ * data source -- for example, a text file. That data source is the
  * &quot;scrollable client&quot; (aka data model) displayed by the
- * <code>JViewport</code> view.
- * A <code>JScrollPane</code> basically consists of <code>JScrollBar</code>s,
- * a <code>JViewport</code>, and the wiring between them,
- * as shown in the diagram at right.
+ * <code>JViewport</code> view. A <code>JScrollPane</code> basically consists of
+ * <code>JScrollBar</code>s, a <code>JViewport</code>, and the wiring between
+ * them, as shown in the diagram at right.
  * <p>
- * In addition to the scroll bars and viewport,
- * a <code>JScrollPane</code> can have a
- * column header and a row header. Each of these is a
- * <code>JViewport</code> object that
- * you specify with <code>setRowHeaderView</code>,
- * and <code>setColumnHeaderView</code>.
- * The column header viewport automatically scrolls left and right, tracking
- * the left-right scrolling of the main viewport.
- * (It never scrolls vertically, however.)
- * The row header acts in a similar fashion.
+ * In addition to the scroll bars and viewport, a <code>JScrollPane</code> can
+ * have a column header and a row header. Each of these is a
+ * <code>JViewport</code> object that you specify with
+ * <code>setRowHeaderView</code>, and <code>setColumnHeaderView</code>. The
+ * column header viewport automatically scrolls left and right, tracking the
+ * left-right scrolling of the main viewport. (It never scrolls vertically,
+ * however.) The row header acts in a similar fashion.
  * <p>
- * Where two scroll bars meet, the row header meets the column header,
- * or a scroll bar meets one of the headers, both components stop short
- * of the corner, leaving a rectangular space which is, by default, empty.
- * These spaces can potentially exist in any number of the four corners.
- * In the previous diagram, the top right space is present and identified
- * by the label "corner component".
+ * Where two scroll bars meet, the row header meets the column header, or a
+ * scroll bar meets one of the headers, both components stop short of the
+ * corner, leaving a rectangular space which is, by default, empty. These spaces
+ * can potentially exist in any number of the four corners. In the previous
+ * diagram, the top right space is present and identified by the label "corner
+ * component".
  * <p>
  * Any number of these empty spaces can be replaced by using the
  * <code>setCorner</code> method to add a component to a particular corner.
- * (Note: The same component cannot be added to multiple corners.)
- * This is useful if there's
- * some extra decoration or function you'd like to add to the scroll pane.
- * The size of each corner component is entirely determined by the size of the
- * headers and/or scroll bars that surround it.
+ * (Note: The same component cannot be added to multiple corners.) This is
+ * useful if there's some extra decoration or function you'd like to add to the
+ * scroll pane. The size of each corner component is entirely determined by the
+ * size of the headers and/or scroll bars that surround it.
  * <p>
  * A corner component will only be visible if there is an empty space in that
- * corner for it to exist in. For example, consider a component set into the
- * top right corner of a scroll pane with a column header. If the scroll pane's
+ * corner for it to exist in. For example, consider a component set into the top
+ * right corner of a scroll pane with a column header. If the scroll pane's
  * vertical scrollbar is not present, perhaps because the view component hasn't
- * grown large enough to require it, then the corner component will not be
- * shown (since there is no empty space in that corner created by the meeting
- * of the header and vertical scroll bar). Forcing the scroll bar to always be
- * shown, using
- * <code>setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS)</code>,
+ * grown large enough to require it, then the corner component will not be shown
+ * (since there is no empty space in that corner created by the meeting of the
+ * header and vertical scroll bar). Forcing the scroll bar to always be shown,
+ * using <code>setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS)</code>,
  * will ensure that the space for the corner component always exists.
  * <p>
- * To add a border around the main viewport,
- * you can use <code>setViewportBorder</code>.
- * (Of course, you can also add a border around the whole scroll pane using
- * <code>setBorder</code>.)
+ * To add a border around the main viewport, you can use
+ * <code>setViewportBorder</code>. (Of course, you can also add a border around
+ * the whole scroll pane using <code>setBorder</code>.)
  * <p>
- * A common operation to want to do is to set the background color that will
- * be used if the main viewport view is smaller than the viewport, or is
- * not opaque. This can be accomplished by setting the background color
- * of the viewport, via <code>scrollPane.getViewport().setBackground()</code>.
- * The reason for setting the color of the viewport and not the scrollpane
- * is that by default <code>JViewport</code> is opaque
- * which, among other things, means it will completely fill
- * in its background using its background color.  Therefore when
- * <code>JScrollPane</code> draws its background the viewport will
- * usually draw over it.
+ * A common operation to want to do is to set the background color that will be
+ * used if the main viewport view is smaller than the viewport, or is not
+ * opaque. This can be accomplished by setting the background color of the
+ * viewport, via <code>scrollPane.getViewport().setBackground()</code>. The
+ * reason for setting the color of the viewport and not the scrollpane is that
+ * by default <code>JViewport</code> is opaque which, among other things, means
+ * it will completely fill in its background using its background color.
+ * Therefore when <code>JScrollPane</code> draws its background the viewport
+ * will usually draw over it.
  * <p>
- * By default <code>JScrollPane</code> uses <code>ScrollPaneLayout</code>
- * to handle the layout of its child Components. <code>ScrollPaneLayout</code>
+ * By default <code>JScrollPane</code> uses <code>ScrollPaneLayout</code> to
+ * handle the layout of its child Components. <code>ScrollPaneLayout</code>
  * determines the size to make the viewport view in one of two ways:
  * <ol>
- *   <li>If the view implements <code>Scrollable</code>
- *       a combination of <code>getPreferredScrollableViewportSize</code>,
- *       <code>getScrollableTracksViewportWidth</code> and
- *       <code>getScrollableTracksViewportHeight</code>is used, otherwise
- *   <li><code>getPreferredSize</code> is used.
+ * <li>If the view implements <code>Scrollable</code> a combination of
+ * <code>getPreferredScrollableViewportSize</code>,
+ * <code>getScrollableTracksViewportWidth</code> and
+ * <code>getScrollableTracksViewportHeight</code>is used, otherwise
+ * <li><code>getPreferredSize</code> is used.
  * </ol>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JScrollBar
  * @see JViewport
@@ -167,52 +152,52 @@ import android.widget.ScrollView;
  * @see #setCorner
  * @see #setViewportBorder
  *
- * @beaninfo
- *     attribute: isContainer true
- *     attribute: containerDelegate getViewport
- *   description: A specialized container that manages a viewport, optional scrollbars and headers
+ * @beaninfo attribute: isContainer true attribute: containerDelegate
+ *           getViewport description: A specialized container that manages a
+ *           viewport, optional scrollbars and headers
  *
  * @author Hans Muller
  */
-public class JScrollPane extends JComponent implements ScrollPaneConstants,
-		Accessible {
+public class JScrollPane extends JComponent implements ScrollPaneConstants, Accessible {
 	final LinearLayout defaultLinearLayout;
 	final ScrollView scrollView;
 	final HorizontalScrollView hScrollView;
-	
+
 	private static final String uiClassID = "ScrollPaneUI";
 
 	protected int verticalScrollBarPolicy = VERTICAL_SCROLLBAR_AS_NEEDED;
 	protected int horizontalScrollBarPolicy = HORIZONTAL_SCROLLBAR_AS_NEEDED;
-	
+
 	public JScrollPane(Component view, int vsbPolicy, int hsbPolicy) {
-		defaultLinearLayout = new LinearLayout(ActivityManager.getActivity());
+		defaultLinearLayout = new LinearLayout(ActivityManager.applicationContext);
 
 		setLayout(new ScrollPaneLayout.UIResource());
-		
-		scrollView = new ScrollView(ActivityManager.getActivity());
+
+		scrollView = new ScrollView(ActivityManager.applicationContext);
 		scrollView.setBackgroundColor(AndroidUIUtil.WIN_BODY_BACK.toAndroid());
-//		scrollView.setBackgroundColor(UIUtil.getEditBackground().toAndroid());
-		
-		hScrollView = new HorizontalScrollView(ActivityManager.getActivity());
+		// scrollView.setBackgroundColor(UIUtil.getEditBackground().toAndroid());
+
+		hScrollView = new HorizontalScrollView(ActivityManager.applicationContext);
 		hScrollView.setBackgroundColor(AndroidUIUtil.WIN_BODY_BACK.toAndroid());
-		
+
 		{
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 			hScrollView.addView(scrollView, lp);
-			
-			hScrollView.setFillViewport(true);//如果表格内容小于最大可用宽度，则自动扩展以填满宽度。
+
+			hScrollView.setFillViewport(true);// 如果表格内容小于最大可用宽度，则自动扩展以填满宽度。
 		}
-		
+
 		{
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 			defaultLinearLayout.addView(hScrollView, lp);
 		}
-		
-		if(view != null){
+
+		if (view != null) {
 			setViewportView(view);
 		}
-		
+
 		setHorizontalScrollBarPolicy(hsbPolicy);
 		setVerticalScrollBarPolicy(vsbPolicy);
 	}
@@ -248,7 +233,7 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 
 	public void setLayout(LayoutManager layout) {
 		super.setLayout(layout);
-		setPeerAdAPI(defaultLinearLayout);//特别处理
+		setPeerAdAPI(defaultLinearLayout);// 特别处理
 	}
 
 	@Override
@@ -270,7 +255,8 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 	}
 
 	public void setHorizontalScrollBarPolicy(int policy) {
-		LogManager.warning("#########only HORIZONTAL_SCROLLBAR_AS_NEEDED is supported and default !#########");
+		LogManager.warning(
+				"#########only HORIZONTAL_SCROLLBAR_AS_NEEDED is supported and default !#########");
 	}
 
 	public Border getViewportBorder() {
@@ -296,7 +282,7 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 
 	@Transient
 	public JScrollBar getHorizontalScrollBar() {
-		if(hScrollBar == null){
+		if (hScrollBar == null) {
 			hScrollBar = createHorizontalScrollBar();
 		}
 		return hScrollBar;
@@ -313,10 +299,10 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 	}
 
 	JScrollBar vScrollBar, hScrollBar;
-	
+
 	@Transient
 	public JScrollBar getVerticalScrollBar() {
-		if(vScrollBar == null){
+		if (vScrollBar == null) {
 			vScrollBar = createVerticalScrollBar();
 		}
 		return vScrollBar;
@@ -326,111 +312,113 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 		vScrollBar = verticalScrollBar;
 	}
 
-    /**
-     * Returns a new <code>JViewport</code> by default.
-     * Used to create the
-     * viewport (as needed) in <code>setViewportView</code>,
-     * <code>setRowHeaderView</code>, and <code>setColumnHeaderView</code>.
-     * Subclasses may override this method to return a subclass of
-     * <code>JViewport</code>.
-     *
-     * @return a new <code>JViewport</code>
-     */
-    protected JViewport createViewport() {
-        return new JViewport();
-    }
+	/**
+	 * Returns a new <code>JViewport</code> by default. Used to create the
+	 * viewport (as needed) in <code>setViewportView</code>,
+	 * <code>setRowHeaderView</code>, and <code>setColumnHeaderView</code>.
+	 * Subclasses may override this method to return a subclass of
+	 * <code>JViewport</code>.
+	 *
+	 * @return a new <code>JViewport</code>
+	 */
+	protected JViewport createViewport() {
+		return new JViewport();
+	}
 
-    /**
-     * The scrollpane's viewport child.  Default is an empty
-     * <code>JViewport</code>.
-     * @see #setViewport
-     */
-    protected JViewport viewport;
-    
+	/**
+	 * The scrollpane's viewport child. Default is an empty
+	 * <code>JViewport</code>.
+	 * 
+	 * @see #setViewport
+	 */
+	protected JViewport viewport;
+
 	public JViewport getViewport() {
 		return viewport;
 	}
 
 	public void setViewport(JViewport viewport) {
 		JViewport old = getViewport();
-        this.viewport = viewport;
-        if (viewport != null) {
-            add(viewport, VIEWPORT);
-        }
-        else if (old != null) {
-            remove(old);
-        }
-        firePropertyChange("viewport", old, viewport);
+		this.viewport = viewport;
+		if (viewport != null) {
+			add(viewport, VIEWPORT);
+		} else if (old != null) {
+			remove(old);
+		}
+		firePropertyChange("viewport", old, viewport);
 
-//        rem by yyh
-//        if (accessibleContext != null) {
-//            ((AccessibleJScrollPane)accessibleContext).resetViewPort();
-//        }
+		// rem by yyh
+		// if (accessibleContext != null) {
+		// ((AccessibleJScrollPane)accessibleContext).resetViewPort();
+		// }
 
-        revalidate();
-        repaint();
+		revalidate();
+		repaint();
 	}
 
 	Component viewportComponent;
-	
-    public void setViewportView(Component view) {
-        if (getViewport() == null) {
-            final JViewport createViewport = createViewport();
-            createViewport.setView(view);
-			setViewport(createViewport);//会导致revalidate，需要view不为null
-        }else{
-        	getViewport().setView(view);
-        }
-        
+
+	public void setViewportView(Component view) {
+		if (getViewport() == null) {
+			final JViewport createViewport = createViewport();
+			createViewport.setView(view);
+			setViewport(createViewport);// 会导致revalidate，需要view不为null
+		} else {
+			getViewport().setView(view);
+		}
+
 		view.validate();
-		
-        viewportComponent = view;
-        
+
+		viewportComponent = view;
+
 		final View peerAdded = viewportComponent.getPeerAdAPI();
 		AndroidUIUtil.removeFromParent(peerAdded);
 		scrollView.removeAllViews();
-		ScrollView.LayoutParams lp = new ScrollView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		ScrollView.LayoutParams lp = new ScrollView.LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
 		scrollView.addView(peerAdded, lp);
-    }
-    
-//	public void validate() {
-//		if(viewportComponent != null){
-////			viewportComponent.setPreferredSize(getPreferredSize());
-//			viewportComponent.validate();
-////			final Dimension vcDim = viewportComponent.getPreferredSize();
-////			final Dimension jsDim = getPreferredSize();
-////			if(vcDim.width < jsDim.width && vcDim.height < jsDim.height){
-////				viewportComponent.setPreferredSize(jsDim);
-////				viewportComponent.validate();
-////				LogManager.log("viewportComponent validate to fit JScrollPane.");
-////			}
-//		}
-//	}
-	
-	//Android专有
-	public Component getViewportViewAdAPI(){
+	}
+
+	// public void validate() {
+	// if(viewportComponent != null){
+	//// viewportComponent.setPreferredSize(getPreferredSize());
+	// viewportComponent.validate();
+	//// final Dimension vcDim = viewportComponent.getPreferredSize();
+	//// final Dimension jsDim = getPreferredSize();
+	//// if(vcDim.width < jsDim.width && vcDim.height < jsDim.height){
+	//// viewportComponent.setPreferredSize(jsDim);
+	//// viewportComponent.validate();
+	//// LogManager.log("viewportComponent validate to fit JScrollPane.");
+	//// }
+	// }
+	// }
+
+	// Android专有
+	public Component getViewportViewAdAPI() {
 		return viewportComponent;
 	}
-	
+
 	@Override
-	public View getPeerAdAPI(){
+	public View getPeerAdAPI() {
 		return defaultLinearLayout;
-		
-//		
-//		return super.getPeerAdAPI();
+
+		//
+		// return super.getPeerAdAPI();
 	}
 
 	public void setPreferredSize(Dimension preferredSize) {
 		super.setPreferredSize(preferredSize);
-//		hScrollView.setLayoutParams(new LinearLayout.LayoutParams(preSize.width, preSize.height));
-		if(PropertiesManager.isSimu()){
-			System.out.println("setPreferredSize for JScrollPane w : " + preSize.width + ", h : " + preSize.height);
+		// hScrollView.setLayoutParams(new
+		// LinearLayout.LayoutParams(preSize.width, preSize.height));
+		if (PropertiesManager.isSimu()) {
+			System.out.println("setPreferredSize for JScrollPane w : " + preSize.width + ", h : "
+					+ preSize.height);
 		}
-//		LayoutParams lp = scrollView.getLayoutParams();
-//		lp.width = preferredSize.width;
-//		lp.height = preferredSize.height;
+		// LayoutParams lp = scrollView.getLayoutParams();
+		// lp.width = preferredSize.width;
+		// lp.height = preferredSize.height;
 	}
-	
+
 	@Transient
 	public JViewport getRowHeader() {
 		AndroidClassUtil.callEmptyMethod();
@@ -461,7 +449,7 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 
 	public Component getCorner(String key) {
 		AndroidClassUtil.callEmptyMethod();
-		
+
 		return null;
 	}
 
@@ -472,11 +460,11 @@ public class JScrollPane extends JComponent implements ScrollPaneConstants,
 	public void setComponentOrientation(ComponentOrientation co) {
 		super.setComponentOrientation(co);
 	}
-	
+
 	public void applyComponentOrientation(final ComponentOrientation o) {
 		super.applyComponentOrientation(o);
-		
-		if(viewportComponent != null){
+
+		if (viewportComponent != null) {
 			viewportComponent.applyComponentOrientation(o);
 		}
 	}

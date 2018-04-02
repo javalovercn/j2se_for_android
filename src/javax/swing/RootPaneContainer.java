@@ -28,44 +28,46 @@ import java.awt.Component;
 import java.awt.Container;
 
 /**
- * This interface is implemented by components that have a single
- * JRootPane child: JDialog, JFrame, JWindow, JApplet, JInternalFrame.
- * The methods in  this interface are just <i>covers</i> for the JRootPane
- * properties, e.g. <code>getContentPane()</code> is generally implemented
- * like this:<pre>
- *     public Container getContentPane() {
- *         return getRootPane().getContentPane();
- *     }
+ * This interface is implemented by components that have a single JRootPane
+ * child: JDialog, JFrame, JWindow, JApplet, JInternalFrame. The methods in this
+ * interface are just <i>covers</i> for the JRootPane properties, e.g.
+ * <code>getContentPane()</code> is generally implemented like this:
+ * 
+ * <pre>
+ * public Container getContentPane() {
+ * 	return getRootPane().getContentPane();
+ * }
  * </pre>
- * This interface serves as a <i>marker</i> for Swing GUI builders
- * that need to treat components like JFrame, that contain a
- * single JRootPane, specially.  For example in a GUI builder,
- * dropping a component on a RootPaneContainer would be interpreted
- * as <code>frame.getContentPane().add(child)</code>.
+ * 
+ * This interface serves as a <i>marker</i> for Swing GUI builders that need to
+ * treat components like JFrame, that contain a single JRootPane, specially. For
+ * example in a GUI builder, dropping a component on a RootPaneContainer would
+ * be interpreted as <code>frame.getContentPane().add(child)</code>.
  * <p>
- * For conveniance
- * <code>JFrame</code>, <code>JDialog</code>, <code>JWindow</code>,
- * <code>JApplet</code> and <code>JInternalFrame</code>, by default,
- * forward, by default, all calls to the <code>add</code>,
+ * For conveniance <code>JFrame</code>, <code>JDialog</code>,
+ * <code>JWindow</code>, <code>JApplet</code> and <code>JInternalFrame</code>,
+ * by default, forward, by default, all calls to the <code>add</code>,
  * <code>remove</code> and <code>setLayout</code> methods, to the
  * <code>contentPane</code>. This means you can call:
+ * 
  * <pre>
  * rootPaneContainer.add(component);
  * </pre>
+ * 
  * instead of:
+ * 
  * <pre>
  * rootPaneContainer.getContentPane().add(component);
  * </pre>
  * <p>
- * The behavior of the <code>add</code> and
- * <code>setLayout</code> methods for
+ * The behavior of the <code>add</code> and <code>setLayout</code> methods for
  * <code>JFrame</code>, <code>JDialog</code>, <code>JWindow</code>,
- * <code>JApplet</code> and <code>JInternalFrame</code> is controlled by
- * the <code>rootPaneCheckingEnabled</code> property. If this property is
- * true (the default), then calls to these methods are
-  * forwarded to the <code>contentPane</code>; if false, these
-  * methods operate directly on the <code>RootPaneContainer</code>. This
-  * property is only intended for subclasses, and is therefore protected.
+ * <code>JApplet</code> and <code>JInternalFrame</code> is controlled by the
+ * <code>rootPaneCheckingEnabled</code> property. If this property is true (the
+ * default), then calls to these methods are forwarded to the
+ * <code>contentPane</code>; if false, these methods operate directly on the
+ * <code>RootPaneContainer</code>. This property is only intended for
+ * subclasses, and is therefore protected.
  *
  * @see JRootPane
  * @see JFrame

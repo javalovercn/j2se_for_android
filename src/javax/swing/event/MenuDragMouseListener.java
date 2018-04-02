@@ -32,8 +32,11 @@ import java.util.EventListener;
  * @author Georges Saab
  */
 public interface MenuDragMouseListener extends EventListener {
-    void menuDragMouseEntered(MenuDragMouseEvent e);
-    void menuDragMouseExited(MenuDragMouseEvent e);
-    void menuDragMouseDragged(MenuDragMouseEvent e);
-    void menuDragMouseReleased(MenuDragMouseEvent e);
+	void menuDragMouseEntered(MenuDragMouseEvent e);
+
+	void menuDragMouseExited(MenuDragMouseEvent e);
+
+	void menuDragMouseDragged(MenuDragMouseEvent e);
+
+	void menuDragMouseReleased(MenuDragMouseEvent e);
 }

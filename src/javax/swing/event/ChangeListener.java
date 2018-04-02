@@ -32,5 +32,5 @@ import java.util.EventListener;
  * @author Jeff Dinkins
  */
 public interface ChangeListener extends EventListener {
-    void stateChanged(ChangeEvent e);
+	void stateChanged(ChangeEvent e);
 }

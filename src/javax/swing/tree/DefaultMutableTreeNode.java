@@ -37,61 +37,56 @@ import java.util.Stack;
 import java.util.Vector;
 
 /**
- * A <code>DefaultMutableTreeNode</code> is a general-purpose node in a tree data
- * structure.
- * For examples of using default mutable tree nodes, see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to Use Trees</a>
- * in <em>The Java Tutorial.</em>
+ * A <code>DefaultMutableTreeNode</code> is a general-purpose node in a tree
+ * data structure. For examples of using default mutable tree nodes, see
+ * <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to
+ * Use Trees</a> in <em>The Java Tutorial.</em>
  *
  * <p>
  *
  * A tree node may have at most one parent and 0 or more children.
- * <code>DefaultMutableTreeNode</code> provides operations for examining and modifying a
- * node's parent and children and also operations for examining the tree that
- * the node is a part of.  A node's tree is the set of all nodes that can be
- * reached by starting at the node and following all the possible links to
- * parents and children.  A node with no parent is the root of its tree; a
- * node with no children is a leaf.  A tree may consist of many subtrees,
- * each node acting as the root for its own subtree.
+ * <code>DefaultMutableTreeNode</code> provides operations for examining and
+ * modifying a node's parent and children and also operations for examining the
+ * tree that the node is a part of. A node's tree is the set of all nodes that
+ * can be reached by starting at the node and following all the possible links
+ * to parents and children. A node with no parent is the root of its tree; a
+ * node with no children is a leaf. A tree may consist of many subtrees, each
+ * node acting as the root for its own subtree.
  * <p>
- * This class provides enumerations for efficiently traversing a tree or
- * subtree in various orders or for following the path between two nodes.
- * A <code>DefaultMutableTreeNode</code> may also hold a reference to a user object, the
- * use of which is left to the user.  Asking a <code>DefaultMutableTreeNode</code> for its
- * string representation with <code>toString()</code> returns the string
- * representation of its user object.
+ * This class provides enumerations for efficiently traversing a tree or subtree
+ * in various orders or for following the path between two nodes. A
+ * <code>DefaultMutableTreeNode</code> may also hold a reference to a user
+ * object, the use of which is left to the user. Asking a
+ * <code>DefaultMutableTreeNode</code> for its string representation with
+ * <code>toString()</code> returns the string representation of its user object.
  * <p>
- * <b>This is not a thread safe class.</b>If you intend to use
- * a DefaultMutableTreeNode (or a tree of TreeNodes) in more than one thread, you
+ * <b>This is not a thread safe class.</b>If you intend to use a
+ * DefaultMutableTreeNode (or a tree of TreeNodes) in more than one thread, you
  * need to do your own synchronizing. A good convention to adopt is
  * synchronizing on the root node of a tree.
  * <p>
  * While DefaultMutableTreeNode implements the MutableTreeNode interface and
- * will allow you to add in any implementation of MutableTreeNode not all
- * of the methods in DefaultMutableTreeNode will be applicable to all
- * MutableTreeNodes implementations. Especially with some of the enumerations
- * that are provided, using some of these methods assumes the
- * DefaultMutableTreeNode contains only DefaultMutableNode instances. All
- * of the TreeNode/MutableTreeNode methods will behave as defined no
- * matter what implementations are added.
+ * will allow you to add in any implementation of MutableTreeNode not all of the
+ * methods in DefaultMutableTreeNode will be applicable to all MutableTreeNodes
+ * implementations. Especially with some of the enumerations that are provided,
+ * using some of these methods assumes the DefaultMutableTreeNode contains only
+ * DefaultMutableNode instances. All of the TreeNode/MutableTreeNode methods
+ * will behave as defined no matter what implementations are added.
  *
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see MutableTreeNode
  *
  * @author Rob Davis
  */
-public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode,
-		Serializable {
+public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode, Serializable {
 	static public final Enumeration<TreeNode> EMPTY_ENUMERATION = new Enumeration<TreeNode>() {
 		public boolean hasMoreElements() {
 			return false;
@@ -558,9 +553,7 @@ public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode,
 			TreeNode myParent = getParent();
 			retval = (myParent != null && myParent == anotherNode.getParent());
 
-			if (retval
-					&& !((DefaultMutableTreeNode) getParent())
-							.isNodeChild(anotherNode)) {
+			if (retval && !((DefaultMutableTreeNode) getParent()).isNodeChild(anotherNode)) {
 				throw new Error("sibling has different parent");
 			}
 		}
@@ -586,7 +579,7 @@ public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode,
 		if (myParent == null) {
 			retval = null;
 		} else {
-			retval = (DefaultMutableTreeNode) myParent.getChildAfter(this); 
+			retval = (DefaultMutableTreeNode) myParent.getChildAfter(this);
 		}
 
 		if (retval != null && !isNodeSibling(retval)) {
@@ -699,24 +692,23 @@ public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode,
 	public Object clone() {
 		DefaultMutableTreeNode newNode;
 
-        try {
-            newNode = (DefaultMutableTreeNode)super.clone();
+		try {
+			newNode = (DefaultMutableTreeNode) super.clone();
 
-            newNode.children = null;
-            newNode.parent = null;
+			newNode.children = null;
+			newNode.parent = null;
 
-        } catch (CloneNotSupportedException e) {
-            throw new Error(e.toString());
-        }
+		} catch (CloneNotSupportedException e) {
+			throw new Error(e.toString());
+		}
 
-        return newNode;
+		return newNode;
 	}
 
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 	}
 
 	private final class PreorderEnumeration implements Enumeration<TreeNode> {
@@ -795,8 +787,7 @@ public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode,
 		}
 
 		public boolean hasMoreElements() {
-			return (!queue.isEmpty() && ((Enumeration) queue.firstObject())
-					.hasMoreElements());
+			return (!queue.isEmpty() && ((Enumeration) queue.firstObject()).hasMoreElements());
 		}
 
 		public TreeNode nextElement() {
@@ -870,8 +861,7 @@ public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode,
 	final class PathBetweenNodesEnumeration implements Enumeration<TreeNode> {
 		protected Stack<TreeNode> stack;
 
-		public PathBetweenNodesEnumeration(TreeNode ancestor,
-				TreeNode descendant) {
+		public PathBetweenNodesEnumeration(TreeNode ancestor, TreeNode descendant) {
 			super();
 
 			if (ancestor == null || descendant == null) {
@@ -887,8 +877,8 @@ public class DefaultMutableTreeNode implements Cloneable, MutableTreeNode,
 			while (current != ancestor) {
 				current = current.getParent();
 				if (current == null && descendant != ancestor) {
-					throw new IllegalArgumentException("node " + ancestor
-							+ " is not an ancestor of " + descendant);
+					throw new IllegalArgumentException(
+							"node " + ancestor + " is not an ancestor of " + descendant);
 				}
 				stack.push(current);
 			}

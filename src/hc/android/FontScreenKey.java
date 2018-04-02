@@ -7,8 +7,8 @@ import java.awt.Font;
 public class FontScreenKey {
 	public final Font font;
 	public final ScreenAdapter adapter;
-	
-	public FontScreenKey(final ScreenAdapter sa, final Font font){
+
+	public FontScreenKey(final ScreenAdapter sa, final Font font) {
 		this.adapter = sa;
 		this.font = font;
 	}

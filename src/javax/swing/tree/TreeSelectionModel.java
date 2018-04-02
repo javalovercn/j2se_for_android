@@ -29,119 +29,117 @@ import java.beans.PropertyChangeListener;
 import javax.swing.event.TreeSelectionListener;
 
 /**
- * This interface represents the current state of the selection for
- * the tree component.
- * For information and examples of using tree selection models,
- * see <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to Use Trees</a>
- * in <em>The Java Tutorial.</em>
+ * This interface represents the current state of the selection for the tree
+ * component. For information and examples of using tree selection models, see
+ * <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to
+ * Use Trees</a> in <em>The Java Tutorial.</em>
  *
  * <p>
- * The state of the tree selection is characterized by
- * a set of TreePaths, and optionally a set of integers. The mapping
- * from TreePath to integer is done by way of an instance of RowMapper.
- * It is not necessary for a TreeSelectionModel to have a RowMapper to
- * correctly operate, but without a RowMapper <code>getSelectionRows</code>
- * will return null.
- *
- * <p>
- *
- * A TreeSelectionModel can be configured to allow only one
- * path (<code>SINGLE_TREE_SELECTION</code>) a number of
- * continguous paths (<code>CONTIGUOUS_TREE_SELECTION</code>) or a number of
- * discontiguous paths (<code>DISCONTIGUOUS_TREE_SELECTION</code>).
- * A <code>RowMapper</code> is used to determine if TreePaths are
- * contiguous.
- * In the absence of a RowMapper <code>CONTIGUOUS_TREE_SELECTION</code> and
- * <code>DISCONTIGUOUS_TREE_SELECTION</code> behave the same, that is they
- * allow any number of paths to be contained in the TreeSelectionModel.
+ * The state of the tree selection is characterized by a set of TreePaths, and
+ * optionally a set of integers. The mapping from TreePath to integer is done by
+ * way of an instance of RowMapper. It is not necessary for a TreeSelectionModel
+ * to have a RowMapper to correctly operate, but without a RowMapper
+ * <code>getSelectionRows</code> will return null.
  *
  * <p>
  *
- * For a selection model of <code>CONTIGUOUS_TREE_SELECTION</code> any
- * time the paths are changed (<code>setSelectionPath</code>,
- * <code>addSelectionPath</code> ...) the TreePaths are again checked to
- * make they are contiguous. A check of the TreePaths can also be forced
- * by invoking <code>resetRowSelection</code>. How a set of discontiguous
- * TreePaths is mapped to a contiguous set is left to implementors of
- * this interface to enforce a particular policy.
+ * A TreeSelectionModel can be configured to allow only one path
+ * (<code>SINGLE_TREE_SELECTION</code>) a number of continguous paths
+ * (<code>CONTIGUOUS_TREE_SELECTION</code>) or a number of discontiguous paths
+ * (<code>DISCONTIGUOUS_TREE_SELECTION</code>). A <code>RowMapper</code> is used
+ * to determine if TreePaths are contiguous. In the absence of a RowMapper
+ * <code>CONTIGUOUS_TREE_SELECTION</code> and
+ * <code>DISCONTIGUOUS_TREE_SELECTION</code> behave the same, that is they allow
+ * any number of paths to be contained in the TreeSelectionModel.
  *
  * <p>
  *
- * Implementations should combine duplicate TreePaths that are
- * added to the selection. For example, the following code
+ * For a selection model of <code>CONTIGUOUS_TREE_SELECTION</code> any time the
+ * paths are changed (<code>setSelectionPath</code>,
+ * <code>addSelectionPath</code> ...) the TreePaths are again checked to make
+ * they are contiguous. A check of the TreePaths can also be forced by invoking
+ * <code>resetRowSelection</code>. How a set of discontiguous TreePaths is
+ * mapped to a contiguous set is left to implementors of this interface to
+ * enforce a particular policy.
+ *
+ * <p>
+ *
+ * Implementations should combine duplicate TreePaths that are added to the
+ * selection. For example, the following code
+ * 
  * <pre>
- *   TreePath[] paths = new TreePath[] { treePath, treePath };
- *   treeSelectionModel.setSelectionPaths(paths);
+ * TreePath[] paths = new TreePath[] { treePath, treePath };
+ * treeSelectionModel.setSelectionPaths(paths);
  * </pre>
- * should result in only one path being selected:
- * <code>treePath</code>, and
- * not two copies of <code>treePath</code>.
+ * 
+ * should result in only one path being selected: <code>treePath</code>, and not
+ * two copies of <code>treePath</code>.
  *
  * <p>
  *
- * The lead TreePath is the last path that was added (or set). The lead
- * row is then the row that corresponds to the TreePath as determined
- * from the RowMapper.
+ * The lead TreePath is the last path that was added (or set). The lead row is
+ * then the row that corresponds to the TreePath as determined from the
+ * RowMapper.
  *
  * @author Scott Violet
  */
-public interface TreeSelectionModel
-{
-    public static final int SINGLE_TREE_SELECTION = 1;
-    public static final int CONTIGUOUS_TREE_SELECTION = 2;
-    public static final int DISCONTIGUOUS_TREE_SELECTION = 4;
+public interface TreeSelectionModel {
+	public static final int SINGLE_TREE_SELECTION = 1;
+	public static final int CONTIGUOUS_TREE_SELECTION = 2;
+	public static final int DISCONTIGUOUS_TREE_SELECTION = 4;
 
-    void setSelectionMode(int mode);
+	void setSelectionMode(int mode);
 
-    int getSelectionMode();
+	int getSelectionMode();
 
-    void setSelectionPath(TreePath path);
+	void setSelectionPath(TreePath path);
 
-    void setSelectionPaths(TreePath[] paths);
+	void setSelectionPaths(TreePath[] paths);
 
-    void addSelectionPath(TreePath path);
+	void addSelectionPath(TreePath path);
 
-    void addSelectionPaths(TreePath[] paths);
+	void addSelectionPaths(TreePath[] paths);
 
-    void removeSelectionPath(TreePath path);
+	void removeSelectionPath(TreePath path);
 
-    void removeSelectionPaths(TreePath[] paths);
+	void removeSelectionPaths(TreePath[] paths);
 
-    TreePath getSelectionPath();
+	TreePath getSelectionPath();
 
-    TreePath[] getSelectionPaths();
+	TreePath[] getSelectionPaths();
 
-    int getSelectionCount();
+	int getSelectionCount();
 
-    boolean isPathSelected(TreePath path);
+	boolean isPathSelected(TreePath path);
 
-    boolean isSelectionEmpty();
+	boolean isSelectionEmpty();
 
-    void clearSelection();
+	void clearSelection();
 
-    void setRowMapper(RowMapper newMapper);
+	void setRowMapper(RowMapper newMapper);
 
-    RowMapper getRowMapper();
+	RowMapper getRowMapper();
 
-    int[] getSelectionRows();
+	int[] getSelectionRows();
 
-    int getMinSelectionRow();
+	int getMinSelectionRow();
 
-    int getMaxSelectionRow();
+	int getMaxSelectionRow();
 
-    boolean isRowSelected(int row);
+	boolean isRowSelected(int row);
 
-    void resetRowSelection();
+	void resetRowSelection();
 
-    int getLeadSelectionRow();
+	int getLeadSelectionRow();
 
-    TreePath getLeadSelectionPath();
+	TreePath getLeadSelectionPath();
 
-    void addPropertyChangeListener(PropertyChangeListener listener);
+	void addPropertyChangeListener(PropertyChangeListener listener);
 
-    void removePropertyChangeListener(PropertyChangeListener listener);
+	void removePropertyChangeListener(PropertyChangeListener listener);
 
-    void addTreeSelectionListener(TreeSelectionListener x);
+	void addTreeSelectionListener(TreeSelectionListener x);
 
-    void removeTreeSelectionListener(TreeSelectionListener x);
+	void removeTreeSelectionListener(TreeSelectionListener x);
 }

@@ -25,16 +25,17 @@
 package javax.accessibility;
 
 /**
- * <P>The AccessibleHypertext class is the base class for all
- * classes that present hypertext information on the display.  This class
- * provides the standard mechanism for an assistive technology to access
- * that text via its content, attributes, and spatial location.
- * It also provides standard mechanisms for manipulating hyperlinks.
- * Applications can determine if an object supports the AccessibleHypertext
- * interface by first obtaining its AccessibleContext (see {@link Accessible})
- * and then calling the {@link AccessibleContext#getAccessibleText}
- * method of AccessibleContext.  If the return value is a class which extends
- * AccessibleHypertext, then that object supports AccessibleHypertext.
+ * <P>
+ * The AccessibleHypertext class is the base class for all classes that present
+ * hypertext information on the display. This class provides the standard
+ * mechanism for an assistive technology to access that text via its content,
+ * attributes, and spatial location. It also provides standard mechanisms for
+ * manipulating hyperlinks. Applications can determine if an object supports the
+ * AccessibleHypertext interface by first obtaining its AccessibleContext (see
+ * {@link Accessible}) and then calling the
+ * {@link AccessibleContext#getAccessibleText} method of AccessibleContext. If
+ * the return value is a class which extends AccessibleHypertext, then that
+ * object supports AccessibleHypertext.
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
@@ -42,7 +43,7 @@ package javax.accessibility;
  * @see AccessibleText
  * @see AccessibleContext#getAccessibleText
  *
- * @author      Peter Korn
+ * @author Peter Korn
  */
 public interface AccessibleHypertext extends AccessibleText {
 

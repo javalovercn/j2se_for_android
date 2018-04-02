@@ -41,13 +41,11 @@ import javax.swing.border.StrokeBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Factory class for vending standard <code>Border</code> objects.  Wherever
- * possible, this factory will hand out references to shared
- * <code>Border</code> instances.
- * For further information and examples see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/border.html">How
- to Use Borders</a>,
- * a section in <em>The Java Tutorial</em>.
+ * Factory class for vending standard <code>Border</code> objects. Wherever
+ * possible, this factory will hand out references to shared <code>Border</code>
+ * instances. For further information and examples see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/border.html">How to Use
+ * Borders</a>, a section in <em>The Java Tutorial</em>.
  *
  * @author David Kloba
  */
@@ -64,8 +62,7 @@ public class BorderFactory {
 		return new LineBorder(color, thickness);
 	}
 
-	public static Border createLineBorder(Color color, int thickness,
-			boolean rounded) {
+	public static Border createLineBorder(Color color, int thickness, boolean rounded) {
 		return new LineBorder(color, thickness, rounded);
 	}
 
@@ -81,15 +78,13 @@ public class BorderFactory {
 		return createSharedBevel(type);
 	}
 
-	public static Border createBevelBorder(int type, Color highlight,
-			Color shadow) {
+	public static Border createBevelBorder(int type, Color highlight, Color shadow) {
 		return new BevelBorder(type, highlight, shadow);
 	}
 
-	public static Border createBevelBorder(int type, Color highlightOuter,
-			Color highlightInner, Color shadowOuter, Color shadowInner) {
-		return new BevelBorder(type, highlightOuter, highlightInner,
-				shadowOuter, shadowInner);
+	public static Border createBevelBorder(int type, Color highlightOuter, Color highlightInner,
+			Color shadowOuter, Color shadowInner) {
+		return new BevelBorder(type, highlightOuter, highlightInner, shadowOuter, shadowInner);
 	}
 
 	static Border createSharedBevel(int type) {
@@ -119,15 +114,13 @@ public class BorderFactory {
 		return null;
 	}
 
-	public static Border createSoftBevelBorder(int type, Color highlight,
-			Color shadow) {
+	public static Border createSoftBevelBorder(int type, Color highlight, Color shadow) {
 		return new SoftBevelBorder(type, highlight, shadow);
 	}
 
-	public static Border createSoftBevelBorder(int type, Color highlightOuter,
-			Color highlightInner, Color shadowOuter, Color shadowInner) {
-		return new SoftBevelBorder(type, highlightOuter, highlightInner,
-				shadowOuter, shadowInner);
+	public static Border createSoftBevelBorder(int type, Color highlightOuter, Color highlightInner,
+			Color shadowOuter, Color shadowInner) {
+		return new SoftBevelBorder(type, highlightOuter, highlightInner, shadowOuter, shadowInner);
 	}
 
 	public static Border createEtchedBorder() {
@@ -150,8 +143,7 @@ public class BorderFactory {
 		}
 	}
 
-	public static Border createEtchedBorder(int type, Color highlight,
-			Color shadow) {
+	public static Border createEtchedBorder(int type, Color highlight, Color shadow) {
 		return new EtchedBorder(type, highlight, shadow);
 	}
 
@@ -169,29 +161,25 @@ public class BorderFactory {
 
 	public static TitledBorder createTitledBorder(Border border, String title,
 			int titleJustification, int titlePosition) {
-		return new TitledBorder(border, title, titleJustification,
-				titlePosition);
+		return new TitledBorder(border, title, titleJustification, titlePosition);
 	}
 
 	public static TitledBorder createTitledBorder(Border border, String title,
 			int titleJustification, int titlePosition, Font titleFont) {
-		return new TitledBorder(border, title, titleJustification,
-				titlePosition, titleFont);
+		return new TitledBorder(border, title, titleJustification, titlePosition, titleFont);
 	}
 
 	public static TitledBorder createTitledBorder(Border border, String title,
-			int titleJustification, int titlePosition, Font titleFont,
-			Color titleColor) {
-		return new TitledBorder(border, title, titleJustification,
-				titlePosition, titleFont, titleColor);
+			int titleJustification, int titlePosition, Font titleFont, Color titleColor) {
+		return new TitledBorder(border, title, titleJustification, titlePosition, titleFont,
+				titleColor);
 	}
 
 	public static Border createEmptyBorder() {
 		return new EmptyBorder(0, 0, 0, 0);
 	}
 
-	public static Border createEmptyBorder(int top, int left, int bottom,
-			int right) {
+	public static Border createEmptyBorder(int top, int left, int bottom, int right) {
 		return new EmptyBorder(top, left, bottom, right);
 	}
 
@@ -199,18 +187,17 @@ public class BorderFactory {
 		return new CompoundBorder();
 	}
 
-	public static CompoundBorder createCompoundBorder(Border outsideBorder,
-			Border insideBorder) {
+	public static CompoundBorder createCompoundBorder(Border outsideBorder, Border insideBorder) {
 		return new CompoundBorder(outsideBorder, insideBorder);
 	}
 
-	public static MatteBorder createMatteBorder(int top, int left, int bottom,
-			int right, Color color) {
+	public static MatteBorder createMatteBorder(int top, int left, int bottom, int right,
+			Color color) {
 		return new MatteBorder(top, left, bottom, right, color);
 	}
 
-	public static MatteBorder createMatteBorder(int top, int left, int bottom,
-			int right, Icon tileIcon) {
+	public static MatteBorder createMatteBorder(int top, int left, int bottom, int right,
+			Icon tileIcon) {
 		return new MatteBorder(top, left, bottom, right, tileIcon);
 	}
 
@@ -226,15 +213,14 @@ public class BorderFactory {
 		return createDashedBorder(paint, 1.0f, 1.0f, 1.0f, false);
 	}
 
-	public static Border createDashedBorder(Paint paint, float length,
-			float spacing) {
+	public static Border createDashedBorder(Paint paint, float length, float spacing) {
 		return createDashedBorder(paint, 1.0f, length, spacing, false);
 	}
 
-	public static Border createDashedBorder(Paint paint, float thickness,
-			float length, float spacing, boolean rounded) {
-		Border border = createStrokeBorder(new BasicStroke(thickness, 0, 0,
-				thickness * 2.0f, null, 0.0f), paint);
+	public static Border createDashedBorder(Paint paint, float thickness, float length,
+			float spacing, boolean rounded) {
+		Border border = createStrokeBorder(
+				new BasicStroke(thickness, 0, 0, thickness * 2.0f, null, 0.0f), paint);
 		return border;
 	}
 }

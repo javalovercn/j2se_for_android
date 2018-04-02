@@ -37,17 +37,15 @@ import javax.swing.event.SwingPropertyChangeSupport;
  * This class provides default implementations for the JFC <code>Action</code>
  * interface. Standard behaviors like the get and set methods for
  * <code>Action</code> object properties (icon, text, and enabled) are defined
- * here. The developer need only subclass this abstract class and
- * define the <code>actionPerformed</code> method.
+ * here. The developer need only subclass this abstract class and define the
+ * <code>actionPerformed</code> method.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Georges Saab
  * @see Action
@@ -61,11 +59,11 @@ public abstract class AbstractAction implements Action, Cloneable, Serializable 
 		return false;
 	}
 
-	static void setEnabledFromAction(JComponent c, Action a) {//注意：被JHCComponent使用，由于不在同一包，请同步代码
+	static void setEnabledFromAction(JComponent c, Action a) {// 注意：被JHCComponent使用，由于不在同一包，请同步代码
 		c.setEnabled((a != null) ? a.isEnabled() : true);
 	}
 
-	static void setToolTipTextFromAction(JComponent c, Action a) {//注意：被JHCComponent使用，由于不在同一包，请同步代码
+	static void setToolTipTextFromAction(JComponent c, Action a) {// 注意：被JHCComponent使用，由于不在同一包，请同步代码
 	}
 
 	static boolean hasSelectedKey(Action a) {
@@ -145,20 +143,17 @@ public abstract class AbstractAction implements Action, Cloneable, Serializable 
 
 	protected SwingPropertyChangeSupport changeSupport;
 
-	protected void firePropertyChange(String propertyName, Object oldValue,
-			Object newValue) {
+	protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
 	}
 
-	public synchronized void addPropertyChangeListener(
-			PropertyChangeListener listener) {
+	public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
 		if (changeSupport == null) {
 			changeSupport = new SwingPropertyChangeSupport(this);
 		}
 		changeSupport.addPropertyChangeListener(listener);
 	}
 
-	public synchronized void removePropertyChangeListener(
-			PropertyChangeListener listener) {
+	public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
 		if (changeSupport == null) {
 			return;
 		}
@@ -179,7 +174,6 @@ public abstract class AbstractAction implements Action, Cloneable, Serializable 
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException {
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
 	}
 }

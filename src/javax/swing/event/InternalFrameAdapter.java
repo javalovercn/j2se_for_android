@@ -25,13 +25,14 @@
 package javax.swing.event;
 
 /**
- * An abstract adapter class for receiving internal frame events.
- * The methods in this class are empty. This class exists as
- * convenience for creating listener objects, and is functionally
- * equivalent to the WindowAdapter class in the AWT.
+ * An abstract adapter class for receiving internal frame events. The methods in
+ * this class are empty. This class exists as convenience for creating listener
+ * objects, and is functionally equivalent to the WindowAdapter class in the
+ * AWT.
  * <p>
- * See <a href="http://java.sun.com/docs/books/tutorial/uiswing/events/internalframelistener.html">How to Write an Internal Frame Listener</a>
- * in <em>The Java Tutorial</em>
+ * See <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/events/internalframelistener.html">How
+ * to Write an Internal Frame Listener</a> in <em>The Java Tutorial</em>
  *
  * @see InternalFrameEvent
  * @see InternalFrameListener
@@ -40,11 +41,24 @@ package javax.swing.event;
  * @author Thomas Ball
  */
 public abstract class InternalFrameAdapter implements InternalFrameListener {
-    public void internalFrameOpened(InternalFrameEvent e) {}
-    public void internalFrameClosing(InternalFrameEvent e) {}
-    public void internalFrameClosed(InternalFrameEvent e) {}
-    public void internalFrameIconified(InternalFrameEvent e) {}
-    public void internalFrameDeiconified(InternalFrameEvent e) {}
-    public void internalFrameActivated(InternalFrameEvent e) {}
-    public void internalFrameDeactivated(InternalFrameEvent e) {}
+	public void internalFrameOpened(InternalFrameEvent e) {
+	}
+
+	public void internalFrameClosing(InternalFrameEvent e) {
+	}
+
+	public void internalFrameClosed(InternalFrameEvent e) {
+	}
+
+	public void internalFrameIconified(InternalFrameEvent e) {
+	}
+
+	public void internalFrameDeiconified(InternalFrameEvent e) {
+	}
+
+	public void internalFrameActivated(InternalFrameEvent e) {
+	}
+
+	public void internalFrameDeactivated(InternalFrameEvent e) {
+	}
 }

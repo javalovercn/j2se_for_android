@@ -29,12 +29,11 @@ import java.util.EventListener;
 /**
  * The listener interface for receiving text events.
  *
- * The class that is interested in processing a text event
- * implements this interface. The object created with that
- * class is then registered with a component using the
- * component's <code>addTextListener</code> method. When the
- * component's text changes, the listener object's
- * <code>textValueChanged</code> method is invoked.
+ * The class that is interested in processing a text event implements this
+ * interface. The object created with that class is then registered with a
+ * component using the component's <code>addTextListener</code> method. When the
+ * component's text changes, the listener object's <code>textValueChanged</code>
+ * method is invoked.
  *
  * @author Georges Saab
  *
@@ -43,6 +42,6 @@ import java.util.EventListener;
  * @since 1.1
  */
 public interface TextListener extends EventListener {
-    public void textValueChanged(TextEvent e);
+	public void textValueChanged(TextEvent e);
 
 }

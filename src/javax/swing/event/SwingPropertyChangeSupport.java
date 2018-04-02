@@ -28,29 +28,29 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 
 /**
- * This subclass of {@code java.beans.PropertyChangeSupport} is almost
- * identical in functionality. The only difference is if constructed with
- * {@code SwingPropertyChangeSupport(sourceBean, true)} it ensures
- * listeners are only ever notified on the <i>Event Dispatch Thread</i>.
+ * This subclass of {@code java.beans.PropertyChangeSupport} is almost identical
+ * in functionality. The only difference is if constructed with
+ * {@code SwingPropertyChangeSupport(sourceBean, true)} it ensures listeners are
+ * only ever notified on the <i>Event Dispatch Thread</i>.
  *
  * @author Igor Kushnirskiy
  */
 public final class SwingPropertyChangeSupport extends PropertyChangeSupport {
-    public SwingPropertyChangeSupport(Object sourceBean) {
-        this(sourceBean, false);
-    }
+	public SwingPropertyChangeSupport(Object sourceBean) {
+		this(sourceBean, false);
+	}
 
-    public SwingPropertyChangeSupport(Object sourceBean, boolean notifyOnEDT) {
-        super(sourceBean);
-        this.notifyOnEDT = notifyOnEDT;
-    }
+	public SwingPropertyChangeSupport(Object sourceBean, boolean notifyOnEDT) {
+		super(sourceBean);
+		this.notifyOnEDT = notifyOnEDT;
+	}
 
-    public void firePropertyChange(final PropertyChangeEvent evt) {
-    }
+	public void firePropertyChange(final PropertyChangeEvent evt) {
+	}
 
-    public final boolean isNotifyOnEDT() {
-        return notifyOnEDT;
-    }
+	public final boolean isNotifyOnEDT() {
+		return notifyOnEDT;
+	}
 
-    private final boolean notifyOnEDT;
+	private final boolean notifyOnEDT;
 }

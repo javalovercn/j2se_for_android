@@ -27,21 +27,21 @@ package javax.swing.tree;
 import java.io.Serializable;
 
 /**
- * {@code TreePath} represents an array of objects that uniquely
- * identify the path to a node in a tree. The elements of the array
- * are ordered with the root as the first element of the array. For
- * example, a file on the file system is uniquely identified based on
- * the array of parent directories and the name of the file. The path
- * {@code /tmp/foo/bar} could be represented by a {@code TreePath} as
- * {@code new TreePath(new Object[] {"tmp", "foo", "bar"})}.
+ * {@code TreePath} represents an array of objects that uniquely identify the
+ * path to a node in a tree. The elements of the array are ordered with the root
+ * as the first element of the array. For example, a file on the file system is
+ * uniquely identified based on the array of parent directories and the name of
+ * the file. The path {@code /tmp/foo/bar} could be represented by a
+ * {@code TreePath} as {@code new TreePath(new Object[] {"tmp", "foo", "bar"})}.
  * <p>
  * {@code TreePath} is used extensively by {@code JTree} and related classes.
  * For example, {@code JTree} represents the selection as an array of
- * {@code TreePath}s. When used with {@code JTree}, the elements of the
- * path are the objects returned from the {@code TreeModel}. When {@code JTree}
- * is paired with {@code DefaultTreeModel}, the elements of the
- * path are {@code TreeNode}s. The following example illustrates extracting
- * the user object from the selection of a {@code JTree}:
+ * {@code TreePath}s. When used with {@code JTree}, the elements of the path are
+ * the objects returned from the {@code TreeModel}. When {@code JTree} is paired
+ * with {@code DefaultTreeModel}, the elements of the path are
+ * {@code TreeNode}s. The following example illustrates extracting the user
+ * object from the selection of a {@code JTree}:
+ * 
  * <pre>
  *   DefaultMutableTreeNode root = ...;
  *   DefaultTreeModel model = new DefaultTreeModel(root);
@@ -52,29 +52,26 @@ import java.io.Serializable;
  *       ((DefaultMutableTreeNode)selectedPath.getLastPathComponent()).
  *       getUserObject();
  * </pre>
+ * 
  * Subclasses typically need override only {@code
- * getLastPathComponent}, and {@code getParentPath}. As {@code JTree}
- * internally creates {@code TreePath}s at various points, it's
- * generally not useful to subclass {@code TreePath} and use with
- * {@code JTree}.
+ * getLastPathComponent}, and {@code getParentPath}. As {@code JTree} internally
+ * creates {@code TreePath}s at various points, it's generally not useful to
+ * subclass {@code TreePath} and use with {@code JTree}.
  * <p>
  * While {@code TreePath} is serializable, a {@code
- * NotSerializableException} is thrown if any elements of the path are
- * not serializable.
+ * NotSerializableException} is thrown if any elements of the path are not
+ * serializable.
  * <p>
- * For further information and examples of using tree paths,
- * see <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to Use Trees</a>
- * in <em>The Java Tutorial.</em>
+ * For further information and examples of using tree paths, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to
+ * Use Trees</a> in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Scott Violet
  * @author Philip Milne
@@ -164,10 +161,8 @@ public class TreePath extends Object implements Serializable {
 
 			if (getPathCount() != oTreePath.getPathCount())
 				return false;
-			for (TreePath path = this; path != null; path = path
-					.getParentPath()) {
-				if (!(path.getLastPathComponent().equals(oTreePath
-						.getLastPathComponent()))) {
+			for (TreePath path = this; path != null; path = path.getParentPath()) {
+				if (!(path.getLastPathComponent().equals(oTreePath.getLastPathComponent()))) {
 					return false;
 				}
 				oTreePath = oTreePath.getParentPath();

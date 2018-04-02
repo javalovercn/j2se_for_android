@@ -38,102 +38,81 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.event.EventListenerList;
 
 /**
- * Fires one or more {@code ActionEvent}s at specified
- * intervals. An example use is an animation object that uses a
- * <code>Timer</code> as the trigger for drawing its frames.
- *<p>
- * Setting up a timer
- * involves creating a <code>Timer</code> object,
- * registering one or more action listeners on it,
- * and starting the timer using
- * the <code>start</code> method.
- * For example,
- * the following code creates and starts a timer
- * that fires an action event once per second
- * (as specified by the first argument to the <code>Timer</code> constructor).
- * The second argument to the <code>Timer</code> constructor
- * specifies a listener to receive the timer's action events.
+ * Fires one or more {@code ActionEvent}s at specified intervals. An example use
+ * is an animation object that uses a <code>Timer</code> as the trigger for
+ * drawing its frames.
+ * <p>
+ * Setting up a timer involves creating a <code>Timer</code> object, registering
+ * one or more action listeners on it, and starting the timer using the
+ * <code>start</code> method. For example, the following code creates and starts
+ * a timer that fires an action event once per second (as specified by the first
+ * argument to the <code>Timer</code> constructor). The second argument to the
+ * <code>Timer</code> constructor specifies a listener to receive the timer's
+ * action events.
  *
- *<pre>
+ * <pre>
  *  int delay = 1000; //milliseconds
  *  ActionListener taskPerformer = new ActionListener() {
  *      public void actionPerformed(ActionEvent evt) {
  *          <em>//...Perform a task...</em>
  *      }
  *  };
- *  new Timer(delay, taskPerformer).start();</pre>
+ *  new Timer(delay, taskPerformer).start();
+ * </pre>
  *
  * <p>
- * {@code Timers} are constructed by specifying both a delay parameter
- * and an {@code ActionListener}. The delay parameter is used
- * to set both the initial delay and the delay between event
- * firing, in milliseconds. Once the timer has been started,
- * it waits for the initial delay before firing its
- * first <code>ActionEvent</code> to registered listeners.
- * After this first event, it continues to fire events
- * every time the between-event delay has elapsed, until it
- * is stopped.
+ * {@code Timers} are constructed by specifying both a delay parameter and an
+ * {@code ActionListener}. The delay parameter is used to set both the initial
+ * delay and the delay between event firing, in milliseconds. Once the timer has
+ * been started, it waits for the initial delay before firing its first
+ * <code>ActionEvent</code> to registered listeners. After this first event, it
+ * continues to fire events every time the between-event delay has elapsed,
+ * until it is stopped.
  * <p>
- * After construction, the initial delay and the between-event
- * delay can be changed independently, and additional
- * <code>ActionListeners</code> may be added.
+ * After construction, the initial delay and the between-event delay can be
+ * changed independently, and additional <code>ActionListeners</code> may be
+ * added.
  * <p>
- * If you want the timer to fire only the first time and then stop,
- * invoke <code>setRepeats(false)</code> on the timer.
+ * If you want the timer to fire only the first time and then stop, invoke
+ * <code>setRepeats(false)</code> on the timer.
  * <p>
- * Although all <code>Timer</code>s perform their waiting
- * using a single, shared thread
- * (created by the first <code>Timer</code> object that executes),
- * the action event handlers for <code>Timer</code>s
- * execute on another thread -- the event-dispatching thread.
- * This means that the action handlers for <code>Timer</code>s
- * can safely perform operations on Swing components.
- * However, it also means that the handlers must execute quickly
- * to keep the GUI responsive.
+ * Although all <code>Timer</code>s perform their waiting using a single, shared
+ * thread (created by the first <code>Timer</code> object that executes), the
+ * action event handlers for <code>Timer</code>s execute on another thread --
+ * the event-dispatching thread. This means that the action handlers for
+ * <code>Timer</code>s can safely perform operations on Swing components.
+ * However, it also means that the handlers must execute quickly to keep the GUI
+ * responsive.
  *
  * <p>
- * In v 1.3, another <code>Timer</code> class was added
- * to the Java platform: <code>java.util.Timer</code>.
- * Both it and <code>javax.swing.Timer</code>
- * provide the same basic functionality,
- * but <code>java.util.Timer</code>
- * is more general and has more features.
- * The <code>javax.swing.Timer</code> has two features
- * that can make it a little easier to use with GUIs.
- * First, its event handling metaphor is familiar to GUI programmers
- * and can make dealing with the event-dispatching thread
- * a bit simpler.
- * Second, its
- * automatic thread sharing means that you don't have to
- * take special steps to avoid spawning
- * too many threads.
- * Instead, your timer uses the same thread
- * used to make cursors blink,
- * tool tips appear,
- * and so on.
+ * In v 1.3, another <code>Timer</code> class was added to the Java platform:
+ * <code>java.util.Timer</code>. Both it and <code>javax.swing.Timer</code>
+ * provide the same basic functionality, but <code>java.util.Timer</code> is
+ * more general and has more features. The <code>javax.swing.Timer</code> has
+ * two features that can make it a little easier to use with GUIs. First, its
+ * event handling metaphor is familiar to GUI programmers and can make dealing
+ * with the event-dispatching thread a bit simpler. Second, its automatic thread
+ * sharing means that you don't have to take special steps to avoid spawning too
+ * many threads. Instead, your timer uses the same thread used to make cursors
+ * blink, tool tips appear, and so on.
  *
  * <p>
- * You can find further documentation
- * and several examples of using timers by visiting
+ * You can find further documentation and several examples of using timers by
+ * visiting
  * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/timer.html"
- * target = "_top">How to Use Timers</a>,
- * a section in <em>The Java Tutorial.</em>
- * For more examples and help in choosing between
- * this <code>Timer</code> class and
- * <code>java.util.Timer</code>,
- * see
- * <a href="http://java.sun.com/products/jfc/tsc/articles/timer/"
- * target="_top">Using Timers in Swing Applications</a>,
- * an article in <em>The Swing Connection.</em>
+ * target = "_top">How to Use Timers</a>, a section in <em>The Java
+ * Tutorial.</em> For more examples and help in choosing between this
+ * <code>Timer</code> class and <code>java.util.Timer</code>, see
+ * <a href="http://java.sun.com/products/jfc/tsc/articles/timer/" target=
+ * "_top">Using Timers in Swing Applications</a>, an article in <em>The Swing
+ * Connection.</em>
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see java.util.Timer <code>java.util.Timer</code>
  *
@@ -227,8 +206,7 @@ public class Timer implements Serializable {
 
 	public void setInitialDelay(int initialDelay) {
 		if (initialDelay < 0) {
-			throw new IllegalArgumentException("Invalid initial delay: "
-					+ initialDelay);
+			throw new IllegalArgumentException("Invalid initial delay: " + initialDelay);
 		} else {
 			this.initialDelay = initialDelay;
 		}
@@ -284,8 +262,7 @@ public class Timer implements Serializable {
 		return lock;
 	}
 
-	private void readObject(ObjectInputStream in)
-			throws ClassNotFoundException, IOException {
+	private void readObject(ObjectInputStream in) throws ClassNotFoundException, IOException {
 	}
 
 	private Object readResolve() {

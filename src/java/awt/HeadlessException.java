@@ -25,12 +25,11 @@
 package java.awt;
 
 /**
- * Thrown when code that is dependent on a keyboard, display, or mouse
- * is called in an environment that does not support a keyboard, display,
- * or mouse.
+ * Thrown when code that is dependent on a keyboard, display, or mouse is called
+ * in an environment that does not support a keyboard, display, or mouse.
  *
  * @since 1.4
- * @author  Michael Martak
+ * @author Michael Martak
  */
 public class HeadlessException extends UnsupportedOperationException {
 	public HeadlessException() {

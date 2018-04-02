@@ -43,62 +43,56 @@ import javax.accessibility.AccessibleContext;
 
 /**
  * A <code>JWindow</code> is a container that can be displayed anywhere on the
- * user's desktop. It does not have the title bar, window-management buttons,
- * or other trimmings associated with a <code>JFrame</code>, but it is still a
- * "first-class citizen" of the user's desktop, and can exist anywhere
- * on it.
+ * user's desktop. It does not have the title bar, window-management buttons, or
+ * other trimmings associated with a <code>JFrame</code>, but it is still a
+ * "first-class citizen" of the user's desktop, and can exist anywhere on it.
  * <p>
- * The <code>JWindow</code> component contains a <code>JRootPane</code>
- * as its only child.  The <code>contentPane</code> should be the parent
- * of any children of the <code>JWindow</code>.
- * As a conveniance <code>add</code> and its variants, <code>remove</code> and
- * <code>setLayout</code> have been overridden to forward to the
- * <code>contentPane</code> as necessary. This means you can write:
+ * The <code>JWindow</code> component contains a <code>JRootPane</code> as its
+ * only child. The <code>contentPane</code> should be the parent of any children
+ * of the <code>JWindow</code>. As a conveniance <code>add</code> and its
+ * variants, <code>remove</code> and <code>setLayout</code> have been overridden
+ * to forward to the <code>contentPane</code> as necessary. This means you can
+ * write:
+ * 
  * <pre>
- *       window.add(child);
+ * window.add(child);
  * </pre>
- * And the child will be added to the contentPane.
- * The <code>contentPane</code> will always be non-<code>null</code>.
- * Attempting to set it to <code>null</code> will cause the <code>JWindow</code>
- * to throw an exception. The default <code>contentPane</code> will have a
- * <code>BorderLayout</code> manager set on it.
- * Refer to {@link javax.swing.RootPaneContainer}
- * for details on adding, removing and setting the <code>LayoutManager</code>
- * of a <code>JWindow</code>.
+ * 
+ * And the child will be added to the contentPane. The <code>contentPane</code>
+ * will always be non-<code>null</code>. Attempting to set it to
+ * <code>null</code> will cause the <code>JWindow</code> to throw an exception.
+ * The default <code>contentPane</code> will have a <code>BorderLayout</code>
+ * manager set on it. Refer to {@link javax.swing.RootPaneContainer} for details
+ * on adding, removing and setting the <code>LayoutManager</code> of a
+ * <code>JWindow</code>.
  * <p>
  * Please see the {@link JRootPane} documentation for a complete description of
  * the <code>contentPane</code>, <code>glassPane</code>, and
  * <code>layeredPane</code> components.
  * <p>
- * In a multi-screen environment, you can create a <code>JWindow</code>
- * on a different screen device.  See {@link java.awt.Window} for more
- * information.
+ * In a multi-screen environment, you can create a <code>JWindow</code> on a
+ * different screen device. See {@link java.awt.Window} for more information.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JRootPane
  *
- * @beaninfo
- *      attribute: isContainer true
- *      attribute: containerDelegate getContentPane
- *    description: A toplevel window which has no system border or controls.
+ * @beaninfo attribute: isContainer true attribute: containerDelegate
+ *           getContentPane description: A toplevel window which has no system
+ *           border or controls.
  *
  * @author David Kloba
  */
-public class JWindow extends Window implements Accessible, RootPaneContainer,
-		TransferHandler.HasGetTransferHandler {
+public class JWindow extends Window
+		implements Accessible, RootPaneContainer, TransferHandler.HasGetTransferHandler {
 	protected JRootPane rootPane;
 	protected boolean rootPaneCheckingEnabled = false;
 	private TransferHandler transferHandler;
@@ -123,8 +117,7 @@ public class JWindow extends Window implements Accessible, RootPaneContainer,
 	}
 
 	public JWindow(Window owner) {
-		super(owner == null ? (Window) SwingUtilities.getSharedOwnerFrame()
-				: owner);
+		super(owner == null ? (Window) SwingUtilities.getSharedOwnerFrame() : owner);
 		if (owner == null) {
 			WindowListener ownerShutdownListener = SwingUtilities
 					.getSharedOwnerFrameShutdownListener();
@@ -134,8 +127,7 @@ public class JWindow extends Window implements Accessible, RootPaneContainer,
 	}
 
 	public JWindow(Window owner, GraphicsConfiguration gc) {
-		super(owner == null ? (Window) SwingUtilities.getSharedOwnerFrame()
-				: owner, gc);
+		super(owner == null ? (Window) SwingUtilities.getSharedOwnerFrame() : owner, gc);
 		if (owner == null) {
 			WindowListener ownerShutdownListener = SwingUtilities
 					.getSharedOwnerFrameShutdownListener();

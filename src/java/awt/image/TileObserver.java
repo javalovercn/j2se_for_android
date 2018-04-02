@@ -25,10 +25,10 @@
 package java.awt.image;
 
 /**
- * An interface for objects that wish to be informed when tiles
- * of a WritableRenderedImage become modifiable by some writer via
- * a call to getWritableTile, and when they become unmodifiable via
- * the last call to releaseWritableTile.
+ * An interface for objects that wish to be informed when tiles of a
+ * WritableRenderedImage become modifiable by some writer via a call to
+ * getWritableTile, and when they become unmodifiable via the last call to
+ * releaseWritableTile.
  *
  * @see WritableRenderedImage
  *
@@ -36,8 +36,7 @@ package java.awt.image;
  * @author Daniel Rice
  */
 public interface TileObserver {
-	    public void tileUpdate(WritableRenderedImage source,
-	                           int tileX, int tileY,
-	                           boolean willBeWritable);
+	public void tileUpdate(WritableRenderedImage source, int tileX, int tileY,
+			boolean willBeWritable);
 
-	}
+}

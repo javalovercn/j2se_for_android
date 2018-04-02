@@ -28,43 +28,41 @@ import java.awt.Component;
 import java.awt.Rectangle;
 
 /**
- * The component-level paint event.
- * This event is a special type which is used to ensure that
- * paint/update method calls are serialized along with the other
- * events delivered from the event queue.  This event is not
- * designed to be used with the Event Listener model; programs
- * should continue to override paint/update methods in order
- * render themselves properly.
+ * The component-level paint event. This event is a special type which is used
+ * to ensure that paint/update method calls are serialized along with the other
+ * events delivered from the event queue. This event is not designed to be used
+ * with the Event Listener model; programs should continue to override
+ * paint/update methods in order render themselves properly.
  * <p>
- * An unspecified behavior will be caused if the {@code id} parameter
- * of any particular {@code PaintEvent} instance is not
- * in the range from {@code PAINT_FIRST} to {@code PAINT_LAST}.
+ * An unspecified behavior will be caused if the {@code id} parameter of any
+ * particular {@code PaintEvent} instance is not in the range from
+ * {@code PAINT_FIRST} to {@code PAINT_LAST}.
  *
  * @author Amy Fowler
  * @since 1.1
  */
 public class PaintEvent extends ComponentEvent {
-    public static final int PAINT_FIRST         = 800;
-    public static final int PAINT_LAST          = 801;
-    public static final int PAINT = PAINT_FIRST;
-    public static final int UPDATE = PAINT_FIRST + 1;
+	public static final int PAINT_FIRST = 800;
+	public static final int PAINT_LAST = 801;
+	public static final int PAINT = PAINT_FIRST;
+	public static final int UPDATE = PAINT_FIRST + 1;
 
-    Rectangle updateRect;
+	Rectangle updateRect;
 
-    public PaintEvent(Component source, int id, Rectangle updateRect) {
-        super(source, id);
-        this.updateRect = updateRect;
-    }
+	public PaintEvent(Component source, int id, Rectangle updateRect) {
+		super(source, id);
+		this.updateRect = updateRect;
+	}
 
-    public Rectangle getUpdateRect() {
-        return updateRect;
-    }
+	public Rectangle getUpdateRect() {
+		return updateRect;
+	}
 
-    public void setUpdateRect(Rectangle updateRect) {
-        this.updateRect = updateRect;
-    }
+	public void setUpdateRect(Rectangle updateRect) {
+		this.updateRect = updateRect;
+	}
 
-    public String paramString() {
-              return "unknown type";
-    }
+	public String paramString() {
+		return "unknown type";
+	}
 }

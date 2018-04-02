@@ -31,44 +31,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The Introspector class provides a standard way for tools to learn about
- * the properties, events, and methods supported by a target Java Bean.
+ * The Introspector class provides a standard way for tools to learn about the
+ * properties, events, and methods supported by a target Java Bean.
  * <p>
  * For each of those three kinds of information, the Introspector will
- * separately analyze the bean's class and superclasses looking for
- * either explicit or implicit information and use that information to
- * build a BeanInfo object that comprehensively describes the target bean.
+ * separately analyze the bean's class and superclasses looking for either
+ * explicit or implicit information and use that information to build a BeanInfo
+ * object that comprehensively describes the target bean.
  * <p>
- * For each class "Foo", explicit information may be available if there exists
- * a corresponding "FooBeanInfo" class that provides a non-null value when
- * queried for the information.   We first look for the BeanInfo class by
- * taking the full package-qualified name of the target bean class and
- * appending "BeanInfo" to form a new class name.  If this fails, then
- * we take the final classname component of this name, and look for that
- * class in each of the packages specified in the BeanInfo package search
- * path.
+ * For each class "Foo", explicit information may be available if there exists a
+ * corresponding "FooBeanInfo" class that provides a non-null value when queried
+ * for the information. We first look for the BeanInfo class by taking the full
+ * package-qualified name of the target bean class and appending "BeanInfo" to
+ * form a new class name. If this fails, then we take the final classname
+ * component of this name, and look for that class in each of the packages
+ * specified in the BeanInfo package search path.
  * <p>
  * Thus for a class such as "sun.xyz.OurButton" we would first look for a
  * BeanInfo class called "sun.xyz.OurButtonBeanInfo" and if that failed we'd
  * look in each package in the BeanInfo search path for an OurButtonBeanInfo
- * class.  With the default search path, this would mean looking for
+ * class. With the default search path, this would mean looking for
  * "sun.beans.infos.OurButtonBeanInfo".
  * <p>
- * If a class provides explicit BeanInfo about itself then we add that to
- * the BeanInfo information we obtained from analyzing any derived classes,
- * but we regard the explicit information as being definitive for the current
- * class and its base classes, and do not proceed any further up the superclass
- * chain.
+ * If a class provides explicit BeanInfo about itself then we add that to the
+ * BeanInfo information we obtained from analyzing any derived classes, but we
+ * regard the explicit information as being definitive for the current class and
+ * its base classes, and do not proceed any further up the superclass chain.
  * <p>
- * If we don't find explicit BeanInfo on a class, we use low-level
- * reflection to study the methods of the class and apply standard design
- * patterns to identify property accessors, event sources, or public
- * methods.  We then proceed to analyze the class's superclass and add
- * in the information from it (and possibly on up the superclass chain).
+ * If we don't find explicit BeanInfo on a class, we use low-level reflection to
+ * study the methods of the class and apply standard design patterns to identify
+ * property accessors, event sources, or public methods. We then proceed to
+ * analyze the class's superclass and add in the information from it (and
+ * possibly on up the superclass chain).
  * <p>
- * For more information about introspection and design patterns, please
- * consult the
- *  <a href="http://java.sun.com/products/javabeans/docs/index.html">JavaBeans&trade; specification</a>.
+ * For more information about introspection and design patterns, please consult
+ * the <a href=
+ * "http://java.sun.com/products/javabeans/docs/index.html">JavaBeans&trade;
+ * specification</a>.
  */
 
 public class Introspector {
@@ -97,8 +96,7 @@ public class Introspector {
 	static final String SET_PREFIX = "set";
 	static final String IS_PREFIX = "is";
 
-	public static BeanInfo getBeanInfo(Class<?> beanClass)
-			throws IntrospectionException {
+	public static BeanInfo getBeanInfo(Class<?> beanClass) throws IntrospectionException {
 		return null;
 	}
 
@@ -112,8 +110,8 @@ public class Introspector {
 		return getBeanInfo(beanClass, stopClass, USE_ALL_BEANINFO);
 	}
 
-	public static BeanInfo getBeanInfo(Class<?> beanClass, Class<?> stopClass,
-			int flags) throws IntrospectionException {
+	public static BeanInfo getBeanInfo(Class<?> beanClass, Class<?> stopClass, int flags)
+			throws IntrospectionException {
 		return null;
 	}
 
@@ -165,8 +163,8 @@ public class Introspector {
 	private void processPropertyDescriptors() {
 	}
 
-	private PropertyDescriptor mergePropertyDescriptor(
-			IndexedPropertyDescriptor ipd, PropertyDescriptor pd) {
+	private PropertyDescriptor mergePropertyDescriptor(IndexedPropertyDescriptor ipd,
+			PropertyDescriptor pd) {
 		return null;
 	}
 
@@ -175,13 +173,12 @@ public class Introspector {
 		return new PropertyDescriptor(pd2, pd1);
 	}
 
-	private PropertyDescriptor mergePropertyDescriptor(
-			IndexedPropertyDescriptor ipd1, IndexedPropertyDescriptor ipd2) {
+	private PropertyDescriptor mergePropertyDescriptor(IndexedPropertyDescriptor ipd1,
+			IndexedPropertyDescriptor ipd2) {
 		return null;
 	}
 
-	private EventSetDescriptor[] getTargetEventInfo()
-			throws IntrospectionException {
+	private EventSetDescriptor[] getTargetEventInfo() throws IntrospectionException {
 		return new EventSetDescriptor[0];
 	}
 
@@ -219,8 +216,8 @@ public class Introspector {
 		return new Method[0];
 	}
 
-	private static Method internalFindMethod(Class start, String methodName,
-			int argCount, Class args[]) {
+	private static Method internalFindMethod(Class start, String methodName, int argCount,
+			Class args[]) {
 		Method method = null;
 		return method;
 	}
@@ -229,8 +226,7 @@ public class Introspector {
 		return findMethod(cls, methodName, argCount, null);
 	}
 
-	static Method findMethod(Class cls, String methodName, int argCount,
-			Class args[]) {
+	static Method findMethod(Class cls, String methodName, int argCount, Class args[]) {
 		if (methodName == null) {
 			return null;
 		}
@@ -246,8 +242,7 @@ public class Introspector {
 	}
 
 	static Object instantiate(Class sibling, String className)
-			throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		return null;
 	}
 
@@ -263,9 +258,8 @@ class GenericBeanInfo extends SimpleBeanInfo {
 	private MethodDescriptor[] methods;
 	private Reference<BeanInfo> targetBeanInfoRef;
 
-	public GenericBeanInfo(BeanDescriptor beanDescriptor,
-			EventSetDescriptor[] events, int defaultEvent,
-			PropertyDescriptor[] properties, int defaultProperty,
+	public GenericBeanInfo(BeanDescriptor beanDescriptor, EventSetDescriptor[] events,
+			int defaultEvent, PropertyDescriptor[] properties, int defaultProperty,
 			MethodDescriptor[] methods, BeanInfo targetBeanInfo) {
 	}
 

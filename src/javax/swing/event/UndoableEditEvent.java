@@ -29,26 +29,24 @@ import javax.swing.undo.UndoableEdit;
 /**
  * An event indicating that an operation which can be undone has occurred.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Ray Ryan
  */
 public class UndoableEditEvent extends java.util.EventObject {
-    private UndoableEdit myEdit;
+	private UndoableEdit myEdit;
 
-    public UndoableEditEvent(Object source, UndoableEdit edit) {
-        super(source);
-        myEdit = edit;
-    }
+	public UndoableEditEvent(Object source, UndoableEdit edit) {
+		super(source);
+		myEdit = edit;
+	}
 
-    public UndoableEdit getEdit() {
-        return myEdit;
-    }
+	public UndoableEdit getEdit() {
+		return myEdit;
+	}
 }

@@ -32,9 +32,8 @@ import java.awt.dnd.InvalidDnDOperationException;
 
 /**
  * <p>
- * This interface is supplied by the underlying window system platform to
- * expose the behaviors of the Drag and Drop system to an originator of
- * the same
+ * This interface is supplied by the underlying window system platform to expose
+ * the behaviors of the Drag and Drop system to an originator of the same
  * </p>
  *
  * @since 1.2
@@ -42,11 +41,12 @@ import java.awt.dnd.InvalidDnDOperationException;
  */
 
 public interface DragSourceContextPeer {
-    void startDrag(DragSourceContext dsc, Cursor c, Image dragImage, Point imageOffset) throws InvalidDnDOperationException;
+	void startDrag(DragSourceContext dsc, Cursor c, Image dragImage, Point imageOffset)
+			throws InvalidDnDOperationException;
 
-    Cursor getCursor();
+	Cursor getCursor();
 
-    void setCursor(Cursor c) throws InvalidDnDOperationException;
+	void setCursor(Cursor c) throws InvalidDnDOperationException;
 
-    void transferablesFlavorsChanged();
+	void transferablesFlavorsChanged();
 }

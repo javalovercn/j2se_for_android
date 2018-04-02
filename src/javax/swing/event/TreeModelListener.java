@@ -27,24 +27,22 @@ package javax.swing.event;
 import java.util.EventListener;
 
 /**
- * Defines the interface for an object that listens
- * to changes in a TreeModel.
- * For further information and examples see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/events/treemodellistener.html">How to Write a Tree Model Listener</a>,
- * a section in <em>The Java Tutorial.</em>
+ * Defines the interface for an object that listens to changes in a TreeModel.
+ * For further information and examples see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/events/treemodellistener.html">How
+ * to Write a Tree Model Listener</a>, a section in <em>The Java Tutorial.</em>
  *
  * @author Rob Davis
  * @author Ray Ryan
  */
 public interface TreeModelListener extends EventListener {
 
-    void treeNodesChanged(TreeModelEvent e);
+	void treeNodesChanged(TreeModelEvent e);
 
-    void treeNodesInserted(TreeModelEvent e);
+	void treeNodesInserted(TreeModelEvent e);
 
-    void treeNodesRemoved(TreeModelEvent e);
+	void treeNodesRemoved(TreeModelEvent e);
 
-    void treeStructureChanged(TreeModelEvent e);
+	void treeStructureChanged(TreeModelEvent e);
 
 }

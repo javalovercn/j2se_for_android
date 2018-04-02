@@ -80,24 +80,22 @@ import android.widget.ScrollView;
 import hc.android.HCRUtil;
 
 /**
- * <a name="jtree_description">
- * A control that displays a set of hierarchical data as an outline.
- * You can find task-oriented documentation and examples of using trees in
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to Use Trees</a>,
- * a section in <em>The Java Tutorial.</em>
+ * <a name="jtree_description"> A control that displays a set of hierarchical
+ * data as an outline. You can find task-oriented documentation and examples of
+ * using trees in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/tree.html">How to
+ * Use Trees</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * A specific node in a tree can be identified either by a
- * <code>TreePath</code> (an object
- * that encapsulates a node and all of its ancestors), or by its
- * display row, where each row in the display area displays one node.
- * An <i>expanded</i> node is a non-leaf node (as identified by
- * <code>TreeModel.isLeaf(node)</code> returning false) that will displays
- * its children when all its ancestors are <i>expanded</i>.
- * A <i>collapsed</i>
- * node is one which hides them. A <i>hidden</i> node is one which is
- * under a collapsed ancestor. All of a <i>viewable</i> nodes parents
- * are expanded, but may or may not be displayed. A <i>displayed</i> node
- * is both viewable and in the display area, where it can be seen.
+ * A specific node in a tree can be identified either by a <code>TreePath</code>
+ * (an object that encapsulates a node and all of its ancestors), or by its
+ * display row, where each row in the display area displays one node. An
+ * <i>expanded</i> node is a non-leaf node (as identified by
+ * <code>TreeModel.isLeaf(node)</code> returning false) that will displays its
+ * children when all its ancestors are <i>expanded</i>. A <i>collapsed</i> node
+ * is one which hides them. A <i>hidden</i> node is one which is under a
+ * collapsed ancestor. All of a <i>viewable</i> nodes parents are expanded, but
+ * may or may not be displayed. A <i>displayed</i> node is both viewable and in
+ * the display area, where it can be seen.
  * <p>
  * The following <code>JTree</code> methods use "visible" to mean "displayed":
  * <ul>
@@ -109,23 +107,23 @@ import hc.android.HCRUtil;
  * <li><code>setVisibleRowCount()</code>
  * </ul>
  * <p>
- * The next group of <code>JTree</code> methods use "visible" to mean
- * "viewable" (under an expanded parent):
+ * The next group of <code>JTree</code> methods use "visible" to mean "viewable"
+ * (under an expanded parent):
  * <ul>
  * <li><code>isVisible()</code>
  * <li><code>makeVisible()</code>
  * </ul>
  * <p>
- * If you are interested in knowing when the selection changes implement
- * the <code>TreeSelectionListener</code> interface and add the instance
- * using the method <code>addTreeSelectionListener</code>.
- * <code>valueChanged</code> will be invoked when the
- * selection changes, that is if the user clicks twice on the same
- * node <code>valueChanged</code> will only be invoked once.
+ * If you are interested in knowing when the selection changes implement the
+ * <code>TreeSelectionListener</code> interface and add the instance using the
+ * method <code>addTreeSelectionListener</code>. <code>valueChanged</code> will
+ * be invoked when the selection changes, that is if the user clicks twice on
+ * the same node <code>valueChanged</code> will only be invoked once.
  * <p>
- * If you are interested in detecting either double-click events or when
- * a user clicks on a node, regardless of whether or not it was selected,
- * we recommend you do the following:
+ * If you are interested in detecting either double-click events or when a user
+ * clicks on a node, regardless of whether or not it was selected, we recommend
+ * you do the following:
+ * 
  * <pre>
  * final JTree tree = ...;
  *
@@ -145,37 +143,31 @@ import hc.android.HCRUtil;
  * };
  * tree.addMouseListener(ml);
  * </pre>
- * NOTE: This example obtains both the path and row, but you only need to
- * get the one you're interested in.
+ * 
+ * NOTE: This example obtains both the path and row, but you only need to get
+ * the one you're interested in.
  * <p>
- * To use <code>JTree</code> to display compound nodes
- * (for example, nodes containing both
- * a graphic icon and text), subclass {@link TreeCellRenderer} and use
- * {@link #setCellRenderer} to tell the tree to use it. To edit such nodes,
- * subclass {@link TreeCellEditor} and use {@link #setCellEditor}.
+ * To use <code>JTree</code> to display compound nodes (for example, nodes
+ * containing both a graphic icon and text), subclass {@link TreeCellRenderer}
+ * and use {@link #setCellRenderer} to tell the tree to use it. To edit such
+ * nodes, subclass {@link TreeCellEditor} and use {@link #setCellEditor}.
  * <p>
  * Like all <code>JComponent</code> classes, you can use {@link InputMap} and
- * {@link ActionMap}
- * to associate an {@link Action} object with a {@link KeyStroke}
- * and execute the action under specified conditions.
+ * {@link ActionMap} to associate an {@link Action} object with a
+ * {@link KeyStroke} and execute the action under specified conditions.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A component that displays a set of hierarchical data as an outline.
+ * @beaninfo attribute: isContainer false description: A component that displays
+ *           a set of hierarchical data as an outline.
  *
  * @author Rob Davis
  * @author Ray Ryan
@@ -191,16 +183,16 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	protected boolean rootVisible = true;
 	transient protected TreeCellRenderer cellRenderer;
 	TreeNode currSelectedTreeNode;
-	
+
 	transient private HashMap<TreeNode, Boolean> expandedState = new HashMap<TreeNode, Boolean>();
 	protected transient TreeSelectionRedirector selectionRedirector;
 	protected int visibleRowCount;
 
 	transient protected TreeModelListener treeModelListener;
-	final LinearLayout defaultLinearLayout = new LinearLayout(ActivityManager.getActivity());
-	
-	final ScrollView rootScrollView = new ScrollView(ActivityManager.getActivity());
-	
+	final LinearLayout defaultLinearLayout = new LinearLayout(ActivityManager.applicationContext);
+
+	final ScrollView rootScrollView = new ScrollView(ActivityManager.applicationContext);
+
 	private TreePath leadPath;
 	private TreePath anchorPath;
 
@@ -223,8 +215,8 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		}
 
 		public String toString() {
-			return getClass().getName() + "[dropPoint=" + getDropPoint() + ","
-					+ "path=" + path + "," + "childIndex=" + index + "]";
+			return getClass().getName() + "[dropPoint=" + getDropPoint() + "," + "path=" + path
+					+ "," + "childIndex=" + index + "]";
 		}
 	}
 
@@ -233,23 +225,26 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		public void treeExpanded(TreeExpansionEvent event) {
 			toExpand(event.getPath());
 		}
-		private void toExpand(TreePath path){
-			if(path.getParentPath() != null){
+
+		private void toExpand(TreePath path) {
+			if (path.getParentPath() != null) {
 				toExpand(path.getParentPath());
 			}
-			TreeNode lastPathComponent = (TreeNode)path.getLastPathComponent();
+			TreeNode lastPathComponent = (TreeNode) path.getLastPathComponent();
 			TreeNodeView tnv = nodeAndView.get(lastPathComponent);
 			tnv.updateExpandChildsUI(lastPathComponent, true, false);
 		}
+
 		@Override
 		public void treeCollapsed(TreeExpansionEvent event) {
 			toCollapse(event.getPath());
 		}
-		private void toCollapse(TreePath path){
-			if(path.getParentPath() != null){
+
+		private void toCollapse(TreePath path) {
+			if (path.getParentPath() != null) {
 				toCollapse(path.getParentPath());
 			}
-			TreeNode lastPathComponent = (TreeNode)path.getLastPathComponent();
+			TreeNode lastPathComponent = (TreeNode) path.getLastPathComponent();
 			TreeNodeView tnv = nodeAndView.get(lastPathComponent);
 			tnv.updateChildGroupUI(lastPathComponent);
 		}
@@ -280,7 +275,8 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	protected static TreeModel createTreeModel(Object value) {
 		DefaultMutableTreeNode root;
 
-		if ((value instanceof Object[]) || (value instanceof Hashtable) || (value instanceof Vector)) {
+		if ((value instanceof Object[]) || (value instanceof Hashtable)
+				|| (value instanceof Vector)) {
 			root = new DefaultMutableTreeNode("root");
 			DynamicUtilTreeNode.createChildren(root, value);
 		} else {
@@ -321,22 +317,24 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 
 	public void setPreferredSize(Dimension preferredSize) {
 		super.setPreferredSize(preferredSize);
-//		LayoutParams lp = rootScrollView.getLayoutParams();
-//		lp.width = preferredSize.width;
-//		lp.height = preferredSize.height;
+		// LayoutParams lp = rootScrollView.getLayoutParams();
+		// lp.width = preferredSize.width;
+		// lp.height = preferredSize.height;
 	}
-	
+
 	public JTree(TreeModel newModel) {
 		super();
 		visibleRowCount = 15;
 		rootVisible = true;
 		selectionModel = new DefaultTreeSelectionModel();
 		cellRenderer = null;
-//		{
-//			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//			defaultLinearLayout.addView(rootScrollView, lp);
-//		}
-//		setPeerAdAPI(defaultLinearLayout);
+		// {
+		// LinearLayout.LayoutParams lp = new
+		// LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+		// LinearLayout.LayoutParams.MATCH_PARENT);
+		// defaultLinearLayout.addView(rootScrollView, lp);
+		// }
+		// setPeerAdAPI(defaultLinearLayout);
 		setModel(newModel);
 		updateUI();
 	}
@@ -354,45 +352,46 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 			@Override
 			public void run() {
-				if(getModel() != null){
-					refreshRootNodeAdAPI((TreeNode)getModel().getRoot(), true);
+				if (getModel() != null) {
+					refreshRootNodeAdAPI((TreeNode) getModel().getRoot(), true);
 				}
 			}
 		});
 	}
 
-	protected class TreeSelectionRedirector implements Serializable, TreeSelectionListener{
+	protected class TreeSelectionRedirector implements Serializable, TreeSelectionListener {
 		public void valueChanged(TreeSelectionEvent e) {
 			fireValueChanged(e);
 		}
 	}
-	
+
 	class TreeNodeView {
 		LinearLayout nodeViewContainer;
 		ImageView expandNodeView;
-		LinearLayout nodeView;//包含expan, icon, text
+		LinearLayout nodeView;// 包含expan, icon, text
 		LinearLayout childGroup;
 		JCheckBox selected;
 		final ImageView rendererView;
-		
+
 		public static final int gap = 5;
 		public static final int expandIconSize = AndroidUIUtil.MIN_DRAWING_ICON_SIZE;
-		
-		TreeNodeView(final TreeNode treeNode){
+
+		TreeNodeView(final TreeNode treeNode) {
 			nodeAndView.put(treeNode, this);
-			
-			nodeViewContainer = new LinearLayout(ActivityManager.getActivity());
+
+			nodeViewContainer = new LinearLayout(ActivityManager.applicationContext);
 			nodeViewContainer.setOrientation(LinearLayout.VERTICAL);
-			
-			nodeView = new LinearLayout(ActivityManager.getActivity());
+
+			nodeView = new LinearLayout(ActivityManager.applicationContext);
 			nodeView.setOrientation(LinearLayout.HORIZONTAL);
-			
+
 			{
-				android.widget.LinearLayout.LayoutParams lp = new android.widget.LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				android.widget.LinearLayout.LayoutParams lp = new android.widget.LinearLayout.LayoutParams(
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				nodeViewContainer.addView(nodeView, lp);
 			}
-			
-			if(treeNode.isLeaf()){
+
+			if (treeNode.isLeaf()) {
 				selected = new JCheckBox();
 				selected.addActionListener(new ActionListener() {
 					@Override
@@ -401,143 +400,153 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 					}
 				});
 			}
-			
-			rendererView = new ImageView(ActivityManager.getActivity()){
-				public boolean onKeyDown(int keyCode, android.view.KeyEvent event){
-					if(event.getAction() == android.view.KeyEvent.ACTION_UP){
-				    	 if(treeNode.isLeaf() == false){
+
+			rendererView = new ImageView(ActivityManager.applicationContext) {
+				public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
+					if (event.getAction() == android.view.KeyEvent.ACTION_UP) {
+						if (treeNode.isLeaf() == false) {
 							Boolean expandStatus = expandedState.get(treeNode);
 							expandStatus = (expandStatus != null && expandStatus);
-				    		if((keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER) 
-				    				 || (expandStatus && keyCode == android.view.KeyEvent.KEYCODE_DPAD_LEFT) 
-				    				 || (expandStatus == false && keyCode == android.view.KeyEvent.KEYCODE_DPAD_RIGHT)){
+							if ((keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER)
+									|| (expandStatus
+											&& keyCode == android.view.KeyEvent.KEYCODE_DPAD_LEFT)
+									|| (expandStatus == false
+											&& keyCode == android.view.KeyEvent.KEYCODE_DPAD_RIGHT)) {
 								doExpandOrCollpse(treeNode);
 								rendererView.requestFocus();
 								return true;
-					    	 }
-					     }
+							}
+						}
 					}
-				     return super.onKeyDown(keyCode, event);
+					return super.onKeyDown(keyCode, event);
 				}
 			};
 			rendererView.setFocusable(true);
 			rendererView.setFocusableInTouchMode(false);
 			rendererView.setClickable(true);
 			rendererView.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_tree_node));
-			
+
 			AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 				@Override
 				public void run() {
 					addAndRefreshInUI(treeNode);
 				}
 			});
-			
+
 			Boolean status = expandedState.get(treeNode);
-			if(status != null && status){
+			if (status != null && status) {
 				updateExpandChildsUI(treeNode, true, false);
 			}
 		}
-		
-		public void refreshSelected(TreeNode treeNode, boolean isSelected){
-			if(selected != null){
+
+		public void refreshSelected(TreeNode treeNode, boolean isSelected) {
+			if (selected != null) {
 				selected.setSelected(isSelected);
 			}
 		}
-		
+
 		/**
 		 * 
 		 * @param treeNode
-		 * @param refresh 展开，并重绘
-		 * @param nested 递归
+		 * @param refresh
+		 *            展开，并重绘
+		 * @param nested
+		 *            递归
 		 */
-		final void updateExpandChildsUI(TreeNode treeNode, boolean refresh, boolean nested){
-			if(childGroup == null){
-				childGroup = new LinearLayout(ActivityManager.getActivity());
+		final void updateExpandChildsUI(TreeNode treeNode, boolean refresh, boolean nested) {
+			if (childGroup == null) {
+				childGroup = new LinearLayout(ActivityManager.applicationContext);
 				childGroup.setOrientation(LinearLayout.VERTICAL);
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lp.gravity = (Gravity.LEFT);
 				lp.leftMargin = expandIconSize;
 				nodeViewContainer.addView(childGroup, lp);
 			}
-			
+
 			int count = treeNode.getChildCount();
-			if(refresh || childGroup.getChildCount() > 0){
+			if (refresh || childGroup.getChildCount() > 0) {
 				for (int i = 0; i < count; i++) {
 					TreeNode aChild = treeNode.getChildAt(i);
 					TreeNodeView tnv = nodeAndView.get(aChild);
 					boolean willAdd = false;
-					if(tnv == null){
+					if (tnv == null) {
 						willAdd = true;
 						tnv = new TreeNodeView(aChild);
-					}else{
-						if(tnv.nodeViewContainer == childGroup.getChildAt(i)){
-							if(nested && (aChild.isLeaf() == false) && tnv.childGroup != null){
+					} else {
+						if (tnv.nodeViewContainer == childGroup.getChildAt(i)) {
+							if (nested && (aChild.isLeaf() == false) && tnv.childGroup != null) {
 								tnv.updateExpandChildsUI(aChild, refresh, nested);
 							}
-						}else{
+						} else {
 							willAdd = true;
 						}
 					}
-					if(willAdd){
-						LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+					if (willAdd) {
+						LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+								LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 						lp.gravity = (Gravity.LEFT);
-						AndroidUIUtil.addView(childGroup, tnv.nodeViewContainer, i, lp, viewRelation);
+						AndroidUIUtil.addView(childGroup, tnv.nodeViewContainer, i, lp,
+								viewRelation);
 					}
 				}
-				while(childGroup.getChildCount() > count){
+				while (childGroup.getChildCount() > count) {
 					viewRelation.unregisterView(childGroup.getChildAt(count));
 				}
 			}
 			updateChildGroupUI(treeNode);
 			refreshRenderer(treeNode);
 		}
-		
-		final void updateChildGroupUI(TreeNode treeNode){
-			if(childGroup == null){
+
+		final void updateChildGroupUI(TreeNode treeNode) {
+			if (childGroup == null) {
 				return;
 			}
 			refreshExpandOrCollapse(treeNode);
 			Boolean status = expandedState.get(treeNode);
-			if(status == null || status == false){
+			if (status == null || status == false) {
 				childGroup.setVisibility(View.GONE);
-			}else{
+			} else {
 				childGroup.setVisibility(View.VISIBLE);
 			}
 		}
 
 		/**
 		 * 重绘当前结点的展开或收拢。
+		 * 
 		 * @param treeNode
-		 * @param refreshIconText 同时重绘内容区
+		 * @param refreshIconText
+		 *            同时重绘内容区
 		 */
 		private final void addAndRefreshInUI(final TreeNode treeNode) {
 			int indent = 0;
-			if(treeNode.getChildCount() > 0){
+			if (treeNode.getChildCount() > 0) {
 				refreshExpandOrCollapse(treeNode);
-				
+
 				indent = gap;
-			}else{
+			} else {
 				indent = expandIconSize + gap;
 			}
-			
-			if(selected != null){
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+			if (selected != null) {
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lp.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER;
 				lp.leftMargin = indent;
 				nodeView.addView(selected.getPeerAdAPI(), lp);
 			}
-		
+
 			nodeView.removeView(rendererView);
-//			AndroidUIUtil.removeFromParent(rendererView);
-			
+			// AndroidUIUtil.removeFromParent(rendererView);
+
 			refreshRenderer(treeNode);
-			
+
 			rendererView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 					if (event.getAction() == MotionEvent.ACTION_DOWN) {
-						switchSelection(treeNode, false);//对叶节点
-						swapExpand(treeNode);//对非叶节点
+						switchSelection(treeNode, false);// 对叶节点
+						swapExpand(treeNode);// 对非叶节点
 						return true;
 					}
 					return false;
@@ -546,13 +555,13 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 			rendererView.setOnKeyListener(new View.OnKeyListener() {
 				@Override
 				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					if(keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER
-							|| keyCode == android.view.KeyEvent.KEYCODE_ENTER){
+					if (keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER
+							|| keyCode == android.view.KeyEvent.KEYCODE_ENTER) {
 						int action = event.getAction();
-						if(action == android.view.KeyEvent.ACTION_DOWN){
+						if (action == android.view.KeyEvent.ACTION_DOWN) {
 							swapExpand(treeNode);
-							
-							if(treeNode.isLeaf()){
+
+							if (treeNode.isLeaf()) {
 								selected.doClick();
 							}
 							return true;
@@ -561,22 +570,23 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 					return false;
 				}
 			});
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT);
 			lp.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER;
-			if(selected != null){
-			}else{
+			if (selected != null) {
+			} else {
 				lp.leftMargin = indent;
 			}
 			nodeView.addView(rendererView, lp);
 		}
 
 		private void refreshRenderer(final TreeNode treeNode) {
-			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+			AndroidUIUtil.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					Component comp = renderer(treeNode);
-					if(comp instanceof JComponent){
-						((JComponent)comp).updateUI();
+					if (comp instanceof JComponent) {
+						((JComponent) comp).updateUI();
 					}
 					rendererView.setImageBitmap(AndroidUIUtil.getViewBitmap(comp.getPeerAdAPI()));
 				}
@@ -585,9 +595,9 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 
 		private void refreshExpandOrCollapse(final TreeNode treeNode) {
 			Boolean status = expandedState.get(treeNode);
-			if(status == null || status == false){
+			if (status == null || status == false) {
 				expandNodeView = AndroidUIUtil.getExpandDrawable();
-			}else{
+			} else {
 				expandNodeView = AndroidUIUtil.getCollapseDrawable();
 			}
 			expandNodeView.setClickable(true);
@@ -601,36 +611,37 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 					return false;
 				}
 			});
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(expandIconSize, expandIconSize);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(expandIconSize,
+					expandIconSize);
 			lp.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER;
-			if(nodeView.getChildCount() > 0){
+			if (nodeView.getChildCount() > 0) {
 				nodeView.removeViewAt(0);
 			}
 			nodeView.addView(expandNodeView, 0, lp);
 		}
-		
+
 		DefaultTreeCellRenderer dtcr;
-		
-		private Component renderer(TreeNode node){
+
+		private Component renderer(TreeNode node) {
 			TreeCellRenderer cellRenderer2 = JTree.this.getCellRenderer();
-			if(cellRenderer2 == null){
-				if(dtcr == null){
+			if (cellRenderer2 == null) {
+				if (dtcr == null) {
 					dtcr = new DefaultTreeCellRenderer();
 				}
 				cellRenderer2 = dtcr;
 			}
-			
+
 			Boolean expanded = expandedState.get(node);
 			expanded = (expanded != null && expanded);
-			return cellRenderer2.getTreeCellRendererComponent(JTree.this, node, 
-					node == currSelectedTreeNode, expanded, 
-					node.isLeaf(), 0, FocusManager.getFocusComponentOwner()==node);
+			return cellRenderer2.getTreeCellRendererComponent(JTree.this, node,
+					node == currSelectedTreeNode, expanded, node.isLeaf(), 0,
+					FocusManager.getFocusComponentOwner() == node);
 		}
 
 		void doExpandOrCollpse(final TreeNode treeNode) {
 			Boolean expandStatus = expandedState.get(treeNode);
 			expandStatus = (expandStatus != null && expandStatus);
-			
+
 			TreePath tp = getTreePathAdAPI(treeNode);
 
 			if (expandStatus == false) {
@@ -644,26 +655,26 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		}
 
 		private void swapExpand(final TreeNode treeNode) {
-			if(treeNode.isLeaf() == false){
+			if (treeNode.isLeaf() == false) {
 				Boolean expandStatus = expandedState.get(treeNode);
 				expandStatus = (expandStatus != null && expandStatus);
 				doExpandOrCollpse(treeNode);
 			}
-			
+
 			rendererView.requestFocus();
 		}
 
 		private void switchSelection(final TreeNode treeNode, boolean isEventDone) {
-			if(treeNode.isLeaf()){
+			if (treeNode.isLeaf()) {
 				final boolean isSelected = selected.isSelected();
-				if(isEventDone?isSelected:!isSelected){
+				if (isEventDone ? isSelected : !isSelected) {
 					notifyNodeSelectChangedAdAPI(treeNode);
-				}else{
+				} else {
 					clearSelection(treeNode);
 				}
 			}
 		}
-		
+
 	}
 
 	public String getUIClassID() {
@@ -675,8 +686,8 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	}
 
 	public void setCellRenderer(TreeCellRenderer x) {
-        cellRenderer = x;
-        updateUI();
+		cellRenderer = x;
+		updateUI();
 	}
 
 	public void setEditable(boolean flag) {
@@ -719,34 +730,34 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		treeModel = newModel;
 		clearToggledPaths();
 		if (treeModel != null) {
-			if (treeModelListener == null){
+			if (treeModelListener == null) {
 				treeModelListener = createTreeModelListener();
 			}
-			if (treeModelListener != null){
+			if (treeModelListener != null) {
 				treeModel.addTreeModelListener(treeModelListener);
 			}
-			if (treeModel.getRoot() != null
-					&& !treeModel.isLeaf(treeModel.getRoot())) {
-				expandedState.put((TreeNode)treeModel.getRoot(), Boolean.TRUE);
+			if (treeModel.getRoot() != null && !treeModel.isLeaf(treeModel.getRoot())) {
+				expandedState.put((TreeNode) treeModel.getRoot(), Boolean.TRUE);
 			}
 		}
-		
+
 		{
 			nodeAndView.clear();
-			TreeNode root = (TreeNode)getModel().getRoot();
+			TreeNode root = (TreeNode) getModel().getRoot();
 			TreeNodeView tnv = new TreeNodeView(root);
 			expandRoot();
-			
-//			rootScrollView.removeAllViews();
-//			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-//			rootScrollView.addView(tnv.nodeViewContainer, lp);
+
+			// rootScrollView.removeAllViews();
+			// LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
+			// LayoutParams.MATCH_PARENT);
+			// rootScrollView.addView(tnv.nodeViewContainer, lp);
 			setPeerAdAPI(tnv.nodeViewContainer);
 		}
-		
+
 		firePropertyChange(TREE_MODEL_PROPERTY, oldModel, treeModel);
 		invalidate();
 	}
-	
+
 	public void invalidate() {
 		updateUI();
 	}
@@ -757,9 +768,9 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 
 	public void setRootVisible(boolean rootVisible) {
 		this.rootVisible = rootVisible;
-		
-		if(getModel() != null){
-			TreeNode root = (TreeNode)getModel().getRoot();
+
+		if (getModel() != null) {
+			TreeNode root = (TreeNode) getModel().getRoot();
 			refreshRootNodeAdAPI(root, true);
 		}
 	}
@@ -851,8 +862,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		return null;
 	}
 
-	Object setDropLocation(TransferHandler.DropLocation location, Object state,
-			boolean forDrop) {
+	Object setDropLocation(TransferHandler.DropLocation location, Object state, boolean forDrop) {
 		AndroidClassUtil.callEmptyMethod();
 		return null;
 	}
@@ -876,8 +886,8 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		return "";
 	}
 
-	public String convertValueToText(Object value, boolean selected,
-			boolean expanded, boolean leaf, int row, boolean hasFocus) {
+	public String convertValueToText(Object value, boolean selected, boolean expanded, boolean leaf,
+			int row, boolean hasFocus) {
 		if (value != null) {
 			String sValue = value.toString();
 			if (sValue != null) {
@@ -893,9 +903,9 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 
 	public void setSelectionPath(TreePath path) {
 		getSelectionModel().setSelectionPath(path);
-		final TreeNode lastPathComponent = (TreeNode)path.getLastPathComponent();
+		final TreeNode lastPathComponent = (TreeNode) path.getLastPathComponent();
 		TreeNodeView tnv = nodeAndView.get(lastPathComponent);
-		if(tnv != null){
+		if (tnv != null) {
 			tnv.refreshSelected(lastPathComponent, true);
 		}
 	}
@@ -943,7 +953,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	}
 
 	public void addSelectionRows(int[] rows) {
-		//如果实现此功能，请务必getTreeCellRendererComponent绘制中实现row参数
+		// 如果实现此功能，请务必getTreeCellRendererComponent绘制中实现row参数
 		AndroidClassUtil.callEmptyMethod();
 	}
 
@@ -1012,7 +1022,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	}
 
 	public boolean hasBeenExpanded(TreePath path) {
-		return (path != null && expandedState.get((TreeNode)path.getLastPathComponent()) != null);
+		return (path != null && expandedState.get((TreeNode) path.getLastPathComponent()) != null);
 	}
 
 	public boolean isExpanded(TreePath path) {
@@ -1020,7 +1030,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 			return false;
 		Object value;
 		do {
-			value = expandedState.get((TreeNode)path.getLastPathComponent());
+			value = expandedState.get((TreeNode) path.getLastPathComponent());
 			if (value == null || !((Boolean) value).booleanValue())
 				return false;
 		} while ((path = path.getParentPath()) != null);
@@ -1032,7 +1042,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		TreePath path = getPathForRow(row);
 
 		if (path != null) {
-			Boolean value = expandedState.get((TreeNode)path.getLastPathComponent());
+			Boolean value = expandedState.get((TreeNode) path.getLastPathComponent());
 
 			return (value != null && value.booleanValue());
 		}
@@ -1056,12 +1066,12 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 			}
 		}
 	}
-	
-	public static TreePath getTreePathAdAPI(TreeNode node){
+
+	public static TreePath getTreePathAdAPI(TreeNode node) {
 		TreeNode parent = node.getParent();
-		if(parent == null){
+		if (parent == null) {
 			return new TreePath(node);
-		}else{
+		} else {
 			TreePath path = getTreePathAdAPI(parent);
 			return path.pathByAddingChild(node);
 		}
@@ -1137,10 +1147,8 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		if (closestPath != null) {
 			Rectangle pathBounds = getPathBounds(closestPath);
 
-			if (pathBounds != null && x >= pathBounds.x
-					&& x < (pathBounds.x + pathBounds.width)
-					&& y >= pathBounds.y
-					&& y < (pathBounds.y + pathBounds.height))
+			if (pathBounds != null && x >= pathBounds.x && x < (pathBounds.x + pathBounds.width)
+					&& y >= pathBounds.y && y < (pathBounds.y + pathBounds.height))
 				return closestPath;
 		}
 		return null;
@@ -1193,12 +1201,12 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		if (accessibleContext != null) {
 			this.selectionModel
 					.removeTreeSelectionListener((TreeSelectionListener) accessibleContext);
-			selectionModel
-					.addTreeSelectionListener((TreeSelectionListener) accessibleContext);
+			selectionModel.addTreeSelectionListener((TreeSelectionListener) accessibleContext);
 		}
 
 		this.selectionModel = selectionModel;
-//		firePropertyChange(SELECTION_MODEL_PROPERTY, oldValue, this.selectionModel);
+		// firePropertyChange(SELECTION_MODEL_PROPERTY, oldValue,
+		// this.selectionModel);
 	}
 
 	public TreeSelectionModel getSelectionModel() {
@@ -1239,11 +1247,11 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	}
 
 	public void clearSelection(final TreeNode treeNode) {
-		if(treeNode != null){
+		if (treeNode != null) {
 			TreeNodeView tnv = nodeAndView.get(treeNode);
 			tnv.refreshSelected(treeNode, false);
 		}
-		
+
 		getSelectionModel().clearSelection();
 	}
 
@@ -1332,22 +1340,21 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	}
 
 	public void addTreeSelectionListener(TreeSelectionListener tsl) {
-        list.add(TreeSelectionListener.class,tsl);
-        if(list.getListenerCount(TreeSelectionListener.class) != 0
-           && selectionRedirector == null) {
-            selectionRedirector = new TreeSelectionRedirector();
-            selectionModel.addTreeSelectionListener(selectionRedirector);
-        }
+		list.add(TreeSelectionListener.class, tsl);
+		if (list.getListenerCount(TreeSelectionListener.class) != 0
+				&& selectionRedirector == null) {
+			selectionRedirector = new TreeSelectionRedirector();
+			selectionModel.addTreeSelectionListener(selectionRedirector);
+		}
 	}
 
 	public void removeTreeSelectionListener(TreeSelectionListener tsl) {
-		list.remove(TreeSelectionListener.class,tsl);
-        if(list.getListenerCount(TreeSelectionListener.class) == 0
-           && selectionRedirector != null) {
-            selectionModel.removeTreeSelectionListener
-                (selectionRedirector);
-            selectionRedirector = null;
-        }
+		list.remove(TreeSelectionListener.class, tsl);
+		if (list.getListenerCount(TreeSelectionListener.class) == 0
+				&& selectionRedirector != null) {
+			selectionModel.removeTreeSelectionListener(selectionRedirector);
+			selectionRedirector = null;
+		}
 	}
 
 	public TreeSelectionListener[] getTreeSelectionListeners() {
@@ -1364,8 +1371,8 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	}
 
 	public void treeDidChange() {
-//		revalidate();
-//		repaint();
+		// revalidate();
+		// repaint();
 		updateUI();
 	}
 
@@ -1394,8 +1401,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 	}
 
 	public Dimension getPreferredScrollableViewportSize() {
@@ -1408,10 +1414,8 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		return 4;
 	}
 
-	public int getScrollableBlockIncrement(Rectangle visibleRect,
-			int orientation, int direction) {
-		return (orientation == SwingConstants.VERTICAL) ? visibleRect.height
-				: visibleRect.width;
+	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+		return (orientation == SwingConstants.VERTICAL) ? visibleRect.height : visibleRect.width;
 	}
 
 	public boolean getScrollableTracksViewportWidth() {
@@ -1427,28 +1431,29 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	/**
 	 * 
 	 * @param path
-	 * @param state false, all parents of path are marked EXPANDED, but path itself is
-	 * marked collapsed.
+	 * @param state
+	 *            false, all parents of path are marked EXPANDED, but path
+	 *            itself is marked collapsed.
 	 */
 	protected void setExpandedState(TreePath path, boolean state) {
 		if (path != null) {
 			TreePath parentPath = path.getParentPath();
-			while(parentPath != null){
+			while (parentPath != null) {
 				if (!isExpanded(parentPath)) {
 					try {
 						fireTreeWillExpand(parentPath);
 					} catch (ExpandVetoException eve) {
 						return;
 					}
-					TreeNode tmpNode = (TreeNode)parentPath.getLastPathComponent();
+					TreeNode tmpNode = (TreeNode) parentPath.getLastPathComponent();
 					expandedState.put(tmpNode, Boolean.TRUE);
 					fireTreeExpanded(parentPath);
 				}
 				parentPath = parentPath.getParentPath();
 			}
-			
+
 			if (!state) {
-				Object cValue = expandedState.get((TreeNode)path.getLastPathComponent());
+				Object cValue = expandedState.get((TreeNode) path.getLastPathComponent());
 
 				if (cValue != null && ((Boolean) cValue).booleanValue()) {
 					try {
@@ -1456,16 +1461,15 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 					} catch (ExpandVetoException eve) {
 						return;
 					}
-					TreeNode tmpNode = (TreeNode)path.getLastPathComponent();
+					TreeNode tmpNode = (TreeNode) path.getLastPathComponent();
 					expandedState.put(tmpNode, Boolean.FALSE);
 					fireTreeCollapsed(path);
-					if (removeDescendantSelectedPaths(path, false)
-							&& !isPathSelected(path)) {
+					if (removeDescendantSelectedPaths(path, false) && !isPathSelected(path)) {
 						addSelectionPath(path);
 					}
 				}
 			} else {
-				Object cValue = expandedState.get((TreeNode)path.getLastPathComponent());
+				Object cValue = expandedState.get((TreeNode) path.getLastPathComponent());
 
 				if (cValue == null || (((Boolean) cValue).booleanValue() == false)) {
 					try {
@@ -1473,7 +1477,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 					} catch (ExpandVetoException eve) {
 						return;
 					}
-					TreeNode tmpNode = (TreeNode)path.getLastPathComponent();
+					TreeNode tmpNode = (TreeNode) path.getLastPathComponent();
 					expandedState.put(tmpNode, Boolean.TRUE);
 					fireTreeExpanded(path);
 				}
@@ -1483,7 +1487,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 
 	protected Enumeration<TreePath> getDescendantToggledPaths(TreePath parent) {
 		AndroidClassUtil.callEmptyMethod();
-		
+
 		if (parent == null)
 			return null;
 
@@ -1503,8 +1507,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		return new TreeModelHandler();
 	}
 
-	protected boolean removeDescendantSelectedPaths(TreePath path,
-			boolean includePath) {
+	protected boolean removeDescendantSelectedPaths(TreePath path, boolean includePath) {
 		TreePath[] toRemove = getDescendantSelectedPaths(path, includePath);
 
 		if (toRemove != null) {
@@ -1514,8 +1517,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		return false;
 	}
 
-	private TreePath[] getDescendantSelectedPaths(TreePath path,
-			boolean includePath) {
+	private TreePath[] getDescendantSelectedPaths(TreePath path, boolean includePath) {
 		TreeSelectionModel sm = getSelectionModel();
 		TreePath[] selPaths = (sm != null) ? sm.getSelectionPaths() : null;
 
@@ -1523,8 +1525,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 			boolean shouldRemove = false;
 
 			for (int counter = selPaths.length - 1; counter >= 0; counter--) {
-				if (selPaths[counter] != null
-						&& path.isDescendant(selPaths[counter])
+				if (selPaths[counter] != null && path.isDescendant(selPaths[counter])
 						&& (!path.equals(selPaths[counter]) || includePath))
 					shouldRemove = true;
 				else
@@ -1543,11 +1544,9 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		Object[] oldChildren = e.getChildren();
 		TreeSelectionModel sm = getSelectionModel();
 
-		if (sm != null && pPath != null && oldChildren != null
-				&& oldChildren.length > 0) {
+		if (sm != null && pPath != null && oldChildren != null && oldChildren.length > 0) {
 			for (int counter = oldChildren.length - 1; counter >= 0; counter--) {
-				removeDescendantSelectedPaths(
-						pPath.pathByAddingChild(oldChildren[counter]), true);
+				removeDescendantSelectedPaths(pPath.pathByAddingChild(oldChildren[counter]), true);
 			}
 		}
 	}
@@ -1570,11 +1569,10 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 
 			if (parent.getPathCount() == 1) {
 				clearToggledPaths();
-				if (treeModel.getRoot() != null
-						&& !treeModel.isLeaf(treeModel.getRoot())) {
-					expandedState.put((TreeNode)parent.getLastPathComponent(), Boolean.TRUE);
+				if (treeModel.getRoot() != null && !treeModel.isLeaf(treeModel.getRoot())) {
+					expandedState.put((TreeNode) parent.getLastPathComponent(), Boolean.TRUE);
 				}
-			} else if (expandedState.get((TreeNode)parent.getLastPathComponent()) != null) {
+			} else if (expandedState.get((TreeNode) parent.getLastPathComponent()) != null) {
 				Vector<TreePath> toRemove = new Vector<TreePath>(1);
 				boolean isExpanded = isExpanded(parent);
 
@@ -1583,11 +1581,10 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 				if (isExpanded) {
 					TreeModel model = getModel();
 
-					if (model == null
-							|| model.isLeaf(parent.getLastPathComponent()))
+					if (model == null || model.isLeaf(parent.getLastPathComponent()))
 						collapsePath(parent);
 					else
-						expandedState.put((TreeNode)parent.getLastPathComponent(), Boolean.TRUE);
+						expandedState.put((TreeNode) parent.getLastPathComponent(), Boolean.TRUE);
 				}
 			}
 			removeDescendantSelectedPaths(parent, false);
@@ -1604,12 +1601,11 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 				return;
 
 			TreePath rPath;
-			Vector<TreePath> toRemove = new Vector<TreePath>(Math.max(1,
-					children.length));
+			Vector<TreePath> toRemove = new Vector<TreePath>(Math.max(1, children.length));
 
 			for (int counter = children.length - 1; counter >= 0; counter--) {
 				rPath = parent.pathByAddingChild(children[counter]);
-				if (expandedState.get((TreeNode)rPath.getLastPathComponent()) != null)
+				if (expandedState.get((TreeNode) rPath.getLastPathComponent()) != null)
 					toRemove.addElement(rPath);
 			}
 			if (toRemove.size() > 0)
@@ -1629,14 +1625,14 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		protected Object childValue;
 		protected boolean loadedChildren;
 
-		public static void createChildren(DefaultMutableTreeNode parent,
-				Object children) {
+		public static void createChildren(DefaultMutableTreeNode parent, Object children) {
 			if (children instanceof Vector) {
 				Vector childVector = (Vector) children;
 
-				for (int counter = 0, maxCounter = childVector.size(); counter < maxCounter; counter++)
-					parent.add(new DynamicUtilTreeNode(childVector
-							.elementAt(counter), childVector.elementAt(counter)));
+				for (int counter = 0, maxCounter = childVector
+						.size(); counter < maxCounter; counter++)
+					parent.add(new DynamicUtilTreeNode(childVector.elementAt(counter),
+							childVector.elementAt(counter)));
 			} else if (children instanceof Hashtable) {
 				Hashtable childHT = (Hashtable) children;
 				Enumeration keys = childHT.keys();
@@ -1650,8 +1646,7 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 				Object[] childArray = (Object[]) children;
 
 				for (int counter = 0, maxCounter = childArray.length; counter < maxCounter; counter++)
-					parent.add(new DynamicUtilTreeNode(childArray[counter],
-							childArray[counter]));
+					parent.add(new DynamicUtilTreeNode(childArray[counter], childArray[counter]));
 			}
 		}
 
@@ -1718,47 +1713,51 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 	private void notifyNodeSelectChangedAdAPI(final TreeNode treeNode) {
 		TreeNode oldSelected = JTree.this.currSelectedTreeNode;
 		currSelectedTreeNode = treeNode;
-		
-		if(oldSelected != treeNode){
-			if(oldSelected != null){
+
+		if (oldSelected != treeNode) {
+			if (oldSelected != null) {
 				TreeNodeView tnv = nodeAndView.get(oldSelected);
 				tnv.refreshSelected(oldSelected, false);
 			}
 		}
-		
+
 		TreeNodeView tnv = nodeAndView.get(treeNode);
 		tnv.refreshSelected(treeNode, true);
-		
-		boolean[] isNew = {true};
-		TreePath newLeadSelectionPath = (treeNode!=null)?JTree.this.getTreePathAdAPI(treeNode):null;
-		TreePath oldLeadSelectionPath = (oldSelected!=null)?JTree.this.getTreePathAdAPI(oldSelected):null;
-		TreePath[] path = {newLeadSelectionPath};
-		
+
+		boolean[] isNew = { true };
+		TreePath newLeadSelectionPath = (treeNode != null) ? JTree.this.getTreePathAdAPI(treeNode)
+				: null;
+		TreePath oldLeadSelectionPath = (oldSelected != null)
+				? JTree.this.getTreePathAdAPI(oldSelected)
+				: null;
+		TreePath[] path = { newLeadSelectionPath };
+
 		TreeSelectionModel selModel = JTree.this.getSelectionModel();
 		selModel.setSelectionPath(newLeadSelectionPath);
-		
-		fireValueChanged(new TreeSelectionEvent(JTree.this, path, isNew, oldLeadSelectionPath, newLeadSelectionPath));
+
+		fireValueChanged(new TreeSelectionEvent(JTree.this, path, isNew, oldLeadSelectionPath,
+				newLeadSelectionPath));
 	}
 
 	private void refreshRootNodeAdAPI(TreeNode treeNode, boolean isRoot) {
 		TreeModel model = getModel();
-		if(model == null){
+		if (model == null) {
 			return;
 		}
-		
+
 		TreeNodeView treeNodeView = nodeAndView.get(treeNode);
 		treeNodeView.updateExpandChildsUI(treeNode, true, true);
-		
-//		int count = treeNode.getChildCount();
-//		for (int i = 0; i < count; i++) {
-//			refreshRootNodeAdAPI(treeNode.getChildAt(i), false);
-//		}
-		
-		if(isRoot){
+
+		// int count = treeNode.getChildCount();
+		// for (int i = 0; i < count; i++) {
+		// refreshRootNodeAdAPI(treeNode.getChildAt(i), false);
+		// }
+
+		if (isRoot) {
 			LinearLayout nodeView = treeNodeView.nodeView;
-			if(rootVisible){
+			if (rootVisible) {
 				nodeView.setVisibility(View.VISIBLE);
-			}else{
+			} else {
 				nodeView.setVisibility(View.GONE);
 			}
 		}

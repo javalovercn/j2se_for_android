@@ -45,24 +45,22 @@ import javax.swing.event.EventListenerList;
 import javax.swing.text.AttributeSet;
 
 /**
- * The <code>TextComponent</code> class is the superclass of
- * any component that allows the editing of some text.
+ * The <code>TextComponent</code> class is the superclass of any component that
+ * allows the editing of some text.
  * <p>
- * A text component embodies a string of text.  The
- * <code>TextComponent</code> class defines a set of methods
- * that determine whether or not this text is editable. If the
- * component is editable, it defines another set of methods
+ * A text component embodies a string of text. The <code>TextComponent</code>
+ * class defines a set of methods that determine whether or not this text is
+ * editable. If the component is editable, it defines another set of methods
  * that supports a text insertion caret.
  * <p>
- * In addition, the class defines methods that are used
- * to maintain a current <em>selection</em> from the text.
- * The text selection, a substring of the component's text,
- * is the target of editing operations. It is also referred
- * to as the <em>selected text</em>.
+ * In addition, the class defines methods that are used to maintain a current
+ * <em>selection</em> from the text. The text selection, a substring of the
+ * component's text, is the target of editing operations. It is also referred to
+ * as the <em>selected text</em>.
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
- * @since       JDK1.0
+ * @author Sami Shaio
+ * @author Arthur van Hoff
+ * @since JDK1.0
  */
 public class TextComponent extends Component implements Accessible {
 
@@ -199,8 +197,7 @@ public class TextComponent extends Component implements Accessible {
 	 * @see java.awt.TextComponent#getText
 	 */
 	public synchronized void setText(String t) {
-		boolean skipTextEvent = (text == null || text.isEmpty())
-				&& (t == null || t.isEmpty());
+		boolean skipTextEvent = (text == null || text.isEmpty()) && (t == null || t.isEmpty());
 		text = (t != null) ? t : "";
 		// TextComponentPeer peer = (TextComponentPeer)this.peer;
 		// // Please note that we do not want to post an event
@@ -733,8 +730,8 @@ public class TextComponent extends Component implements Accessible {
 	 * @see #addTextListener
 	 * @see java.awt.GraphicsEnvironment#isHeadless
 	 */
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException, HeadlessException {
+	private void readObject(ObjectInputStream s)
+			throws ClassNotFoundException, IOException, HeadlessException {
 	}
 
 	// ///////////////
@@ -742,8 +739,8 @@ public class TextComponent extends Component implements Accessible {
 	// //////////////
 
 	/**
-     *
-     */
+	 *
+	 */
 	int getIndexAtPoint(Point p) {
 		return -1;
 		/*
@@ -754,8 +751,8 @@ public class TextComponent extends Component implements Accessible {
 	}
 
 	/**
-     *
-     */
+	 *
+	 */
 	Rectangle getCharacterBounds(int i) {
 		return null;
 		/*

@@ -43,58 +43,55 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 
 /**
- * A class which implements a line border of arbitrary thickness
- * and of a single color.
+ * A class which implements a line border of arbitrary thickness and of a single
+ * color.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author David Kloba
  */
-public class LineBorder extends AbstractBorder
-{
-    protected int thickness;
-    protected Color lineColor;
-    protected boolean roundedCorners;
-    FrameLayout borderView;
-    private View componentView;
-    
-    public static Border createBlackLineBorder() {
-        return new LineBorder(Color.black, 1);
-    }
+public class LineBorder extends AbstractBorder {
+	protected int thickness;
+	protected Color lineColor;
+	protected boolean roundedCorners;
+	FrameLayout borderView;
+	private View componentView;
 
-    public static Border createGrayLineBorder() {
-        return new LineBorder(AndroidUIUtil.getDarkGrayColor(), 1);
-    }
+	public static Border createBlackLineBorder() {
+		return new LineBorder(Color.black, 1);
+	}
 
-    public LineBorder(Color color) {
-        this(color, 1, false);
-    }
+	public static Border createGrayLineBorder() {
+		return new LineBorder(AndroidUIUtil.getDarkGrayColor(), 1);
+	}
 
-    public LineBorder(Color color, int thickness)  {
-        this(color, thickness, false);
-    }
+	public LineBorder(Color color) {
+		this(color, 1, false);
+	}
 
-    public LineBorder(Color color, int thickness, boolean roundedCorners)  {
-        lineColor = color;
-        this.thickness = thickness;
-        this.roundedCorners = roundedCorners;
-        
-        build();
-    }
-    
-    private void build(){
-    	FrameLayout framelayout = new FrameLayout(ActivityManager.getActivity());
-    	framelayout.setBackgroundColor(0);
-    	
-    	final View boxView = new View(ActivityManager.getActivity());
-    	boxView.setBackgroundDrawable(new Drawable(){
+	public LineBorder(Color color, int thickness) {
+		this(color, thickness, false);
+	}
+
+	public LineBorder(Color color, int thickness, boolean roundedCorners) {
+		lineColor = color;
+		this.thickness = thickness;
+		this.roundedCorners = roundedCorners;
+
+		build();
+	}
+
+	private void build() {
+		FrameLayout framelayout = new FrameLayout(ActivityManager.applicationContext);
+		framelayout.setBackgroundColor(0);
+
+		final View boxView = new View(ActivityManager.applicationContext);
+		boxView.setBackgroundDrawable(new Drawable() {
 			@Override
 			public void draw(Canvas canvas) {
 				CanvasGraphics g = new CanvasGraphics(canvas, screenAdapter);
@@ -103,60 +100,67 @@ public class LineBorder extends AbstractBorder
 
 				g.setColor(lineColor);
 				g.setStroke(new BasicStroke(thickness));
-				if(roundedCorners){
+				if (roundedCorners) {
 					int arc = AndroidUIUtil.BORDER_RADIUS;
-					g.drawRoundRect(thickness/2, thickness/2, width-(int)Math.ceil(thickness * 1.0F/2.0F), height-(int)Math.ceil(thickness * 1.0F/2.0F), arc*2, arc*2);
-				}else{
-					g.drawRect((int)Math.ceil(thickness * 1.0F/2.0F), (int)Math.ceil(thickness * 1.0F/2.0F), 
-							width-(int)Math.ceil(thickness * 1.0F/2.0F)*2, height-(int)Math.ceil(thickness * 1.0F/2.0F)*2);
+					g.drawRoundRect(thickness / 2, thickness / 2,
+							width - (int) Math.ceil(thickness * 1.0F / 2.0F),
+							height - (int) Math.ceil(thickness * 1.0F / 2.0F), arc * 2, arc * 2);
+				} else {
+					g.drawRect((int) Math.ceil(thickness * 1.0F / 2.0F),
+							(int) Math.ceil(thickness * 1.0F / 2.0F),
+							width - (int) Math.ceil(thickness * 1.0F / 2.0F) * 2,
+							height - (int) Math.ceil(thickness * 1.0F / 2.0F) * 2);
 				}
 			}
+
 			@Override
 			public int getOpacity() {
 				return 0;
 			}
+
 			@Override
 			public void setAlpha(int arg0) {
 			}
+
 			@Override
 			public void setColorFilter(ColorFilter arg0) {
 			}
-    	});
-    	
-    	{
-    		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-    				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-//    		lp.setMargins(thickness, thickness, thickness, thickness);
-    		
-    		framelayout.addView(boxView, lp);
-    	}
-    	
-    	borderView = framelayout;
-    }
+		});
 
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-    }
+		{
+			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT);
+			// lp.setMargins(thickness, thickness, thickness, thickness);
 
-    public Insets getBorderInsets(Component c, Insets insets) {
-        insets.set(thickness, thickness, thickness, thickness);
-        return insets;
-    }
+			framelayout.addView(boxView, lp);
+		}
 
-    public Color getLineColor()     {
-        return lineColor;
-    }
+		borderView = framelayout;
+	}
 
-    public int getThickness()       {
-        return thickness;
-    }
+	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+	}
 
-    public boolean getRoundedCorners() {
-        return roundedCorners;
-    }
+	public Insets getBorderInsets(Component c, Insets insets) {
+		insets.set(thickness, thickness, thickness, thickness);
+		return insets;
+	}
 
-    public boolean isBorderOpaque() {
-        return !roundedCorners;
-    }
+	public Color getLineColor() {
+		return lineColor;
+	}
+
+	public int getThickness() {
+		return thickness;
+	}
+
+	public boolean getRoundedCorners() {
+		return roundedCorners;
+	}
+
+	public boolean isBorderOpaque() {
+		return !roundedCorners;
+	}
 
 	@Override
 	public View getBorderViewAdAPI() {
@@ -165,19 +169,21 @@ public class LineBorder extends AbstractBorder
 
 	@Override
 	public void setComponentViewAdAPI(final View view, final Component component) {
-		ActivityManager.getActivity().runOnUiThread(new Runnable() {
+		AndroidUIUtil.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if(componentView != null){
+				if (componentView != null) {
 					borderView.removeView(componentView);
 				}
-				
+
 				{
-		    		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-		    				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-		    		lp.setMargins(thickness, thickness, thickness, thickness);
-		    		lp.gravity = (Gravity.TOP | (component.getComponentOrientation().isLeftToRight()?Gravity.LEFT:Gravity.RIGHT));
-		    		borderView.addView(view, lp);
+					FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+							LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+					lp.setMargins(thickness, thickness, thickness, thickness);
+					lp.gravity = (Gravity.TOP
+							| (component.getComponentOrientation().isLeftToRight() ? Gravity.LEFT
+									: Gravity.RIGHT));
+					borderView.addView(view, lp);
 				}
 				componentView = view;
 			}

@@ -79,39 +79,38 @@ import hc.android.HCRUtil;
  * user's request. If you make the combo box editable, then the combo box
  * includes an editable field into which the user can type a value.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * <p>
- * See <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/combobox.html">How to Use Combo Boxes</a>
- * in <a href="http://java.sun.com/Series/Tutorial/index.html"><em>The Java Tutorial</em></a>
- * for further information.
+ * See <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/combobox.html">How
+ * to Use Combo Boxes</a> in
+ * <a href="http://java.sun.com/Series/Tutorial/index.html"><em>The Java
+ * Tutorial</em></a> for further information.
  * <p>
+ * 
  * @see ComboBoxModel
  * @see DefaultComboBoxModel
  *
- * @param <E> the type of the elements of this combo box
+ * @param <E>
+ *            the type of the elements of this combo box
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A combination of a text field and a drop-down list.
+ * @beaninfo attribute: isContainer false description: A combination of a text
+ *           field and a drop-down list.
  *
  * @author Arnaud Weber
  * @author Mark Davidson
  */
-public class JComboBox<E> extends JHCComponent implements ItemSelectable,
-		ListDataListener, ActionListener, Accessible {
+public class JComboBox<E> extends JHCComponent
+		implements ItemSelectable, ListDataListener, ActionListener, Accessible {
 	private Spinner spinner;
 	private static final String uiClassID = "ComboBoxUI";
 	private final DataSetObservable mDataSetObservable = new DataSetObservable();
@@ -119,7 +118,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	public void applyComponentOrientation(ComponentOrientation o) {
 		super.applyComponentOrientation(o);
 	}
-	
+
 	protected ComboBoxModel<E> dataModel;
 	protected ListCellRenderer<? super E> renderer;
 	protected ComboBoxEditor editor;
@@ -153,8 +152,8 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	}
 
 	@Override
-	public View getPeerAdAPI(){
-		if(spinner == null){
+	public View getPeerAdAPI() {
+		if (spinner == null) {
 			AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 				@Override
 				public void run() {
@@ -162,177 +161,201 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 				}
 			});
 		}
-		
+
 		return super.getPeerAdAPI();
 	}
-	
-	public View getFocusablePeerViewAdAPI(){
+
+	public View getFocusablePeerViewAdAPI() {
 		return spinner;
 	}
-	
+
 	private void initSpinner() {
-		spinner = new Spinner(ActivityManager.getActivity());
+		spinner = new Spinner(ActivityManager.applicationContext);
 		setPeerAdAPI(spinner);
 		addOnLayoutChangeListenerAdAPI(spinner);
-		
+
 		spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if(position < getItemCount() && position >= 0){//Android初始为position=0,而J2SE允许集合为0
+				if (position < getItemCount() && position >= 0) {// Android初始为position=0,而J2SE允许集合为0
 					JComboBox.this.setSelectedIndex(position);
 				}
-//				System.out.println("spinner onItemSelected at position : " + position + ", id : " + id);
+				// System.out.println("spinner onItemSelected at position : " +
+				// position + ", id : " + id);
 			}
+
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-//				System.out.println("onNothingSelected");
+				// System.out.println("onNothingSelected");
 			}
 		});
 		AndroidUIUtil.buildListenersForComponent(spinner, this);
 		spinner.setAdapter(new SpinnerAdapter() {
-			private LayoutInflater mInflater = (LayoutInflater)ActivityManager.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			private LayoutInflater mInflater = (LayoutInflater) ActivityManager.applicationContext
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 			@Override
 			public void unregisterDataSetObserver(DataSetObserver observer) {
 				mDataSetObservable.unregisterObserver(observer);
 			}
+
 			@Override
 			public void registerDataSetObserver(DataSetObserver observer) {
 				mDataSetObservable.registerObserver(observer);
 			}
+
 			@Override
 			public boolean isEmpty() {
 				return getCount() == 0;
 			}
+
 			@Override
 			public boolean hasStableIds() {
 				return false;
 			}
+
 			private final int TYPE_STRING = 0;
 			private final int TYPE_ICON = 1;
+
 			@Override
 			public int getItemViewType(int position) {
-				if(dataModel.getSize() > position){
+				if (dataModel.getSize() > position) {
 					Object out = dataModel.getElementAt(position);
-					if(out != null && out instanceof Icon){
+					if (out != null && out instanceof Icon) {
 						return TYPE_ICON;
 					}
 				}
 				return TYPE_STRING;
 			}
+
 			@Override
 			public int getViewTypeCount() {
-				//注意：
-				//05-18 11:57:21.581: E/HomeCenter(29594): java.lang.IllegalArgumentException: Spinner adapter view type count must be 1
-				//This error is being reported for targetSdkVersion of 21.
+				// 注意：
+				// 05-18 11:57:21.581: E/HomeCenter(29594):
+				// java.lang.IllegalArgumentException: Spinner adapter view type
+				// count must be 1
+				// This error is being reported for targetSdkVersion of 21.
 				return 1;
 			}
+
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				if(getItemViewType(position) == TYPE_ICON){
-					return createIconViewFromResource(position, convertView, parent, HCRUtil.getResource(HCRUtil.R_layout_simple_spinner_image_item));
-				}else{
-					return createViewFromResource(position, convertView, parent, HCRUtil.getResource(HCRUtil.R_layout_simple_spinner_item));
+				if (getItemViewType(position) == TYPE_ICON) {
+					return createIconViewFromResource(position, convertView, parent,
+							HCRUtil.getResource(HCRUtil.R_layout_simple_spinner_image_item));
+				} else {
+					return createViewFromResource(position, convertView, parent,
+							HCRUtil.getResource(HCRUtil.R_layout_simple_spinner_item));
 				}
-//				if(convertView instanceof TextView){
-//					return convertView;
-//				}else{
-//					TextView textView = new TextView(ActivityManager.getActivity());
-//					textView.setTextColor(JComboBox.this.isEnable?UIUtil.WIN_FONT_COLOR.toAndroid():UIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
-//					textViewUIUtil.setTextSize(JComboBox.this.font.getSize());
-//					
-//					return textView;
-//				}
+				// if(convertView instanceof TextView){
+				// return convertView;
+				// }else{
+				// TextView textView = new
+				// TextView(ActivityManager.applicationContext);
+				// textView.setTextColor(JComboBox.this.isEnable?UIUtil.WIN_FONT_COLOR.toAndroid():UIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
+				// textViewUIUtil.setTextSize(JComboBox.this.font.getSize());
+				//
+				// return textView;
+				// }
 			}
-			private View createIconViewFromResource(int position, View convertView, ViewGroup parent,
-		            int resource) {
-		        View view;
-		        ImageView bitmapView;
-		        if (convertView == null) {
-		            view = mInflater.inflate(resource, parent, false);
-		        } else {
-		            view = convertView;
-		        }
-		        try {
-		        	int mFieldId = 0;
-		        	if (mFieldId == 0) {
-		                bitmapView = (ImageView) view;
-		            } else {
-		                bitmapView = (ImageView) view.findViewById(mFieldId);
-		            }
-		        } catch (ClassCastException e) {
-		            Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
-		            throw new IllegalStateException(
-		                    "ArrayAdapter requires the resource ID to be a TextView", e);
-		        }
-		        Object item = getItem(position);
-		        if(item == null){
-		        	item = "";
-		        }
-		        if (item instanceof Icon) {
-		            bitmapView.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)item, JComboBox.this));
-		        }
-		        return view;
-		    }
+
+			private View createIconViewFromResource(int position, View convertView,
+					ViewGroup parent, int resource) {
+				View view;
+				ImageView bitmapView;
+				if (convertView == null) {
+					view = mInflater.inflate(resource, parent, false);
+				} else {
+					view = convertView;
+				}
+				try {
+					int mFieldId = 0;
+					if (mFieldId == 0) {
+						bitmapView = (ImageView) view;
+					} else {
+						bitmapView = (ImageView) view.findViewById(mFieldId);
+					}
+				} catch (ClassCastException e) {
+					Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
+					throw new IllegalStateException(
+							"ArrayAdapter requires the resource ID to be a TextView", e);
+				}
+				Object item = getItem(position);
+				if (item == null) {
+					item = "";
+				}
+				if (item instanceof Icon) {
+					bitmapView.setImageDrawable(ImageIcon
+							.getAdapterBitmapDrawableAdAPI((ImageIcon) item, JComboBox.this));
+				}
+				return view;
+			}
+
 			private View createViewFromResource(int position, View convertView, ViewGroup parent,
-		            int resource) {
-		        View view;
-		        TextView text;
-		        if (convertView == null) {
-		            view = mInflater.inflate(resource, parent, false);
-		        } else {
-		            view = convertView;
-		        }
-		        try {
-		        	int mFieldId = 0;
-		        	if (mFieldId == 0) {
-		                text = (TextView) view;
-		            } else {
-		                text = (TextView) view.findViewById(mFieldId);
-		            }
-		        	UICore.setTextSize(text, JComboBox.this.getFont(), JComboBox.this.getScreenAdapterAdAPI());
-		        } catch (ClassCastException e) {
-		            Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
-		            throw new IllegalStateException(
-		                    "ArrayAdapter requires the resource ID to be a TextView", e);
-		        }
-		        Object item = getItem(position);
-		        if(item == null){
-		        	item = "";
-		        }
-		        if (item instanceof CharSequence) {
-		            text.setText((CharSequence)item);
-		        } else {
-		            text.setText(item.toString());
-		        }
-		        return view;
-		    }
+					int resource) {
+				View view;
+				TextView text;
+				if (convertView == null) {
+					view = mInflater.inflate(resource, parent, false);
+				} else {
+					view = convertView;
+				}
+				try {
+					int mFieldId = 0;
+					if (mFieldId == 0) {
+						text = (TextView) view;
+					} else {
+						text = (TextView) view.findViewById(mFieldId);
+					}
+					UICore.setTextSize(text, JComboBox.this.getFont(),
+							JComboBox.this.getScreenAdapterAdAPI());
+				} catch (ClassCastException e) {
+					Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
+					throw new IllegalStateException(
+							"ArrayAdapter requires the resource ID to be a TextView", e);
+				}
+				Object item = getItem(position);
+				if (item == null) {
+					item = "";
+				}
+				if (item instanceof CharSequence) {
+					text.setText((CharSequence) item);
+				} else {
+					text.setText(item.toString());
+				}
+				return view;
+			}
+
 			@Override
 			public long getItemId(int position) {
 				return position;
 			}
+
 			@Override
 			public Object getItem(int position) {
 				return dataModel.getElementAt(position);
 			}
+
 			@Override
 			public int getCount() {
 				return dataModel.getSize();
 			}
+
 			@Override
 			public View getDropDownView(int position, View convertView, ViewGroup parent) {
-				if(getItemViewType(position) == TYPE_ICON){
-					return createIconViewFromResource(position, convertView, parent, 
-							HCRUtil.getResource(HCRUtil.R_layout_simple_spinner_dropdown_image_item));
-				}else{
-					return createViewFromResource(position, convertView, parent, 
+				if (getItemViewType(position) == TYPE_ICON) {
+					return createIconViewFromResource(position, convertView, parent, HCRUtil
+							.getResource(HCRUtil.R_layout_simple_spinner_dropdown_image_item));
+				} else {
+					return createViewFromResource(position, convertView, parent,
 							HCRUtil.getResource(HCRUtil.R_layout_simple_spinner_dropdown_item));
 				}
 			}
-		});    
-        
+		});
+
 		actionCommand = "comboBoxChanged";
-//		installAncestorListener();
-//		setUIProperty("opaque", true);
+		// installAncestorListener();
+		// setUIProperty("opaque", true);
 		updateUI();
 	}
 
@@ -354,19 +377,19 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	}
 
 	public void setUI(ComboBoxUI ui) {
-//		super.setUI(ui);
+		// super.setUI(ui);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
 	public void updateUI() {
-//		spinner.postInvalidate();
-//		AndroidClassUtil.callEmptyMethod();
-//		setUI((ComboBoxUI) UIManager.getUI(this));
-//
-//		ListCellRenderer<? super E> renderer = getRenderer();
-//		if (renderer instanceof Component) {
-//			SwingUtilities.updateComponentTreeUI((Component) renderer);
-//		}
+		// spinner.postInvalidate();
+		// AndroidClassUtil.callEmptyMethod();
+		// setUI((ComboBoxUI) UIManager.getUI(this));
+		//
+		// ListCellRenderer<? super E> renderer = getRenderer();
+		// if (renderer instanceof Component) {
+		// SwingUtilities.updateComponentTreeUI((Component) renderer);
+		// }
 	}
 
 	public String getUIClassID() {
@@ -396,10 +419,10 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	}
 
 	public void setLightWeightPopupEnabled(boolean aFlag) {
-//		boolean oldFlag = lightWeightPopupEnabled;
+		// boolean oldFlag = lightWeightPopupEnabled;
 		lightWeightPopupEnabled = aFlag;
-//		firePropertyChange("lightWeightPopupEnabled", oldFlag,
-//				lightWeightPopupEnabled);
+		// firePropertyChange("lightWeightPopupEnabled", oldFlag,
+		// lightWeightPopupEnabled);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
@@ -408,9 +431,9 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	}
 
 	public void setEditable(boolean aFlag) {
-//		boolean oldFlag = isEditable;
+		// boolean oldFlag = isEditable;
 		isEditable = aFlag;
-//		firePropertyChange("editable", oldFlag, isEditable);
+		// firePropertyChange("editable", oldFlag, isEditable);
 		spinner.setSelected(aFlag);
 	}
 
@@ -419,9 +442,9 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	}
 
 	public void setMaximumRowCount(int count) {
-//		int oldCount = maximumRowCount;
+		// int oldCount = maximumRowCount;
 		maximumRowCount = count;
-//		firePropertyChange("maximumRowCount", oldCount, maximumRowCount);
+		// firePropertyChange("maximumRowCount", oldCount, maximumRowCount);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
@@ -432,10 +455,10 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 
 	public void setRenderer(ListCellRenderer<? super E> aRenderer) {
 		AndroidClassUtil.callEmptyMethod();
-//		ListCellRenderer<? super E> oldRenderer = renderer;
+		// ListCellRenderer<? super E> oldRenderer = renderer;
 		renderer = aRenderer;
-//		firePropertyChange("renderer", oldRenderer, renderer);
-//		invalidate();
+		// firePropertyChange("renderer", oldRenderer, renderer);
+		// invalidate();
 	}
 
 	public ListCellRenderer<? super E> getRenderer() {
@@ -453,7 +476,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 		if (editor != null) {
 			editor.addActionListener(this);
 		}
-//		firePropertyChange("editor", oldEditor, editor);
+		// firePropertyChange("editor", oldEditor, editor);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
@@ -484,7 +507,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 			}
 
 			selectingItem = true;
-			if(spinner == null){
+			if (spinner == null) {
 				AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 					@Override
 					public void run() {
@@ -494,7 +517,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 			}
 			spinner.setSelection(foundIdx);
 			dataModel.setSelectedItem(objectToSelect);
-			mDataSetObservable.notifyChanged();//刷新显示数据
+			mDataSetObservable.notifyChanged();// 刷新显示数据
 			selectingItem = false;
 
 			if (selectedItemReminder != dataModel.getSelectedItem()) {
@@ -514,8 +537,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 		if (anIndex == -1) {
 			setSelectedItem(null);
 		} else if (anIndex < -1 || anIndex >= size) {
-			throw new IllegalArgumentException("setSelectedIndex: " + anIndex
-					+ " out of bounds");
+			throw new IllegalArgumentException("setSelectedIndex: " + anIndex + " out of bounds");
 		} else {
 			setSelectedItem(dataModel.getElementAt(anIndex));
 		}
@@ -540,17 +562,17 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	}
 
 	public void setPrototypeDisplayValue(E prototypeDisplayValue) {
-//		Object oldValue = this.prototypeDisplayValue;
+		// Object oldValue = this.prototypeDisplayValue;
 		this.prototypeDisplayValue = prototypeDisplayValue;
-//		firePropertyChange("prototypeDisplayValue", oldValue,
-//				prototypeDisplayValue);
+		// firePropertyChange("prototypeDisplayValue", oldValue,
+		// prototypeDisplayValue);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
 	public void addItem(E item) {
 		checkMutableComboBoxModel();
 		((MutableComboBoxModel<E>) dataModel).addElement(item);
-//		spinner.invalidate();//不需要
+		// spinner.invalidate();//不需要
 	}
 
 	public void insertItemAt(E item, int index) {
@@ -583,7 +605,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 		}
 		selectedItemReminder = null;
 		if (isEditable()) {
-			if(editor != null){
+			if (editor != null) {
 				editor.setItem(null);
 			}
 		}
@@ -591,27 +613,26 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 
 	void checkMutableComboBoxModel() {
 		if (!(dataModel instanceof MutableComboBoxModel))
-			throw new RuntimeException(
-					"Cannot use this method with a non-Mutable data model.");
+			throw new RuntimeException("Cannot use this method with a non-Mutable data model.");
 	}
 
 	public void showPopup() {
-//		setPopupVisible(true);
+		// setPopupVisible(true);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
 	public void hidePopup() {
-//		setPopupVisible(false);
+		// setPopupVisible(false);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
 	public void setPopupVisible(boolean v) {
-//		getUI().setPopupVisible(this, v);
+		// getUI().setPopupVisible(this, v);
 		AndroidClassUtil.callEmptyMethod();
 	}
 
 	public boolean isPopupVisible() {
-//		return getUI().isPopupVisible(this);
+		// return getUI().isPopupVisible(this);
 		return false;
 	}
 
@@ -687,8 +708,8 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 		}
 	}
 
-	private static class ComboBoxActionPropertyChangeListener extends
-			ActionPropertyChangeListener<JComboBox<?>> {
+	private static class ComboBoxActionPropertyChangeListener
+			extends ActionPropertyChangeListener<JComboBox<?>> {
 		ComboBoxActionPropertyChangeListener(JComboBox<?> b, Action a) {
 			super(b, a);
 		}
@@ -726,9 +747,8 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 
 			for (int i = listeners.length - 1; i >= 0; i--) {
 				if (e == null)
-					e = new ActionEvent(this, ActionEvent.ACTION_PERFORMED,
-							getActionCommand(), mostRecentEventTime,
-							modifiers);
+					e = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, getActionCommand(),
+							mostRecentEventTime, modifiers);
 				((ActionListener) listeners[i]).actionPerformed(e);
 			}
 			firingActionEvent = false;
@@ -737,17 +757,15 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 
 	protected void selectedItemChanged() {
 		if (selectedItemReminder != null) {
-			fireItemStateChanged(new ItemEvent(this,
-					ItemEvent.ITEM_STATE_CHANGED, selectedItemReminder,
-					ItemEvent.DESELECTED));
+			fireItemStateChanged(new ItemEvent(this, ItemEvent.ITEM_STATE_CHANGED,
+					selectedItemReminder, ItemEvent.DESELECTED));
 		}
 
 		selectedItemReminder = dataModel.getSelectedItem();
 
 		if (selectedItemReminder != null) {
-			fireItemStateChanged(new ItemEvent(this,
-					ItemEvent.ITEM_STATE_CHANGED, selectedItemReminder,
-					ItemEvent.SELECTED));
+			fireItemStateChanged(new ItemEvent(this, ItemEvent.ITEM_STATE_CHANGED,
+					selectedItemReminder, ItemEvent.SELECTED));
 		}
 	}
 
@@ -765,7 +783,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 	public void actionPerformed(ActionEvent e) {
 		AndroidClassUtil.callEmptyMethod();
 		ComboBoxEditor editor2 = getEditor();
-		if(editor2 != null){
+		if (editor2 != null) {
 			Object newItem = editor2.getItem();
 			setPopupVisible(false);
 			getModel().setSelectedItem(newItem);
@@ -804,10 +822,10 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 
 	public void setEnabled(boolean b) {
 		super.setEnabled(b);
-		if(spinner != null){
+		if (spinner != null) {
 			spinner.setEnabled(b);
 		}
-//		firePropertyChange("enabled", !isEnabled(), isEnabled());
+		// firePropertyChange("enabled", !isEnabled(), isEnabled());
 	}
 
 	public void configureEditor(ComboBoxEditor anEditor, Object anItem) {
@@ -842,8 +860,7 @@ public class JComboBox<E> extends JHCComponent implements ItemSelectable,
 		int selectionForKey(char aKey, ComboBoxModel aModel);
 	}
 
-	class DefaultKeySelectionManager implements KeySelectionManager,
-			Serializable {
+	class DefaultKeySelectionManager implements KeySelectionManager, Serializable {
 		public int selectionForKey(char aKey, ComboBoxModel aModel) {
 			return -1;
 		}

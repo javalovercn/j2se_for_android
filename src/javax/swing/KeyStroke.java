@@ -30,30 +30,28 @@ import java.awt.event.KeyEvent;
 /**
  * A KeyStroke represents a key action on the keyboard, or equivalent input
  * device. KeyStrokes can correspond to only a press or release of a particular
- * key, just as KEY_PRESSED and KEY_RELEASED KeyEvents do; alternately, they
- * can correspond to typing a specific Java character, just as KEY_TYPED
- * KeyEvents do. In all cases, KeyStrokes can specify modifiers (alt, shift,
- * control, meta, altGraph, or a combination thereof) which must be present during the
+ * key, just as KEY_PRESSED and KEY_RELEASED KeyEvents do; alternately, they can
+ * correspond to typing a specific Java character, just as KEY_TYPED KeyEvents
+ * do. In all cases, KeyStrokes can specify modifiers (alt, shift, control,
+ * meta, altGraph, or a combination thereof) which must be present during the
  * action for an exact match.
  * <p>
- * KeyStrokes are used to define high-level (semantic) action events. Instead
- * of trapping every keystroke and throwing away the ones you are not
- * interested in, those keystrokes you care about automatically initiate
- * actions on the Components with which they are registered.
+ * KeyStrokes are used to define high-level (semantic) action events. Instead of
+ * trapping every keystroke and throwing away the ones you are not interested
+ * in, those keystrokes you care about automatically initiate actions on the
+ * Components with which they are registered.
  * <p>
  * KeyStrokes are immutable, and are intended to be unique. Client code cannot
  * create a KeyStroke; a variant of <code>getKeyStroke</code> must be used
  * instead. These factory methods allow the KeyStroke implementation to cache
  * and share instances efficiently.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see javax.swing.text.Keymap
  * @see #getKeyStroke
@@ -66,8 +64,7 @@ public class KeyStroke extends AWTKeyStroke {
 	private KeyStroke() {
 	}
 
-	private KeyStroke(char keyChar, int keyCode, int modifiers,
-			boolean onKeyRelease) {
+	private KeyStroke(char keyChar, int keyCode, int modifiers, boolean onKeyRelease) {
 		super(keyChar, keyCode, modifiers, onKeyRelease);
 	}
 
@@ -76,7 +73,7 @@ public class KeyStroke extends AWTKeyStroke {
 	}
 
 	public static KeyStroke getKeyStroke(char keyChar, boolean onKeyRelease) {
-		return (KeyStroke)getKeyStroke(keyChar, 0, onKeyRelease);
+		return (KeyStroke) getKeyStroke(keyChar, 0, onKeyRelease);
 	}
 
 	public static KeyStroke getKeyStroke(Character keyChar, int modifiers) {

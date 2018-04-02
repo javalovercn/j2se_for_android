@@ -33,101 +33,92 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * An abstract class to perform lengthy GUI-interaction tasks in a
- * background thread. Several background threads can be used to execute such
- * tasks. However, the exact strategy of choosing a thread for any particular
+ * An abstract class to perform lengthy GUI-interaction tasks in a background
+ * thread. Several background threads can be used to execute such tasks.
+ * However, the exact strategy of choosing a thread for any particular
  * {@code SwingWorker} is unspecified and should not be relied on.
  * <p>
- * When writing a multi-threaded application using Swing, there are
- * two constraints to keep in mind:
- * (refer to
+ * When writing a multi-threaded application using Swing, there are two
+ * constraints to keep in mind: (refer to
  * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/threads.html">
- *   How to Use Threads
- * </a> for more details):
+ * How to Use Threads </a> for more details):
  * <ul>
- *   <li> Time-consuming tasks should not be run on the <i>Event
- *        Dispatch Thread</i>. Otherwise the application becomes unresponsive.
- *   </li>
- *   <li> Swing components should be accessed  on the <i>Event
- *        Dispatch Thread</i> only.
- *   </li>
+ * <li>Time-consuming tasks should not be run on the <i>Event Dispatch
+ * Thread</i>. Otherwise the application becomes unresponsive.</li>
+ * <li>Swing components should be accessed on the <i>Event Dispatch Thread</i>
+ * only.</li>
  * </ul>
  *
  * <p>
  *
  * <p>
- * These constraints mean that a GUI application with time intensive
- * computing needs at least two threads:  1) a thread to perform the lengthy
- * task and 2) the <i>Event Dispatch Thread</i> (EDT) for all GUI-related
- * activities.  This involves inter-thread communication which can be
- * tricky to implement.
+ * These constraints mean that a GUI application with time intensive computing
+ * needs at least two threads: 1) a thread to perform the lengthy task and 2)
+ * the <i>Event Dispatch Thread</i> (EDT) for all GUI-related activities. This
+ * involves inter-thread communication which can be tricky to implement.
  *
  * <p>
  * {@code SwingWorker} is designed for situations where you need to have a long
- * running task run in a background thread and provide updates to the UI
- * either when done, or while processing.
- * Subclasses of {@code SwingWorker} must implement
- * the {@link #doInBackground} method to perform the background computation.
+ * running task run in a background thread and provide updates to the UI either
+ * when done, or while processing. Subclasses of {@code SwingWorker} must
+ * implement the {@link #doInBackground} method to perform the background
+ * computation.
  *
  *
  * <p>
  * <b>Workflow</b>
  * <p>
- * There are three threads involved in the life cycle of a
- * {@code SwingWorker} :
+ * There are three threads involved in the life cycle of a {@code SwingWorker} :
  * <ul>
  * <li>
  * <p>
- * <i>Current</i> thread: The {@link #execute} method is
- * called on this thread. It schedules {@code SwingWorker} for the execution on a
- * <i>worker</i>
- * thread and returns immediately. One can wait for the {@code SwingWorker} to
- * complete using the {@link #get get} methods.
+ * <i>Current</i> thread: The {@link #execute} method is called on this thread.
+ * It schedules {@code SwingWorker} for the execution on a <i>worker</i> thread
+ * and returns immediately. One can wait for the {@code SwingWorker} to complete
+ * using the {@link #get get} methods.
  * <li>
  * <p>
- * <i>Worker</i> thread: The {@link #doInBackground}
- * method is called on this thread.
- * This is where all background activities should happen. To notify
+ * <i>Worker</i> thread: The {@link #doInBackground} method is called on this
+ * thread. This is where all background activities should happen. To notify
  * {@code PropertyChangeListeners} about bound properties changes use the
  * {@link #firePropertyChange firePropertyChange} and
  * {@link #getPropertyChangeSupport} methods. By default there are two bound
  * properties available: {@code state} and {@code progress}.
  * <li>
  * <p>
- * <i>Event Dispatch Thread</i>:  All Swing related activities occur
- * on this thread. {@code SwingWorker} invokes the
- * {@link #process process} and {@link #done} methods and notifies
- * any {@code PropertyChangeListeners} on this thread.
+ * <i>Event Dispatch Thread</i>: All Swing related activities occur on this
+ * thread. {@code SwingWorker} invokes the {@link #process process} and
+ * {@link #done} methods and notifies any {@code PropertyChangeListeners} on
+ * this thread.
  * </ul>
  *
  * <p>
- * Often, the <i>Current</i> thread is the <i>Event Dispatch
- * Thread</i>.
+ * Often, the <i>Current</i> thread is the <i>Event Dispatch Thread</i>.
  *
  *
  * <p>
- * Before the {@code doInBackground} method is invoked on a <i>worker</i> thread,
- * {@code SwingWorker} notifies any {@code PropertyChangeListeners} about the
- * {@code state} property change to {@code StateValue.STARTED}.  After the
- * {@code doInBackground} method is finished the {@code done} method is
- * executed.  Then {@code SwingWorker} notifies any {@code PropertyChangeListeners}
- * about the {@code state} property change to {@code StateValue.DONE}.
+ * Before the {@code doInBackground} method is invoked on a <i>worker</i>
+ * thread, {@code SwingWorker} notifies any {@code PropertyChangeListeners}
+ * about the {@code state} property change to {@code StateValue.STARTED}. After
+ * the {@code doInBackground} method is finished the {@code done} method is
+ * executed. Then {@code SwingWorker} notifies any
+ * {@code PropertyChangeListeners} about the {@code state} property change to
+ * {@code StateValue.DONE}.
  *
  * <p>
- * {@code SwingWorker} is only designed to be executed once.  Executing a
+ * {@code SwingWorker} is only designed to be executed once. Executing a
  * {@code SwingWorker} more than once will not result in invoking the
  * {@code doInBackground} method twice.
  *
  * <p>
  * <b>Sample Usage</b>
  * <p>
- * The following example illustrates the simplest use case.  Some
- * processing is done in the background and when done you update a Swing
- * component.
+ * The following example illustrates the simplest use case. Some processing is
+ * done in the background and when done you update a Swing component.
  *
  * <p>
- * Say we want to find the "Meaning of Life" and display the result in
- * a {@code JLabel}.
+ * Say we want to find the "Meaning of Life" and display the result in a
+ * {@code JLabel}.
  *
  * <pre>
  *   final JLabel label;
@@ -150,14 +141,15 @@ import java.util.concurrent.TimeoutException;
  * </pre>
  *
  * <p>
- * The next example is useful in situations where you wish to process data
- * as it is ready on the <i>Event Dispatch Thread</i>.
+ * The next example is useful in situations where you wish to process data as it
+ * is ready on the <i>Event Dispatch Thread</i>.
  *
  * <p>
  * Now we want to find the first N prime numbers and display the results in a
- * {@code JTextArea}.  While this is computing, we want to update our
- * progress in a {@code JProgressBar}.  Finally, we also want to print
- * the prime numbers to {@code System.out}.
+ * {@code JTextArea}. While this is computing, we want to update our progress in
+ * a {@code JProgressBar}. Finally, we also want to print the prime numbers to
+ * {@code System.out}.
+ * 
  * <pre>
  * class PrimeNumbersTask extends
  *         SwingWorker&lt;List&lt;Integer&gt;, Integer&gt; {
@@ -207,10 +199,12 @@ import java.util.concurrent.TimeoutException;
  *
  * @author Igor Kushnirskiy
  *
- * @param <T> the result type returned by this {@code SwingWorker's}
- *        {@code doInBackground} and {@code get} methods
- * @param <V> the type used for carrying out intermediate results by this
- *        {@code SwingWorker's} {@code publish} and {@code process} methods
+ * @param <T>
+ *            the result type returned by this {@code SwingWorker's}
+ *            {@code doInBackground} and {@code get} methods
+ * @param <V>
+ *            the type used for carrying out intermediate results by this
+ *            {@code SwingWorker's} {@code publish} and {@code process} methods
  *
  * @since 1.6
  */
@@ -275,12 +269,10 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
 	public final void addPropertyChangeListener(PropertyChangeListener listener) {
 	}
 
-	public final void removePropertyChangeListener(
-			PropertyChangeListener listener) {
+	public final void removePropertyChangeListener(PropertyChangeListener listener) {
 	}
 
-	public final void firePropertyChange(String propertyName, Object oldValue,
-			Object newValue) {
+	public final void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
 	}
 
 	public final PropertyChangeSupport getPropertyChangeSupport() {

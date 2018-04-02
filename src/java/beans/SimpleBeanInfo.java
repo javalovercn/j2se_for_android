@@ -25,14 +25,13 @@
 package java.beans;
 
 /**
- * This is a support class to make it easier for people to provide
- * BeanInfo classes.
+ * This is a support class to make it easier for people to provide BeanInfo
+ * classes.
  * <p>
- * It defaults to providing "noop" information, and can be selectively
- * overriden to provide more explicit information on chosen topics.
- * When the introspector sees the "noop" values, it will apply low
- * level introspection and design patterns to automatically analyze
- * the target bean.
+ * It defaults to providing "noop" information, and can be selectively overriden
+ * to provide more explicit information on chosen topics. When the introspector
+ * sees the "noop" values, it will apply low level introspection and design
+ * patterns to automatically analyze the target bean.
  */
 
 public class SimpleBeanInfo implements BeanInfo {

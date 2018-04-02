@@ -25,16 +25,17 @@
 package javax.imageio.stream;
 
 /**
- * A class representing a mutable reference to an array of bytes and
- * an offset and length within that array.  <code>IIOByteBuffer</code>
- * is used by <code>ImageInputStream</code> to supply a sequence of bytes
- * to the caller, possibly with fewer copies than using the conventional
- * <code>read</code> methods that take a user-supplied byte array.
+ * A class representing a mutable reference to an array of bytes and an offset
+ * and length within that array. <code>IIOByteBuffer</code> is used by
+ * <code>ImageInputStream</code> to supply a sequence of bytes to the caller,
+ * possibly with fewer copies than using the conventional <code>read</code>
+ * methods that take a user-supplied byte array.
  *
- * <p> The byte array referenced by an <code>IIOByteBuffer</code> will
- * generally be part of an internal data structure belonging to an
- * <code>ImageReader</code> implementation; its contents should be
- * considered read-only and must not be modified.
+ * <p>
+ * The byte array referenced by an <code>IIOByteBuffer</code> will generally be
+ * part of an internal data structure belonging to an <code>ImageReader</code>
+ * implementation; its contents should be considered read-only and must not be
+ * modified.
  *
  */
 public class IIOByteBuffer {

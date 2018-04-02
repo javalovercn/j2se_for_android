@@ -30,17 +30,17 @@ import java.util.EventListener;
  * AncestorListener
  *
  * Interface to support notification when changes occur to a JComponent or one
- * of its ancestors.  These include movement and when the component becomes
- * visible or invisible, either by the setVisible() method or by being added
- * or removed from the component hierarchy.
+ * of its ancestors. These include movement and when the component becomes
+ * visible or invisible, either by the setVisible() method or by being added or
+ * removed from the component hierarchy.
  *
  * @author Dave Moore
  */
 public interface AncestorListener extends EventListener {
-    public void ancestorAdded(AncestorEvent event);
+	public void ancestorAdded(AncestorEvent event);
 
-    public void ancestorRemoved(AncestorEvent event);
+	public void ancestorRemoved(AncestorEvent event);
 
-    public void ancestorMoved(AncestorEvent event);
+	public void ancestorMoved(AncestorEvent event);
 
 }

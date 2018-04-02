@@ -27,29 +27,30 @@ package javax.swing.event;
 import java.util.EventListener;
 
 /**
- * The listener interface for receiving internal frame events.
- * This class is functionally equivalent to the WindowListener class
- * in the AWT.
+ * The listener interface for receiving internal frame events. This class is
+ * functionally equivalent to the WindowListener class in the AWT.
  * <p>
- * See <a href="http://java.sun.com/docs/books/tutorial/uiswing/events/internalframelistener.html">How to Write an Internal Frame Listener</a>
- * in <em>The Java Tutorial</em> for further documentation.
+ * See <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/events/internalframelistener.html">How
+ * to Write an Internal Frame Listener</a> in <em>The Java Tutorial</em> for
+ * further documentation.
  *
  * @see java.awt.event.WindowListener
  *
  * @author Thomas Ball
  */
 public interface InternalFrameListener extends EventListener {
-    public void internalFrameOpened(InternalFrameEvent e);
+	public void internalFrameOpened(InternalFrameEvent e);
 
-    public void internalFrameClosing(InternalFrameEvent e);
+	public void internalFrameClosing(InternalFrameEvent e);
 
-    public void internalFrameClosed(InternalFrameEvent e);
+	public void internalFrameClosed(InternalFrameEvent e);
 
-    public void internalFrameIconified(InternalFrameEvent e);
+	public void internalFrameIconified(InternalFrameEvent e);
 
-    public void internalFrameDeiconified(InternalFrameEvent e);
+	public void internalFrameDeiconified(InternalFrameEvent e);
 
-    public void internalFrameActivated(InternalFrameEvent e);
+	public void internalFrameActivated(InternalFrameEvent e);
 
-    public void internalFrameDeactivated(InternalFrameEvent e);
+	public void internalFrameDeactivated(InternalFrameEvent e);
 }

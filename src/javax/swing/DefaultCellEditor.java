@@ -40,20 +40,18 @@ import javax.swing.tree.TreeCellEditor;
 /**
  * The default editor for table and tree cells.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Alan Chung
  * @author Philip Milne
  */
-public class DefaultCellEditor extends AbstractCellEditor implements
-		TableCellEditor, TreeCellEditor {
+public class DefaultCellEditor extends AbstractCellEditor
+		implements TableCellEditor, TreeCellEditor {
 
 	//
 	// Instance Variables
@@ -148,8 +146,7 @@ public class DefaultCellEditor extends AbstractCellEditor implements
 			public boolean stopCellEditing() {
 				if (comboBox.isEditable()) {
 					// Commit edited value.
-					comboBox.actionPerformed(new ActionEvent(
-							DefaultCellEditor.this, 0, ""));
+					comboBox.actionPerformed(new ActionEvent(DefaultCellEditor.this, 0, ""));
 				}
 				return super.stopCellEditing();
 			}
@@ -250,10 +247,9 @@ public class DefaultCellEditor extends AbstractCellEditor implements
 	//
 
 	/** Implements the <code>TreeCellEditor</code> interface. */
-	public Component getTreeCellEditorComponent(JTree tree, Object value,
-			boolean isSelected, boolean expanded, boolean leaf, int row) {
-		String stringValue = tree.convertValueToText(value, isSelected,
-				expanded, leaf, row, false);
+	public Component getTreeCellEditorComponent(JTree tree, Object value, boolean isSelected,
+			boolean expanded, boolean leaf, int row) {
+		String stringValue = tree.convertValueToText(value, isSelected, expanded, leaf, row, false);
 
 		delegate.setValue(stringValue);
 		return editorComponent;
@@ -263,8 +259,8 @@ public class DefaultCellEditor extends AbstractCellEditor implements
 	// Implementing the CellEditor Interface
 	//
 	/** Implements the <code>TableCellEditor</code> interface. */
-	public Component getTableCellEditorComponent(JTable table, Object value,
-			boolean isSelected, int row, int column) {
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
+			int row, int column) {
 		delegate.setValue(value);
 		if (editorComponent instanceof JCheckBox) {
 			// in order to avoid a "flashing" effect when clicking a checkbox
@@ -274,8 +270,8 @@ public class DefaultCellEditor extends AbstractCellEditor implements
 			// needed for JCheckBox since this editor doesn't fill all the
 			// visual space of the table cell, unlike a text field.
 			TableCellRenderer renderer = table.getCellRenderer(row, column);
-			Component c = renderer.getTableCellRendererComponent(table, value,
-					isSelected, true, row, column);
+			Component c = renderer.getTableCellRendererComponent(table, value, isSelected, true,
+					row, column);
 			if (c != null) {
 				editorComponent.setOpaque(true);
 				editorComponent.setBackground(c.getBackground());
@@ -289,8 +285,7 @@ public class DefaultCellEditor extends AbstractCellEditor implements
 		return editorComponent;
 	}
 
-	protected class EditorDelegate implements ActionListener, ItemListener,
-			Serializable {
+	protected class EditorDelegate implements ActionListener, ItemListener, Serializable {
 
 		protected Object value;
 

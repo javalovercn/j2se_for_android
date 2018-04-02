@@ -59,31 +59,31 @@ import javax.swing.event.EventListenerList;
 import javax.swing.plaf.UIResource;
 
 /**
- * This class is used to handle the transfer of a <code>Transferable</code>
- * to and from Swing components.  The <code>Transferable</code> is used to
- * represent data that is exchanged via a cut, copy, or paste
- * to/from a clipboard.  It is also used in drag-and-drop operations
- * to represent a drag from a component, and a drop to a component.
- * Swing provides functionality that automatically supports cut, copy,
- * and paste keyboard bindings that use the functionality provided by
- * an implementation of this class.  Swing also provides functionality
- * that automatically supports drag and drop that uses the functionality
- * provided by an implementation of this class.  The Swing developer can
- * concentrate on specifying the semantics of a transfer primarily by setting
- * the <code>transferHandler</code> property on a Swing component.
+ * This class is used to handle the transfer of a <code>Transferable</code> to
+ * and from Swing components. The <code>Transferable</code> is used to represent
+ * data that is exchanged via a cut, copy, or paste to/from a clipboard. It is
+ * also used in drag-and-drop operations to represent a drag from a component,
+ * and a drop to a component. Swing provides functionality that automatically
+ * supports cut, copy, and paste keyboard bindings that use the functionality
+ * provided by an implementation of this class. Swing also provides
+ * functionality that automatically supports drag and drop that uses the
+ * functionality provided by an implementation of this class. The Swing
+ * developer can concentrate on specifying the semantics of a transfer primarily
+ * by setting the <code>transferHandler</code> property on a Swing component.
  * <p>
- * This class is implemented to provide a default behavior of transferring
- * a component property simply by specifying the name of the property in
- * the constructor.  For example, to transfer the foreground color from
- * one component to another either via the clipboard or a drag and drop operation
- * a <code>TransferHandler</code> can be constructed with the string "foreground".  The
- * built in support will use the color returned by <code>getForeground</code> as the source
- * of the transfer, and <code>setForeground</code> for the target of a transfer.
+ * This class is implemented to provide a default behavior of transferring a
+ * component property simply by specifying the name of the property in the
+ * constructor. For example, to transfer the foreground color from one component
+ * to another either via the clipboard or a drag and drop operation a
+ * <code>TransferHandler</code> can be constructed with the string "foreground".
+ * The built in support will use the color returned by
+ * <code>getForeground</code> as the source of the transfer, and
+ * <code>setForeground</code> for the target of a transfer.
  * <p>
  * Please see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/dnd.html">
- * How to Use Drag and Drop and Data Transfer</a>,
- * a section in <em>The Java Tutorial</em>, for more information.
+ * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/dnd.html"> How
+ * to Use Drag and Drop and Data Transfer</a>, a section in <em>The Java
+ * Tutorial</em>, for more information.
  *
  *
  * @author Timothy Prinzing
@@ -324,8 +324,7 @@ public class TransferHandler implements Serializable {
 			}
 		}
 
-		public void addDropTargetListener(DropTargetListener dtl)
-				throws TooManyListenersException {
+		public void addDropTargetListener(DropTargetListener dtl) throws TooManyListenersException {
 			if (listenerList == null) {
 				listenerList = new EventListenerList();
 			}
@@ -356,8 +355,7 @@ public class TransferHandler implements Serializable {
 		private EventListenerList listenerList;
 	}
 
-	private static class DropHandler implements DropTargetListener,
-			Serializable, ActionListener {
+	private static class DropHandler implements DropTargetListener, Serializable, ActionListener {
 
 		private Point lastPosition;
 		private Rectangle outer = new Rectangle();
@@ -366,8 +364,7 @@ public class TransferHandler implements Serializable {
 
 		private Component component;
 		private Object state;
-		private TransferSupport support = new TransferSupport(null,
-				(DropTargetEvent) null);
+		private TransferSupport support = new TransferSupport(null, (DropTargetEvent) null);
 
 		private static final int AUTOSCROLL_INSET = 10;
 
@@ -383,8 +380,7 @@ public class TransferHandler implements Serializable {
 		public void actionPerformed(ActionEvent e) {
 		}
 
-		private void setComponentDropLocation(TransferSupport support,
-				boolean forDrop) {
+		private void setComponentDropLocation(TransferSupport support, boolean forDrop) {
 		}
 
 		private void handleDrag(DropTargetDragEvent e) {
@@ -409,8 +405,7 @@ public class TransferHandler implements Serializable {
 		}
 	}
 
-	private static class DragHandler implements DragGestureListener,
-			DragSourceListener {
+	private static class DragHandler implements DragGestureListener, DragSourceListener {
 		private boolean scrolls;
 
 		public void dragGestureRecognized(DragGestureEvent dge) {
@@ -432,8 +427,7 @@ public class TransferHandler implements Serializable {
 		}
 	}
 
-	private static class SwingDragGestureRecognizer extends
-			DragGestureRecognizer {
+	private static class SwingDragGestureRecognizer extends DragGestureRecognizer {
 
 		SwingDragGestureRecognizer(DragGestureListener dgl) {
 			super(DragSource.getDefaultDragSource(), null, NONE, dgl);

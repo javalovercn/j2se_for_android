@@ -29,34 +29,35 @@ import java.beans.PropertyChangeSupport;
 import java.util.Vector;
 
 /**
- * The <code>SystemTray</code> class represents the system tray for a
- * desktop.  On Microsoft Windows it is referred to as the "Taskbar
- * Status Area", on Gnome it is referred to as the "Notification
- * Area", on KDE it is referred to as the "System Tray".  The system
- * tray is shared by all applications running on the desktop.
+ * The <code>SystemTray</code> class represents the system tray for a desktop.
+ * On Microsoft Windows it is referred to as the "Taskbar Status Area", on Gnome
+ * it is referred to as the "Notification Area", on KDE it is referred to as the
+ * "System Tray". The system tray is shared by all applications running on the
+ * desktop.
  *
- * <p> On some platforms the system tray may not be present or may not
- * be supported, in this case {@link SystemTray#getSystemTray()}
- * throws {@link UnsupportedOperationException}.  To detect whether the
- * system tray is supported, use {@link SystemTray#isSupported}.
+ * <p>
+ * On some platforms the system tray may not be present or may not be supported,
+ * in this case {@link SystemTray#getSystemTray()} throws
+ * {@link UnsupportedOperationException}. To detect whether the system tray is
+ * supported, use {@link SystemTray#isSupported}.
  *
- * <p>The <code>SystemTray</code> may contain one or more {@link
- * TrayIcon TrayIcons}, which are added to the tray using the {@link
- * #add} method, and removed when no longer needed, using the
- * {@link #remove}.  <code>TrayIcon</code> consists of an
- * image, a popup menu and a set of associated listeners.  Please see
- * the {@link TrayIcon} class for details.
+ * <p>
+ * The <code>SystemTray</code> may contain one or more {@link TrayIcon
+ * TrayIcons}, which are added to the tray using the {@link #add} method, and
+ * removed when no longer needed, using the {@link #remove}.
+ * <code>TrayIcon</code> consists of an image, a popup menu and a set of
+ * associated listeners. Please see the {@link TrayIcon} class for details.
  *
- * <p>Every Java application has a single <code>SystemTray</code>
- * instance that allows the app to interface with the system tray of
- * the desktop while the app is running.  The <code>SystemTray</code>
- * instance can be obtained from the {@link #getSystemTray} method.
- * An application may not create its own instance of
- * <code>SystemTray</code>.
+ * <p>
+ * Every Java application has a single <code>SystemTray</code> instance that
+ * allows the app to interface with the system tray of the desktop while the app
+ * is running. The <code>SystemTray</code> instance can be obtained from the
+ * {@link #getSystemTray} method. An application may not create its own instance
+ * of <code>SystemTray</code>.
  *
- * <p>The following code snippet demonstrates how to access
- * and customize the system tray:
- * <code>
+ * <p>
+ * The following code snippet demonstrates how to access and customize the
+ * system tray: <code>
  * <pre>
  *     {@link TrayIcon} trayIcon = null;
  *     if (SystemTray.isSupported()) {
@@ -337,8 +338,7 @@ public class SystemTray {
 		if (listener == null) {
 			return;
 		}
-		getCurrentChangeSupport().addPropertyChangeListener(propertyName,
-				listener);
+		getCurrentChangeSupport().addPropertyChangeListener(propertyName, listener);
 	}
 
 	/**
@@ -363,8 +363,7 @@ public class SystemTray {
 		if (listener == null) {
 			return;
 		}
-		getCurrentChangeSupport().removePropertyChangeListener(propertyName,
-				listener);
+		getCurrentChangeSupport().removePropertyChangeListener(propertyName, listener);
 	}
 
 	/**
@@ -383,10 +382,8 @@ public class SystemTray {
 	 * @see #addPropertyChangeListener
 	 * @see #removePropertyChangeListener
 	 */
-	public synchronized PropertyChangeListener[] getPropertyChangeListeners(
-			String propertyName) {
-		return getCurrentChangeSupport().getPropertyChangeListeners(
-				propertyName);
+	public synchronized PropertyChangeListener[] getPropertyChangeListeners(String propertyName) {
+		return getCurrentChangeSupport().getPropertyChangeListeners(propertyName);
 	}
 
 	// ***************************************************************
@@ -405,13 +402,11 @@ public class SystemTray {
 	 * @param newValue
 	 *            the property's new value
 	 */
-	private void firePropertyChange(String propertyName, Object oldValue,
-			Object newValue) {
+	private void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
 		if (oldValue != null && newValue != null && oldValue.equals(newValue)) {
 			return;
 		}
-		getCurrentChangeSupport().firePropertyChange(propertyName, oldValue,
-				newValue);
+		getCurrentChangeSupport().firePropertyChange(propertyName, oldValue, newValue);
 	}
 
 	/**

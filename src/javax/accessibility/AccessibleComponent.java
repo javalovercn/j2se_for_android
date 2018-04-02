@@ -34,24 +34,22 @@ import java.awt.Rectangle;
 import java.awt.event.FocusListener;
 
 /**
- * The AccessibleComponent interface should be supported by any object
- * that is rendered on the screen.  This interface provides the standard
- * mechanism for an assistive technology to determine and set the
- * graphical representation of an object.  Applications can determine
- * if an object supports the AccessibleComponent interface by first
- * obtaining its AccessibleContext
- * and then calling the
- * {@link AccessibleContext#getAccessibleComponent} method.
- * If the return value is not null, the object supports this interface.
+ * The AccessibleComponent interface should be supported by any object that is
+ * rendered on the screen. This interface provides the standard mechanism for an
+ * assistive technology to determine and set the graphical representation of an
+ * object. Applications can determine if an object supports the
+ * AccessibleComponent interface by first obtaining its AccessibleContext and
+ * then calling the {@link AccessibleContext#getAccessibleComponent} method. If
+ * the return value is not null, the object supports this interface.
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
  * @see AccessibleContext
  * @see AccessibleContext#getAccessibleComponent
  *
- * @author      Peter Korn
- * @author      Hans Muller
- * @author      Willie Walker
+ * @author Peter Korn
+ * @author Hans Muller
+ * @author Willie Walker
  */
 public interface AccessibleComponent {
 	public Color getBackground();

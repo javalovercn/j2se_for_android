@@ -42,47 +42,40 @@ import javax.swing.text.StyledDocument;
 import javax.swing.text.StyledEditorKit;
 
 /**
- * A text component that can be marked up with attributes that are
- * represented graphically.
- * You can find how-to information and examples of using text panes in
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/text.html">Using Text Components</a>,
- * a section in <em>The Java Tutorial.</em>
+ * A text component that can be marked up with attributes that are represented
+ * graphically. You can find how-to information and examples of using text panes
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/text.html">Using
+ * Text Components</a>, a section in <em>The Java Tutorial.</em>
  *
  * <p>
- * This component models paragraphs
- * that are composed of runs of character level attributes.  Each
- * paragraph may have a logical style attached to it which contains
- * the default attributes to use if not overridden by attributes set
- * on the paragraph or character run.  Components and images may
- * be embedded in the flow of text.
+ * This component models paragraphs that are composed of runs of character level
+ * attributes. Each paragraph may have a logical style attached to it which
+ * contains the default attributes to use if not overridden by attributes set on
+ * the paragraph or character run. Components and images may be embedded in the
+ * flow of text.
  * <p>
  * <dl>
  * <dt><b><font size=+1>Newlines</font></b>
- * <dd>
- * For a discussion on how newlines are handled, see
+ * <dd>For a discussion on how newlines are handled, see
  * <a href="text/DefaultEditorKit.html">DefaultEditorKit</a>.
  * </dl>
  *
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer true
- * description: A text component that can be marked up with attributes that are graphically represented.
+ * @beaninfo attribute: isContainer true description: A text component that can
+ *           be marked up with attributes that are graphically represented.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  * @see javax.swing.text.StyledEditorKit
  */
 public class JTextPane extends JEditorPane {
@@ -185,8 +178,7 @@ public class JTextPane extends JEditorPane {
 				int p1 = Math.max(caret.getDot(), caret.getMark());
 				AttributeSet attr = getInputAttributes().copyAttributes();
 				if (doc instanceof AbstractDocument) {
-					((AbstractDocument) doc)
-							.replace(p0, p1 - p0, content, attr);
+					((AbstractDocument) doc).replace(p0, p1 - p0, content, attr);
 				} else {
 					if (p0 != p1) {
 						doc.remove(p0, p1 - p0);

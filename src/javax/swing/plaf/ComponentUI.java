@@ -33,80 +33,76 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
 /**
- * The base class for all UI delegate objects in the Swing pluggable
- * look and feel architecture.  The UI delegate object for a Swing
- * component is responsible for implementing the aspects of the
- * component that depend on the look and feel.
- * The <code>JComponent</code> class
- * invokes methods from this class in order to delegate operations
- * (painting, layout calculations, etc.) that may vary depending on the
- * look and feel installed.  <b>Client programs should not invoke methods
- * on this class directly.</b>
+ * The base class for all UI delegate objects in the Swing pluggable look and
+ * feel architecture. The UI delegate object for a Swing component is
+ * responsible for implementing the aspects of the component that depend on the
+ * look and feel. The <code>JComponent</code> class invokes methods from this
+ * class in order to delegate operations (painting, layout calculations, etc.)
+ * that may vary depending on the look and feel installed. <b>Client programs
+ * should not invoke methods on this class directly.</b>
  *
  * @see javax.swing.JComponent
  * @see javax.swing.UIManager
  *
  */
 public abstract class ComponentUI {
-    public ComponentUI() {
-    }
+	public ComponentUI() {
+	}
 
-    public void installUI(JComponent c) {
-    }
+	public void installUI(JComponent c) {
+	}
 
-    public void uninstallUI(JComponent c) {
-    }
+	public void uninstallUI(JComponent c) {
+	}
 
-    public void paint(Graphics g, JComponent c) {
-    }
+	public void paint(Graphics g, JComponent c) {
+	}
 
-    public void update(Graphics g, JComponent c) {
-    }
+	public void update(Graphics g, JComponent c) {
+	}
 
-    public Dimension getPreferredSize(JComponent c) {
-        return null;
-    }
+	public Dimension getPreferredSize(JComponent c) {
+		return null;
+	}
 
-    public Dimension getMinimumSize(JComponent c) {
-        return getPreferredSize(c);
-    }
+	public Dimension getMinimumSize(JComponent c) {
+		return getPreferredSize(c);
+	}
 
-    public Dimension getMaximumSize(JComponent c) {
-        return getPreferredSize(c);
-    }
+	public Dimension getMaximumSize(JComponent c) {
+		return getPreferredSize(c);
+	}
 
-    public boolean contains(JComponent c, int x, int y) {
-        return c.inside(x, y);
-    }
+	public boolean contains(JComponent c, int x, int y) {
+		return c.inside(x, y);
+	}
 
-    public static ComponentUI createUI(JComponent c) {
-        throw new Error("ComponentUI.createUI not implemented.");
-    }
+	public static ComponentUI createUI(JComponent c) {
+		throw new Error("ComponentUI.createUI not implemented.");
+	}
 
-    public int getBaseline(JComponent c, int width, int height) {
-        if (c == null) {
-            throw new NullPointerException("Component must be non-null");
-        }
-        if (width < 0 || height < 0) {
-            throw new IllegalArgumentException(
-                    "Width and height must be >= 0");
-        }
-        return -1;
-    }
+	public int getBaseline(JComponent c, int width, int height) {
+		if (c == null) {
+			throw new NullPointerException("Component must be non-null");
+		}
+		if (width < 0 || height < 0) {
+			throw new IllegalArgumentException("Width and height must be >= 0");
+		}
+		return -1;
+	}
 
-    public Component.BaselineResizeBehavior getBaselineResizeBehavior(
-            JComponent c) {
-        if (c == null) {
-            throw new NullPointerException("Component must be non-null");
-        }
-        return Component.BaselineResizeBehavior.OTHER;
-    }
+	public Component.BaselineResizeBehavior getBaselineResizeBehavior(JComponent c) {
+		if (c == null) {
+			throw new NullPointerException("Component must be non-null");
+		}
+		return Component.BaselineResizeBehavior.OTHER;
+	}
 
-    public int getAccessibleChildrenCount(JComponent c) {
-        return SwingUtilities.getAccessibleChildrenCount(c);
-    }
+	public int getAccessibleChildrenCount(JComponent c) {
+		return SwingUtilities.getAccessibleChildrenCount(c);
+	}
 
-    public Accessible getAccessibleChild(JComponent c, int i) {
-        return SwingUtilities.getAccessibleChild(c, i);
-    }
+	public Accessible getAccessibleChild(JComponent c, int i) {
+		return SwingUtilities.getAccessibleChild(c, i);
+	}
 }

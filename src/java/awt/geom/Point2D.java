@@ -27,159 +27,154 @@ package java.awt.geom;
 import java.io.Serializable;
 
 /**
- * The <code>Point2D</code> class defines a point representing a location
- * in {@code (x,y)} coordinate space.
+ * The <code>Point2D</code> class defines a point representing a location in
+ * {@code (x,y)} coordinate space.
  * <p>
- * This class is only the abstract superclass for all objects that
- * store a 2D coordinate.
- * The actual storage representation of the coordinates is left to
+ * This class is only the abstract superclass for all objects that store a 2D
+ * coordinate. The actual storage representation of the coordinates is left to
  * the subclass.
  *
- * @author      Jim Graham
+ * @author Jim Graham
  * @since 1.2
  */
 public abstract class Point2D implements Cloneable {
 
-    public static class Float extends Point2D implements Serializable {
-        public float x;
+	public static class Float extends Point2D implements Serializable {
+		public float x;
 
-        public float y;
+		public float y;
 
-        public Float() {
-        }
+		public Float() {
+		}
 
-        public Float(float x, float y) {
-            this.x = x;
-            this.y = y;
-        }
+		public Float(float x, float y) {
+			this.x = x;
+			this.y = y;
+		}
 
-        public double getX() {
-            return (double) x;
-        }
+		public double getX() {
+			return (double) x;
+		}
 
-        public double getY() {
-            return (double) y;
-        }
+		public double getY() {
+			return (double) y;
+		}
 
-        public void setLocation(double x, double y) {
-            this.x = (float) x;
-            this.y = (float) y;
-        }
+		public void setLocation(double x, double y) {
+			this.x = (float) x;
+			this.y = (float) y;
+		}
 
-        public void setLocation(float x, float y) {
-            this.x = x;
-            this.y = y;
-        }
+		public void setLocation(float x, float y) {
+			this.x = x;
+			this.y = y;
+		}
 
-        public String toString() {
-            return "Point2D.Float["+x+", "+y+"]";
-        }
-    }
+		public String toString() {
+			return "Point2D.Float[" + x + ", " + y + "]";
+		}
+	}
 
-    public static class Double extends Point2D implements Serializable {
-        public double x;
+	public static class Double extends Point2D implements Serializable {
+		public double x;
 
-        public double y;
+		public double y;
 
-        public Double() {
-        }
+		public Double() {
+		}
 
-        public Double(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
+		public Double(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
 
-        public double getX() {
-            return x;
-        }
+		public double getX() {
+			return x;
+		}
 
-        public double getY() {
-            return y;
-        }
+		public double getY() {
+			return y;
+		}
 
-        public void setLocation(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
+		public void setLocation(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
 
-        public String toString() {
-            return "Point2D.Double["+x+", "+y+"]";
-        }
+		public String toString() {
+			return "Point2D.Double[" + x + ", " + y + "]";
+		}
 
-    }
+	}
 
-    protected Point2D() {
-    }
+	protected Point2D() {
+	}
 
-    public abstract double getX();
+	public abstract double getX();
 
-    public abstract double getY();
+	public abstract double getY();
 
-    public abstract void setLocation(double x, double y);
+	public abstract void setLocation(double x, double y);
 
-    public void setLocation(Point2D p) {
-        setLocation(p.getX(), p.getY());
-    }
+	public void setLocation(Point2D p) {
+		setLocation(p.getX(), p.getY());
+	}
 
-    public static double distanceSq(double x1, double y1,
-                                    double x2, double y2)
-    {
-        x1 -= x2;
-        y1 -= y2;
-        return (x1 * x1 + y1 * y1);
-    }
+	public static double distanceSq(double x1, double y1, double x2, double y2) {
+		x1 -= x2;
+		y1 -= y2;
+		return (x1 * x1 + y1 * y1);
+	}
 
-    public static double distance(double x1, double y1,
-                                  double x2, double y2)
-    {
-        x1 -= x2;
-        y1 -= y2;
-        return Math.sqrt(x1 * x1 + y1 * y1);
-    }
+	public static double distance(double x1, double y1, double x2, double y2) {
+		x1 -= x2;
+		y1 -= y2;
+		return Math.sqrt(x1 * x1 + y1 * y1);
+	}
 
-    public double distanceSq(double px, double py) {
-        px -= getX();
-        py -= getY();
-        return (px * px + py * py);
-    }
+	public double distanceSq(double px, double py) {
+		px -= getX();
+		py -= getY();
+		return (px * px + py * py);
+	}
 
-    public double distanceSq(Point2D p2) {
-        double px = p2.getX() - this.getX();
-        double py = p2.getY() - this.getY();
-        return (px * px + py * py);
-    }
+	public double distanceSq(Point2D p2) {
+		double px = p2.getX() - this.getX();
+		double py = p2.getY() - this.getY();
+		return (px * px + py * py);
+	}
 
-    public double distance(double px, double py) {
-        px -= getX();
-        py -= getY();
-        return Math.sqrt(px * px + py * py);
-    }
+	public double distance(double px, double py) {
+		px -= getX();
+		py -= getY();
+		return Math.sqrt(px * px + py * py);
+	}
 
-    public double distance(Point2D p2) {
-        double px = p2.getX() - this.getX();
-        double py = p2.getY() - this.getY();
-        return Math.sqrt(px * px + py * py);
-    }
+	public double distance(Point2D p2) {
+		double px = p2.getX() - this.getX();
+		double py = p2.getY() - this.getY();
+		return Math.sqrt(px * px + py * py);
+	}
 
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new InternalError();
-        }
-    }
+	public Object clone() {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError();
+		}
+	}
 
-    public int hashCode() {
-        long bits = java.lang.Double.doubleToLongBits(getX());
-        bits ^= java.lang.Double.doubleToLongBits(getY()) * 31;
-        return (((int) bits) ^ ((int) (bits >> 32)));
-    }
+	public int hashCode() {
+		long bits = java.lang.Double.doubleToLongBits(getX());
+		bits ^= java.lang.Double.doubleToLongBits(getY()) * 31;
+		return (((int) bits) ^ ((int) (bits >> 32)));
+	}
 
-    public boolean equals(Object obj) {
-        if (obj instanceof Point2D) {
-            Point2D p2 = (Point2D) obj;
-            return (getX() == p2.getX()) && (getY() == p2.getY());
-        }
-        return super.equals(obj);
-    }
+	public boolean equals(Object obj) {
+		if (obj instanceof Point2D) {
+			Point2D p2 = (Point2D) obj;
+			return (getX() == p2.getX()) && (getY() == p2.getY());
+		}
+		return super.equals(obj);
+	}
 }

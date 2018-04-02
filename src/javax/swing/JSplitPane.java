@@ -37,55 +37,44 @@ import javax.swing.plaf.SplitPaneUI;
 
 /**
  * <code>JSplitPane</code> is used to divide two (and only two)
- * <code>Component</code>s. The two <code>Component</code>s
- * are graphically divided based on the look and feel
- * implementation, and the two <code>Component</code>s can then be
- * interactively resized by the user.
- * Information on using <code>JSplitPane</code> is in
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/splitpane.html">How to Use Split Panes</a> in
- * <em>The Java Tutorial</em>.
+ * <code>Component</code>s. The two <code>Component</code>s are graphically
+ * divided based on the look and feel implementation, and the two
+ * <code>Component</code>s can then be interactively resized by the user.
+ * Information on using <code>JSplitPane</code> is in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/splitpane.html">How
+ * to Use Split Panes</a> in <em>The Java Tutorial</em>.
  * <p>
- * The two <code>Component</code>s in a split pane can be aligned
- * left to right using
- * <code>JSplitPane.HORIZONTAL_SPLIT</code>, or top to bottom using
- * <code>JSplitPane.VERTICAL_SPLIT</code>.
- * The preferred way to change the size of the <code>Component</code>s
- * is to invoke
- * <code>setDividerLocation</code> where <code>location</code> is either
- * the new x or y position, depending on the orientation of the
- * <code>JSplitPane</code>.
+ * The two <code>Component</code>s in a split pane can be aligned left to right
+ * using <code>JSplitPane.HORIZONTAL_SPLIT</code>, or top to bottom using
+ * <code>JSplitPane.VERTICAL_SPLIT</code>. The preferred way to change the size
+ * of the <code>Component</code>s is to invoke <code>setDividerLocation</code>
+ * where <code>location</code> is either the new x or y position, depending on
+ * the orientation of the <code>JSplitPane</code>.
  * <p>
  * To resize the <code>Component</code>s to their preferred sizes invoke
  * <code>resetToPreferredSizes</code>.
  * <p>
- * When the user is resizing the <code>Component</code>s the minimum
- * size of the <code>Components</code> is used to determine the
- * maximum/minimum position the <code>Component</code>s
- * can be set to. If the minimum size of the two
- * components is greater than the size of the split pane the divider
- * will not allow you to resize it. To alter the minimum size of a
+ * When the user is resizing the <code>Component</code>s the minimum size of the
+ * <code>Components</code> is used to determine the maximum/minimum position the
+ * <code>Component</code>s can be set to. If the minimum size of the two
+ * components is greater than the size of the split pane the divider will not
+ * allow you to resize it. To alter the minimum size of a
  * <code>JComponent</code>, see {@link JComponent#setMinimumSize}.
  * <p>
- * When the user resizes the split pane the new space is distributed between
- * the two components based on the <code>resizeWeight</code> property.
- * A value of 0,
- * the default, indicates the right/bottom component gets all the space,
- * where as a value of 1 indicates the left/top component gets all the space.
+ * When the user resizes the split pane the new space is distributed between the
+ * two components based on the <code>resizeWeight</code> property. A value of 0,
+ * the default, indicates the right/bottom component gets all the space, where
+ * as a value of 1 indicates the left/top component gets all the space.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see #setDividerLocation
  * @see #resetToPreferredSizes
@@ -109,7 +98,7 @@ public class JSplitPane extends JComponent implements Accessible {
 	public final static String LAST_DIVIDER_LOCATION_PROPERTY = "lastDividerLocation";
 	public final static String DIVIDER_LOCATION_PROPERTY = "dividerLocation";
 	public final static String RESIZE_WEIGHT_PROPERTY = "resizeWeight";
-	
+
 	protected int orientation;
 	protected boolean continuousLayout;
 	protected Component leftComponent;
@@ -124,10 +113,9 @@ public class JSplitPane extends JComponent implements Accessible {
 	private int dividerLocation;
 
 	public JSplitPane() {
-		this(JSplitPane.HORIZONTAL_SPLIT, UIManager
-				.getBoolean("SplitPane.continuousLayout"), new JButton(
-				UIManager.getString("SplitPane.leftButtonText")), new JButton(
-				UIManager.getString("SplitPane.rightButtonText")));
+		this(JSplitPane.HORIZONTAL_SPLIT, UIManager.getBoolean("SplitPane.continuousLayout"),
+				new JButton(UIManager.getString("SplitPane.leftButtonText")),
+				new JButton(UIManager.getString("SplitPane.rightButtonText")));
 	}
 
 	public JSplitPane(int newOrientation) {
@@ -138,15 +126,13 @@ public class JSplitPane extends JComponent implements Accessible {
 		this(newOrientation, newContinuousLayout, null, null);
 	}
 
-	public JSplitPane(int newOrientation, Component newLeftComponent,
-			Component newRightComponent) {
-		this(newOrientation,
-				UIManager.getBoolean("SplitPane.continuousLayout"),
-				newLeftComponent, newRightComponent);
+	public JSplitPane(int newOrientation, Component newLeftComponent, Component newRightComponent) {
+		this(newOrientation, UIManager.getBoolean("SplitPane.continuousLayout"), newLeftComponent,
+				newRightComponent);
 	}
 
-	public JSplitPane(int newOrientation, boolean newContinuousLayout,
-			Component newLeftComponent, Component newRightComponent) {
+	public JSplitPane(int newOrientation, boolean newContinuousLayout, Component newLeftComponent,
+			Component newRightComponent) {
 		super();
 
 		dividerLocation = -1;
@@ -154,10 +140,9 @@ public class JSplitPane extends JComponent implements Accessible {
 		setUIProperty("opaque", Boolean.TRUE);
 		orientation = newOrientation;
 		if (orientation != HORIZONTAL_SPLIT && orientation != VERTICAL_SPLIT)
-			throw new IllegalArgumentException("cannot create JSplitPane, "
-					+ "orientation must be one of "
-					+ "JSplitPane.HORIZONTAL_SPLIT "
-					+ "or JSplitPane.VERTICAL_SPLIT");
+			throw new IllegalArgumentException(
+					"cannot create JSplitPane, " + "orientation must be one of "
+							+ "JSplitPane.HORIZONTAL_SPLIT " + "or JSplitPane.VERTICAL_SPLIT");
 		continuousLayout = newContinuousLayout;
 		if (newLeftComponent != null)
 			setLeftComponent(newLeftComponent);
@@ -201,9 +186,9 @@ public class JSplitPane extends JComponent implements Accessible {
 				leftComponent = null;
 			}
 		} else {
-			if(orientation == JSplitPane.HORIZONTAL_SPLIT){
+			if (orientation == JSplitPane.HORIZONTAL_SPLIT) {
 				add(comp, BorderLayout.WEST);
-			}else{
+			} else {
 				add(comp, BorderLayout.NORTH);
 			}
 			leftComponent = comp;
@@ -229,9 +214,9 @@ public class JSplitPane extends JComponent implements Accessible {
 				rightComponent = null;
 			}
 		} else {
-			if(orientation == JSplitPane.HORIZONTAL_SPLIT){
+			if (orientation == JSplitPane.HORIZONTAL_SPLIT) {
 				add(comp, BorderLayout.EAST);
-			}else{
+			} else {
 				add(comp, BorderLayout.SOUTH);
 			}
 			rightComponent = comp;
@@ -252,7 +237,7 @@ public class JSplitPane extends JComponent implements Accessible {
 
 	public void setOneTouchExpandable(boolean newValue) {
 		AndroidClassUtil.callEmptyMethod();
-		
+
 		oneTouchExpandable = newValue;
 		oneTouchExpandableSet = true;
 	}
@@ -271,11 +256,9 @@ public class JSplitPane extends JComponent implements Accessible {
 	}
 
 	public void setOrientation(int orientation) {
-		if ((orientation != VERTICAL_SPLIT)
-				&& (orientation != HORIZONTAL_SPLIT)) {
-			throw new IllegalArgumentException("JSplitPane: orientation must "
-					+ "be one of " + "JSplitPane.VERTICAL_SPLIT or "
-					+ "JSplitPane.HORIZONTAL_SPLIT");
+		if ((orientation != VERTICAL_SPLIT) && (orientation != HORIZONTAL_SPLIT)) {
+			throw new IllegalArgumentException("JSplitPane: orientation must " + "be one of "
+					+ "JSplitPane.VERTICAL_SPLIT or " + "JSplitPane.HORIZONTAL_SPLIT");
 		}
 
 		this.orientation = orientation;
@@ -295,8 +278,7 @@ public class JSplitPane extends JComponent implements Accessible {
 
 	public void setResizeWeight(double value) {
 		if (value < 0 || value > 1) {
-			throw new IllegalArgumentException(
-					"JSplitPane weight must be between 0 and 1");
+			throw new IllegalArgumentException("JSplitPane weight must be between 0 and 1");
 		}
 		resizeWeight = value;
 	}
@@ -315,15 +297,17 @@ public class JSplitPane extends JComponent implements Accessible {
 
 	public void setDividerLocation(double proportionalLocation) {
 		AndroidClassUtil.callEmptyMethod();
-//		if (proportionalLocation < 0.0 || proportionalLocation > 1.0) {
-//			throw new IllegalArgumentException("proportional location must "
-//					+ "be between 0.0 and 1.0.");
-//		}
-//		if (getOrientation() == VERTICAL_SPLIT) {
-//			setDividerLocation((int) ((double) (getHeight() - getDividerSize()) * proportionalLocation));
-//		} else {
-//			setDividerLocation((int) ((double) (getWidth() - getDividerSize()) * proportionalLocation));
-//		}
+		// if (proportionalLocation < 0.0 || proportionalLocation > 1.0) {
+		// throw new IllegalArgumentException("proportional location must "
+		// + "be between 0.0 and 1.0.");
+		// }
+		// if (getOrientation() == VERTICAL_SPLIT) {
+		// setDividerLocation((int) ((double) (getHeight() - getDividerSize()) *
+		// proportionalLocation));
+		// } else {
+		// setDividerLocation((int) ((double) (getWidth() - getDividerSize()) *
+		// proportionalLocation));
+		// }
 	}
 
 	public void setDividerLocation(int location) {
@@ -360,8 +344,8 @@ public class JSplitPane extends JComponent implements Accessible {
 			rightComponent = null;
 		}
 		super.remove(component);
-//		revalidate();
-//		repaint();
+		// revalidate();
+		// repaint();
 	}
 
 	public void remove(int index) {
@@ -374,16 +358,16 @@ public class JSplitPane extends JComponent implements Accessible {
 		}
 		super.remove(index);
 
-//		revalidate();
-//		repaint();
+		// revalidate();
+		// repaint();
 	}
 
 	public void removeAll() {
 		leftComponent = rightComponent = null;
 		super.removeAll();
 
-//		revalidate();
-//		repaint();
+		// revalidate();
+		// repaint();
 	}
 
 	public boolean isValidateRoot() {

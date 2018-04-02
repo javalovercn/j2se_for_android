@@ -25,10 +25,10 @@
 package java.awt;
 
 /**
- * A wrapping tag for a nested AWTEvent which indicates that the event was
- * sent from another AppContext. The destination AppContext should handle the
- * event even if it is currently blocked waiting for a SequencedEvent or
- * another SentEvent to be handled.
+ * A wrapping tag for a nested AWTEvent which indicates that the event was sent
+ * from another AppContext. The destination AppContext should handle the event
+ * even if it is currently blocked waiting for a SequencedEvent or another
+ * SentEvent to be handled.
  *
  * @author David Mendenhall
  */
@@ -40,8 +40,7 @@ class SentEvent extends AWTEvent implements ActiveEvent {
 	}
 
 	SentEvent(AWTEvent nested) {
-		super((nested != null) ? nested.getSource() : Toolkit
-				.getDefaultToolkit(), 0);
+		super((nested != null) ? nested.getSource() : Toolkit.getDefaultToolkit(), 0);
 	}
 
 	public void dispatch() {

@@ -35,37 +35,40 @@ import android.content.Intent;
 import android.net.Uri;
 
 /**
- * The {@code Desktop} class allows a Java application to launch
- * associated applications registered on the native desktop to handle
- * a {@link java.net.URI} or a file.
+ * The {@code Desktop} class allows a Java application to launch associated
+ * applications registered on the native desktop to handle a
+ * {@link java.net.URI} or a file.
  *
- * <p> Supported operations include:
+ * <p>
+ * Supported operations include:
  * <ul>
- *   <li>launching the user-default browser to show a specified
- *       URI;</li>
- *   <li>launching the user-default mail client with an optional
- *       {@code mailto} URI;</li>
- *   <li>launching a registered application to open, edit or print a
- *       specified file.</li>
+ * <li>launching the user-default browser to show a specified URI;</li>
+ * <li>launching the user-default mail client with an optional {@code mailto}
+ * URI;</li>
+ * <li>launching a registered application to open, edit or print a specified
+ * file.</li>
  * </ul>
  *
- * <p> This class provides methods corresponding to these
- * operations. The methods look for the associated application
- * registered on the current platform, and launch it to handle a URI
- * or file. If there is no associated application or the associated
- * application fails to be launched, an exception is thrown.
+ * <p>
+ * This class provides methods corresponding to these operations. The methods
+ * look for the associated application registered on the current platform, and
+ * launch it to handle a URI or file. If there is no associated application or
+ * the associated application fails to be launched, an exception is thrown.
  *
- * <p> An application is registered to a URI or file type; for
- * example, the {@code "sxi"} file extension is typically registered
- * to StarOffice.  The mechanism of registering, accessing, and
- * launching the associated application is platform-dependent.
+ * <p>
+ * An application is registered to a URI or file type; for example, the
+ * {@code "sxi"} file extension is typically registered to StarOffice. The
+ * mechanism of registering, accessing, and launching the associated application
+ * is platform-dependent.
  *
- * <p> Each operation is an action type represented by the {@link
- * Desktop.Action} class.
+ * <p>
+ * Each operation is an action type represented by the {@link Desktop.Action}
+ * class.
  *
- * <p> Note: when some action is invoked and the associated
- * application is executed, it will be executed on the same system as
- * the one on which the Java application was launched.
+ * <p>
+ * Note: when some action is invoked and the associated application is executed,
+ * it will be executed on the same system as the one on which the Java
+ * application was launched.
  *
  * @since 1.6
  * @author Armin Chen
@@ -94,9 +97,9 @@ public class Desktop {
 	}
 
 	public boolean isSupported(Action action) {
-		if(action.equals(java.awt.Desktop.Action.BROWSE)){
+		if (action.equals(java.awt.Desktop.Action.BROWSE)) {
 			return true;
-		}else if(action.equals(Desktop.Action.MAIL)){
+		} else if (action.equals(Desktop.Action.MAIL)) {
 			return true;
 		}
 		return false;
@@ -107,8 +110,7 @@ public class Desktop {
 			throw new NullPointerException("File must not be null");
 
 		if (!file.exists()) {
-			throw new IllegalArgumentException("The file: " + file.getPath()
-					+ " doesn't exist.");
+			throw new IllegalArgumentException("The file: " + file.getPath() + " doesn't exist.");
 		}
 
 		file.canRead();
@@ -124,8 +126,7 @@ public class Desktop {
 	private void checkAWTPermission() {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			sm.checkPermission(new AWTPermission(
-					"showWindowWithoutWarningBanner"));
+			sm.checkPermission(new AWTPermission("showWindowWithoutWarningBanner"));
 		}
 	}
 
@@ -163,19 +164,19 @@ public class Desktop {
 		if (uri == null) {
 			throw new NullPointerException();
 		}
-        Intent intent = new Intent();        
-        intent.setAction("android.intent.action.VIEW");    
-        Uri content_url = Uri.parse(uri.toString());   
-        intent.setData(content_url);  
-        ActivityManager.getActivity().startActivity(intent);
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse(uri.toString());
+		intent.setData(content_url);
+		ActivityManager.applicationContext.startActivity(intent);
 		return;
 	}
 
 	public void mail() throws IOException {
 		Intent intent = new Intent(Intent.ACTION_SEND);
-		String[] receiver=new String[]{J2SEInitor.getContactEmail()};
+		String[] receiver = new String[] { J2SEInitor.getContactEmail() };
 		intent.putExtra(Intent.EXTRA_EMAIL, receiver);
-		ActivityManager.getActivity().startActivity(intent);//调用系统的mail客户端进行发送}
+		ActivityManager.applicationContext.startActivity(intent);// 调用系统的mail客户端进行发送}
 	}
 
 	// http://www.ietf.org/rfc/rfc2368.txt

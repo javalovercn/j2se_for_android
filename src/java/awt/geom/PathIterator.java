@@ -25,31 +25,28 @@
 package java.awt.geom;
 
 /**
- * The <code>PathIterator</code> interface provides the mechanism
- * for objects that implement the {@link java.awt.Shape Shape}
- * interface to return the geometry of their boundary by allowing
- * a caller to retrieve the path of that boundary a segment at a
- * time.  This interface allows these objects to retrieve the path of
- * their boundary a segment at a time by using 1st through 3rd order
- * B&eacute;zier curves, which are lines and quadratic or cubic
- * B&eacute;zier splines.
+ * The <code>PathIterator</code> interface provides the mechanism for objects
+ * that implement the {@link java.awt.Shape Shape} interface to return the
+ * geometry of their boundary by allowing a caller to retrieve the path of that
+ * boundary a segment at a time. This interface allows these objects to retrieve
+ * the path of their boundary a segment at a time by using 1st through 3rd order
+ * B&eacute;zier curves, which are lines and quadratic or cubic B&eacute;zier
+ * splines.
  * <p>
- * Multiple subpaths can be expressed by using a "MOVETO" segment to
- * create a discontinuity in the geometry to move from the end of
- * one subpath to the beginning of the next.
+ * Multiple subpaths can be expressed by using a "MOVETO" segment to create a
+ * discontinuity in the geometry to move from the end of one subpath to the
+ * beginning of the next.
  * <p>
- * Each subpath can be closed manually by ending the last segment in
- * the subpath on the same coordinate as the beginning "MOVETO" segment
- * for that subpath or by using a "CLOSE" segment to append a line
- * segment from the last point back to the first.
- * Be aware that manually closing an outline as opposed to using a
- * "CLOSE" segment to close the path might result in different line
- * style decorations being used at the end points of the subpath.
- * For example, the {@link java.awt.BasicStroke BasicStroke} object
- * uses a line "JOIN" decoration to connect the first and last points
- * if a "CLOSE" segment is encountered, whereas simply ending the path
- * on the same coordinate as the beginning coordinate results in line
- * "CAP" decorations being used at the ends.
+ * Each subpath can be closed manually by ending the last segment in the subpath
+ * on the same coordinate as the beginning "MOVETO" segment for that subpath or
+ * by using a "CLOSE" segment to append a line segment from the last point back
+ * to the first. Be aware that manually closing an outline as opposed to using a
+ * "CLOSE" segment to close the path might result in different line style
+ * decorations being used at the end points of the subpath. For example, the
+ * {@link java.awt.BasicStroke BasicStroke} object uses a line "JOIN" decoration
+ * to connect the first and last points if a "CLOSE" segment is encountered,
+ * whereas simply ending the path on the same coordinate as the beginning
+ * coordinate results in line "CAP" decorations being used at the ends.
  *
  * @see java.awt.Shape
  * @see java.awt.BasicStroke
@@ -57,21 +54,21 @@ package java.awt.geom;
  * @author Jim Graham
  */
 public interface PathIterator {
-    public static final int WIND_EVEN_ODD       = 0;
-    public static final int WIND_NON_ZERO       = 1;
-    public static final int SEG_MOVETO          = 0;
-    public static final int SEG_LINETO          = 1;
-    public static final int SEG_QUADTO          = 2;
-    public static final int SEG_CUBICTO         = 3;
-    public static final int SEG_CLOSE           = 4;
+	public static final int WIND_EVEN_ODD = 0;
+	public static final int WIND_NON_ZERO = 1;
+	public static final int SEG_MOVETO = 0;
+	public static final int SEG_LINETO = 1;
+	public static final int SEG_QUADTO = 2;
+	public static final int SEG_CUBICTO = 3;
+	public static final int SEG_CLOSE = 4;
 
-    public int getWindingRule();
+	public int getWindingRule();
 
-    public boolean isDone();
+	public boolean isDone();
 
-    public void next();
+	public void next();
 
-    public int currentSegment(float[] coords);
+	public int currentSegment(float[] coords);
 
-    public int currentSegment(double[] coords);
+	public int currentSegment(double[] coords);
 }

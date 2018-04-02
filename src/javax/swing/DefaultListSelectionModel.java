@@ -37,21 +37,18 @@ import javax.swing.event.ListSelectionListener;
 /**
  * Default data model for list selections.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Philip Milne
  * @author Hans Muller
  * @see ListSelectionModel
  */
-public class DefaultListSelectionModel implements ListSelectionModel,
-		Cloneable, Serializable {
+public class DefaultListSelectionModel implements ListSelectionModel, Cloneable, Serializable {
 	private static final int MIN = -1;
 	private static final int MAX = Integer.MAX_VALUE;
 	private int selectionMode = MULTIPLE_INTERVAL_SELECTION;
@@ -100,8 +97,7 @@ public class DefaultListSelectionModel implements ListSelectionModel,
 	}
 
 	public boolean isSelectedIndex(int index) {
-		return ((index < minIndex) || (index > maxIndex)) ? false : value
-				.get(index);
+		return ((index < minIndex) || (index > maxIndex)) ? false : value.get(index);
 	}
 
 	public boolean isSelectionEmpty() {
@@ -135,16 +131,14 @@ public class DefaultListSelectionModel implements ListSelectionModel,
 		fireValueChanged(firstIndex, lastIndex, getValueIsAdjusting());
 	}
 
-	protected void fireValueChanged(int firstIndex, int lastIndex,
-			boolean isAdjusting) {
+	protected void fireValueChanged(int firstIndex, int lastIndex, boolean isAdjusting) {
 		Object[] listeners = listenerList.getListenerList();
 		ListSelectionEvent e = null;
 
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ListSelectionListener.class) {
 				if (e == null) {
-					e = new ListSelectionEvent(this, firstIndex, lastIndex,
-							isAdjusting);
+					e = new ListSelectionEvent(this, firstIndex, lastIndex, isAdjusting);
 				}
 				((ListSelectionListener) listeners[i + 1]).valueChanged(e);
 			}
@@ -246,10 +240,9 @@ public class DefaultListSelectionModel implements ListSelectionModel,
 		return (i >= a) && (i <= b);
 	}
 
-	private void changeSelection(int clearMin, int clearMax, int setMin,
-			int setMax, boolean clearFirst) {
-		for (int i = Math.min(setMin, clearMin); i <= Math
-				.max(setMax, clearMax); i++) {
+	private void changeSelection(int clearMin, int clearMax, int setMin, int setMax,
+			boolean clearFirst) {
+		for (int i = Math.min(setMin, clearMin); i <= Math.max(setMax, clearMax); i++) {
 
 			boolean shouldClear = contains(clearMin, clearMax, i);
 			boolean shouldSet = contains(setMin, setMax, i);
@@ -272,8 +265,7 @@ public class DefaultListSelectionModel implements ListSelectionModel,
 		fireValueChanged();
 	}
 
-	private void changeSelection(int clearMin, int clearMax, int setMin,
-			int setMax) {
+	private void changeSelection(int clearMin, int clearMax, int setMin, int setMax) {
 		changeSelection(clearMin, clearMax, setMin, setMax, true);
 	}
 
@@ -316,12 +308,12 @@ public class DefaultListSelectionModel implements ListSelectionModel,
 		int setMin = Math.min(index0, index1);
 		int setMax = Math.max(index0, index1);
 
-//		if (getSelectionMode() == SINGLE_INTERVAL_SELECTION
-//				&& (setMax < minIndex - 1 || setMin > maxIndex + 1)) {
-//
-//			setSelectionInterval(index0, index1);
-//			return;
-//		}
+		// if (getSelectionMode() == SINGLE_INTERVAL_SELECTION
+		// && (setMax < minIndex - 1 || setMin > maxIndex + 1)) {
+		//
+		// setSelectionInterval(index0, index1);
+		// return;
+		// }
 
 		changeSelection(clearMin, clearMax, setMin, setMax);
 	}
@@ -330,8 +322,7 @@ public class DefaultListSelectionModel implements ListSelectionModel,
 		removeSelectionIntervalImpl(index0, index1, true);
 	}
 
-	private void removeSelectionIntervalImpl(int index0, int index1,
-			boolean changeLeadAnchor) {
+	private void removeSelectionIntervalImpl(int index0, int index1, boolean changeLeadAnchor) {
 
 		if (index0 == -1 || index1 == -1) {
 			return;
@@ -346,8 +337,8 @@ public class DefaultListSelectionModel implements ListSelectionModel,
 		int setMin = MAX;
 		int setMax = MIN;
 
-		if (getSelectionMode() != MULTIPLE_INTERVAL_SELECTION
-				&& clearMin > minIndex && clearMax < maxIndex) {
+		if (getSelectionMode() != MULTIPLE_INTERVAL_SELECTION && clearMin > minIndex
+				&& clearMax < maxIndex) {
 			clearMax = maxIndex;
 		}
 

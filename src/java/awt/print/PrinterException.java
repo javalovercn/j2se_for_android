@@ -25,18 +25,17 @@
 package java.awt.print;
 
 /**
- * The <code>PrinterException</code> class and its subclasses are used
- * to indicate that an exceptional condition has occurred in the print
- * system.
+ * The <code>PrinterException</code> class and its subclasses are used to
+ * indicate that an exceptional condition has occurred in the print system.
  */
 
 public class PrinterException extends Exception {
 
-    public PrinterException() {
+	public PrinterException() {
 
-    }
+	}
 
-    public PrinterException(String msg) {
-        super(msg);
-    }
+	public PrinterException(String msg) {
+		super(msg);
+	}
 }

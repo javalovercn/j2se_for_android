@@ -50,8 +50,8 @@ import android.graphics.BitmapFactory;
 
 /**
  * A class containing static convenience methods for locating
- * <code>ImageReader</code>s and <code>ImageWriter</code>s, and
- * performing simple encoding and decoding.
+ * <code>ImageReader</code>s and <code>ImageWriter</code>s, and performing
+ * simple encoding and decoding.
  *
  */
 public final class ImageIO {
@@ -90,13 +90,11 @@ public final class ImageIO {
 		return new File(ResourceUtil.getBaseDir(), "");
 	}
 
-	public static ImageInputStream createImageInputStream(Object input)
-			throws IOException {
+	public static ImageInputStream createImageInputStream(Object input) throws IOException {
 		return null;
 	}
 
-	public static ImageOutputStream createImageOutputStream(Object output)
-			throws IOException {
+	public static ImageOutputStream createImageOutputStream(Object output) throws IOException {
 		return null;
 	}
 
@@ -109,7 +107,7 @@ public final class ImageIO {
 	}
 
 	public static String[] getReaderFileSuffixes() {
-		String[] ext = {"png", "jpg"};
+		String[] ext = { "png", "jpg" };
 		return ext;
 	}
 
@@ -165,21 +163,21 @@ public final class ImageIO {
 
 	public static BufferedImage read(File input) throws IOException {
 		final String path = input.getPath();
-		
+
 		Vector<ClassLoader> packageLoader = J2SEInitor.getPackagesPath();
 		int size = packageLoader.size();
 		for (int i = 0; i < size; i++) {
 			ClassLoader loader = packageLoader.get(i);
 			URL url = loader.getResource(path);
-			try{
+			try {
 				BufferedImage bi = read(url);
-				if(bi != null){
+				if (bi != null) {
 					return bi;
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
 			}
 		}
-		
+
 		BufferedImage bi = read(new FileInputStream(input));
 		return bi;
 	}
@@ -217,18 +215,16 @@ public final class ImageIO {
 		return null;
 	}
 
-	public static BufferedImage read(ImageInputStream stream)
+	public static BufferedImage read(ImageInputStream stream) throws IOException {
+		throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
+	}
+
+	public static boolean write(RenderedImage im, String formatName, ImageOutputStream output)
 			throws IOException {
 		throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
 	}
 
-	public static boolean write(RenderedImage im, String formatName,
-			ImageOutputStream output) throws IOException {
-		throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
-	}
-
-	public static boolean write(RenderedImage im, String formatName, File file)
-			throws IOException {
+	public static boolean write(RenderedImage im, String formatName, File file) throws IOException {
 		if (file == null) {
 			throw new IllegalArgumentException("output == null!");
 		}
@@ -238,17 +234,17 @@ public final class ImageIO {
 			os = new FileOutputStream(file);
 			return write(im, formatName, os);
 		} catch (Exception e) {
-		}finally{
-			try{
+		} finally {
+			try {
 				os.close();
-			}catch (Throwable e) {
+			} catch (Throwable e) {
 			}
 		}
 		return false;
 	}
 
-	public static boolean write(RenderedImage im, String formatName,
-			OutputStream output) throws IOException {
+	public static boolean write(RenderedImage im, String formatName, OutputStream output)
+			throws IOException {
 		try {
 			Bitmap.CompressFormat format = null;
 			if (formatName.equalsIgnoreCase("png")) {
@@ -256,8 +252,7 @@ public final class ImageIO {
 			} else if (formatName.equalsIgnoreCase("jpg")) {
 				format = Bitmap.CompressFormat.JPEG;
 			} else {
-				throw new IllegalArgumentException("illegal format : "
-						+ formatName);
+				throw new IllegalArgumentException("illegal format : " + formatName);
 			}
 
 			im.getBitmapAdAPI().compress(format, 100, output);

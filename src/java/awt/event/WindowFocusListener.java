@@ -29,14 +29,12 @@ import java.util.EventListener;
 /**
  * The listener interface for receiving <code>WindowEvents</code>, including
  * <code>WINDOW_GAINED_FOCUS</code> and <code>WINDOW_LOST_FOCUS</code> events.
- * The class that is interested in processing a <code>WindowEvent</code>
- * either implements this interface (and
- * all the methods it contains) or extends the abstract
- * <code>WindowAdapter</code> class (overriding only the methods of interest).
- * The listener object created from that class is then registered with a
- * <code>Window</code>
- * using the <code>Window</code>'s <code>addWindowFocusListener</code> method.
- * When the <code>Window</code>'s
+ * The class that is interested in processing a <code>WindowEvent</code> either
+ * implements this interface (and all the methods it contains) or extends the
+ * abstract <code>WindowAdapter</code> class (overriding only the methods of
+ * interest). The listener object created from that class is then registered
+ * with a <code>Window</code> using the <code>Window</code>'s
+ * <code>addWindowFocusListener</code> method. When the <code>Window</code>'s
  * status changes by virtue of it being opened, closed, activated, deactivated,
  * iconified, or deiconified, or by focus being transfered into or out of the
  * <code>Window</code>, the relevant method in the listener object is invoked,
@@ -46,13 +44,15 @@ import java.util.EventListener;
  *
  * @see WindowAdapter
  * @see WindowEvent
- * @see <a href="http://java.sun.com/docs/books/tutorial/post1.0/ui/windowlistener.html">Tutorial: Writing a Window Listener</a>
+ * @see <a href=
+ *      "http://java.sun.com/docs/books/tutorial/post1.0/ui/windowlistener.html">Tutorial:
+ *      Writing a Window Listener</a>
  *
  * @since 1.4
  */
 public interface WindowFocusListener extends EventListener {
 
-    public void windowGainedFocus(WindowEvent e);
+	public void windowGainedFocus(WindowEvent e);
 
-    public void windowLostFocus(WindowEvent e);
+	public void windowLostFocus(WindowEvent e);
 }

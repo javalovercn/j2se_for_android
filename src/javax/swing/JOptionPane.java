@@ -60,112 +60,106 @@ import android.graphics.drawable.Drawable;
 
 /**
  * <code>JOptionPane</code> makes it easy to pop up a standard dialog box that
- * prompts users for a value or informs them of something.
- * For information about using <code>JOptionPane</code>, see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/dialog.html">How to Make Dialogs</a>,
- * a section in <em>The Java Tutorial</em>.
+ * prompts users for a value or informs them of something. For information about
+ * using <code>JOptionPane</code>, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/dialog.html">How
+ * to Make Dialogs</a>, a section in <em>The Java Tutorial</em>.
  *
  * <p>
  *
- * While the <code>JOptionPane</code>
- * class may appear complex because of the large number of methods, almost
- * all uses of this class are one-line calls to one of the static
- * <code>showXxxDialog</code> methods shown below:
+ * While the <code>JOptionPane</code> class may appear complex because of the
+ * large number of methods, almost all uses of this class are one-line calls to
+ * one of the static <code>showXxxDialog</code> methods shown below:
  * <blockquote>
  *
  *
- * <table border=1 summary="Common JOptionPane method names and their descriptions">
+ * <table border=1 summary="Common JOptionPane method names and their
+ * descriptions">
  * <tr>
- *    <th>Method Name</th>
- *    <th>Description</th>
+ * <th>Method Name</th>
+ * <th>Description</th>
  * </tr>
  * <tr>
- *    <td>showConfirmDialog</td>
- *    <td>Asks a confirming question, like yes/no/cancel.</td>
+ * <td>showConfirmDialog</td>
+ * <td>Asks a confirming question, like yes/no/cancel.</td>
  * </tr>
  * <tr>
- *    <td>showInputDialog</td>
- *    <td>Prompt for some input.</td>
+ * <td>showInputDialog</td>
+ * <td>Prompt for some input.</td>
  * </tr>
  * <tr>
- *   <td>showMessageDialog</td>
- *   <td>Tell the user about something that has happened.</td>
+ * <td>showMessageDialog</td>
+ * <td>Tell the user about something that has happened.</td>
  * </tr>
  * <tr>
- *   <td>showOptionDialog</td>
- *   <td>The Grand Unification of the above three.</td>
+ * <td>showOptionDialog</td>
+ * <td>The Grand Unification of the above three.</td>
  * </tr>
  * </table>
  *
- * </blockquote>
- * Each of these methods also comes in a <code>showInternalXXX</code>
- * flavor, which uses an internal frame to hold the dialog box (see
- * {@link JInternalFrame}).
- * Multiple convenience methods have also been defined -- overloaded
- * versions of the basic methods that use different parameter lists.
+ * </blockquote> Each of these methods also comes in a
+ * <code>showInternalXXX</code> flavor, which uses an internal frame to hold the
+ * dialog box (see {@link JInternalFrame}). Multiple convenience methods have
+ * also been defined -- overloaded versions of the basic methods that use
+ * different parameter lists.
  * <p>
- * All dialogs are modal. Each <code>showXxxDialog</code> method blocks
- * the caller until the user's interaction is complete.
+ * All dialogs are modal. Each <code>showXxxDialog</code> method blocks the
+ * caller until the user's interaction is complete.
  * <p>
  *
  * <table cellspacing=6 cellpadding=4 border=0 align=right summary="layout">
  * <tr>
- *  <td bgcolor=#FFe0d0 rowspan=2>icon</td>
- *  <td bgcolor=#FFe0d0>message</td>
+ * <td bgcolor=#FFe0d0 rowspan=2>icon</td>
+ * <td bgcolor=#FFe0d0>message</td>
  * </tr>
  * <tr>
- *  <td bgcolor=#FFe0d0>input value</td>
+ * <td bgcolor=#FFe0d0>input value</td>
  * </tr>
  * <tr>
- *   <td bgcolor=#FFe0d0 colspan=2>option buttons</td>
+ * <td bgcolor=#FFe0d0 colspan=2>option buttons</td>
  * </tr>
  * </table>
  *
- * The basic appearance of one of these dialog boxes is generally
- * similar to the picture at the right, although the various
- * look-and-feels are
- * ultimately responsible for the final result.  In particular, the
- * look-and-feels will adjust the layout to accommodate the option pane's
- * <code>ComponentOrientation</code> property.
- * <br clear=all>
+ * The basic appearance of one of these dialog boxes is generally similar to the
+ * picture at the right, although the various look-and-feels are ultimately
+ * responsible for the final result. In particular, the look-and-feels will
+ * adjust the layout to accommodate the option pane's
+ * <code>ComponentOrientation</code> property. <br clear=all>
  * <p>
  * <b>Parameters:</b><br>
- * The parameters to these methods follow consistent patterns:
- * <blockquote>
- * <dl compact>
- * <dt>parentComponent<dd>
- * Defines the <code>Component</code> that is to be the parent of this
- * dialog box.
- * It is used in two ways: the <code>Frame</code> that contains
- * it is used as the <code>Frame</code>
- * parent for the dialog box, and its screen coordinates are used in
- * the placement of the dialog box. In general, the dialog box is placed
- * just below the component. This parameter may be <code>null</code>,
- * in which case a default <code>Frame</code> is used as the parent,
- * and the dialog will be
- * centered on the screen (depending on the L&F).
- * <dt><a name=message>message</a><dd>
- * A descriptive message to be placed in the dialog box.
- * In the most common usage, message is just a <code>String</code> or
- * <code>String</code> constant.
+ * The parameters to these methods follow consistent patterns: <blockquote> <dl
+ * compact>
+ * <dt>parentComponent
+ * <dd>Defines the <code>Component</code> that is to be the parent of this
+ * dialog box. It is used in two ways: the <code>Frame</code> that contains it
+ * is used as the <code>Frame</code> parent for the dialog box, and its screen
+ * coordinates are used in the placement of the dialog box. In general, the
+ * dialog box is placed just below the component. This parameter may be
+ * <code>null</code>, in which case a default <code>Frame</code> is used as the
+ * parent, and the dialog will be centered on the screen (depending on the L&F).
+ * <dt><a name=message>message</a>
+ * <dd>A descriptive message to be placed in the dialog box. In the most common
+ * usage, message is just a <code>String</code> or <code>String</code> constant.
  * However, the type of this parameter is actually <code>Object</code>. Its
- * interpretation depends on its type:
- * <dl compact>
- * <dt>Object[]<dd>An array of objects is interpreted as a series of
- *                 messages (one per object) arranged in a vertical stack.
- *                 The interpretation is recursive -- each object in the
- *                 array is interpreted according to its type.
- * <dt>Component<dd>The <code>Component</code> is displayed in the dialog.
- * <dt>Icon<dd>The <code>Icon</code> is wrapped in a <code>JLabel</code>
- *               and displayed in the dialog.
- * <dt>others<dd>The object is converted to a <code>String</code> by calling
- *               its <code>toString</code> method. The result is wrapped in a
- *               <code>JLabel</code> and displayed.
+ * interpretation depends on its type: <dl compact>
+ * <dt>Object[]
+ * <dd>An array of objects is interpreted as a series of messages (one per
+ * object) arranged in a vertical stack. The interpretation is recursive -- each
+ * object in the array is interpreted according to its type.
+ * <dt>Component
+ * <dd>The <code>Component</code> is displayed in the dialog.
+ * <dt>Icon
+ * <dd>The <code>Icon</code> is wrapped in a <code>JLabel</code> and displayed
+ * in the dialog.
+ * <dt>others
+ * <dd>The object is converted to a <code>String</code> by calling its
+ * <code>toString</code> method. The result is wrapped in a <code>JLabel</code>
+ * and displayed.
  * </dl>
- * <dt>messageType<dd>Defines the style of the message. The Look and Feel
- * manager may lay out the dialog differently depending on this value, and
- * will often provide a default icon. The possible values are:
+ * <dt>messageType
+ * <dd>Defines the style of the message. The Look and Feel manager may lay out
+ * the dialog differently depending on this value, and will often provide a
+ * default icon. The possible values are:
  * <ul>
  * <li><code>ERROR_MESSAGE</code>
  * <li><code>INFORMATION_MESSAGE</code>
@@ -173,47 +167,52 @@ import android.graphics.drawable.Drawable;
  * <li><code>QUESTION_MESSAGE</code>
  * <li><code>PLAIN_MESSAGE</code>
  * </ul>
- * <dt>optionType<dd>Defines the set of option buttons that appear at
- * the bottom of the dialog box:
+ * <dt>optionType
+ * <dd>Defines the set of option buttons that appear at the bottom of the dialog
+ * box:
  * <ul>
  * <li><code>DEFAULT_OPTION</code>
  * <li><code>YES_NO_OPTION</code>
  * <li><code>YES_NO_CANCEL_OPTION</code>
  * <li><code>OK_CANCEL_OPTION</code>
  * </ul>
- * You aren't limited to this set of option buttons.  You can provide any
- * buttons you want using the options parameter.
- * <dt>options<dd>A more detailed description of the set of option buttons
- * that will appear at the bottom of the dialog box.
- * The usual value for the options parameter is an array of
- * <code>String</code>s. But
- * the parameter type is an array of <code>Objects</code>.
- * A button is created for each object depending on its type:
- * <dl compact>
- * <dt>Component<dd>The component is added to the button row directly.
- * <dt>Icon<dd>A <code>JButton</code> is created with this as its label.
- * <dt>other<dd>The <code>Object</code> is converted to a string using its
- *              <code>toString</code> method and the result is used to
- *              label a <code>JButton</code>.
+ * You aren't limited to this set of option buttons. You can provide any buttons
+ * you want using the options parameter.
+ * <dt>options
+ * <dd>A more detailed description of the set of option buttons that will appear
+ * at the bottom of the dialog box. The usual value for the options parameter is
+ * an array of <code>String</code>s. But the parameter type is an array of
+ * <code>Objects</code>. A button is created for each object depending on its
+ * type: <dl compact>
+ * <dt>Component
+ * <dd>The component is added to the button row directly.
+ * <dt>Icon
+ * <dd>A <code>JButton</code> is created with this as its label.
+ * <dt>other
+ * <dd>The <code>Object</code> is converted to a string using its
+ * <code>toString</code> method and the result is used to label a
+ * <code>JButton</code>.
  * </dl>
- * <dt>icon<dd>A decorative icon to be placed in the dialog box. A default
- * value for this is determined by the <code>messageType</code> parameter.
- * <dt>title<dd>The title for the dialog box.
- * <dt>initialValue<dd>The default selection (input value).
+ * <dt>icon
+ * <dd>A decorative icon to be placed in the dialog box. A default value for
+ * this is determined by the <code>messageType</code> parameter.
+ * <dt>title
+ * <dd>The title for the dialog box.
+ * <dt>initialValue
+ * <dd>The default selection (input value).
  * </dl>
  * </blockquote>
  * <p>
- * When the selection is changed, <code>setValue</code> is invoked,
- * which generates a <code>PropertyChangeEvent</code>.
+ * When the selection is changed, <code>setValue</code> is invoked, which
+ * generates a <code>PropertyChangeEvent</code>.
  * <p>
  * If a <code>JOptionPane</code> has configured to all input
- * <code>setWantsInput</code>
- * the bound property <code>JOptionPane.INPUT_VALUE_PROPERTY</code>
- *  can also be listened
- * to, to determine when the user has input or selected a value.
+ * <code>setWantsInput</code> the bound property
+ * <code>JOptionPane.INPUT_VALUE_PROPERTY</code> can also be listened to, to
+ * determine when the user has input or selected a value.
  * <p>
- * When one of the <code>showXxxDialog</code> methods returns an integer,
- * the possible values are:
+ * When one of the <code>showXxxDialog</code> methods returns an integer, the
+ * possible values are:
  * <ul>
  * <li><code>YES_OPTION</code>
  * <li><code>NO_OPTION</code>
@@ -226,22 +225,27 @@ import android.graphics.drawable.Drawable;
  * <dt>Show an error dialog that displays the message, 'alert':
  * <dd><code>
  * JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE);
- * </code><p>
+ * </code>
+ * <p>
  * <dt>Show an internal information dialog with the message, 'information':
  * <dd><code>
  * JOptionPane.showInternalMessageDialog(frame, "information",<br>
  *             <ul><ul>"information", JOptionPane.INFORMATION_MESSAGE);</ul></ul>
- * </code><p>
- * <dt>Show an information panel with the options yes/no and message 'choose one':
+ * </code>
+ * <p>
+ * <dt>Show an information panel with the options yes/no and message 'choose
+ * one':
  * <dd><code>JOptionPane.showConfirmDialog(null,
  *             <ul><ul>"choose one", "choose one", JOptionPane.YES_NO_OPTION);</ul></ul>
- * </code><p>
+ * </code>
+ * <p>
  * <dt>Show an internal information dialog with the options yes/no/cancel and
  * message 'please choose one' and title information:
  * <dd><code>JOptionPane.showInternalConfirmDialog(frame,
  *             <ul><ul>"please choose one", "information",</ul></ul>
  *             <ul><ul>JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);</ul></ul>
- * </code><p>
+ * </code>
+ * <p>
  * <dt>Show a warning dialog with the options OK, CANCEL, title 'Warning', and
  * message 'Click OK to continue':
  * <dd><code>
@@ -249,11 +253,13 @@ import android.graphics.drawable.Drawable;
  * JOptionPane.showOptionDialog(null, "Click OK to continue", "Warning",
  *             <ul><ul>JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,</ul></ul>
  *             <ul><ul>null, options, options[0]);</ul></ul>
- * </code><p>
+ * </code>
+ * <p>
  * <dt>Show a dialog asking the user to type in a String:
  * <dd><code>
  * String inputValue = JOptionPane.showInputDialog("Please input a value");
- * </code><p>
+ * </code>
+ * <p>
  * <dt>Show a dialog asking the user to select a String:
  * <dd><code>
  * Object[] possibleValues = { "First", "Second", "Third" };<br>
@@ -261,11 +267,13 @@ import android.graphics.drawable.Drawable;
  *             <ul><ul>"Choose one", "Input",</ul></ul>
  *             <ul><ul>JOptionPane.INFORMATION_MESSAGE, null,</ul></ul>
  *             <ul><ul>possibleValues, possibleValues[0]);</ul></ul>
- * </code><p>
+ * </code>
+ * <p>
  * </dl>
  * <b>Direct Use:</b><br>
- * To create and use an <code>JOptionPane</code> directly, the
- * standard pattern is roughly as follows:
+ * To create and use an <code>JOptionPane</code> directly, the standard pattern
+ * is roughly as follows:
+ * 
  * <pre>
  *     JOptionPane pane = new JOptionPane(<i>arguments</i>);
  *     pane.set<i>.Xxxx(...); // Configure</i>
@@ -289,25 +297,20 @@ import android.graphics.drawable.Drawable;
  *     return CLOSED_OPTION;
  * </pre>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JInternalFrame
  *
- * @beaninfo
- *      attribute: isContainer true
- *    description: A component which implements standard dialog box controls.
+ * @beaninfo attribute: isContainer true description: A component which
+ *           implements standard dialog box controls.
  *
  * @author James Gosling
  * @author Scott Violet
@@ -352,11 +355,11 @@ public class JOptionPane extends JComponent implements Accessible {
 	transient protected Object[] options;
 	transient protected Object initialValue;
 	protected int messageType;
-	
+
 	private JPanel buttonPanel;
 	private JTextField inputField;
 	private JComboBox list;
-	
+
 	/**
 	 * DEFAULT_OPTION, YES_NO_OPTION, YES_NO_CANCEL_OPTION, OK_CANCEL_OPTION.
 	 */
@@ -375,61 +378,60 @@ public class JOptionPane extends JComponent implements Accessible {
 		return showInputDialog(null, message, initialSelectionValue);
 	}
 
-	public static String showInputDialog(Component parentComponent, Object message) throws HeadlessException {
-		return showInputDialog(parentComponent, message, UIManager.getString(
-				"OptionPane.inputDialogTitle", parentComponent),
+	public static String showInputDialog(Component parentComponent, Object message)
+			throws HeadlessException {
+		return showInputDialog(parentComponent, message,
+				UIManager.getString("OptionPane.inputDialogTitle", parentComponent),
 				QUESTION_MESSAGE);
 	}
 
-	public static String showInputDialog(Component parentComponent, Object message, Object initialSelectionValue) {
+	public static String showInputDialog(Component parentComponent, Object message,
+			Object initialSelectionValue) {
 		return (String) showInputDialog(parentComponent, message,
-				UIManager.getString("OptionPane.inputDialogTitle",
-						parentComponent), QUESTION_MESSAGE, null, null,
-				initialSelectionValue);
+				UIManager.getString("OptionPane.inputDialogTitle", parentComponent),
+				QUESTION_MESSAGE, null, null, initialSelectionValue);
 	}
 
-	public static String showInputDialog(Component parentComponent,
-			Object message, String title, int messageType)
-			throws HeadlessException {
-		return (String) showInputDialog(parentComponent, message, title,
-				messageType, null, null, null);
+	public static String showInputDialog(Component parentComponent, Object message, String title,
+			int messageType) throws HeadlessException {
+		return (String) showInputDialog(parentComponent, message, title, messageType, null, null,
+				null);
 	}
 
-	public static Object showInputDialog(Component parentComponent,
-			Object message, String title, int messageType, Icon icon,
-			Object[] selectionValues, Object initialSelectionValue)
+	public static Object showInputDialog(Component parentComponent, Object message, String title,
+			int messageType, Icon icon, Object[] selectionValues, Object initialSelectionValue)
 			throws HeadlessException {
-		if(title == null){
+		if (title == null) {
 			title = "Input";
 		}
-		
+
 		final Window dialog = App.buildCloseableWindow(false, null, title, true);
-		
+
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		
+
 		JLabel lable = new JLabel(message.toString(), icon, SwingConstants.LEADING);
 		c.anchor = GridBagConstraints.LINE_START;
 		panel.add(lable, c);
-		
+
 		c.gridy = 1;
 		JComboBox select = null;
 		JTextField field = null;
-		if(selectionValues != null){
+		if (selectionValues != null) {
 			select = new JComboBox(selectionValues);
 			select.setSelectedItem(initialSelectionValue);
 			panel.add(select, c);
-		}else{
+		} else {
 			String initV = null;
-			if(initialSelectionValue != null){
+			if (initialSelectionValue != null) {
 				initV = initialSelectionValue.toString();
 			}
 			field = new JTextField(initV);
 			panel.add(field, c);
 		}
-		
+
 		final Boolean[] out = new Boolean[1];
-		
+
 		JButton ok = App.buildDefaultOKButton();
 		ok.addActionListener(new ActionListener() {
 			@Override
@@ -445,103 +447,94 @@ public class JOptionPane extends JComponent implements Accessible {
 				dialog.dispose();
 			}
 		});
-		
+
 		JPanel btnPanel = new JPanel(new GridLayout(1, 2));
 		btnPanel.add(cancel);
 		btnPanel.add(ok);
-		
+
 		c.gridy = 2;
 		c.anchor = GridBagConstraints.CENTER;
 		c.insets = new Insets(ClientDesc.hgap, ClientDesc.hgap, 0, ClientDesc.hgap);
 		panel.add(btnPanel, c);
-		
+
 		App.showCenterPanelWindowWithoutButton(panel, 0, 0, dialog, null, false);
-		
-		if(out[0] != null && out[0]){
-			if(select != null){
+
+		if (out[0] != null && out[0]) {
+			if (select != null) {
 				return select.getSelectedItem();
-			}else if(field != null){
+			} else if (field != null) {
 				return field.getText();
 			}
 			return null;
-		}else{
+		} else {
 			return null;
 		}
 	}
 
-	public static void showMessageDialog(Component parentComponent,
-			Object message) throws HeadlessException {
-		showMessageDialog(parentComponent, message, UIManager.getString(
-				"OptionPane.messageDialogTitle", parentComponent),
+	public static void showMessageDialog(Component parentComponent, Object message)
+			throws HeadlessException {
+		showMessageDialog(parentComponent, message,
+				UIManager.getString("OptionPane.messageDialogTitle", parentComponent),
 				INFORMATION_MESSAGE);
 	}
 
-	public static void showMessageDialog(Component parentComponent,
-			Object message, String title, int messageType)
-			throws HeadlessException {
+	public static void showMessageDialog(Component parentComponent, Object message, String title,
+			int messageType) throws HeadlessException {
 		showMessageDialog(parentComponent, message, title, messageType, null);
 	}
 
-	public static void showMessageDialog(Component parentComponent,
-			Object message, String title, int messageType, Icon icon)
-			throws HeadlessException {
-		showOptionDialog(parentComponent, message, title, DEFAULT_OPTION,
-				messageType, icon, null, null);
+	public static void showMessageDialog(Component parentComponent, Object message, String title,
+			int messageType, Icon icon) throws HeadlessException {
+		showOptionDialog(parentComponent, message, title, DEFAULT_OPTION, messageType, icon, null,
+				null);
 	}
 
-	public static int showConfirmDialog(Component parentComponent,
-			Object message) throws HeadlessException {
+	public static int showConfirmDialog(Component parentComponent, Object message)
+			throws HeadlessException {
 		return showConfirmDialog(parentComponent, message,
-				UIManager.getString("OptionPane.titleText"),
-				YES_NO_CANCEL_OPTION);
+				UIManager.getString("OptionPane.titleText"), YES_NO_CANCEL_OPTION);
 	}
 
-	public static int showConfirmDialog(Component parentComponent,
-			Object message, String title, int optionType)
+	public static int showConfirmDialog(Component parentComponent, Object message, String title,
+			int optionType) throws HeadlessException {
+		return showConfirmDialog(parentComponent, message, title, optionType, QUESTION_MESSAGE);
+	}
+
+	public static int showConfirmDialog(Component parentComponent, Object message, String title,
+			int optionType, int messageType) throws HeadlessException {
+		return showConfirmDialog(parentComponent, message, title, optionType, messageType, null);
+	}
+
+	public static int showConfirmDialog(Component parentComponent, Object message, String title,
+			int optionType, int messageType, Icon icon) throws HeadlessException {
+		return showOptionDialog(parentComponent, message, title, optionType, messageType, icon,
+				null, null);
+	}
+
+	public static int showOptionDialog(Component parentComponent, Object message, String title,
+			final int optionType, int messageType, Icon icon, Object[] options, Object initialValue)
 			throws HeadlessException {
-		return showConfirmDialog(parentComponent, message, title, optionType,
-				QUESTION_MESSAGE);
-	}
-
-	public static int showConfirmDialog(Component parentComponent,
-			Object message, String title, int optionType, int messageType)
-			throws HeadlessException {
-		return showConfirmDialog(parentComponent, message, title, optionType,
-				messageType, null);
-	}
-
-	public static int showConfirmDialog(Component parentComponent,
-			Object message, String title, int optionType, int messageType,
-			Icon icon) throws HeadlessException {
-		return showOptionDialog(parentComponent, message, title, optionType,
-				messageType, icon, null, null);
-	}
-
-	public static int showOptionDialog(Component parentComponent,
-			Object message, String title, final int optionType, int messageType,
-			Icon icon, Object[] options, Object initialValue)
-			throws HeadlessException {
-		if(title == null){
+		if (title == null) {
 			title = "Options";
 		}
-		
-		if(options == null){
+
+		if (options == null) {
 			options = getOptionTypeButtonNumAdAPI(optionType);
 			initialValue = options[0];
 		}
-		
+
 		final Window dialog = App.buildCloseableWindow(false, null, title, true);
-		
+
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		
+
 		JLabel lable = new JLabel(message.toString(), icon, SwingConstants.LEADING);
 		c.anchor = GridBagConstraints.LINE_START;
 		panel.add(lable, c);
-		
+
 		final Integer[] out = new Integer[1];
 		out[0] = CLOSED_OPTION;
-		
+
 		final int length = options.length;
 		JButton[] btns = new JButton[length];
 		for (int i = 0; i < length; i++) {
@@ -551,35 +544,34 @@ public class JOptionPane extends JComponent implements Accessible {
 			btn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(optionType == OK_CANCEL_OPTION && currentIdx == 1){
+					if (optionType == OK_CANCEL_OPTION && currentIdx == 1) {
 						out[0] = CANCEL_OPTION;
-					}else{
+					} else {
 						out[0] = currentIdx;
 					}
 					dialog.dispose();
 				}
 			});
-			if(btnText.equals(initialValue)){
+			if (btnText.equals(initialValue)) {
 				btn.requestFocus();
 			}
 			btns[i] = btn;
 		}
 		JPanel btnPanel = new JPanel(new GridLayout(1, length));
-		for (int i = length - 1; i >= 0; i--) {//注意：0在最后
+		for (int i = length - 1; i >= 0; i--) {// 注意：0在最后
 			btnPanel.add(btns[i]);
 		}
 		c.gridy = 1;
 		c.anchor = GridBagConstraints.CENTER;
 		c.insets = new Insets(ClientDesc.hgap, ClientDesc.hgap, 0, ClientDesc.hgap);
 		panel.add(btnPanel, c);
-		
+
 		App.showCenterPanelWindowWithoutButton(panel, 0, 0, dialog, null, false);
-		
+
 		return out[0];
 	}
 
-	public JDialog createDialog(Component parentComponent, String title)
-			throws HeadlessException {
+	public JDialog createDialog(Component parentComponent, String title) throws HeadlessException {
 		int style = styleFromMessageType(getMessageType());
 		return createDialog(parentComponent, title, style);
 	}
@@ -590,99 +582,101 @@ public class JOptionPane extends JComponent implements Accessible {
 		initDialog(dialog, style, null);
 		return dialog;
 	}
-	
-	private static final String[] YES_NO_OPTIONS = {(String)ResourceUtil.get(1032), (String)ResourceUtil.get(1033)};
-	private static final String[] YES_NO_CANCEL_OPTIONS = {(String)ResourceUtil.get(1032), (String)ResourceUtil.get(1033), (String)ResourceUtil.get(1018)};
-	private static final String[] OK_CANCEL_OPTIONS = {(String)ResourceUtil.get(1010), (String)ResourceUtil.get(1018)};
-	private static final String[] DEFAULT_OPTIONS = {(String)ResourceUtil.get(1010)};
-	
-	private static Object[] getOptionTypeButtonNumAdAPI(final int optionType){
-		if(optionType == YES_NO_OPTION){
+
+	private static final String[] YES_NO_OPTIONS = { (String) ResourceUtil.get(1032),
+			(String) ResourceUtil.get(1033) };
+	private static final String[] YES_NO_CANCEL_OPTIONS = { (String) ResourceUtil.get(1032),
+			(String) ResourceUtil.get(1033), (String) ResourceUtil.get(1018) };
+	private static final String[] OK_CANCEL_OPTIONS = { (String) ResourceUtil.get(1010),
+			(String) ResourceUtil.get(1018) };
+	private static final String[] DEFAULT_OPTIONS = { (String) ResourceUtil.get(1010) };
+
+	private static Object[] getOptionTypeButtonNumAdAPI(final int optionType) {
+		if (optionType == YES_NO_OPTION) {
 			return YES_NO_OPTIONS;
-		}else if(optionType == YES_NO_CANCEL_OPTION){
+		} else if (optionType == YES_NO_CANCEL_OPTION) {
 			return YES_NO_CANCEL_OPTIONS;
-		}else if(optionType == OK_CANCEL_OPTION){
+		} else if (optionType == OK_CANCEL_OPTION) {
 			return OK_CANCEL_OPTIONS;
-		}else{
-			//DEFAULT_OPTION
+		} else {
+			// DEFAULT_OPTION
 			return DEFAULT_OPTIONS;
 		}
 	}
 
-	private JDialog createDialog(final Component parentComponent, String title,
-			final int style) throws HeadlessException {
+	private JDialog createDialog(final Component parentComponent, String title, final int style)
+			throws HeadlessException {
 		final JDialog dialog = new JDialog((Frame) null, title, true);
-//				Window window = JOptionPane.getWindowForComponent(parentComponent);
+		// Window window = JOptionPane.getWindowForComponent(parentComponent);
 		initDialog(dialog, style, parentComponent);
 		return dialog;
 	}
-	
-	private void doSelectOrInputAdAPI(int selectedIdx, Dialog dialog){
-		if(wantsInput == false){
-			//OptionPane
-			if(useInnerOptions){
-				if(isOKOrYes(selectedIdx)){
+
+	private void doSelectOrInputAdAPI(int selectedIdx, Dialog dialog) {
+		if (wantsInput == false) {
+			// OptionPane
+			if (useInnerOptions) {
+				if (isOKOrYes(selectedIdx)) {
 					value = YES_OPTION;
-				}else if(isNo(selectedIdx)){
+				} else if (isNo(selectedIdx)) {
 					value = NO_OPTION;
-				}else{
+				} else {
 					value = CANCEL_OPTION;
 				}
-			}else{
+			} else {
 				value = selectedIdx;
 			}
-		}else{
-			//Want inputs
-			if(inputField != null){
-				if(isOKOrYes(selectedIdx)){
+		} else {
+			// Want inputs
+			if (inputField != null) {
+				if (isOKOrYes(selectedIdx)) {
 					inputValue = inputField.getText();
 				}
-			}else if(list != null){
-				if(isOKOrYes(selectedIdx)){
+			} else if (list != null) {
+				if (isOKOrYes(selectedIdx)) {
 					inputValue = list.getSelectedItem();
 				}
 			}
 		}
-		
+
 		dialog.dispose();
 	}
-	
-	private boolean isOKOrYes(int selectedIdx){
-		if(optionType == YES_NO_CANCEL_OPTION){
-			if(selectedIdx == 0){
+
+	private boolean isOKOrYes(int selectedIdx) {
+		if (optionType == YES_NO_CANCEL_OPTION) {
+			if (selectedIdx == 0) {
 				return true;
 			}
-		}else if(optionType == YES_NO_OPTION){
-			if(selectedIdx == 0){
+		} else if (optionType == YES_NO_OPTION) {
+			if (selectedIdx == 0) {
 				return true;
 			}
-		}else if(optionType == OK_CANCEL_OPTION){
-			if(selectedIdx == 0){
+		} else if (optionType == OK_CANCEL_OPTION) {
+			if (selectedIdx == 0) {
 				return true;
 			}
 		}
-		if(selectedIdx == 0){
+		if (selectedIdx == 0) {
 			return true;
 		}
 		return false;
 	}
-	
-	private boolean isNo(int selectedIdx){
-		if(optionType == YES_NO_CANCEL_OPTION){
-			if(selectedIdx == 1){
+
+	private boolean isNo(int selectedIdx) {
+		if (optionType == YES_NO_CANCEL_OPTION) {
+			if (selectedIdx == 1) {
 				return true;
 			}
-		}else if(optionType == YES_NO_OPTION){
-			if(selectedIdx == 1){
+		} else if (optionType == YES_NO_OPTION) {
+			if (selectedIdx == 1) {
 				return true;
 			}
-		}else if(optionType == OK_CANCEL_OPTION){
+		} else if (optionType == OK_CANCEL_OPTION) {
 		}
 		return false;
 	}
 
-	private void initDialog(final JDialog dialog, int style,
-			Component parentComponent) {
+	private void initDialog(final JDialog dialog, int style, Component parentComponent) {
 		Container rootPane = dialog.getContentPane();
 
 		JPanel contentPane = new JPanel(new BorderLayout());
@@ -690,76 +684,75 @@ public class JOptionPane extends JComponent implements Accessible {
 
 		{
 			rootPane.setLayout(new GridBagLayout());
-			rootPane.add(contentPane, new GridBagConstraints(0, 0, 1, 1, 1.0,
-					0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE,
-					insets, 0, 0));
+			rootPane.add(contentPane, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
+					GridBagConstraints.LINE_END, GridBagConstraints.NONE, insets, 0, 0));
 		}
 		{
 			JLabel iconLabel = null;
-			if(icon != null){
+			if (icon != null) {
 				iconLabel = new JLabel(icon);
-			}else{
-				if(messageType == ERROR_MESSAGE){
+			} else {
+				if (messageType == ERROR_MESSAGE) {
 					iconLabel = buildLabel(AndroidUIUtil.getSystemErrorDrawable());
-				}else if(messageType == INFORMATION_MESSAGE){
+				} else if (messageType == INFORMATION_MESSAGE) {
 					iconLabel = buildLabel(AndroidUIUtil.getSystemInformationDrawable());
-				}else if(messageType == WARNING_MESSAGE){
+				} else if (messageType == WARNING_MESSAGE) {
 					iconLabel = buildLabel(AndroidUIUtil.getSystemWarningDrawable());
-				}else if(messageType == QUESTION_MESSAGE){
+				} else if (messageType == QUESTION_MESSAGE) {
 					iconLabel = buildLabel(AndroidUIUtil.getSystemQuestionDrawable());
 				}
 			}
-			if(iconLabel != null){
+			if (iconLabel != null) {
 				contentPane.add(iconLabel, BorderLayout.WEST);
 			}
 		}
 		{
-			if(wantsInput){
-				if(options != null){
-					//List
+			if (wantsInput) {
+				if (options != null) {
+					// List
 					list = new JComboBox(options);
 					JPanel inputPanel = new JPanel(new GridLayout(2, 1));
 					inputPanel.add(new JLabel(message.toString()));
 					inputPanel.add(list);
-					
+
 					list.requestFocus();
-					
-					if(initialValue != null){
+
+					if (initialValue != null) {
 						list.setSelectedItem(initialValue);
 					}
 					contentPane.add(inputPanel, BorderLayout.CENTER);
-				}else{
-					//Input
+				} else {
+					// Input
 					JPanel inputPanel = new JPanel(new GridLayout(2, 1));
 					inputPanel.add(new JLabel(message.toString()));
 					inputField = new JTextField("", 22);
 					inputPanel.add(inputField);
-					
+
 					inputField.requestFocus();
-					
-					if(initialValue != null){
+
+					if (initialValue != null) {
 						inputField.setText(initialValue.toString());
 						inputField.selectAll();
 					}
 					contentPane.add(inputPanel, BorderLayout.CENTER);
 				}
-			}else{
-				if(message instanceof Component){
-					contentPane.add((Component)message, BorderLayout.CENTER);
-				}else{
+			} else {
+				if (message instanceof Component) {
+					contentPane.add((Component) message, BorderLayout.CENTER);
+				} else {
 					contentPane.add(new JLabel(message.toString()), BorderLayout.CENTER);
 				}
 			}
 		}
 		{
-			if(options == null){
+			if (options == null) {
 				useInnerOptions = true;
 				options = getOptionTypeButtonNumAdAPI(optionType);
 			}
 			int cols = options.length;
 			buttonPanel = new JPanel(new GridLayout(1, cols));
 			for (int i = cols - 1; i >= 0; i--) {
-				JButton btn = new JButton((String)options[i]);
+				JButton btn = new JButton((String) options[i]);
 				final int selectedIdx = i;
 				btn.addActionListener(new ActionListener() {
 					@Override
@@ -771,13 +764,12 @@ public class JOptionPane extends JComponent implements Accessible {
 			}
 			JPanel bottomPanel = new JPanel();
 			bottomPanel.setLayout(new GridBagLayout());
-			bottomPanel.add(buttonPanel, new GridBagConstraints(0, 0, 1, 1, 1.0,
-					0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE,
-					insets, 0, 0));
+			bottomPanel.add(buttonPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
+					GridBagConstraints.LINE_END, GridBagConstraints.NONE, insets, 0, 0));
 			contentPane.add(bottomPanel, BorderLayout.SOUTH);
 		}
-//		contentPane.setLayout(new BorderLayout());
-//		contentPane.add(this, BorderLayout.CENTER);
+		// contentPane.setLayout(new BorderLayout());
+		// contentPane.add(this, BorderLayout.CENTER);
 
 		dialog.setComponentOrientation(this.getComponentOrientation());
 
@@ -787,11 +779,14 @@ public class JOptionPane extends JComponent implements Accessible {
 
 		WindowAdapter adapter = new WindowAdapter() {
 			private boolean gotFocus = false;
+
 			public void windowClosing(WindowEvent we) {
 				dialog.dispose();
 			}
+
 			public void windowClosed(WindowEvent e) {
 			}
+
 			public void windowGainedFocus(WindowEvent we) {
 				if (!gotFocus) {
 					selectInitialValue();
@@ -801,72 +796,66 @@ public class JOptionPane extends JComponent implements Accessible {
 		};
 		dialog.addWindowListener(adapter);
 		dialog.addWindowFocusListener(adapter);
-//		dialog.addComponentListener(new ComponentAdapter() {
-//			public void componentShown(ComponentEvent ce) {
-//				setValue(JOptionPane.UNINITIALIZED_VALUE);
-//			}
-//		});
+		// dialog.addComponentListener(new ComponentAdapter() {
+		// public void componentShown(ComponentEvent ce) {
+		// setValue(JOptionPane.UNINITIALIZED_VALUE);
+		// }
+		// });
 	}
 
-	private JLabel buildLabel(Drawable draw) {//会根据屏幕尺寸自动调整比例
+	private JLabel buildLabel(Drawable draw) {// 会根据屏幕尺寸自动调整比例
 		return new JLabel(new ImageIcon(new BufferedImage(draw)));
 	}
 
-	public static void showInternalMessageDialog(Component parentComponent,
-			Object message) {
+	public static void showInternalMessageDialog(Component parentComponent, Object message) {
 		showInternalMessageDialog(parentComponent, message,
-				UIManager.getString("OptionPane.messageDialogTitle",
-						parentComponent), INFORMATION_MESSAGE);
+				UIManager.getString("OptionPane.messageDialogTitle", parentComponent),
+				INFORMATION_MESSAGE);
 	}
 
-	public static void showInternalMessageDialog(Component parentComponent,
-			Object message, String title, int messageType) {
-		showInternalMessageDialog(parentComponent, message, title, messageType,
+	public static void showInternalMessageDialog(Component parentComponent, Object message,
+			String title, int messageType) {
+		showInternalMessageDialog(parentComponent, message, title, messageType, null);
+	}
+
+	public static void showInternalMessageDialog(Component parentComponent, Object message,
+			String title, int messageType, Icon icon) {
+		showInternalOptionDialog(parentComponent, message, title, DEFAULT_OPTION, messageType, icon,
+				null, null);
+	}
+
+	public static int showInternalConfirmDialog(Component parentComponent, Object message) {
+		return showInternalConfirmDialog(parentComponent, message,
+				UIManager.getString("OptionPane.titleText"), YES_NO_CANCEL_OPTION);
+	}
+
+	public static int showInternalConfirmDialog(Component parentComponent, Object message,
+			String title, int optionType) {
+		return showInternalConfirmDialog(parentComponent, message, title, optionType,
+				QUESTION_MESSAGE);
+	}
+
+	public static int showInternalConfirmDialog(Component parentComponent, Object message,
+			String title, int optionType, int messageType) {
+		return showInternalConfirmDialog(parentComponent, message, title, optionType, messageType,
 				null);
 	}
 
-	public static void showInternalMessageDialog(Component parentComponent,
-			Object message, String title, int messageType, Icon icon) {
-		showInternalOptionDialog(parentComponent, message, title,
-				DEFAULT_OPTION, messageType, icon, null, null);
+	public static int showInternalConfirmDialog(Component parentComponent, Object message,
+			String title, int optionType, int messageType, Icon icon) {
+		return showInternalOptionDialog(parentComponent, message, title, optionType, messageType,
+				icon, null, null);
 	}
 
-	public static int showInternalConfirmDialog(Component parentComponent,
-			Object message) {
-		return showInternalConfirmDialog(parentComponent, message,
-				UIManager.getString("OptionPane.titleText"),
-				YES_NO_CANCEL_OPTION);
-	}
-
-	public static int showInternalConfirmDialog(Component parentComponent,
-			Object message, String title, int optionType) {
-		return showInternalConfirmDialog(parentComponent, message, title,
-				optionType, QUESTION_MESSAGE);
-	}
-
-	public static int showInternalConfirmDialog(Component parentComponent,
-			Object message, String title, int optionType, int messageType) {
-		return showInternalConfirmDialog(parentComponent, message, title,
-				optionType, messageType, null);
-	}
-
-	public static int showInternalConfirmDialog(Component parentComponent,
-			Object message, String title, int optionType, int messageType,
-			Icon icon) {
-		return showInternalOptionDialog(parentComponent, message, title,
-				optionType, messageType, icon, null, null);
-	}
-
-	public static int showInternalOptionDialog(Component parentComponent,
-			Object message, String title, int optionType, int messageType,
-			Icon icon, Object[] options, Object initialValue) {
-		JOptionPane pane = new JOptionPane(message, messageType, optionType,
-				icon, options, initialValue);
+	public static int showInternalOptionDialog(Component parentComponent, Object message,
+			String title, int optionType, int messageType, Icon icon, Object[] options,
+			Object initialValue) {
+		JOptionPane pane = new JOptionPane(message, messageType, optionType, icon, options,
+				initialValue);
 
 		pane.setInitialValue(initialValue);
 
-		JInternalFrame dialog = pane
-				.createInternalFrame(parentComponent, title);
+		JInternalFrame dialog = pane.createInternalFrame(parentComponent, title);
 		dialog.setVisible(true);
 
 		Object selectedValue = pane.getValue();
@@ -888,31 +877,29 @@ public class JOptionPane extends JComponent implements Accessible {
 		return CLOSED_OPTION;
 	}
 
-	public static String showInternalInputDialog(Component parentComponent,
-			Object message) {
+	public static String showInternalInputDialog(Component parentComponent, Object message) {
 		return showInternalInputDialog(parentComponent, message,
-				UIManager.getString("OptionPane.inputDialogTitle",
-						parentComponent), QUESTION_MESSAGE);
+				UIManager.getString("OptionPane.inputDialogTitle", parentComponent),
+				QUESTION_MESSAGE);
 	}
 
-	public static String showInternalInputDialog(Component parentComponent,
-			Object message, String title, int messageType) {
-		return (String) showInternalInputDialog(parentComponent, message,
-				title, messageType, null, null, null);
+	public static String showInternalInputDialog(Component parentComponent, Object message,
+			String title, int messageType) {
+		return (String) showInternalInputDialog(parentComponent, message, title, messageType, null,
+				null, null);
 	}
 
-	public static Object showInternalInputDialog(Component parentComponent,
-			Object message, String title, int messageType, Icon icon,
-			Object[] selectionValues, Object initialSelectionValue) {
-		JOptionPane pane = new JOptionPane(message, messageType,
-				OK_CANCEL_OPTION, icon, null, null);
+	public static Object showInternalInputDialog(Component parentComponent, Object message,
+			String title, int messageType, Icon icon, Object[] selectionValues,
+			Object initialSelectionValue) {
+		JOptionPane pane = new JOptionPane(message, messageType, OK_CANCEL_OPTION, icon, null,
+				null);
 
 		pane.setWantsInput(true);
 		pane.setSelectionValues(selectionValues);
 		pane.setInitialSelectionValue(initialSelectionValue);
 
-		JInternalFrame dialog = pane
-				.createInternalFrame(parentComponent, title);
+		JInternalFrame dialog = pane.createInternalFrame(parentComponent, title);
 
 		dialog.setVisible(true);
 
@@ -924,25 +911,20 @@ public class JOptionPane extends JComponent implements Accessible {
 		return value;
 	}
 
-	public JInternalFrame createInternalFrame(Component parentComponent,
-			String title) {
-		Container parent = JOptionPane
-				.getDesktopPaneForComponent(parentComponent);
+	public JInternalFrame createInternalFrame(Component parentComponent, String title) {
+		Container parent = JOptionPane.getDesktopPaneForComponent(parentComponent);
 
 		if (parent == null
-				&& (parentComponent == null || (parent = parentComponent
-						.getParent()) == null)) {
-			throw new RuntimeException("JOptionPane: parentComponent does "
-					+ "not have a valid parent");
+				&& (parentComponent == null || (parent = parentComponent.getParent()) == null)) {
+			throw new RuntimeException(
+					"JOptionPane: parentComponent does " + "not have a valid parent");
 		}
 
-		final JInternalFrame iFrame = new JInternalFrame(title, false, true,
-				false, false);
+		final JInternalFrame iFrame = new JInternalFrame(title, false, true, false, false);
 		return iFrame;
 	}
 
-	public static Frame getFrameForComponent(Component parentComponent)
-			throws HeadlessException {
+	public static Frame getFrameForComponent(Component parentComponent) throws HeadlessException {
 		if (parentComponent == null)
 			return getRootFrame();
 		if (parentComponent instanceof Frame)
@@ -951,9 +933,9 @@ public class JOptionPane extends JComponent implements Accessible {
 	}
 
 	static Window getWindowForComponent(Component parentComponent) throws HeadlessException {
-		while(parentComponent != null){
-			if(parentComponent instanceof Window){
-				return (Window)parentComponent;
+		while (parentComponent != null) {
+			if (parentComponent instanceof Window) {
+				return (Window) parentComponent;
 			}
 			parentComponent = parentComponent.getParent();
 		}
@@ -990,18 +972,17 @@ public class JOptionPane extends JComponent implements Accessible {
 		this(message, messageType, optionType, null);
 	}
 
-	public JOptionPane(Object message, int messageType, int optionType,
-			Icon icon) {
+	public JOptionPane(Object message, int messageType, int optionType, Icon icon) {
 		this(message, messageType, optionType, icon, null);
 	}
 
-	public JOptionPane(Object message, int messageType, int optionType,
-			Icon icon, Object[] options) {
+	public JOptionPane(Object message, int messageType, int optionType, Icon icon,
+			Object[] options) {
 		this(message, messageType, optionType, icon, options, null);
 	}
 
-	public JOptionPane(Object message, int messageType, int optionType,
-			Icon icon, Object[] options, Object initialValue) {
+	public JOptionPane(Object message, int messageType, int optionType, Icon icon, Object[] options,
+			Object initialValue) {
 		this.message = message;
 		this.options = options;
 		this.initialValue = initialValue;
@@ -1010,7 +991,7 @@ public class JOptionPane extends JComponent implements Accessible {
 		setOptionType(optionType);
 		value = UNINITIALIZED_VALUE;
 		inputValue = UNINITIALIZED_VALUE;
-//		updateUI();
+		// updateUI();
 	}
 
 	public void setUI(OptionPaneUI ui) {
@@ -1077,12 +1058,11 @@ public class JOptionPane extends JComponent implements Accessible {
 	}
 
 	public void setMessageType(int newType) {
-		if (newType != ERROR_MESSAGE && newType != INFORMATION_MESSAGE
-				&& newType != WARNING_MESSAGE && newType != QUESTION_MESSAGE
-				&& newType != PLAIN_MESSAGE)
+		if (newType != ERROR_MESSAGE && newType != INFORMATION_MESSAGE && newType != WARNING_MESSAGE
+				&& newType != QUESTION_MESSAGE && newType != PLAIN_MESSAGE)
 			throw new RuntimeException(
-					"JOptionPane: type must be one of ERROR_MESSAGE, INFORMATION_MESSAGE, " +
-					"WARNING_MESSAGE, QUESTION_MESSAGE or PLAIN_MESSAGE");
+					"JOptionPane: type must be one of ERROR_MESSAGE, INFORMATION_MESSAGE, "
+							+ "WARNING_MESSAGE, QUESTION_MESSAGE or PLAIN_MESSAGE");
 
 		messageType = newType;
 	}
@@ -1092,12 +1072,11 @@ public class JOptionPane extends JComponent implements Accessible {
 	}
 
 	public void setOptionType(int newType) {
-		if (newType != DEFAULT_OPTION && newType != YES_NO_OPTION
-				&& newType != YES_NO_CANCEL_OPTION
+		if (newType != DEFAULT_OPTION && newType != YES_NO_OPTION && newType != YES_NO_CANCEL_OPTION
 				&& newType != OK_CANCEL_OPTION)
 			throw new RuntimeException(
-					"JOptionPane: option type must be one of DEFAULT_OPTION, YES_NO_OPTION, " +
-					"YES_NO_CANCEL_OPTION or OK_CANCEL_OPTION");
+					"JOptionPane: option type must be one of DEFAULT_OPTION, YES_NO_OPTION, "
+							+ "YES_NO_CANCEL_OPTION or OK_CANCEL_OPTION");
 
 		optionType = newType;
 	}
@@ -1151,25 +1130,26 @@ public class JOptionPane extends JComponent implements Accessible {
 	 * 本逻辑option,input均调用
 	 */
 	public void selectInitialValue() {
-		if(wantsInput == false){
-			//OptionPane
-			if(useInnerOptions){
-				JButton lastBtn = (JButton)buttonPanel.getComponent(buttonPanel.getComponentCount() - 1);
+		if (wantsInput == false) {
+			// OptionPane
+			if (useInnerOptions) {
+				JButton lastBtn = (JButton) buttonPanel
+						.getComponent(buttonPanel.getComponentCount() - 1);
 				lastBtn.requestFocus();
-			}else{
-				if(initialValue != null){
+			} else {
+				if (initialValue != null) {
 					int size = buttonPanel.getComponentCount();
 					for (int i = 0; i < size; i++) {
-						JButton btn = (JButton)buttonPanel.getComponent(i);
-						if(btn.getText().equals(initialValue)){
+						JButton btn = (JButton) buttonPanel.getComponent(i);
+						if (btn.getText().equals(initialValue)) {
 							btn.requestFocus();
 							return;
 						}
 					}
 				}
 			}
-		}else{//want Inputs
-			
+		} else {// want Inputs
+
 		}
 	}
 
@@ -1192,16 +1172,14 @@ public class JOptionPane extends JComponent implements Accessible {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 	}
 
 	protected String paramString() {
 		return "";
 	}
 
-	private static class ModalPrivilegedAction implements
-			PrivilegedAction<Method> {
+	private static class ModalPrivilegedAction implements PrivilegedAction<Method> {
 		private Class<?> clazz;
 		private String methodName;
 

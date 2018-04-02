@@ -25,26 +25,27 @@
 package java.awt.event;
 
 /**
- * An abstract adapter class for receiving window events.
- * The methods in this class are empty. This class exists as
- * convenience for creating listener objects.
+ * An abstract adapter class for receiving window events. The methods in this
+ * class are empty. This class exists as convenience for creating listener
+ * objects.
  * <P>
- * Extend this class to create a <code>WindowEvent</code> listener
- * and override the methods for the events of interest. (If you implement the
- * <code>WindowListener</code> interface, you have to define all of
- * the methods in it. This abstract class defines null methods for them
- * all, so you can only have to define methods for events you care about.)
+ * Extend this class to create a <code>WindowEvent</code> listener and override
+ * the methods for the events of interest. (If you implement the
+ * <code>WindowListener</code> interface, you have to define all of the methods
+ * in it. This abstract class defines null methods for them all, so you can only
+ * have to define methods for events you care about.)
  * <P>
- * Create a listener object using the extended class and then register it with
- * a Window using the window's <code>addWindowListener</code>
- * method. When the window's status changes by virtue of being opened,
- * closed, activated or deactivated, iconified or deiconified,
- * the relevant method in the listener
+ * Create a listener object using the extended class and then register it with a
+ * Window using the window's <code>addWindowListener</code> method. When the
+ * window's status changes by virtue of being opened, closed, activated or
+ * deactivated, iconified or deiconified, the relevant method in the listener
  * object is invoked, and the <code>WindowEvent</code> is passed to it.
  *
  * @see WindowEvent
  * @see WindowListener
- * @see <a href="http://java.sun.com/docs/books/tutorial/post1.0/ui/windowlistener.html">Tutorial: Writing a Window Listener</a>
+ * @see <a href=
+ *      "http://java.sun.com/docs/books/tutorial/post1.0/ui/windowlistener.html">Tutorial:
+ *      Writing a Window Listener</a>
  *
  * @author Carl Quinn
  * @author Amy Fowler
@@ -52,25 +53,34 @@ package java.awt.event;
  * @since 1.1
  */
 public abstract class WindowAdapter
-implements WindowListener, WindowStateListener, WindowFocusListener
-{
-public void windowOpened(WindowEvent e) {}
+		implements WindowListener, WindowStateListener, WindowFocusListener {
+	public void windowOpened(WindowEvent e) {
+	}
 
-public void windowClosing(WindowEvent e) {}
+	public void windowClosing(WindowEvent e) {
+	}
 
-public void windowClosed(WindowEvent e) {}
+	public void windowClosed(WindowEvent e) {
+	}
 
-public void windowIconified(WindowEvent e) {}
+	public void windowIconified(WindowEvent e) {
+	}
 
-public void windowDeiconified(WindowEvent e) {}
+	public void windowDeiconified(WindowEvent e) {
+	}
 
-public void windowActivated(WindowEvent e) {}
+	public void windowActivated(WindowEvent e) {
+	}
 
-public void windowDeactivated(WindowEvent e) {}
+	public void windowDeactivated(WindowEvent e) {
+	}
 
-public void windowStateChanged(WindowEvent e) {}
+	public void windowStateChanged(WindowEvent e) {
+	}
 
-public void windowGainedFocus(WindowEvent e) {}
+	public void windowGainedFocus(WindowEvent e) {
+	}
 
-public void windowLostFocus(WindowEvent e) {}
+	public void windowLostFocus(WindowEvent e) {
+	}
 }

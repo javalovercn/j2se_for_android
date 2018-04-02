@@ -25,15 +25,14 @@
 package javax.accessibility;
 
 /**
- * Interface Accessible is the main interface for the accessibility package.
- * All components that support
- * the accessibility package must implement this interface.
- * It contains a single method, {@link #getAccessibleContext}, which
+ * Interface Accessible is the main interface for the accessibility package. All
+ * components that support the accessibility package must implement this
+ * interface. It contains a single method, {@link #getAccessibleContext}, which
  * returns an instance of the class {@link AccessibleContext}.
  *
- * @author      Peter Korn
- * @author      Hans Muller
- * @author      Willie Walker
+ * @author Peter Korn
+ * @author Hans Muller
+ * @author Willie Walker
  */
 public interface Accessible {
 	public AccessibleContext getAccessibleContext();

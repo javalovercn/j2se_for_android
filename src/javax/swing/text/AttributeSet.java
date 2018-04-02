@@ -27,57 +27,55 @@ package javax.swing.text;
 import java.util.Enumeration;
 
 /**
- * A collection of unique attributes.  This is a read-only,
- * immutable interface.  An attribute is basically a key and
- * a value assigned to the key.  The collection may represent
- * something like a style run, a logical style, etc.  These
- * are generally used to describe features that will contribute
- * to some graphical representation such as a font.  The
- * set of possible keys is unbounded and can be anything.
- * Typically View implementations will respond to attribute
- * definitions and render something to represent the attributes.
+ * A collection of unique attributes. This is a read-only, immutable interface.
+ * An attribute is basically a key and a value assigned to the key. The
+ * collection may represent something like a style run, a logical style, etc.
+ * These are generally used to describe features that will contribute to some
+ * graphical representation such as a font. The set of possible keys is
+ * unbounded and can be anything. Typically View implementations will respond to
+ * attribute definitions and render something to represent the attributes.
  * <p>
- * Attributes can potentially resolve in a hierarchy.  If a
- * key doesn't resolve locally, and a resolving parent
- * exists, the key will be resolved through the parent.
+ * Attributes can potentially resolve in a hierarchy. If a key doesn't resolve
+ * locally, and a resolving parent exists, the key will be resolved through the
+ * parent.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  * @see MutableAttributeSet
  */
 public interface AttributeSet {
 
-    public interface FontAttribute {
-    }
+	public interface FontAttribute {
+	}
 
-    public interface ColorAttribute {
-    }
+	public interface ColorAttribute {
+	}
 
-    public interface CharacterAttribute {
-    }
+	public interface CharacterAttribute {
+	}
 
-    public interface ParagraphAttribute {
-    }
+	public interface ParagraphAttribute {
+	}
 
-    public int getAttributeCount();
+	public int getAttributeCount();
 
-    public boolean isDefined(Object attrName);
+	public boolean isDefined(Object attrName);
 
-    public boolean isEqual(AttributeSet attr);
+	public boolean isEqual(AttributeSet attr);
 
-    public AttributeSet copyAttributes();
+	public AttributeSet copyAttributes();
 
-    public Object getAttribute(Object key);
+	public Object getAttribute(Object key);
 
-    public Enumeration<?> getAttributeNames();
+	public Enumeration<?> getAttributeNames();
 
-    public boolean containsAttribute(Object name, Object value);
+	public boolean containsAttribute(Object name, Object value);
 
-    public boolean containsAttributes(AttributeSet attributes);
+	public boolean containsAttributes(AttributeSet attributes);
 
-    public AttributeSet getResolveParent();
+	public AttributeSet getResolveParent();
 
-    public static final Object NameAttribute = StyleConstants.NameAttribute;
+	public static final Object NameAttribute = StyleConstants.NameAttribute;
 
-    public static final Object ResolveAttribute = StyleConstants.ResolveAttribute;
+	public static final Object ResolveAttribute = StyleConstants.ResolveAttribute;
 
 }

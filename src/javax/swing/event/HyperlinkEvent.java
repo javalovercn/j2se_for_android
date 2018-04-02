@@ -31,90 +31,87 @@ import java.util.EventObject;
 import javax.swing.text.Element;
 
 /**
- * HyperlinkEvent is used to notify interested parties that
- * something has happened with respect to a hypertext link.
+ * HyperlinkEvent is used to notify interested parties that something has
+ * happened with respect to a hypertext link.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public class HyperlinkEvent extends EventObject {
 
-    public HyperlinkEvent(Object source, EventType type, URL u) {
-        this(source, type, u, null);
-    }
+	public HyperlinkEvent(Object source, EventType type, URL u) {
+		this(source, type, u, null);
+	}
 
-    public HyperlinkEvent(Object source, EventType type, URL u, String desc) {
-        this(source, type, u, desc, null);
-    }
+	public HyperlinkEvent(Object source, EventType type, URL u, String desc) {
+		this(source, type, u, desc, null);
+	}
 
-    public HyperlinkEvent(Object source, EventType type, URL u, String desc,
-                          Element sourceElement) {
-        super(source);
-        this.type = type;
-        this.u = u;
-        this.desc = desc;
-        this.sourceElement = sourceElement;
-    }
+	public HyperlinkEvent(Object source, EventType type, URL u, String desc,
+			Element sourceElement) {
+		super(source);
+		this.type = type;
+		this.u = u;
+		this.desc = desc;
+		this.sourceElement = sourceElement;
+	}
 
-    public HyperlinkEvent(Object source, EventType type, URL u, String desc,
-                          Element sourceElement, InputEvent inputEvent) {
-        super(source);
-        this.type = type;
-        this.u = u;
-        this.desc = desc;
-        this.sourceElement = sourceElement;
-        this.inputEvent = inputEvent;
-    }
+	public HyperlinkEvent(Object source, EventType type, URL u, String desc, Element sourceElement,
+			InputEvent inputEvent) {
+		super(source);
+		this.type = type;
+		this.u = u;
+		this.desc = desc;
+		this.sourceElement = sourceElement;
+		this.inputEvent = inputEvent;
+	}
 
-    public EventType getEventType() {
-        return type;
-    }
+	public EventType getEventType() {
+		return type;
+	}
 
-    public String getDescription() {
-        return desc;
-    }
+	public String getDescription() {
+		return desc;
+	}
 
-    public URL getURL() {
-        return u;
-    }
+	public URL getURL() {
+		return u;
+	}
 
-    public Element getSourceElement() {
-        return sourceElement;
-    }
+	public Element getSourceElement() {
+		return sourceElement;
+	}
 
-    public InputEvent getInputEvent() {
-        return inputEvent;
-    }
+	public InputEvent getInputEvent() {
+		return inputEvent;
+	}
 
-    private EventType type;
-    private URL u;
-    private String desc;
-    private Element sourceElement;
-    private InputEvent inputEvent;
+	private EventType type;
+	private URL u;
+	private String desc;
+	private Element sourceElement;
+	private InputEvent inputEvent;
 
+	public static final class EventType {
 
-    public static final class EventType {
+		private EventType(String s) {
+			typeString = s;
+		}
 
-        private EventType(String s) {
-            typeString = s;
-        }
+		public static final EventType ENTERED = new EventType("ENTERED");
+		public static final EventType EXITED = new EventType("EXITED");
+		public static final EventType ACTIVATED = new EventType("ACTIVATED");
 
-        public static final EventType ENTERED = new EventType("ENTERED");
-        public static final EventType EXITED = new EventType("EXITED");
-        public static final EventType ACTIVATED = new EventType("ACTIVATED");
+		public String toString() {
+			return typeString;
+		}
 
-        public String toString() {
-            return typeString;
-        }
-
-        private String typeString;
-    }
+		private String typeString;
+	}
 }

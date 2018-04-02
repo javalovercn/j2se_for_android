@@ -33,68 +33,67 @@ import java.util.Vector;
  * @author Ray Ryan
  */
 public class CompoundEdit extends AbstractUndoableEdit {
-    boolean inProgress;
+	boolean inProgress;
 
-    protected Vector<UndoableEdit> edits;
+	protected Vector<UndoableEdit> edits;
 
-    public CompoundEdit() {
-        super();
-        inProgress = true;
-        edits = new Vector<UndoableEdit>();
-    }
+	public CompoundEdit() {
+		super();
+		inProgress = true;
+		edits = new Vector<UndoableEdit>();
+	}
 
-    public void undo() throws CannotUndoException {
-        super.undo();
-    }
+	public void undo() throws CannotUndoException {
+		super.undo();
+	}
 
-    public void redo() throws CannotRedoException {
-        super.redo();
-    }
+	public void redo() throws CannotRedoException {
+		super.redo();
+	}
 
-    protected UndoableEdit lastEdit() {
-            return null;
-    }
+	protected UndoableEdit lastEdit() {
+		return null;
+	}
 
-    public void die() {
-    }
+	public void die() {
+	}
 
-    public boolean addEdit(UndoableEdit anEdit) {
-            return false;
-    }
+	public boolean addEdit(UndoableEdit anEdit) {
+		return false;
+	}
 
-    public void end() {
-    }
+	public void end() {
+	}
 
-    public boolean canUndo() {
-        return false;
-    }
+	public boolean canUndo() {
+		return false;
+	}
 
-    public boolean canRedo() {
-        return false;
-    }
+	public boolean canRedo() {
+		return false;
+	}
 
-    public boolean isInProgress() {
-        return inProgress;
-    }
+	public boolean isInProgress() {
+		return inProgress;
+	}
 
-    public boolean  isSignificant() {
-        return false;
-    }
+	public boolean isSignificant() {
+		return false;
+	}
 
-    public String getPresentationName() {
-            return null;
-    }
+	public String getPresentationName() {
+		return null;
+	}
 
-    public String getUndoPresentationName() {
-    	return null;
-    }
+	public String getUndoPresentationName() {
+		return null;
+	}
 
-    public String getRedoPresentationName() {
-    	return null;
-    }
+	public String getRedoPresentationName() {
+		return null;
+	}
 
-    public String toString()
-    {
-        return "";
-    }
+	public String toString() {
+		return "";
+	}
 }

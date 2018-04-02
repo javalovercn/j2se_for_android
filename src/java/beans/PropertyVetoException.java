@@ -25,8 +25,8 @@
 package java.beans;
 
 /**
- * A PropertyVetoException is thrown when a proposed change to a
- * property represents an unacceptable value.
+ * A PropertyVetoException is thrown when a proposed change to a property
+ * represents an unacceptable value.
  */
 
 public class PropertyVetoException extends Exception {

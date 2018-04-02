@@ -28,37 +28,36 @@ import javax.swing.Action;
 import javax.swing.KeyStroke;
 
 /**
- * A collection of bindings of KeyStrokes to actions.  The
- * bindings are basically name-value pairs that potentially
- * resolve in a hierarchy.
+ * A collection of bindings of KeyStrokes to actions. The bindings are basically
+ * name-value pairs that potentially resolve in a hierarchy.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public interface Keymap {
-    public String getName();
+	public String getName();
 
-    public Action getDefaultAction();
+	public Action getDefaultAction();
 
-    public void setDefaultAction(Action a);
+	public void setDefaultAction(Action a);
 
-    public Action getAction(KeyStroke key);
+	public Action getAction(KeyStroke key);
 
-    public KeyStroke[] getBoundKeyStrokes();
+	public KeyStroke[] getBoundKeyStrokes();
 
-    public Action[] getBoundActions();
+	public Action[] getBoundActions();
 
-    public KeyStroke[] getKeyStrokesForAction(Action a);
+	public KeyStroke[] getKeyStrokesForAction(Action a);
 
-    public boolean isLocallyDefined(KeyStroke key);
+	public boolean isLocallyDefined(KeyStroke key);
 
-    public void addActionForKeyStroke(KeyStroke key, Action a);
+	public void addActionForKeyStroke(KeyStroke key, Action a);
 
-    public void removeKeyStrokeBinding(KeyStroke keys);
+	public void removeKeyStrokeBinding(KeyStroke keys);
 
-    public void removeBindings();
+	public void removeBindings();
 
-    public Keymap getResolveParent();
+	public Keymap getResolveParent();
 
-    public void setResolveParent(Keymap parent);
+	public void setResolveParent(Keymap parent);
 
 }

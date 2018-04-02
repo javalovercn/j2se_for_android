@@ -9,7 +9,7 @@ public abstract class BaseLayoutManager2 implements LayoutManager2 {
 	protected final ViewRelation viewRelation = new ViewRelation();
 	protected boolean isLayout = false;
 	protected Container parent;
-	
+
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
 		isModified = true;

@@ -47,55 +47,51 @@ import android.text.InputType;
 import android.view.ViewGroup;
 
 /**
- * A <code>JTextArea</code> is a multi-line area that displays plain text.
- * It is intended to be a lightweight component that provides source
- * compatibility with the <code>java.awt.TextArea</code> class where it can
- * reasonably do so.
+ * A <code>JTextArea</code> is a multi-line area that displays plain text. It is
+ * intended to be a lightweight component that provides source compatibility
+ * with the <code>java.awt.TextArea</code> class where it can reasonably do so.
  * You can find information and examples of using all the text components in
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/text.html">Using Text Components</a>,
- * a section in <em>The Java Tutorial.</em>
+ * <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/text.html">Using
+ * Text Components</a>, a section in <em>The Java Tutorial.</em>
  *
  * <p>
  * This component has capabilities not found in the
- * <code>java.awt.TextArea</code> class.  The superclass should be
- * consulted for additional capabilities.
- * Alternative multi-line text classes with
- * more capabilities are <code>JTextPane</code> and <code>JEditorPane</code>.
+ * <code>java.awt.TextArea</code> class. The superclass should be consulted for
+ * additional capabilities. Alternative multi-line text classes with more
+ * capabilities are <code>JTextPane</code> and <code>JEditorPane</code>.
  * <p>
  * The <code>java.awt.TextArea</code> internally handles scrolling.
- * <code>JTextArea</code> is different in that it doesn't manage scrolling,
- * but implements the swing <code>Scrollable</code> interface.  This allows it
- * to be placed inside a <code>JScrollPane</code> if scrolling
- * behavior is desired, and used directly if scrolling is not desired.
+ * <code>JTextArea</code> is different in that it doesn't manage scrolling, but
+ * implements the swing <code>Scrollable</code> interface. This allows it to be
+ * placed inside a <code>JScrollPane</code> if scrolling behavior is desired,
+ * and used directly if scrolling is not desired.
  * <p>
- * The <code>java.awt.TextArea</code> has the ability to do line wrapping.
- * This was controlled by the horizontal scrolling policy.  Since
- * scrolling is not done by <code>JTextArea</code> directly, backward
- * compatibility must be provided another way.  <code>JTextArea</code> has
- * a bound property for line wrapping that controls whether or
- * not it will wrap lines.  By default, the line wrapping property
- * is set to false (not wrapped).
+ * The <code>java.awt.TextArea</code> has the ability to do line wrapping. This
+ * was controlled by the horizontal scrolling policy. Since scrolling is not
+ * done by <code>JTextArea</code> directly, backward compatibility must be
+ * provided another way. <code>JTextArea</code> has a bound property for line
+ * wrapping that controls whether or not it will wrap lines. By default, the
+ * line wrapping property is set to false (not wrapped).
  * <p>
- * <code>java.awt.TextArea</code> has two properties <code>rows</code>
- * and <code>columns</code> that are used to determine the preferred size.
- * <code>JTextArea</code> uses these properties to indicate the
- * preferred size of the viewport when placed inside a <code>JScrollPane</code>
- * to match the functionality provided by <code>java.awt.TextArea</code>.
- * <code>JTextArea</code> has a preferred size of what is needed to
- * display all of the text, so that it functions properly inside of
- * a <code>JScrollPane</code>.  If the value for <code>rows</code>
- * or <code>columns</code> is equal to zero,
- * the preferred size along that axis is used for
- * the viewport preferred size along the same axis.
+ * <code>java.awt.TextArea</code> has two properties <code>rows</code> and
+ * <code>columns</code> that are used to determine the preferred size.
+ * <code>JTextArea</code> uses these properties to indicate the preferred size
+ * of the viewport when placed inside a <code>JScrollPane</code> to match the
+ * functionality provided by <code>java.awt.TextArea</code>.
+ * <code>JTextArea</code> has a preferred size of what is needed to display all
+ * of the text, so that it functions properly inside of a
+ * <code>JScrollPane</code>. If the value for <code>rows</code> or
+ * <code>columns</code> is equal to zero, the preferred size along that axis is
+ * used for the viewport preferred size along the same axis.
  * <p>
- * The <code>java.awt.TextArea</code> could be monitored for changes by adding
- * a <code>TextListener</code> for <code>TextEvent</code>s.
- * In the <code>JTextComponent</code> based
- * components, changes are broadcasted from the model via a
- * <code>DocumentEvent</code> to <code>DocumentListeners</code>.
- * The <code>DocumentEvent</code> gives
- * the location of the change and the kind of change if desired.
- * The code fragment might look something like:
+ * The <code>java.awt.TextArea</code> could be monitored for changes by adding a
+ * <code>TextListener</code> for <code>TextEvent</code>s. In the
+ * <code>JTextComponent</code> based components, changes are broadcasted from
+ * the model via a <code>DocumentEvent</code> to <code>DocumentListeners</code>.
+ * The <code>DocumentEvent</code> gives the location of the change and the kind
+ * of change if desired. The code fragment might look something like:
+ * 
  * <pre>
  *    DocumentListener myListener = ??;
  *    JTextArea myArea = ??;
@@ -104,31 +100,25 @@ import android.view.ViewGroup;
  * <p>
  * <dl>
  * <dt><b><font size=+1>Newlines</font></b>
- * <dd>
- * For a discussion on how newlines are handled, see
+ * <dd>For a discussion on how newlines are handled, see
  * <a href="text/DefaultEditorKit.html">DefaultEditorKit</a>.
  * </dl>
  *
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A multi-line area that displays plain text.
+ * @beaninfo attribute: isContainer false description: A multi-line area that
+ *           displays plain text.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  * @see JTextPane
  * @see JEditorPane
  */
@@ -167,30 +157,30 @@ public class JTextArea extends JTextComponent {
 		setRows(rows);
 		setColumns(columns);
 		editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-		
-//		if (doc == null) {
-//			doc = createDefaultModel();
-//		}
-//		setDocument(doc);
+
+		// if (doc == null) {
+		// doc = createDefaultModel();
+		// }
+		// setDocument(doc);
 		if (text != null) {
 			setText(text);
 			select(0, 0);
 		}
 	}
-	
+
 	protected int getColumnWidth() {
-        if (columnWidth == 0) {
-            FontMetrics metrics = getFontMetrics(getFont());
-            columnWidth = metrics.charWidth('m');
-        }
-        return columnWidth;
+		if (columnWidth == 0) {
+			FontMetrics metrics = getFontMetrics(getFont());
+			columnWidth = metrics.charWidth('m');
+		}
+		return columnWidth;
 	}
-	
-	private int getCharWidth(){
+
+	private int getCharWidth() {
 		FontMetrics metrics = getFontMetrics(getFont());
 		return metrics.charWidth('m');
 	}
-	
+
 	public String getUIClassID() {
 		return uiClassID;
 	}
@@ -234,8 +224,7 @@ public class JTextArea extends JTextComponent {
 		if (offset < 0) {
 			throw new BadLocationException("Can't translate offset to line", -1);
 		} else if (offset > doc.getLength()) {
-			throw new BadLocationException("Can't translate offset to line",
-					doc.getLength() + 1);
+			throw new BadLocationException("Can't translate offset to line", doc.getLength() + 1);
 		} else {
 			Element map = getDocument().getDefaultRootElement();
 			return map.getElementIndex(offset);
@@ -252,8 +241,7 @@ public class JTextArea extends JTextComponent {
 		if (line < 0) {
 			throw new BadLocationException("Negative line", -1);
 		} else if (line >= lineCount) {
-			throw new BadLocationException("No such line", getDocument()
-					.getLength() + 1);
+			throw new BadLocationException("No such line", getDocument().getLength() + 1);
 		} else {
 			Element map = getDocument().getDefaultRootElement();
 			Element lineElem = map.getElement(line);
@@ -277,8 +265,7 @@ public class JTextArea extends JTextComponent {
 		if (line < 0) {
 			throw new BadLocationException("Negative line", -1);
 		} else if (line >= lineCount) {
-			throw new BadLocationException("No such line", getDocument()
-					.getLength() + 1);
+			throw new BadLocationException("No such line", getDocument().getLength() + 1);
 		} else {
 			Element map = getDocument().getDefaultRootElement();
 			Element lineElem = map.getElement(line);
@@ -348,8 +335,7 @@ public class JTextArea extends JTextComponent {
 		if (doc != null) {
 			try {
 				if (doc instanceof AbstractDocument) {
-					((AbstractDocument) doc).replace(start, end - start, str,
-							null);
+					((AbstractDocument) doc).replace(start, end - start, str, null);
 				} else {
 					doc.remove(start, end - start);
 					doc.insertString(start, str, null);
@@ -387,19 +373,19 @@ public class JTextArea extends JTextComponent {
 		}
 		if (rows != oldVal) {
 			this.rows = rows;
-			if(rows == 0){
+			if (rows == 0) {
 				editText.getLayoutParams().height = ViewGroup.LayoutParams.FILL_PARENT;
-			}else{
+			} else {
 				editText.setMinLines(rows);
-//				editText.setMinimumHeight(getFont().getSize() * rows);
+				// editText.setMinimumHeight(getFont().getSize() * rows);
 			}
 			invalidate();
 		}
 	}
-	
+
 	public void invalidate() {
-		if(editText == null){
-		}else{
+		if (editText == null) {
+		} else {
 			editText.invalidate();
 		}
 	}
@@ -445,10 +431,10 @@ public class JTextArea extends JTextComponent {
 		}
 		if (columns != oldVal) {
 			this.columns = columns;
-			
-			if(rows == 0){
-				editText.getLayoutParams().width =  ViewGroup.LayoutParams.FILL_PARENT;
-			}else{
+
+			if (rows == 0) {
+				editText.getLayoutParams().width = ViewGroup.LayoutParams.FILL_PARENT;
+			} else {
 				editText.setMinimumWidth(columns * getCharWidth());
 			}
 
@@ -468,12 +454,10 @@ public class JTextArea extends JTextComponent {
 		Insets insets = getInsets();
 
 		if (columns != 0) {
-			d.width = Math.max(d.width, columns * getColumnWidth()
-					+ insets.left + insets.right);
+			d.width = Math.max(d.width, columns * getColumnWidth() + insets.left + insets.right);
 		}
 		if (rows != 0) {
-			d.height = Math.max(d.height, rows * getRowHeight() + insets.top
-					+ insets.bottom);
+			d.height = Math.max(d.height, rows * getRowHeight() + insets.top + insets.bottom);
 		}
 		return d;
 	}
@@ -521,10 +505,10 @@ public class JTextArea extends JTextComponent {
 		size = (size == null) ? new Dimension(400, 400) : size;
 		Insets insets = getInsets();
 
-		size.width = (columns == 0) ? size.width : columns * getColumnWidth()
-				+ insets.left + insets.right;
-		size.height = (rows == 0) ? size.height : rows * getRowHeight()
-				+ insets.top + insets.bottom;
+		size.width = (columns == 0) ? size.width
+				: columns * getColumnWidth() + insets.left + insets.right;
+		size.height = (rows == 0) ? size.height
+				: rows * getRowHeight() + insets.top + insets.bottom;
 		return size;
 	}
 
@@ -551,16 +535,14 @@ public class JTextArea extends JTextComponent {
 	 * @see #getRowHeight
 	 * @see #getColumnWidth
 	 */
-	public int getScrollableUnitIncrement(Rectangle visibleRect,
-			int orientation, int direction) {
+	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
 		switch (orientation) {
 		case SwingConstants.VERTICAL:
 			return getRowHeight();
 		case SwingConstants.HORIZONTAL:
 			return getColumnWidth();
 		default:
-			throw new IllegalArgumentException("Invalid orientation: "
-					+ orientation);
+			throw new IllegalArgumentException("Invalid orientation: " + orientation);
 		}
 	}
 

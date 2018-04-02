@@ -27,7 +27,8 @@ package javax.swing;
 /**
  * A mutable version of <code>ComboBoxModel</code>.
  *
- * @param <E> the type of the elements of this model
+ * @param <E>
+ *            the type of the elements of this model
  *
  * @author Tom Santos
  */

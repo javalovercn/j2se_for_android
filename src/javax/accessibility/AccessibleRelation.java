@@ -25,20 +25,22 @@
 package javax.accessibility;
 
 /**
- * <P>Class AccessibleRelation describes a relation between the
- * object that implements the AccessibleRelation and one or more other
- * objects.  The actual relations that an object has with other
- * objects are defined as an AccessibleRelationSet, which is a composed
- * set of AccessibleRelations.
- * <p>The toDisplayString method allows you to obtain the localized string
- * for a locale independent key from a predefined ResourceBundle for the
- * keys defined in this class.
- * <p>The constants in this class present a strongly typed enumeration
- * of common object roles. If the constants in this class are not sufficient
- * to describe the role of an object, a subclass should be generated
- * from this class and it should provide constants in a similar manner.
+ * <P>
+ * Class AccessibleRelation describes a relation between the object that
+ * implements the AccessibleRelation and one or more other objects. The actual
+ * relations that an object has with other objects are defined as an
+ * AccessibleRelationSet, which is a composed set of AccessibleRelations.
+ * <p>
+ * The toDisplayString method allows you to obtain the localized string for a
+ * locale independent key from a predefined ResourceBundle for the keys defined
+ * in this class.
+ * <p>
+ * The constants in this class present a strongly typed enumeration of common
+ * object roles. If the constants in this class are not sufficient to describe
+ * the role of an object, a subclass should be generated from this class and it
+ * should provide constants in a similar manner.
  *
- * @author      Lynn Monsanto
+ * @author Lynn Monsanto
  * @since 1.3
  */
 public class AccessibleRelation extends AccessibleBundle {

@@ -25,10 +25,10 @@
 package javax.accessibility;
 
 /**
- * Class AccessibleTable describes a user-interface component that
- * presents data in a two-dimensional table format.
+ * Class AccessibleTable describes a user-interface component that presents data
+ * in a two-dimensional table format.
  *
- * @author      Lynn Monsanto
+ * @author Lynn Monsanto
  * @since 1.3
  */
 public interface AccessibleTable {

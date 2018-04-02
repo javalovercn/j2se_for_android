@@ -28,12 +28,11 @@ import java.awt.Container;
 
 /**
  * <code>LayoutStyle</code> provides information about how to position
- * components.  This class is primarily useful for visual tools and
- * layout managers.  Most developers will not need to use this class.
+ * components. This class is primarily useful for visual tools and layout
+ * managers. Most developers will not need to use this class.
  * <p>
- * You typically don't set or create a
- * <code>LayoutStyle</code>.  Instead use the static method
- * <code>getInstance</code> to obtain the current instance.
+ * You typically don't set or create a <code>LayoutStyle</code>. Instead use the
+ * static method <code>getInstance</code> to obtain the current instance.
  *
  * @since 1.6
  */
@@ -52,10 +51,8 @@ public abstract class LayoutStyle {
 	public LayoutStyle() {
 	}
 
-	public abstract int getPreferredGap(JComponent component1,
-			JComponent component2, ComponentPlacement type, int position,
-			Container parent);
+	public abstract int getPreferredGap(JComponent component1, JComponent component2,
+			ComponentPlacement type, int position, Container parent);
 
-	public abstract int getContainerGap(JComponent component, int position,
-			Container parent);
+	public abstract int getContainerGap(JComponent component, int position, Container parent);
 }

@@ -27,15 +27,12 @@ package javax.swing;
 import javax.swing.event.ListSelectionListener;
 
 /**
- * This interface represents the current state of the
- * selection for any of the components that display a
- * list of values with stable indices.  The selection is
- * modeled as a set of intervals, each interval represents
- * a contiguous range of selected list elements.
- * The methods for modifying the set of selected intervals
- * all take a pair of indices, index0 and index1, that represent
- * a closed interval, i.e. the interval includes both index0 and
- * index1.
+ * This interface represents the current state of the selection for any of the
+ * components that display a list of values with stable indices. The selection
+ * is modeled as a set of intervals, each interval represents a contiguous range
+ * of selected list elements. The methods for modifying the set of selected
+ * intervals all take a pair of indices, index0 and index1, that represent a
+ * closed interval, i.e. the interval includes both index0 and index1.
  *
  * @author Hans Muller
  * @author Philip Milne

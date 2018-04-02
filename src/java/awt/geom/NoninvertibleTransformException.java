@@ -25,15 +25,14 @@
 package java.awt.geom;
 
 /**
- * The <code>NoninvertibleTransformException</code> class represents
- * an exception that is thrown if an operation is performed requiring
- * the inverse of an {@link AffineTransform} object but the
- * <code>AffineTransform</code> is in a non-invertible state.
+ * The <code>NoninvertibleTransformException</code> class represents an
+ * exception that is thrown if an operation is performed requiring the inverse
+ * of an {@link AffineTransform} object but the <code>AffineTransform</code> is
+ * in a non-invertible state.
  */
 
 public class NoninvertibleTransformException extends java.lang.Exception {
-    public NoninvertibleTransformException(String s) {
-        super (s);
-    }
+	public NoninvertibleTransformException(String s) {
+		super(s);
+	}
 }
-

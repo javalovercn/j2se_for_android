@@ -45,21 +45,19 @@ import javax.swing.event.TableColumnModelListener;
 /**
  * The standard column-handler for a <code>JTable</code>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Alan Chung
  * @author Philip Milne
  * @see JTable
  */
-public class DefaultTableColumnModel implements TableColumnModel,
-		PropertyChangeListener, ListSelectionListener, Serializable {
+public class DefaultTableColumnModel
+		implements TableColumnModel, PropertyChangeListener, ListSelectionListener, Serializable {
 
 	protected Vector<TableColumn> tableColumns;
 	protected ListSelectionModel selectionModel;
@@ -108,16 +106,14 @@ public class DefaultTableColumnModel implements TableColumnModel,
 	}
 
 	public void moveColumn(int columnIndex, int newIndex) {
-		if ((columnIndex < 0) || (columnIndex >= getColumnCount())
-				|| (newIndex < 0) || (newIndex >= getColumnCount()))
-			throw new IllegalArgumentException(
-					"moveColumn() - Index out of range");
+		if ((columnIndex < 0) || (columnIndex >= getColumnCount()) || (newIndex < 0)
+				|| (newIndex >= getColumnCount()))
+			throw new IllegalArgumentException("moveColumn() - Index out of range");
 
 		TableColumn aColumn;
 
 		if (columnIndex == newIndex) {
-			fireColumnMoved(new TableColumnModelEvent(this, columnIndex,
-					newIndex));
+			fireColumnMoved(new TableColumnModelEvent(this, columnIndex, newIndex));
 			return;
 		}
 		aColumn = tableColumns.elementAt(columnIndex);
@@ -197,15 +193,14 @@ public class DefaultTableColumnModel implements TableColumnModel,
 
 	public int getTotalColumnWidth() {
 		if (totalColumnWidth == -1) {
-            recalcWidthCache();
-        }
-        return totalColumnWidth;
+			recalcWidthCache();
+		}
+		return totalColumnWidth;
 	}
 
 	public void setSelectionModel(ListSelectionModel newModel) {
 		if (newModel == null) {
-			throw new IllegalArgumentException(
-					"Cannot set a null SelectionModel");
+			throw new IllegalArgumentException("Cannot set a null SelectionModel");
 		}
 
 		ListSelectionModel oldModel = selectionModel;
@@ -326,8 +321,7 @@ public class DefaultTableColumnModel implements TableColumnModel,
 			if (listeners[i] == TableColumnModelListener.class) {
 				if (changeEvent == null)
 					changeEvent = new ChangeEvent(this);
-				((TableColumnModelListener) listeners[i + 1])
-						.columnMarginChanged(changeEvent);
+				((TableColumnModelListener) listeners[i + 1]).columnMarginChanged(changeEvent);
 			}
 		}
 	}
@@ -355,10 +349,10 @@ public class DefaultTableColumnModel implements TableColumnModel,
 
 	protected void recalcWidthCache() {
 		Enumeration enumeration = getColumns();
-        totalColumnWidth = 0;
-        while (enumeration.hasMoreElements()) {
-            totalColumnWidth += ((TableColumn)enumeration.nextElement()).getWidth();
-        }
+		totalColumnWidth = 0;
+		while (enumeration.hasMoreElements()) {
+			totalColumnWidth += ((TableColumn) enumeration.nextElement()).getWidth();
+		}
 	}
 
 	private void invalidateWidthCache() {

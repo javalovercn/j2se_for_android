@@ -28,7 +28,7 @@ package java.awt;
  * A class to encapsulate the bitmap representation of the mouse cursor.
  *
  * @see Component#setCursor
- * @author      Amy Fowler
+ * @author Amy Fowler
  */
 public class Cursor implements java.io.Serializable {
 	public static final int DEFAULT_CURSOR = 0;

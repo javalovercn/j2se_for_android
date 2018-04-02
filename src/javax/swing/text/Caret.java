@@ -30,59 +30,55 @@ import java.awt.Point;
 import javax.swing.event.ChangeListener;
 
 /**
- * A place within a document view that represents where
- * things can be inserted into the document model.  A caret
- * has a position in the document referred to as a dot.
- * The dot is where the caret is currently located in the
- * model.  There is
- * a second position maintained by the caret that represents
- * the other end of a selection called mark.  If there is
- * no selection the dot and mark will be equal.  If a selection
- * exists, the two values will be different.
+ * A place within a document view that represents where things can be inserted
+ * into the document model. A caret has a position in the document referred to
+ * as a dot. The dot is where the caret is currently located in the model. There
+ * is a second position maintained by the caret that represents the other end of
+ * a selection called mark. If there is no selection the dot and mark will be
+ * equal. If a selection exists, the two values will be different.
  * <p>
- * The dot can be placed by either calling
- * <code>setDot</code> or <code>moveDot</code>.  Setting
- * the dot has the effect of removing any selection that may
- * have previously existed.  The dot and mark will be equal.
- * Moving the dot has the effect of creating a selection as
- * the mark is left at whatever position it previously had.
+ * The dot can be placed by either calling <code>setDot</code> or
+ * <code>moveDot</code>. Setting the dot has the effect of removing any
+ * selection that may have previously existed. The dot and mark will be equal.
+ * Moving the dot has the effect of creating a selection as the mark is left at
+ * whatever position it previously had.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public interface Caret {
 
-    public void install(JTextComponent c);
+	public void install(JTextComponent c);
 
-    public void deinstall(JTextComponent c);
+	public void deinstall(JTextComponent c);
 
-    public void paint(Graphics g);
+	public void paint(Graphics g);
 
-    public void addChangeListener(ChangeListener l);
+	public void addChangeListener(ChangeListener l);
 
-    public void removeChangeListener(ChangeListener l);
+	public void removeChangeListener(ChangeListener l);
 
-    public boolean isVisible();
+	public boolean isVisible();
 
-    public void setVisible(boolean v);
+	public void setVisible(boolean v);
 
-    public boolean isSelectionVisible();
+	public boolean isSelectionVisible();
 
-    public void setSelectionVisible(boolean v);
+	public void setSelectionVisible(boolean v);
 
-    public void setMagicCaretPosition(Point p);
+	public void setMagicCaretPosition(Point p);
 
-    public Point getMagicCaretPosition();
+	public Point getMagicCaretPosition();
 
-    public void setBlinkRate(int rate);
+	public void setBlinkRate(int rate);
 
-    public int getBlinkRate();
+	public int getBlinkRate();
 
-    public int getDot();
+	public int getDot();
 
-    public int getMark();
+	public int getMark();
 
-    public void setDot(int dot);
+	public void setDot(int dot);
 
-    public void moveDot(int dot);
+	public void moveDot(int dot);
 
 };

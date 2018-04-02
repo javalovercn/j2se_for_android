@@ -29,8 +29,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * A MethodDescriptor describes a particular method that a Java Bean
- * supports for external access from other components.
+ * A MethodDescriptor describes a particular method that a Java Bean supports
+ * for external access from other components.
  */
 
 public class MethodDescriptor extends FeatureDescriptor {
@@ -47,8 +47,7 @@ public class MethodDescriptor extends FeatureDescriptor {
 		this(method, null);
 	}
 
-	public MethodDescriptor(Method method,
-			ParameterDescriptor parameterDescriptors[]) {
+	public MethodDescriptor(Method method, ParameterDescriptor parameterDescriptors[]) {
 		setName(method.getName());
 		setMethod(method);
 		this.parameterDescriptors = parameterDescriptors;
@@ -113,8 +112,7 @@ public class MethodDescriptor extends FeatureDescriptor {
 			int len = old.parameterDescriptors.length;
 			parameterDescriptors = new ParameterDescriptor[len];
 			for (int i = 0; i < len; i++) {
-				parameterDescriptors[i] = new ParameterDescriptor(
-						old.parameterDescriptors[i]);
+				parameterDescriptors[i] = new ParameterDescriptor(old.parameterDescriptors[i]);
 			}
 		}
 	}

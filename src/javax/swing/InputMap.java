@@ -30,21 +30,22 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * <code>InputMap</code> provides a binding between an input event
- * (currently only <code>KeyStroke</code>s are used)
- * and an <code>Object</code>. <code>InputMap</code>s
- * are usually used with an <code>ActionMap</code>,
- * to determine an <code>Action</code> to perform
- * when a key is pressed.
- * An <code>InputMap</code> can have a parent
- * that is searched for bindings not defined in the <code>InputMap</code>.
- * <p>As with <code>ActionMap</code> if you create a cycle, eg:
+ * <code>InputMap</code> provides a binding between an input event (currently
+ * only <code>KeyStroke</code>s are used) and an <code>Object</code>.
+ * <code>InputMap</code>s are usually used with an <code>ActionMap</code>, to
+ * determine an <code>Action</code> to perform when a key is pressed. An
+ * <code>InputMap</code> can have a parent that is searched for bindings not
+ * defined in the <code>InputMap</code>.
+ * <p>
+ * As with <code>ActionMap</code> if you create a cycle, eg:
+ * 
  * <pre>
  *   InputMap am = new InputMap();
  *   InputMap bm = new InputMap():
  *   am.setParent(bm);
  *   bm.setParent(am);
  * </pre>
+ * 
  * some of the methods will cause a StackOverflowError to be thrown.
  *
  * @author Scott Violet
@@ -92,7 +93,6 @@ public class InputMap implements Serializable {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException {
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
 	}
 }

@@ -27,28 +27,27 @@ package java.awt;
 /**
  * The <code>Color</code> class is used to encapsulate colors in the default
  * sRGB color space or colors in arbitrary color spaces identified by a
- * {@link ColorSpace}.  Every color has an implicit alpha value of 1.0 or
- * an explicit one provided in the constructor.  The alpha value
- * defines the transparency of a color and can be represented by
- * a float value in the range 0.0&nbsp;-&nbsp;1.0 or 0&nbsp;-&nbsp;255.
- * An alpha value of 1.0 or 255 means that the color is completely
- * opaque and an alpha value of 0 or 0.0 means that the color is
- * completely transparent.
- * When constructing a <code>Color</code> with an explicit alpha or
- * getting the color/alpha components of a <code>Color</code>, the color
- * components are never premultiplied by the alpha component.
+ * {@link ColorSpace}. Every color has an implicit alpha value of 1.0 or an
+ * explicit one provided in the constructor. The alpha value defines the
+ * transparency of a color and can be represented by a float value in the range
+ * 0.0&nbsp;-&nbsp;1.0 or 0&nbsp;-&nbsp;255. An alpha value of 1.0 or 255 means
+ * that the color is completely opaque and an alpha value of 0 or 0.0 means that
+ * the color is completely transparent. When constructing a <code>Color</code>
+ * with an explicit alpha or getting the color/alpha components of a
+ * <code>Color</code>, the color components are never premultiplied by the alpha
+ * component.
  * <p>
- * The default color space for the Java 2D(tm) API is sRGB, a proposed
- * standard RGB color space.  For further information on sRGB,
- * see <A href="http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html">
- * http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html
- * </A>.
+ * The default color space for the Java 2D(tm) API is sRGB, a proposed standard
+ * RGB color space. For further information on sRGB, see
+ * <A href="http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html">
+ * http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html </A>.
  * <p>
- * @version     10 Feb 1997
- * @author      Sami Shaio
- * @author      Arthur van Hoff
- * @see         ColorSpace
- * @see         AlphaComposite
+ * 
+ * @version 10 Feb 1997
+ * @author Sami Shaio
+ * @author Arthur van Hoff
+ * @see ColorSpace
+ * @see AlphaComposite
  */
 public class Color {
 	public final int toAndroid() {
@@ -114,8 +113,7 @@ public class Color {
 	}
 
 	public Color(int r, int g, int b, int a) {
-		value = ((a & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8)
-				| ((b & 0xFF) << 0);
+		value = ((a & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | ((b & 0xFF) << 0);
 	}
 
 	public Color(int rgb) {
@@ -131,13 +129,12 @@ public class Color {
 	}
 
 	public Color(float r, float g, float b) {
-		this((int) (r * 255 + 0.5), (int) (g * 255 + 0.5),
-				(int) (b * 255 + 0.5));
+		this((int) (r * 255 + 0.5), (int) (g * 255 + 0.5), (int) (b * 255 + 0.5));
 	}
 
 	public Color(float r, float g, float b, float a) {
-		this((int) (r * 255 + 0.5), (int) (g * 255 + 0.5),
-				(int) (b * 255 + 0.5), (int) (a * 255 + 0.5));
+		this((int) (r * 255 + 0.5), (int) (g * 255 + 0.5), (int) (b * 255 + 0.5),
+				(int) (a * 255 + 0.5));
 	}
 
 	public int getRed() {
@@ -169,8 +166,8 @@ public class Color {
 	}
 
 	public String toString() {
-		return getClass().getName() + "[r=" + getRed() + ",g=" + getGreen()
-				+ ",b=" + getBlue() + "]";
+		return getClass().getName() + "[r=" + getRed() + ",g=" + getGreen() + ",b=" + getBlue()
+				+ "]";
 	}
 
 	public static Color decode(String nm) throws NumberFormatException {
@@ -217,15 +214,14 @@ public class Color {
 		if (b > 0 && b < i)
 			b = i;
 
-		return new Color(Math.min((int) (r / FACTOR), 255), Math.min(
-				(int) (g / FACTOR), 255), Math.min((int) (b / FACTOR), 255),
-				alpha);
+		return new Color(Math.min((int) (r / FACTOR), 255), Math.min((int) (g / FACTOR), 255),
+				Math.min((int) (b / FACTOR), 255), alpha);
 	}
 
 	public Color darker() {
-		return new Color(Math.max((int) (getRed() * FACTOR), 0), Math.max(
-				(int) (getGreen() * FACTOR), 0), Math.max(
-				(int) (getBlue() * FACTOR), 0), getAlpha());
+		return new Color(Math.max((int) (getRed() * FACTOR), 0),
+				Math.max((int) (getGreen() * FACTOR), 0), Math.max((int) (getBlue() * FACTOR), 0),
+				getAlpha());
 	}
 
 }

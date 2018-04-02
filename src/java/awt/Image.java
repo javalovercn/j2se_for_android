@@ -37,59 +37,60 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 /**
- * The abstract class <code>Image</code> is the superclass of all
- * classes that represent graphical images. The image must be
- * obtained in a platform-specific manner.
+ * The abstract class <code>Image</code> is the superclass of all classes that
+ * represent graphical images. The image must be obtained in a platform-specific
+ * manner.
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
- * @since       JDK1.0
+ * @author Sami Shaio
+ * @author Arthur van Hoff
+ * @since JDK1.0
  */
 public abstract class Image {
 	protected Bitmap bitmap;
 	public float initZoom = 1.0F;
 	protected Drawable bitmapDrawableAdapter;
-	
-	public Bitmap getBitmapAdAPI(){
+
+	public Bitmap getBitmapAdAPI() {
 		return bitmap;
 	}
 
-	public final Drawable getAdapterBitmapDrawableAdAPI(Component component){
-		if(bitmapDrawableAdapter == null){
-			bitmapDrawableAdapter = new BitmapDrawable(ActivityManager.getActivity().getResources(), getAdapterBitmap(component)); 
+	public final Drawable getAdapterBitmapDrawableAdAPI(Component component) {
+		if (bitmapDrawableAdapter == null) {
+			bitmapDrawableAdapter = new BitmapDrawable(ActivityManager.applicationContext.getResources(),
+					getAdapterBitmap(component));
 		}
 		return bitmapDrawableAdapter;
 	}
-	
-	private final Bitmap getAdapterBitmap(Component component){
+
+	private final Bitmap getAdapterBitmap(Component component) {
 		final ScreenAdapter screenAdapterAdAPI = component.getScreenAdapterAdAPI();
 		Bitmap src = getBitmapAdAPI();
 
-		if(screenAdapterAdAPI.type == ScreenAdapter.TYPE_MLET){
+		if (screenAdapterAdAPI.type == ScreenAdapter.TYPE_MLET) {
 			return src;
 		}
-		
+
 		final int oldW = src.getWidth();
 		final int oldH = src.getHeight();
 
 		int scaleWSize = screenAdapterAdAPI.imageSizeToScreenFloat(oldW, initZoom);
 		int scaleHSize = screenAdapterAdAPI.imageSizeToScreenFloat(oldH, initZoom);
-		
-//		//最小限定。因为树节点的图标太小
-//		if(scaleWSize < 20){
-//			scaleHSize = scaleHSize * 20 / scaleWSize;
-//			scaleWSize = 20;
-//		}
-		
+
+		// //最小限定。因为树节点的图标太小
+		// if(scaleWSize < 20){
+		// scaleHSize = scaleHSize * 20 / scaleWSize;
+		// scaleWSize = 20;
+		// }
+
 		Bitmap out;
-		if(oldW == scaleWSize && oldH == scaleHSize){
+		if (oldW == scaleWSize && oldH == scaleHSize) {
 			out = src;
-		}else{
+		} else {
 			out = ImageUtil.zoomBitmap(src, scaleWSize, scaleHSize);
 		}
 		return out;
 	}
-	
+
 	protected float accelerationPriority = .5f;
 
 	public abstract int getWidth(ImageObserver observer);

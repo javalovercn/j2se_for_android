@@ -12,12 +12,12 @@ public class DefaultLookup {
 	public static final String TREE_TEXTFOREGROUND = "Tree.textForeground";
 	public static final String TREE_SELECTIONBACKGROUND = "Tree.selectionBackground";
 	public static final String TREE_TEXTBACKGROUND = "Tree.textBackground";
-	
-	public static Icon getIcon(String name){
+
+	public static Icon getIcon(String name) {
 		return null;
 	}
-	
-	public static Color getColor(String name){
+
+	public static Color getColor(String name) {
 		return null;
 	}
 }

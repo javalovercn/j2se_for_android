@@ -34,108 +34,109 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * A <code>DropTargetContext</code> is created
- * whenever the logical cursor associated
- * with a Drag and Drop operation coincides with the visible geometry of
- * a <code>Component</code> associated with a <code>DropTarget</code>.
- * The <code>DropTargetContext</code> provides
- * the mechanism for a potential receiver
- * of a drop operation to both provide the end user with the appropriate
- * drag under feedback, but also to effect the subsequent data transfer
- * if appropriate.
+ * A <code>DropTargetContext</code> is created whenever the logical cursor
+ * associated with a Drag and Drop operation coincides with the visible geometry
+ * of a <code>Component</code> associated with a <code>DropTarget</code>. The
+ * <code>DropTargetContext</code> provides the mechanism for a potential
+ * receiver of a drop operation to both provide the end user with the
+ * appropriate drag under feedback, but also to effect the subsequent data
+ * transfer if appropriate.
  *
  * @since 1.2
  */
 
 public class DropTargetContext implements Serializable {
-    DropTargetContext(DropTarget dt) {
-        super();
+	DropTargetContext(DropTarget dt) {
+		super();
 
-        dropTarget = dt;
-    }
+		dropTarget = dt;
+	}
 
-    public DropTarget getDropTarget() { return dropTarget; }
+	public DropTarget getDropTarget() {
+		return dropTarget;
+	}
 
-    public Component getComponent() { return dropTarget.getComponent(); }
+	public Component getComponent() {
+		return dropTarget.getComponent();
+	}
 
-    public void addNotify(DropTargetContextPeer dtcp) {
-        dropTargetContextPeer = dtcp;
-    }
+	public void addNotify(DropTargetContextPeer dtcp) {
+		dropTargetContextPeer = dtcp;
+	}
 
-    public void removeNotify() {
-        dropTargetContextPeer = null;
-        transferable          = null;
-    }
+	public void removeNotify() {
+		dropTargetContextPeer = null;
+		transferable = null;
+	}
 
-    protected void setTargetActions(int actions) {
-    }
+	protected void setTargetActions(int actions) {
+	}
 
-    protected int getTargetActions() {
-    	return 0;
-    }
+	protected int getTargetActions() {
+		return 0;
+	}
 
-    public void dropComplete(boolean success) throws InvalidDnDOperationException{
-    }
+	public void dropComplete(boolean success) throws InvalidDnDOperationException {
+	}
 
-    protected void acceptDrag(int dragOperation) {
-    }
+	protected void acceptDrag(int dragOperation) {
+	}
 
-    protected void rejectDrag() {
-    }
+	protected void rejectDrag() {
+	}
 
-    protected void acceptDrop(int dropOperation) {
-    }
+	protected void acceptDrop(int dropOperation) {
+	}
 
-    protected void rejectDrop() {
-    }
+	protected void rejectDrop() {
+	}
 
-    protected DataFlavor[] getCurrentDataFlavors() {
-        return new DataFlavor[0];
-    }
+	protected DataFlavor[] getCurrentDataFlavors() {
+		return new DataFlavor[0];
+	}
 
-    protected List<DataFlavor> getCurrentDataFlavorsAsList() {
-        return null;
-    }
+	protected List<DataFlavor> getCurrentDataFlavorsAsList() {
+		return null;
+	}
 
-    protected boolean isDataFlavorSupported(DataFlavor df) {
-        return getCurrentDataFlavorsAsList().contains(df);
-    }
+	protected boolean isDataFlavorSupported(DataFlavor df) {
+		return getCurrentDataFlavorsAsList().contains(df);
+	}
 
-    protected Transferable getTransferable() throws InvalidDnDOperationException {
-            return null;
-    }
+	protected Transferable getTransferable() throws InvalidDnDOperationException {
+		return null;
+	}
 
-    DropTargetContextPeer getDropTargetContextPeer() {
-        return dropTargetContextPeer;
-    }
+	DropTargetContextPeer getDropTargetContextPeer() {
+		return dropTargetContextPeer;
+	}
 
-    protected Transferable createTransferableProxy(Transferable t, boolean local) {
-        return new TransferableProxy(t, local);
-    }
+	protected Transferable createTransferableProxy(Transferable t, boolean local) {
+		return new TransferableProxy(t, local);
+	}
 
-    protected class TransferableProxy implements Transferable {
-        TransferableProxy(Transferable t, boolean local) {
-        }
+	protected class TransferableProxy implements Transferable {
+		TransferableProxy(Transferable t, boolean local) {
+		}
 
-        public DataFlavor[] getTransferDataFlavors() {
-            return new DataFlavor[0];
-        }
+		public DataFlavor[] getTransferDataFlavors() {
+			return new DataFlavor[0];
+		}
 
-        public boolean isDataFlavorSupported(DataFlavor flavor) {
-            return false;
-        }
+		public boolean isDataFlavorSupported(DataFlavor flavor) {
+			return false;
+		}
 
-        public Object getTransferData(DataFlavor df)
-            throws UnsupportedFlavorException, IOException
-        {
-            return null;
-        }
+		public Object getTransferData(DataFlavor df)
+				throws UnsupportedFlavorException, IOException {
+			return null;
+		}
 
-        protected Transferable  transferable;
-        protected boolean       isLocal;
-    }
+		protected Transferable transferable;
+		protected boolean isLocal;
+	}
 
-    private DropTarget dropTarget;
-    private transient DropTargetContextPeer dropTargetContextPeer;
-    private transient Transferable transferable;
+	private DropTarget dropTarget;
+	private transient DropTargetContextPeer dropTargetContextPeer;
+	private transient Transferable transferable;
 }

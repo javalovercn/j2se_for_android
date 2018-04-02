@@ -61,41 +61,35 @@ import hc.android.HCRUtil;
 
 /**
  * An implementation of an item in a menu. A menu item is essentially a button
- * sitting in a list. When the user selects the "button", the action
- * associated with the menu item is performed. A <code>JMenuItem</code>
- * contained in a <code>JPopupMenu</code> performs exactly that function.
+ * sitting in a list. When the user selects the "button", the action associated
+ * with the menu item is performed. A <code>JMenuItem</code> contained in a
+ * <code>JPopupMenu</code> performs exactly that function.
  * <p>
  * Menu items can be configured, and to some degree controlled, by
- * <code><a href="Action.html">Action</a></code>s.  Using an
- * <code>Action</code> with a menu item has many benefits beyond directly
- * configuring a menu item.  Refer to <a href="Action.html#buttonActions">
- * Swing Components Supporting <code>Action</code></a> for more
- * details, and you can find more information in <a
- * href="http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How
- * to Use Actions</a>, a section in <em>The Java Tutorial</em>.
+ * <code><a href="Action.html">Action</a></code>s. Using an <code>Action</code>
+ * with a menu item has many benefits beyond directly configuring a menu item.
+ * Refer to <a href="Action.html#buttonActions"> Swing Components Supporting
+ * <code>Action</code></a> for more details, and you can find more information
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How to Use
+ * Actions</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * For further documentation and for examples, see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to Use Menus</a>
- * in <em>The Java Tutorial.</em>
+ * For further documentation and for examples, see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to
+ * Use Menus</a> in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: An item which can be selected in a menu.
+ * @beaninfo attribute: isContainer false description: An item which can be
+ *           selected in a menu.
  *
  * @author Georges Saab
  * @author David Karlton
@@ -108,7 +102,7 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 	private static final String uiClassID = "MenuItemUI";
 	private LinearLayout defaultLinearLayout;
 	private TextView textView;
-	
+
 	public JMenuItem() {
 		this(null, (Icon) null);
 	}
@@ -135,7 +129,7 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 	}
 
 	public void setModel(ButtonModel newModel) {
-		super.setModel(newModel);//必须
+		super.setModel(newModel);// 必须
 	}
 
 	void initFocusability() {
@@ -144,45 +138,47 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 	public void setUI(MenuItemUI ui) {
 		super.setUI(ui);
 	}
-	
+
 	@Override
 	public void requestFocus() {
-		if(defaultLinearLayout != null){
+		if (defaultLinearLayout != null) {
 			defaultLinearLayout.requestFocus();
 		}
 	}
-	
+
 	@Override
-	public View getPeerAdAPI(){
-		if(defaultLinearLayout == null){
-			defaultLinearLayout = new LinearLayout(ActivityManager.getActivity());
+	public View getPeerAdAPI() {
+		if (defaultLinearLayout == null) {
+			defaultLinearLayout = new LinearLayout(ActivityManager.applicationContext);
 			setPeerAdAPI(defaultLinearLayout);
-			
+
 			focusListener = new FocusListener() {
 				@Override
 				public void focusLost(FocusEvent e) {
 				}
+
 				@Override
 				public void focusGained(FocusEvent e) {
-					if(getPopupMenuAdAPI().isDismissPopupMenuAdAPI()){
+					if (getPopupMenuAdAPI().isDismissPopupMenuAdAPI()) {
 						return;
 					}
-					
-					if(JMenuItem.this instanceof JMenu){
-						getPopupMenuAdAPI().showSubMenu((JMenu)JMenuItem.this);
-					}else{
-						getPopupMenuAdAPI().showSubMenu(null);//关闭旧的
-						if(defaultLinearLayout.isInTouchMode()){
-							if(getPopupMenuAdAPI().isFirstFocusOnPopupMenuAdAPI()){
-							}else{
-								JMenuItem.this.fireActionPerformed(new ActionEvent(JMenuItem.this, ActionEvent.ACTION_PERFORMED, ""));
+
+					if (JMenuItem.this instanceof JMenu) {
+						getPopupMenuAdAPI().showSubMenu((JMenu) JMenuItem.this);
+					} else {
+						getPopupMenuAdAPI().showSubMenu(null);// 关闭旧的
+						if (defaultLinearLayout.isInTouchMode()) {
+							if (getPopupMenuAdAPI().isFirstFocusOnPopupMenuAdAPI()) {
+							} else {
+								JMenuItem.this.fireActionPerformed(new ActionEvent(JMenuItem.this,
+										ActionEvent.ACTION_PERFORMED, ""));
 							}
 						}
 					}
 				}
 			};
 			addFocusListener(focusListener);
-			
+
 			AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 				@Override
 				public void run() {
@@ -197,51 +193,55 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 		super.applyComponentOrientation(o);
 		updateUI();
 	}
-	
+
 	FocusListener focusListener;
-	
+
 	public void updateUI() {
-		if(defaultLinearLayout == null){
+		if (defaultLinearLayout == null) {
 			return;
 		}
-		
+
 		rebuildUI();
-		
-		defaultLinearLayout.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_tree_node));
-		
+
+		defaultLinearLayout
+				.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_tree_node));
+
 		defaultLinearLayout.setClickable(isEnable);
 		defaultLinearLayout.setFocusable(isEnable);
-		defaultLinearLayout.setFocusableInTouchMode(true);//保证JMenu/JMenuItem初次展开时，能显示焦点状态。另见JPopupMenu.setFocusableOnlyToJMenu
-		
+		defaultLinearLayout.setFocusableInTouchMode(true);// 保证JMenu/JMenuItem初次展开时，能显示焦点状态。另见JPopupMenu.setFocusableOnlyToJMenu
+
 		AndroidUIUtil.buildListenersForComponent(defaultLinearLayout, this);
-		
+
 		defaultLinearLayout.setOnKeyListener(new View.OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, android.view.KeyEvent event) {
-				
-				if(event.getAction() == android.view.KeyEvent.ACTION_DOWN){//先于Focus之前
-					if(keyCode == android.view.KeyEvent.KEYCODE_DPAD_RIGHT){
-						if(JMenuItem.this instanceof JMenu && JMenuItem.this.getComponentOrientation().isLeftToRight()){
+
+				if (event.getAction() == android.view.KeyEvent.ACTION_DOWN) {// 先于Focus之前
+					if (keyCode == android.view.KeyEvent.KEYCODE_DPAD_RIGHT) {
+						if (JMenuItem.this instanceof JMenu
+								&& JMenuItem.this.getComponentOrientation().isLeftToRight()) {
 							return false;
 						}
 					}
-					
-					if(keyCode == android.view.KeyEvent.KEYCODE_DPAD_LEFT){
-						if(JMenuItem.this instanceof JMenu && (JMenuItem.this.getComponentOrientation().isLeftToRight() == false)){
+
+					if (keyCode == android.view.KeyEvent.KEYCODE_DPAD_LEFT) {
+						if (JMenuItem.this instanceof JMenu && (JMenuItem.this
+								.getComponentOrientation().isLeftToRight() == false)) {
 							return false;
 						}
 					}
-				}else{
-					if(keyCode == android.view.KeyEvent.KEYCODE_BACK){
-						if(getPopupMenuAdAPI().dismissMenuAdAPI()){
+				} else {
+					if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+						if (getPopupMenuAdAPI().dismissMenuAdAPI()) {
 							return true;
 						}
 					}
-					
-					if(keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER){
-		    			JMenuItem.this.fireActionPerformed(new ActionEvent(JMenuItem.this, ActionEvent.ACTION_PERFORMED, ""));
+
+					if (keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER) {
+						JMenuItem.this.fireActionPerformed(
+								new ActionEvent(JMenuItem.this, ActionEvent.ACTION_PERFORMED, ""));
 						return true;
-			    	 }
+					}
 				}
 				return false;
 			}
@@ -249,25 +249,25 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 	}
 
 	private void rebuildUI() {
-		if(defaultLinearLayout == null){
+		if (defaultLinearLayout == null) {
 			return;
 		}
-		
+
 		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 			@Override
 			public void run() {
 				defaultLinearLayout.removeAllViews();
 				boolean isLeftToRight = getComponentOrientation().isLeftToRight();
-				
-				if(isLeftToRight){
+
+				if (isLeftToRight) {
 					addCheckIcon(isLeftToRight);
 					addItemIcon(isLeftToRight);
 					addText(isLeftToRight);
-					if(JMenuItem.this instanceof JMenu){
+					if (JMenuItem.this instanceof JMenu) {
 						addMenuExpand(isLeftToRight);
 					}
-				}else{
-					if(JMenuItem.this instanceof JMenu){
+				} else {
+					if (JMenuItem.this instanceof JMenu) {
 						addMenuExpand(isLeftToRight);
 					}
 					addText(isLeftToRight);
@@ -277,114 +277,121 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 			}
 		});
 	}
-	
+
 	private void addMenuExpand(boolean isLeftToRight) {
-		String charSet = (isLeftToRight?"  >":"<  ");
-		
-		TextView charSetView = new TextView(ActivityManager.getActivity());
+		String charSet = (isLeftToRight ? "  >" : "<  ");
+
+		TextView charSetView = new TextView(ActivityManager.applicationContext);
 		charSetView.setText(charSet);
 		UICore.setTextSize(charSetView, getScreenAdapterAdAPI());
-		charSetView.setTextColor(isEnable?AndroidUIUtil.WIN_FONT_COLOR.toAndroid():AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
-		charSetView.setGravity(Gravity.CENTER_VERTICAL | (isLeftToRight?Gravity.RIGHT:Gravity.LEFT));
+		charSetView.setTextColor(isEnable ? AndroidUIUtil.WIN_FONT_COLOR.toAndroid()
+				: AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
+		charSetView.setGravity(
+				Gravity.CENTER_VERTICAL | (isLeftToRight ? Gravity.RIGHT : Gravity.LEFT));
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0F);
+				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,
+				1.0F);
 		lp.gravity = charSetView.getGravity();
-		
+
 		AndroidUIUtil.addView(defaultLinearLayout, charSetView, lp, viewRelation);
 	}
-	
+
 	private void addText(boolean isLeftToRight) {
-		textView = new TextView(ActivityManager.getActivity());
+		textView = new TextView(ActivityManager.applicationContext);
 		textView.setText(text);
 		textView.setSingleLine(true);
-		textView.setTextColor(isEnable?AndroidUIUtil.WIN_FONT_COLOR.toAndroid():AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
+		textView.setTextColor(isEnable ? AndroidUIUtil.WIN_FONT_COLOR.toAndroid()
+				: AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
 		UICore.setTextSize(textView, getScreenAdapterAdAPI());
 		textView.setMaxWidth(300);
 		textView.setEllipsize(TruncateAt.MARQUEE);
-		textView.setGravity(Gravity.CENTER_VERTICAL | (isLeftToRight?Gravity.LEFT:Gravity.RIGHT));
+		textView.setGravity(
+				Gravity.CENTER_VERTICAL | (isLeftToRight ? Gravity.LEFT : Gravity.RIGHT));
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		lp.gravity = textView.getGravity();
-		if(isLeftToRight){
+		if (isLeftToRight) {
 			lp.leftMargin = 5;
-		}else{
+		} else {
 			lp.rightMargin = 5;
 		}
 		AndroidUIUtil.addView(defaultLinearLayout, textView, lp, viewRelation);
 	}
 
 	private void addItemIcon(boolean isLeftToRight) {
-		Icon icon = isEnable?defaultIcon:disabledIcon;
-		if(icon == null){
+		Icon icon = isEnable ? defaultIcon : disabledIcon;
+		if (icon == null) {
 			return;
 		}
-		
-		ImageView iconView = new ImageView(ActivityManager.getActivity());
-		iconView.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon)icon, this));
-		
+
+		ImageView iconView = new ImageView(ActivityManager.applicationContext);
+		iconView.setImageDrawable(ImageIcon.getAdapterBitmapDrawableAdAPI((ImageIcon) icon, this));
+
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-		lp.gravity = (Gravity.CENTER_VERTICAL | (isLeftToRight?Gravity.LEFT:Gravity.RIGHT));
-		
+		lp.gravity = (Gravity.CENTER_VERTICAL | (isLeftToRight ? Gravity.LEFT : Gravity.RIGHT));
+
 		AndroidUIUtil.addView(defaultLinearLayout, iconView, lp, viewRelation);
 	}
 
 	private void addCheckIcon(boolean isLeftToRight) {
-		if(toggleIsSelected && 
-				((this instanceof JCheckBoxMenuItem) || (this instanceof JRadioButtonMenuItem))){
-			CheckBox checkView = new CheckBox(ActivityManager.getActivity());
+		if (toggleIsSelected && ((this instanceof JCheckBoxMenuItem)
+				|| (this instanceof JRadioButtonMenuItem))) {
+			CheckBox checkView = new CheckBox(ActivityManager.applicationContext);
 			checkView.setChecked(true);
-			
+
 			checkView.setFocusable(false);
 			checkView.setClickable(false);
 			checkView.setFocusableInTouchMode(false);
-			
+
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-			lp.gravity = (Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL | (isLeftToRight?Gravity.LEFT:Gravity.RIGHT));
-			
+			lp.gravity = (Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL
+					| (isLeftToRight ? Gravity.LEFT : Gravity.RIGHT));
+
 			AndroidUIUtil.addView(defaultLinearLayout, checkView, lp, viewRelation);
-		}else{
-			//空白块
-			ImageView imgView = new ImageView(ActivityManager.getActivity());
+		} else {
+			// 空白块
+			ImageView imgView = new ImageView(ActivityManager.applicationContext);
 			imgView.setMinimumHeight(1);
 			imgView.setMinimumWidth(AndroidUIUtil.getCheckBoxWidth());
-			
+
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-			lp.gravity = (Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL | (isLeftToRight?Gravity.LEFT:Gravity.RIGHT));
-			
+			lp.gravity = (Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL
+					| (isLeftToRight ? Gravity.LEFT : Gravity.RIGHT));
+
 			AndroidUIUtil.addView(defaultLinearLayout, imgView, lp, viewRelation);
 		}
 	}
 
-	public void processActionListenerAdAPI(ActionEvent event){
-		if(this instanceof JMenu){
+	public void processActionListenerAdAPI(ActionEvent event) {
+		if (this instanceof JMenu) {
 			getPeerAdAPI().requestFocus();
-		}else{
+		} else {
 			getPopupMenuAdAPI().dismissMenuAdAPI();
 			super.processActionListenerAdAPI(event);
 		}
 	}
-	
+
 	@Override
 	public void fireActionPerformed(ActionEvent event) {
 		super.fireActionPerformed(event);
 	}
-	
-	public void setSelected(boolean b){
-		if(b == toggleIsSelected){
+
+	public void setSelected(boolean b) {
+		if (b == toggleIsSelected) {
 			return;
 		}
-		
+
 		super.setSelected(b);
-		if(model != null){
+		if (model != null) {
 			model.setSelected(b);
 		}
-		
+
 		rebuildUI();
 	}
-	
+
 	public String getUIClassID() {
 		return uiClassID;
 	}
@@ -399,15 +406,16 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 	@Override
 	public void setEnabled(boolean b) {
 		super.setEnabled(b);
-		
-		if(defaultLinearLayout != null){
+
+		if (defaultLinearLayout != null) {
 			defaultLinearLayout.setClickable(isEnable);
 			defaultLinearLayout.setFocusable(isEnable);
 			defaultLinearLayout.setFocusableInTouchMode(false);
 		}
-	
-		if(textView != null){
-			textView.setTextColor(isEnable?AndroidUIUtil.WIN_FONT_COLOR.toAndroid():AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
+
+		if (textView != null) {
+			textView.setTextColor(isEnable ? AndroidUIUtil.WIN_FONT_COLOR.toAndroid()
+					: AndroidUIUtil.WIN_FONT_DISABLE_COLOR.toAndroid());
 		}
 	}
 
@@ -442,12 +450,10 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 	protected void actionPropertyChanged(Action action, String propertyName) {
 	}
 
-	public void processMouseEvent(MouseEvent e, MenuElement path[],
-			MenuSelectionManager manager) {
+	public void processMouseEvent(MouseEvent e, MenuElement path[], MenuSelectionManager manager) {
 	}
 
-	public void processKeyEvent(KeyEvent e, MenuElement path[],
-			MenuSelectionManager manager) {
+	public void processKeyEvent(KeyEvent e, MenuElement path[], MenuSelectionManager manager) {
 	}
 
 	public void processMenuDragMouseEvent(MenuDragMouseEvent e) {
@@ -508,8 +514,7 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 		return list.getListeners(MenuKeyListener.class);
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 	}
 
 	private void writeObject(ObjectOutputStream s) throws IOException {
@@ -527,7 +532,7 @@ public class JMenuItem extends AbstractButton implements Accessible, MenuElement
 	}
 
 	private JPopupMenu getPopupMenuAdAPI() {
-		return (JPopupMenu)getParent();
+		return (JPopupMenu) getParent();
 	}
 
 }

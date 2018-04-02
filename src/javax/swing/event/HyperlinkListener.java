@@ -29,9 +29,9 @@ import java.util.EventListener;
 /**
  * HyperlinkListener
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public interface HyperlinkListener extends EventListener {
 
-    void hyperlinkUpdate(HyperlinkEvent e);
+	void hyperlinkUpdate(HyperlinkEvent e);
 }

@@ -31,50 +31,43 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 
 /**
- * MenuDragMouseEvent is used to notify interested parties that
- * the menu element has received a MouseEvent forwarded to it
- * under drag conditions.
+ * MenuDragMouseEvent is used to notify interested parties that the menu element
+ * has received a MouseEvent forwarded to it under drag conditions.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Georges Saab
  */
 public class MenuDragMouseEvent extends MouseEvent {
-    private MenuElement path[];
-    private MenuSelectionManager manager;
+	private MenuElement path[];
+	private MenuSelectionManager manager;
 
-    public MenuDragMouseEvent(Component source, int id, long when,
-                              int modifiers, int x, int y, int clickCount,
-                              boolean popupTrigger, MenuElement p[],
-                              MenuSelectionManager m) {
-        super(source, id, when, modifiers, x, y, clickCount, popupTrigger);
-        path = p;
-        manager = m;
-    }
+	public MenuDragMouseEvent(Component source, int id, long when, int modifiers, int x, int y,
+			int clickCount, boolean popupTrigger, MenuElement p[], MenuSelectionManager m) {
+		super(source, id, when, modifiers, x, y, clickCount, popupTrigger);
+		path = p;
+		manager = m;
+	}
 
-    public MenuDragMouseEvent(Component source, int id, long when,
-                              int modifiers, int x, int y, int xAbs,
-                              int yAbs, int clickCount,
-                              boolean popupTrigger, MenuElement p[],
-                              MenuSelectionManager m) {
-        super(source, id, when, modifiers, x, y, xAbs, yAbs, clickCount,
-              popupTrigger, MouseEvent.NOBUTTON);
-        path = p;
-        manager = m;
-    }
+	public MenuDragMouseEvent(Component source, int id, long when, int modifiers, int x, int y,
+			int xAbs, int yAbs, int clickCount, boolean popupTrigger, MenuElement p[],
+			MenuSelectionManager m) {
+		super(source, id, when, modifiers, x, y, xAbs, yAbs, clickCount, popupTrigger,
+				MouseEvent.NOBUTTON);
+		path = p;
+		manager = m;
+	}
 
-    public MenuElement[] getPath() {
-        return path;
-    }
+	public MenuElement[] getPath() {
+		return path;
+	}
 
-    public MenuSelectionManager getMenuSelectionManager() {
-        return manager;
-    }
+	public MenuSelectionManager getMenuSelectionManager() {
+		return manager;
+	}
 }

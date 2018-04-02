@@ -41,45 +41,37 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
- * <code>JSeparator</code> provides a general purpose component for
- * implementing divider lines - most commonly used as a divider
- * between menu items that breaks them up into logical groupings.
- * Instead of using <code>JSeparator</code> directly,
- * you can use the <code>JMenu</code> or <code>JPopupMenu</code>
- * <code>addSeparator</code> method to create and add a separator.
- * <code>JSeparator</code>s may also be used elsewhere in a GUI
+ * <code>JSeparator</code> provides a general purpose component for implementing
+ * divider lines - most commonly used as a divider between menu items that
+ * breaks them up into logical groupings. Instead of using
+ * <code>JSeparator</code> directly, you can use the <code>JMenu</code> or
+ * <code>JPopupMenu</code> <code>addSeparator</code> method to create and add a
+ * separator. <code>JSeparator</code>s may also be used elsewhere in a GUI
  * wherever a visual divider is useful.
  *
  * <p>
  *
- * For more information and examples see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to Use Menus</a>,
- * a section in <em>The Java Tutorial.</em>
+ * For more information and examples see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to
+ * Use Menus</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *      attribute: isContainer false
- *    description: A divider between menu items.
+ * @beaninfo attribute: isContainer false description: A divider between menu
+ *           items.
  *
  * @author Georges Saab
  * @author Jeff Shapiro
  */
-public class JSeparator extends JComponent implements SwingConstants,
-		Accessible {
+public class JSeparator extends JComponent implements SwingConstants, Accessible {
 	private static final String uiClassID = "SeparatorUI";
 
 	private int orientation = HORIZONTAL;
@@ -104,24 +96,24 @@ public class JSeparator extends JComponent implements SwingConstants,
 	}
 
 	LinearLayout defaultLinearLayout;
-	
-	public View getPeerAdAPI(){
-		if(defaultLinearLayout == null){
-			defaultLinearLayout = new LinearLayout(ActivityManager.getActivity());
-			
+
+	public View getPeerAdAPI() {
+		if (defaultLinearLayout == null) {
+			defaultLinearLayout = new LinearLayout(ActivityManager.applicationContext);
+
 			final int px = AndroidUIUtil.dpToPx(1);
 
-			defaultLinearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT, px));
-			
-			if(orientation == HORIZONTAL){
+			defaultLinearLayout.setLayoutParams(
+					new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, px));
+
+			if (orientation == HORIZONTAL) {
 				defaultLinearLayout.setMinimumHeight(px);
-			}else{
+			} else {
 				defaultLinearLayout.setMinimumWidth(px);
 			}
 			setPeerAdAPI(defaultLinearLayout);
-			
-			defaultLinearLayout.setBackgroundDrawable(new Drawable(){
+
+			defaultLinearLayout.setBackgroundDrawable(new Drawable() {
 				@Override
 				public void draw(Canvas arg0) {
 					Paint paint = new Paint();
@@ -129,36 +121,38 @@ public class JSeparator extends JComponent implements SwingConstants,
 					paint.setStrokeWidth(px);
 					int width = defaultLinearLayout.getWidth();
 					int height = defaultLinearLayout.getHeight();
-					
-					if(JSeparator.this.orientation == HORIZONTAL){
+
+					if (JSeparator.this.orientation == HORIZONTAL) {
 						drawLine(arg0, paint, 1, 0, width - 2, 0);
-					}else{
+					} else {
 						drawLine(arg0, paint, 0, 1, 0, height - 2);
 					}
 				}
-				
-				private void drawLine(Canvas canvas, Paint paint, int x1, int y1, int x2, int y2){
-			    	canvas.drawPoint(x1, y1, paint);
-			    	canvas.drawLine(x1, y1, x2, y2, paint);
-			    	canvas.drawPoint(x2, y2, paint);
+
+				private void drawLine(Canvas canvas, Paint paint, int x1, int y1, int x2, int y2) {
+					canvas.drawPoint(x1, y1, paint);
+					canvas.drawLine(x1, y1, x2, y2, paint);
+					canvas.drawPoint(x2, y2, paint);
 				}
-				
+
 				@Override
 				public int getOpacity() {
 					return 0;
 				}
+
 				@Override
 				public void setAlpha(int arg0) {
 				}
+
 				@Override
 				public void setColorFilter(ColorFilter arg0) {
 				}
 			});
 		}
-		
+
 		return defaultLinearLayout;
 	}
-	
+
 	public void updateUI() {
 	}
 

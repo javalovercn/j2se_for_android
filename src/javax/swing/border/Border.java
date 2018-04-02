@@ -31,28 +31,25 @@ import java.awt.Insets;
 import android.view.View;
 
 /**
- * Interface describing an object capable of rendering a border
- * around the edges of a swing component.
- * For examples of using borders see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/misc/border.html">How to Use Borders</a>,
- * a section in <em>The Java Tutorial.</em>
+ * Interface describing an object capable of rendering a border around the edges
+ * of a swing component. For examples of using borders see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/border.html">How to Use
+ * Borders</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * In the Swing component set, borders supercede Insets as the
- * mechanism for creating a (decorated or plain) area around the
- * edge of a component.
+ * In the Swing component set, borders supercede Insets as the mechanism for
+ * creating a (decorated or plain) area around the edge of a component.
  * <p>
  * Usage Notes:
  * <ul>
- * <li>Use EmptyBorder to create a plain border (this mechanism
- *     replaces its predecessor, <code>setInsets</code>).
- * <li>Use CompoundBorder to nest multiple border objects, creating
- *     a single, combined border.
- * <li>Border instances are designed to be shared. Rather than creating
- *     a new border object using one of border classes, use the
- *     BorderFactory methods, which produces a shared instance of the
- *     common border types.
+ * <li>Use EmptyBorder to create a plain border (this mechanism replaces its
+ * predecessor, <code>setInsets</code>).
+ * <li>Use CompoundBorder to nest multiple border objects, creating a single,
+ * combined border.
+ * <li>Border instances are designed to be shared. Rather than creating a new
+ * border object using one of border classes, use the BorderFactory methods,
+ * which produces a shared instance of the common border types.
  * <li>Additional border styles include BevelBorder, SoftBevelBorder,
- *     EtchedBorder, LineBorder, TitledBorder, and MatteBorder.
+ * EtchedBorder, LineBorder, TitledBorder, and MatteBorder.
  * <li>To create a new border class, subclass AbstractBorder.
  * </ul>
  *
@@ -62,15 +59,14 @@ import android.view.View;
  * @see EmptyBorder
  * @see CompoundBorder
  */
-public interface Border
-{
-    void paintBorder(Component c, Graphics g, int x, int y, int width, int height);
+public interface Border {
+	void paintBorder(Component c, Graphics g, int x, int y, int width, int height);
 
-    Insets getBorderInsets(Component c);
+	Insets getBorderInsets(Component c);
 
-    boolean isBorderOpaque();
-    
-    public View getBorderViewAdAPI();
-    
-    public void setComponentViewAdAPI(View view, Component component);
+	boolean isBorderOpaque();
+
+	public View getBorderViewAdAPI();
+
+	public void setComponentViewAdAPI(View view, Component component);
 }

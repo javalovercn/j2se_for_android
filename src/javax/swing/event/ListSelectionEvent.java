@@ -34,47 +34,44 @@ import java.util.EventObject;
  * generally query the source of the event for the new selected status of each
  * potentially changed row.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Hans Muller
  * @author Ray Ryan
  * @see ListSelectionModel
  */
-public class ListSelectionEvent extends EventObject
-{
-    private int firstIndex;
-    private int lastIndex;
-    private boolean isAdjusting;
+public class ListSelectionEvent extends EventObject {
+	private int firstIndex;
+	private int lastIndex;
+	private boolean isAdjusting;
 
-    public ListSelectionEvent(Object source, int firstIndex, int lastIndex,
-                              boolean isAdjusting)
-    {
-        super(source);
-        this.firstIndex = firstIndex;
-        this.lastIndex = lastIndex;
-        this.isAdjusting = isAdjusting;
-    }
+	public ListSelectionEvent(Object source, int firstIndex, int lastIndex, boolean isAdjusting) {
+		super(source);
+		this.firstIndex = firstIndex;
+		this.lastIndex = lastIndex;
+		this.isAdjusting = isAdjusting;
+	}
 
-    public int getFirstIndex() { return firstIndex; }
+	public int getFirstIndex() {
+		return firstIndex;
+	}
 
-    public int getLastIndex() { return lastIndex; }
+	public int getLastIndex() {
+		return lastIndex;
+	}
 
-    public boolean getValueIsAdjusting() { return isAdjusting; }
+	public boolean getValueIsAdjusting() {
+		return isAdjusting;
+	}
 
-    public String toString() {
-        String properties =
-            " source=" + getSource() +
-            " firstIndex= " + firstIndex +
-            " lastIndex= " + lastIndex +
-            " isAdjusting= " + isAdjusting +
-            " ";
-        return getClass().getName() + "[" + properties + "]";
-    }
+	public String toString() {
+		String properties = " source=" + getSource() + " firstIndex= " + firstIndex + " lastIndex= "
+				+ lastIndex + " isAdjusting= " + isAdjusting + " ";
+		return getClass().getName() + "[" + properties + "]";
+	}
 }

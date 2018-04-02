@@ -25,8 +25,8 @@
 package javax.accessibility;
 
 /**
- * Encapsulation of a link, or set of links (e.g. client side imagemap)
- * in a Hypertext document
+ * Encapsulation of a link, or set of links (e.g. client side imagemap) in a
+ * Hypertext document
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
@@ -34,7 +34,7 @@ package javax.accessibility;
  * @see AccessibleText
  * @see AccessibleContext#getAccessibleText
  *
- * @author      Peter Korn
+ * @author Peter Korn
  */
 public abstract class AccessibleHyperlink implements AccessibleAction {
 

@@ -7,19 +7,19 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-public abstract class JHCComponent extends JComponent{
+public abstract class JHCComponent extends JComponent {
 	private Action action;
 	private PropertyChangeListener actionPropertyChangeListener;
 	protected String actionCommand;
-	
+
 	public Action getAction() {
 		return action;
 	}
-	
+
 	public String getActionCommand() {
 		return actionCommand;
 	}
-	
+
 	public void removeActionListener(ActionListener l) {
 		if ((l != null) && (getAction() == l)) {
 			setAction(null);
@@ -27,23 +27,24 @@ public abstract class JHCComponent extends JComponent{
 			list.remove(ActionListener.class, l);
 		}
 	}
-	
+
 	protected void configurePropertiesFromAction(Action a) {
 		setEnabled((a != null) ? a.isEnabled() : true);
-//		AbstractAction.setEnabledFromAction(this, a);need friend in same package.
-//		AbstractAction.setToolTipTextFromAction(this, a);need friend in same package.
+		// AbstractAction.setEnabledFromAction(this, a);need friend in same
+		// package.
+		// AbstractAction.setToolTipTextFromAction(this, a);need friend in same
+		// package.
 		setActionCommandFromAction(a);
 	}
-	
+
 	protected void setActionCommandFromAction(Action a) {
-		setActionCommand((a != null) ? (String) a
-				.getValue(Action.ACTION_COMMAND_KEY) : null);
+		setActionCommand((a != null) ? (String) a.getValue(Action.ACTION_COMMAND_KEY) : null);
 	}
-	
+
 	public void setActionCommand(String aCommand) {
 		actionCommand = aCommand;
 	}
-	
+
 	public void setAction(Action a) {
 		Action oldValue = getAction();
 		if (action == null || !action.equals(a)) {
@@ -52,7 +53,7 @@ public abstract class JHCComponent extends JComponent{
 				removeActionListener(oldValue);
 				actionPropertyChangeListener = null;
 			}
-//			configurePropertiesFromAction(action);
+			// configurePropertiesFromAction(action);
 			if (action != null) {
 				if (!isListener(ActionListener.class, action)) {
 					addActionListener(action);
@@ -60,9 +61,9 @@ public abstract class JHCComponent extends JComponent{
 			}
 		}
 	}
-	
+
 	protected abstract PropertyChangeListener createActionPropertyChangeListener(Action a);
-	
+
 	protected boolean isListener(Class c, ActionListener a) {
 		boolean isListener = false;
 		Object[] listeners = list.getListeners(c);
@@ -73,7 +74,7 @@ public abstract class JHCComponent extends JComponent{
 		}
 		return isListener;
 	}
-	
+
 	public void addActionListener(ActionListener l) {
 		list.add(ActionListener.class, l);
 	}

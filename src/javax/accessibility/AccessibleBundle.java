@@ -27,19 +27,20 @@ package javax.accessibility;
 import java.util.Locale;
 
 /**
- * <p>Base class used to maintain a strongly typed enumeration.  This is
- * the superclass of {@link AccessibleState} and {@link AccessibleRole}.
- * <p>The toDisplayString method allows you to obtain the localized string
- * for a locale independent key from a predefined ResourceBundle for the
- * keys defined in this class.  This localized string is intended to be
- * readable by humans.
+ * <p>
+ * Base class used to maintain a strongly typed enumeration. This is the
+ * superclass of {@link AccessibleState} and {@link AccessibleRole}.
+ * <p>
+ * The toDisplayString method allows you to obtain the localized string for a
+ * locale independent key from a predefined ResourceBundle for the keys defined
+ * in this class. This localized string is intended to be readable by humans.
  *
  * @see AccessibleRole
  * @see AccessibleState
  *
- * @author      Willie Walker
- * @author      Peter Korn
- * @author      Lynn Monsanto
+ * @author Willie Walker
+ * @author Peter Korn
+ * @author Lynn Monsanto
  */
 public abstract class AccessibleBundle {
 

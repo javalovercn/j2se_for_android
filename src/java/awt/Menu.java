@@ -36,26 +36,25 @@ import javax.accessibility.AccessibleContext;
 import javax.accessibility.AccessibleRole;
 
 /**
- * A <code>Menu</code> object is a pull-down menu component
- * that is deployed from a menu bar.
+ * A <code>Menu</code> object is a pull-down menu component that is deployed
+ * from a menu bar.
  * <p>
- * A menu can optionally be a <i>tear-off</i> menu. A tear-off menu
- * can be opened and dragged away from its parent menu bar or menu.
- * It remains on the screen after the mouse button has been released.
- * The mechanism for tearing off a menu is platform dependent, since
- * the look and feel of the tear-off menu is determined by its peer.
- * On platforms that do not support tear-off menus, the tear-off
- * property is ignored.
+ * A menu can optionally be a <i>tear-off</i> menu. A tear-off menu can be
+ * opened and dragged away from its parent menu bar or menu. It remains on the
+ * screen after the mouse button has been released. The mechanism for tearing
+ * off a menu is platform dependent, since the look and feel of the tear-off
+ * menu is determined by its peer. On platforms that do not support tear-off
+ * menus, the tear-off property is ignored.
  * <p>
- * Each item in a menu must belong to the <code>MenuItem</code>
- * class. It can be an instance of <code>MenuItem</code>, a submenu
- * (an instance of <code>Menu</code>), or a check box (an instance of
+ * Each item in a menu must belong to the <code>MenuItem</code> class. It can be
+ * an instance of <code>MenuItem</code>, a submenu (an instance of
+ * <code>Menu</code>), or a check box (an instance of
  * <code>CheckboxMenuItem</code>).
  *
  * @author Sami Shaio
- * @see     java.awt.MenuItem
- * @see     java.awt.CheckboxMenuItem
- * @since   JDK1.0
+ * @see java.awt.MenuItem
+ * @see java.awt.CheckboxMenuItem
+ * @since JDK1.0
  */
 public class Menu extends MenuItem implements MenuContainer, Accessible {
 	Vector items = new Vector();
@@ -163,12 +162,11 @@ public class Menu extends MenuItem implements MenuContainer, Accessible {
 	void deleteShortcut(MenuShortcut s) {
 	}
 
-	private void writeObject(java.io.ObjectOutputStream s)
-			throws java.io.IOException {
+	private void writeObject(java.io.ObjectOutputStream s) throws java.io.IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException, HeadlessException {
+	private void readObject(ObjectInputStream s)
+			throws IOException, ClassNotFoundException, HeadlessException {
 	}
 
 	public String paramString() {

@@ -52,32 +52,30 @@ import android.view.ViewGroup;
  * Defines common behaviors for buttons and menu items.
  * <p>
  * Buttons can be configured, and to some degree controlled, by
- * <code><a href="Action.html">Action</a></code>s.  Using an
- * <code>Action</code> with a button has many benefits beyond directly
- * configuring a button.  Refer to <a href="Action.html#buttonActions">
- * Swing Components Supporting <code>Action</code></a> for more
- * details, and you can find more information in <a
- * href="http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How
- * to Use Actions</a>, a section in <em>The Java Tutorial</em>.
+ * <code><a href="Action.html">Action</a></code>s. Using an <code>Action</code>
+ * with a button has many benefits beyond directly configuring a button. Refer
+ * to <a href="Action.html#buttonActions"> Swing Components Supporting
+ * <code>Action</code></a> for more details, and you can find more information
+ * in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/misc/action.html">How to Use
+ * Actions</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * For further information see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How to Use Buttons, Check Boxes, and Radio Buttons</a>,
- * a section in <em>The Java Tutorial</em>.
+ * For further information see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/button.html">How
+ * to Use Buttons, Check Boxes, and Radio Buttons</a>, a section in <em>The Java
+ * Tutorial</em>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Jeff Dinkins
  */
-public abstract class AbstractButton extends JHCComponent implements
-		ItemSelectable, SwingConstants {
+public abstract class AbstractButton extends JHCComponent
+		implements ItemSelectable, SwingConstants {
 	public static final String MODEL_CHANGED_PROPERTY = "model";
 	public static final String TEXT_CHANGED_PROPERTY = "text";
 	public static final String MNEMONIC_CHANGED_PROPERTY = "mnemonic";
@@ -163,11 +161,11 @@ public abstract class AbstractButton extends JHCComponent implements
 		boolean isChanged = (this.text != text);
 		Object oldValue = this.text;
 		this.text = text;
-		if(isChanged){
+		if (isChanged) {
 			firePropertyChange(TEXT_CHANGED_PROPERTY, oldValue, text);
 		}
 	}
-	
+
 	boolean toggleIsSelected;
 
 	public boolean isSelected() {
@@ -177,66 +175,67 @@ public abstract class AbstractButton extends JHCComponent implements
 	public void setSelected(boolean b) {
 		if (b != toggleIsSelected) {
 			toggleIsSelected = b;
-			
-			ItemEvent itemEvent = new ItemEvent(this, ItemEvent.ITEM_STATE_CHANGED, this, 
-					b?ItemEvent.SELECTED:ItemEvent.DESELECTED);
+
+			ItemEvent itemEvent = new ItemEvent(this, ItemEvent.ITEM_STATE_CHANGED, this,
+					b ? ItemEvent.SELECTED : ItemEvent.DESELECTED);
 			fireItemStateChanged(itemEvent);
-			
+
 			ChangeEvent changeEvent = new ChangeEvent(this);
-			fireChangeListener(changeEvent);//updateUI分散到实例内
+			fireChangeListener(changeEvent);// updateUI分散到实例内
 		}
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		boolean changed = (super.isEnable != enabled);
-		super.setEnabled(enabled);//supe call updateUI
-		
-		if(changed){
+		super.setEnabled(enabled);// supe call updateUI
+
+		if (changed) {
 			ChangeEvent changeEvent = new ChangeEvent(this);
 			fireChangeListener(changeEvent);
-			
+
 			refreshIconToMobile(null);
 		}
 	}
 
 	private final void refreshIconToMobile(final Icon oldValue) {
-		if(isEnable){
+		if (isEnable) {
 			firePropertyChange(ICON_CHANGED_PROPERTY, oldValue, defaultIcon);
-		}else{
+		} else {
 			firePropertyChange(DISABLED_ICON_CHANGED_PROPERTY, oldValue, disabledIcon);
 		}
 	}
-	
-	public void processActionListenerAdAPI(ActionEvent event){
-		try{
+
+	public void processActionListenerAdAPI(ActionEvent event) {
+		try {
 			ActionListener[] listeners = getActionListeners();
-			if(listeners != null){
-				for (int i = listeners.length - 1; i >= 0; i--) {//先入先执行，因为取出Listeners时，是先入为后.
+			if (listeners != null) {
+				for (int i = listeners.length - 1; i >= 0; i--) {// 先入先执行，因为取出Listeners时，是先入为后.
 					listeners[i].actionPerformed(event);
 				}
 			}
-		}catch (Throwable e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void setVisible(boolean isVisible){
+	public void setVisible(boolean isVisible) {
 		boolean changed = (isVisible != super.isVisible);
-		
-		if(changed){
+
+		if (changed) {
 			super.setVisible(isVisible);
 			updateUI();
 		}
 	}
-	
+
 	public void doClick() {
 		doClick(ThreadPriorityManager.UI_WAIT_MS);
 	}
 
 	public void doClick(int pressTime) {
-		if(getPeerAdAPI().performClick() == false){
-			//生成事件
-			fireActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, getActionCommand()));
+		if (getPeerAdAPI().performClick() == false) {
+			// 生成事件
+			fireActionPerformed(
+					new ActionEvent(this, ActionEvent.ACTION_PERFORMED, getActionCommand()));
 		}
 	}
 
@@ -266,22 +265,22 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	public void setIcon(Icon defaultIcon) {
-		if(defaultIcon == null || (defaultIcon instanceof ImageIcon) == false){
+		if (defaultIcon == null || (defaultIcon instanceof ImageIcon) == false) {
 			return;
 		}
 		Icon oldValue = this.defaultIcon;
 		this.defaultIcon = defaultIcon;
 		boolean isChanged = (oldValue != defaultIcon);
-		if(isChanged){
+		if (isChanged) {
 			refreshIconToMobile(oldValue);
 		}
-		//生成缺省的灰色图片
-		setDisabledIcon(ImageIcon.toGrayAdAPI((ImageIcon)defaultIcon));
+		// 生成缺省的灰色图片
+		setDisabledIcon(ImageIcon.toGrayAdAPI((ImageIcon) defaultIcon));
 		updateUI();
 	}
 
 	public Icon getPressedIcon() {
-		return isEnable?defaultIcon:((disabledIcon!=null)?disabledIcon:defaultIcon);
+		return isEnable ? defaultIcon : ((disabledIcon != null) ? disabledIcon : defaultIcon);
 	}
 
 	public void setPressedIcon(Icon pressedIcon) {
@@ -293,13 +292,13 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	public void setSelectedIcon(Icon selectedIcon) {
-		if(selectedIcon == null || (defaultIcon instanceof ImageIcon) == false){
+		if (selectedIcon == null || (defaultIcon instanceof ImageIcon) == false) {
 			return;
 		}
 
 		this.selectedIcon = selectedIcon;
-		//生成缺省的灰色图片
-		setDisabledSelectedIcon(ImageIcon.toGrayAdAPI((ImageIcon)selectedIcon));
+		// 生成缺省的灰色图片
+		setDisabledSelectedIcon(ImageIcon.toGrayAdAPI((ImageIcon) selectedIcon));
 		updateUI();
 	}
 
@@ -323,8 +322,8 @@ public abstract class AbstractButton extends JHCComponent implements
 
 	public Icon getDisabledIcon() {
 		if (disabledIcon == null) {
-			if(defaultIcon != null){
-				disabledIcon = ImageIcon.toGrayAdAPI((ImageIcon)defaultIcon);
+			if (defaultIcon != null) {
+				disabledIcon = ImageIcon.toGrayAdAPI((ImageIcon) defaultIcon);
 				refreshIconToMobile(null);
 			}
 		}
@@ -332,13 +331,13 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	public void setDisabledIcon(Icon disabledIcon) {
-		if(disabledIcon == null){
+		if (disabledIcon == null) {
 			return;
 		}
 		Icon oldValue = this.disabledIcon;
 		this.disabledIcon = disabledIcon;
 		boolean isChanged = (oldValue != this.disabledIcon);
-		if(isChanged){
+		if (isChanged) {
 			refreshIconToMobile(oldValue);
 		}
 		updateUI();
@@ -377,8 +376,7 @@ public abstract class AbstractButton extends JHCComponent implements
 	public void setHorizontalAlignment(int alignment) {
 		if (alignment == horizontalAlignment)
 			return;
-		horizontalAlignment = checkHorizontalKey(alignment,
-				"horizontalAlignment");
+		horizontalAlignment = checkHorizontalKey(alignment, "horizontalAlignment");
 	}
 
 	public int getVerticalTextPosition() {
@@ -388,8 +386,7 @@ public abstract class AbstractButton extends JHCComponent implements
 	public void setVerticalTextPosition(int textPosition) {
 		if (textPosition == verticalTextPosition)
 			return;
-		verticalTextPosition = checkVerticalKey(textPosition,
-				"verticalTextPosition");
+		verticalTextPosition = checkVerticalKey(textPosition, "verticalTextPosition");
 	}
 
 	public int getHorizontalTextPosition() {
@@ -399,8 +396,7 @@ public abstract class AbstractButton extends JHCComponent implements
 	public void setHorizontalTextPosition(int textPosition) {
 		if (textPosition == horizontalTextPosition)
 			return;
-		horizontalTextPosition = checkHorizontalKey(textPosition,
-				"horizontalTextPosition");
+		horizontalTextPosition = checkHorizontalKey(textPosition, "horizontalTextPosition");
 	}
 
 	public int getIconTextGap() {
@@ -412,8 +408,8 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	protected int checkHorizontalKey(int key, String exception) {
-		if ((key == LEFT) || (key == CENTER) || (key == RIGHT)
-				|| (key == LEADING) || (key == TRAILING)) {
+		if ((key == LEFT) || (key == CENTER) || (key == RIGHT) || (key == LEADING)
+				|| (key == TRAILING)) {
 			return key;
 		} else {
 			throw new IllegalArgumentException(exception);
@@ -439,7 +435,7 @@ public abstract class AbstractButton extends JHCComponent implements
 	public String getActionCommand() {
 		final ButtonModel btnModel = getModel();
 		String ac = null;
-		if(btnModel != null){
+		if (btnModel != null) {
 			ac = btnModel.getActionCommand();
 		}
 		if (ac == null) {
@@ -549,8 +545,7 @@ public abstract class AbstractButton extends JHCComponent implements
 		setMnemonic(vk);
 	}
 
-	public void setDisplayedMnemonicIndex(int index)
-			throws IllegalArgumentException {
+	public void setDisplayedMnemonicIndex(int index) throws IllegalArgumentException {
 		AndroidClassUtil.callEmptyMethod();
 	}
 
@@ -559,8 +554,7 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	private void updateDisplayedMnemonicIndex(String text, int mnemonic) {
-		setDisplayedMnemonicIndex(SwingUtilities.findDisplayedMnemonicIndex(
-				text, mnemonic));
+		setDisplayedMnemonicIndex(SwingUtilities.findDisplayedMnemonicIndex(text, mnemonic));
 	}
 
 	public void setMultiClickThreshhold(long threshhold) {
@@ -599,6 +593,7 @@ public abstract class AbstractButton extends JHCComponent implements
 
 	/**
 	 * Adds a ChangeListener to the button.
+	 * 
 	 * @param l
 	 */
 	public void addChangeListener(ChangeListener l) {
@@ -630,27 +625,27 @@ public abstract class AbstractButton extends JHCComponent implements
 	}
 
 	protected void fireChangeListener(ChangeEvent event) {
-		try{
+		try {
 			ChangeListener[] listener = getChangeListeners();
-			if(listener != null){
+			if (listener != null) {
 				for (int i = 0; i < listener.length; i++) {
 					listener[i].stateChanged(event);
 				}
 			}
-		}catch (Throwable e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected void fireItemStateChanged(ItemEvent event) {
-		try{
+		try {
 			ItemListener[] listener = getItemListeners();
-			if(listener != null){
+			if (listener != null) {
 				for (int i = 0; i < listener.length; i++) {
 					listener[i].itemStateChanged(event);
 				}
 			}
-		}catch (Throwable e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
@@ -697,7 +692,7 @@ public abstract class AbstractButton extends JHCComponent implements
 
 	protected void init(String text, Icon icon) {
 		setFont(UICore.buildDefaultDialogButtonFont());
-		
+
 		if (text != null) {
 			setText(text);
 		}
@@ -709,20 +704,21 @@ public abstract class AbstractButton extends JHCComponent implements
 		addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(AbstractButton.this instanceof JCheckBox || AbstractButton.this instanceof JCheckBoxMenuItem){
-					setSelected(!toggleIsSelected);//由各实现更新状态，及刷新
-				}else{
-					setSelected(true);//由各实现更新状态，及刷新
+				if (AbstractButton.this instanceof JCheckBox
+						|| AbstractButton.this instanceof JCheckBoxMenuItem) {
+					setSelected(!toggleIsSelected);// 由各实现更新状态，及刷新
+				} else {
+					setSelected(true);// 由各实现更新状态，及刷新
 				}
-				
+
 				ChangeEvent changeEvent = new ChangeEvent(e.getSource());
 				AbstractButton.this.fireChangeListener(changeEvent);
 			}
 		});
-		
+
 		setAlignmentX(LEFT_ALIGNMENT);
 		setAlignmentY(CENTER_ALIGNMENT);
-		
+
 		updateUI();
 	}
 
@@ -750,8 +746,7 @@ public abstract class AbstractButton extends JHCComponent implements
 		return handler;
 	}
 
-	class Handler implements ActionListener, ChangeListener, ItemListener,
-			Serializable {
+	class Handler implements ActionListener, ChangeListener, ItemListener, Serializable {
 		public void stateChanged(ChangeEvent e) {
 			fireStateChanged();
 			repaint();

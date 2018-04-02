@@ -27,23 +27,22 @@ package java.awt.peer;
 import java.awt.Insets;
 
 /**
- * The peer interface for {@link Container}. This is the parent interface
- * for all container like widgets.
+ * The peer interface for {@link Container}. This is the parent interface for
+ * all container like widgets.
  *
- * The peer interfaces are intended only for use in porting
- * the AWT. They are not intended for use by application
- * developers, and developers should not implement peers
- * nor invoke any of the peer methods directly on the peer
+ * The peer interfaces are intended only for use in porting the AWT. They are
+ * not intended for use by application developers, and developers should not
+ * implement peers nor invoke any of the peer methods directly on the peer
  * instances.
  */
 public interface ContainerPeer extends ComponentPeer {
-    Insets getInsets();
+	Insets getInsets();
 
-    void beginValidate();
+	void beginValidate();
 
-    void endValidate();
+	void endValidate();
 
-    void beginLayout();
+	void beginLayout();
 
-    void endLayout();
+	void endLayout();
 }

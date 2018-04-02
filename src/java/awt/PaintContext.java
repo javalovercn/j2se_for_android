@@ -28,15 +28,15 @@ import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 
 /**
- * The <code>PaintContext</code> interface defines the encapsulated
- * and optimized environment to generate color patterns in device
- * space for fill or stroke operations on a
- * {@link Graphics2D}.  The <code>PaintContext</code> provides
- * the necessary colors for <code>Graphics2D</code> operations in the
- * form of a {@link Raster} associated with a {@link ColorModel}.
- * The <code>PaintContext</code> maintains state for a particular paint
- * operation.  In a multi-threaded environment, several
- * contexts can exist simultaneously for a single {@link Paint} object.
+ * The <code>PaintContext</code> interface defines the encapsulated and
+ * optimized environment to generate color patterns in device space for fill or
+ * stroke operations on a {@link Graphics2D}. The <code>PaintContext</code>
+ * provides the necessary colors for <code>Graphics2D</code> operations in the
+ * form of a {@link Raster} associated with a {@link ColorModel}. The
+ * <code>PaintContext</code> maintains state for a particular paint operation.
+ * In a multi-threaded environment, several contexts can exist simultaneously
+ * for a single {@link Paint} object.
+ * 
  * @see Paint
  */
 

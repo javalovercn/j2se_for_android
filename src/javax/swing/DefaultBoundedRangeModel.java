@@ -34,14 +34,12 @@ import javax.swing.event.EventListenerList;
 /**
  * A generic implementation of BoundedRangeModel.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author David Kloba
  * @author Hans Muller
@@ -128,8 +126,8 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
 		return isAdjusting;
 	}
 
-	public void setRangeProperties(int newValue, int newExtent, int newMin,
-			int newMax, boolean adjusting) {
+	public void setRangeProperties(int newValue, int newExtent, int newMin, int newMax,
+			boolean adjusting) {
 		if (newMin > newMax) {
 			newMin = newMax;
 		}
@@ -148,9 +146,8 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
 			newExtent = 0;
 		}
 
-		boolean isChange = (newValue != value) || (newExtent != extent)
-				|| (newMin != min) || (newMax != max)
-				|| (adjusting != isAdjusting);
+		boolean isChange = (newValue != value) || (newExtent != extent) || (newMin != min)
+				|| (newMax != max) || (adjusting != isAdjusting);
 
 		if (isChange) {
 			value = newValue;

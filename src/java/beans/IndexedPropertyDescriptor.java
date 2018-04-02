@@ -28,12 +28,12 @@ import java.lang.ref.Reference;
 import java.lang.reflect.Method;
 
 /**
- * An IndexedPropertyDescriptor describes a property that acts like an
- * array and has an indexed read and/or indexed write method to access
- * specific elements of the array.
+ * An IndexedPropertyDescriptor describes a property that acts like an array and
+ * has an indexed read and/or indexed write method to access specific elements
+ * of the array.
  * <p>
  * An indexed property may also provide simple non-indexed read and write
- * methods.  If these are present, they read and write arrays of the type
+ * methods. If these are present, they read and write arrays of the type
  * returned by the indexed read method.
  */
 
@@ -48,22 +48,19 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
 		this(propertyName, beanClass, "", "", "", "");
 	}
 
-	public IndexedPropertyDescriptor(String propertyName, Class<?> beanClass,
-			String readMethodName, String writeMethodName,
-			String indexedReadMethodName, String indexedWriteMethodName)
+	public IndexedPropertyDescriptor(String propertyName, Class<?> beanClass, String readMethodName,
+			String writeMethodName, String indexedReadMethodName, String indexedWriteMethodName)
 			throws IntrospectionException {
 		super(propertyName, beanClass, readMethodName, writeMethodName);
 	}
 
-	public IndexedPropertyDescriptor(String propertyName, Method readMethod,
-			Method writeMethod, Method indexedReadMethod,
-			Method indexedWriteMethod) throws IntrospectionException {
+	public IndexedPropertyDescriptor(String propertyName, Method readMethod, Method writeMethod,
+			Method indexedReadMethod, Method indexedWriteMethod) throws IntrospectionException {
 		super(propertyName, readMethod, writeMethod);
 	}
 
-	IndexedPropertyDescriptor(Class<?> bean, String base, Method read,
-			Method write, Method readIndexed, Method writeIndexed)
-			throws IntrospectionException {
+	IndexedPropertyDescriptor(Class<?> bean, String base, Method read, Method write,
+			Method readIndexed, Method writeIndexed) throws IntrospectionException {
 		super(bean, base, read, write);
 	}
 
@@ -71,8 +68,7 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
 		return null;
 	}
 
-	public synchronized void setIndexedReadMethod(Method readMethod)
-			throws IntrospectionException {
+	public synchronized void setIndexedReadMethod(Method readMethod) throws IntrospectionException {
 	}
 
 	private void setIndexedReadMethod0(Method readMethod) {
@@ -108,8 +104,8 @@ public class IndexedPropertyDescriptor extends PropertyDescriptor {
 		return null;
 	}
 
-	private Class findIndexedPropertyType(Method indexedReadMethod,
-			Method indexedWriteMethod) throws IntrospectionException {
+	private Class findIndexedPropertyType(Method indexedReadMethod, Method indexedWriteMethod)
+			throws IntrospectionException {
 		return null;
 	}
 

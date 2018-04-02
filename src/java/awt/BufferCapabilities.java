@@ -37,8 +37,8 @@ public class BufferCapabilities implements Cloneable {
 	private ImageCapabilities backCaps;
 	private FlipContents flipContents;
 
-	public BufferCapabilities(ImageCapabilities frontCaps,
-			ImageCapabilities backCaps, FlipContents flipContents) {
+	public BufferCapabilities(ImageCapabilities frontCaps, ImageCapabilities backCaps,
+			FlipContents flipContents) {
 		this.frontCaps = frontCaps;
 		this.backCaps = backCaps;
 		this.flipContents = flipContents;
@@ -79,13 +79,10 @@ public class BufferCapabilities implements Cloneable {
 		private static int I_PRIOR = 2;
 		private static int I_COPIED = 3;
 
-		private static final String NAMES[] = { "undefined", "background",
-				"prior", "copied" };
+		private static final String NAMES[] = { "undefined", "background", "prior", "copied" };
 
-		public static final FlipContents UNDEFINED = new FlipContents(
-				I_UNDEFINED);
-		public static final FlipContents BACKGROUND = new FlipContents(
-				I_BACKGROUND);
+		public static final FlipContents UNDEFINED = new FlipContents(I_UNDEFINED);
+		public static final FlipContents BACKGROUND = new FlipContents(I_BACKGROUND);
 		public static final FlipContents PRIOR = new FlipContents(I_PRIOR);
 		public static final FlipContents COPIED = new FlipContents(I_COPIED);
 

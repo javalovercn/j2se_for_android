@@ -39,28 +39,27 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
 /**
-*
-* The <code>BufferedImage</code> subclass describes an {@link
-* java.awt.Image Image} with an accessible buffer of image data.
-* A <code>BufferedImage</code> is comprised of a {@link ColorModel} and a
-* {@link Raster} of image data.
-* The number and types of bands in the {@link SampleModel} of the
-* <code>Raster</code> must match the number and types required by the
-* <code>ColorModel</code> to represent its color and alpha components.
-* All <code>BufferedImage</code> objects have an upper left corner
-* coordinate of (0,&nbsp;0).  Any <code>Raster</code> used to construct a
-* <code>BufferedImage</code> must therefore have minX=0 and minY=0.
-*
-* <p>
-* This class relies on the data fetching and setting methods
-* of <code>Raster</code>,
-* and on the color characterization methods of <code>ColorModel</code>.
-*
-* @see ColorModel
-* @see Raster
-* @see WritableRaster
-*/
-public class BufferedImage extends java.awt.Image implements WritableRenderedImage, Transparency{
+ *
+ * The <code>BufferedImage</code> subclass describes an {@link java.awt.Image
+ * Image} with an accessible buffer of image data. A <code>BufferedImage</code>
+ * is comprised of a {@link ColorModel} and a {@link Raster} of image data. The
+ * number and types of bands in the {@link SampleModel} of the
+ * <code>Raster</code> must match the number and types required by the
+ * <code>ColorModel</code> to represent its color and alpha components. All
+ * <code>BufferedImage</code> objects have an upper left corner coordinate of
+ * (0,&nbsp;0). Any <code>Raster</code> used to construct a
+ * <code>BufferedImage</code> must therefore have minX=0 and minY=0.
+ *
+ * <p>
+ * This class relies on the data fetching and setting methods of
+ * <code>Raster</code>, and on the color characterization methods of
+ * <code>ColorModel</code>.
+ *
+ * @see ColorModel
+ * @see Raster
+ * @see WritableRaster
+ */
+public class BufferedImage extends java.awt.Image implements WritableRenderedImage, Transparency {
 	int imageType = TYPE_INT_ARGB;
 	public static final int TYPE_CUSTOM = 0;
 
@@ -113,34 +112,33 @@ public class BufferedImage extends java.awt.Image implements WritableRenderedIma
 	}
 
 	WritableRaster raster;
-	
+
 	public BufferedImage(int width, int height, int imageType) {
 		switch (imageType) {
-			case TYPE_INT_ARGB: {
-				colorModel = ColorModel.getRGBdefault();
-				raster = colorModel.createCompatibleWritableRaster(width, height);
-				break;
-			}
-			case TYPE_INT_RGB: {
-				colorModel = ColorModel.getRGBdefault();
-				raster = colorModel.createCompatibleWritableRaster(width, height);
-				break;
-			}
-			default:
-				throw new IllegalArgumentException("Unknown image type " + imageType);
+		case TYPE_INT_ARGB: {
+			colorModel = ColorModel.getRGBdefault();
+			raster = colorModel.createCompatibleWritableRaster(width, height);
+			break;
+		}
+		case TYPE_INT_RGB: {
+			colorModel = ColorModel.getRGBdefault();
+			raster = colorModel.createCompatibleWritableRaster(width, height);
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unknown image type " + imageType);
 		}
 
 		this.imageType = imageType;
 		bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 	}
-	
-	public BufferedImage (ColorModel cm,
-            WritableRaster raster,
-            boolean isRasterPremultiplied,
-            Hashtable<?,?> properties) {
+
+	public BufferedImage(ColorModel cm, WritableRaster raster, boolean isRasterPremultiplied,
+			Hashtable<?, ?> properties) {
 		this.bitmap = null;
-		
+
 	}
+
 	public int getType() {
 		return imageType;
 	}
@@ -161,10 +159,10 @@ public class BufferedImage extends java.awt.Image implements WritableRenderedIma
 		return bitmap.getPixel(x, y);
 	}
 
-	public int[] getRGB(int startX, int startY, int w, int h, int[] rgbArray,
-			int offset, int scansize) {
-		if(rgbArray == null){
-			rgbArray = new int[offset+scansize * h];
+	public int[] getRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset,
+			int scansize) {
+		if (rgbArray == null) {
+			rgbArray = new int[offset + scansize * h];
 		}
 		bitmap.getPixels(rgbArray, offset, scansize, startX, startY, w, h);
 		return rgbArray;
@@ -178,35 +176,35 @@ public class BufferedImage extends java.awt.Image implements WritableRenderedIma
 	// }
 
 	public Graphics2D createGraphics() {
-		return (Graphics2D)getGraphics();
-    }
-	
-	public synchronized void setRGB(int x, int y, int rgb) {
-        raster.setDataElements(x, y, colorModel.getDataElements(rgb, null));
-    }
+		return (Graphics2D) getGraphics();
+	}
 
-    public void setRGB(int startX, int startY, int w, int h,
-                        int[] rgbArray, int offset, int scansize) {
-//        int yoff  = offset;
-//        int off;
-//        Object pixel = null;
-//
-//        for (int y = startY; y < startY+h; y++, yoff+=scansize) {
-//            off = yoff;
-//            for (int x = startX; x < startX+w; x++) {
-//                pixel = colorModel.getDataElements(rgbArray[off++], pixel);xx
-//                raster.setDataElements(x, y, pixel);
-//            }
-//        }
-    	if(imageType == TYPE_INT_RGB){
-    		for (int i = 0; i < rgbArray.length; i++) {
+	public synchronized void setRGB(int x, int y, int rgb) {
+		raster.setDataElements(x, y, colorModel.getDataElements(rgb, null));
+	}
+
+	public void setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset,
+			int scansize) {
+		// int yoff = offset;
+		// int off;
+		// Object pixel = null;
+		//
+		// for (int y = startY; y < startY+h; y++, yoff+=scansize) {
+		// off = yoff;
+		// for (int x = startX; x < startX+w; x++) {
+		// pixel = colorModel.getDataElements(rgbArray[off++], pixel);xx
+		// raster.setDataElements(x, y, pixel);
+		// }
+		// }
+		if (imageType == TYPE_INT_RGB) {
+			for (int i = 0; i < rgbArray.length; i++) {
 				rgbArray[i] |= 0xFF000000;
 			}
-    	}
-    	
+		}
+
 		bitmap.setPixels(rgbArray, offset, scansize, startX, startY, w, h);
-    }
-	
+	}
+
 	public int getWidth() {
 		return bitmap.getWidth();
 	}
@@ -250,139 +248,169 @@ public class BufferedImage extends java.awt.Image implements WritableRenderedIma
 	public String toString() {
 		return "BufferedImage";
 	}
+
 	@Override
 	public Vector<RenderedImage> getSources() {
 		return null;
 	}
+
 	@Override
 	public Object getProperty(String name) {
 		return null;
 	}
+
 	@Override
 	public String[] getPropertyNames() {
 		return null;
 	}
-	
+
 	ColorModel colorModel;
-	
+
 	@Override
 	public ColorModel getColorModel() {
-		if(colorModel == null){
+		if (colorModel == null) {
 			colorModel = new DirectColorModel(24, 0xFF0000, 0xFF00, 0xFF);
 		}
 		return colorModel;
 	}
+
 	@Override
 	public SampleModel getSampleModel() {
 		return null;
 	}
+
 	@Override
 	public int getMinX() {
 		return 0;
 	}
+
 	@Override
 	public int getMinY() {
 		return 0;
 	}
+
 	@Override
 	public int getNumXTiles() {
 		return 0;
 	}
+
 	@Override
 	public int getNumYTiles() {
 		return 0;
 	}
+
 	@Override
 	public int getMinTileX() {
 		return 0;
 	}
+
 	@Override
 	public int getMinTileY() {
 		return 0;
 	}
+
 	@Override
 	public int getTileWidth() {
 		return 0;
 	}
+
 	@Override
 	public int getTileHeight() {
 		return 0;
 	}
+
 	@Override
 	public int getTileGridXOffset() {
 		return 0;
 	}
+
 	@Override
 	public int getTileGridYOffset() {
 		return 0;
 	}
+
 	@Override
 	public Raster getTile(int tileX, int tileY) {
 		return null;
 	}
+
 	@Override
 	public Raster getData() {
 		return null;
 	}
+
 	@Override
 	public Raster getData(Rectangle rect) {
 		return null;
 	}
+
 	@Override
 	public WritableRaster copyData(WritableRaster raster) {
 		return null;
 	}
+
 	@Override
 	public int getTransparency() {
 		return 0;
 	}
+
 	@Override
 	public void addTileObserver(TileObserver to) {
 	}
+
 	@Override
 	public void removeTileObserver(TileObserver to) {
 	}
+
 	@Override
 	public WritableRaster getWritableTile(int tileX, int tileY) {
 		return null;
 	}
+
 	@Override
 	public void releaseWritableTile(int tileX, int tileY) {
 	}
+
 	@Override
 	public boolean isTileWritable(int tileX, int tileY) {
 		return false;
 	}
+
 	@Override
 	public Point[] getWritableTileIndices() {
 		return null;
 	}
+
 	@Override
 	public boolean hasTileWriters() {
 		return false;
 	}
+
 	@Override
 	public void setData(Raster r) {
 	}
+
 	@Override
 	public Bitmap getBitmapAdAPI() {
 		return bitmap;
 	}
+
 	@Override
 	public ImageProducer getSource() {
 		return null;
 	}
-	
+
 	Graphics graphics;
-	
+
 	@Override
 	public Graphics getGraphics() {
-		if(graphics == null){
-			Object[] para = {bitmap, new Canvas(bitmap)};
+		if (graphics == null) {
+			Object[] para = { bitmap, new Canvas(bitmap) };
 			graphics = new CanvasGraphics(para, ScreenAdapter.initScreenAdapterFromContext(false));
 		}
 		return graphics;
 	}
+
 	@Override
 	public Object getProperty(String name, ImageObserver observer) {
 		return null;

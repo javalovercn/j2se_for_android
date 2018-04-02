@@ -27,14 +27,14 @@ package javax.accessibility;
 import java.util.Vector;
 
 /**
- * Class AccessibleStateSet determines a component's state set.  The state set
- * of a component is a set of AccessibleState objects and descriptions. E.G., The
- * current overall state of the object, such as whether it is enabled,
- * has focus, etc.
+ * Class AccessibleStateSet determines a component's state set. The state set of
+ * a component is a set of AccessibleState objects and descriptions. E.G., The
+ * current overall state of the object, such as whether it is enabled, has
+ * focus, etc.
  *
  * @see AccessibleState
  *
- * @author      Willie Walker
+ * @author Willie Walker
  */
 public class AccessibleStateSet {
 	protected Vector<AccessibleState> states = null;
@@ -119,10 +119,7 @@ public class AccessibleStateSet {
 		if ((states != null) && (states.size() > 0)) {
 			ret = ((AccessibleState) (states.elementAt(0))).toDisplayString();
 			for (int i = 1; i < states.size(); i++) {
-				ret = ret
-						+ ","
-						+ ((AccessibleState) (states.elementAt(i)))
-								.toDisplayString();
+				ret = ret + "," + ((AccessibleState) (states.elementAt(i))).toDisplayString();
 			}
 		}
 		return ret;

@@ -54,19 +54,19 @@ import hc.android.HCRUtil;
 /**
  * Manages all the <code>ToolTips</code> in the system.
  * <p>
- * ToolTipManager contains numerous properties for configuring how long it
- * will take for the tooltips to become visible, and how long till they
- * hide. Consider a component that has a different tooltip based on where
- * the mouse is, such as JTree. When the mouse moves into the JTree and
- * over a region that has a valid tooltip, the tooltip will become
- * visibile after <code>initialDelay</code> milliseconds. After
- * <code>dismissDelay</code> milliseconds the tooltip will be hidden. If
- * the mouse is over a region that has a valid tooltip, and the tooltip
- * is currently visible, when the mouse moves to a region that doesn't have
- * a valid tooltip the tooltip will be hidden. If the mouse then moves back
- * into a region that has a valid tooltip within <code>reshowDelay</code>
- * milliseconds, the tooltip will immediately be shown, otherwise the
- * tooltip will be shown again after <code>initialDelay</code> milliseconds.
+ * ToolTipManager contains numerous properties for configuring how long it will
+ * take for the tooltips to become visible, and how long till they hide.
+ * Consider a component that has a different tooltip based on where the mouse
+ * is, such as JTree. When the mouse moves into the JTree and over a region that
+ * has a valid tooltip, the tooltip will become visibile after
+ * <code>initialDelay</code> milliseconds. After <code>dismissDelay</code>
+ * milliseconds the tooltip will be hidden. If the mouse is over a region that
+ * has a valid tooltip, and the tooltip is currently visible, when the mouse
+ * moves to a region that doesn't have a valid tooltip the tooltip will be
+ * hidden. If the mouse then moves back into a region that has a valid tooltip
+ * within <code>reshowDelay</code> milliseconds, the tooltip will immediately be
+ * shown, otherwise the tooltip will be shown again after
+ * <code>initialDelay</code> milliseconds.
  *
  * @see JComponent#createToolTip
  * @author Dave Moore
@@ -79,7 +79,7 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 	JComponent insideComponent;
 	MouseEvent mouseEvent;
 	boolean showImmediately;
-	
+
 	private JComponent current;
 	private Toast toast;
 	private HCTimer time = new HCTimer("", 1000, true) {
@@ -88,16 +88,16 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 			showTipWindow();
 		}
 	};
-	
+
 	ToolTipManager() {
 	}
 
 	boolean isEnableTip = true;
-	
+
 	public void setEnabled(boolean flag) {
 		isEnableTip = flag;
-		if(isEnableTip){
-		}else{
+		if (isEnableTip) {
+		} else {
 			hideTipWindow();
 		}
 	}
@@ -114,7 +114,7 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 	}
 
 	public void setInitialDelay(int milliseconds) {
-		if(milliseconds < 300){
+		if (milliseconds < 300) {
 			milliseconds = 300;
 		}
 		time.setIntervalMS(milliseconds);
@@ -140,58 +140,65 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 
 	void showTipWindow() {
 		JComponent toDisp = current;
-		if(toDisp != null){
-			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+		if (toDisp != null) {
+			AndroidUIUtil.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					JComponent toDisp = current;
-					if(toDisp != null){
+					if (toDisp != null) {
 						synchronized (time) {
 							String tip = toDisp.getToolTipText();
-							toast = new Toast(ActivityManager.getActivity());
+							toast = new Toast(ActivityManager.applicationContext);
 							View focusableView = toDisp.getFocusablePeerViewAdAPI();
-							if(focusableView == null){
+							if (focusableView == null) {
 								focusableView = toDisp.getPeerAdAPI();
 							}
 							int[] xy = new int[2];
 							focusableView.getLocationOnScreen(xy);
 							Point point = new Point(xy[0], xy[1]);
 							toast.setDuration(Toast.LENGTH_LONG);
-							
-							int halfWidth = focusableView.getWidth()/2;
-							int halfHeight = focusableView.getHeight()/2;
-							
-//							int centerX = point.x + halfWidth;
+
+							int halfWidth = focusableView.getWidth() / 2;
+							int halfHeight = focusableView.getHeight() / 2;
+
+							// int centerX = point.x + halfWidth;
 							int centerY = point.y + halfHeight;
-//							boolean biggerHalfX = centerX > J2SEInitor.screenWidth/2;
-							boolean biggerHalfY = centerY > J2SEInitor.screenHeight/2;
-							
-							TextView tv = new TextView(ActivityManager.getActivity());
+							// boolean biggerHalfX = centerX >
+							// J2SEInitor.screenWidth/2;
+							boolean biggerHalfY = centerY > J2SEInitor.screenHeight / 2;
+
+							TextView tv = new TextView(ActivityManager.applicationContext);
 							tv.setBackgroundResource(HCRUtil.getResource(HCRUtil.R_drawable_tip));
 							tv.setTextColor(AndroidUIUtil.WINDOW_TIP_FONT_COLOR.toAndroid());
-							UICore.setTextSize(tv, UICore.getDefaultDialogInputFontForSystemUIOnly(), -2, J2SEInitor.getAndroidServerScreenAdapter());
-							if(AndroidUIUtil.containsHTML(tip)){
+							UICore.setTextSize(tv,
+									UICore.getDefaultDialogInputFontForSystemUIOnly(), -2,
+									J2SEInitor.getAndroidServerScreenAdapter());
+							if (AndroidUIUtil.containsHTML(tip)) {
 								tv.setText(Html.fromHtml(tip));
-							}else{
+							} else {
 								tv.setText(tip);
 							}
 							Dimension dimension = new Dimension();
 							AndroidUIUtil.getViewWidthAndHeight(tv, dimension);
-//							System.out.println("halfWidth : " + halfWidth + ", halfHeight : " 
-//									+ halfHeight + ", pX : " + point.x + ", pY : " + point.y + ", tip w : " + dimension.width + ", h :  "+ dimension.height +
-//									focusableView.getClass().getName());
-							
-							//需要考虑Toast自身部分的高宽
-							int pixel = AndroidUIUtil.dpToPx(15);//假定为边框为15dp
-							
-							toast.setGravity(Gravity.TOP | Gravity.LEFT, 
-									point.x, biggerHalfY?(point.y - dimension.height - pixel*2):(point.y + halfHeight*2 + pixel));
-							
+							// System.out.println("halfWidth : " + halfWidth +
+							// ", halfHeight : "
+							// + halfHeight + ", pX : " + point.x + ", pY : " +
+							// point.y + ", tip w : " + dimension.width + ", h :
+							// "+ dimension.height +
+							// focusableView.getClass().getName());
+
+							// 需要考虑Toast自身部分的高宽
+							int pixel = AndroidUIUtil.dpToPx(15);// 假定为边框为15dp
+
+							toast.setGravity(Gravity.TOP | Gravity.LEFT, point.x,
+									biggerHalfY ? (point.y - dimension.height - pixel * 2)
+											: (point.y + halfHeight * 2 + pixel));
+
 							toast.setView(tv);
 							toast.show();
-							
+
 							time.setEnable(false);
-					   }
+						}
 					}
 				}
 			});
@@ -201,12 +208,12 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 	void hideTipWindow() {
 		time.setEnable(false);
 
-		if(toast != null){
-			ActivityManager.getActivity().runOnUiThread(new Runnable() {
+		if (toast != null) {
+			AndroidUIUtil.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					synchronized (time) {
-						if(toast != null){
+						if (toast != null) {
 							toast.cancel();
 							toast = null;
 						}
@@ -224,7 +231,7 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 
 	public void registerComponent(JComponent component) {
 		unregisterComponent(null);
-		if(isEnableTip){
+		if (isEnableTip) {
 			this.current = component;
 			time.setEnable(true);
 			time.resetTimerCount();
@@ -233,7 +240,7 @@ public class ToolTipManager extends MouseAdapter implements MouseMotionListener 
 
 	public void unregisterComponent(JComponent component) {
 		this.current = null;
-		
+
 		hideTipWindow();
 	}
 

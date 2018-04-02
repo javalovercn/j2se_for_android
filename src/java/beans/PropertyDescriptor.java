@@ -28,8 +28,8 @@ import java.lang.ref.Reference;
 import java.lang.reflect.Method;
 
 /**
- * A PropertyDescriptor describes one property that a Java Bean
- * exports via a pair of accessor methods.
+ * A PropertyDescriptor describes one property that a Java Bean exports via a
+ * pair of accessor methods.
  */
 public class PropertyDescriptor extends FeatureDescriptor {
 
@@ -51,13 +51,12 @@ public class PropertyDescriptor extends FeatureDescriptor {
 		this(propertyName, beanClass, "", "");
 	}
 
-	public PropertyDescriptor(String propertyName, Class<?> beanClass,
-			String readMethodName, String writeMethodName)
-			throws IntrospectionException {
+	public PropertyDescriptor(String propertyName, Class<?> beanClass, String readMethodName,
+			String writeMethodName) throws IntrospectionException {
 	}
 
-	public PropertyDescriptor(String propertyName, Method readMethod,
-			Method writeMethod) throws IntrospectionException {
+	public PropertyDescriptor(String propertyName, Method readMethod, Method writeMethod)
+			throws IntrospectionException {
 	}
 
 	PropertyDescriptor(Class<?> bean, String base, Method read, Method write)
@@ -79,16 +78,14 @@ public class PropertyDescriptor extends FeatureDescriptor {
 		return null;
 	}
 
-	public synchronized void setReadMethod(Method readMethod)
-			throws IntrospectionException {
+	public synchronized void setReadMethod(Method readMethod) throws IntrospectionException {
 	}
 
 	public synchronized Method getWriteMethod() {
 		return null;
 	}
 
-	public synchronized void setWriteMethod(Method writeMethod)
-			throws IntrospectionException {
+	public synchronized void setWriteMethod(Method writeMethod) throws IntrospectionException {
 	}
 
 	private Method getReadMethod0() {

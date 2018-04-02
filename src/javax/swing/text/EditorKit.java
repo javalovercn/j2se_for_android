@@ -35,63 +35,59 @@ import javax.swing.Action;
 import javax.swing.JEditorPane;
 
 /**
- * Establishes the set of things needed by a text component
- * to be a reasonably functioning editor for some <em>type</em>
- * of text content.  The EditorKit acts as a factory for some
- * kind of policy.  For example, an implementation
- * of html and rtf can be provided that is replaceable
- * with other implementations.
+ * Establishes the set of things needed by a text component to be a reasonably
+ * functioning editor for some <em>type</em> of text content. The EditorKit acts
+ * as a factory for some kind of policy. For example, an implementation of html
+ * and rtf can be provided that is replaceable with other implementations.
  * <p>
- * A kit can safely store editing state as an instance
- * of the kit will be dedicated to a text component.
- * New kits will normally be created by cloning a
- * prototype kit.  The kit will have it's
- * <code>setComponent</code> method called to establish
- * it's relationship with a JTextComponent.
+ * A kit can safely store editing state as an instance of the kit will be
+ * dedicated to a text component. New kits will normally be created by cloning a
+ * prototype kit. The kit will have it's <code>setComponent</code> method called
+ * to establish it's relationship with a JTextComponent.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public abstract class EditorKit implements Cloneable, Serializable {
 
-    public EditorKit() {
-    }
+	public EditorKit() {
+	}
 
-    public Object clone() {
-        Object o;
-        try {
-            o = super.clone();
-        } catch (CloneNotSupportedException cnse) {
-            o = null;
-        }
-        return o;
-    }
+	public Object clone() {
+		Object o;
+		try {
+			o = super.clone();
+		} catch (CloneNotSupportedException cnse) {
+			o = null;
+		}
+		return o;
+	}
 
-    public void install(JEditorPane c) {
-    }
+	public void install(JEditorPane c) {
+	}
 
-    public void deinstall(JEditorPane c) {
-    }
+	public void deinstall(JEditorPane c) {
+	}
 
-    public abstract String getContentType();
+	public abstract String getContentType();
 
-    public abstract ViewFactory getViewFactory();
+	public abstract ViewFactory getViewFactory();
 
-    public abstract Action[] getActions();
+	public abstract Action[] getActions();
 
-    public abstract Caret createCaret();
+	public abstract Caret createCaret();
 
-    public abstract Document createDefaultDocument();
+	public abstract Document createDefaultDocument();
 
-    public abstract void read(InputStream in, Document doc, int pos)
-        throws IOException, BadLocationException;
+	public abstract void read(InputStream in, Document doc, int pos)
+			throws IOException, BadLocationException;
 
-    public abstract void write(OutputStream out, Document doc, int pos, int len)
-        throws IOException, BadLocationException;
+	public abstract void write(OutputStream out, Document doc, int pos, int len)
+			throws IOException, BadLocationException;
 
-    public abstract void read(Reader in, Document doc, int pos)
-        throws IOException, BadLocationException;
+	public abstract void read(Reader in, Document doc, int pos)
+			throws IOException, BadLocationException;
 
-    public abstract void write(Writer out, Document doc, int pos, int len)
-        throws IOException, BadLocationException;
+	public abstract void write(Writer out, Document doc, int pos, int len)
+			throws IOException, BadLocationException;
 
 }

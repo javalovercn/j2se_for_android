@@ -45,28 +45,22 @@ import javax.swing.plaf.MenuBarUI;
  * object, its associated <code>JPopupMenu</code> is displayed, allowing the
  * user to select one of the <code>JMenuItems</code> on it.
  * <p>
- * For information and examples of using menu bars see
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to Use Menus</a>,
- * a section in <em>The Java Tutorial.</em>
+ * For information and examples of using menu bars see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/menu.html">How to
+ * Use Menus</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer true
- * description: A container for holding and displaying menus.
+ * @beaninfo attribute: isContainer true description: A container for holding
+ *           and displaying menus.
  *
  * @author Georges Saab
  * @author David Karlton
@@ -180,8 +174,7 @@ public class JMenuBar extends JComponent implements Accessible, MenuElement {
 			MenuSelectionManager manager) {
 	}
 
-	public void processKeyEvent(KeyEvent e, MenuElement path[],
-			MenuSelectionManager manager) {
+	public void processKeyEvent(KeyEvent e, MenuElement path[], MenuSelectionManager manager) {
 	}
 
 	public void menuSelectionChanged(boolean isIncluded) {
@@ -206,13 +199,12 @@ public class JMenuBar extends JComponent implements Accessible, MenuElement {
 		return accessibleContext;
 	}
 
-	protected boolean processKeyBinding(KeyStroke ks, KeyEvent e,
-			int condition, boolean pressed) {
+	protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
 		return false;
 	}
 
-	static boolean processBindingForKeyStrokeRecursive(MenuElement elem,
-			KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
+	static boolean processBindingForKeyStrokeRecursive(MenuElement elem, KeyStroke ks, KeyEvent e,
+			int condition, boolean pressed) {
 		return false;
 	}
 
@@ -225,7 +217,6 @@ public class JMenuBar extends JComponent implements Accessible, MenuElement {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 	}
 }

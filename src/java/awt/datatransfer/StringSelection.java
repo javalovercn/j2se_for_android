@@ -28,60 +28,55 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * A <code>Transferable</code> which implements the capability required
- * to transfer a <code>String</code>.
+ * A <code>Transferable</code> which implements the capability required to
+ * transfer a <code>String</code>.
  *
  * This <code>Transferable</code> properly supports
- * <code>DataFlavor.stringFlavor</code>
- * and all equivalent flavors. Support for
- * <code>DataFlavor.plainTextFlavor</code>
- * and all equivalent flavors is <b>deprecated</b>. No other
- * <code>DataFlavor</code>s are supported.
+ * <code>DataFlavor.stringFlavor</code> and all equivalent flavors. Support for
+ * <code>DataFlavor.plainTextFlavor</code> and all equivalent flavors is
+ * <b>deprecated</b>. No other <code>DataFlavor</code>s are supported.
  *
  * @see java.awt.datatransfer.DataFlavor#stringFlavor
  * @see java.awt.datatransfer.DataFlavor#plainTextFlavor
  */
 public class StringSelection implements Transferable, ClipboardOwner {
 
-    private static final int STRING = 0;
-    private static final int PLAIN_TEXT = 1;
+	private static final int STRING = 0;
+	private static final int PLAIN_TEXT = 1;
 
-    private static final DataFlavor[] flavors = {
-        DataFlavor.stringFlavor,
-        DataFlavor.plainTextFlavor 
-    };
+	private static final DataFlavor[] flavors = { DataFlavor.stringFlavor,
+			DataFlavor.plainTextFlavor };
 
-    private String data;
+	private String data;
 
-    public StringSelection(String data) {
-        this.data = data;
-    }
+	public StringSelection(String data) {
+		this.data = data;
+	}
 
-    public DataFlavor[] getTransferDataFlavors() {
-        return (DataFlavor[])flavors.clone();
-    }
+	public DataFlavor[] getTransferDataFlavors() {
+		return (DataFlavor[]) flavors.clone();
+	}
 
-    public boolean isDataFlavorSupported(DataFlavor flavor) {
-        for (int i = 0; i < flavors.length; i++) {
-            if (flavor.equals(flavors[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		for (int i = 0; i < flavors.length; i++) {
+			if (flavor.equals(flavors[i])) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public Object getTransferData(DataFlavor flavor)
-        throws UnsupportedFlavorException, IOException
-    {
-        if (flavor.equals(flavors[STRING])) {
-            return (Object)data;
-        } else if (flavor.equals(flavors[PLAIN_TEXT])) {
-            return new StringReader(data == null ? "" : data);
-        } else {
-            throw new UnsupportedFlavorException(flavor);
-        }
-    }
+	public Object getTransferData(DataFlavor flavor)
+			throws UnsupportedFlavorException, IOException {
+		if (flavor.equals(flavors[STRING])) {
+			return (Object) data;
+		} else if (flavor.equals(flavors[PLAIN_TEXT])) {
+			return new StringReader(data == null ? "" : data);
+		} else {
+			throw new UnsupportedFlavorException(flavor);
+		}
+	}
 
-    public void lostOwnership(Clipboard clipboard, Transferable contents) {
-    }
+	public void lostOwnership(Clipboard clipboard, Transferable contents) {
+	}
 }

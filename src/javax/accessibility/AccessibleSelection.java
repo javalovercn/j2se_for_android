@@ -25,24 +25,23 @@
 package javax.accessibility;
 
 /**
- * This AccessibleSelection interface
- * provides the standard mechanism for an assistive technology to determine
- * what the current selected children are, as well as modify the selection set.
- * Any object that has children that can be selected should support
- * the AccessibleSelection interface.  Applications can determine if an object supports the
- * AccessibleSelection interface by first obtaining its AccessibleContext (see
- * {@link Accessible}) and then calling the
- * {@link AccessibleContext#getAccessibleSelection} method.
- * If the return value is not null, the object supports this interface.
+ * This AccessibleSelection interface provides the standard mechanism for an
+ * assistive technology to determine what the current selected children are, as
+ * well as modify the selection set. Any object that has children that can be
+ * selected should support the AccessibleSelection interface. Applications can
+ * determine if an object supports the AccessibleSelection interface by first
+ * obtaining its AccessibleContext (see {@link Accessible}) and then calling the
+ * {@link AccessibleContext#getAccessibleSelection} method. If the return value
+ * is not null, the object supports this interface.
  *
  * @see Accessible
  * @see Accessible#getAccessibleContext
  * @see AccessibleContext
  * @see AccessibleContext#getAccessibleSelection
  *
- * @author      Peter Korn
- * @author      Hans Muller
- * @author      Willie Walker
+ * @author Peter Korn
+ * @author Hans Muller
+ * @author Willie Walker
  */
 public interface AccessibleSelection {
 

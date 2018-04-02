@@ -35,8 +35,8 @@ import java.util.Hashtable;
  * The FeatureDescriptor class is the common baseclass for PropertyDescriptor,
  * EventSetDescriptor, and MethodDescriptor, etc.
  * <p>
- * It supports some common information that can be set and retrieved for
- * any of the introspection descriptors.
+ * It supports some common information that can be set and retrieved for any of
+ * the introspection descriptors.
  * <p>
  * In addition it provides an extension mechanism so that arbitrary
  * attribute/value pairs can be associated with a design feature.

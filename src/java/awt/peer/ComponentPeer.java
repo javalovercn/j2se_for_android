@@ -47,107 +47,105 @@ import java.awt.image.VolatileImage;
 /**
  * The peer interface for {@link Component}. This is the top level peer
  * interface for widgets and defines the bulk of methods for AWT component
- * peers. Most component peers have to implement this interface (via one
- * of the subinterfaces), except menu components, which implement
+ * peers. Most component peers have to implement this interface (via one of the
+ * subinterfaces), except menu components, which implement
  * {@link MenuComponentPeer}.
  *
- * The peer interfaces are intended only for use in porting
- * the AWT. They are not intended for use by application
- * developers, and developers should not implement peers
- * nor invoke any of the peer methods directly on the peer
+ * The peer interfaces are intended only for use in porting the AWT. They are
+ * not intended for use by application developers, and developers should not
+ * implement peers nor invoke any of the peer methods directly on the peer
  * instances.
  */
 
 public interface ComponentPeer {
 
-    public static final int SET_LOCATION = 1;
-    public static final int SET_SIZE = 2;
-    public static final int SET_BOUNDS = 3;
-    public static final int SET_CLIENT_SIZE = 4;
-    public static final int RESET_OPERATION = 5;
-    public static final int NO_EMBEDDED_CHECK = (1 << 14);
-    public static final int DEFAULT_OPERATION = SET_BOUNDS;
+	public static final int SET_LOCATION = 1;
+	public static final int SET_SIZE = 2;
+	public static final int SET_BOUNDS = 3;
+	public static final int SET_CLIENT_SIZE = 4;
+	public static final int RESET_OPERATION = 5;
+	public static final int NO_EMBEDDED_CHECK = (1 << 14);
+	public static final int DEFAULT_OPERATION = SET_BOUNDS;
 
-    boolean isObscured();
+	boolean isObscured();
 
-    boolean canDetermineObscurity();
+	boolean canDetermineObscurity();
 
-    void setVisible(boolean v);
+	void setVisible(boolean v);
 
-    void setEnabled(boolean e);
+	void setEnabled(boolean e);
 
-    void paint(Graphics g);
+	void paint(Graphics g);
 
-    void print(Graphics g);
+	void print(Graphics g);
 
-    void setBounds(int x, int y, int width, int height, int op);
+	void setBounds(int x, int y, int width, int height, int op);
 
-    void handleEvent(AWTEvent e);
+	void handleEvent(AWTEvent e);
 
-    void coalescePaintEvent(PaintEvent e);
+	void coalescePaintEvent(PaintEvent e);
 
-    Point getLocationOnScreen();
+	Point getLocationOnScreen();
 
-    Dimension getPreferredSize();
+	Dimension getPreferredSize();
 
-    Dimension getMinimumSize();
+	Dimension getMinimumSize();
 
-    ColorModel getColorModel();
+	ColorModel getColorModel();
 
-    Toolkit getToolkit();
+	Toolkit getToolkit();
 
-    Graphics getGraphics();
+	Graphics getGraphics();
 
-    FontMetrics getFontMetrics(Font font);
+	FontMetrics getFontMetrics(Font font);
 
-    void dispose();
+	void dispose();
 
-    void setForeground(Color c);
+	void setForeground(Color c);
 
-    void setBackground(Color c);
+	void setBackground(Color c);
 
-    void setFont(Font f);
+	void setFont(Font f);
 
-    void updateCursorImmediately();
+	void updateCursorImmediately();
 
-    boolean requestFocus(Component lightweightChild, boolean temporary,
-                         boolean focusedWindowChangeAllowed, long time,
-                         Object cause);//MODI CausedFocusEvent.Cause
+	boolean requestFocus(Component lightweightChild, boolean temporary,
+			boolean focusedWindowChangeAllowed, long time, Object cause);// MODI
+																			// CausedFocusEvent.Cause
 
-    boolean isFocusable();
+	boolean isFocusable();
 
-    Image createImage(ImageProducer producer);
+	Image createImage(ImageProducer producer);
 
-    Image createImage(int width, int height);
+	Image createImage(int width, int height);
 
-    VolatileImage createVolatileImage(int width, int height);
+	VolatileImage createVolatileImage(int width, int height);
 
-    boolean prepareImage(Image img, int w, int h, ImageObserver o);
+	boolean prepareImage(Image img, int w, int h, ImageObserver o);
 
-    int checkImage(Image img, int w, int h, ImageObserver o);
+	int checkImage(Image img, int w, int h, ImageObserver o);
 
-    GraphicsConfiguration getGraphicsConfiguration();
+	GraphicsConfiguration getGraphicsConfiguration();
 
-    boolean handlesWheelScrolling();
+	boolean handlesWheelScrolling();
 
-    void createBuffers(int numBuffers, BufferCapabilities caps)
-         throws AWTException;
+	void createBuffers(int numBuffers, BufferCapabilities caps) throws AWTException;
 
-    Image getBackBuffer();
+	Image getBackBuffer();
 
-    void flip(int x1, int y1, int x2, int y2, BufferCapabilities.FlipContents flipAction);
+	void flip(int x1, int y1, int x2, int y2, BufferCapabilities.FlipContents flipAction);
 
-    void destroyBuffers();
+	void destroyBuffers();
 
-    void reparent(ContainerPeer newContainer);
+	void reparent(ContainerPeer newContainer);
 
-    boolean isReparentSupported();
+	boolean isReparentSupported();
 
-    void layout();
+	void layout();
 
-    void applyShape(javax.swing.plaf.synth.Region shape);
+	void applyShape(javax.swing.plaf.synth.Region shape);
 
-    void setZOrder(ComponentPeer above);
+	void setZOrder(ComponentPeer above);
 
-    boolean updateGraphicsData(GraphicsConfiguration gc);
+	boolean updateGraphicsData(GraphicsConfiguration gc);
 }

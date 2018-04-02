@@ -27,43 +27,36 @@ package java.awt;
 import hc.android.AndroidClassUtil;
 
 /**
- * The <code>MediaTracker</code> class is a utility class to track
- * the status of a number of media objects. Media objects could
- * include audio clips as well as images, though currently only
- * images are supported.
+ * The <code>MediaTracker</code> class is a utility class to track the status of
+ * a number of media objects. Media objects could include audio clips as well as
+ * images, though currently only images are supported.
  * <p>
- * To use a media tracker, create an instance of
- * <code>MediaTracker</code> and call its <code>addImage</code>
- * method for each image to be tracked. In addition, each image can
- * be assigned a unique identifier. This identifier controls the
- * priority order in which the images are fetched. It can also be used
- * to identify unique subsets of the images that can be waited on
- * independently. Images with a lower ID are loaded in preference to
- * those with a higher ID number.
+ * To use a media tracker, create an instance of <code>MediaTracker</code> and
+ * call its <code>addImage</code> method for each image to be tracked. In
+ * addition, each image can be assigned a unique identifier. This identifier
+ * controls the priority order in which the images are fetched. It can also be
+ * used to identify unique subsets of the images that can be waited on
+ * independently. Images with a lower ID are loaded in preference to those with
+ * a higher ID number.
  *
  * <p>
  *
- * Tracking an animated image
- * might not always be useful
- * due to the multi-part nature of animated image
- * loading and painting,
- * but it is supported.
- * <code>MediaTracker</code> treats an animated image
- * as completely loaded
- * when the first frame is completely loaded.
- * At that point, the <code>MediaTracker</code>
- * signals any waiters
- * that the image is completely loaded.
- * If no <code>ImageObserver</code>s are observing the image
- * when the first frame has finished loading,
- * the image might flush itself
- * to conserve resources
- * (see {@link Image#flush()}).
+ * Tracking an animated image might not always be useful due to the multi-part
+ * nature of animated image loading and painting, but it is supported.
+ * <code>MediaTracker</code> treats an animated image as completely loaded when
+ * the first frame is completely loaded. At that point, the
+ * <code>MediaTracker</code> signals any waiters that the image is completely
+ * loaded. If no <code>ImageObserver</code>s are observing the image when the
+ * first frame has finished loading, the image might flush itself to conserve
+ * resources (see {@link Image#flush()}).
  *
  * <p>
  * Here is an example of using <code>MediaTracker</code>:
  * <p>
- * <hr><blockquote><pre>
+ * <hr>
+ * <blockquote>
+ * 
+ * <pre>
  * import java.applet.Applet;
  * import java.awt.Color;
  * import java.awt.Image;
@@ -71,96 +64,97 @@ import hc.android.AndroidClassUtil;
  * import java.awt.MediaTracker;
  *
  * public class ImageBlaster extends Applet implements Runnable {
- *      MediaTracker tracker;
- *      Image bg;
- *      Image anim[] = new Image[5];
- *      int index;
- *      Thread animator;
+ * 	MediaTracker tracker;
+ * 	Image bg;
+ * 	Image anim[] = new Image[5];
+ * 	int index;
+ * 	Thread animator;
  *
- *      // Get the images for the background (id == 0)
- *      // and the animation frames (id == 1)
- *      // and add them to the MediaTracker
- *      public void init() {
- *          tracker = new MediaTracker(this);
- *          bg = getImage(getDocumentBase(),
- *                  "images/background.gif");
- *          tracker.addImage(bg, 0);
- *          for (int i = 0; i < 5; i++) {
- *              anim[i] = getImage(getDocumentBase(),
- *                      "images/anim"+i+".gif");
- *              tracker.addImage(anim[i], 1);
- *          }
- *      }
+ * 	// Get the images for the background (id == 0)
+ * 	// and the animation frames (id == 1)
+ * 	// and add them to the MediaTracker
+ * 	public void init() {
+ * 		tracker = new MediaTracker(this);
+ * 		bg = getImage(getDocumentBase(), "images/background.gif");
+ * 		tracker.addImage(bg, 0);
+ * 		for (int i = 0; i < 5; i++) {
+ * 			anim[i] = getImage(getDocumentBase(), "images/anim" + i + ".gif");
+ * 			tracker.addImage(anim[i], 1);
+ * 		}
+ * 	}
  *
- *      // Start the animation thread.
- *      public void start() {
- *          animator = new Thread(this);
- *          animator.start();
- *      }
+ * 	// Start the animation thread.
+ * 	public void start() {
+ * 		animator = new Thread(this);
+ * 		animator.start();
+ * 	}
  *
- *      // Stop the animation thread.
- *      public void stop() {
- *          animator = null;
- *      }
+ * 	// Stop the animation thread.
+ * 	public void stop() {
+ * 		animator = null;
+ * 	}
  *
- *      // Run the animation thread.
- *      // First wait for the background image to fully load
- *      // and paint.  Then wait for all of the animation
- *      // frames to finish loading. Finally, loop and
- *      // increment the animation frame index.
- *      public void run() {
- *          try {
- *              tracker.waitForID(0);
- *              tracker.waitForID(1);
- *          } catch (InterruptedException e) {
- *              return;
- *          }
- *          Thread me = Thread.currentThread();
- *          while (animator == me) {
- *              try {
- *                  Thread.sleep(100);
- *              } catch (InterruptedException e) {
- *                  break;
- *              }
- *              synchronized (this) {
- *                  index++;
- *                  if (index >= anim.length) {
- *                      index = 0;
- *                  }
- *              }
- *              repaint();
- *          }
- *      }
+ * 	// Run the animation thread.
+ * 	// First wait for the background image to fully load
+ * 	// and paint. Then wait for all of the animation
+ * 	// frames to finish loading. Finally, loop and
+ * 	// increment the animation frame index.
+ * 	public void run() {
+ * 		try {
+ * 			tracker.waitForID(0);
+ * 			tracker.waitForID(1);
+ * 		} catch (InterruptedException e) {
+ * 			return;
+ * 		}
+ * 		Thread me = Thread.currentThread();
+ * 		while (animator == me) {
+ * 			try {
+ * 				Thread.sleep(100);
+ * 			} catch (InterruptedException e) {
+ * 				break;
+ * 			}
+ * 			synchronized (this) {
+ * 				index++;
+ * 				if (index >= anim.length) {
+ * 					index = 0;
+ * 				}
+ * 			}
+ * 			repaint();
+ * 		}
+ * 	}
  *
- *      // The background image fills the frame so we
- *      // don't need to clear the applet on repaints.
- *      // Just call the paint method.
- *      public void update(Graphics g) {
- *          paint(g);
- *      }
+ * 	// The background image fills the frame so we
+ * 	// don't need to clear the applet on repaints.
+ * 	// Just call the paint method.
+ * 	public void update(Graphics g) {
+ * 		paint(g);
+ * 	}
  *
- *      // Paint a large red rectangle if there are any errors
- *      // loading the images.  Otherwise always paint the
- *      // background so that it appears incrementally as it
- *      // is loading.  Finally, only paint the current animation
- *      // frame if all of the frames (id == 1) are done loading,
- *      // so that we don't get partial animations.
- *      public void paint(Graphics g) {
- *          if ((tracker.statusAll(false) & MediaTracker.ERRORED) != 0) {
- *              g.setColor(Color.red);
- *              g.fillRect(0, 0, size().width, size().height);
- *              return;
- *          }
- *          g.drawImage(bg, 0, 0, this);
- *          if (tracker.statusID(1, false) == MediaTracker.COMPLETE) {
- *              g.drawImage(anim[index], 10, 10, this);
- *          }
- *      }
+ * 	// Paint a large red rectangle if there are any errors
+ * 	// loading the images. Otherwise always paint the
+ * 	// background so that it appears incrementally as it
+ * 	// is loading. Finally, only paint the current animation
+ * 	// frame if all of the frames (id == 1) are done loading,
+ * 	// so that we don't get partial animations.
+ * 	public void paint(Graphics g) {
+ * 		if ((tracker.statusAll(false) & MediaTracker.ERRORED) != 0) {
+ * 			g.setColor(Color.red);
+ * 			g.fillRect(0, 0, size().width, size().height);
+ * 			return;
+ * 		}
+ * 		g.drawImage(bg, 0, 0, this);
+ * 		if (tracker.statusID(1, false) == MediaTracker.COMPLETE) {
+ * 			g.drawImage(anim[index], 10, 10, this);
+ * 		}
+ * 	}
  * }
- * </pre></blockquote><hr>
+ * </pre>
+ * 
+ * </blockquote>
+ * <hr>
  *
- * @author      Jim Graham
- * @since       JDK1.0
+ * @author Jim Graham
+ * @since JDK1.0
  */
 public class MediaTracker implements java.io.Serializable {
 
@@ -246,8 +240,7 @@ public class MediaTracker implements java.io.Serializable {
 		waitForID(id, 0);
 	}
 
-	public synchronized boolean waitForID(int id, long ms)
-			throws InterruptedException {
+	public synchronized boolean waitForID(int id, long ms) throws InterruptedException {
 		AndroidClassUtil.callEmptyMethod();
 		return false;
 	}
@@ -269,8 +262,7 @@ public class MediaTracker implements java.io.Serializable {
 		AndroidClassUtil.callEmptyMethod();
 	}
 
-	public synchronized void removeImage(Image image, int id, int width,
-			int height) {
+	public synchronized void removeImage(Image image, int id, int width, int height) {
 		AndroidClassUtil.callEmptyMethod();
 	}
 

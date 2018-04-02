@@ -24,7 +24,6 @@
  */
 package javax.accessibility;
 
-
 /**
  * <P>The AccessibleTextSequence provides information about
  * a contiguous sequence of text.
@@ -39,11 +38,11 @@ package javax.accessibility;
  */
 
 /**
- * This class collects together key details of a span of text.  It
- * is used by implementors of the class <code>AccessibleExtendedText</code> in
- * order to return the requested triplet of a <code>String</code>, and the
- * start and end indicies/offsets into a larger body of text that the
- * <code>String</code> comes from.
+ * This class collects together key details of a span of text. It is used by
+ * implementors of the class <code>AccessibleExtendedText</code> in order to
+ * return the requested triplet of a <code>String</code>, and the start and end
+ * indicies/offsets into a larger body of text that the <code>String</code>
+ * comes from.
  *
  * @see javax.accessibility.AccessibleExtendedText
  */

@@ -26,6 +26,8 @@ package javax.swing;
 
 import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
+import hc.android.AndroidUIUtil;
+
 import java.awt.Graphics;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -51,52 +53,47 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 /**
- * A component that visually displays the progress of some task.  As the task
- * progresses towards completion, the progress bar displays the
- * task's percentage of completion.
- * This percentage is typically represented visually by a rectangle which
- * starts out empty and gradually becomes filled in as the task progresses.
- * In addition, the progress bar can display a textual representation of this
- * percentage.
+ * A component that visually displays the progress of some task. As the task
+ * progresses towards completion, the progress bar displays the task's
+ * percentage of completion. This percentage is typically represented visually
+ * by a rectangle which starts out empty and gradually becomes filled in as the
+ * task progresses. In addition, the progress bar can display a textual
+ * representation of this percentage.
  * <p>
- * {@code JProgressBar} uses a {@code BoundedRangeModel} as its data model,
- * with the {@code value} property representing the "current" state of the task,
- * and the {@code minimum} and {@code maximum} properties representing the
- * beginning and end points, respectively.
+ * {@code JProgressBar} uses a {@code BoundedRangeModel} as its data model, with
+ * the {@code value} property representing the "current" state of the task, and
+ * the {@code minimum} and {@code maximum} properties representing the beginning
+ * and end points, respectively.
  * <p>
- * To indicate that a task of unknown length is executing,
- * you can put a progress bar into indeterminate mode.
- * While the bar is in indeterminate mode,
- * it animates constantly to show that work is occurring.
- * As soon as you can determine the task's length and amount of progress,
- * you should update the progress bar's value
- * and switch it back to determinate mode.
+ * To indicate that a task of unknown length is executing, you can put a
+ * progress bar into indeterminate mode. While the bar is in indeterminate mode,
+ * it animates constantly to show that work is occurring. As soon as you can
+ * determine the task's length and amount of progress, you should update the
+ * progress bar's value and switch it back to determinate mode.
  *
  * <p>
  *
- * Here is an example of creating a progress bar,
- * where <code>task</code> is an object (representing some piece of work)
- * which returns information about the progress of the task:
+ * Here is an example of creating a progress bar, where <code>task</code> is an
+ * object (representing some piece of work) which returns information about the
+ * progress of the task:
  *
- *<pre>
- *progressBar = new JProgressBar(0, task.getLengthOfTask());
- *progressBar.setValue(0);
- *progressBar.setStringPainted(true);
- *</pre>
+ * <pre>
+ * progressBar = new JProgressBar(0, task.getLengthOfTask());
+ * progressBar.setValue(0);
+ * progressBar.setStringPainted(true);
+ * </pre>
  *
- * Here is an example of querying the current state of the task, and using
- * the returned value to update the progress bar:
+ * Here is an example of querying the current state of the task, and using the
+ * returned value to update the progress bar:
  *
- *<pre>
- *progressBar.setValue(task.getCurrent());
- *</pre>
+ * <pre>
+ * progressBar.setValue(task.getCurrent());
+ * </pre>
  *
- * Here is an example of putting a progress bar into
- * indeterminate mode,
- * and then switching back to determinate mode
- * once the length of the task is known:
+ * Here is an example of putting a progress bar into indeterminate mode, and
+ * then switching back to determinate mode once the length of the task is known:
  *
- *<pre>
+ * <pre>
  *progressBar = new JProgressBar();
  *<em>...//when the task of (initially) unknown length begins:</em>
  *progressBar.setIndeterminate(true);
@@ -104,43 +101,39 @@ import android.widget.ProgressBar;
  *progressBar.setMaximum(newLength);
  *progressBar.setValue(newValue);
  *progressBar.setIndeterminate(false);
- *</pre>
+ * </pre>
  *
  * <p>
  *
- * For complete examples and further documentation see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/progress.html" target="_top">How to Monitor Progress</a>,
- * a section in <em>The Java Tutorial.</em>
+ * For complete examples and further documentation see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/progress.html"
+ * target="_top">How to Monitor Progress</a>, a section in <em>The Java
+ * Tutorial.</em>
  *
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see javax.swing.plaf.basic.BasicProgressBarUI
  * @see javax.swing.BoundedRangeModel
  * @see javax.swing.SwingWorker
  *
- * @beaninfo
- *      attribute: isContainer false
- *    description: A component that displays an integer value.
+ * @beaninfo attribute: isContainer false description: A component that displays
+ *           an integer value.
  *
  * @author Michael C. Albers
  * @author Kathy Walrath
  */
 public class JProgressBar extends JComponent implements SwingConstants, Accessible {
 	protected ProgressBar progressBar;
-	
+
 	/**
 	 * @see #getUIClassID
 	 */
@@ -179,7 +172,7 @@ public class JProgressBar extends JComponent implements SwingConstants, Accessib
 	}
 
 	public JProgressBar(int orient, int min, int max) {
-		setOrientation(orient); 
+		setOrientation(orient);
 		setModel(new DefaultBoundedRangeModel(min, 0, min, max));
 		initBar();
 		updateUI();
@@ -191,40 +184,44 @@ public class JProgressBar extends JComponent implements SwingConstants, Accessib
 	}
 
 	private void initBar() {
-		progressBar = new ProgressBar(ActivityManager.getActivity(), null, android.R.attr.progressBarStyleHorizontal){
+		progressBar = new ProgressBar(ActivityManager.applicationContext, null,
+				android.R.attr.progressBarStyleHorizontal) {
 			Paint mPaint;
-	        Rect rect = new Rect();  
-			protected void onDraw(Canvas canvas) {  
-		        super.onDraw(canvas);  
-		        
-		        if(paintString && progressString != null){
-			        getPaint().getTextBounds(progressString, 0, progressString.length(), rect);  
-			        int x = (getWidth() / 2) - rect.centerX();  
-			        int y = (getHeight() / 2) - rect.centerY();  
-			        canvas.drawText(progressString, x, y, getPaint());  
-		        }
-		    }
-			
-			private Paint getPaint(){
-				if(mPaint == null){
-					mPaint = new Paint();  
+			Rect rect = new Rect();
+
+			protected void onDraw(Canvas canvas) {
+				super.onDraw(canvas);
+
+				if (paintString && progressString != null) {
+					getPaint().getTextBounds(progressString, 0, progressString.length(), rect);
+					int x = (getWidth() / 2) - rect.centerX();
+					int y = (getHeight() / 2) - rect.centerY();
+					canvas.drawText(progressString, x, y, getPaint());
+				}
+			}
+
+			private Paint getPaint() {
+				if (mPaint == null) {
+					mPaint = new Paint();
 					mPaint.setTypeface(JProgressBar.this.getFont().typeface);
-					mPaint.setTextSize(getScreenAdapterAdAPI().getFontSizeInPixel(JProgressBar.this.getFont().getSize()));
+					mPaint.setTextSize(getScreenAdapterAdAPI()
+							.getFontSizeInPixel(JProgressBar.this.getFont().getSize()));
 					mPaint.setAntiAlias(true);
-			        mPaint.setColor(Color.BLACK);
+					mPaint.setColor(Color.BLACK);
 				}
 				return mPaint;
 			}
 		};
-		
-		progressBar.setMinimumHeight((int)getScreenAdapterAdAPI().getFontSizeInPixel(getFont().getSize()));
+
+		progressBar.setMinimumHeight(
+				(int) getScreenAdapterAdAPI().getFontSizeInPixel(getFont().getSize()));
 		progressBar.setFocusable(false);
 		progressBar.setClickable(false);
 		progressBar.setMax(getModel().getMaximum());
-		progressBar.setProgressDrawable(ActivityManager.getActivity().getResources().getDrawable(
-				HCRUtil.getResource(HCRUtil.R_drawable_progress_bar)));
-		
-		LinearLayout layout = new LinearLayout(ActivityManager.getActivity());
+		progressBar.setProgressDrawable(ActivityManager.applicationContext.getResources()
+				.getDrawable(HCRUtil.getResource(HCRUtil.R_drawable_progress_bar)));
+
+		LinearLayout layout = new LinearLayout(ActivityManager.applicationContext);
 		{
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -280,8 +277,7 @@ public class JProgressBar extends JComponent implements SwingConstants, Accessib
 	public void setString(String s) {
 		String oldValue = progressString;
 		progressString = s;
-		if (progressString == null || oldValue == null
-				|| !progressString.equals(oldValue)) {
+		if (progressString == null || oldValue == null || !progressString.equals(oldValue)) {
 			progressBar.postInvalidate();
 		}
 	}
@@ -364,10 +360,11 @@ public class JProgressBar extends JComponent implements SwingConstants, Accessib
 	public void setModel(BoundedRangeModel newModel) {
 		BoundedRangeModel oldModel = getModel();
 
-        if(newModel.getMinimum() != 0){
-        	LogManager.errToLog("javax.swing.JProgressBar must set min to zero in Android server, there is a difference with standard J2SE.");
-        }
-        
+		if (newModel.getMinimum() != 0) {
+			LogManager.errToLog(
+					"javax.swing.JProgressBar must set min to zero in Android server, there is a difference with standard J2SE.");
+		}
+
 		if (newModel != oldModel) {
 			if (oldModel != null) {
 				oldModel.removeChangeListener(changeListener);
@@ -402,8 +399,8 @@ public class JProgressBar extends JComponent implements SwingConstants, Accessib
 	public void setValue(final int n) {
 		BoundedRangeModel brm = getModel();
 		brm.setValue(n);
-		
-		ActivityManager.sysActivity.runOnUiThread(new Runnable() {
+
+		AndroidUIUtil.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				progressBar.setProgress(n);

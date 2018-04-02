@@ -33,44 +33,37 @@ import javax.swing.text.Document;
 import android.text.InputType;
 
 /**
- * <code>JPasswordField</code> is a lightweight component that allows
- * the editing of a single line of text where the view indicates
- * something was typed, but does not show the original characters.
- * You can find further information and examples in
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/textfield.html">How to Use Text Fields</a>,
- * a section in <em>The Java Tutorial.</em>
+ * <code>JPasswordField</code> is a lightweight component that allows the
+ * editing of a single line of text where the view indicates something was
+ * typed, but does not show the original characters. You can find further
+ * information and examples in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/textfield.html">How
+ * to Use Text Fields</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * <code>JPasswordField</code> is intended
- * to be source-compatible with <code>java.awt.TextField</code>
- * used with <code>echoChar</code> set.  It is provided separately
- * to make it easier to safely change the UI for the
+ * <code>JPasswordField</code> is intended to be source-compatible with
+ * <code>java.awt.TextField</code> used with <code>echoChar</code> set. It is
+ * provided separately to make it easier to safely change the UI for the
  * <code>JTextField</code> without affecting password entries.
  * <p>
- * <strong>NOTE:</strong>
- * By default, JPasswordField disables input methods; otherwise, input
- * characters could be visible while they were composed using input methods.
- * If an application needs the input methods support, please use the
- * inherited method, <code>enableInputMethods(true)</code>.
+ * <strong>NOTE:</strong> By default, JPasswordField disables input methods;
+ * otherwise, input characters could be visible while they were composed using
+ * input methods. If an application needs the input methods support, please use
+ * the inherited method, <code>enableInputMethods(true)</code>.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *  attribute: isContainer false
- * description: Allows the editing of a line of text but doesn't show the characters.
+ * @beaninfo attribute: isContainer false description: Allows the editing of a
+ *           line of text but doesn't show the characters.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public class JPasswordField extends JTextField {
 	public JPasswordField() {

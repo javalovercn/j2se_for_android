@@ -25,16 +25,15 @@
 package javax.swing.text;
 
 /**
- * <code>NavigationFilter</code> can be used to restrict where the cursor can
- * be positioned. When the default cursor positioning actions attempt to
- * reposition the cursor they will call into the
- * <code>NavigationFilter</code>, assuming
- * the <code>JTextComponent</code> has a non-null
- * <code>NavigationFilter</code> set. In this manner
- * the <code>NavigationFilter</code> can effectively restrict where the
- * cursor can be positioned. Similarly <code>DefaultCaret</code> will call
- * into the <code>NavigationFilter</code> when the user is changing the
- * selection to further restrict where the cursor can be positioned.
+ * <code>NavigationFilter</code> can be used to restrict where the cursor can be
+ * positioned. When the default cursor positioning actions attempt to reposition
+ * the cursor they will call into the <code>NavigationFilter</code>, assuming
+ * the <code>JTextComponent</code> has a non-null <code>NavigationFilter</code>
+ * set. In this manner the <code>NavigationFilter</code> can effectively
+ * restrict where the cursor can be positioned. Similarly
+ * <code>DefaultCaret</code> will call into the <code>NavigationFilter</code>
+ * when the user is changing the selection to further restrict where the cursor
+ * can be positioned.
  * <p>
  * Subclasses can conditionally call into supers implementation to restrict
  * where the cursor can be placed, or call directly into the
@@ -47,28 +46,24 @@ package javax.swing.text;
  * @since 1.4
  */
 public class NavigationFilter {
-    public void setDot(FilterBypass fb, int dot, Position.Bias bias) {
-        fb.setDot(dot, bias);
-    }
+	public void setDot(FilterBypass fb, int dot, Position.Bias bias) {
+		fb.setDot(dot, bias);
+	}
 
-    public void moveDot(FilterBypass fb, int dot, Position.Bias bias) {
-        fb.moveDot(dot, bias);
-    }
+	public void moveDot(FilterBypass fb, int dot, Position.Bias bias) {
+		fb.moveDot(dot, bias);
+	}
 
-    public int getNextVisualPositionFrom(JTextComponent text, int pos,
-                                         Position.Bias bias, int direction,
-                                         Position.Bias[] biasRet)
-                                           throws BadLocationException {
-        return text.getUI().getNextVisualPositionFrom(text, pos, bias,
-                                                      direction, biasRet);
-    }
+	public int getNextVisualPositionFrom(JTextComponent text, int pos, Position.Bias bias,
+			int direction, Position.Bias[] biasRet) throws BadLocationException {
+		return text.getUI().getNextVisualPositionFrom(text, pos, bias, direction, biasRet);
+	}
 
+	public static abstract class FilterBypass {
+		public abstract Caret getCaret();
 
-    public static abstract class FilterBypass {
-        public abstract Caret getCaret();
+		public abstract void setDot(int dot, Position.Bias bias);
 
-        public abstract void setDot(int dot, Position.Bias bias);
-
-        public abstract void moveDot(int dot, Position.Bias bias);
-    }
+		public abstract void moveDot(int dot, Position.Bias bias);
+	}
 }

@@ -28,12 +28,12 @@ import java.io.Serializable;
 
 /**
  * Interface Attribute is the base interface implemented by any and every
- * printing attribute class to indicate that the class represents a
- * printing attribute. All printing attributes are serializable.
+ * printing attribute class to indicate that the class represents a printing
+ * attribute. All printing attributes are serializable.
  * <P>
  *
- * @author  David Mendenhall
- * @author  Alan Kaminsky
+ * @author David Mendenhall
+ * @author Alan Kaminsky
  */
 public interface Attribute extends Serializable {
 

@@ -27,20 +27,18 @@ package java.awt.dnd;
 import java.util.EventListener;
 
 /**
- * The listener interface for receiving drag gesture events.
- * This interface is intended for a drag gesture recognition
- * implementation. See a specification for {@code DragGestureRecognizer}
- * for details on how to register the listener interface.
- * Upon recognition of a drag gesture the {@code
- * DragGestureRecognizer} calls this interface's
- * {@link #dragGestureRecognized dragGestureRecognized()}
- * method and passes a {@code DragGestureEvent}.
-
+ * The listener interface for receiving drag gesture events. This interface is
+ * intended for a drag gesture recognition implementation. See a specification
+ * for {@code DragGestureRecognizer} for details on how to register the listener
+ * interface. Upon recognition of a drag gesture the {@code
+ * DragGestureRecognizer} calls this interface's {@link #dragGestureRecognized
+ * dragGestureRecognized()} method and passes a {@code DragGestureEvent}.
  *
+ * 
  * @see java.awt.dnd.DragGestureRecognizer
  * @see java.awt.dnd.DragGestureEvent
  * @see java.awt.dnd.DragSource
  */
 public interface DragGestureListener extends EventListener {
-     void dragGestureRecognized(DragGestureEvent dge);
+	void dragGestureRecognized(DragGestureEvent dge);
 }

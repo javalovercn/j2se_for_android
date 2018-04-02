@@ -44,41 +44,35 @@ import javax.accessibility.AccessibleRole;
 import javax.swing.plaf.DesktopPaneUI;
 
 /**
- * A container used to create a multiple-document interface or a virtual desktop.
- * You create <code>JInternalFrame</code> objects and add them to the
+ * A container used to create a multiple-document interface or a virtual
+ * desktop. You create <code>JInternalFrame</code> objects and add them to the
  * <code>JDesktopPane</code>. <code>JDesktopPane</code> extends
  * <code>JLayeredPane</code> to manage the potentially overlapping internal
  * frames. It also maintains a reference to an instance of
- * <code>DesktopManager</code> that is set by the UI
- * class for the current look and feel (L&F).  Note that <code>JDesktopPane</code>
- * does not support borders.
+ * <code>DesktopManager</code> that is set by the UI class for the current look
+ * and feel (L&F). Note that <code>JDesktopPane</code> does not support borders.
  * <p>
- * This class is normally used as the parent of <code>JInternalFrames</code>
- * to provide a pluggable <code>DesktopManager</code> object to the
- * <code>JInternalFrames</code>. The <code>installUI</code> of the
- * L&F specific implementation is responsible for setting the
- * <code>desktopManager</code> variable appropriately.
- * When the parent of a <code>JInternalFrame</code> is a <code>JDesktopPane</code>,
- * it should delegate most of its behavior to the <code>desktopManager</code>
- * (closing, resizing, etc).
+ * This class is normally used as the parent of <code>JInternalFrames</code> to
+ * provide a pluggable <code>DesktopManager</code> object to the
+ * <code>JInternalFrames</code>. The <code>installUI</code> of the L&F specific
+ * implementation is responsible for setting the <code>desktopManager</code>
+ * variable appropriately. When the parent of a <code>JInternalFrame</code> is a
+ * <code>JDesktopPane</code>, it should delegate most of its behavior to the
+ * <code>desktopManager</code> (closing, resizing, etc).
  * <p>
- * For further documentation and examples see
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/internalframe.html">How to Use Internal Frames</a>,
- * a section in <em>The Java Tutorial</em>.
+ * For further documentation and examples see <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/internalframe.html">How
+ * to Use Internal Frames</a>, a section in <em>The Java Tutorial</em>.
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see JInternalFrame
  * @see JInternalFrame.JDesktopIcon
@@ -158,8 +152,7 @@ public class JDesktopPane extends JLayeredPane implements Accessible {
 			if (next instanceof JInternalFrame) {
 				results.add((JInternalFrame) next);
 			} else if (next instanceof JInternalFrame.JDesktopIcon) {
-				JInternalFrame tmp = ((JInternalFrame.JDesktopIcon) next)
-						.getInternalFrame();
+				JInternalFrame tmp = ((JInternalFrame.JDesktopIcon) next).getInternalFrame();
 				if (tmp != null) {
 					results.add(tmp);
 				}
@@ -195,12 +188,10 @@ public class JDesktopPane extends JLayeredPane implements Accessible {
 		for (int i = 0; i < getComponentCount(); i++) {
 			c = getComponent(i);
 			if (c instanceof JInternalFrame) {
-				set.add(new ComponentPosition((JInternalFrame) c, getLayer(c),
-						i));
+				set.add(new ComponentPosition((JInternalFrame) c, getLayer(c), i));
 			} else if (c instanceof JInternalFrame.JDesktopIcon) {
 				c = ((JInternalFrame.JDesktopIcon) c).getInternalFrame();
-				set.add(new ComponentPosition((JInternalFrame) c, getLayer(c),
-						i));
+				set.add(new ComponentPosition((JInternalFrame) c, getLayer(c), i));
 			}
 		}
 		List<JInternalFrame> frames = new ArrayList<JInternalFrame>(set.size());
@@ -210,8 +201,7 @@ public class JDesktopPane extends JLayeredPane implements Accessible {
 		return frames;
 	}
 
-	private static class ComponentPosition implements
-			Comparable<ComponentPosition> {
+	private static class ComponentPosition implements Comparable<ComponentPosition> {
 		private final JInternalFrame component;
 		private final int layer;
 		private final int zOrder;
@@ -305,8 +295,7 @@ public class JDesktopPane extends JLayeredPane implements Accessible {
 	protected void addImpl(Component comp, Object constraints, int index) {
 		super.addImpl(comp, constraints, index);
 		if (componentOrderCheckingEnabled) {
-			if (comp instanceof JInternalFrame
-					|| comp instanceof JInternalFrame.JDesktopIcon) {
+			if (comp instanceof JInternalFrame || comp instanceof JInternalFrame.JDesktopIcon) {
 				componentOrderChanged = true;
 			}
 		}
@@ -315,8 +304,7 @@ public class JDesktopPane extends JLayeredPane implements Accessible {
 	public void remove(int index) {
 		if (componentOrderCheckingEnabled) {
 			Component comp = getComponent(index);
-			if (comp instanceof JInternalFrame
-					|| comp instanceof JInternalFrame.JDesktopIcon) {
+			if (comp instanceof JInternalFrame || comp instanceof JInternalFrame.JDesktopIcon) {
 				componentOrderChanged = true;
 			}
 		}
@@ -328,8 +316,7 @@ public class JDesktopPane extends JLayeredPane implements Accessible {
 			int count = getComponentCount();
 			for (int i = 0; i < count; i++) {
 				Component comp = getComponent(i);
-				if (comp instanceof JInternalFrame
-						|| comp instanceof JInternalFrame.JDesktopIcon) {
+				if (comp instanceof JInternalFrame || comp instanceof JInternalFrame.JDesktopIcon) {
 					componentOrderChanged = true;
 					break;
 				}
@@ -341,8 +328,7 @@ public class JDesktopPane extends JLayeredPane implements Accessible {
 	public void setComponentZOrder(Component comp, int index) {
 		super.setComponentZOrder(comp, index);
 		if (componentOrderCheckingEnabled) {
-			if (comp instanceof JInternalFrame
-					|| comp instanceof JInternalFrame.JDesktopIcon) {
+			if (comp instanceof JInternalFrame || comp instanceof JInternalFrame.JDesktopIcon) {
 				componentOrderChanged = true;
 			}
 		}

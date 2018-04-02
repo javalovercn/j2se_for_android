@@ -19,7 +19,7 @@ import javax.swing.JTabbedPane;
 
 public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 	public Vector<Card> vector = new Vector<Card>();
-	
+
 	public static class Card implements Serializable {
 		public JTabbedPane.TabParameter para;
 		public Component comp;
@@ -64,12 +64,13 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 		}
 		if (constraints instanceof JTabbedPane.TabParameter) {
 			addLayoutComponent((JTabbedPane.TabParameter) constraints, comp);
-		} else if (constraints instanceof String){
+		} else if (constraints instanceof String) {
 			addLayoutComponent((String) constraints, comp);
-		}else{
-			throw new IllegalArgumentException("constraint must be a JTabbedPane.TabParameter or String");
+		} else {
+			throw new IllegalArgumentException(
+					"constraint must be a JTabbedPane.TabParameter or String");
 		}
-		if(isLayout){
+		if (isLayout) {
 			layoutContainer(parent);
 		}
 	}
@@ -88,59 +89,59 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 				return;
 			}
 		}
-		
-		if(para.idx < 0){
+
+		if (para.idx < 0) {
 			vector.add(new Card(para, comp));
-		}else{
+		} else {
 			vector.add(para.idx, new Card(para, comp));
 		}
 	}
-	
+
 	public synchronized void addLayoutComponent(String name, Component comp) {
-		JTabbedPane.TabParameter para = new JTabbedPane.TabParameter(name, (Icon)null, "", -1);
+		JTabbedPane.TabParameter para = new JTabbedPane.TabParameter(name, (Icon) null, "", -1);
 		addLayoutComponent(para, comp);
 	}
-	
+
 	public synchronized void removeLayoutComponent(Component comp) {
 		for (int i = 0; i < vector.size(); i++) {
 			if (((Card) vector.get(i)).comp == comp) {
 				vector.remove(i);
-				if(isLayout){
+				if (isLayout) {
 					layoutContainer(parent);
 				}
 				return;
 			}
 		}
 	}
-	
+
 	final static int doubleGap = 2;
-	
-	private final int getTabRightAdAPI(){
-		return getBorderWidth() * doubleGap;//*2增加边量，否则挤在一起
+
+	private final int getTabRightAdAPI() {
+		return getBorderWidth() * doubleGap;// *2增加边量，否则挤在一起
 	}
 
-	private final int getTabLeftAdAPI(){
-		return getBorderWidth() * doubleGap;//*2增加边量，否则挤在一起
+	private final int getTabLeftAdAPI() {
+		return getBorderWidth() * doubleGap;// *2增加边量，否则挤在一起
 	}
-	
+
 	private HCTabIndicatorView indicatorViewSample;
-	
-	private final int getTabTopAdAPI(Container container){
-		HCTabHost tabHost = (HCTabHost)container.getContainerViewAdAPI();
-		if(indicatorViewSample == null){
+
+	private final int getTabTopAdAPI(Container container) {
+		HCTabHost tabHost = (HCTabHost) container.getContainerViewAdAPI();
+		if (indicatorViewSample == null) {
 			HCTabSpec tabSpec = new HCTabSpec("AA", null, "", null);
 			indicatorViewSample = tabHost.createIndicatorView(tabSpec);
 		}
 		Dimension dimension = new Dimension(0, 0);
 		AndroidUIUtil.getViewWidthAndHeight(indicatorViewSample.defaultLinearLayout, dimension);
-		return getBorderWidth() * doubleGap + dimension.height;//*2增加边量，否则挤在一起
+		return getBorderWidth() * doubleGap + dimension.height;// *2增加边量，否则挤在一起
 	}
-	
-	private final int getTabBottomAdAPI(){
-		return getBorderWidth() * doubleGap;//*2增加边量，否则挤在一起
+
+	private final int getTabBottomAdAPI() {
+		return getBorderWidth() * doubleGap;// *2增加边量，否则挤在一起
 	}
-	
-	public final static int getBorderWidth(){
+
+	public final static int getBorderWidth() {
 		return AndroidUIUtil.getBorderStrokeWidthInPixel();
 	}
 
@@ -160,8 +161,10 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 				h = d.height;
 			}
 		}
-		return new Dimension(getTabLeftAdAPI() + insets.left + insets.right + w + hgap * 2 + getTabRightAdAPI(),
-				getTabTopAdAPI(parent) + insets.top + insets.bottom + h + vgap * 2 + getTabBottomAdAPI());
+		return new Dimension(
+				getTabLeftAdAPI() + insets.left + insets.right + w + hgap * 2 + getTabRightAdAPI(),
+				getTabTopAdAPI(parent) + insets.top + insets.bottom + h + vgap * 2
+						+ getTabBottomAdAPI());
 	}
 
 	public Dimension minimumLayoutSize(Container parent) {
@@ -180,8 +183,10 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 				h = d.height;
 			}
 		}
-		return new Dimension(getTabLeftAdAPI() + insets.left + insets.right + w + hgap * 2 + getTabRightAdAPI(),
-				getTabTopAdAPI(parent) + insets.top + insets.bottom + h + vgap * 2 + getTabBottomAdAPI());
+		return new Dimension(
+				getTabLeftAdAPI() + insets.left + insets.right + w + hgap * 2 + getTabRightAdAPI(),
+				getTabTopAdAPI(parent) + insets.top + insets.bottom + h + vgap * 2
+						+ getTabBottomAdAPI());
 	}
 
 	public Dimension maximumLayoutSize(Container target) {
@@ -207,34 +212,37 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 			}
 		});
 	}
-	
-	private void layoutContainerUI(Container parent) {	
+
+	private void layoutContainerUI(Container parent) {
 		super.layoutContainer(parent);
-		
-		HCTabHost tabHost = (HCTabHost)parent.getContainerViewAdAPI();
+
+		HCTabHost tabHost = (HCTabHost) parent.getContainerViewAdAPI();
 		tabHost.setLeftToRight(parent.getComponentOrientation().isLeftToRight());
 		tabHost.clearAllTabs();
 
 		synchronized (parent.getTreeLock()) {
-            Insets insets = parent.getInsets();
-            int ncomponents = parent.getComponentCount();
-            Component comp = null;
+			Insets insets = parent.getInsets();
+			int ncomponents = parent.getComponentCount();
+			Component comp = null;
 
-            for (int i = 0 ; i < ncomponents ; i++) {
-                comp = parent.getComponent(i);
-                comp.setBounds(hgap + insets.left, vgap + insets.top,
-                               parent.getWidth() - (getTabLeftAdAPI() + hgap*2 + insets.left + insets.right + getTabRightAdAPI()),
-                               parent.getHeight() - (getTabTopAdAPI(parent) + vgap*2 + insets.top + insets.bottom + getTabBottomAdAPI()));
-            }
-        }
-		
+			for (int i = 0; i < ncomponents; i++) {
+				comp = parent.getComponent(i);
+				comp.setBounds(hgap + insets.left, vgap + insets.top,
+						parent.getWidth() - (getTabLeftAdAPI() + hgap * 2 + insets.left
+								+ insets.right + getTabRightAdAPI()),
+						parent.getHeight() - (getTabTopAdAPI(parent) + vgap * 2 + insets.top
+								+ insets.bottom + getTabBottomAdAPI()));
+			}
+		}
+
 		int nChildren = vector.size();
 		for (int i = 0; i < nChildren; i++) {
 			Card card = vector.get(i);
-			
-			tabHost.addTab(card.para.tag, card.para.icon, card.para.tip, card.comp.getPeerAdAPI(), -1);
+
+			tabHost.addTab(card.para.tag, card.para.icon, card.para.tip, card.comp.getPeerAdAPI(),
+					-1);
 		}
-		
+
 		refresh(parent, -1);
 	}
 
@@ -249,44 +257,44 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 	 */
 	public synchronized void first(Container parent) {
 		checkLayout(parent);
-		
+
 		refresh(parent, 0);
 	}
 
 	public synchronized void next(Container parent) {
 		checkLayout(parent);
-		
-		HCTabHost tabHost = (HCTabHost)parent.getContainerViewAdAPI();
+
+		HCTabHost tabHost = (HCTabHost) parent.getContainerViewAdAPI();
 		int currIdx = tabHost.getCurrentTab() + 1;
-		if(currIdx >= vector.size()){
+		if (currIdx >= vector.size()) {
 			currIdx = vector.size() - 1;
 		}
-		
+
 		refresh(parent, currIdx);
 	}
 
 	public synchronized void previous(Container parent) {
 		checkLayout(parent);
-		
-		HCTabHost tabHost = (HCTabHost)parent.getContainerViewAdAPI();
+
+		HCTabHost tabHost = (HCTabHost) parent.getContainerViewAdAPI();
 		int currIdx = tabHost.getCurrentTab() - 1;
-		if(currIdx < 0){
+		if (currIdx < 0) {
 			currIdx = 0;
 		}
-		
+
 		refresh(parent, currIdx);
 	}
 
 	void refresh(Container target, int currIdx) {
-		if(currIdx < 0){
+		if (currIdx < 0) {
 			currIdx = 0;
 		}
-		if(currIdx >= vector.size()){
+		if (currIdx >= vector.size()) {
 			currIdx = 0;
 		}
-		
-		if(currIdx >= 0 && currIdx < vector.size()){
-			HCTabHost tabHost = (HCTabHost)target.getContainerViewAdAPI();
+
+		if (currIdx >= 0 && currIdx < vector.size()) {
+			HCTabHost tabHost = (HCTabHost) target.getContainerViewAdAPI();
 			tabHost.setCurrentTab(currIdx);
 		}
 	}
@@ -296,13 +304,13 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 	 */
 	public synchronized void last(Container parent) {
 		checkLayout(parent);
-		
+
 		refresh(parent, vector.size() - 1);
 	}
 
 	public synchronized void show(Container parent, String name) {
 		checkLayout(parent);
-		
+
 		int ncomponents = vector.size();
 		for (int i = 0; i < ncomponents; i++) {
 			Card card = (Card) vector.get(i);
@@ -317,8 +325,7 @@ public class HCCardLayout extends BaseLayoutManager2 implements Serializable {
 		return getClass().getName() + "[hgap=" + hgap + ",vgap=" + vgap + "]";
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException {
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
 	}
 
 	private void writeObject(ObjectOutputStream s) throws IOException {

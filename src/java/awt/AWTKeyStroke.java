@@ -31,23 +31,21 @@ import java.lang.reflect.Constructor;
 import javax.swing.KeyStroke;
 
 /**
- * An <code>AWTKeyStroke</code> represents a key action on the
- * keyboard, or equivalent input device. <code>AWTKeyStroke</code>s
- * can correspond to only a press or release of a
- * particular key, just as <code>KEY_PRESSED</code> and
- * <code>KEY_RELEASED</code> <code>KeyEvent</code>s do;
- * alternately, they can correspond to typing a specific Java character, just
- * as <code>KEY_TYPED</code> <code>KeyEvent</code>s do.
- * In all cases, <code>AWTKeyStroke</code>s can specify modifiers
- * (alt, shift, control, meta, altGraph, or a combination thereof) which must be present
- * during the action for an exact match.
+ * An <code>AWTKeyStroke</code> represents a key action on the keyboard, or
+ * equivalent input device. <code>AWTKeyStroke</code>s can correspond to only a
+ * press or release of a particular key, just as <code>KEY_PRESSED</code> and
+ * <code>KEY_RELEASED</code> <code>KeyEvent</code>s do; alternately, they can
+ * correspond to typing a specific Java character, just as
+ * <code>KEY_TYPED</code> <code>KeyEvent</code>s do. In all cases,
+ * <code>AWTKeyStroke</code>s can specify modifiers (alt, shift, control, meta,
+ * altGraph, or a combination thereof) which must be present during the action
+ * for an exact match.
  * <p>
- * <code>AWTKeyStrokes</code> are immutable, and are intended
- * to be unique. Client code should never create an
- * <code>AWTKeyStroke</code> on its own, but should instead use
- * a variant of <code>getAWTKeyStroke</code>. Client use of these factory
- * methods allows the <code>AWTKeyStroke</code> implementation
- * to cache and share instances efficiently.
+ * <code>AWTKeyStrokes</code> are immutable, and are intended to be unique.
+ * Client code should never create an <code>AWTKeyStroke</code> on its own, but
+ * should instead use a variant of <code>getAWTKeyStroke</code>. Client use of
+ * these factory methods allows the <code>AWTKeyStroke</code> implementation to
+ * cache and share instances efficiently.
  *
  * @see #getAWTKeyStroke
  *
@@ -70,8 +68,7 @@ public class AWTKeyStroke implements Serializable {
 	protected AWTKeyStroke() {
 	}
 
-	protected AWTKeyStroke(char keyChar, int keyCode, int modifiers,
-			boolean onKeyRelease) {
+	protected AWTKeyStroke(char keyChar, int keyCode, int modifiers, boolean onKeyRelease) {
 		this.keyChar = keyChar;
 		this.keyCode = keyCode;
 		this.modifiers = modifiers;
@@ -85,7 +82,8 @@ public class AWTKeyStroke implements Serializable {
 		return null;
 	}
 
-	private static synchronized AWTKeyStroke getCachedStroke(char keyChar, int keyCode, int modifiers, boolean onKeyRelease) {
+	private static synchronized AWTKeyStroke getCachedStroke(char keyChar, int keyCode,
+			int modifiers, boolean onKeyRelease) {
 		return KeyStroke.getKeyStroke(keyCode, modifiers, onKeyRelease);
 	}
 
@@ -94,8 +92,7 @@ public class AWTKeyStroke implements Serializable {
 	}
 
 	public static AWTKeyStroke getAWTKeyStroke(Character keyChar, int modifiers) {
-		return getCachedStroke(keyChar.charValue(), KeyEvent.VK_UNDEFINED,
-                modifiers, false);
+		return getCachedStroke(keyChar.charValue(), KeyEvent.VK_UNDEFINED, modifiers, false);
 	}
 
 	public static AWTKeyStroke getAWTKeyStroke(int keyCode, int modifiers, boolean onKeyRelease) {
@@ -107,10 +104,8 @@ public class AWTKeyStroke implements Serializable {
 	}
 
 	public static AWTKeyStroke getAWTKeyStrokeForEvent(KeyEvent anEvent) {
-		return getCachedStroke(KeyEvent.CHAR_UNDEFINED,
-                anEvent.getKeyCode(),
-                anEvent.getModifiers(),
-                (anEvent.getID() == KeyEvent.KEY_RELEASED));
+		return getCachedStroke(KeyEvent.CHAR_UNDEFINED, anEvent.getKeyCode(),
+				anEvent.getModifiers(), (anEvent.getID() == KeyEvent.KEY_RELEASED));
 	}
 
 	public static AWTKeyStroke getAWTKeyStroke(String s) {

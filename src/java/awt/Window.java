@@ -66,45 +66,44 @@ import android.view.ViewGroup.LayoutParams;
 
 /**
  * A <code>Window</code> object is a top-level window with no borders and no
- * menubar.
- * The default layout for a window is <code>BorderLayout</code>.
+ * menubar. The default layout for a window is <code>BorderLayout</code>.
  * <p>
  * A window must have either a frame, dialog, or another window defined as its
  * owner when it's constructed.
  * <p>
- * In a multi-screen environment, you can create a <code>Window</code>
- * on a different screen device by constructing the <code>Window</code>
- * with {@link #Window(Window, GraphicsConfiguration)}.  The
+ * In a multi-screen environment, you can create a <code>Window</code> on a
+ * different screen device by constructing the <code>Window</code> with
+ * {@link #Window(Window, GraphicsConfiguration)}. The
  * <code>GraphicsConfiguration</code> object is one of the
  * <code>GraphicsConfiguration</code> objects of the target screen device.
  * <p>
- * In a virtual device multi-screen environment in which the desktop
- * area could span multiple physical screen devices, the bounds of all
- * configurations are relative to the virtual device coordinate system.
- * The origin of the virtual-coordinate system is at the upper left-hand
- * corner of the primary physical screen.  Depending on the location of
- * the primary screen in the virtual device, negative coordinates are
- * possible, as shown in the following figure.
+ * In a virtual device multi-screen environment in which the desktop area could
+ * span multiple physical screen devices, the bounds of all configurations are
+ * relative to the virtual device coordinate system. The origin of the
+ * virtual-coordinate system is at the upper left-hand corner of the primary
+ * physical screen. Depending on the location of the primary screen in the
+ * virtual device, negative coordinates are possible, as shown in the following
+ * figure.
  * <p>
- * <img src="doc-files/MultiScreen.gif"
- * alt="Diagram shows virtual device containing 4 physical screens. Primary physical screen shows coords (0,0), other screen shows (-80,-100)."
- * ALIGN=center HSPACE=10 VSPACE=7>
+ * <img src="doc-files/MultiScreen.gif" alt="Diagram shows virtual device
+ * containing 4 physical screens. Primary physical screen shows coords (0,0),
+ * other screen shows (-80,-100)." ALIGN=center HSPACE=10 VSPACE=7>
  * <p>
- * In such an environment, when calling <code>setLocation</code>,
- * you must pass a virtual coordinate to this method.  Similarly,
- * calling <code>getLocationOnScreen</code> on a <code>Window</code> returns
- * virtual device coordinates.  Call the <code>getBounds</code> method
- * of a <code>GraphicsConfiguration</code> to find its origin in the virtual
+ * In such an environment, when calling <code>setLocation</code>, you must pass
+ * a virtual coordinate to this method. Similarly, calling
+ * <code>getLocationOnScreen</code> on a <code>Window</code> returns virtual
+ * device coordinates. Call the <code>getBounds</code> method of a
+ * <code>GraphicsConfiguration</code> to find its origin in the virtual
  * coordinate system.
  * <p>
- * The following code sets the location of a <code>Window</code>
- * at (10, 10) relative to the origin of the physical screen
- * of the corresponding <code>GraphicsConfiguration</code>.  If the
- * bounds of the <code>GraphicsConfiguration</code> is not taken
- * into account, the <code>Window</code> location would be set
- * at (10, 10) relative to the virtual-coordinate system and would appear
- * on the primary physical screen, which might be different from the
- * physical screen of the specified <code>GraphicsConfiguration</code>.
+ * The following code sets the location of a <code>Window</code> at (10, 10)
+ * relative to the origin of the physical screen of the corresponding
+ * <code>GraphicsConfiguration</code>. If the bounds of the
+ * <code>GraphicsConfiguration</code> is not taken into account, the
+ * <code>Window</code> location would be set at (10, 10) relative to the
+ * virtual-coordinate system and would appear on the primary physical screen,
+ * which might be different from the physical screen of the specified
+ * <code>GraphicsConfiguration</code>.
  *
  * <pre>
  *      Window w = new Window(Window owner, GraphicsConfiguration gc);
@@ -114,39 +113,36 @@ import android.view.ViewGroup.LayoutParams;
  *
  * <p>
  * Note: the location and size of top-level windows (including
- * <code>Window</code>s, <code>Frame</code>s, and <code>Dialog</code>s)
- * are under the control of the desktop's window management system.
- * Calls to <code>setLocation</code>, <code>setSize</code>, and
- * <code>setBounds</code> are requests (not directives) which are
- * forwarded to the window management system.  Every effort will be
- * made to honor such requests.  However, in some cases the window
- * management system may ignore such requests, or modify the requested
- * geometry in order to place and size the <code>Window</code> in a way
- * that more closely matches the desktop settings.
+ * <code>Window</code>s, <code>Frame</code>s, and <code>Dialog</code>s) are
+ * under the control of the desktop's window management system. Calls to
+ * <code>setLocation</code>, <code>setSize</code>, and <code>setBounds</code>
+ * are requests (not directives) which are forwarded to the window management
+ * system. Every effort will be made to honor such requests. However, in some
+ * cases the window management system may ignore such requests, or modify the
+ * requested geometry in order to place and size the <code>Window</code> in a
+ * way that more closely matches the desktop settings.
  * <p>
- * Due to the asynchronous nature of native event handling, the results
- * returned by <code>getBounds</code>, <code>getLocation</code>,
- * <code>getLocationOnScreen</code>, and <code>getSize</code> might not
- * reflect the actual geometry of the Window on screen until the last
- * request has been processed.  During the processing of subsequent
- * requests these values might change accordingly while the window
- * management system fulfills the requests.
+ * Due to the asynchronous nature of native event handling, the results returned
+ * by <code>getBounds</code>, <code>getLocation</code>,
+ * <code>getLocationOnScreen</code>, and <code>getSize</code> might not reflect
+ * the actual geometry of the Window on screen until the last request has been
+ * processed. During the processing of subsequent requests these values might
+ * change accordingly while the window management system fulfills the requests.
  * <p>
- * An application may set the size and location of an invisible
- * {@code Window} arbitrarily, but the window management system may
- * subsequently change its size and/or location when the
- * {@code Window} is made visible. One or more {@code ComponentEvent}s
- * will be generated to indicate the new geometry.
+ * An application may set the size and location of an invisible {@code Window}
+ * arbitrarily, but the window management system may subsequently change its
+ * size and/or location when the {@code Window} is made visible. One or more
+ * {@code ComponentEvent}s will be generated to indicate the new geometry.
  * <p>
- * Windows are capable of generating the following WindowEvents:
- * WindowOpened, WindowClosed, WindowGainedFocus, WindowLostFocus.
+ * Windows are capable of generating the following WindowEvents: WindowOpened,
+ * WindowClosed, WindowGainedFocus, WindowLostFocus.
  *
- * @author      Sami Shaio
- * @author      Arthur van Hoff
+ * @author Sami Shaio
+ * @author Arthur van Hoff
  * @see WindowEvent
  * @see #addWindowListener
  * @see java.awt.BorderLayout
- * @since       JDK1.0
+ * @since JDK1.0
  */
 public class Window extends Container implements Accessible {
 	public static final int ANDROID_FULL_SCREEN_AD_API = LayoutParams.FILL_PARENT;
@@ -154,7 +150,7 @@ public class Window extends Container implements Accessible {
 	protected JRootPane rootPane;
 	boolean isPack = false;
 	boolean isDisposed = false;
-	
+
 	String title = "Untitled";
 	transient java.util.List<Image> icons;
 	Window owner;
@@ -165,153 +161,163 @@ public class Window extends Container implements Accessible {
 	}
 
 	private View windowView;
-	
-	public View getWindowViewAdAPI(){
-//		System.out.println("--------------------printViewStructure : --------------------");
-//		UIUtil.printViewStructure(windowView, 0);
-		
-		if(rootPane != null){
+
+	public View getWindowViewAdAPI() {
+		// System.out.println("--------------------printViewStructure :
+		// --------------------");
+		// UIUtil.printViewStructure(windowView, 0);
+
+		if (rootPane != null) {
 			Container contentPane = rootPane.getContentPane();
 			minPreSize(contentPane);
 		}
 		return windowView;
 	}
-	
-	private final void minPreSize(final Component p){
+
+	private final void minPreSize(final Component p) {
 		p.setMinSizeForServerUIAdAPI();
 		p.setPreSizeForServerUIAdAPI();
-		
-		if(p instanceof Container){
-			Container c = (Container)p;
+
+		if (p instanceof Container) {
+			Container c = (Container) p;
 			final int size = c.getComponentCount();
 			for (int i = 0; i < size; i++) {
 				minPreSize(c.getComponent(i));
 			}
 		}
 	}
-	
+
 	public boolean isFireComponentShow = false;
-	
+
 	@Override
-	public void fireComponentShowAdAPI(){
+	public void fireComponentShowAdAPI() {
 		isFireComponentShow = true;
 		super.fireComponentShowAdAPI();
-		
-		if(rootPane != null){
+
+		if (rootPane != null) {
 			Container contentPane = rootPane.getContentPane();
 			contentPane.fireComponentShowAdAPI();
 		}
 	}
-	
+
 	@Override
-	public void fireComponentHiddenAdAPI(){
+	public void fireComponentHiddenAdAPI() {
 		super.fireComponentHiddenAdAPI();
-		
-		if(rootPane != null){
+
+		if (rootPane != null) {
 			Container contentPane = rootPane.getContentPane();
 			contentPane.fireComponentHiddenAdAPI();
 		}
 	}
-	
-	public void setWindowViewAdAPI(View view){
+
+	public void setWindowViewAdAPI(View view) {
 		windowView = view;
 	}
-	
+
 	Window() {
-//		setLayout(new BorderLayout());
+		// setLayout(new BorderLayout());
 		addWindowListener(new WindowListener() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				Container c = Window.this;
-				if(doRequireFirstFocus(c) == false){
-					Log.w(J2SEInitor.getAppName(), "No default focus Component in current Window!!!");
-					//找一个最近可编辑;
+				if (doRequireFirstFocus(c) == false) {
+					Log.w(J2SEInitor.getAppName(),
+							"No default focus Component in current Window!!!");
+					// 找一个最近可编辑;
 					doFocusOnFirstEditable(c);
 				}
 			}
-			private boolean doRequireFirstFocus(final Component c){
-				if(c.isRequireFirstFocus){
+
+			private boolean doRequireFirstFocus(final Component c) {
+				if (c.isRequireFirstFocus) {
 					c.getFocusablePeerViewAdAPI().setFocusableInTouchMode(true);
 					c.requestFocus();
 					c.isRequireFirstFocus = false;
-					
-					AndroidUIUtil.runDelay(new Runnable() {
+
+					AndroidUIUtil.runDelayNotInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							try{
+							try {
 								Thread.sleep(AndroidUIUtil.MS_FOCUSONTOUCH);
-							}catch (Exception e) {
+							} catch (Exception e) {
 							}
 							c.getFocusablePeerViewAdAPI().setFocusableInTouchMode(false);
 						}
 					});
 					return true;
 				}
-				if(c instanceof Container){
-					Container container = (Container)c;
+				if (c instanceof Container) {
+					Container container = (Container) c;
 					int size = container.getComponentCount();
 					for (int i = 0; i < size; i++) {
-						if(doRequireFirstFocus(container.getComponent(i))){
+						if (doRequireFirstFocus(container.getComponent(i))) {
 							return true;
 						}
 					}
 				}
 				return false;
 			}
-			private Component doFocusOnFirstEditable(final Component c){
+
+			private Component doFocusOnFirstEditable(final Component c) {
 				final View view = c.getFocusablePeerViewAdAPI();
-				if(view != null && view.isFocusable()){
+				if (view != null && view.isFocusable()) {
 					view.setFocusableInTouchMode(true);
 					c.requestFocus();
-					
-					AndroidUIUtil.runDelay(new Runnable() {
+
+					AndroidUIUtil.runDelayNotInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							try{
+							try {
 								Thread.sleep(AndroidUIUtil.MS_FOCUSONTOUCH);
-							}catch (Exception e) {
+							} catch (Exception e) {
 							}
 							view.setFocusableInTouchMode(false);
 						}
 					});
 					return c;
 				}
-				if(c instanceof Container){
-					Container container = (Container)c;
+				if (c instanceof Container) {
+					Container container = (Container) c;
 					int size = container.getComponentCount();
 					for (int i = 0; i < size; i++) {
 						final Component focusC = doFocusOnFirstEditable(container.getComponent(i));
-						if(focusC != null){
+						if (focusC != null) {
 							return focusC;
 						}
 					}
 				}
 				return null;
 			}
+
 			@Override
 			public void windowIconified(WindowEvent e) {
 			}
+
 			@Override
 			public void windowDeiconified(WindowEvent e) {
 			}
+
 			@Override
 			public void windowDeactivated(WindowEvent e) {
 			}
+
 			@Override
 			public void windowClosing(WindowEvent e) {
 			}
+
 			@Override
 			public void windowClosed(WindowEvent e) {
 			}
+
 			@Override
 			public void windowActivated(WindowEvent e) {
 			}
 		});
-		
+
 	}
 
 	public Window(Frame owner) {
-		//TODO
+		// TODO
 		this();
 	}
 
@@ -321,7 +327,7 @@ public class Window extends Container implements Accessible {
 	}
 
 	Window(GraphicsConfiguration gc) {
-		//TODO
+		// TODO
 		this();
 	}
 
@@ -331,108 +337,117 @@ public class Window extends Container implements Accessible {
 	}
 
 	public void setIconImage(Image image) {
-        ArrayList<Image> imageList = new ArrayList<Image>();
-        if (image != null) {
-            imageList.add(image);
-        }
-        setIconImages(imageList);
+		ArrayList<Image> imageList = new ArrayList<Image>();
+		if (image != null) {
+			imageList.add(image);
+		}
+		setIconImages(imageList);
 	}
 
-    public synchronized void setIconImages(java.util.List<? extends Image> icons) {
-    	AndroidClassUtil.callEmptyMethod();
-//        peer.updateIconImages();
-    }
-    
-    public boolean isPackedAdAPI(){
-    	return isPack;
-    }
-    
-    private static final int windowBodyPaddingPixel = AndroidUIUtil.dpToPx(2);//2 ：应同步于HCAndroidServer/res/drawable/window_body.xml
-    private static final int windowTitleBarHeight = JRootPane.getTitleBarHeight(JRootPane.getEscIconHeightAdAPI());
-    private static final int maxWindowPreferredHeight = J2SEInitor.screenHeight - windowTitleBarHeight - windowBodyPaddingPixel * 2;
-    private static final int maxWindowPreferredWidth = J2SEInitor.screenWidth - windowBodyPaddingPixel * 2;
-    
-    public static final int getMaxWindowPreferredHeight(){
-    	return maxWindowPreferredHeight;
-    }
-    
-    public static final int getMaxWindowPreferredWidth(){
-    	return maxWindowPreferredWidth;
-    }
-    
+	public synchronized void setIconImages(java.util.List<? extends Image> icons) {
+		AndroidClassUtil.callEmptyMethod();
+		// peer.updateIconImages();
+	}
+
+	public boolean isPackedAdAPI() {
+		return isPack;
+	}
+
+	private static final int windowBodyPaddingPixel = AndroidUIUtil.dpToPx(2);// 2
+																				// ：应同步于HCAndroidServer/res/drawable/window_body.xml
+	private static final int windowTitleBarHeight = JRootPane
+			.getTitleBarHeight(JRootPane.getEscIconHeightAdAPI());
+	private static final int maxWindowPreferredHeight = J2SEInitor.screenHeight
+			- windowTitleBarHeight - windowBodyPaddingPixel * 2;
+	private static final int maxWindowPreferredWidth = J2SEInitor.screenWidth
+			- windowBodyPaddingPixel * 2;
+
+	public static final int getMaxWindowPreferredHeight() {
+		return maxWindowPreferredHeight;
+	}
+
+	public static final int getMaxWindowPreferredWidth() {
+		return maxWindowPreferredWidth;
+	}
+
 	public void pack() {
 		L.V = L.WShop ? false : LogManager.log("pack() -- " + toString());
-		
+
 		isPack = true;
-		
-//        Dimension newSize = getPreferredSize();
-//        if (getPeerAdAPI() != null) {
-//        	setSize(newSize.width, newSize.height + getRootPaneTtitleBarAndMenuBarHeightAdAPI());
-//        }
-        Dimension newSize = getPreferredSize();
-        if (getPeerAdAPI() != null) {
-        	final ScreenAdapter screenAdapter = getScreenAdapterAdAPI();
-            if(screenAdapter.type == ScreenAdapter.TYPE_SERVER){
-	        	System.out.println("Window preferredSize : [" + newSize.width + ", " + newSize.height + "], " +
-	        			"screen Size : [" + J2SEInitor.screenWidth + ", " + J2SEInitor.screenHeight + "], windowBodyPaddingPixel : " + windowBodyPaddingPixel);
-	        	boolean isAdjust = false;
-	        	if(newSize.width > maxWindowPreferredWidth){
-	        		isAdjust = true;
-	        		newSize.width = maxWindowPreferredWidth;
-	        	}
-	        	if(newSize.height > maxWindowPreferredHeight){
-	        		isAdjust = true;
-	        		newSize.height = maxWindowPreferredHeight;
-	        	}
-	        	setPreferredSize(newSize);
-	        	if(isAdjust){
-	        		System.out.println("after adjust Window preferredSize : [" + newSize.width + ", " + newSize.height + "], " +
-	            			"screen Size : [" + J2SEInitor.screenWidth + ", " + J2SEInitor.screenHeight + "]");
-	        	}
-            }
-            setClientSize(newSize.width, newSize.height);
-        }
-        
-        validate();
+
+		// Dimension newSize = getPreferredSize();
+		// if (getPeerAdAPI() != null) {
+		// setSize(newSize.width, newSize.height +
+		// getRootPaneTtitleBarAndMenuBarHeightAdAPI());
+		// }
+		Dimension newSize = getPreferredSize();
+		if (getPeerAdAPI() != null) {
+			final ScreenAdapter screenAdapter = getScreenAdapterAdAPI();
+			if (screenAdapter.type == ScreenAdapter.TYPE_SERVER) {
+				System.out.println("Window preferredSize : [" + newSize.width + ", "
+						+ newSize.height + "], " + "screen Size : [" + J2SEInitor.screenWidth + ", "
+						+ J2SEInitor.screenHeight + "], windowBodyPaddingPixel : "
+						+ windowBodyPaddingPixel);
+				boolean isAdjust = false;
+				if (newSize.width > maxWindowPreferredWidth) {
+					isAdjust = true;
+					newSize.width = maxWindowPreferredWidth;
+				}
+				if (newSize.height > maxWindowPreferredHeight) {
+					isAdjust = true;
+					newSize.height = maxWindowPreferredHeight;
+				}
+				setPreferredSize(newSize);
+				if (isAdjust) {
+					System.out.println("after adjust Window preferredSize : [" + newSize.width
+							+ ", " + newSize.height + "], " + "screen Size : ["
+							+ J2SEInitor.screenWidth + ", " + J2SEInitor.screenHeight + "]");
+				}
+			}
+			setClientSize(newSize.width, newSize.height);
+		}
+
+		validate();
 	}
-	
-	public JRootPane getRootPaneAdAPI(){
+
+	public JRootPane getRootPaneAdAPI() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getRootPane();
-			}else if(isJDialog){
-				return ((JDialog)this).getRootPane();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getRootPane();
+			} else if (isJDialog) {
+				return ((JDialog) this).getRootPane();
 			}
 		}
 		return null;
 	}
-	
-	private int getRootPaneTtitleBarAndMenuBarHeightAdAPI(){
+
+	private int getRootPaneTtitleBarAndMenuBarHeightAdAPI() {
 		JRootPane rootPane = getRootPaneAdAPI();
-		if(rootPane != null){
+		if (rootPane != null) {
 			return rootPane.getTitleBarHeightAdAPI() + rootPane.getMenuBarHeightAdAPI();
 		}
 		DebugLogger.log("unknow getRootPaneTtitleBarAndMenuBarHeightAdAPI!!!");
 		return 0;
 	}
 
-    void setClientSize(int w, int h) {
-    	getRootPaneAdAPI().getContentPane().setSize(w, h);
-    	super.width = w;
-    	super.height = h;
-//        synchronized (getTreeLock()) {
-//            setBoundsOp(ComponentPeer.SET_CLIENT_SIZE);
-//            setBounds(getX(), getY(), w, h);
-//        }
-    }
-    
+	void setClientSize(int w, int h) {
+		getRootPaneAdAPI().getContentPane().setSize(w, h);
+		super.width = w;
+		super.height = h;
+		// synchronized (getTreeLock()) {
+		// setBoundsOp(ComponentPeer.SET_CLIENT_SIZE);
+		// setBounds(getX(), getY(), w, h);
+		// }
+	}
+
 	public void setMinimumSize(Dimension minimumSize) {
 		setMinimumSize(minimumSize);
 	}
 
-//	private int windowFixWidth = ANDROID_FULL_SCREEN_AD_API, windowFixHeight = ANDROID_FULL_SCREEN_AD_API;
-	
+	// private int windowFixWidth = ANDROID_FULL_SCREEN_AD_API, windowFixHeight
+	// = ANDROID_FULL_SCREEN_AD_API;
+
 	public void setSize(Dimension d) {
 		setSize(d.width, d.height);
 	}
@@ -441,61 +456,63 @@ public class Window extends Container implements Accessible {
 	 * to get size, {@link #getWindowFixWidthAdAPI()}, default is FILL_PARENT
 	 */
 	public void setSize(int width, int height) {
-		Boolean enable = (Boolean)ConfigManager.get(ConfigManager.UI_ENABLE_SCREEN_ADAPTER, Boolean.TRUE);
-		if(enable){
+		Boolean enable = (Boolean) ConfigManager.get(ConfigManager.UI_ENABLE_SCREEN_ADAPTER,
+				Boolean.TRUE);
+		if (enable) {
 			final ScreenAdapter screenAdapter = getScreenAdapterAdAPI();
-			
-			if(screenAdapter == null || screenAdapter.type != ScreenAdapter.TYPE_SERVER){
-			}else{
+
+			if (screenAdapter == null || screenAdapter.type != ScreenAdapter.TYPE_SERVER) {
+			} else {
 				final int oldW = width, oldH = height;
 				width = screenAdapter.getPreAdapterWidth(width);
 				height = screenAdapter.getPreAdapterHeight(height);
-				if(PropertiesManager.isSimu()){
-					LogManager.log("auto adapter screen size from [" + oldW + ", " + oldH + "] to [" + width + ", " + height + "].");
+				if (PropertiesManager.isSimu()) {
+					LogManager.log("auto adapter screen size from [" + oldW + ", " + oldH + "] to ["
+							+ width + ", " + height + "].");
 				}
 			}
 		}
-		
+
 		setClientSize(width, height);
-//		super.setSize(width, height);
+		// super.setSize(width, height);
 	}
-	
+
 	/**
 	 * 
 	 * @return -1:FILL_PARENT, fullWidth
 	 */
-	public int getWindowFixWidthAdAPI(){
+	public int getWindowFixWidthAdAPI() {
 		return getRootPaneAdAPI().getContentPane().getWidth();
-//		return getWidth();//windowFixWidth;
+		// return getWidth();//windowFixWidth;
 	}
-	
+
 	/**
 	 * 
 	 * @return -1:FILL_PARENT, fullHeight
 	 */
-	public int getWindowFixHeightAdAPI(){
+	public int getWindowFixHeightAdAPI() {
 		return getRootPaneAdAPI().getContentPane().getHeight();
-//		return getHeight();//windowFixHeight;
+		// return getHeight();//windowFixHeight;
 	}
 
 	private int locX = UN_LOC_AD_API, locY = UN_LOC_AD_API;
-	
+
 	/**
 	 * 
 	 * @return -1:Center or fullScreen
 	 */
-	public int getLocationXAdAPI(){
+	public int getLocationXAdAPI() {
 		return locX;
 	}
-	
+
 	/**
 	 * 
 	 * @return -1:Center or fullScreen
 	 */
-	public int getLocationYAdAPI(){
+	public int getLocationYAdAPI() {
 		return locY;
 	}
-	
+
 	public void setLocation(int x, int y) {
 		locX = x;
 		locY = y;
@@ -506,57 +523,58 @@ public class Window extends Container implements Accessible {
 	}
 
 	boolean isVisible = false;
-	
+
 	public void setVisible(boolean b) {
-		if(isVisible == b || isDisposed){
+		if (isVisible == b || isDisposed) {
 			return;
 		}
-		
+
 		isVisible = b;
-        if(b){
-        	fireComponentShowAdAPI();//注意： 不能加super.
-        	
-        	if(isValidated == false){
-	        	AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
+		if (b) {
+			fireComponentShowAdAPI();// 注意： 不能加super.
+
+			if (isValidated == false) {
+				AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
 					@Override
 					public void run() {
-		                validate();						
-		        	}
+						validate();
+					}
 				});
 			}
-    		WindowManager.showWindow(this);
-        }else{
-        	fireComponentHiddenAdAPI();//注意： 不能加super.
-        	WindowManager.closeWindow(this);
-        }
+			WindowManager.showWindow(this);
+		} else {
+			fireComponentHiddenAdAPI();// 注意： 不能加super.
+			WindowManager.closeWindow(this);
+		}
 	}
 
-	private JRootPane getDisplayPaneAdAPI(){
+	private JRootPane getDisplayPaneAdAPI() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getRootPane();
-			}else if(isJDialog){
-				return ((JDialog)this).getRootPane();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getRootPane();
+			} else if (isJDialog) {
+				return ((JDialog) this).getRootPane();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return null;
 	}
-	
+
 	public View getPeerAdAPI() {
-//		boolean isJFrame = false, isJDialog = false;
-//		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-//			if(isJFrame){
-//				return ((JFrame)this).getContentPane().getPeerAdAPI();
-//			}else if(isJDialog){
-//				return ((JDialog)this).getContentPane().getPeerAdAPI();
-//			}
-//		}
-//		DebugLogger.log("unknow container type!!!");
+		// boolean isJFrame = false, isJDialog = false;
+		// if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this
+		// instanceof JDialog))){
+		// if(isJFrame){
+		// return ((JFrame)this).getContentPane().getPeerAdAPI();
+		// }else if(isJDialog){
+		// return ((JDialog)this).getContentPane().getPeerAdAPI();
+		// }
+		// }
+		// DebugLogger.log("unknow container type!!!");
 		return getDisplayPaneAdAPI().getPeerAdAPI();
 	}
-	
+
 	/**
 	 * replaced by setVisible(boolean) from JDK version 1.5.
 	 */
@@ -565,533 +583,533 @@ public class Window extends Container implements Accessible {
 	}
 
 	boolean isValidated = false;
-	
+
 	public void validate() {
 		isValidated = true;
-		
+
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().validate();
-//				getDisplayPaneAdAPI().validate();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().validate();
+				// getDisplayPaneAdAPI().validate();
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().validate();
-//				getDisplayPaneAdAPI().validate();
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().validate();
+				// getDisplayPaneAdAPI().validate();
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public int getComponentCount() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getComponentCount();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getComponentCount();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getComponentCount();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getComponentCount();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return 0;
 	}
-	
+
 	public int countComponents() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().countComponents();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().countComponents();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().countComponents();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().countComponents();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return 0;
 	}
-	
+
 	public void invalidate() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().invalidate();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().invalidate();
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().invalidate();
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().invalidate();
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public Component getComponent(int n) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getComponent(n);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getComponent(n);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getComponent(n);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getComponent(n);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return null;
 	}
-	
+
 	public Component[] getComponents() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getComponents();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getComponents();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getComponents();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getComponents();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return EMPTY_ARRAY;
 	}
-	
+
 	public Insets getInsets() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getInsets();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getInsets();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getInsets();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getInsets();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return null;
 	}
-	
+
 	public Insets insets() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().insets();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().insets();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().insets();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().insets();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return null;
 	}
-	
+
 	protected synchronized void addImpl(Component comp, Object constraints, int index) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().addImpl(comp, constraints, index);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().addImpl(comp, constraints, index);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().addImpl(comp, constraints, index);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().addImpl(comp, constraints, index);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public void remove(int index) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().remove(index);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().remove(index);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().remove(index);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().remove(index);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public synchronized void remove(Component comp) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().remove(comp);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().remove(comp);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().remove(comp);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().remove(comp);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public synchronized void removeAll() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().removeAll();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().removeAll();
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().removeAll();
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().removeAll();
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public LayoutManager getLayout() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getLayout();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getLayout();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getLayout();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getLayout();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return null;
 	}
-	
+
 	public void setLayout(LayoutManager mgr) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().setLayout(mgr);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().setLayout(mgr);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().setLayout(mgr);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().setLayout(mgr);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
-//	final JPanel windowPanel = new JPanel(new BorderLayout());
-	
+
+	// final JPanel windowPanel = new JPanel(new BorderLayout());
+
 	protected void validateTree() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().validateTree();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().validateTree();
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().validateTree();
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().validateTree();
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public void doLayout() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
 				getDisplayPaneAdAPI().doLayout();
 				return;
-			}else if(isJDialog){
+			} else if (isJDialog) {
 				getDisplayPaneAdAPI().doLayout();
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public void layout() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
 				getDisplayPaneAdAPI().layout();
 				return;
-			}else if(isJDialog){
+			} else if (isJDialog) {
 				getDisplayPaneAdAPI().layout();
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public boolean isValidateRoot() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
 				return getDisplayPaneAdAPI().isValidateRoot();
-			}else if(isJDialog){
+			} else if (isJDialog) {
 				return getDisplayPaneAdAPI().isValidateRoot();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return true;
 	}
-	
+
 	public void revalidate() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
 				getDisplayPaneAdAPI().revalidate();
 				return;
-			}else if(isJDialog){
+			} else if (isJDialog) {
 				getDisplayPaneAdAPI().revalidate();
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public Dimension getPreferredSize() {
 		return preferredSize();
-//		if(this instanceof JFrame || this instanceof JDialog){
-//			Dimension dimension = new Dimension();
-//			UIUtil.getViewWidthAndHeight(getPeerAdAPI(), dimension);
-//			return dimension;
-//		}
-//		DebugLogger.log("unknow container type!!!");
-//		return super.getPreferredSize();
+		// if(this instanceof JFrame || this instanceof JDialog){
+		// Dimension dimension = new Dimension();
+		// UIUtil.getViewWidthAndHeight(getPeerAdAPI(), dimension);
+		// return dimension;
+		// }
+		// DebugLogger.log("unknow container type!!!");
+		// return super.getPreferredSize();
 	}
-	
+
 	final boolean containsFocus() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().containsFocus();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().containsFocus();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().containsFocus();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().containsFocus();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return false;
 	}
-	
+
 	public Dimension preferredSize() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().preferredSize();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().preferredSize();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().preferredSize();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().preferredSize();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.preferredSize();
 	}
-	
-	public Component searchComponentByViewAdAPI(View view){
+
+	public Component searchComponentByViewAdAPI(View view) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().searchComponentByViewAdAPI(view);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().searchComponentByViewAdAPI(view);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().searchComponentByViewAdAPI(view);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().searchComponentByViewAdAPI(view);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return null;
 	}
-	
+
 	public Dimension getMinimumSize() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getMinimumSize();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getMinimumSize();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getMinimumSize();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getMinimumSize();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.getMinimumSize();
 	}
-	
+
 	public Dimension minimumSize() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().minimumSize();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().minimumSize();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().minimumSize();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().minimumSize();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.minimumSize();
 	}
-	
+
 	public Dimension getMaximumSize() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getMaximumSize();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getMaximumSize();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getMaximumSize();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getMaximumSize();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.getMaximumSize();
 	}
-	
+
 	public float getAlignmentX() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getAlignmentX();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getAlignmentX();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getAlignmentX();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getAlignmentX();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return 0;
 	}
-	
+
 	public float getAlignmentY() {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getAlignmentY();
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getAlignmentY();
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getAlignmentY();
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getAlignmentY();
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return 0;
 	}
-	
+
 	public void update(Graphics g) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().update(g);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().update(g);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().update(g);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().update(g);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public void print(Graphics g) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().print(g);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().print(g);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().print(g);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().print(g);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public Component getComponentAt(int x, int y) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getComponentAt(x, y);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getComponentAt(x, y);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getComponentAt(x, y);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getComponentAt(x, y);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.getComponentAt(x, y);
 	}
-	
+
 	public Component locate(int x, int y) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().locate(x, y);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().locate(x, y);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().locate(x, y);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().locate(x, y);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.locate(x, y);
 	}
-	
+
 	public Component getComponentAt(Point p) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().getComponentAt(p);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().getComponentAt(p);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().getComponentAt(p);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().getComponentAt(p);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.getComponentAt(p);
 	}
-	
+
 	public Component findComponentAt(int x, int y) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().findComponentAt(x, y);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().findComponentAt(x, y);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().findComponentAt(x, y);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().findComponentAt(x, y);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.findComponentAt(x, y);
 	}
-	
+
 	final Component findComponentAt(int x, int y, boolean ignoreEnabled) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().findComponentAt(x, y, ignoreEnabled);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().findComponentAt(x, y, ignoreEnabled);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().findComponentAt(x, y, ignoreEnabled);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().findComponentAt(x, y, ignoreEnabled);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.findComponentAt(x, y, ignoreEnabled);
 	}
-	
+
 	Component findComponentAtImpl(int x, int y, boolean ignoreEnabled) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().findComponentAtImpl(x, y, ignoreEnabled);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().findComponentAtImpl(x, y, ignoreEnabled);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().findComponentAtImpl(x, y, ignoreEnabled);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().findComponentAtImpl(x, y, ignoreEnabled);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.findComponentAtImpl(x, y, ignoreEnabled);
 	}
-	
+
 	public Component findComponentAt(Point p) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				return ((JFrame)this).getContentPane().findComponentAt(p);
-			}else if(isJDialog){
-				return ((JDialog)this).getContentPane().findComponentAt(p);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				return ((JFrame) this).getContentPane().findComponentAt(p);
+			} else if (isJDialog) {
+				return ((JDialog) this).getContentPane().findComponentAt(p);
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 		return super.findComponentAt(p);
 	}
-	
+
 	public void applyComponentOrientation(ComponentOrientation o) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().applyComponentOrientation(o);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().applyComponentOrientation(o);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().applyComponentOrientation(o);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().applyComponentOrientation(o);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	public void remove(MenuComponent comp) {
 		boolean isJFrame = false, isJDialog = false;
-		if((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))){
-			if(isJFrame){
-				((JFrame)this).getContentPane().remove(comp);
+		if ((isJFrame = (this instanceof JFrame)) || (isJDialog = (this instanceof JDialog))) {
+			if (isJFrame) {
+				((JFrame) this).getContentPane().remove(comp);
 				return;
-			}else if(isJDialog){
-				((JDialog)this).getContentPane().remove(comp);
+			} else if (isJDialog) {
+				((JDialog) this).getContentPane().remove(comp);
 				return;
 			}
 		}
 		DebugLogger.log("unknow container type!!!");
 	}
-	
+
 	synchronized void postWindowEvent(int id) {
 	}
 
@@ -1100,28 +1118,28 @@ public class Window extends Container implements Accessible {
 	}
 
 	public void dispose() {
-		synchronized(this){
-			if(isDisposed == false){
+		synchronized (this) {
+			if (isDisposed == false) {
 				isDisposed = true;
 				isVisible = false;
-			}else{
+			} else {
 				return;
 			}
 		}
-		if(windowView != null){//MCanvas时，该值为null
+		if (windowView != null) {// MCanvas时，该值为null
 			WindowManager.closeWindow(this);
 		}
 	}
 
 	public void toFront() {
-		if(isDisposed){
+		if (isDisposed) {
 			return;
 		}
 		WindowManager.toFront(this);
 	}
 
 	public void toBack() {
-		if(isDisposed){
+		if (isDisposed) {
 			return;
 		}
 		WindowManager.toBack(this);
@@ -1200,138 +1218,138 @@ public class Window extends Container implements Accessible {
 	boolean eventEnabled(AWTEvent e) {
 		return false;
 	}
-	
-	public void processEventAdAPI(AWTEvent e){
+
+	public void processEventAdAPI(AWTEvent e) {
 		processEvent(e);
 	}
 
 	protected void processEvent(AWTEvent e) {
 		if (e instanceof WindowEvent) {
-            switch (e.getID()) {
-                case WindowEvent.WINDOW_OPENED:
-                case WindowEvent.WINDOW_CLOSING:
-                case WindowEvent.WINDOW_CLOSED:
-                case WindowEvent.WINDOW_ICONIFIED:
-                case WindowEvent.WINDOW_DEICONIFIED:
-                case WindowEvent.WINDOW_ACTIVATED:
-                case WindowEvent.WINDOW_DEACTIVATED:
-                    processWindowEvent((WindowEvent)e);
-                    break;
-                case WindowEvent.WINDOW_GAINED_FOCUS:
-                case WindowEvent.WINDOW_LOST_FOCUS:
-                    processWindowFocusEvent((WindowEvent)e);
-                    break;
-                case WindowEvent.WINDOW_STATE_CHANGED:
-                    processWindowStateEvent((WindowEvent)e);
-                default:
-                    break;
-            }
-            return;
-        }
-//        super.processEvent(e);
+			switch (e.getID()) {
+			case WindowEvent.WINDOW_OPENED:
+			case WindowEvent.WINDOW_CLOSING:
+			case WindowEvent.WINDOW_CLOSED:
+			case WindowEvent.WINDOW_ICONIFIED:
+			case WindowEvent.WINDOW_DEICONIFIED:
+			case WindowEvent.WINDOW_ACTIVATED:
+			case WindowEvent.WINDOW_DEACTIVATED:
+				processWindowEvent((WindowEvent) e);
+				break;
+			case WindowEvent.WINDOW_GAINED_FOCUS:
+			case WindowEvent.WINDOW_LOST_FOCUS:
+				processWindowFocusEvent((WindowEvent) e);
+				break;
+			case WindowEvent.WINDOW_STATE_CHANGED:
+				processWindowStateEvent((WindowEvent) e);
+			default:
+				break;
+			}
+			return;
+		}
+		// super.processEvent(e);
 	}
 
 	protected void processWindowEvent(WindowEvent e) {
-		try{
-		WindowListener[] wl = getWindowListeners();
-		if(wl == null){
-			return;
-		}
-        switch(e.getID()) {
-            case WindowEvent.WINDOW_OPENED:
+		try {
+			WindowListener[] wl = getWindowListeners();
+			if (wl == null) {
+				return;
+			}
+			switch (e.getID()) {
+			case WindowEvent.WINDOW_OPENED:
 				DebugLogger.log("fire WindowListener.windowOpened.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowOpened(e);
 				}
-                break;
-            case WindowEvent.WINDOW_CLOSING:
-            	DebugLogger.log("fire WindowListener.windowClosing.");
+				break;
+			case WindowEvent.WINDOW_CLOSING:
+				DebugLogger.log("fire WindowListener.windowClosing.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowClosing(e);
 				}
-                break;
-            case WindowEvent.WINDOW_CLOSED:
-            	DebugLogger.log("fire WindowListener.windowClosed.");
+				break;
+			case WindowEvent.WINDOW_CLOSED:
+				DebugLogger.log("fire WindowListener.windowClosed.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowClosed(e);
 				}
-                break;
-            case WindowEvent.WINDOW_ICONIFIED:
-            	DebugLogger.log("fire WindowListener.windowIconified.");
+				break;
+			case WindowEvent.WINDOW_ICONIFIED:
+				DebugLogger.log("fire WindowListener.windowIconified.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowIconified(e);
 				}
-                break;
-            case WindowEvent.WINDOW_DEICONIFIED:
-            	DebugLogger.log("fire WindowListener.windowDeiconified.");
+				break;
+			case WindowEvent.WINDOW_DEICONIFIED:
+				DebugLogger.log("fire WindowListener.windowDeiconified.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowDeiconified(e);
 				}
-                break;
-            case WindowEvent.WINDOW_ACTIVATED:
-            	DebugLogger.log("fire WindowListener.windowActivated.");
+				break;
+			case WindowEvent.WINDOW_ACTIVATED:
+				DebugLogger.log("fire WindowListener.windowActivated.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowActivated(e);
 				}
-                break;
-            case WindowEvent.WINDOW_DEACTIVATED:
-            	DebugLogger.log("fire WindowListener.windowDeactivated.");
+				break;
+			case WindowEvent.WINDOW_DEACTIVATED:
+				DebugLogger.log("fire WindowListener.windowDeactivated.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowDeactivated(e);
 				}
-                break;
-            default:
-                break;
-        }
-		}catch (Throwable ex) {
+				break;
+			default:
+				break;
+			}
+		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	protected void processWindowFocusEvent(WindowEvent e) {
-		try{
-		WindowFocusListener[] wl = getWindowFocusListeners();
-		if(wl == null){
-			return;
-		}
-        switch (e.getID()) {
-            case WindowEvent.WINDOW_GAINED_FOCUS:
-            	DebugLogger.log("fire WindowListener.windowGainedFocus.");
+		try {
+			WindowFocusListener[] wl = getWindowFocusListeners();
+			if (wl == null) {
+				return;
+			}
+			switch (e.getID()) {
+			case WindowEvent.WINDOW_GAINED_FOCUS:
+				DebugLogger.log("fire WindowListener.windowGainedFocus.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowGainedFocus(e);
 				}
-                break;
-            case WindowEvent.WINDOW_LOST_FOCUS:
-            	DebugLogger.log("fire WindowListener.windowLostFocus.");
+				break;
+			case WindowEvent.WINDOW_LOST_FOCUS:
+				DebugLogger.log("fire WindowListener.windowLostFocus.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowLostFocus(e);
 				}
-                break;
-            default:
-                break;
-        }
-		}catch (Throwable ex) {
+				break;
+			default:
+				break;
+			}
+		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	protected void processWindowStateEvent(WindowEvent e) {
-		try{
-		WindowStateListener[] wl = getWindowStateListeners();
-		if(wl == null){
-			return;
-		}
-        switch (e.getID()) {
-            case WindowEvent.WINDOW_STATE_CHANGED:
-            	DebugLogger.log("fire WindowListener.windowStateChanged.");
+		try {
+			WindowStateListener[] wl = getWindowStateListeners();
+			if (wl == null) {
+				return;
+			}
+			switch (e.getID()) {
+			case WindowEvent.WINDOW_STATE_CHANGED:
+				DebugLogger.log("fire WindowListener.windowStateChanged.");
 				for (int i = 0; i < wl.length; i++) {
 					wl[i].windowStateChanged(e);
 				}
-                break;
-            default:
-                break;
-        }
-		}catch (Throwable ex) {
+				break;
+			default:
+				break;
+			}
+		} catch (Throwable ex) {
 			ex.printStackTrace();
 		}
 	}
@@ -1354,10 +1372,10 @@ public class Window extends Container implements Accessible {
 	}
 
 	public Component getFocusOwner() {
-		if(isFocused()){
-			View currFocus = ActivityManager.getActivity().getCurrentFocus();
+		if (isFocused()) {
+			View currFocus = ActivityManager.getCurrentFocusView();
 			return searchComponentByViewAdAPI(currFocus);
-		}else{
+		} else {
 			return null;
 		}
 	}
@@ -1412,16 +1430,15 @@ public class Window extends Container implements Accessible {
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 	}
 
-	public void addPropertyChangeListener(String propertyName,
-			PropertyChangeListener listener) {
+	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
 	}
 
 	public boolean postEvent(Event e) {
 		if (handleEvent(e)) {
-            e.consume();
-            return true;
-        }
-        return false;
+			e.consume();
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isShowing() {
@@ -1465,8 +1482,8 @@ public class Window extends Container implements Accessible {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 	}
 
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException, HeadlessException {
+	private void readObject(ObjectInputStream s)
+			throws ClassNotFoundException, IOException, HeadlessException {
 	}
 
 	public AccessibleContext getAccessibleContext() {
@@ -1482,10 +1499,10 @@ public class Window extends Container implements Accessible {
 	}
 
 	public void setLocationRelativeTo(Component c) {
-		if(c == null){
+		if (c == null) {
 			return;
 		}
-		
+
 		int dx = 0, dy = 0;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension windowSize = getSize();
@@ -1530,8 +1547,7 @@ public class Window extends Container implements Accessible {
 		throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
 	}
 
-	public void createBufferStrategy(int numBuffers, BufferCapabilities caps)
-			throws AWTException {
+	public void createBufferStrategy(int numBuffers, BufferCapabilities caps) throws AWTException {
 		throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
 	}
 
@@ -1557,18 +1573,18 @@ public class Window extends Container implements Accessible {
 
 	public boolean isLocationByPlatform() {
 		throw new Error(AndroidClassUtil.UN_IMPLEMENT_METHOD);
-//		return false;
+		// return false;
 	}
 
 	public void setBounds(int x, int y, int width, int height) {
 		synchronized (getTreeLock()) {
-//            if (getBoundsOp() == ComponentPeer.SET_LOCATION ||
-//                getBoundsOp() == ComponentPeer.SET_BOUNDS)
-//            {
-//                locationByPlatform = false;
-//            }
-            super.setBounds(x, y, width, height);
-        }
+			// if (getBoundsOp() == ComponentPeer.SET_LOCATION ||
+			// getBoundsOp() == ComponentPeer.SET_BOUNDS)
+			// {
+			// locationByPlatform = false;
+			// }
+			super.setBounds(x, y, width, height);
+		}
 	}
 
 	public void setBounds(Rectangle r) {
@@ -1613,7 +1629,7 @@ public class Window extends Container implements Accessible {
 	}
 
 	final Container getContainer() {
-		//it does NOT have a container
+		// it does NOT have a container
 		return null;
 	}
 
@@ -1630,7 +1646,7 @@ public class Window extends Container implements Accessible {
 
 	@Override
 	final Point getLocationOnWindow() {
-//		return new Point(0, 0);//旧代码
+		// return new Point(0, 0);//旧代码
 		return new Point(getX(), getY());
 	}
 

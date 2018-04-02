@@ -25,16 +25,14 @@
 package javax.swing.text;
 
 /**
- * This exception is to report the failure of state invarient
- * assertion that was made.  This indicates an internal error
- * has occurred.
+ * This exception is to report the failure of state invarient assertion that was
+ * made. This indicates an internal error has occurred.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
-class StateInvariantError extends Error
-{
-    public StateInvariantError(String s) {
-        super(s);
-    }
+class StateInvariantError extends Error {
+	public StateInvariantError(String s) {
+		super(s);
+	}
 
 }

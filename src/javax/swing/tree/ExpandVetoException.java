@@ -27,23 +27,22 @@ package javax.swing.tree;
 import javax.swing.event.TreeExpansionEvent;
 
 /**
- * Exception used to stop and expand/collapse from happening.
- * See <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/events/treewillexpandlistener.html">How to Write a Tree-Will-Expand Listener</a>
- * in <em>The Java Tutorial</em>
- * for further information and examples.
+ * Exception used to stop and expand/collapse from happening. See <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/events/treewillexpandlistener.html">How
+ * to Write a Tree-Will-Expand Listener</a> in <em>The Java Tutorial</em> for
+ * further information and examples.
  *
  * @author Scott Violet
  */
 public class ExpandVetoException extends Exception {
-    protected TreeExpansionEvent      event;
+	protected TreeExpansionEvent event;
 
-    public ExpandVetoException(TreeExpansionEvent event) {
-        this(event, null);
-    }
+	public ExpandVetoException(TreeExpansionEvent event) {
+		this(event, null);
+	}
 
-    public ExpandVetoException(TreeExpansionEvent event, String message) {
-        super(message);
-        this.event = event;
-    }
+	public ExpandVetoException(TreeExpansionEvent event, String message) {
+		super(message);
+		this.event = event;
+	}
 }

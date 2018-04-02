@@ -25,10 +25,11 @@
 package javax.script;
 
 /**
- * The generic <code>Exception</code> class for the Scripting APIs.  Checked
- * exception types thrown by underlying scripting implementations must be wrapped in instances of
- * <code>ScriptException</code>.  The class has members to store line and column numbers and
- * filenames if this information is available.
+ * The generic <code>Exception</code> class for the Scripting APIs. Checked
+ * exception types thrown by underlying scripting implementations must be
+ * wrapped in instances of <code>ScriptException</code>. The class has members
+ * to store line and column numbers and filenames if this information is
+ * available.
  *
  * @author Mike Grogan
  * @since 1.6
@@ -60,8 +61,7 @@ public class ScriptException extends Exception {
 		this.columnNumber = -1;
 	}
 
-	public ScriptException(String message, String fileName, int lineNumber,
-			int columnNumber) {
+	public ScriptException(String message, String fileName, int lineNumber, int columnNumber) {
 		super(message);
 		this.fileName = fileName;
 		this.lineNumber = lineNumber;

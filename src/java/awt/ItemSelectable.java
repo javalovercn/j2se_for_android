@@ -27,8 +27,8 @@ package java.awt;
 import java.awt.event.ItemListener;
 
 /**
- * The interface for objects which contain a set of items for
- * which zero or more can be selected.
+ * The interface for objects which contain a set of items for which zero or more
+ * can be selected.
  *
  * @author Amy Fowler
  */

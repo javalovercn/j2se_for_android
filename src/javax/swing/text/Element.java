@@ -25,32 +25,31 @@
 package javax.swing.text;
 
 /**
- * Interface to describe a structural piece of a document.  It
- * is intended to capture the spirit of an SGML element.
+ * Interface to describe a structural piece of a document. It is intended to
+ * capture the spirit of an SGML element.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public interface Element {
 
-    public Document getDocument();
+	public Document getDocument();
 
-    public Element getParentElement();
+	public Element getParentElement();
 
-    public String getName();
+	public String getName();
 
-    public AttributeSet getAttributes();
+	public AttributeSet getAttributes();
 
-    public int getStartOffset();
+	public int getStartOffset();
 
-    public int getEndOffset();
+	public int getEndOffset();
 
-    public int getElementIndex(int offset);
+	public int getElementIndex(int offset);
 
-    public int getElementCount();
+	public int getElementCount();
 
-    public Element getElement(int index);
+	public Element getElement(int index);
 
-    public boolean isLeaf();
-
+	public boolean isLeaf();
 
 }

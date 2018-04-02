@@ -28,28 +28,25 @@ import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 
 /**
- * The <code>Polygon</code> class encapsulates a description of a
- * closed, two-dimensional region within a coordinate space. This
- * region is bounded by an arbitrary number of line segments, each of
- * which is one side of the polygon. Internally, a polygon
- * comprises of a list of {@code (x,y)}
- * coordinate pairs, where each pair defines a <i>vertex</i> of the
- * polygon, and two successive pairs are the endpoints of a
- * line that is a side of the polygon. The first and final
- * pairs of {@code (x,y)} points are joined by a line segment
- * that closes the polygon.  This <code>Polygon</code> is defined with
- * an even-odd winding rule.  See
- * {@link java.awt.geom.PathIterator#WIND_EVEN_ODD WIND_EVEN_ODD}
- * for a definition of the even-odd winding rule.
- * This class's hit-testing methods, which include the
- * <code>contains</code>, <code>intersects</code> and <code>inside</code>
- * methods, use the <i>insideness</i> definition described in the
- * {@link Shape} class comments.
+ * The <code>Polygon</code> class encapsulates a description of a closed,
+ * two-dimensional region within a coordinate space. This region is bounded by
+ * an arbitrary number of line segments, each of which is one side of the
+ * polygon. Internally, a polygon comprises of a list of {@code (x,y)}
+ * coordinate pairs, where each pair defines a <i>vertex</i> of the polygon, and
+ * two successive pairs are the endpoints of a line that is a side of the
+ * polygon. The first and final pairs of {@code (x,y)} points are joined by a
+ * line segment that closes the polygon. This <code>Polygon</code> is defined
+ * with an even-odd winding rule. See
+ * {@link java.awt.geom.PathIterator#WIND_EVEN_ODD WIND_EVEN_ODD} for a
+ * definition of the even-odd winding rule. This class's hit-testing methods,
+ * which include the <code>contains</code>, <code>intersects</code> and
+ * <code>inside</code> methods, use the <i>insideness</i> definition described
+ * in the {@link Shape} class comments.
  *
- * @author      Sami Shaio
+ * @author Sami Shaio
  * @see Shape
- * @author      Herb Jellinek
- * @since       1.0
+ * @author Herb Jellinek
+ * @since 1.0
  */
 public class Polygon implements Shape, java.io.Serializable {
 
@@ -70,8 +67,8 @@ public class Polygon implements Shape, java.io.Serializable {
 
 	public Polygon(int xpoints[], int ypoints[], int npoints) {
 		if (npoints > xpoints.length || npoints > ypoints.length) {
-			throw new IndexOutOfBoundsException("npoints > xpoints.length || "
-					+ "npoints > ypoints.length");
+			throw new IndexOutOfBoundsException(
+					"npoints > xpoints.length || " + "npoints > ypoints.length");
 		}
 		if (npoints < 0) {
 			throw new NegativeArraySizeException("npoints < 0");
@@ -244,18 +241,17 @@ public class Polygon implements Shape, java.io.Serializable {
 		return ((hits & 1) != 0);
 	}
 
-    /**
-     * {@inheritDoc}
-     * @since 1.2
-     */
-    public boolean intersects(Rectangle2D r) {
-        return intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight());
-    }
-    
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @since 1.2
+	 */
+	public boolean intersects(Rectangle2D r) {
+		return intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+	}
+
 	public boolean intersects(double x, double y, double w, double h) {
-		if (npoints <= 0
-				|| !getBoundingBox().intersects((int) x, (int) y, (int) w,
-						(int) h)) {
+		if (npoints <= 0 || !getBoundingBox().intersects((int) x, (int) y, (int) w, (int) h)) {
 			return false;
 		}
 
@@ -265,9 +261,7 @@ public class Polygon implements Shape, java.io.Serializable {
 	}
 
 	public boolean contains(double x, double y, double w, double h) {
-		if (npoints <= 0
-				|| !getBoundingBox().intersects((int) x, (int) y, (int) w,
-						(int) h)) {
+		if (npoints <= 0 || !getBoundingBox().intersects((int) x, (int) y, (int) w, (int) h)) {
 			return false;
 		}
 

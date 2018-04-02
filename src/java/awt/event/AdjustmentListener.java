@@ -33,6 +33,6 @@ import java.util.EventListener;
  * @since 1.1
  */
 public interface AdjustmentListener extends EventListener {
-    public void adjustmentValueChanged(AdjustmentEvent e);
+	public void adjustmentValueChanged(AdjustmentEvent e);
 
 }

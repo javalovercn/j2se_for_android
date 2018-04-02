@@ -25,14 +25,13 @@
 package java.awt;
 
 /**
- * EventDispatchThread is a package-private AWT class which takes
- * events off the EventQueue and dispatches them to the appropriate
- * AWT components.
+ * EventDispatchThread is a package-private AWT class which takes events off the
+ * EventQueue and dispatches them to the appropriate AWT components.
  *
  * The Thread starts a "permanent" event pump with a call to
  * pumpEvents(Conditional) in its run() method. Event handlers can choose to
- * block this event pump at any time, but should start a new pump (<b>not</b>
- * a new EventDispatchThread) by again calling pumpEvents(Conditional). This
+ * block this event pump at any time, but should start a new pump (<b>not</b> a
+ * new EventDispatchThread) by again calling pumpEvents(Conditional). This
  * secondary event pump will exit automatically as soon as the Condtional
  * evaluate()s to false and an additional Event is pumped and dispatched.
  *
@@ -90,8 +89,7 @@ class EventDispatchThread extends Thread {
 		pumpEventsForHierarchy(id, cond, null);
 	}
 
-	void pumpEventsForHierarchy(int id, Conditional cond,
-			Component modalComponent) {
+	void pumpEventsForHierarchy(int id, Conditional cond, Component modalComponent) {
 	}
 
 	void pumpEventsForFilter(Conditional cond, EventFilter filter) {

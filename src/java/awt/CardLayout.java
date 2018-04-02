@@ -33,24 +33,22 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 /**
- * A <code>CardLayout</code> object is a layout manager for a
- * container. It treats each component in the container as a card.
- * Only one card is visible at a time, and the container acts as
- * a stack of cards. The first component added to a
- * <code>CardLayout</code> object is the visible component when the
+ * A <code>CardLayout</code> object is a layout manager for a container. It
+ * treats each component in the container as a card. Only one card is visible at
+ * a time, and the container acts as a stack of cards. The first component added
+ * to a <code>CardLayout</code> object is the visible component when the
  * container is first displayed.
  * <p>
- * The ordering of cards is determined by the container's own internal
- * ordering of its component objects. <code>CardLayout</code>
- * defines a set of methods that allow an application to flip
- * through these cards sequentially, or to show a specified card.
- * The {@link CardLayout#addLayoutComponent}
- * method can be used to associate a string identifier with a given card
- * for fast random access.
+ * The ordering of cards is determined by the container's own internal ordering
+ * of its component objects. <code>CardLayout</code> defines a set of methods
+ * that allow an application to flip through these cards sequentially, or to
+ * show a specified card. The {@link CardLayout#addLayoutComponent} method can
+ * be used to associate a string identifier with a given card for fast random
+ * access.
  *
- * @author      Arthur van Hoff
- * @see         java.awt.Container
- * @since       JDK1.0
+ * @author Arthur van Hoff
+ * @see java.awt.Container
+ * @since JDK1.0
  */
 public class CardLayout implements LayoutManager2, Serializable {
 
@@ -106,17 +104,16 @@ public class CardLayout implements LayoutManager2, Serializable {
 	int vgap;
 
 	/**
-	 * @serialField
-	 *                  tab Hashtable deprectated, for forward compatibility
-	 *                  only
-	 * @serialField
-	 *                  hgap int
-	 * @serialField
-	 *                  vgap int
-	 * @serialField
-	 *                  vector Vector
-	 * @serialField
-	 *                  currentCard int
+	 * @serialField tab
+	 *                  Hashtable deprectated, for forward compatibility only
+	 * @serialField hgap
+	 *                  int
+	 * @serialField vgap
+	 *                  int
+	 * @serialField vector
+	 *                  Vector
+	 * @serialField currentCard
+	 *                  int
 	 */
 	private static final ObjectStreamField[] serialPersistentFields = {
 			new ObjectStreamField("tab", Hashtable.class),
@@ -595,8 +592,7 @@ public class CardLayout implements LayoutManager2, Serializable {
 	/**
 	 * Reads serializable fields from stream.
 	 */
-	private void readObject(ObjectInputStream s) throws ClassNotFoundException,
-			IOException {
+	private void readObject(ObjectInputStream s) throws ClassNotFoundException, IOException {
 	}
 
 	/**

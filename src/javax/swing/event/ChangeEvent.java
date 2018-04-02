@@ -27,22 +27,20 @@ package javax.swing.event;
 import java.util.EventObject;
 
 /**
- * ChangeEvent is used to notify interested parties that
- * state has changed in the event source.
+ * ChangeEvent is used to notify interested parties that state has changed in
+ * the event source.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @author Jeff Dinkins
  */
 public class ChangeEvent extends EventObject {
-    public ChangeEvent(Object source) {
-        super(source);
-    }
+	public ChangeEvent(Object source) {
+		super(source);
+	}
 }

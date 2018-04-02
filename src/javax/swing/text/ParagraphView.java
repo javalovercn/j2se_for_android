@@ -29,26 +29,23 @@ import java.awt.Shape;
 import javax.swing.text.Position.Bias;
 
 /**
- * View of a simple line-wrapping paragraph that supports
- * multiple fonts, colors, components, icons, etc.  It is
- * basically a vertical box with a margin around it.  The
- * contents of the box are a bunch of rows which are special
- * horizontal boxes.  This view creates a collection of
- * views that represent the child elements of the paragraph
- * element.  Each of these views are placed into a row
- * directly if they will fit, otherwise the <code>breakView</code>
- * method is called to try and carve the view into pieces
- * that fit.
+ * View of a simple line-wrapping paragraph that supports multiple fonts,
+ * colors, components, icons, etc. It is basically a vertical box with a margin
+ * around it. The contents of the box are a bunch of rows which are special
+ * horizontal boxes. This view creates a collection of views that represent the
+ * child elements of the paragraph element. Each of these views are placed into
+ * a row directly if they will fit, otherwise the <code>breakView</code> method
+ * is called to try and carve the view into pieces that fit.
  *
- * @author  Timothy Prinzing
- * @author  Scott Violet
- * @author  Igor Kushnirskiy
- * @see     View
+ * @author Timothy Prinzing
+ * @author Scott Violet
+ * @author Igor Kushnirskiy
+ * @see View
  */
-public class ParagraphView extends View{
+public class ParagraphView extends View {
 
-	//extends FlowView implements TabExpander 
-	
+	// extends FlowView implements TabExpander
+
 	public ParagraphView(Element elem) {
 		super(elem);
 	}
@@ -60,12 +57,11 @@ public class ParagraphView extends View{
 
 	@Override
 	public void paint(Graphics g, Shape allocation) {
-		
+
 	}
 
 	@Override
-	public Shape modelToView(int pos, Shape a, Bias b)
-			throws BadLocationException {
+	public Shape modelToView(int pos, Shape a, Bias b) throws BadLocationException {
 		return null;
 	}
 

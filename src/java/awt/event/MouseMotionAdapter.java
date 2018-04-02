@@ -25,35 +25,39 @@
 package java.awt.event;
 
 /**
- * An abstract adapter class for receiving mouse motion events.
- * The methods in this class are empty. This class exists as
- * convenience for creating listener objects.
+ * An abstract adapter class for receiving mouse motion events. The methods in
+ * this class are empty. This class exists as convenience for creating listener
+ * objects.
  * <P>
- * Mouse motion events occur when a mouse is moved or dragged.
- * (Many such events will be generated in a normal program.
- * To track clicks and other mouse events, use the MouseAdapter.)
+ * Mouse motion events occur when a mouse is moved or dragged. (Many such events
+ * will be generated in a normal program. To track clicks and other mouse
+ * events, use the MouseAdapter.)
  * <P>
- * Extend this class to create a <code>MouseEvent</code> listener
- * and override the methods for the events of interest. (If you implement the
- * <code>MouseMotionListener</code> interface, you have to define all of
- * the methods in it. This abstract class defines null methods for them
- * all, so you can only have to define methods for events you care about.)
+ * Extend this class to create a <code>MouseEvent</code> listener and override
+ * the methods for the events of interest. (If you implement the
+ * <code>MouseMotionListener</code> interface, you have to define all of the
+ * methods in it. This abstract class defines null methods for them all, so you
+ * can only have to define methods for events you care about.)
  * <P>
- * Create a listener object using the extended class and then register it with
- * a component using the component's <code>addMouseMotionListener</code>
- * method. When the mouse is moved or dragged, the relevant method in the
- * listener object is invoked and the <code>MouseEvent</code> is passed to it.
+ * Create a listener object using the extended class and then register it with a
+ * component using the component's <code>addMouseMotionListener</code> method.
+ * When the mouse is moved or dragged, the relevant method in the listener
+ * object is invoked and the <code>MouseEvent</code> is passed to it.
  *
  * @author Amy Fowler
  *
  * @see MouseEvent
  * @see MouseMotionListener
- * @see <a href="http://java.sun.com/docs/books/tutorial/post1.0/ui/mousemotionlistener.html">Tutorial: Writing a Mouse Motion Listener</a>
+ * @see <a href=
+ *      "http://java.sun.com/docs/books/tutorial/post1.0/ui/mousemotionlistener.html">Tutorial:
+ *      Writing a Mouse Motion Listener</a>
  *
  * @since 1.1
  */
 public abstract class MouseMotionAdapter implements MouseMotionListener {
-    public void mouseDragged(MouseEvent e) {}
+	public void mouseDragged(MouseEvent e) {
+	}
 
-    public void mouseMoved(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e) {
+	}
 }

@@ -25,25 +25,25 @@
 package java.beans;
 
 /**
- * A bean implementor who wishes to provide explicit information about
- * their bean may provide a BeanInfo class that implements this BeanInfo
- * interface and provides explicit information about the methods,
- * properties, events, etc, of their  bean.
+ * A bean implementor who wishes to provide explicit information about their
+ * bean may provide a BeanInfo class that implements this BeanInfo interface and
+ * provides explicit information about the methods, properties, events, etc, of
+ * their bean.
  * <p>
- * A bean implementor doesn't need to provide a complete set of
- * explicit information.  You can pick and choose which information
- * you want to provide and the rest will be obtained by automatic
- * analysis using low-level reflection of the bean classes' methods
- * and applying standard design patterns.
+ * A bean implementor doesn't need to provide a complete set of explicit
+ * information. You can pick and choose which information you want to provide
+ * and the rest will be obtained by automatic analysis using low-level
+ * reflection of the bean classes' methods and applying standard design
+ * patterns.
  * <p>
- * You get the opportunity to provide lots and lots of different
- * information as part of the various XyZDescriptor classes.  But
- * don't panic, you only really need to provide the minimal core
- * information required by the various constructors.
+ * You get the opportunity to provide lots and lots of different information as
+ * part of the various XyZDescriptor classes. But don't panic, you only really
+ * need to provide the minimal core information required by the various
+ * constructors.
  * <P>
- * See also the SimpleBeanInfo class which provides a convenient
- * "noop" base class for BeanInfo classes, which you can override
- * for those specific places where you want to return explicit info.
+ * See also the SimpleBeanInfo class which provides a convenient "noop" base
+ * class for BeanInfo classes, which you can override for those specific places
+ * where you want to return explicit info.
  * <P>
  * To learn about all the behaviour of a bean see the Introspector class.
  */

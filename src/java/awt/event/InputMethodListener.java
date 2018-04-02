@@ -28,11 +28,12 @@ import java.util.EventListener;
 
 /**
  * The listener interface for receiving input method events. A text editing
- * component has to install an input method event listener in order to work
- * with input methods.
+ * component has to install an input method event listener in order to work with
+ * input methods.
  *
  * <p>
- * The text editing component also has to provide an instance of InputMethodRequests.
+ * The text editing component also has to provide an instance of
+ * InputMethodRequests.
  *
  * @author JavaSoft Asia/Pacific
  * @see InputMethodEvent
@@ -42,8 +43,8 @@ import java.util.EventListener;
 
 public interface InputMethodListener extends EventListener {
 
-    void inputMethodTextChanged(InputMethodEvent event);
+	void inputMethodTextChanged(InputMethodEvent event);
 
-    void caretPositionChanged(InputMethodEvent event);
+	void caretPositionChanged(InputMethodEvent event);
 
 }

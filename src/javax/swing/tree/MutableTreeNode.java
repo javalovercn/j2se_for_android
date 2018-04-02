@@ -25,9 +25,9 @@
 package javax.swing.tree;
 
 /**
- * Defines the requirements for a tree node object that can change --
- * by adding or removing child nodes, or by changing the contents
- * of a user object stored in the node.
+ * Defines the requirements for a tree node object that can change -- by adding
+ * or removing child nodes, or by changing the contents of a user object stored
+ * in the node.
  *
  * @see DefaultMutableTreeNode
  * @see javax.swing.JTree
@@ -36,15 +36,15 @@ package javax.swing.tree;
  * @author Scott Violet
  */
 public interface MutableTreeNode extends TreeNode {
-    void insert(MutableTreeNode child, int index);
+	void insert(MutableTreeNode child, int index);
 
-    void remove(int index);
+	void remove(int index);
 
-    void remove(MutableTreeNode node);
+	void remove(MutableTreeNode node);
 
-    void setUserObject(Object object);
+	void setUserObject(Object object);
 
-    void removeFromParent();
+	void removeFromParent();
 
-    void setParent(MutableTreeNode newParent);
+	void setParent(MutableTreeNode newParent);
 }

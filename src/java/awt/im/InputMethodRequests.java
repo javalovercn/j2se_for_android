@@ -30,11 +30,11 @@ import java.text.AttributedCharacterIterator;
 import java.text.AttributedCharacterIterator.Attribute;
 
 /**
- * InputMethodRequests defines the requests that a text editing component
- * has to handle in order to work with input methods. The component
- * can implement this interface itself or use a separate object that
- * implements it. The object implementing this interface must be returned
- * from the component's getInputMethodRequests method.
+ * InputMethodRequests defines the requests that a text editing component has to
+ * handle in order to work with input methods. The component can implement this
+ * interface itself or use a separate object that implements it. The object
+ * implementing this interface must be returned from the component's
+ * getInputMethodRequests method.
  *
  * <p>
  * The text editing component also has to provide an input method event
@@ -44,13 +44,13 @@ import java.text.AttributedCharacterIterator.Attribute;
  * The interface is designed to support one of two input user interfaces:
  * <ul>
  * <li><em>on-the-spot</em> input, where the composed text is displayed as part
- *     of the text component's text body.
- * <li><em>below-the-spot</em> input, where the composed text is displayed in
- *     a separate composition window just below the insertion point where
- *     the text will be inserted when it is committed. Note that, if text is
- *     selected within the component's text body, this text will be replaced by
- *     the committed text upon commitment; therefore it is not considered part
- *     of the context that the text is input into.
+ * of the text component's text body.
+ * <li><em>below-the-spot</em> input, where the composed text is displayed in a
+ * separate composition window just below the insertion point where the text
+ * will be inserted when it is committed. Note that, if text is selected within
+ * the component's text body, this text will be replaced by the committed text
+ * upon commitment; therefore it is not considered part of the context that the
+ * text is input into.
  * </ul>
  *
  * @see java.awt.Component#getInputMethodRequests
@@ -62,19 +62,18 @@ import java.text.AttributedCharacterIterator.Attribute;
 
 public interface InputMethodRequests {
 
-    Rectangle getTextLocation(TextHitInfo offset);
+	Rectangle getTextLocation(TextHitInfo offset);
 
-    TextHitInfo getLocationOffset(int x, int y);
+	TextHitInfo getLocationOffset(int x, int y);
 
-    int getInsertPositionOffset();
+	int getInsertPositionOffset();
 
-    AttributedCharacterIterator getCommittedText(int beginIndex, int endIndex,
-                                                 Attribute[] attributes);
+	AttributedCharacterIterator getCommittedText(int beginIndex, int endIndex,
+			Attribute[] attributes);
 
-    int getCommittedTextLength();
+	int getCommittedTextLength();
 
-    AttributedCharacterIterator cancelLatestCommittedText(Attribute[] attributes);
+	AttributedCharacterIterator cancelLatestCommittedText(Attribute[] attributes);
 
-    AttributedCharacterIterator getSelectedText(Attribute[] attributes);
+	AttributedCharacterIterator getSelectedText(Attribute[] attributes);
 }
-

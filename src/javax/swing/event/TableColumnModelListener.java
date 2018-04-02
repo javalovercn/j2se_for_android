@@ -25,21 +25,20 @@
 package javax.swing.event;
 
 /**
- * TableColumnModelListener defines the interface for an object that listens
- * to changes in a TableColumnModel.
+ * TableColumnModelListener defines the interface for an object that listens to
+ * changes in a TableColumnModel.
  *
  * @author Alan Chung
  * @see TableColumnModelEvent
  */
-public interface TableColumnModelListener extends java.util.EventListener
-{
-    public void columnAdded(TableColumnModelEvent e);
+public interface TableColumnModelListener extends java.util.EventListener {
+	public void columnAdded(TableColumnModelEvent e);
 
-    public void columnRemoved(TableColumnModelEvent e);
+	public void columnRemoved(TableColumnModelEvent e);
 
-    public void columnMoved(TableColumnModelEvent e);
+	public void columnMoved(TableColumnModelEvent e);
 
-    public void columnMarginChanged(ChangeEvent e);
+	public void columnMarginChanged(ChangeEvent e);
 
-    public void columnSelectionChanged(ListSelectionEvent e);
+	public void columnSelectionChanged(ListSelectionEvent e);
 }

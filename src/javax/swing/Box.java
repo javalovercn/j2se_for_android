@@ -37,47 +37,36 @@ import android.graphics.Canvas;
 import android.view.View;
 
 /**
- * A lightweight container
- * that uses a BoxLayout object as its layout manager.
- * Box provides several class methods
- * that are useful for containers using BoxLayout --
- * even non-Box containers.
+ * A lightweight container that uses a BoxLayout object as its layout manager.
+ * Box provides several class methods that are useful for containers using
+ * BoxLayout -- even non-Box containers.
  *
  * <p>
- * The <code>Box</code> class can create several kinds
- * of invisible components
- * that affect layout:
- * glue, struts, and rigid areas.
- * If all the components your <code>Box</code> contains
- * have a fixed size,
- * you might want to use a glue component
- * (returned by <code>createGlue</code>)
- * to control the components' positions.
- * If you need a fixed amount of space between two components,
- * try using a strut
- * (<code>createHorizontalStrut</code> or <code>createVerticalStrut</code>).
- * If you need an invisible component
- * that always takes up the same amount of space,
- * get it by invoking <code>createRigidArea</code>.
+ * The <code>Box</code> class can create several kinds of invisible components
+ * that affect layout: glue, struts, and rigid areas. If all the components your
+ * <code>Box</code> contains have a fixed size, you might want to use a glue
+ * component (returned by <code>createGlue</code>) to control the components'
+ * positions. If you need a fixed amount of space between two components, try
+ * using a strut (<code>createHorizontalStrut</code> or
+ * <code>createVerticalStrut</code>). If you need an invisible component that
+ * always takes up the same amount of space, get it by invoking
+ * <code>createRigidArea</code>.
  * <p>
- * If you are implementing a <code>BoxLayout</code> you
- * can find further information and examples in
- * <a
- href="http://java.sun.com/docs/books/tutorial/uiswing/layout/box.html">How to Use BoxLayout</a>,
- * a section in <em>The Java Tutorial.</em>
+ * If you are implementing a <code>BoxLayout</code> you can find further
+ * information and examples in
+ * <a href="http://java.sun.com/docs/books/tutorial/uiswing/layout/box.html">How
+ * to Use BoxLayout</a>, a section in <em>The Java Tutorial.</em>
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @see BoxLayout
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public class Box extends JComponent implements Accessible {
 
@@ -96,6 +85,7 @@ public class Box extends JComponent implements Accessible {
 
 	/**
 	 * 固定大小透明块
+	 * 
 	 * @param d
 	 * @return
 	 */
@@ -105,6 +95,7 @@ public class Box extends JComponent implements Accessible {
 
 	/**
 	 * 固定宽度，高度不限
+	 * 
 	 * @param width
 	 * @return
 	 */
@@ -115,6 +106,7 @@ public class Box extends JComponent implements Accessible {
 
 	/**
 	 * 高度固定，宽度不限
+	 * 
 	 * @param height
 	 * @return
 	 */
@@ -125,6 +117,7 @@ public class Box extends JComponent implements Accessible {
 
 	/**
 	 * 最大高度、宽度不限
+	 * 
 	 * @return
 	 */
 	public static Component createGlue() {
@@ -134,6 +127,7 @@ public class Box extends JComponent implements Accessible {
 
 	/**
 	 * 最大高度、宽度不限
+	 * 
 	 * @return
 	 */
 	public static Component createHorizontalGlue() {
@@ -141,35 +135,36 @@ public class Box extends JComponent implements Accessible {
 				new Dimension(Short.MAX_VALUE, 0));
 	}
 
-	public static boolean isVerticalGlueAdAPI(Component filler){
+	public static boolean isVerticalGlueAdAPI(Component filler) {
 		Dimension max = filler.getMaximumSize();
-		if(max.width == 0 && max.height == Short.MAX_VALUE){
+		if (max.width == 0 && max.height == Short.MAX_VALUE) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	public static boolean isHorizontalVerticalGlueAdAPI(Component filler){
+
+	public static boolean isHorizontalVerticalGlueAdAPI(Component filler) {
 		Dimension max = filler.getMaximumSize();
-		if(max.width == Short.MAX_VALUE && max.height == Short.MAX_VALUE){
+		if (max.width == Short.MAX_VALUE && max.height == Short.MAX_VALUE) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	public static boolean isHorizontalGlueAdAPI(Component filler){
+
+	public static boolean isHorizontalGlueAdAPI(Component filler) {
 		Dimension max = filler.getMaximumSize();
-		if(max.width == Short.MAX_VALUE && max.height == 0){
+		if (max.width == Short.MAX_VALUE && max.height == 0) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * 最大高度、宽度不限
+	 * 
 	 * @return
 	 */
 	public static Component createVerticalGlue() {
@@ -182,8 +177,8 @@ public class Box extends JComponent implements Accessible {
 	}
 
 	protected void paintComponent(Graphics g) {
-//		g.setColor(getBackground());
-//		g.fillRect(0, 0, getWidth(), getHeight());
+		// g.setColor(getBackground());
+		// g.fillRect(0, 0, getWidth(), getHeight());
 	}
 
 	public static class Filler extends JComponent implements Accessible {
@@ -203,34 +198,34 @@ public class Box extends JComponent implements Accessible {
 			init();
 			revalidate();
 		}
-		
-		private void init(){
-			setPeerAdAPI(new View(hc.android.ActivityManager.getActivity()){
-//				MeasureSpec.getSize(measureSpec)
-				@Override  
-			    protected void onDraw(Canvas canvas) { 
-					paintComponent(new CanvasGraphics(canvas, getScreenAdapterAdAPI()));//注意不能缓存，因为可能会调整尺寸
+
+		private void init() {
+			setPeerAdAPI(new View(hc.android.ActivityManager.applicationContext) {
+				// MeasureSpec.getSize(measureSpec)
+				@Override
+				protected void onDraw(Canvas canvas) {
+					paintComponent(new CanvasGraphics(canvas, getScreenAdapterAdAPI()));// 注意不能缓存，因为可能会调整尺寸
 				}
-				
+
 				protected int getSuggestedMinimumWidth() {
 					Dimension minimumSize = Filler.this.getMinimumSize();
 					int outWidth = minimumSize.width;
-					if(outWidth <= 0){
+					if (outWidth <= 0) {
 						outWidth = 5;
 					}
 					return outWidth;
 				}
-				
+
 				protected int getSuggestedMinimumHeight() {
 					Dimension minimumSize = Filler.this.getMinimumSize();
 					int outHeight = minimumSize.height;
-					if(outHeight <= 0){
+					if (outHeight <= 0) {
 						outHeight = 5;
 					}
 					return outHeight;
 				}
 			});
-			
+
 		}
 
 		protected void paintComponent(Graphics g) {

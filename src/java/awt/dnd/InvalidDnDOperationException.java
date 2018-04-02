@@ -25,16 +25,20 @@
 package java.awt.dnd;
 
 /**
- * This exception is thrown by various methods in the java.awt.dnd package.
- * It is usually thrown to indicate that the target in question is unable
- * to undertake the requested operation that the present time, since the
- * undrelying DnD system is not in the appropriate state.
+ * This exception is thrown by various methods in the java.awt.dnd package. It
+ * is usually thrown to indicate that the target in question is unable to
+ * undertake the requested operation that the present time, since the undrelying
+ * DnD system is not in the appropriate state.
  *
  * @since 1.2
  */
 
 public class InvalidDnDOperationException extends IllegalStateException {
-    public InvalidDnDOperationException() { super("InvalidDnDOperation on the DnD system"); }
+	public InvalidDnDOperationException() {
+		super("InvalidDnDOperation on the DnD system");
+	}
 
-    public InvalidDnDOperationException(String msg) { super(msg); }
+	public InvalidDnDOperationException(String msg) {
+		super(msg);
+	}
 }

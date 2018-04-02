@@ -60,69 +60,61 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
 /**
- * A text component to edit various kinds of content.
- * You can find how-to information and examples of using editor panes in
- * <a href="http://java.sun.com/docs/books/tutorial/uiswing/components/text.html">Using Text Components</a>,
- * a section in <em>The Java Tutorial.</em>
+ * A text component to edit various kinds of content. You can find how-to
+ * information and examples of using editor panes in <a href=
+ * "http://java.sun.com/docs/books/tutorial/uiswing/components/text.html">Using
+ * Text Components</a>, a section in <em>The Java Tutorial.</em>
  *
  * <p>
- * This component uses implementations of the
- * <code>EditorKit</code> to accomplish its behavior. It effectively
- * morphs into the proper kind of text editor for the kind
- * of content it is given.  The content type that editor is bound
- * to at any given time is determined by the <code>EditorKit</code> currently
- * installed.  If the content is set to a new URL, its type is used
- * to determine the <code>EditorKit</code> that should be used to
- * load the content.
+ * This component uses implementations of the <code>EditorKit</code> to
+ * accomplish its behavior. It effectively morphs into the proper kind of text
+ * editor for the kind of content it is given. The content type that editor is
+ * bound to at any given time is determined by the <code>EditorKit</code>
+ * currently installed. If the content is set to a new URL, its type is used to
+ * determine the <code>EditorKit</code> that should be used to load the content.
  * <p>
  * By default, the following types of content are known:
  * <dl>
  * <dt><b>text/plain</b>
- * <dd>Plain text, which is the default the type given isn't
- * recognized.  The kit used in this case is an extension of
- * <code>DefaultEditorKit</code> that produces a wrapped plain text view.
+ * <dd>Plain text, which is the default the type given isn't recognized. The kit
+ * used in this case is an extension of <code>DefaultEditorKit</code> that
+ * produces a wrapped plain text view.
  * <dt><b>text/html</b>
- * <dd>HTML text.  The kit used in this case is the class
- * <code>javax.swing.text.html.HTMLEditorKit</code>
- * which provides HTML 3.2 support.
+ * <dd>HTML text. The kit used in this case is the class
+ * <code>javax.swing.text.html.HTMLEditorKit</code> which provides HTML 3.2
+ * support.
  * <dt><b>text/rtf</b>
- * <dd>RTF text.  The kit used in this case is the class
- * <code>javax.swing.text.rtf.RTFEditorKit</code>
- * which provides a limited support of the Rich Text Format.
+ * <dd>RTF text. The kit used in this case is the class
+ * <code>javax.swing.text.rtf.RTFEditorKit</code> which provides a limited
+ * support of the Rich Text Format.
  * </dl>
  * <p>
  * There are several ways to load content into this component.
  * <ol>
- * <li>
- * The {@link #setText setText} method can be used to initialize
- * the component from a string.  In this case the current
- * <code>EditorKit</code> will be used, and the content type will be
- * expected to be of this type.
- * <li>
- * The {@link #read read} method can be used to initialize the
- * component from a <code>Reader</code>.  Note that if the content type is HTML,
- * relative references (e.g. for things like images) can't be resolved
- * unless the &lt;base&gt; tag is used or the <em>Base</em> property
- * on <code>HTMLDocument</code> is set.
- * In this case the current <code>EditorKit</code> will be used,
- * and the content type will be expected to be of this type.
- * <li>
- * The {@link #setPage setPage} method can be used to initialize
- * the component from a URL.  In this case, the content type will be
- * determined from the URL, and the registered <code>EditorKit</code>
- * for that content type will be set.
+ * <li>The {@link #setText setText} method can be used to initialize the
+ * component from a string. In this case the current <code>EditorKit</code> will
+ * be used, and the content type will be expected to be of this type.
+ * <li>The {@link #read read} method can be used to initialize the component
+ * from a <code>Reader</code>. Note that if the content type is HTML, relative
+ * references (e.g. for things like images) can't be resolved unless the
+ * &lt;base&gt; tag is used or the <em>Base</em> property on
+ * <code>HTMLDocument</code> is set. In this case the current
+ * <code>EditorKit</code> will be used, and the content type will be expected to
+ * be of this type.
+ * <li>The {@link #setPage setPage} method can be used to initialize the
+ * component from a URL. In this case, the content type will be determined from
+ * the URL, and the registered <code>EditorKit</code> for that content type will
+ * be set.
  * </ol>
  * <p>
- * Some kinds of content may provide hyperlink support by generating
- * hyperlink events.  The HTML <code>EditorKit</code> will generate
- * hyperlink events if the <code>JEditorPane</code> is <em>not editable</em>
- * (<code>JEditorPane.setEditable(false);</code> has been called).
- * If HTML frames are embedded in the document, the typical response would be
- * to change a portion of the current document.  The following code
- * fragment is a possible hyperlink listener implementation, that treats
- * HTML frame events specially, and simply displays any other activated
- * hyperlinks.
- * <code><pre>
+ * Some kinds of content may provide hyperlink support by generating hyperlink
+ * events. The HTML <code>EditorKit</code> will generate hyperlink events if the
+ * <code>JEditorPane</code> is <em>not editable</em>
+ * (<code>JEditorPane.setEditable(false);</code> has been called). If HTML
+ * frames are embedded in the document, the typical response would be to change
+ * a portion of the current document. The following code fragment is a possible
+ * hyperlink listener implementation, that treats HTML frame events specially,
+ * and simply displays any other activated hyperlinks. <code><pre>
 
 &nbsp;    class Hyperactive implements HyperlinkListener {
 &nbsp;
@@ -149,64 +141,54 @@ import javax.swing.text.ViewFactory;
  * For information on customizing how <b>text/html</b> is rendered please see
  * {@link #W3C_LENGTH_UNITS} and {@link #HONOR_DISPLAY_PROPERTIES}
  * <p>
- * Culturally dependent information in some documents is handled through
- * a mechanism called character encoding.  Character encoding is an
- * unambiguous mapping of the members of a character set (letters, ideographs,
- * digits, symbols, or control functions) to specific numeric code values. It
- * represents the way the file is stored. Example character encodings are
- * ISO-8859-1, ISO-8859-5, Shift-jis, Euc-jp, and UTF-8. When the file is
- * passed to an user agent (<code>JEditorPane</code>) it is converted to
- * the document character set (ISO-10646 aka Unicode).
+ * Culturally dependent information in some documents is handled through a
+ * mechanism called character encoding. Character encoding is an unambiguous
+ * mapping of the members of a character set (letters, ideographs, digits,
+ * symbols, or control functions) to specific numeric code values. It represents
+ * the way the file is stored. Example character encodings are ISO-8859-1,
+ * ISO-8859-5, Shift-jis, Euc-jp, and UTF-8. When the file is passed to an user
+ * agent (<code>JEditorPane</code>) it is converted to the document character
+ * set (ISO-10646 aka Unicode).
  * <p>
- * There are multiple ways to get a character set mapping to happen
- * with <code>JEditorPane</code>.
+ * There are multiple ways to get a character set mapping to happen with
+ * <code>JEditorPane</code>.
  * <ol>
- * <li>
- * One way is to specify the character set as a parameter of the MIME
- * type.  This will be established by a call to the
- * {@link #setContentType setContentType} method.  If the content
- * is loaded by the {@link #setPage setPage} method the content
- * type will have been set according to the specification of the URL.
- * It the file is loaded directly, the content type would be expected to
- * have been set prior to loading.
- * <li>
- * Another way the character set can be specified is in the document itself.
+ * <li>One way is to specify the character set as a parameter of the MIME type.
+ * This will be established by a call to the {@link #setContentType
+ * setContentType} method. If the content is loaded by the {@link #setPage
+ * setPage} method the content type will have been set according to the
+ * specification of the URL. It the file is loaded directly, the content type
+ * would be expected to have been set prior to loading.
+ * <li>Another way the character set can be specified is in the document itself.
  * This requires reading the document prior to determining the character set
- * that is desired.  To handle this, it is expected that the
+ * that is desired. To handle this, it is expected that the
  * <code>EditorKit</code>.read operation throw a
- * <code>ChangedCharSetException</code> which will
- * be caught.  The read is then restarted with a new Reader that uses
- * the character set specified in the <code>ChangedCharSetException</code>
- * (which is an <code>IOException</code>).
+ * <code>ChangedCharSetException</code> which will be caught. The read is then
+ * restarted with a new Reader that uses the character set specified in the
+ * <code>ChangedCharSetException</code> (which is an <code>IOException</code>).
  * </ol>
  * <p>
  * <dl>
  * <dt><b><font size=+1>Newlines</font></b>
- * <dd>
- * For a discussion on how newlines are handled, see
+ * <dd>For a discussion on how newlines are handled, see
  * <a href="text/DefaultEditorKit.html">DefaultEditorKit</a>.
  * </dl>
  *
  * <p>
- * <strong>Warning:</strong> Swing is not thread safe. For more
- * information see <a
- * href="package-summary.html#threading">Swing's Threading
- * Policy</a>.
+ * <strong>Warning:</strong> Swing is not thread safe. For more information see
+ * <a href="package-summary.html#threading">Swing's Threading Policy</a>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @beaninfo
- *   attribute: isContainer false
- * description: A text component to edit various types of content.
+ * @beaninfo attribute: isContainer false description: A text component to edit
+ *           various types of content.
  *
- * @author  Timothy Prinzing
+ * @author Timothy Prinzing
  */
 public class JEditorPane extends JTextComponent {
 
@@ -329,12 +311,11 @@ public class JEditorPane extends JTextComponent {
 		return null;
 	}
 
-	public static void registerEditorKitForContentType(String type,
-			String classname) {
+	public static void registerEditorKitForContentType(String type, String classname) {
 	}
 
-	public static void registerEditorKitForContentType(String type,
-			String classname, ClassLoader loader) {
+	public static void registerEditorKitForContentType(String type, String classname,
+			ClassLoader loader) {
 	}
 
 	public static String getEditorKitClassNameForContentType(String type) {
@@ -374,8 +355,7 @@ public class JEditorPane extends JTextComponent {
 
 	private Hashtable<String, EditorKit> typeHandlers;
 
-	private static final Object kitRegistryKey = new StringBuffer(
-			"JEditorPane.kitRegistry");
+	private static final Object kitRegistryKey = new StringBuffer("JEditorPane.kitRegistry");
 	private static final Object kitTypeRegistryKey = new StringBuffer(
 			"JEditorPane.kitTypeRegistry");
 	private static final Object kitLoaderRegistryKey = new StringBuffer(
@@ -387,8 +367,7 @@ public class JEditorPane extends JTextComponent {
 
 	public static final String HONOR_DISPLAY_PROPERTIES = "JEditorPane.honorDisplayProperties";
 
-	static final Map<String, String> defaultEditorKitMap = new HashMap<String, String>(
-			0);
+	static final Map<String, String> defaultEditorKitMap = new HashMap<String, String>(0);
 
 	protected String paramString() {
 
@@ -444,8 +423,7 @@ public class JEditorPane extends JTextComponent {
 					return 0;
 				}
 
-				protected boolean updateChildren(
-						DocumentEvent.ElementChange ec, DocumentEvent e,
+				protected boolean updateChildren(DocumentEvent.ElementChange ec, DocumentEvent e,
 						ViewFactory f) {
 					return false;
 				}
@@ -457,8 +435,8 @@ public class JEditorPane extends JTextComponent {
 					return 0;
 				}
 
-				protected void forwardUpdateToView(View v, DocumentEvent e,
-						Shape a, ViewFactory f) {
+				protected void forwardUpdateToView(View v, DocumentEvent e, Shape a,
+						ViewFactory f) {
 				}
 
 				public void paint(Graphics g, Shape allocation) {
