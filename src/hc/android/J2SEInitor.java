@@ -24,7 +24,7 @@ public class J2SEInitor {
 	private static boolean isInited = false;
 
 	public static final String getVersion() {
-		return "3.5";
+		return "3.7";
 	}
 
 	/**

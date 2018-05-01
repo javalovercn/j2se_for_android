@@ -220,12 +220,15 @@ public class JLabel extends JComponent implements SwingConstants, Accessible {
 								ViewGroup.LayoutParams.WRAP_CONTENT, 1.0F);
 						lp.gravity = Gravity.CENTER;
 
-						if (AndroidUIUtil.setTextForTextViewAdAPI(text, textView) == false) {
-							textView.setLines(1);// 不含html。不能设置setSingleLine()，会导致表头字重叠
-						}
+						//以下要置于setText之前，否则可能产生移动
 						UICore.setTextSize(textView, JLabel.this.getFont(),
 								JLabel.this.getScreenAdapterAdAPI());
 						textView.setFocusable(false);
+						textView.setGravity(AndroidUIUtil.convertToGravity(horizontalAlignment, getComponentOrientation()));
+						
+						if (AndroidUIUtil.setTextForTextViewAdAPI(text, textView) == false) {
+							textView.setLines(1);// 不含html。不能设置setSingleLine()，会导致表头字重叠
+						}
 						AndroidUIUtil.addView(defaultLinearLayout, textView, lp, viewRelation);
 					}
 					defaultLinearLayout.setMinimumHeight(AndroidUIUtil.getDefaultTextViewHeight(
@@ -399,11 +402,17 @@ public class JLabel extends JComponent implements SwingConstants, Accessible {
 		return horizontalAlignment;
 	}
 
-	public void setHorizontalAlignment(int alignment) {
-		if (alignment == horizontalAlignment)
+	public void setHorizontalAlignment(final int alignment) {
+		if (alignment == horizontalAlignment) {
 			return;
-		horizontalAlignment = checkHorizontalKey(alignment, "horizontalAlignment");
-		textView.setGravity(AndroidUIUtil.convertToGravity(alignment, getComponentOrientation()));
+		}
+		AndroidUIUtil.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				horizontalAlignment = checkHorizontalKey(alignment, "horizontalAlignment");
+				textView.setGravity(AndroidUIUtil.convertToGravity(horizontalAlignment, getComponentOrientation()));
+			}
+		});
 	}
 
 	public int getVerticalTextPosition() {

@@ -226,6 +226,7 @@ public class AndroidUIUtil {
 		boolean isTextView = (view instanceof TextView);
 		int visib = view.getVisibility();
 		sb.append(view.getClass().getName());
+		sb.append('@');
 		sb.append(Integer.toHexString(System.identityHashCode(view)));
 		if (visib == View.INVISIBLE || visib == View.GONE) {
 			sb.append("[INVISIBLE|GONE]");

@@ -1324,7 +1324,12 @@ public abstract class JComponent extends Container
 
 	public void validate() {
 		paintGraphics = null;
-		super.validate();
+		AndroidUIUtil.runOnUiThreadAndWait(new Runnable() {
+			@Override
+			public void run() {
+				JComponent.super.validate();				
+			}
+		});
 	}
 
 	public boolean isValidateRoot() {

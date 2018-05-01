@@ -440,6 +440,9 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		}
 
 		public void refreshSelected(TreeNode treeNode, boolean isSelected) {
+			if(isSelected) {
+				currSelectedTreeNode = treeNode;
+			}
 			if (selected != null) {
 				selected.setSelected(isSelected);
 			}
@@ -665,6 +668,11 @@ public class JTree extends JComponent implements Scrollable, Accessible {
 		}
 
 		private void switchSelection(final TreeNode treeNode, boolean isEventDone) {
+			TreeNode oldSelected = JTree.this.currSelectedTreeNode;
+			if(treeNode == oldSelected) {
+				return;
+			}
+			
 			if (treeNode.isLeaf()) {
 				final boolean isSelected = selected.isSelected();
 				if (isEventDone ? isSelected : !isSelected) {

@@ -3,6 +3,7 @@ package hc.android;
 import hc.core.ConfigManager;
 import hc.core.GlobalConditionWatcher;
 import hc.core.IWatcher;
+import hc.server.PlatformManager;
 
 import java.lang.reflect.Method;
 import java.net.DatagramPacket;
@@ -123,11 +124,12 @@ public class HCWiFiManager {
 	 * @param bs
 	 */
 	public static void multicast(final String multicastIP, final int port, final byte[] sendData) {
-		final WifiManager wifi = getWiFiManager();
-		MulticastLock multicastLock = wifi
-				.createMulticastLock(String.valueOf(System.currentTimeMillis()));
-		multicastLock.setReferenceCounted(true);
-		multicastLock.acquire();
+//		final WifiManager wifi = getWiFiManager();
+//		MulticastLock multicastLock = wifi
+//				.createMulticastLock(String.valueOf(System.currentTimeMillis()));
+//		multicastLock.setReferenceCounted(true);
+//		multicastLock.acquire();
+		PlatformManager.getService().enableMulticast();
 
 		try {
 			final MulticastSocket multicastSocket = new MulticastSocket(port);
@@ -143,10 +145,10 @@ public class HCWiFiManager {
 			e.printStackTrace();
 		}
 
-		if (multicastLock != null) {
-			multicastLock.release();
-			multicastLock = null;
-		}
+//		if (multicastLock != null) {
+//			multicastLock.release();
+//			multicastLock = null;
+//		}
 	}
 
 	public static WifiManager getWiFiManager() {

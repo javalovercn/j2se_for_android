@@ -26,6 +26,11 @@ package javax.swing;
 
 import hc.android.ActivityManager;
 import hc.android.AndroidClassUtil;
+import hc.core.IConstant;
+import hc.core.L;
+import hc.server.TrayMenuUtil;
+import hc.util.ResourceUtil;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -135,6 +140,10 @@ public class JSplitPane extends JComponent implements Accessible {
 			Component newRightComponent) {
 		super();
 
+		if(L.isInWorkshop) {
+			TrayMenuUtil.displayMessage(ResourceUtil.getErrorI18N(), "JSplitPane is NOT supported", IConstant.ERROR, null, 0);
+		}
+		
 		dividerLocation = -1;
 		setLayout(new BorderLayout());
 		setUIProperty("opaque", Boolean.TRUE);

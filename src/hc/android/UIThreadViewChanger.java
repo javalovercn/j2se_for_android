@@ -51,6 +51,11 @@ public class UIThreadViewChanger {
 	}
 
 	public static void setCurr(final View p_view) {
+		if(ActivityManager.activity == null) {//注意：不能while，会导致业务层阻塞
+			LogManager.errToLog("ActivityManager.activity is null!!!");
+			return;
+		}
+		
 		AndroidUIUtil.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

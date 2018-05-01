@@ -42,6 +42,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.StatFs;
 import android.view.View;
 import android.view.ViewGroup;
@@ -428,9 +429,16 @@ public class AndroidPlatformService implements PlatformService {
 		} else if(bizID == BIZ_PRINT_MAIN_TRACE_STACK) {
 			final Thread main = ActivityManager.mainThread;
 			ClassUtil.printTraceStack(main, main.isDaemon(), main.getStackTrace());
+		} else if(bizID == BIZ_ENABLE_ANDROID_LOGCAT) {
+			if(androidLog == null) {
+				getLog();
+			}
+			androidLog.enableAndroidLogCat(IConstant.TRUE.equals(para));
 		}
 		return null;
 	}
+	
+	AndroidLogServerSide androidLog;
 
 	private static Object runScriptlet(final Object ruby, final String code) {
 		try {
@@ -894,7 +902,11 @@ public class AndroidPlatformService implements PlatformService {
 
 	@Override
 	public LogServerSide getLog() {
-		return new AndroidLogServerSide();
+		if(androidLog == null) {
+			androidLog = new AndroidLogServerSide();
+			doExtBiz(BIZ_ENABLE_ANDROID_LOGCAT, IConstant.toString(ResourceUtil.isEnableAndroidLogCat()));
+		}
+		return androidLog;
 	}
 
 	android.app.ActivityManager.MemoryInfo info;
@@ -963,6 +975,20 @@ public class AndroidPlatformService implements PlatformService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private WifiManager.MulticastLock multicastLock;
+	
+	@Override
+	public void enableMulticast() {
+		if(multicastLock != null) {
+			return;
+		}
+		
+		WifiManager wm = (WifiManager)ActivityManager.applicationContext.getSystemService(Context.WIFI_SERVICE);
+		multicastLock = wm.createMulticastLock("homecenter");
+		multicastLock.setReferenceCounted(true);
+		multicastLock.acquire(); 		
 	}
 
 }

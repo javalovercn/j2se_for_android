@@ -15,7 +15,7 @@ public class ScreenAdapter {
 	public final static int STAND_SCREEN_WIDTH = 1024;
 	public final static float avgFontMin = STAND_SCREEN_WIDTH * 1.0F / 12.0F;
 	// 一英寸分72磅
-	final static float ADJUST_FONT = 120F / STAND_SCREEN_WIDTH / 72;
+	final static float ADJUST_FONT = 100F / STAND_SCREEN_WIDTH / 72;//由于BindManager，将字体由120F / STAND_SCREEN_WIDTH / 72改为此
 	final static float ADJUST_FONT_FOR_1080P = 120F / STAND_SCREEN_HEIGHT / 72;
 
 	public final int width;

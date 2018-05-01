@@ -43,6 +43,7 @@ import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
+import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.border.Border;
 
@@ -92,6 +93,18 @@ public class Container extends Component {
 	public Container() {
 	}
 
+	public final boolean isInJScrollPaneAD() {
+		final Container c = getParent();
+		if(c == null) {
+			return false;
+		}else {
+			if(c instanceof JScrollPane) {
+				return true;
+			}
+			return c.isInJScrollPaneAD();
+		}
+	}
+	
 	public int getComponentCount() {
 		return countComponents();
 	}

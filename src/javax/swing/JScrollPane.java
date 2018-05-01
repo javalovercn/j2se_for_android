@@ -161,7 +161,7 @@ import android.widget.ScrollView;
 public class JScrollPane extends JComponent implements ScrollPaneConstants, Accessible {
 	final LinearLayout defaultLinearLayout;
 	final ScrollView scrollView;
-	final HorizontalScrollView hScrollView;
+	final HorizontalScrollView hScrollView;//注意：采用HVScroll会导致嵌入的JTable下的header左挤在一起
 
 	private static final String uiClassID = "ScrollPaneUI";
 
